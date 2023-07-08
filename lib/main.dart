@@ -1,4 +1,4 @@
-import 'package:filmflu/ui/screens/mainPage.dart';
+import 'package:filmflu/ui/screens/main_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
