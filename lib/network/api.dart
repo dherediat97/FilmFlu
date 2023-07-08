@@ -1,8 +1,7 @@
 import 'dart:convert';
-import 'dart:io';
-
 import 'package:dio/dio.dart';
-import 'package:filmflu/env/env.dart';
+import 'package:FilmFlu/dto/tv_show.dart';
+import 'package:FilmFlu/env/env.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -18,6 +17,7 @@ Map<String, dynamic> baseHeaders = {
 
 class Api {
   final _dio = Dio();
+
   Api() {
     _dio.options = BaseOptions(
       baseUrl: baseURL,
@@ -42,12 +42,26 @@ class Api {
     return parsed.map<Movie>((json) => Movie.fromJson(json)).toList();
   }
 
-  Future<List<Movie>> fetchMovies() async {
+  List<TvShow> parseTvShows(String responseBody) {
+    final parsed = jsonDecode(responseBody)['results'];
+    return parsed.map<TvShow>((json) => TvShow.fromJson(json)).toList();
+  }
+
+  Future<List<Movie>> fetchPopularMovies() async {
     final response = await http.Client().get(
         Uri.parse(
-            'https://api.themoviedb.org/3/discover/movie?language=${Platform.localeName.replaceAll("_", "-")}'),
+            'https://api.themoviedb.org/3/trending/movie/day?language=es-ES'),
         headers: {"Authorization": "Bearer ${Env.tmdbApiKey}"});
 
     return compute(parseMovies, response.body);
+  }
+
+  Future<List<TvShow>> fetchPopularTvShows() async {
+    final response = await http.Client().get(
+        Uri.parse(
+            'https://api.themoviedb.org/3/trending/tv/day?language=es-ES'),
+        headers: {"Authorization": "Bearer ${Env.tmdbApiKey}"});
+
+    return compute(parseTvShows, response.body);
   }
 }

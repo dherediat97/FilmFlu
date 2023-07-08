@@ -1,4 +1,4 @@
-import 'package:filmflu/ui/screens/main_page.dart';
+import 'package:FilmFlu/ui/screens/main_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,8 +13,8 @@ class FilmFlu extends StatelessWidget {
     return MaterialApp(
         title: 'Flim Flu',
         debugShowCheckedModeBanner: false,
+        color: Colors.black,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
           useMaterial3: true,
         ),
         home: const MainPage(title: 'Flim Flu'));

@@ -1,4 +1,4 @@
-name: filmflu
+name: FilmFlu
 description: A new Flutter project.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
@@ -15,7 +15,8 @@ dependencies:
   envied: ^0.3.0+3
   carousel_slider: ^4.2.1
   json_annotation: ^4.8.1
-  http: ^1.1.0
+  http:
+  cached_network_image:
 
 dev_dependencies:
   flutter_test:
