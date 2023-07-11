@@ -12,7 +12,7 @@ class TvShowItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       CachedNetworkImage(
-        imageUrl: "${Env.imgBaseURL}${tvShow.posterPath}",
+        imageUrl: '${Env.imgBaseURL}${tvShow.posterPath}',
         placeholder: (context, url) => const CircularProgressIndicator(),
       ),
       Text(tvShow.title)
