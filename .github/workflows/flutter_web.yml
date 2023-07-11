@@ -23,5 +23,5 @@ jobs:
           uses: SpicyPizza/create-envfile@v2.0
           with:
             file_name: .env
-        - run: flutter run build_runner build --delete-conflicting-outputs
+        - run: flutter run build_runner build
         - run: flutter build web
