@@ -3,11 +3,9 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Dart
+name: Flutter Web
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
