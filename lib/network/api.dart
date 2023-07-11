@@ -52,7 +52,6 @@ class Api {
         Uri.parse(
             'https://api.themoviedb.org/3/trending/movie/day?language=es-ES'),
         headers: {"Authorization": "Bearer ${Env.tmdbApiKey}"});
-
     return compute(parseMovies, response.body);
   }
 
@@ -61,7 +60,6 @@ class Api {
         Uri.parse(
             'https://api.themoviedb.org/3/trending/tv/day?language=es-ES'),
         headers: {"Authorization": "Bearer ${Env.tmdbApiKey}"});
-
     return compute(parseTvShows, response.body);
   }
 }

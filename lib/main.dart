@@ -1,4 +1,6 @@
-import 'package:FilmFlu/ui/screens/main_page.dart';
+import 'package:FilmFlu/ui/components/movie_item.dart';
+import 'package:FilmFlu/ui/screens/login/login_page.dart';
+import 'package:FilmFlu/ui/screens/main/main_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,10 +15,23 @@ class FilmFlu extends StatelessWidget {
     return MaterialApp(
         title: 'Flim Flu',
         debugShowCheckedModeBanner: false,
-        color: Colors.black,
         theme: ThemeData(
+          primaryColor: Colors.deepOrange,
           useMaterial3: true,
+          textTheme: const TextTheme(
+            bodyMedium: TextStyle(color: Colors.deepOrange),
+          ),
         ),
-        home: const MainPage(title: 'Flim Flu'));
+        darkTheme: ThemeData(
+          primaryColor: Colors.deepOrange,
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepOrange),
+        ),
+        initialRoute: "/home",
+        routes: {
+          "/home": (context) => const MainPage(),
+          "/login": (context) => const LoginPage(),
+          "/movie": (context) => const MovieItem(),
+        });
   }
 }
