@@ -8,11 +8,11 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../dto/movie.dart';
 
-const String baseURL = "https://api.themoviedb.org";
+const String baseURL = 'https://api.themoviedb.org';
 
 Map<String, dynamic> baseHeaders = {
-  "Authorization": 'Bearer ${Env.tmdbApiKey}',
-  "Content-Type": "application/json"
+  'Authorization': 'Bearer ${Env.tmdbApiKey}',
+  'Content-Type': 'application/json'
 };
 
 class Api {
@@ -51,7 +51,7 @@ class Api {
     final response = await http.Client().get(
         Uri.parse(
             'https://api.themoviedb.org/3/trending/movie/day?language=es-ES'),
-        headers: {"Authorization": "Bearer ${Env.tmdbApiKey}"});
+        headers: {'Authorization': 'Bearer ${Env.tmdbApiKey}'});
     return compute(parseMovies, response.body);
   }
 
@@ -59,7 +59,7 @@ class Api {
     final response = await http.Client().get(
         Uri.parse(
             'https://api.themoviedb.org/3/trending/tv/day?language=es-ES'),
-        headers: {"Authorization": "Bearer ${Env.tmdbApiKey}"});
+        headers: {'Authorization': 'Bearer ${Env.tmdbApiKey}'});
     return compute(parseTvShows, response.body);
   }
 }

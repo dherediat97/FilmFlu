@@ -31,7 +31,7 @@ class _MainPageState extends State<MainPage> {
                     color: Colors.white,
                   )),
               IconButton(
-                  onPressed: () => Navigator.pushNamed(context, "/login"),
+                  onPressed: () => Navigator.pushNamed(context, '/login'),
                   icon: const Icon(
                     Icons.login,
                     color: Colors.white,
@@ -55,7 +55,7 @@ class _MainPageState extends State<MainPage> {
               const Row(
                 children: [
                   Text(
-                    "Películas populares hoy",
+                    'Películas populares hoy',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                   ),
                 ],
@@ -76,7 +76,7 @@ class _MainPageState extends State<MainPage> {
               const Row(
                 children: [
                   Text(
-                    "Programas TV populares hoy",
+                    'Programas TV populares hoy',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                   ),
                 ],

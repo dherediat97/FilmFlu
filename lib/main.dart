@@ -27,11 +27,11 @@ class FilmFlu extends StatelessWidget {
           useMaterial3: true,
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepOrange),
         ),
-        initialRoute: "/home",
+        initialRoute: '/home',
         routes: {
-          "/home": (context) => const MainPage(),
-          "/login": (context) => const LoginPage(),
-          "/movie": (context) => const MovieItem(),
+          '/home': (context) => const MainPage(),
+          '/login': (context) => const LoginPage(),
+          '/movie': (context) => const MovieItem(),
         });
   }
 }

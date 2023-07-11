@@ -12,7 +12,7 @@ class MovieCarrouselItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       CachedNetworkImage(
-        imageUrl: "${Env.imgBaseURL}${movie.posterPath}",
+        imageUrl: '${Env.imgBaseURL}${movie.posterPath}',
         placeholder: (context, url) => const CircularProgressIndicator(),
       ),
       Text(movie.title)
