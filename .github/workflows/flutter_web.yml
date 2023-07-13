@@ -14,16 +14,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-        - uses: actions/checkout@v1
+        - uses: actions/checkout@v2
         - uses: subosito/flutter-action@v2
           with:
-            channel: 'stable' # or: 'beta', 'dev' or 'master'
+            channel: 'stable'
         - run: flutter pub get
         - run: flutter config --enable-web
           env:
-            TMDB_KEY: ${{ secrets.TMDB_KEY }} 
+            TMDB_KEY: ${{ secrets.TMDB_KEY }}
+            IMAGE_BASE_URL: ${{ secrets.IMAGE_BASE_URL }}
             EXEC_ENV: 'github_actions'
-        - run: dart run build_runner build
         - run: flutter build web
         - uses: bluefireteam/flutter-gh-pages@v7
           with:
