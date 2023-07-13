@@ -20,7 +20,7 @@ jobs:
             distribution: 'zulu'
             java-version: '11'
         - uses: subosito/flutter-action@v2
-           with:
+          with:
             channel: 'stable' # or: 'beta', 'dev' or 'master'
         - run: flutter pub get
         - run: flutter test
