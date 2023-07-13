@@ -17,7 +17,7 @@ class TvShowItem extends StatelessWidget {
       ),
       Text(
         tvShow.title,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
         ),
       )
