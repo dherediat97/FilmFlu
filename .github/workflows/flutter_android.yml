@@ -26,7 +26,7 @@ jobs:
       - run: flutter build apk
       - run: flutter build appbundle
       - name: Archive Production Artifact
-          uses: actions/upload-artifact@master
-          with:
-            name: android app
-            path: android/build
+      - uses: actions/upload-artifact@master
+        with:
+          name: android app
+          path: android/build
