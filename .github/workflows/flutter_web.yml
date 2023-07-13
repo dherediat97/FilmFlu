@@ -20,6 +20,8 @@ jobs:
             channel: 'stable' # or: 'beta', 'dev' or 'master'
         - run: flutter pub get
         - run: flutter config --enable-web
+          env:
+            TMDB_KEY: ${{ secrets.TMDB_KEY }}
         - run: dart run build_runner build
         - run: flutter build web
         - uses: bluefireteam/flutter-gh-pages@v7
