@@ -5,7 +5,7 @@ part 'env.g.dart';
 @Envied(path: '.env')
 abstract class Env {
   @EnviedField(varName: 'TMDB_KEY')
-  static const tmdbApiKey = _Env.tmdbApiKey;
+  static final String tmdbApiKey = _Env.tmdbApiKey;
   @EnviedField(varName: 'IMAGE_BASE_URL')
-  static const imgBaseURL = _Env.imgBaseURL;
+  static final String imgBaseURL = _Env.imgBaseURL;
 }
