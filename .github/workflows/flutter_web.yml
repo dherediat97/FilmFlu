@@ -14,14 +14,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-        - uses: actions/checkout@v2
-        - uses: subosito/flutter-action@v2
-        - run: flutter config --enable-web
-        - name: Make envfile
-          uses: SpicyPizza/create-envfile@v2.0
+        - uses: actions/checkout@v1
+        - uses: subosito/flutter-action@v1
           with:
-            file_name: .env
-        - run: dart run build_runner build
+              channel: 'dev'
+        - run: flutter pub get
+        - run: flutter config --enable-web
+        - run: flutter build web
         - uses: bluefireteam/flutter-gh-pages@v7
           with:
             baseHref: /FilmFlu/
