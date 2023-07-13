@@ -21,7 +21,8 @@ jobs:
         - run: flutter pub get
         - run: flutter config --enable-web
           env:
-            TMDB_KEY: ${{ secrets.TMDB_KEY }}
+            TMDB_KEY: ${{ secrets.TMDB_KEY }} 
+            EXEC_ENV: 'github_actions'
         - run: dart run build_runner build
         - run: flutter build web
         - uses: bluefireteam/flutter-gh-pages@v7
