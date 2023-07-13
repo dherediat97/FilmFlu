@@ -15,7 +15,12 @@ class MovieCarrouselItem extends StatelessWidget {
         imageUrl: '${Env.imgBaseURL}${movie.posterPath}',
         placeholder: (context, url) => const CircularProgressIndicator(),
       ),
-      Text(movie.title)
+      Text(
+        movie.title,
+        style: TextStyle(
+          color: Colors.white,
+        ),
+      )
     ]);
   }
 }
