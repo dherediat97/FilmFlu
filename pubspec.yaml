@@ -21,6 +21,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  source_gen: 1.2.3
+  graphs: 2.2.0
   flutter_lints: ^2.0.0
   envied_generator: ^0.3.0+3
   build_runner: ^2.4.6
