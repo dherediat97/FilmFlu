@@ -13,7 +13,7 @@ class FilmFlu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flim Flu',
+        title: 'Film Flu',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primaryColor: Colors.deepOrange,
@@ -21,11 +21,14 @@ class FilmFlu extends StatelessWidget {
           textTheme: const TextTheme(
             bodyMedium: TextStyle(color: Colors.deepOrange),
           ),
+          colorScheme: ColorScheme.fromSwatch(
+              primarySwatch: Colors.grey, backgroundColor: Colors.black87),
         ),
         darkTheme: ThemeData(
           primaryColor: Colors.deepOrange,
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepOrange),
+          colorScheme: ColorScheme.fromSwatch(
+              primarySwatch: Colors.grey, backgroundColor: Colors.black87),
         ),
         initialRoute: '/home',
         routes: {

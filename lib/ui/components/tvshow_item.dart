@@ -15,7 +15,12 @@ class TvShowItem extends StatelessWidget {
         imageUrl: '${Env.imgBaseURL}${tvShow.posterPath}',
         placeholder: (context, url) => const CircularProgressIndicator(),
       ),
-      Text(tvShow.title)
+      Text(
+        tvShow.title,
+        style: TextStyle(
+          color: Colors.white,
+        ),
+      )
     ]);
   }
 }
