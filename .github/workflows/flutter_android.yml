@@ -23,6 +23,9 @@ jobs:
           with:
             channel: 'stable' # or: 'beta', 'dev' or 'master'
         - run: flutter pub get
+        env:
+          TMDB_KEY: ${{ secrets.TMDB_KEY }} 
+          EXEC_ENV: 'github_actions'
         - run: dart run build_runner build
         - run: flutter test
         - run: flutter build apk
