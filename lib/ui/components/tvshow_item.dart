@@ -1,6 +1,5 @@
 import 'package:FilmFlu/dto/tv_show.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:FilmFlu/env/env.dart';
 import 'package:flutter/material.dart';
 
 import '../../network/api.dart';
@@ -14,7 +13,7 @@ class TvShowItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       CachedNetworkImage(
-        imageUrl: '${imgBaseUrl}${tvShow.posterPath}',
+        imageUrl: '$imgBaseUrl${tvShow.posterPath}',
         placeholder: (context, url) => const CircularProgressIndicator(),
       ),
       Text(
