@@ -25,4 +25,4 @@ jobs:
         - run: flutter build web
         - uses: bluefireteam/flutter-gh-pages@v7
           with:
-            baseHref: /build/web
+            baseHref: /build/web/
