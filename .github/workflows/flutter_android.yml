@@ -22,6 +22,8 @@ jobs:
         - uses: subosito/flutter-action@v2
           with:
             channel: 'stable' # or: 'beta', 'dev' or 'master'
+        - name: Write TMDB_KEY to .env
+          run: echo 'TMDB_KEY={{ secrets.TMDB_KEY }}' > .env
         - run: flutter pub get
           env:
             TMDB_KEY: ${{ secrets.TMDB_KEY }} 
