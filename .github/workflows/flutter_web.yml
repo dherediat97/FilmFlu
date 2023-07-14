@@ -22,9 +22,7 @@ jobs:
         - name: Write TMDB_KEY to .env
           run: echo 'TMDB_KEY={{ secrets.TMDB_KEY }}' > .env
         - run: flutter pub run build_runner build
-        - run: flutter build web
-          with:
-            baseHref: /build/web/
+        - run: flutter build web --base-href /FilmFlu/
         - uses: bluefireteam/flutter-gh-pages@v7
           with:
             baseHref: /build/web/
