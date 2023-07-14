@@ -26,8 +26,3 @@ jobs:
         - uses: bluefireteam/flutter-gh-pages@v7
           with:
             baseHref: /FilmFlu/
-        - name: Archive Production Artifact
-          uses: actions/upload-artifact@master
-          with:
-            name: platform
-            path: build/web
