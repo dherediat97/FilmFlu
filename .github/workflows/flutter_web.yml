@@ -21,9 +21,9 @@ jobs:
         - run: flutter pub get
         - name: Write TMDB_KEY to .env
           run: echo 'TMDB_KEY={{ secrets.TMDB_KEY }}' > .env  
-        - name: Write IMAGE_BASE_URL to .env
-          run: echo 'IMAGE_BASE_URL={{ secrets.IMAGE_BASE_URL }}' > .env
-        - run: flutter pub run build_runner build --delete-conflicting-outputs
+        # - name: Write IMAGE_BASE_URL to .env
+        #   run: echo 'IMAGE_BASE_URL={{ secrets.IMAGE_BASE_URL }}' > .env
+        - run: flutter pub run build_runner build
         - run: flutter build web
         - uses: bluefireteam/flutter-gh-pages@v7
           with:
