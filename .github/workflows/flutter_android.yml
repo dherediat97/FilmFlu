@@ -23,8 +23,9 @@ jobs:
           with:
             channel: 'stable' # or: 'beta', 'dev' or 'master'
         - run: flutter pub get
-        - name: Write VARIABLES .env
-          run: echo 'TMDB_KEY={{ secrets.TMDB_KEY }}' > .env
+        - name: Write TMDB_KEY to .env
+          run: echo 'TMDB_KEY={{ secrets.TMDB_KEY }}' > .env  
+        - name: Write IMAGE_BASE_URL to .env
           run: echo 'IMAGE_BASE_URL={{ secrets.IMAGE_BASE_URL }}' > .env
         - run: flutter pub run build_runner build --delete-conflicting-outputs
         - run: flutter build apk

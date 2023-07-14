@@ -19,12 +19,9 @@ jobs:
           with:
             channel: 'stable'
         - run: flutter pub get
-          env:
-            TMDB_KEY: ${{ secrets.TMDB_KEY }}
-            IMAGE_BASE_URL: ${{ secrets.IMAGE_BASE_URL }}
-            EXEC_ENV: 'github_actions'
         - name: Write TMDB_KEY to .env
-          run: echo 'TMDB_KEY={{ secrets.TMDB_KEY }}' > .env
+          run: echo 'TMDB_KEY={{ secrets.TMDB_KEY }}' > .env  
+        - name: Write IMAGE_BASE_URL to .env
           run: echo 'IMAGE_BASE_URL={{ secrets.IMAGE_BASE_URL }}' > .env
         - run: flutter pub run build_runner build --delete-conflicting-outputs
         - run: flutter build web
