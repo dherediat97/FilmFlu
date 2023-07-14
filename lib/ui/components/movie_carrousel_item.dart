@@ -1,7 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:FilmFlu/dto/movie.dart';
-import 'package:FilmFlu/env/env.dart';
 import 'package:flutter/material.dart';
+
+import '../../network/api.dart';
 
 class MovieCarrouselItem extends StatelessWidget {
   const MovieCarrouselItem({super.key, required this.movie});
@@ -12,7 +13,7 @@ class MovieCarrouselItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       CachedNetworkImage(
-        imageUrl: '${Env.imgBaseURL}${movie.posterPath}',
+        imageUrl: '${imgBaseUrl}${movie.posterPath}',
         placeholder: (context, url) => const CircularProgressIndicator(),
       ),
       Text(

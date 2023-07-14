@@ -9,6 +9,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../dto/movie.dart';
 
 const String baseURL = 'https://api.themoviedb.org';
+final String imgBaseUrl = 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2';
 
 Map<String, dynamic> baseHeaders = {
   'Authorization': 'Bearer ${Env.tmdbApiKey}',
