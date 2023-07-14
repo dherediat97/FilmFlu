@@ -26,8 +26,6 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   envied_generator: ^0.3.0+3
   build_runner: ^2.4.6
-  build_test: ^2.1.0
-  build_web_compilers: ^3.0.0
   json_serializable:
 
 flutter:
