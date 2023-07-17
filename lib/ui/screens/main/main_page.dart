@@ -1,5 +1,5 @@
-import 'package:FilmFlu/dto/tv_show.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import '../../../dto/movie.dart';
 import '../../../network/api.dart';
@@ -17,32 +17,39 @@ class _MainPageState extends State<MainPage> {
   final TextEditingController _searchController = TextEditingController();
 
   @override
+  void initState() {
+    FlutterNativeSplash.remove();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.onPrimary,
-        appBar: AppBar(
-            centerTitle: true,
-            toolbarHeight: 75,
-            flexibleSpace: Padding(
-              padding: const EdgeInsets.only(left: 16),
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Theme.of(context).colorScheme.onBackground,
+      appBar: AppBar(
+          toolbarHeight: 75,
+          flexibleSpace: Padding(
+            padding: const EdgeInsets.only(left: 16),
+            child: Center(
               child: SafeArea(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      width: MediaQuery.of(context).size.width / 4,
+                      width: MediaQuery.of(context).size.width / 3,
                       child: TextField(
                         autocorrect: true,
                         controller: _searchController,
-                        style: const TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary),
                         cursorColor: Colors.white,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                             hintText: 'Busca aquí tu película favorita...',
                             hintStyle: TextStyle(color: Colors.white54),
                             icon: Icon(
                               Icons.search,
-                              color: Colors.white,
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                             border: InputBorder.none),
                         onChanged: (value) {},
@@ -52,92 +59,67 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
             ),
-            title: Center(
-                child: Image.asset('assets/images/transparent_logo.png',
-                    height: 60)),
-            elevation: 48,
-            backgroundColor: Theme.of(context).colorScheme.background,
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 16.0),
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.person,
-                        color: Colors.white,
-                      ),
+          ),
+          title: Image.asset('assets/images/transparent_logo.png', height: 60),
+          elevation: 48,
+          backgroundColor: Theme.of(context).colorScheme.background,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.person,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
-                    IconButton(
-                      onPressed: () => Navigator.pushNamed(context, '/login'),
-                      icon: const Icon(
-                        Icons.login,
-                        color: Colors.white,
-                      ),
+                  ),
+                  IconButton(
+                    onPressed: () => Navigator.pushNamed(context, '/login'),
+                    icon: Icon(
+                      Icons.login,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ]),
-        body: Container(
+            ),
+          ]),
+      body: Container(
+          height: double.infinity,
           color: Theme.of(context).colorScheme.background,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
+          child: ListView(children: [
+            const Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                const Row(
-                  children: [
-                    Text(
-                      'Películas populares hoy',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 24),
-                    ),
-                  ],
-                ),
-                FutureBuilder<List<Movie>>(
-                    future: api.fetchPopularMovies(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) {
-                        return const Center();
-                      } else if (snapshot.hasData) {
-                        return MovieList(items: snapshot.data!);
-                      } else {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                    }),
-                const Row(
-                  children: [
-                    Text(
-                      'Programas TV populares hoy',
-                      style: TextStyle(
+                Padding(
+                  padding: EdgeInsets.all(12.0),
+                  child: Text(
+                    'Cartelera',
+                    style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 24,
                         color: Colors.white,
-                      ),
-                    ),
-                  ],
+                        fontFamily: 'Barlow',
+                        fontSize: 40),
+                  ),
                 ),
-                FutureBuilder<List<TvShow>>(
-                    future: api.fetchPopularTvShows(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) {
-                        return const Center();
-                      } else if (snapshot.hasData) {
-                        return MovieList(items: snapshot.data!);
-                      } else {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                    }),
               ],
             ),
-          ),
-        ));
+            FutureBuilder<List<Movie>>(
+                future: api.fetchPopularMovies(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return const Center();
+                  } else if (snapshot.hasData) {
+                    return MovieList(items: snapshot.data!);
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                })
+          ])),
+    );
   }
 }

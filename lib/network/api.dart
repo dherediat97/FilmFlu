@@ -1,14 +1,12 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:FilmFlu/dto/tv_show.dart';
 import 'package:FilmFlu/env/env.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:FilmFlu/dto/movie.dart';
 
-import '../dto/movie.dart';
-
-const String baseURL = 'https://api.themoviedb.org';
+const String baseURL = 'https://api.themoviedb.org/3';
 const String imgBaseUrl = 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2';
 
 Map<String, dynamic> baseHeaders = {
@@ -38,29 +36,27 @@ class Api {
     ));
   }
 
+  Movie parseMovie(String responseBody) {
+    final parsed = jsonDecode(responseBody);
+    return parsed.map<Movie>((json) => Movie.fromJson(json));
+  }
+
   List<Movie> parseMovies(String responseBody) {
     final parsed = jsonDecode(responseBody)['results'];
     return parsed.map<Movie>((json) => Movie.fromJson(json)).toList();
   }
 
-  List<TvShow> parseTvShows(String responseBody) {
-    final parsed = jsonDecode(responseBody)['results'];
-    return parsed.map<TvShow>((json) => TvShow.fromJson(json)).toList();
-  }
-
   Future<List<Movie>> fetchPopularMovies() async {
     final response = await http.Client().get(
-        Uri.parse(
-            'https://api.themoviedb.org/3/trending/movie/day?language=es-ES'),
+        Uri.parse('$baseURL/trending/movie/day?language=es-ES'),
         headers: {'Authorization': 'Bearer ${Env.tmdbApiKey}'});
     return compute(parseMovies, response.body);
   }
 
-  Future<List<TvShow>> fetchPopularTvShows() async {
+  Future<Movie> getMovie(int movieId) async {
     final response = await http.Client().get(
-        Uri.parse(
-            'https://api.themoviedb.org/3/trending/tv/day?language=es-ES'),
+        Uri.parse('$baseURL/movie/${movieId}?language=es-ES'),
         headers: {'Authorization': 'Bearer ${Env.tmdbApiKey}'});
-    return compute(parseTvShows, response.body);
+    return compute(parseMovie, response.body);
   }
 }
