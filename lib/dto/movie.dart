@@ -2,11 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'movie.g.dart';
 
-@JsonSerializable(
-    explicitToJson: true,
-    fieldRename: FieldRename.snake,
-    ignoreUnannotated: true,
-    includeIfNull: true)
+@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
 class Movie {
   Movie({
     required this.adult,
