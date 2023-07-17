@@ -8,6 +8,7 @@ name: Film Flu Android App
 on:
   push:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -24,7 +25,10 @@ jobs:
             channel: 'stable'
         - run: flutter pub get
         - name: Write TMDB_KEY to .env
-          run: echo 'TMDB_KEY={{ secrets.TMDB_KEY }}' > .env
+          run: |
+            touch .env
+            echo TMDB_KEY={{ secrets.TMDB_KEY } >> .env
+            cat .env
         - run: flutter pub run build_runner build
         - run: flutter build apk
         - uses: actions/upload-artifact@master

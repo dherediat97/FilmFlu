@@ -8,6 +8,8 @@ name: Film Flu Web App
 on:
   push:
     branches: [ "main" ]
+  workflow_dispatch:
+
 
 jobs:
   build:
@@ -19,11 +21,11 @@ jobs:
           with:
             channel: 'stable'
         - run: flutter pub get
-        - name: Getting Secrets
-          env:
-            TMDB_KEY: ${{ secrets.TMDB_KEY }}
+        - name: Write TMDB_KEY to .env
           run: |
-            echo 'TMDB_KEY=${#TMDB_KEY}' > .env 
+            touch .env
+            echo TMDB_KEY={{ secrets.TMDB_KEY } >> .env
+            cat .env
         - run: flutter pub run build_runner build
         - run: flutter build web
         - uses: bluefireteam/flutter-gh-pages@v7

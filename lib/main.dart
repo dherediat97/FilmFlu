@@ -1,9 +1,11 @@
-import 'package:FilmFlu/ui/components/movie_item.dart';
 import 'package:FilmFlu/ui/screens/login/login_page.dart';
 import 'package:FilmFlu/ui/screens/main/main_page.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const FilmFlu());
 }
 
@@ -16,25 +18,26 @@ class FilmFlu extends StatelessWidget {
         title: 'Film Flu',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: Colors.deepOrange,
+          fontFamily: 'Barlow',
+          primaryColor: Color(0xFFC7CD18),
           useMaterial3: true,
           textTheme: const TextTheme(
-            bodyMedium: TextStyle(color: Colors.deepOrange),
+            bodyMedium:
+                TextStyle(color: Color(0xFFFFFFFF), fontFamily: 'Barlow'),
           ),
           colorScheme: ColorScheme.fromSwatch(
-              primarySwatch: Colors.grey, backgroundColor: Colors.black87),
+              primarySwatch: Colors.yellow, backgroundColor: Color(0x10F0F)),
         ),
         darkTheme: ThemeData(
-          primaryColor: Colors.deepOrange,
+          primaryColor: Color(0xFFC7CD18),
           useMaterial3: true,
           colorScheme: ColorScheme.fromSwatch(
-              primarySwatch: Colors.grey, backgroundColor: Colors.black87),
+              primarySwatch: Colors.yellow, backgroundColor: Color(0x10F0F)),
         ),
-        initialRoute: '/home',
+        initialRoute: '',
         routes: {
-          '/home': (context) => const MainPage(),
-          '/login': (context) => const LoginPage(),
-          '/movie': (context) => const MovieItem(),
+          '': (context) => const MainPage(),
+          '/login': (context) => const LoginPage()
         });
   }
 }

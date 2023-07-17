@@ -2,7 +2,11 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'movie.g.dart';
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
+@JsonSerializable(
+    explicitToJson: true,
+    fieldRename: FieldRename.snake,
+    ignoreUnannotated: true,
+    includeIfNull: true)
 class Movie {
   Movie({
     required this.adult,
@@ -18,6 +22,8 @@ class Movie {
     required this.video,
     required this.voteAverage,
     required this.voteCount,
+    this.overview,
+    this.runtime,
   });
 
   bool adult;
@@ -33,6 +39,8 @@ class Movie {
   bool video;
   double voteAverage;
   int voteCount;
+  String? overview;
+  int? runtime;
 
   factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
 

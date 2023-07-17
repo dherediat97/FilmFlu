@@ -1,24 +1,37 @@
+import 'package:FilmFlu/dto/movie.dart';
+import 'package:FilmFlu/network/api.dart';
 import 'package:flutter/material.dart';
 
-class MovieItem extends StatelessWidget {
-  const MovieItem({super.key});
+class MovieItem extends StatefulWidget {
+  const MovieItem({super.key, required this.movieId});
+
+  final int movieId;
+
+  @override
+  State<MovieItem> createState() => _MovieItemState();
+}
+
+class _MovieItemState extends State<MovieItem> {
+  Api api = Api();
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        height: 200,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const Text('Modal BottomSheet'),
-              ElevatedButton(
-                child: const Text('Close BottomSheet'),
-                onPressed: () => Navigator.pop(context),
+    return FutureBuilder<Movie>(
+        future: api.getMovie(widget.movieId),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            var movie = snapshot.data;
+            print("movie=$movie");
+            return Container(
+              child: Column(
+                children: [Text('Sinopsis'), Text(movie!.overview!)],
               ),
-            ],
-          ),
-        ));
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        });
   }
 }
