@@ -1,11 +1,8 @@
 import 'package:FilmFlu/ui/screens/login/login_page.dart';
-import 'package:FilmFlu/ui/screens/main/main_page.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:FilmFlu/ui/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const FilmFlu());
 }
 
@@ -36,7 +33,7 @@ class FilmFlu extends StatelessWidget {
         ),
         initialRoute: '',
         routes: {
-          '': (context) => const MainPage(),
+          '': (context) => const SplashScreen(),
           '/login': (context) => const LoginPage()
         });
   }

@@ -15,6 +15,6 @@ class MovieList extends StatelessWidget {
             return MovieCarrouselItem(movie: item);
           });
         }).toList(),
-        options: CarouselOptions(viewportFraction: 0.5));
+        options: CarouselOptions(viewportFraction: 0.3));
   }
 }

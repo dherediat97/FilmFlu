@@ -18,21 +18,33 @@ class MovieCarrouselItem extends StatelessWidget {
           context: context,
           builder: (context) => MovieItem(movieId: movie.id),
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            CachedNetworkImage(
-              imageUrl: '$imgBaseUrl${movie.posterPath}',
-              placeholder: (context, url) => const CircularProgressIndicator(),
-            ),
-            Text(
-              movie.title,
-              style:
-                  const TextStyle(color: Colors.white, fontFamily: 'LilitaOne'),
-              textAlign: TextAlign.center,
-            )
-          ],
-        ),
+        child: Card(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(32),
+              child: Column(
+                children: [
+                  CachedNetworkImage(
+                    imageUrl: '$imgBaseUrl${movie.posterPath}',
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) =>
+                        const CircularProgressIndicator(),
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(4),
+                    child: Text(
+                      movie.title,
+                      style: const TextStyle(
+                          fontSize: 13,
+                          color: Colors.black,
+                          fontFamily: 'LilitaOne'),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
+            )),
       )
     ]);
   }
