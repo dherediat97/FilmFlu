@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-        - uses: actions/checkout@v3
+        - uses: actions/checkout@v2
         - uses: subosito/flutter-action@v2
           with:
             channel: 'stable'
@@ -25,4 +25,5 @@ jobs:
         - run: flutter build web
         - uses: bluefireteam/flutter-gh-pages@v7
           with:
-            baseHref: /FilmFlu/build/web/
+            baseHref: /FilmFlu/
+            targetBranch: gh-pages
