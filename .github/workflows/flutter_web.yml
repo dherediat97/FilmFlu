@@ -22,12 +22,10 @@ jobs:
         - shell: bash
           env:
             TMDB_KEY: ${{ secrets.TMDB_KEY }}
-          run: |
-            print "$TMDB_KEY"
-                with:
-                  TMDB_KEY: ${{ secrets.TMDB_KEY }}
         - name: Write TMDB_KEY to .env
           run: echo 'TMDB_KEY={{ secrets.TMDB_KEY }}' > .env
+            with:
+              TMDB_KEY: ${{ secrets.TMDB_KEY }}
         - run: flutter pub run build_runner build
         - run: flutter build web
         - uses: bluefireteam/flutter-gh-pages@v7
