@@ -24,7 +24,16 @@ jobs:
         - name: Write TMDB_KEY to .env
           run:
             set -o noclobber
-            echo TMDB_KEY={{ secrets.TMDB_KEY } >> .env
+            echo TMDB_KEY={{ secrets.TMDB_KEY }} >> .env
+        - name: Make envfile
+          uses: SpicyPizza/create-envfile@v2.0
+            with:
+              envkey_DEBUG: false
+              envkey_TMDB_KEY: ${{ secrets.TMDB_KEY }}
+              directory: <directory_name>
+              file_name: .env
+              fail_on_empty: false
+              sort_keys: false
         - run: flutter pub run build_runner build
         - run: flutter build web
         - uses: bluefireteam/flutter-gh-pages@v7
