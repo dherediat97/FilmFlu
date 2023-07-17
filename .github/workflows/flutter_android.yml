@@ -25,10 +25,9 @@ jobs:
             channel: 'stable'
         - run: flutter pub get
         - name: Write TMDB_KEY to .env
-          run: |
-            touch .env
+          run:
+            set -o noclobber
             echo TMDB_KEY={{ secrets.TMDB_KEY } >> .env
-            cat .env
         - run: flutter pub run build_runner build
         - run: flutter build apk
         - uses: actions/upload-artifact@master
