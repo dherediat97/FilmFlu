@@ -34,7 +34,7 @@ jobs:
             envkey_TMDB_KEY: ${{ secrets.TMDB_KEY }}
             file_name: .env
         - run: flutter pub run build_runner build
-        - run: flutter build web
+        - run: flutter build web --web-renderer html
         - uses: bluefireteam/flutter-gh-pages@v7
           with:
             baseHref: /Filmflu/
