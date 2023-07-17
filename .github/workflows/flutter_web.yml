@@ -19,9 +19,13 @@ jobs:
           with:
             channel: 'stable'
         - run: flutter pub get
-        - name: SET SECRET
-          with:
+        - shell: bash
+          env:
             TMDB_KEY: ${{ secrets.TMDB_KEY }}
+          run: |
+            print "$TMDB_KEY"
+                with:
+                  TMDB_KEY: ${{ secrets.TMDB_KEY }}
         - name: Write TMDB_KEY to .env
           run: echo 'TMDB_KEY={{ secrets.TMDB_KEY }}' > .env
         - run: flutter pub run build_runner build
