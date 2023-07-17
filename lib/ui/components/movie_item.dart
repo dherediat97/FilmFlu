@@ -1,5 +1,7 @@
 import 'package:FilmFlu/dto/movie.dart';
 import 'package:FilmFlu/network/api.dart';
+import 'package:FilmFlu/ui/util/utilColor.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class MovieItem extends StatefulWidget {
@@ -19,12 +21,16 @@ class _MovieItemState extends State<MovieItem> {
     return FutureBuilder<Movie>(
         future: api.getMovie(widget.movieId),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.connectionState == ConnectionState.done &&
+              snapshot.data != null) {
             var movie = snapshot.data;
+            Color dominantColor = getImagePalette(CachedNetworkImageProvider(
+                "$imgBaseUrl/${movie!.posterPath}")) as Color;
             print("movie=$movie");
             return Container(
+              color: dominantColor,
               child: Column(
-                children: [Text('Sinopsis'), Text(movie!.overview!)],
+                children: [Text('Sinopsis'), Text(movie.overview!)],
               ),
             );
           } else {

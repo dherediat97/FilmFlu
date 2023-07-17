@@ -1,9 +1,10 @@
+//Core Packages
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-import '../../../dto/movie.dart';
-import '../../../network/api.dart';
-import '../../components/movie_list.dart';
+//My Packages
+import 'package:FilmFlu/dto/movie.dart';
+import 'package:FilmFlu/network/api.dart';
+import 'package:FilmFlu/ui/components/movie_list.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -15,12 +16,6 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   Api api = Api();
   final TextEditingController _searchController = TextEditingController();
-
-  @override
-  void initState() {
-    FlutterNativeSplash.remove();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +77,14 @@ class _MainPageState extends State<MainPage> {
                       color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
+                  IconButton(
+                      onPressed: () {
+                        //Descargar App Android
+                      },
+                      icon: Icon(
+                        Icons.android,
+                        color: Theme.of(context).colorScheme.primary,
+                      ))
                 ],
               ),
             ),
@@ -109,9 +112,7 @@ class _MainPageState extends State<MainPage> {
             FutureBuilder<List<Movie>>(
                 future: api.fetchPopularMovies(),
                 builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    return const Center();
-                  } else if (snapshot.hasData) {
+                  if (snapshot.hasData) {
                     return MovieList(items: snapshot.data!);
                   } else {
                     return const Center(

@@ -38,7 +38,10 @@ class Api {
 
   Movie parseMovie(String responseBody) {
     final parsed = jsonDecode(responseBody);
-    return parsed.map<Movie>((json) => Movie.fromJson(json));
+    print("parse=$parsed");
+    final movie = Movie.fromJson(parsed);
+    print("movie=$movie");
+    return movie;
   }
 
   List<Movie> parseMovies(String responseBody) {
