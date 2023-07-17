@@ -58,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen>
       ),
       body: Center(
         child: Lottie.asset(
-          './animations/splash_animation.json',
+          'assets/animations/splash_animation.json',
           controller: _controller,
           height: MediaQuery.of(context).size.height / 2,
           animate: true,
