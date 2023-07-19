@@ -38,9 +38,9 @@ class Api {
 
   Movie parseMovie(String responseBody) {
     final parsed = jsonDecode(responseBody);
-    print("parse=$parsed");
+    debugPrint("parse=$parsed");
     final movie = Movie.fromJson(parsed);
-    print("movie=$movie");
+    debugPrint("movie=$movie");
     return movie;
   }
 

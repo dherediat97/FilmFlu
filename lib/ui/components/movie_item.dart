@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter/material.dart';
+
 import 'package:FilmFlu/dto/movie.dart';
 import 'package:FilmFlu/network/api.dart';
 import 'package:FilmFlu/ui/util/utilColor.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
 
 class MovieItem extends StatefulWidget {
   const MovieItem({super.key, required this.movieId});
@@ -26,11 +28,14 @@ class _MovieItemState extends State<MovieItem> {
             var movie = snapshot.data;
             Color dominantColor = getImagePalette(CachedNetworkImageProvider(
                 "$imgBaseUrl/${movie!.posterPath}")) as Color;
-            print("movie=$movie");
+            debugPrint("movie=$movie");
             return Container(
               color: dominantColor,
               child: Column(
-                children: [Text('Sinopsis'), Text(movie.overview!)],
+                children: [
+                  Text(AppLocalizations.of(context)!.synopsis_film),
+                  Text(movie.overview!)
+                ],
               ),
             );
           } else {

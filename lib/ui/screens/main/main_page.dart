@@ -1,20 +1,21 @@
 //Core Packages
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 //My Packages
 import 'package:FilmFlu/dto/movie.dart';
-import 'package:FilmFlu/network/api.dart';
 import 'package:FilmFlu/ui/components/movie_list.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+  const MainPage({required this.movies, super.key});
+
+  final List<Movie> movies;
 
   @override
   State<MainPage> createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
-  Api api = Api();
   final TextEditingController _searchController = TextEditingController();
 
   @override
@@ -40,7 +41,8 @@ class _MainPageState extends State<MainPage> {
                             color: Theme.of(context).colorScheme.primary),
                         cursorColor: Colors.white,
                         decoration: InputDecoration(
-                            hintText: 'Busca aquí tu película favorita...',
+                            hintText:
+                                AppLocalizations.of(context)!.search_movie_hint,
                             hintStyle: TextStyle(color: Colors.white54),
                             icon: Icon(
                               Icons.search,
@@ -93,33 +95,19 @@ class _MainPageState extends State<MainPage> {
           height: double.infinity,
           color: Theme.of(context).colorScheme.background,
           child: ListView(children: [
-            const Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
+            Row(mainAxisSize: MainAxisSize.min, children: [
+              Padding(
                   padding: EdgeInsets.all(12.0),
                   child: Text(
-                    'Cartelera',
+                    AppLocalizations.of(context)!.movie_list_title,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                         fontFamily: 'Barlow',
                         fontSize: 40),
-                  ),
-                ),
-              ],
-            ),
-            FutureBuilder<List<Movie>>(
-                future: api.fetchPopularMovies(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return MovieList(items: snapshot.data!);
-                  } else {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                })
+                  ))
+            ]),
+            MovieList(items: widget.movies)
           ])),
     );
   }
