@@ -1,9 +1,6 @@
 
 version: 2
 enable-beta-ecosystems: true
-on:
-  push:
-    branches: [ "main" ]
 
 updates:
   - package-ecosystem: "github-actions"
