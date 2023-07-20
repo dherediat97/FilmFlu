@@ -1,5 +1,3 @@
-import 'package:FilmFlu/ui/util/utilColor.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -35,29 +33,10 @@ class _MovieItemState extends State<MovieItem> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      FutureBuilder(
-                          future: getImagePalette(CachedNetworkImageProvider(
-                              "$imgBaseUrl/${movie.posterPath}")),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              Color filmColor = snapshot.data as Color;
-                              return Text(
-                                movie.title,
-                                style: TextStyle(
-                                    fontSize: 28,
-                                    color: filmColor,
-                                    fontFamily: "LilitaOne"),
-                                textAlign: TextAlign.center,
-                              );
-                            } else {
-                              return Text(
-                                movie.title,
-                                style: TextStyle(
-                                    fontSize: 28, fontFamily: "LilitaOne"),
-                                textAlign: TextAlign.center,
-                              );
-                            }
-                          }),
+                      Text(movie.title,
+                          style:
+                              TextStyle(fontSize: 28, fontFamily: "LilitaOne"),
+                          textAlign: TextAlign.center),
                       Text(AppLocalizations.of(context)!.synopsis,
                           style: TextStyle(fontSize: 25, fontFamily: "Barlow")),
                       Text(
