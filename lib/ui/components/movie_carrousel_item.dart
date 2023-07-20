@@ -13,11 +13,12 @@ class MovieCarrouselItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(children: [
       InkWell(
-        onTap: () => showModalBottomSheet(
-          isDismissible: true,
-          context: context,
-          builder: (context) => MovieItem(movieId: movie.id),
-        ),
+        onTap: () {
+          showModalBottomSheet(
+              isDismissible: true,
+              context: context,
+              builder: (context) => MovieItem(movieId: movie.id));
+        },
         child: Card(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),

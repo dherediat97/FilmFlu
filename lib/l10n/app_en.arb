@@ -1,6 +1,7 @@
 {
-  "app_name": "FilmFlu",
-  "movie_list_title": "Film Playing",
-  "search_movie_hint": "Search here for your favorite movie...",
-  "synopsis_film": "Synopsis"
+  "app_name": "Film Flu",
+  "film_list_title": "Film Playing",
+  "search_film_hint": "Search here for your favorite film...",
+  "synopsis": "Synopsis",
+  "character_cast": "Character Cast"
 }

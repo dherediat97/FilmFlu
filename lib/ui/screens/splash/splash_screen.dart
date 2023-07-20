@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
-    api.fetchPopularMovies().then((value) {
+    api.fetchPopularMovies("day").then((value) {
       movies = value;
     });
     _controller = AnimationController(
@@ -67,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen>
         child: Lottie.asset(
           'assets/animations/splash_animation.json',
           controller: _controller,
-          height: MediaQuery.of(context).size.height / 2,
+          height: MediaQuery.of(context).size.height,
           animate: true,
           reverse: false,
           onLoaded: (composition) {

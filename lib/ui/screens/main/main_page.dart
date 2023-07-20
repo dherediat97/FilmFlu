@@ -42,7 +42,7 @@ class _MainPageState extends State<MainPage> {
                         cursorColor: Colors.white,
                         decoration: InputDecoration(
                             hintText:
-                                AppLocalizations.of(context)!.search_movie_hint,
+                                AppLocalizations.of(context)!.search_film_hint,
                             hintStyle: TextStyle(color: Colors.white54),
                             icon: Icon(
                               Icons.search,
@@ -99,7 +99,7 @@ class _MainPageState extends State<MainPage> {
               Padding(
                   padding: EdgeInsets.all(12.0),
                   child: Text(
-                    AppLocalizations.of(context)!.movie_list_title,
+                    AppLocalizations.of(context)!.film_list_title,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
