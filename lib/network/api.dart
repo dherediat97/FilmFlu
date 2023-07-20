@@ -7,7 +7,7 @@ import 'package:FilmFlu/dto/movie.dart';
 const String baseURL = 'https://api.themoviedb.org/3';
 const String imgBaseUrl = 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2';
 
-Map<String, dynamic> baseHeaders = {
+Map<String, String>? baseHeaders = {
   'Authorization': 'Bearer ${Env.tmdbApiKey}',
   'Content-Type': 'application/json'
 };
@@ -15,10 +15,7 @@ Map<String, dynamic> baseHeaders = {
 class Api {
   Movie parseMovie(String responseBody) {
     final parsed = jsonDecode(responseBody);
-    debugPrint("parse=$parsed");
-    final movie = Movie.fromJson(parsed);
-    debugPrint("movie=$movie");
-    return movie;
+    return Movie.fromJson(parsed);
   }
 
   List<Movie> parseMovies(String responseBody) {
@@ -26,17 +23,18 @@ class Api {
     return parsed.map<Movie>((json) => Movie.fromJson(json)).toList();
   }
 
-  Future<List<Movie>> fetchPopularMovies() async {
+  Future<List<Movie>> fetchPopularMovies(String trendingType) async {
     final response = await http.Client().get(
-        Uri.parse('$baseURL/trending/movie/day?language=es-ES'),
-        headers: {'Authorization': 'Bearer ${Env.tmdbApiKey}'});
+        Uri.parse('$baseURL/trending/movie/$trendingType?language=es-ES'),
+        headers: baseHeaders);
     return compute(parseMovies, response.body);
   }
 
-  Future<Movie> getMovie(int movieId) async {
+  Future<Movie> fetchMovie(int movieId) async {
     final response = await http.Client().get(
-        Uri.parse('$baseURL/movie/${movieId}?language=es-ES'),
-        headers: {'Authorization': 'Bearer ${Env.tmdbApiKey}'});
+        Uri.parse(
+            '$baseURL/movie/${movieId}?language=es-ES&append_to_response=videos,credits'),
+        headers: baseHeaders);
     return compute(parseMovie, response.body);
   }
 }

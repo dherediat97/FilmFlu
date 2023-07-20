@@ -1,6 +1,7 @@
 {
-  "app_name": "FilmFlu",
-  "movie_list_title": "Cartelera",
-  "search_movie_hint": "Busca aquí tu película favorita...",
-  "synopsis_film": "Sinopsis"
+  "app_name": "Film Flu",
+  "film_list_title": "Cartelera",
+  "search_film_hint": "Busca aquí tu película favorita...",
+  "synopsis": "Sinopsis",
+  "character_cast": "Reparto"
 }
