@@ -5,8 +5,10 @@ import 'package:http/http.dart' as http;
 import 'package:FilmFlu/dto/movie.dart';
 
 const String baseURL = 'https://api.themoviedb.org/3';
-const String imgBaseUrl = 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2';
-
+const String movieImgBaseURL =
+    'https://www.themoviedb.org/t/p/w300_and_h450_bestv2';
+const String personImgBaseUrl =
+    'https://www.themoviedb.org/t/p/w138_and_h175_face';
 Map<String, String>? baseHeaders = {
   'Authorization': 'Bearer ${Env.tmdbApiKey}',
   'Content-Type': 'application/json'

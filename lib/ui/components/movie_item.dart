@@ -1,5 +1,4 @@
-import 'package:FilmFlu/ui/util/utilColor.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:FilmFlu/ui/components/movie_cast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -20,44 +19,23 @@ class _MovieItemState extends State<MovieItem> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Movie>(
-        future: api.fetchMovie(widget.movieId),
-        builder: (context, snapshot) {
-          // debugPrint(snapshot.toString());
-          if (snapshot.hasData) {
-            var movie = snapshot.data;
-            if (movie != null) {
-              // _controller.loadVideoById(videoId: movie.)
-              return Container(
-                height: double.infinity,
-                child: Padding(
+    return ListView(children: [
+      FutureBuilder<Movie>(
+          future: api.fetchMovie(widget.movieId),
+          builder: (context, snapshot) {
+            // debugPrint(snapshot.toString());
+            if (snapshot.hasData) {
+              var movie = snapshot.data;
+              if (movie != null) {
+                // _controller.loadVideoById(videoId: movie.)
+                return Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      FutureBuilder(
-                          future: getImagePalette(CachedNetworkImageProvider(
-                              "$imgBaseUrl/${movie.posterPath}")),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              Color filmColor = snapshot.data as Color;
-                              return Text(
-                                movie.title,
-                                style: TextStyle(
-                                    fontSize: 28,
-                                    color: filmColor,
-                                    fontFamily: "LilitaOne"),
-                                textAlign: TextAlign.center,
-                              );
-                            } else {
-                              return Text(
-                                movie.title,
-                                style: TextStyle(
-                                    fontSize: 28, fontFamily: "LilitaOne"),
-                                textAlign: TextAlign.center,
-                              );
-                            }
-                          }),
+                      Text(movie.title,
+                          style:
+                              TextStyle(fontSize: 28, fontFamily: "LilitaOne"),
+                          textAlign: TextAlign.center),
                       Text(AppLocalizations.of(context)!.synopsis,
                           style: TextStyle(fontSize: 25, fontFamily: "Barlow")),
                       Text(
@@ -67,8 +45,14 @@ class _MovieItemState extends State<MovieItem> {
                       ),
                       Text(AppLocalizations.of(context)!.character_cast,
                           style: TextStyle(fontSize: 25, fontFamily: "Barlow")),
-                      Text(movie.credits!.cast![0].name!,
+
+                      FilmCast(cast: movie.credits!.cast!, crew: []),
+
+                      Text("Produción",
                           style: TextStyle(fontSize: 25, fontFamily: "Barlow")),
+
+                      FilmCast(cast: [], crew: movie.credits!.crew!),
+
                       // Text("Tráiler",
                       //     style: TextStyle(fontSize: 30, fontFamily: "Barlow")),
                       // YoutubePlayer(
@@ -77,18 +61,18 @@ class _MovieItemState extends State<MovieItem> {
                       // )
                     ],
                   ),
-                ),
-              );
+                );
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
             } else {
               return const Center(
                 child: CircularProgressIndicator(),
               );
             }
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        });
+          }),
+    ]);
   }
 }

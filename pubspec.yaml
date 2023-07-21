@@ -22,6 +22,7 @@ dependencies:
   package_info_plus:
   palette_generator:
   intl:
+  flutter_svg: ^2.0.7
 
 dev_dependencies:
   flutter_test:
@@ -40,6 +41,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/icons/
     - fonts/
     - assets/animations/
   fonts:

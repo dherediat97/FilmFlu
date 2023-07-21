@@ -7,7 +7,7 @@ class FilmWorker {
   FilmWorker({
     this.adult,
     this.gender,
-    this.knowForDepartment,
+    this.knownForDepartment,
     this.name,
     this.profilePath,
     this.job,
@@ -15,7 +15,7 @@ class FilmWorker {
 
   bool? adult;
   int? gender;
-  String? knowForDepartment;
+  String? knownForDepartment;
   String? name;
   String? profilePath;
   String? job;
