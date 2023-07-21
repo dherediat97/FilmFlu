@@ -27,7 +27,7 @@ class MovieCarrouselItem extends StatelessWidget {
               child: Column(
                 children: [
                   CachedNetworkImage(
-                    imageUrl: '$imgBaseUrl${movie.posterPath}',
+                    imageUrl: '$movieImgBaseURL${movie.posterPath}',
                     fit: BoxFit.cover,
                     placeholder: (context, url) =>
                         const CircularProgressIndicator(),
