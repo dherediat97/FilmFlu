@@ -1,4 +1,5 @@
 //Core Packages
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -25,34 +26,27 @@ class _MainPageState extends State<MainPage> {
       backgroundColor: Theme.of(context).colorScheme.onBackground,
       appBar: AppBar(
           toolbarHeight: 75,
-          flexibleSpace: Padding(
-            padding: const EdgeInsets.only(left: 16),
+          flexibleSpace: SafeArea(
             child: Center(
-              child: SafeArea(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: TextField(
-                        autocorrect: true,
-                        controller: _searchController,
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.primary),
-                        cursorColor: Colors.white,
-                        decoration: InputDecoration(
-                            hintText:
-                                AppLocalizations.of(context)!.search_film_hint,
-                            hintStyle: TextStyle(color: Colors.white54),
-                            icon: Icon(
-                              Icons.search,
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
-                            border: InputBorder.none),
-                        onChanged: (value) {},
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width / 3,
+                child: TextField(
+                  autocorrect: true,
+                  controller: _searchController,
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontFamily: "Barlow"),
+                  cursorColor: Colors.white,
+                  decoration: InputDecoration(
+                      hintText: AppLocalizations.of(context)!.search_film_hint,
+                      hintStyle: TextStyle(
+                          color: Colors.white54, fontFamily: "Barlow"),
+                      icon: Icon(
+                        Icons.search,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
-                    )
-                  ],
+                      border: InputBorder.none),
+                  onChanged: (value) {},
                 ),
               ),
             ),
@@ -62,40 +56,17 @@ class _MainPageState extends State<MainPage> {
           backgroundColor: Theme.of(context).colorScheme.background,
           actions: [
             Padding(
-              padding: const EdgeInsets.only(right: 16.0),
+              padding: const EdgeInsets.all(8.0),
               child: Row(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.person,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () => Navigator.pushNamed(context, '/login'),
-                    icon: Icon(
-                      Icons.login,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                  IconButton(
-                      onPressed: () {
-                        //Descargar App Android
-                      },
-                      icon: Icon(
-                        Icons.android,
-                        color: Theme.of(context).colorScheme.primary,
-                      ))
-                ],
+                children: _appBarActions(),
               ),
-            ),
+            )
           ]),
       body: Container(
           height: double.infinity,
           color: Theme.of(context).colorScheme.background,
           child: ListView(children: [
-            Row(mainAxisSize: MainAxisSize.min, children: [
+            Row(children: [
               Padding(
                   padding: EdgeInsets.all(12.0),
                   child: Text(
@@ -110,5 +81,36 @@ class _MainPageState extends State<MainPage> {
             MovieList(items: widget.movies)
           ])),
     );
+  }
+
+  List<Widget> _appBarActions() {
+    List<Widget> actions = [];
+    if (kIsWeb) {
+      actions.add(IconButton(
+        onPressed: () {
+          //Descargar App Android
+        },
+        icon: Icon(
+          Icons.android,
+          color: Theme.of(context).colorScheme.primary,
+        ),
+      ));
+      actions.add(IconButton(
+        onPressed: () => Navigator.pushNamed(context, '/login'),
+        icon: Icon(
+          Icons.login,
+          color: Theme.of(context).colorScheme.primary,
+        ),
+      ));
+    } else {
+      actions.add(IconButton(
+        onPressed: () {},
+        icon: Icon(
+          Icons.more_vert,
+          color: Theme.of(context).colorScheme.primary,
+        ),
+      ));
+    }
+    return actions;
   }
 }

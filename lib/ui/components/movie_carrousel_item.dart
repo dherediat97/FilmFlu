@@ -1,4 +1,5 @@
 import 'package:FilmFlu/ui/components/movie_item.dart';
+import 'package:FilmFlu/ui/theme/colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:FilmFlu/dto/movie.dart';
 import 'package:flutter/material.dart';
@@ -11,42 +12,32 @@ class MovieCarrouselItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(children: [
-      InkWell(
-        onTap: () {
-          showModalBottomSheet(
-              isDismissible: true,
-              context: context,
-              builder: (context) => MovieItem(movieId: movie.id));
-        },
-        child: Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(32),
-              child: Column(
-                children: [
-                  CachedNetworkImage(
-                    imageUrl: '$movieImgBaseURL${movie.posterPath}',
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) =>
-                        const CircularProgressIndicator(),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(4),
-                    child: Text(
-                      movie.title,
-                      style: const TextStyle(
-                          fontSize: 13,
-                          color: Colors.black,
-                          fontFamily: 'LilitaOne'),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
-              ),
-            )),
-      )
-    ]);
+    return InkWell(
+      onTap: () {
+        showModalBottomSheet(
+            isDismissible: true,
+            context: context,
+            builder: (context) => MovieItem(movieId: movie.id));
+      },
+      child:
+          // Column(children: [
+          Card(
+              margin: EdgeInsets.all(8),
+              color: Colors.transparent,
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16.0),
+                    image: DecorationImage(
+                        fit: BoxFit.contain,
+                        image: CachedNetworkImageProvider(
+                            '$movieImgBaseURL${movie.posterPath}'))),
+              )),
+      // Text(
+      //   movie.title,
+      //   style: TextStyle(color: primaryColor, fontFamily: 'LilitaOne'),
+      //   textAlign: TextAlign.center,
+      // ),
+      // ]),
+    );
   }
 }
