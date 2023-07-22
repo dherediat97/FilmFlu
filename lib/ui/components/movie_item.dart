@@ -1,7 +1,8 @@
-import 'package:FilmFlu/ui/components/movie_cast.dart';
+//Core Packages
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
+//My Packages
 import 'package:FilmFlu/dto/movie.dart';
 import 'package:FilmFlu/network/api.dart';
 
@@ -43,15 +44,6 @@ class _MovieItemState extends State<MovieItem> {
                         style: TextStyle(fontFamily: "Barlow"),
                         textAlign: TextAlign.justify,
                       ),
-                      Text(AppLocalizations.of(context)!.character_cast,
-                          style: TextStyle(fontSize: 25, fontFamily: "Barlow")),
-
-                      FilmCast(cast: movie.credits!.cast!, crew: []),
-
-                      Text("Produción",
-                          style: TextStyle(fontSize: 25, fontFamily: "Barlow")),
-
-                      FilmCast(cast: [], crew: movie.credits!.crew!),
 
                       // Text("Tráiler",
                       //     style: TextStyle(fontSize: 30, fontFamily: "Barlow")),

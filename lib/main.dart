@@ -1,4 +1,5 @@
 //Core Packages
+import 'package:FilmFlu/ui/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -28,8 +29,9 @@ class FilmFlu extends StatelessWidget {
         supportedLocales: [Locale('en'), Locale('es')],
         theme: ThemeData(
           fontFamily: 'Barlow',
-          primaryColor: Color(0xFFC7CD18),
+          primaryColor: primaryColor,
           useMaterial3: true,
+          scaffoldBackgroundColor: secondaryColor,
           textTheme: const TextTheme(
             bodyMedium: TextStyle(
               color: Color(0xFFFFFFFF),
@@ -37,16 +39,16 @@ class FilmFlu extends StatelessWidget {
             ),
           ),
           colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: Colors.yellow,
-            backgroundColor: Color(0x10F0F),
+            primarySwatch: primaryMaterialColor,
+            backgroundColor: backgroundColor,
           ),
         ),
         darkTheme: ThemeData(
-          primaryColor: Color(0xFFC7CD18),
+          primaryColor: primaryColor,
           useMaterial3: true,
           colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: Colors.yellow,
-            backgroundColor: Color(0x10F0F),
+            primarySwatch: primaryMaterialColor,
+            backgroundColor: secondaryColor,
           ),
         ),
         initialRoute: '',

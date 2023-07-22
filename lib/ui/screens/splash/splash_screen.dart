@@ -1,8 +1,12 @@
+//Core Packages
+import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+//My Packages
 import 'package:FilmFlu/dto/movie.dart';
 import 'package:FilmFlu/network/api.dart';
 import 'package:FilmFlu/ui/screens/main/main_page.dart';
-import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -45,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen>
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 2,
                     child: Text(
-                      "Film Flu",
+                      AppLocalizations.of(context)!.app_name,
                       style: TextStyle(
                           fontSize: 30,
                           color: Colors.white,
