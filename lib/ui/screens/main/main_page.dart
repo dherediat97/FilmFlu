@@ -26,27 +26,36 @@ class _MainPageState extends State<MainPage> {
       backgroundColor: Theme.of(context).colorScheme.onBackground,
       appBar: AppBar(
           toolbarHeight: 75,
-          flexibleSpace: SafeArea(
+          flexibleSpace: Padding(
+            padding: const EdgeInsets.only(left: 16.0),
             child: Center(
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width / 3,
-                child: TextField(
-                  autocorrect: true,
-                  controller: _searchController,
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontFamily: "Barlow"),
-                  cursorColor: Colors.white,
-                  decoration: InputDecoration(
-                      hintText: AppLocalizations.of(context)!.search_film_hint,
-                      hintStyle: TextStyle(
-                          color: Colors.white54, fontFamily: "Barlow"),
-                      icon: Icon(
-                        Icons.search,
-                        color: Theme.of(context).colorScheme.primary,
+              child: SafeArea(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 2,
+                      child: TextField(
+                        autocorrect: true,
+                        controller: _searchController,
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontFamily: "Barlow"),
+                        cursorColor: Colors.white,
+                        decoration: InputDecoration(
+                            hintText:
+                                AppLocalizations.of(context)!.search_film_hint,
+                            hintStyle: TextStyle(
+                                color: Colors.white54, fontFamily: "Barlow"),
+                            icon: Icon(
+                              Icons.search,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            border: InputBorder.none),
+                        onChanged: (value) {},
                       ),
-                      border: InputBorder.none),
-                  onChanged: (value) {},
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -63,7 +72,6 @@ class _MainPageState extends State<MainPage> {
             )
           ]),
       body: Container(
-          height: double.infinity,
           color: Theme.of(context).colorScheme.background,
           child: ListView(children: [
             Row(children: [

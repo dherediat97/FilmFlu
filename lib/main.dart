@@ -1,4 +1,5 @@
 //Core Packages
+import 'package:FilmFlu/ui/screens/movieDetails/movie_details.dart';
 import 'package:FilmFlu/ui/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -18,43 +19,56 @@ class FilmFlu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        onGenerateTitle: (context) => AppLocalizations.of(context)!.app_name,
-        supportedLocales: [Locale('en'), Locale('es')],
-        theme: ThemeData(
-          fontFamily: 'Barlow',
-          primaryColor: primaryColor,
-          useMaterial3: true,
-          scaffoldBackgroundColor: secondaryColor,
-          textTheme: const TextTheme(
-            bodyMedium: TextStyle(
-              color: Color(0xFFFFFFFF),
-              fontFamily: 'Barlow',
-            ),
-          ),
-          colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: primaryMaterialColor,
-            backgroundColor: backgroundColor,
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      onGenerateTitle: (context) => AppLocalizations.of(context)!.app_name,
+      supportedLocales: [Locale('en'), Locale('es')],
+      theme: ThemeData(
+        fontFamily: 'Barlow',
+        primaryColor: primaryColor,
+        useMaterial3: true,
+        scaffoldBackgroundColor: secondaryColor,
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(
+            color: Color(0xFFFFFFFF),
+            fontFamily: 'Barlow',
           ),
         ),
-        darkTheme: ThemeData(
-          primaryColor: primaryColor,
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: primaryMaterialColor,
-            backgroundColor: secondaryColor,
-          ),
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: primaryMaterialColor,
+          backgroundColor: backgroundColor,
         ),
-        initialRoute: '',
-        routes: {
-          '': (context) => const SplashScreen(),
-          '/login': (context) => const LoginPage()
-        });
+      ),
+      darkTheme: ThemeData(
+        primaryColor: primaryColor,
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: primaryMaterialColor,
+          backgroundColor: secondaryColor,
+        ),
+      ),
+      initialRoute: '',
+      onGenerateRoute: (settings) {
+        Widget screen;
+        switch (settings.name) {
+          case "/login":
+            screen = LoginPage();
+            break;
+          case "/movieDetails/":
+            screen = MovieDetailsPage();
+            break;
+          default:
+            screen = SplashScreen();
+            break;
+        }
+
+        return MaterialPageRoute(builder: (context) => screen);
+      },
+    );
   }
 }

@@ -1,5 +1,5 @@
 name: FilmFlu
-description: A new Flutter project.
+description: A project of movies and something more
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 0.0.1+1
 
@@ -17,8 +17,7 @@ dependencies:
   http:
   cached_network_image:
   modal_bottom_sheet:
-  flutter_rating_bar:
-  lottie:
+  lottie: ^2.5.0
   package_info_plus:
   palette_generator:
   intl:
