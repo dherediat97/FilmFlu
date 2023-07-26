@@ -1,12 +1,15 @@
 import 'package:FilmFlu/dto/movie.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:FilmFlu/ui/components/movie_carrousel_item.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class MovieList extends StatelessWidget {
   const MovieList({super.key, required this.items});
 
   final List<Movie> items;
+
+  final aspectRatio = kIsWeb ? 16 / 9 : 1.5;
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +20,9 @@ class MovieList extends StatelessWidget {
           });
         }).toList(),
         options: CarouselOptions(
-            viewportFraction: 0.2, aspectRatio: (16 / 9) / 0.50));
+          viewportFraction: 0.6,
+          height: MediaQuery.of(context).size.height / 2,
+          aspectRatio: aspectRatio,
+        ));
   }
 }

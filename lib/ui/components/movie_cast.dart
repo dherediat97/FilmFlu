@@ -16,8 +16,10 @@ class FilmCast extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.custom(
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 300,
-      ),
+          maxCrossAxisExtent: 250,
+          mainAxisSpacing: 20,
+          crossAxisSpacing: 0,
+          mainAxisExtent: 250),
       childrenDelegate: SliverChildBuilderDelegate(
         (context, index) {
           if (cast.isNotEmpty)
@@ -35,8 +37,6 @@ class FilmCast extends StatelessWidget {
     Actor actor = cast[index];
     return GridTile(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CachedNetworkImage(
               imageUrl: '$personImgBaseUrl${actor.profilePath}',
@@ -64,7 +64,7 @@ class FilmCast extends StatelessWidget {
               style: TextStyle(
                   fontFamily: "Barlow",
                   fontWeight: FontWeight.bold,
-                  fontSize: 20)),
+                  fontSize: 18)),
           Text(
             "es ${actor.character}",
             textAlign: TextAlign.center,
