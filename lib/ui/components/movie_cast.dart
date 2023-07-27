@@ -38,35 +38,45 @@ class FilmCast extends StatelessWidget {
     return GridTile(
       child: Column(
         children: [
-          CachedNetworkImage(
-              imageUrl: '$personImgBaseUrl${actor.profilePath}',
-              fit: BoxFit.cover,
-              placeholder: (context, url) => const CircularProgressIndicator(),
-              errorWidget: (context, url, error) {
-                if (actor.gender == 2) {
-                  return SvgPicture.asset(
-                    "assets/icons/actor_icon.svg",
-                    height: 180,
-                    fit: BoxFit.cover,
-                    width: 120,
-                  );
-                } else {
-                  return SvgPicture.asset(
-                    "assets/icons/actress_icon.svg",
-                    height: 180,
-                    fit: BoxFit.cover,
-                    width: 120,
-                  );
-                }
-              }),
-          Text("${actor.name!}",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontFamily: "Barlow",
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18)),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(48.0),
+            child: CachedNetworkImage(
+                imageUrl: '$personImgBaseUrl${actor.profilePath}',
+                fit: BoxFit.cover,
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
+                errorWidget: (context, url, error) {
+                  if (actor.gender == 2) {
+                    return SvgPicture.asset(
+                      "assets/icons/actor_icon.svg",
+                      height: 180,
+                      fit: BoxFit.cover,
+                      width: 120,
+                    );
+                  } else {
+                    return SvgPicture.asset(
+                      "assets/icons/actress_icon.svg",
+                      height: 180,
+                      fit: BoxFit.cover,
+                      width: 120,
+                    );
+                  }
+                }),
+          ),
+          actor.order == 0
+              ? Text("${actor.name!}",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontFamily: "ShadowsIntoLight",
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary,
+                      fontSize: 18))
+              : Text("${actor.name!}",
+                  textAlign: TextAlign.center,
+                  style:
+                      TextStyle(fontFamily: "ShadowsIntoLight", fontSize: 18)),
           Text(
-            "es ${actor.character}",
+            "interpreta a ${actor.character}",
             textAlign: TextAlign.center,
             style: TextStyle(fontFamily: "Barlow"),
           ),

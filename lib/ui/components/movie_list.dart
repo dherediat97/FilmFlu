@@ -10,6 +10,7 @@ class MovieList extends StatelessWidget {
   final List<Movie> items;
 
   final aspectRatio = kIsWeb ? 16 / 9 : 1.5;
+  final viewportFraction = kIsWeb ? 0.2 : 0.6;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class MovieList extends StatelessWidget {
           });
         }).toList(),
         options: CarouselOptions(
-          viewportFraction: 0.6,
+          viewportFraction: viewportFraction,
           height: MediaQuery.of(context).size.height / 2,
           aspectRatio: aspectRatio,
         ));
