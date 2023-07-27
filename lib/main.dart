@@ -52,11 +52,13 @@ class FilmFlu extends StatelessWidget {
         ),
       ),
       darkTheme: ThemeData(
+        fontFamily: 'Barlow',
         primaryColor: primaryColor,
         useMaterial3: true,
+        scaffoldBackgroundColor: secondaryColor,
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: primaryMaterialColor,
-          backgroundColor: secondaryColor,
+          backgroundColor: backgroundColor,
         ),
       ),
       initialRoute: '',
