@@ -37,6 +37,6 @@ jobs:
         - run: flutter build web
         - uses: bluefireteam/flutter-gh-pages@v7
           with:
-            baseHref: /Filmflu/
+            baseHref: /FilmFlu/
             targetBranch: gh-pages
             webRenderer: html
