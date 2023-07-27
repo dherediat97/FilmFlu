@@ -34,6 +34,7 @@ dev_dependencies:
   json_serializable:
   flutter_launcher_icons:
   youtube_player_iframe: ^4.0.4
+  url_launcher: ^6.1.11
 
 flutter:
   generate: true
@@ -50,6 +51,9 @@ flutter:
     - family: LilitaOne
       fonts:
         - asset: fonts/LilitaOne-Regular.ttf
+    - family: ShadowsIntoLight
+      fonts:
+        - asset: fonts/ShadowsIntoLight-Regular.ttf
 
 flutter_launcher_icons:
   android: "launcher_icon"

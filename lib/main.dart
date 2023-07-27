@@ -27,7 +27,14 @@ class FilmFlu extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       onGenerateTitle: (context) => AppLocalizations.of(context)!.app_name,
-      supportedLocales: [Locale('en'), Locale('es')],
+      supportedLocales: [
+        Locale('en'),
+        Locale('fr'),
+        Locale('de'),
+        Locale('nl'),
+        Locale('is'),
+        Locale('es'),
+      ],
       theme: ThemeData(
         fontFamily: 'Barlow',
         primaryColor: primaryColor,

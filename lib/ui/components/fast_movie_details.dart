@@ -21,63 +21,73 @@ class _FastMovieDetailsState extends State<FastMovieDetails> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(children: [
-      FutureBuilder<Movie>(
+    return Container(
+      child: FutureBuilder<Movie>(
           future: api.fetchMovie(widget.movieId),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               var movie = snapshot.data!;
               return Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.only(left: 16.0, right: 16.0),
                 child: Column(
                   children: [
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                          width: 400,
+                          width: 310,
                           child: Text(movie.title,
                               textAlign: TextAlign.start,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                  fontSize: 30, fontFamily: "LilitaOne")),
+                                  fontSize: 25, fontFamily: "LilitaOne")),
                         ),
-                        IconButton(
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                  context, "/movieDetails/${movie.id}");
-                            },
-                            icon: Icon(Icons.info)),
+                        Tooltip(
+                          message: "Más info aquí",
+                          child: IconButton(
+                              onPressed: () {
+                                // Navigator.pushNamed(
+                                // context, "/movieDetails/${movie.id}");
+                              },
+                              icon: Icon(Icons.info)),
+                        ),
                       ],
                     ),
-                    SizedBox(height: 10),
                     Text(AppLocalizations.of(context)!.synopsis,
                         style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 30,
                             fontFamily: "Barlow",
                             fontWeight: FontWeight.bold)),
                     SizedBox(height: 10),
                     Text(movie.overview!,
-                        style: TextStyle(fontFamily: "Barlow"),
+                        style: TextStyle(fontFamily: "Barlow", fontSize: 13),
                         textAlign: TextAlign.justify),
                     SizedBox(height: 10),
                     Text(AppLocalizations.of(context)!.character_cast,
                         style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 30,
                             fontFamily: "Barlow",
                             fontWeight: FontWeight.bold)),
                     SizedBox(height: 10),
                     FilmCast(
-                        cast: movie.credits!.cast!.sublist(0, 3), crew: []),
+                        cast: movie.credits!.cast!
+                            .sublist(0, movie.credits!.cast!.length ~/ 6),
+                        crew: []),
                   ],
                 ),
               );
             } else {
-              return CircularProgressIndicator();
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                ],
+              );
             }
           }),
-    ]);
+    );
   }
 }

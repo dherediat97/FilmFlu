@@ -4,8 +4,6 @@ import 'package:lottie/lottie.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 //My Packages
-import 'package:FilmFlu/dto/movie.dart';
-import 'package:FilmFlu/network/api.dart';
 import 'package:FilmFlu/ui/screens/main/main_page.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,16 +15,11 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
-  Api api = Api();
-  late List<Movie> movies;
   late AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    api.fetchPopularMovies("day").then((value) {
-      movies = value;
-    });
     _controller = AnimationController(
       duration: Duration(seconds: (5)),
       vsync: this,
@@ -79,8 +72,7 @@ class _SplashScreenState extends State<SplashScreen>
               ..duration = composition.duration
               ..forward().whenComplete(() => Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => MainPage(movies: movies)),
+                    MaterialPageRoute(builder: (context) => MainPage()),
                   ));
           },
         ),
