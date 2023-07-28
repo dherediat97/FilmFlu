@@ -77,7 +77,7 @@ class _FilmCastState extends State<FilmCast> {
                 }),
           ),
           actor.order == 0
-              ? Text("${actor.name!}",
+              ? Text(actor.name!,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontFamily: "ShadowsIntoLight",
@@ -88,11 +88,13 @@ class _FilmCastState extends State<FilmCast> {
                   textAlign: TextAlign.center,
                   style:
                       TextStyle(fontFamily: "ShadowsIntoLight", fontSize: 18)),
-          Text(
-            "interpreta a ${actor.character}",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontFamily: "Barlow"),
-          ),
+          actor.character!.isNotEmpty
+              ? Text(
+                  "interpreta a ${actor.character}",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontFamily: "YsabeauInfant"),
+                )
+              : Container()
         ],
       ),
     );
@@ -130,13 +132,13 @@ class _FilmCastState extends State<FilmCast> {
           Text("${filmWorker.name!}",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontFamily: "Barlow",
+                  fontFamily: "YsabeauInfant",
                   fontWeight: FontWeight.bold,
                   fontSize: 20)),
           Text(
             "realizó el trabajo de ${filmWorker.job} en ${filmWorker.knownForDepartment}",
             textAlign: TextAlign.center,
-            style: TextStyle(fontFamily: "Barlow"),
+            style: TextStyle(fontFamily: "YsabeauInfant"),
           ),
         ],
       ),

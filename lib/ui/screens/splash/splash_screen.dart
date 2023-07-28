@@ -18,10 +18,16 @@ class _SplashScreenState extends State<SplashScreen>
   late AnimationController _controller;
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: Duration(seconds: (5)),
+      duration: Duration(seconds: 4),
       vsync: this,
     );
   }
@@ -47,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen>
                           fontSize: 30,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontFamily: "Barlow"),
+                          fontFamily: "YsabeauInfant"),
                       textAlign: TextAlign.center,
                     ),
                   )
@@ -67,6 +73,7 @@ class _SplashScreenState extends State<SplashScreen>
           height: MediaQuery.of(context).size.height,
           animate: true,
           reverse: false,
+          repeat: true,
           onLoaded: (composition) {
             _controller
               ..duration = composition.duration
