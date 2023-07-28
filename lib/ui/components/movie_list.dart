@@ -14,17 +14,15 @@ class MovieList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: CarouselSlider(
-          items: items.map((item) {
-            return Builder(builder: (BuildContext context) {
-              return MovieCarrouselItem(movie: item);
-            });
-          }).toList(),
-          options: CarouselOptions(
-            viewportFraction: viewportFraction,
-            height: MediaQuery.of(context).size.height / 1.4,
-          )),
-    );
+    return CarouselSlider(
+        items: items.map((item) {
+          return Builder(builder: (BuildContext context) {
+            return MovieCarrouselItem(movie: item);
+          });
+        }).toList(),
+        options: CarouselOptions(
+          viewportFraction: viewportFraction,
+          height: MediaQuery.of(context).size.height / 1.4,
+        ));
   }
 }
