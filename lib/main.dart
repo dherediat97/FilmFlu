@@ -1,4 +1,5 @@
 //Core Packages
+import 'package:FilmFlu/dto/movie_details_arguments.dart';
 import 'package:FilmFlu/ui/screens/movieDetails/movie_details.dart';
 import 'package:FilmFlu/ui/theme/colors.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -85,30 +86,37 @@ class FilmFlu extends StatelessWidget {
       ),
       initialRoute: '',
       onGenerateRoute: (settings) {
-        Widget screen;
-        switch (settings.name) {
-          case "/login":
-            screen = LoginPage();
-            break;
-          case "/movieDetails/":
-            screen = MovieDetailsPage();
-            break;
-          default:
-            screen = SplashScreen();
-            break;
-        }
-
-        return MaterialPageRoute(builder: (context) {
-          return ResponsiveScaledBox(
-            width: ResponsiveValue<double>(context, conditionalValues: [
-              Condition.equals(name: MOBILE, value: 450),
-              Condition.between(start: 800, end: 1100, value: 800),
-              Condition.between(start: 1000, end: 1200, value: 1000),
-            ]).value,
-            child: BouncingScrollWrapper.builder(context, screen,
-                dragWithMouse: true),
+        if (settings.name == MovieDetailsPage.routeName) {
+          final args = settings.arguments as MovieDetailsArguments;
+          return MaterialPageRoute(
+            builder: (context) {
+              return MovieDetailsPage(
+                movieId: args.movieId,
+              );
+            },
           );
-        });
+        } else {
+          Widget screen;
+          switch (settings.name) {
+            case "/login":
+              screen = LoginPage();
+              break;
+            default:
+              screen = SplashScreen();
+              break;
+          }
+          return MaterialPageRoute(builder: (context) {
+            return ResponsiveScaledBox(
+              width: ResponsiveValue<double>(context, conditionalValues: [
+                Condition.equals(name: MOBILE, value: 450),
+                Condition.between(start: 800, end: 1100, value: 800),
+                Condition.between(start: 1000, end: 1200, value: 1000),
+              ]).value,
+              child: BouncingScrollWrapper.builder(context, screen,
+                  dragWithMouse: true),
+            );
+          });
+        }
       },
     );
   }

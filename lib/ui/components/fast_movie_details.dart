@@ -1,5 +1,7 @@
 //Core Packages
+import 'package:FilmFlu/dto/movie_details_arguments.dart';
 import 'package:FilmFlu/ui/components/movie_cast.dart';
+import 'package:FilmFlu/ui/screens/movieDetails/movie_details.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -47,8 +49,9 @@ class _FastMovieDetailsState extends State<FastMovieDetails> {
                           message: "Más info aquí",
                           child: IconButton(
                               onPressed: () {
-                                // Navigator.pushNamed(
-                                // context, "/movieDetails/${movie.id}");
+                                Navigator.pushReplacementNamed(
+                                    context, MovieDetailsPage.routeName,
+                                    arguments: MovieDetailsArguments(movie.id));
                               },
                               icon: Icon(Icons.info)),
                         ),
