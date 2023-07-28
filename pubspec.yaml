@@ -12,16 +12,16 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   envied:
-  carousel_slider:
+  carousel_slider: ^4.2.1
   json_annotation:
   http:
   cached_network_image:
-  modal_bottom_sheet:
   lottie: ^2.5.0
   package_info_plus:
   palette_generator:
   intl:
   flutter_svg: ^2.0.7
+  responsive_framework: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -62,6 +62,6 @@ flutter_launcher_icons:
   min_sdk_android: 21
   web:
     generate: true
-    image_path: "assets/images/logo.png"
+    image_path: "assets/images/transparent_logo.png"
     background_color: "#000"
     theme_color: "#000"
