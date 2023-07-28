@@ -1,45 +1,59 @@
 import 'package:FilmFlu/dto/film_worker.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:FilmFlu/dto/actor.dart';
 import 'package:FilmFlu/network/api.dart';
 
-class FilmCast extends StatelessWidget {
-  const FilmCast({super.key, required this.cast, required this.crew});
+class FilmCast extends StatefulWidget {
+  const FilmCast({super.key, required this.movieId});
 
-  final List<Actor> cast;
-  final List<FilmWorker> crew;
+  final int movieId;
+
+  @override
+  State<FilmCast> createState() => _FilmCastState();
+}
+
+class _FilmCastState extends State<FilmCast> {
+  Api api = Api();
 
   @override
   Widget build(BuildContext context) {
-    return GridView.custom(
-      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 250,
-          mainAxisSpacing: 20,
-          crossAxisSpacing: 0,
-          mainAxisExtent: 250),
-      childrenDelegate: SliverChildBuilderDelegate(
-        (context, index) {
-          if (cast.isNotEmpty)
-            return _buildGridActors(context, index);
-          else
-            return _buildFilmWorker(context, index);
-        },
-        childCount: cast.isNotEmpty ? cast.length : crew.length,
-      ),
-      shrinkWrap: true,
+    return Container(
+      child: FutureBuilder<List<Actor>>(
+          future: api.fetchCast(widget.movieId),
+          builder: (context, snapshot) {
+            if (snapshot.hasData && !snapshot.hasError) {
+              final List<Actor> cast = snapshot.data!.sublist(0, 4);
+              return GridView.custom(
+                controller: TrackingScrollController(),
+                shrinkWrap: true,
+                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 175,
+                  mainAxisSpacing: 20,
+                  crossAxisSpacing: 40,
+                  mainAxisExtent: 275,
+                ),
+                childrenDelegate: SliverChildBuilderDelegate((context, index) {
+                  return _buildGridActors(context, index, cast);
+                }, childCount: cast.length),
+              );
+            } else {
+              return CircularProgressIndicator();
+            }
+          }),
     );
   }
 
-  Widget _buildGridActors(BuildContext context, int index) {
+  Widget _buildGridActors(BuildContext context, int index, List<Actor> cast) {
     Actor actor = cast[index];
     return GridTile(
       child: Column(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(48.0),
+            borderRadius: BorderRadius.circular(32.0),
             child: CachedNetworkImage(
                 imageUrl: '$personImgBaseUrl${actor.profilePath}',
                 fit: BoxFit.cover,
@@ -85,7 +99,8 @@ class FilmCast extends StatelessWidget {
     );
   }
 
-  Widget _buildFilmWorker(BuildContext context, int index) {
+  Widget _buildFilmWorker(
+      BuildContext context, int index, List<FilmWorker> crew) {
     FilmWorker filmWorker = crew[index];
     return GridTile(
       child: Column(
