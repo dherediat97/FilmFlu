@@ -45,9 +45,9 @@ flutter:
     - fonts/
     - assets/animations/
   fonts:
-    - family: Barlow
+    - family: YsabeauInfant
       fonts:
-        - asset: fonts/Barlow-Regular.ttf
+        - asset: fonts/YsabeauInfant-Regular.ttf
     - family: LilitaOne
       fonts:
         - asset: fonts/LilitaOne-Regular.ttf

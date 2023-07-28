@@ -38,22 +38,22 @@ class FilmFlu extends StatelessWidget {
       ),
       onGenerateTitle: (context) => AppLocalizations.of(context)!.app_name,
       supportedLocales: [
+        Locale('es'),
         Locale('en'),
         Locale('fr'),
         Locale('de'),
         Locale('nl'),
         Locale('is'),
-        Locale('es'),
       ],
       theme: ThemeData(
-        fontFamily: 'Barlow',
+        fontFamily: 'YsabeauInfant',
         primaryColor: primaryColor,
         useMaterial3: true,
         scaffoldBackgroundColor: secondaryColor,
         textTheme: const TextTheme(
           bodyMedium: TextStyle(
             color: Color(0xFFFFFFFF),
-            fontFamily: 'Barlow',
+            fontFamily: 'YsabeauInfant',
           ),
         ),
         colorScheme: ColorScheme.fromSwatch(
@@ -68,7 +68,7 @@ class FilmFlu extends StatelessWidget {
         ),
       ),
       darkTheme: ThemeData(
-        fontFamily: 'Barlow',
+        fontFamily: 'YsabeauInfant',
         primaryColor: primaryColor,
         useMaterial3: true,
         scaffoldBackgroundColor: secondaryColor,

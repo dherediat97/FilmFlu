@@ -3,6 +3,7 @@ import 'package:FilmFlu/network/api.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -19,14 +20,16 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   List<Movie> movies = [];
+  final now = new DateTime.now();
   final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     Api().fetchPopularMovies("day").then((value) {
-      movies = value;
-      setState(() {});
+      setState(() {
+        movies = value;
+      });
     });
   }
 
@@ -43,22 +46,27 @@ class _MainPageState extends State<MainPage> {
               child: SafeArea(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 2,
                       child: TextField(
                         autocorrect: true,
                         controller: _searchController,
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Theme.of(context).colorScheme.primary,
-                            fontFamily: "Barlow"),
+                            fontSize: 20,
+                            fontFamily: "YsabeauInfant"),
                         cursorColor: Colors.white,
                         decoration: InputDecoration(
                             hintText:
                                 AppLocalizations.of(context)!.search_film_hint,
                             hintStyle: TextStyle(
-                                color: Colors.white54, fontFamily: "Barlow"),
-                            icon: Icon(
+                                color: Colors.white54,
+                                fontSize: 20,
+                                fontFamily: "YsabeauInfant"),
+                            prefixIcon: Icon(
                               Icons.search,
                               color: Theme.of(context).colorScheme.primary,
                             ),
@@ -93,38 +101,65 @@ class _MainPageState extends State<MainPage> {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
-                        fontFamily: 'Barlow',
+                        fontFamily: 'YsabeauInfant',
                         fontSize: 40),
                   ))
             ]),
-            MovieList(items: movies)
+            MovieList(items: movies),
           ])),
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.all(12),
+        height: 50.0,
+        color: Colors.white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text("Made with many"),
+            Icon(Icons.favorite, color: Colors.red),
+            Spacer(flex: 1),
+            Icon(Icons.copyright, color: Colors.black),
+            Text("${now.year} dherediat All Rights Reserved")
+          ],
+        ),
+      ),
     );
   }
 
   List<Widget> _appBarActions() {
     List<Widget> actions = [];
-    // List<String> languages = [];
-    // String languageChosen =
-    //     "assets/icons/${Localizations.localeOf(context).languageCode}.svg";
-    // for (var locale in MaterialApp().supportedLocales) {
-    //   languages.add(locale.languageCode);
-    // }
+    List<String> languages = [];
+    String languageChosen = Localizations.localeOf(context).languageCode;
+    for (var locale in MaterialApp().supportedLocales) {
+      languages.add("assets/icons/${locale.languageCode}_flag.svg");
+    }
 
-    // actions.add(DropdownButton(
+    // actions.add(DropdownButton<String>(
     //     onChanged: (value) {
-    //       languageChosen = languages[value];
+    //       setState(() {
+    //         languageChosen = value!;
+    //       });
     //     },
     //     icon: SvgPicture.asset(languageChosen),
-    //     value: 0,
-    //     items: [DropdownMenuItem(child: Container())]));
+    //     value: languages.first,
+    //     items: languages.map<DropdownMenuItem<String>>((String value) {
+    //       return DropdownMenuItem<String>(
+    //         value: value,
+    //         child: Row(
+    //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    //           children: [
+    //             SvgPicture.asset(value),
+    //           ],
+    //         ),
+    //       );
+    //     }).toList()));
     if (kIsWeb) {
       actions.add(IconButton(
         onPressed: () async {
           PackageInfo packageInfo = await PackageInfo.fromPlatform();
+          version = packageInfo.version;
           //Descargar App Android
-          final Uri url = Uri.parse(
-              'https://github.com/dherediat97/Filmflu/releases/download/${packageInfo.version}/app-release.apk');
+          final Uri url = Uri.parse(appDownloadBaseUrl);
           launchUrl(url);
         },
         icon: Icon(
@@ -148,15 +183,6 @@ class _MainPageState extends State<MainPage> {
     //     color: Theme.of(context).colorScheme.primary,
     //   ),
     // ));
-    // } else {
-    //   actions.add(IconButton(
-    //     onPressed: () {},
-    //     icon: Icon(
-    //       Icons.more_vert,
-    //       color: Theme.of(context).colorScheme.primary,
-    //     ),
-    //   ));
-    // }
     return actions;
   }
 }
