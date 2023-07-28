@@ -26,7 +26,7 @@ class _FastMovieDetailsState extends State<FastMovieDetails> {
           future: api.fetchMovie(widget.movieId),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              var movie = snapshot.data!;
+              var movie = snapshot.requireData;
               return Padding(
                 padding: const EdgeInsets.only(left: 24.0, right: 24.0),
                 child: Column(
