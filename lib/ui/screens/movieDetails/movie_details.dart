@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
-class MovieDetailsPage extends StatefulWidget {
-  const MovieDetailsPage({super.key});
+class MovieDetailsPage extends StatelessWidget {
+  const MovieDetailsPage({super.key, required this.movieId});
 
-  @override
-  State<MovieDetailsPage> createState() => _MovieDetailsPageState();
-}
+  final int movieId;
+  static const routeName = '/movieDetails';
 
-class _MovieDetailsPageState extends State<MovieDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Container();

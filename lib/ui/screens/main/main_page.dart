@@ -113,13 +113,20 @@ class _MainPageState extends State<MainPage> {
         color: Colors.white,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("Made with many"),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text("Made with many",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+            ),
             Icon(Icons.favorite, color: Colors.red),
             Spacer(flex: 1),
             Icon(Icons.copyright, color: Colors.black),
-            Text("${now.year} dherediat All Rights Reserved")
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text("${now.year} @dherediat97 All Rights Reserved",
+                  style: TextStyle(fontSize: 12)),
+            )
           ],
         ),
       ),
@@ -176,13 +183,6 @@ class _MainPageState extends State<MainPage> {
         ),
       ));
     }
-    // actions.add(IconButton(
-    //   onPressed: () => Navigator.pushNamed(context, '/login'),
-    //   icon: Icon(
-    //     Icons.login,
-    //     color: Theme.of(context).colorScheme.primary,
-    //   ),
-    // ));
     return actions;
   }
 }
