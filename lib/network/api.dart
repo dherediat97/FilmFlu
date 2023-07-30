@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:FilmFlu/dto/credits.dart';
+import 'package:FilmFlu/dto/video.dart';
 import 'package:FilmFlu/env/env.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
@@ -14,7 +15,7 @@ const String personImgBaseUrl =
     'https://www.themoviedb.org/t/p/w138_and_h175_face';
 String appDownloadBaseUrl =
     "https://github.com/dherediat97/Filmflu/releases/download/$version/app-release.apk";
-Map<String, String>? baseHeaders = {
+const Map<String, String>? baseHeaders = {
   'Authorization': 'Bearer ${Env.tmdbApiKey}',
   'Content-Type': 'application/json'
 };
@@ -35,6 +36,11 @@ class Api {
     return Credits.fromJson(parsed);
   }
 
+  List<Video> parseVideos(String responseBody) {
+    final parsed = jsonDecode(responseBody)["results"];
+    return parsed.map<Video>((json) => Video.fromJson(json)).toList();
+  }
+
   Future<List<Movie>> fetchPopularMovies(String trendingType) async {
     final response = await http.Client().get(
         Uri.parse('$baseURL/trending/movie/$trendingType?language=es-ES'),
@@ -47,6 +53,13 @@ class Api {
         Uri.parse('$baseURL/movie/${movieId}?language=es-ES'),
         headers: baseHeaders);
     return compute(parseMovie, response.body);
+  }
+
+  Future<List<Video>> fetchTrailer(int movieId) async {
+    final response = await http.Client().get(
+        Uri.parse('$baseURL/movie/${movieId}/videos?language=es-ES'),
+        headers: baseHeaders);
+    return compute(parseVideos, response.body);
   }
 
   Future<Credits> fetchCredits(int movieId) async {

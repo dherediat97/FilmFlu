@@ -21,83 +21,92 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Theme.of(context).colorScheme.onBackground,
-      appBar: AppBar(
-          toolbarHeight: 75,
-          flexibleSpace: Padding(
-            padding: const EdgeInsets.only(left: 16),
-            child: Center(
-              child: SafeArea(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 2,
-                      child: TextField(
-                        autocorrect: true,
-                        controller: _searchController,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.primary,
-                            fontSize: 20,
-                            fontFamily: "YsabeauInfant"),
-                        cursorColor: Colors.white,
-                        decoration: InputDecoration(
-                            hintText:
-                                AppLocalizations.of(context)!.search_film_hint,
-                            hintStyle: TextStyle(
-                                color: Colors.white54,
-                                fontSize: 20,
-                                fontFamily: "YsabeauInfant"),
-                            prefixIcon: Icon(
-                              Icons.search,
+    return new WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Theme.of(context).colorScheme.onBackground,
+        appBar: AppBar(
+            toolbarHeight: 75,
+            flexibleSpace: Padding(
+              padding: const EdgeInsets.only(left: 16),
+              child: Center(
+                child: SafeArea(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 2,
+                        child: TextField(
+                          autocorrect: true,
+                          controller: _searchController,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
                               color: Theme.of(context).colorScheme.primary,
-                            ),
-                            border: InputBorder.none),
-                        onChanged: (value) {},
+                              fontSize: 20,
+                              fontFamily: "YsabeauInfant"),
+                          cursorColor: Colors.white,
+                          decoration: InputDecoration(
+                              hintText: AppLocalizations.of(context)!
+                                  .search_film_hint,
+                              hintStyle: TextStyle(
+                                  color: Colors.white54,
+                                  fontSize: 20,
+                                  fontFamily: "YsabeauInfant"),
+                              prefixIcon: Icon(
+                                Icons.search,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                              border: InputBorder.none),
+                          onChanged: (value) {},
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          title: Image.asset('assets/images/transparent_logo.png', height: 60),
-          elevation: 48,
-          backgroundColor: Theme.of(context).colorScheme.background,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: _appBarActions(context),
+            title: InkWell(
+                child: Image.asset('assets/images/transparent_logo.png',
+                    height: 60),
+                onTap: () {
+                  Navigator.pop(context);
+                }),
+            elevation: 48,
+            backgroundColor: Theme.of(context).colorScheme.background,
+            actions: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: _appBarActions(context),
+                ),
+              )
+            ]),
+        body: widget.containerChild,
+        bottomNavigationBar: Container(
+          padding: EdgeInsets.all(12),
+          height: 50.0,
+          color: Colors.white,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text("Made with much",
+                    style:
+                        TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
               ),
-            )
-          ]),
-      body: widget.containerChild,
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.all(12),
-        height: 50.0,
-        color: Colors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text("Made with much",
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-            ),
-            Icon(Icons.favorite, color: Colors.red),
-            Spacer(flex: 1),
-            Icon(Icons.copyright, color: Colors.black),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text("${now.year} @dherediat97 All Rights Reserved",
-                  style: TextStyle(fontSize: 12)),
-            )
-          ],
+              Icon(Icons.favorite, color: Colors.red),
+              Spacer(flex: 1),
+              Icon(Icons.copyright, color: Colors.black),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text("${now.year} @dherediat97 All Rights Reserved",
+                    style: TextStyle(fontSize: 12)),
+              )
+            ],
+          ),
         ),
       ),
     );
