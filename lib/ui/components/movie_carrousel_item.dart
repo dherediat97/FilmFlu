@@ -13,7 +13,7 @@ class MovieCarrouselItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.only(right: 32),
       child: InkWell(
         onTap: () {
           showModalBottomSheet(
@@ -45,8 +45,9 @@ class MovieCarrouselItem extends StatelessWidget {
           );
         },
         child: Container(
+          width: 300,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.0),
+            borderRadius: BorderRadius.circular(24.0),
             image: DecorationImage(
               fit: BoxFit.cover,
               image: CachedNetworkImageProvider(

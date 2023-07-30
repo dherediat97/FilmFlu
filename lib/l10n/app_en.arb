@@ -4,5 +4,7 @@
   "search_film_hint": "Search here for your favorite film...",
   "synopsis": "Synopsis",
   "character_cast": "Character Cast",
-  "production_cast": "Production"
+  "production_cast": "Production",
+  "production_job": "performed the work of",
+  "in_preposition": "in"
 }

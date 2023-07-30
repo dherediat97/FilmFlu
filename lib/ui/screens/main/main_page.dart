@@ -17,18 +17,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  List<Movie> movies = [];
-
-  @override
-  void initState() {
-    super.initState();
-    Api().fetchPopularMovies("day").then((value) {
-      setState(() {
-        movies = value;
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
@@ -47,7 +35,18 @@ class _MainPageState extends State<MainPage> {
                           fontSize: 40),
                     ))
               ]),
-              MovieList(items: movies),
+              FutureBuilder<List<Movie>>(
+                future: Api().fetchPopularMovies("day"),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return MovieList(movies: snapshot.requireData);
+                  } else if (snapshot.hasError) {
+                    return Center(child: CircularProgressIndicator());
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                },
+              ),
             ])));
   }
 }

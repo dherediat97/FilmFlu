@@ -43,7 +43,6 @@ class _MovieDetailsPageState extends State<MovieDetailsPage>
           builder: (context, snapshot) {
             if (snapshot.hasData && !snapshot.hasError) {
               Movie movie = snapshot.requireData;
-              print(movie.toJson());
               return SingleChildScrollView(
                 child: Column(
                   children: [
@@ -56,16 +55,28 @@ class _MovieDetailsPageState extends State<MovieDetailsPage>
                         ),
                         Positioned.fill(
                             child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            movie.title,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontFamily: "YsabeauInfant",
-                                fontSize: 60,
-                                color: Colors.white),
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              movie.title,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontFamily: "YsabeauInfant",
+                                  fontSize: 60,
+                                  color: Colors.white),
+                            ),
                           ),
-                        ))
+                        )),
+                        Text(
+                          AppLocalizations.of(context)!.synopsis,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "YsabeauInfant",
+                            fontSize: 40,
+                          ),
+                        ),
+                        Text(movie.overview!),
                       ],
                     ),
                     Text(

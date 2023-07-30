@@ -1,7 +1,4 @@
 //Core Packages
-import 'package:FilmFlu/dto/movie_details_arguments.dart';
-import 'package:FilmFlu/ui/screens/movieDetails/movie_details.dart';
-import 'package:FilmFlu/ui/theme/colors.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -10,6 +7,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 //My Packages
 import 'package:FilmFlu/ui/screens/login/login_page.dart';
 import 'package:FilmFlu/ui/screens/splash/splash_screen.dart';
+import 'package:FilmFlu/dto/movie_details_arguments.dart';
+import 'package:FilmFlu/ui/screens/movieDetails/movie_details.dart';
+import 'package:FilmFlu/ui/theme/colors.dart';
+import 'package:FilmFlu/ui/util/utilScroll.dart';
 
 void main() {
   runApp(const FilmFlu());
@@ -22,6 +23,7 @@ class FilmFlu extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      scrollBehavior: WebScrollBehavior(),
       localizationsDelegates: [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -90,9 +92,18 @@ class FilmFlu extends StatelessWidget {
           final args = settings.arguments as MovieDetailsArguments;
           return MaterialPageRoute(
             builder: (context) {
-              return MovieDetailsPage(
-                movieId: args.movieId,
-              );
+              return ResponsiveScaledBox(
+                  width: ResponsiveValue<double>(context, conditionalValues: [
+                    Condition.equals(name: MOBILE, value: 450),
+                    Condition.between(start: 800, end: 1100, value: 800),
+                    Condition.between(start: 1000, end: 1200, value: 1000),
+                  ]).value,
+                  child: BouncingScrollWrapper.builder(
+                      context,
+                      MovieDetailsPage(
+                        movieId: args.movieId,
+                      ),
+                      dragWithMouse: true));
             },
           );
         } else {
