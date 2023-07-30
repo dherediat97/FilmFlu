@@ -1,3 +1,4 @@
+import 'package:FilmFlu/dto/credits.dart';
 import 'package:FilmFlu/dto/film_worker.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,9 @@ import 'package:FilmFlu/dto/actor.dart';
 import 'package:FilmFlu/network/api.dart';
 
 class FilmCast extends StatefulWidget {
-  const FilmCast({super.key, required this.movieId});
+  const FilmCast({super.key, required this.movieId, required this.isCast});
+
+  final bool isCast;
 
   final int movieId;
 
@@ -16,28 +19,30 @@ class FilmCast extends StatefulWidget {
 }
 
 class _FilmCastState extends State<FilmCast> {
-  Api api = Api();
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: FutureBuilder<List<Actor>>(
-          future: api.fetchCast(widget.movieId),
+      child: FutureBuilder<Credits>(
+          future: Api().fetchCredits(widget.movieId),
           builder: (context, snapshot) {
             if (snapshot.hasData && !snapshot.hasError) {
-              final List<Actor> cast = snapshot.data!.sublist(0, 4);
+              final List<Actor>? cast = snapshot.requireData.cast;
+              final List<FilmWorker>? crew = snapshot.requireData.crew;
               return GridView.custom(
                 controller: TrackingScrollController(),
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 175,
-                  mainAxisSpacing: 20,
+                  mainAxisSpacing: 0,
                   crossAxisSpacing: 40,
-                  mainAxisExtent: 275,
+                  mainAxisExtent: 300,
                 ),
                 childrenDelegate: SliverChildBuilderDelegate((context, index) {
-                  return _buildGridActors(context, index, cast);
-                }, childCount: cast.length),
+                  if (widget.isCast)
+                    return _buildGridActors(context, index, cast!);
+                  else
+                    return _buildFilmWorker(context, index, crew!);
+                }, childCount: widget.isCast ? cast?.length : crew?.length),
               );
             } else {
               return CircularProgressIndicator();
@@ -76,23 +81,21 @@ class _FilmCastState extends State<FilmCast> {
                   }
                 }),
           ),
-          actor.order == 0
-              ? Text(actor.name!,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontFamily: "ShadowsIntoLight",
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.primary,
-                      fontSize: 18))
-              : Text("${actor.name!}",
-                  textAlign: TextAlign.center,
-                  style:
-                      TextStyle(fontFamily: "ShadowsIntoLight", fontSize: 18)),
+          Text(actor.name!,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontFamily: "ShadowsIntoLight",
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
+                  fontSize: 20)),
           actor.character!.isNotEmpty
               ? Text(
                   "interpreta a ${actor.character}",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontFamily: "YsabeauInfant"),
+                  style: TextStyle(
+                    fontFamily: "YsabeauInfant",
+                    color: Colors.white,
+                  ),
                 )
               : Container()
         ],
@@ -103,6 +106,7 @@ class _FilmCastState extends State<FilmCast> {
   Widget _buildFilmWorker(
       BuildContext context, int index, List<FilmWorker> crew) {
     FilmWorker filmWorker = crew[index];
+
     return GridTile(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -133,12 +137,16 @@ class _FilmCastState extends State<FilmCast> {
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: "YsabeauInfant",
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 20)),
           Text(
             "realizó el trabajo de ${filmWorker.job} en ${filmWorker.knownForDepartment}",
             textAlign: TextAlign.center,
-            style: TextStyle(fontFamily: "YsabeauInfant"),
+            style: TextStyle(
+              fontFamily: "YsabeauInfant",
+              color: Colors.white,
+            ),
           ),
         ],
       ),

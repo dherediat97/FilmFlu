@@ -73,7 +73,7 @@ class _FastMovieDetailsState extends State<FastMovieDetails> {
                             fontFamily: "YsabeauInfant",
                             fontWeight: FontWeight.bold)),
                     SizedBox(height: 20),
-                    FilmCast(movieId: movie.id),
+                    // FilmCast(movieId: movie.id, isCastComplete: false),
                   ],
                 ),
               );

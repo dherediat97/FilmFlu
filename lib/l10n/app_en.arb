@@ -3,5 +3,6 @@
   "film_list_title": "Film Playing",
   "search_film_hint": "Search here for your favorite film...",
   "synopsis": "Synopsis",
-  "character_cast": "Character Cast"
+  "character_cast": "Character Cast",
+  "production_cast": "Production"
 }
