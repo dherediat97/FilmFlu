@@ -1,6 +1,5 @@
 import 'dart:convert';
-import 'package:FilmFlu/dto/actor.dart';
-import 'package:FilmFlu/dto/film_worker.dart';
+import 'package:FilmFlu/dto/credits.dart';
 import 'package:FilmFlu/env/env.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
@@ -10,6 +9,7 @@ String version = "0.0.1";
 const String baseURL = 'https://api.themoviedb.org/3';
 const String movieImgBaseURL =
     'https://www.themoviedb.org/t/p/w300_and_h450_bestv2';
+const String movieLandscapeBaseUrl = 'https://image.tmdb.org/t/p/original';
 const String personImgBaseUrl =
     'https://www.themoviedb.org/t/p/w138_and_h175_face';
 String appDownloadBaseUrl =
@@ -30,14 +30,9 @@ class Api {
     return parsed.map<Movie>((json) => Movie.fromJson(json)).toList();
   }
 
-  List<Actor> parseCast(String responseBody) {
-    final parsed = jsonDecode(responseBody)['cast'];
-    return parsed.map<Actor>((json) => Actor.fromJson(json)).toList();
-  }
-
-  List<FilmWorker> parseCrew(String responseBody) {
-    final parsed = jsonDecode(responseBody)['crew'];
-    return parsed.map<FilmWorker>((json) => FilmWorker.fromJson(json)).toList();
+  Credits parseCredits(String responseBody) {
+    final parsed = jsonDecode(responseBody);
+    return Credits.fromJson(parsed);
   }
 
   Future<List<Movie>> fetchPopularMovies(String trendingType) async {
@@ -54,10 +49,10 @@ class Api {
     return compute(parseMovie, response.body);
   }
 
-  Future<List<Actor>> fetchCast(int movieId) async {
+  Future<Credits> fetchCredits(int movieId) async {
     final response = await http.Client().get(
         Uri.parse('$baseURL/movie/${movieId}/credits?language=es-ES'),
         headers: baseHeaders);
-    return compute(parseCast, response.body);
+    return compute(parseCredits, response.body);
   }
 }

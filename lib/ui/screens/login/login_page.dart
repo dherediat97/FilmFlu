@@ -1,3 +1,4 @@
+import 'package:FilmFlu/ui/components/scaffold_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -5,8 +6,8 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
+    return ScaffoldPage(
+      containerChild: Padding(
         padding: const EdgeInsets.all(32.0),
         child: Center(
           child: Column(

@@ -3,5 +3,8 @@
   "film_list_title": "Cartelera",
   "search_film_hint": "Busca aquí tu película favorita...",
   "synopsis": "Sinopsis",
-  "character_cast": "Reparto"
+  "character_cast": "Reparto",
+  "production_cast": "Producción",
+  "production_job": "realizó el trabajo de",
+  "in_preposition": "en"
 }

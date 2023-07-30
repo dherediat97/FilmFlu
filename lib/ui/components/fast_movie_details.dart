@@ -1,6 +1,5 @@
 //Core Packages
 import 'package:FilmFlu/dto/movie_details_arguments.dart';
-import 'package:FilmFlu/ui/components/movie_cast.dart';
 import 'package:FilmFlu/ui/screens/movieDetails/movie_details.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +72,7 @@ class _FastMovieDetailsState extends State<FastMovieDetails> {
                             fontFamily: "YsabeauInfant",
                             fontWeight: FontWeight.bold)),
                     SizedBox(height: 20),
-                    FilmCast(movieId: movie.id),
+                    // FilmCast(movieId: movie.id, isCastComplete: false),
                   ],
                 ),
               );
