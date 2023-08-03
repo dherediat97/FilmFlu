@@ -55,7 +55,7 @@ class FilmFlu extends StatelessWidget {
         scaffoldBackgroundColor: secondaryColor,
         textTheme: const TextTheme(
           bodyMedium: TextStyle(
-            color: Color(0xFFFFFFFF),
+            color: Colors.black,
             fontFamily: 'YsabeauInfant',
           ),
         ),
@@ -67,23 +67,6 @@ class FilmFlu extends StatelessWidget {
         scrollbarTheme: ScrollbarThemeData(
           radius: Radius.circular(20),
           thumbColor: MaterialStatePropertyAll(primaryColor),
-          // thumbVisibility: MaterialStatePropertyAll(true),
-        ),
-      ),
-      darkTheme: ThemeData(
-        fontFamily: 'YsabeauInfant',
-        primaryColor: primaryColor,
-        useMaterial3: true,
-        scaffoldBackgroundColor: secondaryColor,
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: primaryMaterialColor,
-          backgroundColor: backgroundColor,
-        ),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        scrollbarTheme: ScrollbarThemeData(
-          radius: Radius.circular(20),
-          thumbColor: MaterialStatePropertyAll(primaryColor),
-          // thumbVisibility: MaterialStatePropertyAll(true),
         ),
       ),
       initialRoute: '',

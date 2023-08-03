@@ -25,6 +25,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
       resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).colorScheme.onBackground,
       appBar: AppBar(
+          automaticallyImplyLeading: false,
           toolbarHeight: 75,
           flexibleSpace: Padding(
             padding: const EdgeInsets.only(left: 16),
@@ -65,7 +66,12 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
               ),
             ),
           ),
-          title: Image.asset('assets/images/transparent_logo.png', height: 60),
+          title: InkWell(
+              child:
+                  Image.asset('assets/images/transparent_logo.png', height: 60),
+              onTap: () {
+                Navigator.pop(context);
+              }),
           elevation: 48,
           backgroundColor: Theme.of(context).colorScheme.background,
           actions: [
@@ -84,19 +90,12 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text("Made with much",
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-            ),
+            Text("Made with much",
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
             Icon(Icons.favorite, color: Colors.red),
             Spacer(flex: 1),
             Icon(Icons.copyright, color: Colors.black),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text("${now.year} @dherediat97 All Rights Reserved",
-                  style: TextStyle(fontSize: 12)),
-            )
+            Text("${now.year} @dherediat97", style: TextStyle(fontSize: 12))
           ],
         ),
       ),
@@ -110,6 +109,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
     for (var locale in MaterialApp().supportedLocales) {
       languages.add("assets/icons/${locale.languageCode}_flag.svg");
     }
+    debugPrint(languages.toString());
 
     // actions.add(DropdownButton<String>(
     //     onChanged: (value) {

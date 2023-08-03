@@ -22,6 +22,7 @@ class _FilmCastState extends State<FilmCast> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.all(8),
       child: FutureBuilder<Credits>(
           future: Api().fetchCredits(widget.movieId),
           builder: (context, snapshot) {
@@ -32,10 +33,11 @@ class _FilmCastState extends State<FilmCast> {
                 controller: TrackingScrollController(),
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 175,
-                  mainAxisSpacing: 0,
+                  maxCrossAxisExtent: 200,
+                  mainAxisSpacing: 40,
                   crossAxisSpacing: 40,
                   mainAxisExtent: 300,
+                  childAspectRatio: MediaQuery.of(context).size.aspectRatio,
                 ),
                 childrenDelegate: SliverChildBuilderDelegate((context, index) {
                   if (widget.isCast)
@@ -109,36 +111,38 @@ class _FilmCastState extends State<FilmCast> {
 
     return GridTile(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CachedNetworkImage(
-              imageUrl: '$personImgBaseUrl${filmWorker.profilePath}',
-              fit: BoxFit.cover,
-              placeholder: (context, url) => const CircularProgressIndicator(),
-              errorWidget: (context, url, error) {
-                if (filmWorker.gender == 2) {
-                  return SvgPicture.asset(
-                    "assets/icons/actor_icon.svg",
-                    height: 180,
-                    fit: BoxFit.cover,
-                    width: 120,
-                  );
-                } else {
-                  return SvgPicture.asset(
-                    "assets/icons/actress_icon.svg",
-                    height: 180,
-                    fit: BoxFit.cover,
-                    width: 120,
-                  );
-                }
-              }),
-          Text("${filmWorker.name!}",
+          ClipRRect(
+            borderRadius: BorderRadius.circular(32.0),
+            child: CachedNetworkImage(
+                imageUrl: '$personImgBaseUrl${filmWorker.profilePath}',
+                fit: BoxFit.cover,
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
+                errorWidget: (context, url, error) {
+                  if (filmWorker.gender == 2) {
+                    return SvgPicture.asset(
+                      "assets/icons/actor_icon.svg",
+                      height: 180,
+                      fit: BoxFit.cover,
+                      width: 120,
+                    );
+                  } else {
+                    return SvgPicture.asset(
+                      "assets/icons/actress_icon.svg",
+                      height: 180,
+                      fit: BoxFit.cover,
+                      width: 120,
+                    );
+                  }
+                }),
+          ),
+          Text(filmWorker.name!,
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontFamily: "YsabeauInfant",
-                  color: Colors.white,
+                  fontFamily: "ShadowsIntoLight",
                   fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
                   fontSize: 20)),
           Text(
             "realizó el trabajo de ${filmWorker.job} en ${filmWorker.knownForDepartment}",
