@@ -35,7 +35,7 @@ class _FastMovieDetailsState extends State<FastMovieDetails> {
                     Row(
                       children: [
                         SizedBox(
-                          width: 300,
+                          width: MediaQuery.of(context).size.width / 1.5,
                           child: Text(movie.title,
                               textAlign: TextAlign.start,
                               maxLines: 3,
@@ -43,7 +43,7 @@ class _FastMovieDetailsState extends State<FastMovieDetails> {
                               style: TextStyle(
                                   fontSize: 22, fontFamily: "LilitaOne")),
                         ),
-                        Spacer(),
+                        Spacer(flex: 1),
                         Tooltip(
                           message: "Más info aquí",
                           child: IconButton(
@@ -65,14 +65,6 @@ class _FastMovieDetailsState extends State<FastMovieDetails> {
                     Text(movie.overview!,
                         style: TextStyle(fontFamily: "YsabeauInfant"),
                         textAlign: TextAlign.justify),
-                    SizedBox(height: 20),
-                    Text(AppLocalizations.of(context)!.character_cast,
-                        style: TextStyle(
-                            fontSize: 30,
-                            fontFamily: "YsabeauInfant",
-                            fontWeight: FontWeight.bold)),
-                    SizedBox(height: 20),
-                    // FilmCast(movieId: movie.id, isCastComplete: false),
                   ],
                 ),
               );
