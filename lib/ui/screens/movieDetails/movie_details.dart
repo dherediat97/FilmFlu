@@ -62,7 +62,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                 mini: true,
                 backgroundColor: Colors.red,
                 foregroundColor: Colors.white,
-                child: Icon(Icons.stop_circle, color: Colors.white),
+                child: Icon(Icons.stop),
                 onPressed: () {
                   isTrailerSelected = false;
                   setState(() {});
@@ -94,14 +94,17 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                     children: [
                                       Row(
                                         children: [
-                                          Text(
-                                            movie.title,
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
-                                                fontFamily: 'YsabeauInfant',
-                                                fontSize: 40),
+                                          Container(
+                                            width: 400,
+                                            child: Text(
+                                              movie.title,
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                  fontFamily: 'YsabeauInfant',
+                                                  fontSize: 40),
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -226,10 +229,14 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                     Video video = videoList.first;
                     _controller.loadVideoById(videoId: video.key);
                     return isTrailerSelected
-                        ? YoutubePlayer(
-                            controller: _controller,
-                            aspectRatio:
-                                MediaQuery.of(context).size.aspectRatio)
+                        ? OrientationBuilder(builder: (context, orientation) {
+                            return AspectRatio(
+                              aspectRatio: orientation == Orientation.landscape
+                                  ? MediaQuery.of(context).size.aspectRatio
+                                  : 16 / 9,
+                              child: YoutubePlayer(controller: _controller),
+                            );
+                          })
                         : CircularProgressIndicator();
                   } else {
                     return CircularProgressIndicator();
