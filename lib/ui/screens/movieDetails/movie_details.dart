@@ -61,6 +61,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
               child: FloatingActionButton(
                 mini: true,
                 backgroundColor: Colors.red,
+                foregroundColor: Colors.white,
                 child: Icon(Icons.stop_circle, color: Colors.white),
                 onPressed: () {
                   isTrailerSelected = false;
