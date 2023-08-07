@@ -7,8 +7,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 //My Packages
 import 'package:FilmFlu/network/api.dart';
 
+// ignore: must_be_immutable
 class ScaffoldPage extends StatefulWidget {
-  const ScaffoldPage({super.key, required this.containerChild});
+  ScaffoldPage(
+      {super.key,
+      required this.containerChild,
+      required this.floatingActionButton,
+      required this.isLightsOn});
+  bool isLightsOn;
+  final Widget? floatingActionButton;
   final Widget containerChild;
 
   @override
@@ -22,84 +29,85 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Theme.of(context).colorScheme.onBackground,
-      appBar: AppBar(
-          automaticallyImplyLeading: false,
-          toolbarHeight: 75,
-          flexibleSpace: Padding(
-            padding: const EdgeInsets.only(left: 16),
-            child: Center(
-              child: SafeArea(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 2,
-                      child: TextField(
-                        autocorrect: true,
-                        controller: _searchController,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.primary,
-                            fontSize: 20,
-                            fontFamily: "YsabeauInfant"),
-                        cursorColor: Colors.white,
-                        decoration: InputDecoration(
-                            hintText:
-                                AppLocalizations.of(context)!.search_film_hint,
-                            hintStyle: TextStyle(
-                                color: Colors.white54,
-                                fontSize: 20,
-                                fontFamily: "YsabeauInfant"),
-                            prefixIcon: Icon(
-                              Icons.search,
-                              color: Theme.of(context).colorScheme.primary,
+        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Theme.of(context).colorScheme.onBackground,
+        appBar: widget.isLightsOn
+            ? AppBar(
+                automaticallyImplyLeading: false,
+                toolbarHeight: 75,
+                flexibleSpace: Padding(
+                  padding: const EdgeInsets.only(left: 16),
+                  child: Center(
+                    child: SafeArea(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 2,
+                            child: TextField(
+                              autocorrect: true,
+                              controller: _searchController,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  fontSize: 20,
+                                  fontFamily: "YsabeauInfant"),
+                              cursorColor: Colors.white,
+                              decoration: InputDecoration(
+                                  hintText: AppLocalizations.of(context)!
+                                      .search_film_hint,
+                                  hintStyle: TextStyle(
+                                      color: Colors.white54,
+                                      fontSize: 20,
+                                      fontFamily: "YsabeauInfant"),
+                                  prefixIcon: Icon(
+                                    Icons.search,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                                  border: InputBorder.none),
+                              onChanged: (value) {},
                             ),
-                            border: InputBorder.none),
-                        onChanged: (value) {},
+                          ),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          ),
-          title: InkWell(
-              child:
-                  Image.asset('assets/images/transparent_logo.png', height: 60),
-              onTap: () {
-                Navigator.pop(context);
-              }),
-          elevation: 48,
-          backgroundColor: Theme.of(context).colorScheme.background,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: _appBarActions(context),
-              ),
-            )
-          ]),
-      body: widget.containerChild,
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.all(12),
-        height: 50.0,
-        color: Colors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+                title: InkWell(
+                    child: Image.asset('assets/images/transparent_logo.png',
+                        height: 60),
+                    onTap: () {
+                      Navigator.pushNamed(context, "/");
+                    }),
+                elevation: 48,
+                backgroundColor: Theme.of(context).colorScheme.background,
+                actions: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: _appBarActions(context),
+                      ),
+                    )
+                  ])
+            : null,
+        body: widget.containerChild,
+        bottomNavigationBar: Container(
+          padding: EdgeInsets.all(12),
+          height: 50.0,
+          color: Colors.white,
+          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Text("Made with much",
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
             Icon(Icons.favorite, color: Colors.red),
             Spacer(flex: 1),
             Icon(Icons.copyright, color: Colors.black),
             Text("${now.year} @dherediat97", style: TextStyle(fontSize: 12))
-          ],
+          ]),
         ),
-      ),
-    );
+        floatingActionButton: widget.floatingActionButton);
   }
 
   List<Widget> _appBarActions(BuildContext context) {
@@ -109,7 +117,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
     for (var locale in MaterialApp().supportedLocales) {
       languages.add("assets/icons/${locale.languageCode}_flag.svg");
     }
-    debugPrint(languages.toString());
+    //debugPrint(languages.toString());
 
     // actions.add(DropdownButton<String>(
     //     onChanged: (value) {

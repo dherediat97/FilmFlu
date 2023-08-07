@@ -1,4 +1,6 @@
 //Core Packages
+import 'package:FilmFlu/ui/screens/main/main_page.dart';
+import 'package:flutter/foundation.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -69,7 +71,7 @@ class FilmFlu extends StatelessWidget {
           thumbColor: MaterialStatePropertyAll(primaryColor),
         ),
       ),
-      initialRoute: '',
+      initialRoute: '/',
       onGenerateRoute: (settings) {
         if (settings.name == MovieDetailsPage.routeName) {
           final args = settings.arguments as MovieDetailsArguments;
@@ -96,7 +98,7 @@ class FilmFlu extends StatelessWidget {
               screen = LoginPage();
               break;
             default:
-              screen = SplashScreen();
+              screen = !kIsWeb ? SplashScreen() : MainPage();
               break;
           }
           return MaterialPageRoute(builder: (context) {
