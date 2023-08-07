@@ -1,10 +1,10 @@
 //Core Packages
-import 'package:FilmFlu/ui/components/scaffold_page.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 //My Packages
 import 'package:FilmFlu/ui/screens/main/main_page.dart';
+import 'package:FilmFlu/ui/components/scaffold_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -35,6 +35,8 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
+      floatingActionButton: null,
+      isLightsOn: true,
       containerChild: Center(
         child: Lottie.asset(
           'assets/animations/splash_animation.json',

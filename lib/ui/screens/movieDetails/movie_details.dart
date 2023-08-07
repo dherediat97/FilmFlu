@@ -1,7 +1,5 @@
-//Core Packages
-import 'package:FilmFlu/ui/components/movie_valoration.dart';
+//Core Packages;
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -25,7 +23,7 @@ class MovieDetailsPage extends StatefulWidget {
 
 class _MovieDetailsPageState extends State<MovieDetailsPage> {
   bool isCastSelected = true;
-  bool isTrailerSelected = true;
+  bool isTrailerSelected = false;
   String youtubeVideoId = "";
   final _controller = YoutubePlayerController(
       params: const YoutubePlayerParams(
@@ -34,7 +32,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
     showVideoAnnotations: false,
     strictRelatedVideos: true,
     playsInline: true,
-    loop: true,
+    loop: false,
     captionLanguage: "es",
     enableKeyboard: false,
     enableJavaScript: false,
@@ -43,173 +41,201 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
   ));
 
   @override
+  void initState() {
+    super.initState();
+    _controller.listen((event) {
+      if (event.playerState == PlayerState.ended) {
+        isTrailerSelected = false;
+        setState(() {});
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
-      containerChild: Container(
-        child: SingleChildScrollView(
-          controller: ScrollController(),
-          physics: ScrollPhysics(),
-          scrollDirection: Axis.vertical,
-          child: FutureBuilder<Movie>(
-            future: Api().fetchMovie(widget.movieId),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                var movie = snapshot.requireData;
-                return Column(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                      child: DecoratedBox(
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(16.0),
+      isLightsOn: !isTrailerSelected,
+      floatingActionButton: isTrailerSelected
+          ? Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: FloatingActionButton(
+                mini: true,
+                backgroundColor: Colors.red,
+                child: Icon(Icons.stop_circle, color: Colors.white),
+                onPressed: () {
+                  isTrailerSelected = false;
+                  setState(() {});
+                },
+              ),
+            )
+          : null,
+      containerChild: !isTrailerSelected
+          ? Container(
+              child: SingleChildScrollView(
+                controller: ScrollController(),
+                physics: ScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                child: FutureBuilder<Movie>(
+                  future: Api().fetchMovie(widget.movieId),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      var movie = snapshot.requireData;
+                      return Column(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height,
+                            child: DecoratedBox(
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
                                 child: Column(children: [
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
-                                      Text(
-                                        movie.title,
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                          fontFamily: "YsabeauInfant",
-                                          fontSize: 40,
-                                          color: Colors.white,
-                                        ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            movie.title,
+                                            textAlign: TextAlign.start,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                                fontFamily: 'YsabeauInfant',
+                                                fontSize: 40),
+                                          ),
+                                        ],
                                       ),
+                                      Spacer(flex: 1),
                                       FloatingActionButton(
-                                          onPressed: () {},
-                                          child: Icon(Icons.play_arrow))
+                                          mini: true,
+                                          onPressed: () {
+                                            isTrailerSelected =
+                                                !isTrailerSelected;
+                                            setState(() {});
+                                          },
+                                          child: Icon(Icons.play_arrow)),
                                     ],
                                   ),
-                                  Spacer(),
+                                  SizedBox(height: 100),
                                   Column(
                                     children: [
-                                      Text(
-                                        AppLocalizations.of(context)!.synopsis,
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: "YsabeauInfant",
-                                          fontSize: 30,
+                                      Container(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          AppLocalizations.of(context)!
+                                              .synopsis,
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "YsabeauInfant",
+                                            fontSize: 30,
+                                          ),
                                         ),
                                       ),
-                                      SizedBox(
-                                        width: 600,
-                                        child: Text(
-                                          movie.overview!,
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(color: Colors.white),
+                                      Container(
+                                        alignment: Alignment.centerLeft,
+                                        child: SizedBox(
+                                          width: 400,
+                                          child: Text(
+                                            movie.overview!,
+                                            textAlign: TextAlign.justify,
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
                                         ),
                                       ),
                                     ],
                                   ),
                                 ]),
                               ),
-                              Container(
-                                child: FutureBuilder<List<Video>>(
-                                  future: Api().fetchTrailer(movie.id),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasData) {
-                                      List<Video> videoList =
-                                          snapshot.requireData;
-                                      Video video = videoList.firstWhere(
-                                          (video) =>
-                                              video.type == "Trailer" &&
-                                              video.official,
-                                          orElse: () => videoList.first);
-                                      if (videoList.isNotEmpty)
-                                        _controller.loadVideoById(
-                                            videoId: video.key);
-                                      return YoutubePlayer(
-                                          controller: _controller);
-                                    } else {
-                                      return Container();
-                                    }
-                                  },
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  colorFilter: ColorFilter.mode(
+                                    Colors.black.withOpacity(0.7),
+                                    BlendMode.darken,
+                                  ),
+                                  image: CachedNetworkImageProvider(
+                                    "$movieLandscapeBaseUrl${movie.backdropPath}",
+                                  ),
                                 ),
                               ),
-                            ]),
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            colorFilter: ColorFilter.mode(
-                              Colors.black.withOpacity(0.6),
-                              BlendMode.dstOut,
                             ),
-                            image: CachedNetworkImageProvider(
-                                "$movieLandscapeBaseUrl${movie.backdropPath}"),
                           ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Center(
-                      child: SegmentedButton<bool>(
-                        selectedIcon: null,
-                        emptySelectionAllowed: false,
-                        showSelectedIcon: false,
-                        selected: <bool>{isCastSelected},
-                        segments: [
-                          ButtonSegment<bool>(
-                            label: Text(
-                              AppLocalizations.of(context)!.character_cast,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Center(
+                            child: SegmentedButton<bool>(
+                              selectedIcon: null,
+                              emptySelectionAllowed: false,
+                              showSelectedIcon: false,
+                              selected: <bool>{isCastSelected},
+                              segments: [
+                                ButtonSegment<bool>(
+                                  label: Text(
+                                    AppLocalizations.of(context)!
+                                        .character_cast,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  value: true,
+                                ),
+                                ButtonSegment<bool>(
+                                  label: Text(
+                                    AppLocalizations.of(context)!
+                                        .production_cast,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  value: false,
+                                ),
+                              ],
+                              onSelectionChanged: (Set<bool> newSelection) {
+                                setState(() {
+                                  isCastSelected = newSelection.first;
+                                });
+                              },
                             ),
-                            value: true,
                           ),
-                          ButtonSegment<bool>(
-                            label: Text(
-                              AppLocalizations.of(context)!.production_cast,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                            ),
-                            value: false,
+                          SizedBox(
+                            height: 16,
                           ),
+                          isCastSelected
+                              ? FilmCast(movieId: movie.id, isCast: true)
+                              : FilmCast(movieId: movie.id, isCast: false)
                         ],
-                        onSelectionChanged: (Set<bool> newSelection) {
-                          setState(() {
-                            isCastSelected = newSelection.first;
-                          });
-                        },
-                      ),
-                    ),
-                    isCastSelected
-                        ? Padding(
-                            padding: const EdgeInsets.only(top: 16),
-                            child: FilmCast(
-                              movieId: movie.id,
-                              isCast: true,
-                            ),
-                          )
-                        : Padding(
-                            padding: const EdgeInsets.only(top: 16),
-                            child: FilmCast(
-                              movieId: movie.id,
-                              isCast: false,
-                            ),
-                          )
-                  ],
-                );
-              } else {
-                return CircularProgressIndicator();
-              }
-            },
-          ),
-        ),
-      ),
+                      );
+                    } else {
+                      return CircularProgressIndicator();
+                    }
+                  },
+                ),
+              ),
+            )
+          : Container(
+              child: FutureBuilder<List<Video>>(
+                future: Api().fetchTrailer(widget.movieId),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<Video> videoList = snapshot.requireData;
+                    Video video = videoList.first;
+                    _controller.loadVideoById(videoId: video.key);
+                    return isTrailerSelected
+                        ? YoutubePlayer(
+                            controller: _controller,
+                            aspectRatio:
+                                MediaQuery.of(context).size.aspectRatio)
+                        : CircularProgressIndicator();
+                  } else {
+                    return CircularProgressIndicator();
+                  }
+                },
+              ),
+            ),
     );
   }
 }

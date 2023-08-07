@@ -20,6 +20,8 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
+        floatingActionButton: null,
+        isLightsOn: true,
         containerChild: Container(
             color: Theme.of(context).colorScheme.background,
             child: ListView(children: [
