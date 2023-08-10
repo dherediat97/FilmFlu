@@ -5,17 +5,17 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 //My Packages
-import 'package:FilmFlu/network/api.dart';
+import 'package:FilmFlu/network/client_api.dart';
 
 // ignore: must_be_immutable
 class ScaffoldPage extends StatefulWidget {
   ScaffoldPage(
       {super.key,
       required this.containerChild,
-      required this.floatingActionButton,
-      required this.isLightsOn});
-  bool isLightsOn;
-  final Widget? floatingActionButton;
+      this.floatingActionButton,
+      this.isLightsOn});
+  bool? isLightsOn = false;
+  Widget? floatingActionButton = null;
   final Widget containerChild;
 
   @override
@@ -24,7 +24,7 @@ class ScaffoldPage extends StatefulWidget {
 
 class _ScaffoldPageState extends State<ScaffoldPage> {
   final TextEditingController _searchController = TextEditingController();
-  final now = new DateTime.now();
+  final today = new DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -32,20 +32,20 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
         resizeToAvoidBottomInset: false,
         backgroundColor: Theme.of(context).colorScheme.onBackground,
-        appBar: widget.isLightsOn
+        appBar: widget.isLightsOn == true
             ? AppBar(
                 automaticallyImplyLeading: false,
-                toolbarHeight: 75,
+                toolbarHeight: 100,
                 flexibleSpace: Padding(
-                  padding: const EdgeInsets.only(left: 16),
+                  padding: const EdgeInsets.only(left: 16, right: 16),
                   child: Center(
                     child: SafeArea(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            width: MediaQuery.of(context).size.width / 2,
+                            width: MediaQuery.of(context).size.width / 4,
                             child: TextField(
                               autocorrect: true,
                               controller: _searchController,
@@ -94,19 +94,29 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                   ])
             : null,
         body: widget.containerChild,
-        bottomNavigationBar: Container(
-          padding: EdgeInsets.all(12),
-          height: 50.0,
-          color: Colors.white,
-          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text("Made with much",
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-            Icon(Icons.favorite, color: Colors.red),
-            Spacer(flex: 1),
-            Icon(Icons.copyright, color: Colors.black),
-            Text("${now.year} @dherediat97", style: TextStyle(fontSize: 12))
-          ]),
-        ),
+        bottomNavigationBar: widget.isLightsOn == true
+            ? Container(
+                padding: EdgeInsets.all(16),
+                height: kBottomNavigationBarHeight,
+                alignment: Alignment.center,
+                color: Colors.white,
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text("Made with much",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold)),
+                      Icon(Icons.favorite, color: Colors.red),
+                      Spacer(flex: 1),
+                      Icon(Icons.copyright, color: Colors.black),
+                      Center(
+                        child: Text("${today.year} @dherediat97",
+                            style: TextStyle(fontSize: 12)),
+                      )
+                    ]),
+              )
+            : null,
         floatingActionButton: widget.floatingActionButton);
   }
 

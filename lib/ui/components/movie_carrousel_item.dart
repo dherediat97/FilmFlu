@@ -2,13 +2,11 @@
 import 'package:FilmFlu/dto/movie_details_arguments.dart';
 import 'package:FilmFlu/ui/screens/movieDetails/movie_details.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 //My Packages
-import 'package:FilmFlu/ui/components/fast_movie_details.dart';
 import 'package:FilmFlu/dto/movie.dart';
-import 'package:FilmFlu/network/api.dart';
+import 'package:FilmFlu/network/client_api.dart';
 
 class MovieCarrouselItem extends StatelessWidget {
   const MovieCarrouselItem({super.key, required this.movie});

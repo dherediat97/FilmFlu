@@ -86,8 +86,7 @@ class FilmFlu extends StatelessWidget {
                   child: BouncingScrollWrapper.builder(
                       context,
                       MovieDetailsPage(
-                        movieId: args.movieId,
-                      ),
+                          movieId: args.movieId, isTrailerSelected: true),
                       dragWithMouse: true));
             },
           );
@@ -108,8 +107,11 @@ class FilmFlu extends StatelessWidget {
                 Condition.between(start: 800, end: 1100, value: 800),
                 Condition.between(start: 1000, end: 1200, value: 1000),
               ]).value,
-              child: BouncingScrollWrapper.builder(context, screen,
-                  dragWithMouse: true),
+              child: BouncingScrollWrapper.builder(
+                context,
+                screen,
+                dragWithMouse: true,
+              ),
             );
           });
         }

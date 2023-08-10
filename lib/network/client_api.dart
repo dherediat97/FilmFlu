@@ -23,7 +23,8 @@ const Map<String, String>? baseHeaders = {
 class Api {
   Movie parseMovie(String responseBody) {
     final parsed = jsonDecode(responseBody);
-    return Movie.fromJson(parsed);
+    Movie movie = Movie.fromJson(parsed);
+    return movie;
   }
 
   List<Movie> parseMovies(String responseBody) {
@@ -33,7 +34,8 @@ class Api {
 
   Credits parseCredits(String responseBody) {
     final parsed = jsonDecode(responseBody);
-    return Credits.fromJson(parsed);
+    Credits credits = Credits.fromJson(parsed);
+    return credits;
   }
 
   List<Video> parseVideos(String responseBody) {

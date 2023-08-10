@@ -4,7 +4,12 @@ part 'video.g.dart';
 
 @JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
 class Video {
-  Video({required this.key, required this.type, required this.official});
+  Video({
+    required this.key,
+    required this.type,
+    required this.official,
+  });
+
   String key;
   String type;
   bool official;
