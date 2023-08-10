@@ -6,14 +6,16 @@ import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 //My Packages
 import 'package:FilmFlu/dto/movie.dart';
-import 'package:FilmFlu/network/api.dart';
+import 'package:FilmFlu/network/client_api.dart';
 import 'package:FilmFlu/ui/components/scaffold_page.dart';
 import 'package:FilmFlu/dto/video.dart';
 import 'package:FilmFlu/ui/components/movie_cast.dart';
 
 class MovieDetailsPage extends StatefulWidget {
-  const MovieDetailsPage({super.key, required this.movieId});
+  const MovieDetailsPage(
+      {super.key, required this.movieId, required this.isTrailerSelected});
 
+  final bool isTrailerSelected;
   final int movieId;
   static const routeName = '/movieDetails';
 
@@ -27,18 +29,16 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
   String youtubeVideoId = "";
   final _controller = YoutubePlayerController(
       params: const YoutubePlayerParams(
-    showFullscreenButton: false,
-    showControls: false,
-    showVideoAnnotations: false,
-    strictRelatedVideos: true,
-    playsInline: true,
-    loop: false,
-    captionLanguage: "es",
-    enableKeyboard: false,
-    enableJavaScript: false,
-    interfaceLanguage: "es",
-    pointerEvents: PointerEvents.none,
-  ));
+          showControls: false,
+          showVideoAnnotations: false,
+          strictRelatedVideos: true,
+          loop: false,
+          captionLanguage: "es",
+          enableKeyboard: false,
+          enableJavaScript: false,
+          playsInline: true,
+          interfaceLanguage: "es",
+          pointerEvents: PointerEvents.none));
 
   @override
   void initState() {
@@ -57,9 +57,9 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
       isLightsOn: !isTrailerSelected,
       floatingActionButton: isTrailerSelected
           ? Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16),
               child: FloatingActionButton(
-                mini: true,
+                autofocus: true,
                 backgroundColor: Colors.red,
                 foregroundColor: Colors.white,
                 child: Icon(Icons.stop),
@@ -88,14 +88,17 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                             height: MediaQuery.of(context).size.height,
                             child: DecoratedBox(
                               child: Padding(
-                                padding: const EdgeInsets.all(16),
+                                padding: const EdgeInsets.all(8),
                                 child: Column(children: [
                                   Row(
                                     children: [
                                       Row(
                                         children: [
                                           Container(
-                                            width: 400,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2,
                                             child: Text(
                                               movie.title,
                                               textAlign: TextAlign.start,
@@ -103,20 +106,20 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.white,
                                                   fontFamily: 'YsabeauInfant',
-                                                  fontSize: 40),
+                                                  fontSize: 50),
                                             ),
                                           ),
                                         ],
                                       ),
                                       Spacer(flex: 1),
-                                      FloatingActionButton(
-                                          mini: true,
-                                          onPressed: () {
-                                            isTrailerSelected =
-                                                !isTrailerSelected;
-                                            setState(() {});
-                                          },
-                                          child: Icon(Icons.play_arrow)),
+                                      if (!widget.isTrailerSelected)
+                                        FloatingActionButton(
+                                            onPressed: () {
+                                              isTrailerSelected =
+                                                  !isTrailerSelected;
+                                              setState(() {});
+                                            },
+                                            child: Icon(Icons.play_arrow)),
                                     ],
                                   ),
                                   SizedBox(height: 100),
@@ -131,7 +134,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontFamily: "YsabeauInfant",
-                                            fontSize: 30,
+                                            fontSize: 40,
                                           ),
                                         ),
                                       ),
@@ -142,8 +145,9 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                           child: Text(
                                             movie.overview!,
                                             textAlign: TextAlign.justify,
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16),
                                           ),
                                         ),
                                       ),
@@ -221,25 +225,31 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
               ),
             )
           : Container(
+              height: MediaQuery.of(context).size.height / 1.2,
               child: FutureBuilder<List<Video>>(
                 future: Api().fetchTrailer(widget.movieId),
                 builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    List<Video> videoList = snapshot.requireData;
-                    Video video = videoList.first;
-                    _controller.loadVideoById(videoId: video.key);
-                    return isTrailerSelected
-                        ? OrientationBuilder(builder: (context, orientation) {
-                            return AspectRatio(
-                              aspectRatio: orientation == Orientation.landscape
-                                  ? MediaQuery.of(context).size.aspectRatio
-                                  : 16 / 9,
-                              child: YoutubePlayer(controller: _controller),
+                  if (snapshot.connectionState != ConnectionState.waiting) {
+                    List videoList = snapshot.requireData;
+                    if (videoList.firstOrNull != null) {
+                      _controller.loadVideoById(videoId: videoList.first.key);
+                      return YoutubePlayerScaffold(
+                          controller: _controller,
+                          builder: (context, player) {
+                            return Column(
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.only(top: 50),
+                                    child: player),
+                              ],
                             );
-                          })
-                        : CircularProgressIndicator();
+                          });
+                    } else {
+                      return MovieDetailsPage(
+                          movieId: widget.movieId, isTrailerSelected: false);
+                    }
                   } else {
-                    return CircularProgressIndicator();
+                    return Center(child: CircularProgressIndicator());
                   }
                 },
               ),

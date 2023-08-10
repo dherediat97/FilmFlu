@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 //My Packages
 import 'package:FilmFlu/dto/movie.dart';
-import 'package:FilmFlu/network/api.dart';
+import 'package:FilmFlu/network/client_api.dart';
 
 class FastMovieDetails extends StatefulWidget {
   const FastMovieDetails({super.key, required this.movieId});

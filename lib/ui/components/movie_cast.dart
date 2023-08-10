@@ -1,11 +1,14 @@
-import 'package:FilmFlu/dto/credits.dart';
-import 'package:FilmFlu/dto/film_worker.dart';
+//Core Packages
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+//My Packages
+import 'package:FilmFlu/dto/credits.dart';
+import 'package:FilmFlu/dto/film_worker.dart';
 import 'package:FilmFlu/dto/actor.dart';
-import 'package:FilmFlu/network/api.dart';
+import 'package:FilmFlu/network/client_api.dart';
 
 class FilmCast extends StatefulWidget {
   const FilmCast({super.key, required this.movieId, required this.isCast});
@@ -29,22 +32,20 @@ class _FilmCastState extends State<FilmCast> {
             if (snapshot.hasData && !snapshot.hasError) {
               final List<Actor>? cast = snapshot.requireData.cast;
               final List<FilmWorker>? crew = snapshot.requireData.crew;
-              return GridView.custom(
+              return GridView.builder(
                 controller: TrackingScrollController(),
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 200,
-                  mainAxisSpacing: 40,
-                  crossAxisSpacing: 40,
-                  mainAxisExtent: 300,
+                  mainAxisSpacing: 0,
+                  crossAxisSpacing: 0,
+                  mainAxisExtent: 275,
                   childAspectRatio: MediaQuery.of(context).size.aspectRatio,
                 ),
-                childrenDelegate: SliverChildBuilderDelegate((context, index) {
-                  if (widget.isCast)
-                    return _buildGridActors(context, index, cast!);
-                  else
-                    return _buildFilmWorker(context, index, crew!);
-                }, childCount: widget.isCast ? cast?.length : crew?.length),
+                itemCount: widget.isCast ? cast?.length : crew?.length,
+                itemBuilder: (context, index) => widget.isCast
+                    ? _buildGridActors(context, index, cast!)
+                    : _buildFilmWorker(context, index, crew!),
               );
             } else {
               return CircularProgressIndicator();
@@ -55,6 +56,7 @@ class _FilmCastState extends State<FilmCast> {
 
   Widget _buildGridActors(BuildContext context, int index, List<Actor> cast) {
     Actor actor = cast[index];
+    // cast.map((element) => element.id == actor.id);
     return GridTile(
       child: Column(
         children: [
@@ -89,10 +91,10 @@ class _FilmCastState extends State<FilmCast> {
                   fontFamily: "ShadowsIntoLight",
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.primary,
-                  fontSize: 20)),
+                  fontSize: 18)),
           actor.character!.isNotEmpty
               ? Text(
-                  "interpreta a ${actor.character}",
+                  "${AppLocalizations.of(context)?.actor_job} ${actor.character}",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: "YsabeauInfant",
@@ -108,7 +110,6 @@ class _FilmCastState extends State<FilmCast> {
   Widget _buildFilmWorker(
       BuildContext context, int index, List<FilmWorker> crew) {
     FilmWorker filmWorker = crew[index];
-
     return GridTile(
       child: Column(
         children: [
@@ -120,20 +121,24 @@ class _FilmCastState extends State<FilmCast> {
                 placeholder: (context, url) =>
                     const CircularProgressIndicator(),
                 errorWidget: (context, url, error) {
-                  if (filmWorker.gender == 2) {
+                  if (filmWorker.profilePath == null ||
+                      filmWorker.gender == 2) {
                     return SvgPicture.asset(
                       "assets/icons/actor_icon.svg",
                       height: 180,
                       fit: BoxFit.cover,
                       width: 120,
                     );
-                  } else {
+                  } else if (filmWorker.profilePath == null ||
+                      filmWorker.gender != 2) {
                     return SvgPicture.asset(
                       "assets/icons/actress_icon.svg",
                       height: 180,
                       fit: BoxFit.cover,
                       width: 120,
                     );
+                  } else {
+                    return CircularProgressIndicator();
                   }
                 }),
           ),
@@ -143,9 +148,9 @@ class _FilmCastState extends State<FilmCast> {
                   fontFamily: "ShadowsIntoLight",
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.primary,
-                  fontSize: 20)),
+                  fontSize: 18)),
           Text(
-            "realizó el trabajo de ${filmWorker.job} en ${filmWorker.knownForDepartment}",
+            "${AppLocalizations.of(context)?.production_job} ${filmWorker.job} ${AppLocalizations.of(context)?.in_preposition} ${filmWorker.knownForDepartment}",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontFamily: "YsabeauInfant",

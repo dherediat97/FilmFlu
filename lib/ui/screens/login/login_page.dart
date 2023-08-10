@@ -7,8 +7,6 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
-      floatingActionButton: null,
-      isLightsOn: true,
       containerChild: Padding(
         padding: const EdgeInsets.all(32.0),
         child: Center(
