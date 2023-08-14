@@ -1,6 +1,7 @@
 //Core Packages
-import 'package:FilmFlu/ui/screens/main/main_page.dart';
+import 'package:FilmFlu/ui/screens/main/main_screen.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -15,6 +16,7 @@ import 'package:FilmFlu/ui/theme/colors.dart';
 import 'package:FilmFlu/ui/util/utilScroll.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const FilmFlu());
 }
 

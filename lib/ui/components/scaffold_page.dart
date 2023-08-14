@@ -5,7 +5,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 //My Packages
-import 'package:FilmFlu/network/client_api.dart';
+import 'package:FilmFlu/constants.dart';
 
 // ignore: must_be_immutable
 class ScaffoldPage extends StatefulWidget {
