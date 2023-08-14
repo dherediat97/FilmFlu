@@ -1,4 +1,6 @@
 //Core Packages
+import 'dart:js_interop';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,6 +11,7 @@ import 'package:FilmFlu/dto/credits.dart';
 import 'package:FilmFlu/dto/film_worker.dart';
 import 'package:FilmFlu/dto/actor.dart';
 import 'package:FilmFlu/network/client_api.dart';
+import 'package:FilmFlu/constants.dart';
 
 class FilmCast extends StatefulWidget {
   const FilmCast({super.key, required this.movieId, required this.isCast});
@@ -29,24 +32,28 @@ class _FilmCastState extends State<FilmCast> {
       child: FutureBuilder<Credits>(
           future: Api().fetchCredits(widget.movieId),
           builder: (context, snapshot) {
-            if (snapshot.hasData && !snapshot.hasError) {
-              final List<Actor>? cast = snapshot.requireData.cast;
-              final List<FilmWorker>? crew = snapshot.requireData.crew;
-              return GridView.builder(
-                controller: TrackingScrollController(),
-                shrinkWrap: true,
-                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 200,
-                  mainAxisSpacing: 0,
-                  crossAxisSpacing: 0,
-                  mainAxisExtent: 275,
-                  childAspectRatio: MediaQuery.of(context).size.aspectRatio,
-                ),
-                itemCount: widget.isCast ? cast?.length : crew?.length,
-                itemBuilder: (context, index) => widget.isCast
-                    ? _buildGridActors(context, index, cast!)
-                    : _buildFilmWorker(context, index, crew!),
-              );
+            if (snapshot.connectionState != ConnectionState.waiting) {
+              if (!snapshot.data.isNull) {
+                final List<Actor>? cast = snapshot.data!.cast;
+                final List<FilmWorker>? crew = snapshot.data!.crew;
+                return GridView.builder(
+                  controller: TrackingScrollController(),
+                  shrinkWrap: true,
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 200,
+                    mainAxisSpacing: 0,
+                    crossAxisSpacing: 0,
+                    mainAxisExtent: 275,
+                    childAspectRatio: MediaQuery.of(context).size.aspectRatio,
+                  ),
+                  itemCount: widget.isCast ? cast?.length : crew?.length,
+                  itemBuilder: (context, index) => widget.isCast
+                      ? _buildGridActors(context, index, cast!)
+                      : _buildFilmWorker(context, index, crew!),
+                );
+              } else {
+                return Container();
+              }
             } else {
               return CircularProgressIndicator();
             }
@@ -68,7 +75,7 @@ class _FilmCastState extends State<FilmCast> {
                 placeholder: (context, url) =>
                     const CircularProgressIndicator(),
                 errorWidget: (context, url, error) {
-                  if (actor.gender == 2) {
+                  if (actor.profilePath == null || actor.gender == 2) {
                     return SvgPicture.asset(
                       "assets/icons/actor_icon.svg",
                       height: 180,

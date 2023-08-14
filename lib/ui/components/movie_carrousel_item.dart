@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 //My Packages
 import 'package:FilmFlu/dto/movie.dart';
-import 'package:FilmFlu/network/client_api.dart';
+import 'package:FilmFlu/constants.dart';
 
 class MovieCarrouselItem extends StatelessWidget {
   const MovieCarrouselItem({super.key, required this.movie});

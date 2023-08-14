@@ -1,5 +1,4 @@
 import 'package:FilmFlu/dto/credits.dart';
-import 'package:FilmFlu/dto/video.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'movie.g.dart';
