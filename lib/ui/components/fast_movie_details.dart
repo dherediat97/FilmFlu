@@ -1,6 +1,6 @@
 //Core Packages
 import 'package:FilmFlu/dto/movie_details_arguments.dart';
-import 'package:FilmFlu/ui/screens/movieDetails/movie_details.dart';
+import 'package:FilmFlu/ui/pages/movieDetails/movie_details.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 

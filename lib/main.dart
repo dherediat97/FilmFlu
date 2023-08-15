@@ -1,5 +1,5 @@
 //Core Packages
-import 'package:FilmFlu/ui/screens/main/main_screen.dart';
+import 'package:FilmFlu/ui/pages/main/main_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:flutter/material.dart';
@@ -7,10 +7,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 //My Packages
-import 'package:FilmFlu/ui/screens/login/login_page.dart';
-import 'package:FilmFlu/ui/screens/splash/splash_screen.dart';
+import 'package:FilmFlu/ui/pages/login/login_page.dart';
+import 'package:FilmFlu/ui/pages/splash/splash_screen.dart';
 import 'package:FilmFlu/dto/movie_details_arguments.dart';
-import 'package:FilmFlu/ui/screens/movieDetails/movie_details.dart';
+import 'package:FilmFlu/ui/pages/movieDetails/movie_details.dart';
 import 'package:FilmFlu/ui/theme/colors.dart';
 import 'package:FilmFlu/ui/util/utilScroll.dart';
 

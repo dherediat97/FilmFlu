@@ -24,7 +24,6 @@ class MovieList extends StatelessWidget {
               child: ListView.builder(
                   physics: ClampingScrollPhysics(),
                   shrinkWrap: true,
-                  padding: EdgeInsets.zero,
                   scrollDirection: Axis.horizontal,
                   itemCount: movies.length,
                   itemBuilder: (context, index) {

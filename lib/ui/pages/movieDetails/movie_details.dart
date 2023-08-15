@@ -1,8 +1,10 @@
 //Core Packages;
+import 'package:FilmFlu/dto/video.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 //My Packages
 import 'package:FilmFlu/dto/movie.dart';
@@ -32,6 +34,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
   @override
   void initState() {
     super.initState();
+    youtubeVideoIds.clear();
     initTrailerComponent();
     _trailerController.listen((event) {
       if (event.playerState == PlayerState.ended) {
@@ -97,20 +100,23 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                               height: MediaQuery.of(context).size.height,
                               child: DecoratedBox(
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8),
+                                  padding: const EdgeInsets.all(16),
                                   child: Column(children: [
                                     Row(
                                       children: [
                                         Row(
                                           children: [
-                                            Container(
+                                            SizedBox(
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width /
-                                                  2,
-                                              child: Text(
+                                                  1.3,
+                                              child: AutoSizeText(
                                                 movie.title,
-                                                textAlign: TextAlign.start,
+                                                minFontSize: 10,
+                                                stepGranularity: 10,
+                                                maxLines: 4,
+                                                overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.white,
@@ -123,12 +129,30 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                         Spacer(flex: 1),
                                         FloatingActionButton(
                                             onPressed: () {
-                                              isTrailerSelected = true;
-                                              initTrailerComponent();
-                                              _trailerController.loadPlaylist(
-                                                  list: youtubeVideoIds,
-                                                  listType: ListType.playlist);
-                                              setState(() {});
+                                              if (youtubeVideoIds.isNotEmpty) {
+                                                isTrailerSelected = true;
+                                                initTrailerComponent();
+                                                _trailerController.loadPlaylist(
+                                                    list: youtubeVideoIds,
+                                                    listType:
+                                                        ListType.playlist);
+                                                setState(() {});
+                                              } else {
+                                                SnackBar snackBar = SnackBar(
+                                                    content: Text(
+                                                        "Esta película no tiene tráilers",
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white)),
+                                                    duration:
+                                                        Duration(seconds: 5),
+                                                    backgroundColor:
+                                                        Theme.of(context)
+                                                            .colorScheme
+                                                            .primary);
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(snackBar);
+                                              }
                                             },
                                             child: Icon(Icons.play_arrow)),
                                       ],
@@ -153,8 +177,14 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                           alignment: Alignment.centerLeft,
                                           child: SizedBox(
                                             width: 400,
-                                            child: Text(
-                                              movie.overview!,
+                                            child: AutoSizeText(
+                                              (() {
+                                                return movie.overview != null
+                                                    ? movie.overview!
+                                                    : "Sin Sinopsis";
+                                              }()),
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 9,
                                               textAlign: TextAlign.justify,
                                               style: TextStyle(
                                                   color: Colors.white,
@@ -229,23 +259,30 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                           ],
                         );
                       } else {
-                        return CircularProgressIndicator();
+                        return Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height,
+                            child: Center(child: CircularProgressIndicator()));
                       }
                     },
                   ),
                 ),
               )
-            : YoutubePlayerScaffold(
-                controller: _trailerController,
-                builder: (context, player) {
-                  return Column(
-                    children: [
-                      Container(
-                          height: MediaQuery.of(context).size.height,
-                          padding: EdgeInsets.only(top: 50),
-                          child: player),
-                    ],
-                  );
+            : FutureBuilder<List<String>>(
+                future: Future.sync(() => youtubeVideoIds),
+                builder: (context, snapshot) {
+                  return YoutubePlayerScaffold(
+                      controller: _trailerController,
+                      builder: (context, player) {
+                        return Column(
+                          children: [
+                            Container(
+                                height: MediaQuery.of(context).size.height,
+                                padding: EdgeInsets.only(top: 50),
+                                child: player),
+                          ],
+                        );
+                      });
                 }));
   }
 

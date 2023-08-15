@@ -1,4 +1,5 @@
 //Core Packages
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -39,8 +40,8 @@ class _FilmCastState extends State<FilmCast> {
                   shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: 200,
-                    mainAxisSpacing: 0,
-                    crossAxisSpacing: 0,
+                    mainAxisSpacing: 15,
+                    crossAxisSpacing: 10,
                     mainAxisExtent: 275,
                     childAspectRatio: MediaQuery.of(context).size.aspectRatio,
                   ),
@@ -53,7 +54,10 @@ class _FilmCastState extends State<FilmCast> {
                 return Container();
               }
             } else {
-              return CircularProgressIndicator();
+              return Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: Center(child: CircularProgressIndicator()));
             }
           }),
     );
@@ -90,18 +94,27 @@ class _FilmCastState extends State<FilmCast> {
                   }
                 }),
           ),
-          Text(actor.name!,
+          AutoSizeText(actor.name!,
               textAlign: TextAlign.center,
+              minFontSize: 16,
+              stepGranularity: 1,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                   fontFamily: "ShadowsIntoLight",
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.primary,
                   fontSize: 18)),
           actor.character!.isNotEmpty
-              ? Text(
+              ? AutoSizeText(
+                  minFontSize: 14,
+                  stepGranularity: 1,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
                   "${AppLocalizations.of(context)?.actor_job} ${actor.character}",
                   textAlign: TextAlign.center,
                   style: TextStyle(
+                    fontSize: 16,
                     fontFamily: "YsabeauInfant",
                     color: Colors.white,
                   ),
