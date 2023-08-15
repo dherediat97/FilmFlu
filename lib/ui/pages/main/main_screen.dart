@@ -40,12 +40,13 @@ class _MainPageState extends State<MainPage> {
               FutureBuilder<List<Movie>>(
                 future: Api().fetchPopularMovies("day"),
                 builder: (context, snapshot) {
-                  if (snapshot.hasData) {
+                  if (snapshot.connectionState != ConnectionState.waiting) {
                     return MovieList(movies: snapshot.requireData);
-                  } else if (snapshot.hasError) {
-                    return Center(child: CircularProgressIndicator());
                   } else {
-                    return Center(child: CircularProgressIndicator());
+                    return Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        child: Center(child: CircularProgressIndicator()));
                   }
                 },
               ),

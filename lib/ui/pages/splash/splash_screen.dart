@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 //My Packages
-import 'package:FilmFlu/ui/screens/main/main_screen.dart';
+import 'package:FilmFlu/ui/pages/main/main_screen.dart';
 import 'package:FilmFlu/ui/components/scaffold_page.dart';
 
 class SplashScreen extends StatefulWidget {
