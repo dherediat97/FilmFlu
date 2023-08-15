@@ -1,6 +1,4 @@
 //Core Packages
-import 'dart:js_interop';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -33,7 +31,7 @@ class _FilmCastState extends State<FilmCast> {
           future: Api().fetchCredits(widget.movieId),
           builder: (context, snapshot) {
             if (snapshot.connectionState != ConnectionState.waiting) {
-              if (!snapshot.data.isNull) {
+              if (snapshot.data != null) {
                 final List<Actor>? cast = snapshot.data!.cast;
                 final List<FilmWorker>? crew = snapshot.data!.crew;
                 return GridView.builder(
