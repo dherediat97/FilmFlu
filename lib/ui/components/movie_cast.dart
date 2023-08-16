@@ -65,7 +65,6 @@ class _FilmCastState extends State<FilmCast> {
 
   Widget _buildGridActors(BuildContext context, int index, List<Actor> cast) {
     Actor actor = cast[index];
-    // cast.map((element) => element.id == actor.id);
     return GridTile(
       child: Column(
         children: [

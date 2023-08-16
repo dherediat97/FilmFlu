@@ -14,7 +14,7 @@ class Movie {
     this.originalTitle,
     required this.popularity,
     required this.posterPath,
-    this.releaseDate,
+    required this.releaseDate,
     required this.title,
     required this.video,
     required this.voteAverage,
@@ -32,7 +32,7 @@ class Movie {
   String? originalTitle;
   double popularity;
   String posterPath;
-  String? releaseDate;
+  String releaseDate;
   String title;
   bool video;
   double voteAverage;

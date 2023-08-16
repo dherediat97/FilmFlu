@@ -1,4 +1,5 @@
 //Core Packages
+import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -6,6 +7,10 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 //My Packages
 import 'package:FilmFlu/constants.dart';
+import 'package:FilmFlu/dto/movie.dart';
+import 'package:FilmFlu/network/client_api.dart';
+import 'package:FilmFlu/ui/pages/movieDetails/movie_details.dart';
+import 'package:FilmFlu/dto/movie_details_arguments.dart';
 
 // ignore: must_be_immutable
 class ScaffoldPage extends StatefulWidget {
@@ -25,6 +30,14 @@ class ScaffoldPage extends StatefulWidget {
 class _ScaffoldPageState extends State<ScaffoldPage> {
   final TextEditingController _searchController = TextEditingController();
   final today = new DateTime.now();
+  Timer? _debounce;
+  List<Movie> movieList = [];
+
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,33 +57,36 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width / 4,
-                            child: TextField(
-                              autocorrect: true,
-                              controller: _searchController,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Theme.of(context).colorScheme.primary,
-                                  fontSize: 20,
-                                  fontFamily: "YsabeauInfant"),
-                              cursorColor: Colors.white,
-                              decoration: InputDecoration(
-                                  hintText: AppLocalizations.of(context)!
-                                      .search_film_hint,
-                                  hintStyle: TextStyle(
-                                      color: Colors.white54,
-                                      fontSize: 20,
-                                      fontFamily: "YsabeauInfant"),
-                                  prefixIcon: Icon(
-                                    Icons.search,
+                          DropdownMenu<Movie>(
+                            dropdownMenuEntries: [
+                              DropdownMenuEntry(
+                                  value: movieMock1,
+                                  label: "El castillo ambulante")
+                            ],
+                            width: 350,
+                            controller: _searchController,
+                            leadingIcon: Icon(Icons.search,
+                                color: Theme.of(context).colorScheme.primary),
+                            textStyle: TextStyle(
+                                color: Theme.of(context).colorScheme.primary),
+                            hintText:
+                                AppLocalizations.of(context)!.search_film_hint,
+                            inputDecorationTheme: InputDecorationTheme(
+                                border: InputBorder.none,
+                                hintStyle: TextStyle(
                                     color:
-                                        Theme.of(context).colorScheme.primary,
-                                  ),
-                                  border: InputBorder.none),
-                              onChanged: (value) {},
-                            ),
-                          ),
+                                        Theme.of(context).colorScheme.primary),
+                                contentPadding:
+                                    EdgeInsets.symmetric(vertical: 5.0)),
+                            onSelected: (Movie? movie) {
+                              setState(() {
+                                Navigator.pushReplacementNamed(
+                                    context, MovieDetailsPage.routeName,
+                                    arguments:
+                                        MovieDetailsArguments(movie!.id));
+                              });
+                            },
+                          )
                         ],
                       ),
                     ),
@@ -78,11 +94,12 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                 ),
                 title: InkWell(
                     child: Image.asset('assets/images/transparent_logo.png',
-                        height: 60),
+                        height: 50),
                     onTap: () {
                       Navigator.pushNamed(context, "/");
                     }),
-                elevation: 48,
+                elevation: 2,
+                scrolledUnderElevation: 40,
                 backgroundColor: Theme.of(context).colorScheme.background,
                 actions: [
                     Padding(
@@ -93,7 +110,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                     )
                   ])
             : null,
-        body: widget.containerChild,
+        body: SafeArea(child: widget.containerChild),
         bottomNavigationBar: widget.isLightsOn == true
             ? Container(
                 padding: EdgeInsets.all(16),
@@ -171,5 +188,14 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
       ),
     ));
     return actions;
+  }
+
+  _onSearchChanged(String query) {
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 1000), () {
+      Api().searchMovie(query).then((movies) {
+        movieList = movies.toList();
+      });
+    });
   }
 }

@@ -1,8 +1,7 @@
 //Core Packages;
-import 'package:FilmFlu/dto/video.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
@@ -28,13 +27,13 @@ class MovieDetailsPage extends StatefulWidget {
 class _MovieDetailsPageState extends State<MovieDetailsPage> {
   bool isCastSelected = true;
   bool isTrailerSelected = false;
-  List<String> youtubeVideoIds = [];
+  List<String> trailerVideosIds = [];
   late YoutubePlayerController _trailerController;
 
   @override
   void initState() {
     super.initState();
-    youtubeVideoIds.clear();
+    trailerVideosIds.clear();
     initTrailerComponent();
     _trailerController.listen((event) {
       if (event.playerState == PlayerState.ended) {
@@ -43,20 +42,12 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
         });
       }
     });
-    Api().fetchTrailer(widget.movieId).then((trailerList) {
-      if (trailerList.isNotEmpty) {
-        youtubeVideoIds = trailerList.map((e) => e.key).toList();
-      }
-    });
+    fetchMovieTrailers("es-ES");
   }
 
   @override
   void dispose() {
-    try {
-      _trailerController.close();
-    } catch (e) {
-      debugPrint(e.toString());
-    }
+    trailerVideosIds.clear();
     super.dispose();
   }
 
@@ -68,7 +59,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
             ? Padding(
                 padding: const EdgeInsets.all(16),
                 child: FloatingActionButton(
-                  autofocus: true,
+                  mini: true,
                   backgroundColor: Colors.red,
                   foregroundColor: Colors.white,
                   child: Icon(Icons.stop),
@@ -81,7 +72,32 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                   },
                 ),
               )
-            : null,
+            : Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: FloatingActionButton(
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white,
+                    onPressed: () {
+                      if (trailerVideosIds.isNotEmpty) {
+                        isTrailerSelected = true;
+                        initTrailerComponent();
+                        _trailerController.loadPlaylist(
+                            list: trailerVideosIds,
+                            listType: ListType.playlist);
+                        setState(() {});
+                      } else {
+                        SnackBar snackBar = SnackBar(
+                            content: Text("Esta película no tiene tráilers",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20)),
+                            duration: Duration(seconds: 2),
+                            backgroundColor:
+                                Theme.of(context).colorScheme.onBackground);
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                    },
+                    child: Icon(Icons.play_arrow)),
+              ),
         containerChild: !isTrailerSelected
             ? Container(
                 child: SingleChildScrollView(
@@ -91,8 +107,10 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                   child: FutureBuilder<Movie>(
                     future: Api().fetchMovie(widget.movieId),
                     builder: (context, snapshot) {
-                      if (snapshot.hasData) {
+                      if (snapshot.connectionState != ConnectionState.waiting) {
                         var movie = snapshot.requireData;
+                        String releaseYear = movie.releaseDate.split("-")[0];
+                        String movieTitle = movie.title;
                         return Column(
                           children: [
                             Container(
@@ -104,57 +122,35 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                   child: Column(children: [
                                     Row(
                                       children: [
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  1.3,
-                                              child: AutoSizeText(
-                                                movie.title,
-                                                minFontSize: 10,
-                                                stepGranularity: 10,
-                                                maxLines: 4,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.white,
-                                                    fontFamily: 'YsabeauInfant',
-                                                    fontSize: 50),
-                                              ),
-                                            ),
-                                          ],
+                                        SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                1.3,
+                                            child: AutoSizeText(
+                                              "$movieTitle(${releaseYear})",
+                                              minFontSize: 10,
+                                              stepGranularity: 10,
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                  fontFamily: 'YsabeauInfant',
+                                                  fontSize: 40),
+                                            )),
+                                        InkWell(
+                                          child: SvgPicture.asset(
+                                              height: 40,
+                                              width: 40,
+                                              "assets/icons/${movie.originalLanguage}_flag.svg"),
+                                          onTap: () {
+                                            setState(() {
+                                              movieTitle = movie.originalTitle!;
+                                              print(movieTitle);
+                                            });
+                                          },
                                         ),
-                                        Spacer(flex: 1),
-                                        FloatingActionButton(
-                                            onPressed: () {
-                                              if (youtubeVideoIds.isNotEmpty) {
-                                                isTrailerSelected = true;
-                                                initTrailerComponent();
-                                                _trailerController.loadPlaylist(
-                                                    list: youtubeVideoIds,
-                                                    listType:
-                                                        ListType.playlist);
-                                                setState(() {});
-                                              } else {
-                                                SnackBar snackBar = SnackBar(
-                                                    content: Text(
-                                                        "Esta película no tiene tráilers",
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.white)),
-                                                    duration:
-                                                        Duration(seconds: 5),
-                                                    backgroundColor:
-                                                        Theme.of(context)
-                                                            .colorScheme
-                                                            .primary);
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(snackBar);
-                                              }
-                                            },
-                                            child: Icon(Icons.play_arrow)),
                                       ],
                                     ),
                                     SizedBox(height: 100),
@@ -178,17 +174,14 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                           child: SizedBox(
                                             width: 400,
                                             child: AutoSizeText(
-                                              (() {
-                                                return movie.overview != null
-                                                    ? movie.overview!
-                                                    : "Sin Sinopsis";
-                                              }()),
+                                              movie.overview!,
                                               overflow: TextOverflow.ellipsis,
-                                              maxLines: 9,
+                                              maxLines: 20,
                                               textAlign: TextAlign.justify,
                                               style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16),
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -200,18 +193,37 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
                                     colorFilter: ColorFilter.mode(
-                                      Colors.black.withOpacity(0.7),
+                                      Colors.black.withOpacity(0.8),
                                       BlendMode.darken,
                                     ),
-                                    image: CachedNetworkImageProvider(
+                                    image: Image.network(
                                       "$movieLandscapeBaseUrl${movie.backdropPath}",
-                                    ),
+                                      fit: BoxFit.fill,
+                                      loadingBuilder: (BuildContext context,
+                                          Widget child,
+                                          ImageChunkEvent? loadingProgress) {
+                                        if (loadingProgress == null)
+                                          return child;
+                                        return Center(
+                                          child: CircularProgressIndicator(
+                                            value: loadingProgress
+                                                        .expectedTotalBytes !=
+                                                    null
+                                                ? loadingProgress
+                                                        .cumulativeBytesLoaded /
+                                                    loadingProgress
+                                                        .expectedTotalBytes!
+                                                : null,
+                                          ),
+                                        );
+                                      },
+                                    ).image,
                                   ),
                                 ),
                               ),
                             ),
                             SizedBox(
-                              height: 20,
+                              height: 60,
                             ),
                             Center(
                               child: SegmentedButton<bool>(
@@ -269,7 +281,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                 ),
               )
             : FutureBuilder<List<String>>(
-                future: Future.sync(() => youtubeVideoIds),
+                future: fetchMovieTrailers("es-ES"),
                 builder: (context, snapshot) {
                   return YoutubePlayerScaffold(
                       controller: _trailerController,
@@ -295,5 +307,15 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
       enableKeyboard: false,
       interfaceLanguage: "es",
     ));
+  }
+
+  fetchMovieTrailers(String language) {
+    Api().fetchTrailers(widget.movieId, language).then((trailerList) {
+      if (trailerList.isNotEmpty) {
+        trailerVideosIds = trailerList.map((e) => e.key).toList();
+      } else {
+        fetchMovieTrailers("");
+      }
+    });
   }
 }
