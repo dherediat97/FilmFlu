@@ -46,9 +46,9 @@ class Api {
     return compute(parseMovie, response.body);
   }
 
-  Future<List<Video>> fetchTrailer(int movieId) async {
+  Future<List<Video>> fetchTrailers(int movieId, String? language) async {
     final response = await http.Client().get(
-        Uri.parse('$baseURL/movie/${movieId}/videos?language=es-ES'),
+        Uri.parse('$baseURL/movie/${movieId}/videos?language=$language'),
         headers: baseHeaders);
     return compute(parseVideos, response.body);
   }
@@ -58,5 +58,13 @@ class Api {
         Uri.parse('$baseURL/movie/${movieId}/credits?language=es-ES'),
         headers: baseHeaders);
     return compute(parseCredits, response.body);
+  }
+
+  Future<List<Movie>> searchMovie(String movieSearched) async {
+    final response = await http.Client().get(
+        Uri.parse(
+            '$baseURL/search/movie?query=${movieSearched}&include_adult=false&language=es-ES&page=1'),
+        headers: baseHeaders);
+    return compute(parseMovies, response.body);
   }
 }
