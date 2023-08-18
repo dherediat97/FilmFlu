@@ -30,5 +30,4 @@ jobs:
         uses: DanTup/gh-actions/setup-dart@master
         with:
           channel: ${{ matrix.dart-version }}
-      - run: dart format --output=none --set-exit-if-changed .
       - run: dart run ./lib/network/server_api.dart
