@@ -108,7 +108,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                     future: Api().fetchMovie(widget.movieId),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState != ConnectionState.waiting) {
-                        var movie = snapshot.requireData;
+                        Movie movie = snapshot.requireData;
                         String releaseYear = movie.releaseDate.split("-")[0];
                         String movieTitle = movie.title;
                         return Column(
@@ -147,7 +147,6 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                           onTap: () {
                                             setState(() {
                                               movieTitle = movie.originalTitle!;
-                                              print(movieTitle);
                                             });
                                           },
                                         ),
@@ -193,7 +192,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
                                     colorFilter: ColorFilter.mode(
-                                      Colors.black.withOpacity(0.8),
+                                      Colors.black.withOpacity(0.6),
                                       BlendMode.darken,
                                     ),
                                     image: Image.network(

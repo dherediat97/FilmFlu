@@ -9,31 +9,17 @@ class MovieList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return ListView.builder(
+      shrinkWrap: true,
       scrollDirection: Axis.horizontal,
-      physics: ClampingScrollPhysics(),
-      controller: ScrollController(),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height / 1.7,
-            child: ListView.builder(
-              physics: ClampingScrollPhysics(),
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: movies.length,
-              itemBuilder: (context, index) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return MovieCarrouselItem(movie: movies[index]);
-                  },
-                );
-              },
-            ),
-          )
-        ],
-      ),
+      itemCount: movies.length,
+      itemBuilder: (context, index) {
+        return Builder(
+          builder: (BuildContext context) {
+            return MovieCarrouselItem(movie: movies[index]);
+          },
+        );
+      },
     );
   }
 }

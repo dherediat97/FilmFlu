@@ -1,4 +1,5 @@
 //Core Packages
+import 'package:FilmFlu/ui/pages/personDetails/actor_details.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -39,10 +40,10 @@ class _FilmCastState extends State<FilmCast> {
                   controller: TrackingScrollController(),
                   shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 200,
-                    mainAxisSpacing: 15,
-                    crossAxisSpacing: 10,
-                    mainAxisExtent: 275,
+                    maxCrossAxisExtent: 150,
+                    mainAxisSpacing: 0,
+                    crossAxisSpacing: 50,
+                    mainAxisExtent: 340,
                     childAspectRatio: MediaQuery.of(context).size.aspectRatio,
                   ),
                   itemCount: widget.isCast ? cast?.length : crew?.length,
@@ -68,30 +69,36 @@ class _FilmCastState extends State<FilmCast> {
     return GridTile(
       child: Column(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(32.0),
-            child: CachedNetworkImage(
-                imageUrl: '$personImgBaseUrl${actor.profilePath}',
-                fit: BoxFit.cover,
-                placeholder: (context, url) =>
-                    const CircularProgressIndicator(),
-                errorWidget: (context, url, error) {
-                  if (actor.profilePath == null || actor.gender == 2) {
-                    return SvgPicture.asset(
-                      "assets/icons/actor_icon.svg",
-                      height: 180,
-                      fit: BoxFit.cover,
-                      width: 120,
-                    );
-                  } else {
-                    return SvgPicture.asset(
-                      "assets/icons/actress_icon.svg",
-                      height: 180,
-                      fit: BoxFit.cover,
-                      width: 120,
-                    );
-                  }
-                }),
+          InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => ActorDetailsPage(actorId: actor.id!)));
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(32.0),
+              child: CachedNetworkImage(
+                  imageUrl: '$personImgBaseUrl${actor.profilePath}',
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) =>
+                      const CircularProgressIndicator(),
+                  errorWidget: (context, url, error) {
+                    if (actor.profilePath == null || actor.gender == 2) {
+                      return SvgPicture.asset(
+                        "assets/icons/actor_icon.svg",
+                        height: 180,
+                        fit: BoxFit.cover,
+                        width: 120,
+                      );
+                    } else {
+                      return SvgPicture.asset(
+                        "assets/icons/actress_icon.svg",
+                        height: 180,
+                        fit: BoxFit.cover,
+                        width: 120,
+                      );
+                    }
+                  }),
+            ),
           ),
           AutoSizeText(actor.name!,
               textAlign: TextAlign.center,
@@ -130,34 +137,37 @@ class _FilmCastState extends State<FilmCast> {
     return GridTile(
       child: Column(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(32.0),
-            child: CachedNetworkImage(
-                imageUrl: '$personImgBaseUrl${filmWorker.profilePath}',
-                fit: BoxFit.cover,
-                placeholder: (context, url) =>
-                    const CircularProgressIndicator(),
-                errorWidget: (context, url, error) {
-                  if (filmWorker.profilePath == null ||
-                      filmWorker.gender == 2) {
-                    return SvgPicture.asset(
-                      "assets/icons/actor_icon.svg",
-                      height: 180,
-                      fit: BoxFit.cover,
-                      width: 120,
-                    );
-                  } else if (filmWorker.profilePath == null ||
-                      filmWorker.gender != 2) {
-                    return SvgPicture.asset(
-                      "assets/icons/actress_icon.svg",
-                      height: 180,
-                      fit: BoxFit.cover,
-                      width: 120,
-                    );
-                  } else {
-                    return CircularProgressIndicator();
-                  }
-                }),
+          InkWell(
+            onTap: () {},
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(32.0),
+              child: CachedNetworkImage(
+                  imageUrl: '$personImgBaseUrl${filmWorker.profilePath}',
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) =>
+                      const CircularProgressIndicator(),
+                  errorWidget: (context, url, error) {
+                    if (filmWorker.profilePath == null ||
+                        filmWorker.gender == 2) {
+                      return SvgPicture.asset(
+                        "assets/icons/actor_icon.svg",
+                        height: 180,
+                        fit: BoxFit.cover,
+                        width: 120,
+                      );
+                    } else if (filmWorker.profilePath == null ||
+                        filmWorker.gender != 2) {
+                      return SvgPicture.asset(
+                        "assets/icons/actress_icon.svg",
+                        height: 180,
+                        fit: BoxFit.cover,
+                        width: 120,
+                      );
+                    } else {
+                      return CircularProgressIndicator();
+                    }
+                  }),
+            ),
           ),
           Text(filmWorker.name!,
               textAlign: TextAlign.center,
