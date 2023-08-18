@@ -1,12 +1,11 @@
 //Core Packages
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 //My Packages
 import 'package:FilmFlu/dto/movie.dart';
 import 'package:FilmFlu/constants.dart';
 import 'package:FilmFlu/ui/pages/movieDetails/movie_details.dart';
-import 'package:FilmFlu/dto/movie_details_arguments.dart';
 
 class MovieCarrouselItem extends StatelessWidget {
   const MovieCarrouselItem({super.key, required this.movie});
@@ -16,23 +15,50 @@ class MovieCarrouselItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 12, right: 12),
-      child: InkWell(
-        onTap: () {
-          Navigator.pushReplacementNamed(context, MovieDetailsPage.routeName,
-              arguments: MovieDetailsArguments(movie.id));
-        },
-        child: Container(
-          width: 300,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.0),
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: CachedNetworkImageProvider(
-                  '$movieImgBaseURL${movie.posterPath}'),
-            ),
-          ),
-        ),
+      padding: const EdgeInsets.only(left: 16, right: 16),
+      child: Column(
+        children: [
+          InkWell(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => MovieDetailsPage(
+                        movieId: movie.id, isTrailerSelected: false)));
+              },
+              child: Container(
+                width: 250,
+                height: 400,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(48.0),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: Image.network(
+                      '$movieImgBaseURL${movie.backdropPath}',
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    loadingProgress.expectedTotalBytes!
+                                : null,
+                          ),
+                        );
+                      },
+                    ).image,
+                  ),
+                ),
+              )),
+          AutoSizeText(movie.title,
+              maxLines: 2,
+              maxFontSize: 15,
+              minFontSize: 13,
+              stepGranularity: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold))
+        ],
       ),
     );
   }

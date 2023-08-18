@@ -10,7 +10,6 @@ import 'package:FilmFlu/constants.dart';
 import 'package:FilmFlu/dto/movie.dart';
 import 'package:FilmFlu/network/client_api.dart';
 import 'package:FilmFlu/ui/pages/movieDetails/movie_details.dart';
-import 'package:FilmFlu/dto/movie_details_arguments.dart';
 
 // ignore: must_be_immutable
 class ScaffoldPage extends StatefulWidget {
@@ -80,10 +79,10 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                                     EdgeInsets.symmetric(vertical: 5.0)),
                             onSelected: (Movie? movie) {
                               setState(() {
-                                Navigator.pushReplacementNamed(
-                                    context, MovieDetailsPage.routeName,
-                                    arguments:
-                                        MovieDetailsArguments(movie!.id));
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (_) => MovieDetailsPage(
+                                        movieId: movie!.id,
+                                        isTrailerSelected: false)));
                               });
                             },
                           )
