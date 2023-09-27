@@ -1,17 +1,13 @@
 //Core Packages
-import 'package:FilmFlu/ui/pages/personDetails/actor_details.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 //My Packages
 import 'package:FilmFlu/dto/credits.dart';
 import 'package:FilmFlu/dto/film_worker.dart';
 import 'package:FilmFlu/dto/actor.dart';
 import 'package:FilmFlu/network/client_api.dart';
-import 'package:FilmFlu/constants.dart';
+import 'package:FilmFlu/ui/components/film_worker_cast_item.dart';
+import 'package:FilmFlu/ui/components/film_actor_cast_item.dart';
 
 class FilmCast extends StatefulWidget {
   const FilmCast({super.key, required this.movieId, required this.isCast});
@@ -32,160 +28,30 @@ class _FilmCastState extends State<FilmCast> {
       child: FutureBuilder<Credits>(
           future: Api().fetchCredits(widget.movieId),
           builder: (context, snapshot) {
-            if (snapshot.connectionState != ConnectionState.waiting) {
-              if (snapshot.data != null) {
-                final List<Actor>? cast = snapshot.data!.cast;
-                final List<FilmWorker>? crew = snapshot.data!.crew;
-                return GridView.builder(
-                  controller: TrackingScrollController(),
-                  shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 150,
-                    mainAxisSpacing: 0,
-                    crossAxisSpacing: 50,
-                    mainAxisExtent: 340,
-                    childAspectRatio: MediaQuery.of(context).size.aspectRatio,
-                  ),
-                  itemCount: widget.isCast ? cast?.length : crew?.length,
-                  itemBuilder: (context, index) => widget.isCast
-                      ? _buildGridActors(context, index, cast!)
-                      : _buildFilmWorker(context, index, crew!),
-                );
-              } else {
-                return Container();
-              }
-            } else {
+            if (snapshot.connectionState == ConnectionState.waiting) {
               return Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
                   child: Center(child: CircularProgressIndicator()));
             }
+            final List<Actor>? cast = snapshot.requireData.cast;
+            final List<FilmWorker>? crew = snapshot.requireData.crew;
+            return GridView.builder(
+              controller: TrackingScrollController(),
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 150,
+                mainAxisSpacing: 0,
+                crossAxisSpacing: 40,
+                mainAxisExtent: 340,
+                childAspectRatio: MediaQuery.of(context).size.aspectRatio,
+              ),
+              itemCount: widget.isCast ? cast?.length : crew?.length,
+              itemBuilder: (context, index) => widget.isCast
+                  ? FilmActorItem(index: index, cast: cast!)
+                  : FilmWorkerItem(index: index, crew: crew!),
+            );
           }),
-    );
-  }
-
-  Widget _buildGridActors(BuildContext context, int index, List<Actor> cast) {
-    Actor actor = cast[index];
-    return GridTile(
-      child: Column(
-        children: [
-          InkWell(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => ActorDetailsPage(actorId: actor.id!)));
-            },
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(32.0),
-              child: CachedNetworkImage(
-                  imageUrl: '$personImgBaseUrl${actor.profilePath}',
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) =>
-                      const CircularProgressIndicator(),
-                  errorWidget: (context, url, error) {
-                    if (actor.profilePath == null || actor.gender == 2) {
-                      return SvgPicture.asset(
-                        "assets/icons/actor_icon.svg",
-                        height: 180,
-                        fit: BoxFit.cover,
-                        width: 120,
-                      );
-                    } else {
-                      return SvgPicture.asset(
-                        "assets/icons/actress_icon.svg",
-                        height: 180,
-                        fit: BoxFit.cover,
-                        width: 120,
-                      );
-                    }
-                  }),
-            ),
-          ),
-          AutoSizeText(actor.name!,
-              textAlign: TextAlign.center,
-              minFontSize: 16,
-              stepGranularity: 1,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                  fontFamily: "ShadowsIntoLight",
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
-                  fontSize: 18)),
-          actor.character!.isNotEmpty
-              ? AutoSizeText(
-                  minFontSize: 14,
-                  stepGranularity: 1,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  "${AppLocalizations.of(context)?.actor_job} ${actor.character}",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: "YsabeauInfant",
-                    color: Colors.white,
-                  ),
-                )
-              : Container()
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFilmWorker(
-      BuildContext context, int index, List<FilmWorker> crew) {
-    FilmWorker filmWorker = crew[index];
-    return GridTile(
-      child: Column(
-        children: [
-          InkWell(
-            onTap: () {},
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(32.0),
-              child: CachedNetworkImage(
-                  imageUrl: '$personImgBaseUrl${filmWorker.profilePath}',
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) =>
-                      const CircularProgressIndicator(),
-                  errorWidget: (context, url, error) {
-                    if (filmWorker.profilePath == null ||
-                        filmWorker.gender == 2) {
-                      return SvgPicture.asset(
-                        "assets/icons/actor_icon.svg",
-                        height: 180,
-                        fit: BoxFit.cover,
-                        width: 120,
-                      );
-                    } else if (filmWorker.profilePath == null ||
-                        filmWorker.gender != 2) {
-                      return SvgPicture.asset(
-                        "assets/icons/actress_icon.svg",
-                        height: 180,
-                        fit: BoxFit.cover,
-                        width: 120,
-                      );
-                    } else {
-                      return CircularProgressIndicator();
-                    }
-                  }),
-            ),
-          ),
-          Text(filmWorker.name!,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontFamily: "ShadowsIntoLight",
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
-                  fontSize: 18)),
-          Text(
-            "${AppLocalizations.of(context)?.production_job} ${filmWorker.job} ${AppLocalizations.of(context)?.in_preposition} ${filmWorker.knownForDepartment}",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: "YsabeauInfant",
-              color: Colors.white,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

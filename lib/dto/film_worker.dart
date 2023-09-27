@@ -5,6 +5,7 @@ part 'film_worker.g.dart';
 @JsonSerializable(explicitToJson: false, fieldRename: FieldRename.snake)
 class FilmWorker {
   FilmWorker({
+    required this.id,
     this.adult,
     this.gender,
     this.knownForDepartment,
@@ -12,7 +13,7 @@ class FilmWorker {
     this.profilePath,
     this.job,
   });
-
+  int id;
   bool? adult;
   int? gender;
   String? knownForDepartment;

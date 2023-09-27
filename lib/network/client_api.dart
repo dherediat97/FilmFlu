@@ -36,7 +36,7 @@ class Api {
   }
 
   List<CreditPerson> parsePersonCredits(String responseBody) {
-    final parsed = jsonDecode(responseBody);
+    final parsed = jsonDecode(responseBody)["cast"];
     return parsed
         .map<CreditPerson>((json) => CreditPerson.fromJson(json))
         .toList();

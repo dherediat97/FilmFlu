@@ -44,16 +44,13 @@ class _FastMovieDetailsState extends State<FastMovieDetails> {
                                   fontSize: 22, fontFamily: "LilitaOne")),
                         ),
                         Spacer(flex: 1),
-                        Tooltip(
-                          message: "Más info aquí",
-                          child: IconButton(
-                              onPressed: () {
-                                Navigator.pushReplacementNamed(
-                                    context, MovieDetailsPage.routeName,
-                                    arguments: BaseArguments(movie.id, 0));
-                              },
-                              icon: Icon(Icons.info)),
-                        ),
+                        IconButton(
+                            onPressed: () {
+                              Navigator.pushReplacementNamed(
+                                  context, MovieDetailsPage.routeName,
+                                  arguments: BaseArguments(movie.id, 0));
+                            },
+                            icon: Icon(Icons.info)),
                       ],
                     ),
                     Text(AppLocalizations.of(context)!.synopsis,

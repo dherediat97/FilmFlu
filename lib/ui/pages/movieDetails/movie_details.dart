@@ -7,6 +7,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 //My Packages
 import 'package:FilmFlu/dto/movie.dart';
+import 'package:FilmFlu/ui/pages/splash/splash_screen.dart';
 import 'package:FilmFlu/network/client_api.dart';
 import 'package:FilmFlu/ui/components/scaffold_page.dart';
 import 'package:FilmFlu/ui/components/movie_cast.dart';
@@ -54,11 +55,13 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
+        routeName: "",
+        isSearchVisible: true,
         isLightsOn: !isTrailerSelected,
-        floatingActionButton: isTrailerSelected
-            ? Padding(
-                padding: const EdgeInsets.all(16),
-                child: FloatingActionButton(
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.all(16),
+          child: isTrailerSelected
+              ? FloatingActionButton(
                   mini: true,
                   backgroundColor: Colors.red,
                   foregroundColor: Colors.white,
@@ -70,34 +73,37 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                       isTrailerSelected = false;
                     });
                   },
-                ),
-              )
-            : Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: FloatingActionButton(
-                    backgroundColor: Colors.red,
-                    foregroundColor: Colors.white,
-                    onPressed: () {
-                      if (trailerVideosIds.isNotEmpty) {
-                        isTrailerSelected = true;
-                        initTrailerComponent();
-                        _trailerController.loadPlaylist(
-                            list: trailerVideosIds,
-                            listType: ListType.playlist);
-                        setState(() {});
-                      } else {
-                        SnackBar snackBar = SnackBar(
-                            content: Text("Esta película no tiene tráilers",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20)),
-                            duration: Duration(seconds: 2),
-                            backgroundColor:
-                                Theme.of(context).colorScheme.onBackground);
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      }
-                    },
-                    child: Icon(Icons.play_arrow)),
-              ),
+                )
+              : FloatingActionButton(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                  onPressed: () {
+                    if (trailerVideosIds.isNotEmpty) {
+                      isTrailerSelected = true;
+                      initTrailerComponent();
+                      _trailerController.loadPlaylist(
+                          list: trailerVideosIds, listType: ListType.playlist);
+                      setState(() {});
+                    } else {
+                      SnackBar snackBar = SnackBar(
+                          content: Text(
+                              AppLocalizations.of(context)!.no_trailers,
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20)),
+                          duration: Duration(seconds: 3),
+                          action: SnackBarAction(
+                              label: "Ok",
+                              onPressed: () {
+                                ScaffoldMessenger.of(context)
+                                    .hideCurrentSnackBar();
+                              }),
+                          backgroundColor:
+                              Theme.of(context).colorScheme.onBackground);
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
+                  },
+                  child: Icon(Icons.play_arrow)),
+        ),
         containerChild: !isTrailerSelected
             ? Container(
                 child: SingleChildScrollView(
@@ -139,17 +145,17 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                                   fontFamily: 'YsabeauInfant',
                                                   fontSize: 40),
                                             )),
-                                        InkWell(
-                                          child: SvgPicture.asset(
-                                              height: 40,
-                                              width: 40,
-                                              "assets/icons/${movie.originalLanguage}_flag.svg"),
-                                          onTap: () {
-                                            setState(() {
-                                              movieTitle = movie.originalTitle!;
-                                            });
-                                          },
-                                        ),
+                                        // InkWell(
+                                        //   child: SvgPicture.asset(
+                                        //       height: 40,
+                                        //       width: 40,
+                                        //       "assets/icons/flags/${movie.originalLanguage}_flag.svg"),
+                                        //   onTap: () {
+                                        //     setState(() {
+                                        //       movieTitle = movie.originalTitle!;
+                                        //     });
+                                        //   },
+                                        // ),
                                       ],
                                     ),
                                     SizedBox(height: 100),
@@ -270,10 +276,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                           ],
                         );
                       } else {
-                        return Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height,
-                            child: Center(child: CircularProgressIndicator()));
+                        return SplashScreen();
                       }
                     },
                   ),

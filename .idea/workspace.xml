@@ -10,9 +10,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e42b280c-2f95-4b71-aa86-2f7f24a22f3f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/animations/splash_animation.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/de_flag.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/el_flag.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/en_flag.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/es_flag.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/fi_flag.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/fr_flag.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/hy_flag.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/is_flag.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/ja_flag.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/nl_flag.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/sk_flag.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/dto/actor.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/dto/actor.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/dto/credit_person.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/dto/credit_person.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/dto/film_worker.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/dto/film_worker.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/l10n/app_en.arb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/l10n/app_en.arb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/l10n/app_es.arb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/l10n/app_es.arb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/network/client_api.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/network/client_api.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/components/fast_movie_details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/components/fast_movie_details.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/components/movie_cast.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/components/movie_cast.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/components/scaffold_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/components/scaffold_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/movieDetails/movie_details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/movieDetails/movie_details.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/pages/personDetails/actor_details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/personDetails/actor_details.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
