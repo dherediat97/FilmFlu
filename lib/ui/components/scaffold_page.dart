@@ -127,23 +127,30 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
             : widget.containerChild,
         bottomNavigationBar: widget.isLightsOn == true
             ? Container(
-                padding: EdgeInsets.all(16),
-                height: kBottomNavigationBarHeight,
-                alignment: Alignment.center,
-                color: Colors.white,
+                color: Color(0xFFFFFFFF),
+                height: 50,
                 child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Made with much",
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold)),
-                      Icon(Icons.favorite, color: Colors.red),
-                      Spacer(flex: 1),
-                      Icon(Icons.copyright, color: Colors.black),
-                      Center(
-                        child: Text("${today.year} @dherediat97",
-                            style: TextStyle(fontSize: 12)),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 6.0),
+                        child: Row(children: [
+                          Text("Made with much",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
+                          Icon(Icons.favorite, color: Colors.red),
+                        ]),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 6.0),
+                        child: Row(children: [
+                          Icon(Icons.copyright, color: Colors.black),
+                          Center(
+                            child: Text("${today.year} @dherediat97",
+                                style: TextStyle(fontSize: 15)),
+                          )
+                        ]),
                       )
                     ]),
               )

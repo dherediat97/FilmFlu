@@ -13,7 +13,11 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return ScaffoldPage(
       routeName: "Ajustes",
-      containerChild: Container(),
+      containerChild: Container(
+        child: Row(
+          children: [Text("Hola")],
+        ),
+      ),
       isLightsOn: true,
       isSearchVisible: false,
     );
