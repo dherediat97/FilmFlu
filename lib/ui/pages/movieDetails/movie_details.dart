@@ -7,6 +7,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 //My Packages
 import 'package:FilmFlu/dto/movie.dart';
+import 'package:FilmFlu/ui/pages/splash/splash_screen.dart';
 import 'package:FilmFlu/network/client_api.dart';
 import 'package:FilmFlu/ui/components/scaffold_page.dart';
 import 'package:FilmFlu/ui/components/movie_cast.dart';
@@ -54,6 +55,8 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
+        routeName: "",
+        isSearchVisible: true,
         isLightsOn: !isTrailerSelected,
         floatingActionButton: Padding(
           padding: const EdgeInsets.all(16),
@@ -142,17 +145,17 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                                   fontFamily: 'YsabeauInfant',
                                                   fontSize: 40),
                                             )),
-                                        InkWell(
-                                          child: SvgPicture.asset(
-                                              height: 40,
-                                              width: 40,
-                                              "assets/icons/flags/${movie.originalLanguage}_flag.svg"),
-                                          onTap: () {
-                                            setState(() {
-                                              movieTitle = movie.originalTitle!;
-                                            });
-                                          },
-                                        ),
+                                        // InkWell(
+                                        //   child: SvgPicture.asset(
+                                        //       height: 40,
+                                        //       width: 40,
+                                        //       "assets/icons/flags/${movie.originalLanguage}_flag.svg"),
+                                        //   onTap: () {
+                                        //     setState(() {
+                                        //       movieTitle = movie.originalTitle!;
+                                        //     });
+                                        //   },
+                                        // ),
                                       ],
                                     ),
                                     SizedBox(height: 100),
@@ -273,10 +276,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                           ],
                         );
                       } else {
-                        return Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height,
-                            child: Center(child: CircularProgressIndicator()));
+                        return SplashScreen();
                       }
                     },
                   ),

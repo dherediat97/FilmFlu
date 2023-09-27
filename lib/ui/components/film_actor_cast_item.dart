@@ -1,0 +1,96 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:FilmFlu/constants.dart';
+import 'package:FilmFlu/dto/actor.dart';
+import 'package:FilmFlu/ui/pages/personDetails/actor_details.dart';
+
+class FilmActorItem extends StatefulWidget {
+  FilmActorItem({super.key, required this.index, required this.cast});
+  int index;
+  List<Actor> cast;
+
+  @override
+  State<FilmActorItem> createState() => _FilmActorItemState();
+}
+
+class _FilmActorItemState extends State<FilmActorItem> {
+  @override
+  Widget build(BuildContext context) {
+    int index = widget.index;
+    List<Actor> cast = widget.cast;
+    Actor actor = cast[index];
+    return GridTile(
+      child: Column(
+        children: [
+          InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => ActorDetailsPage(actorId: actor.id)));
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(32.0),
+              child: Image.network('$personImgBaseUrl${actor.profilePath}',
+                  fit: BoxFit.cover, loadingBuilder: (BuildContext context,
+                      Widget child, ImageChunkEvent? loadingProgress) {
+                if (loadingProgress == null) return child;
+                return Center(
+                  child: CircularProgressIndicator(
+                    value: loadingProgress.expectedTotalBytes != null
+                        ? loadingProgress.cumulativeBytesLoaded /
+                            loadingProgress.expectedTotalBytes!
+                        : null,
+                  ),
+                );
+              }, errorBuilder: (context, url, error) {
+                if (actor.gender == 2) {
+                  return SvgPicture.asset(
+                    "assets/icons/actor_icon.svg",
+                    height: 220,
+                    fit: BoxFit.cover,
+                    width: 120,
+                  );
+                } else {
+                  return SvgPicture.asset(
+                    "assets/icons/actress_icon.svg",
+                    height: 220,
+                    fit: BoxFit.cover,
+                    width: 120,
+                  );
+                }
+              }),
+            ),
+          ),
+          AutoSizeText(actor.name!,
+              textAlign: TextAlign.center,
+              minFontSize: 16,
+              stepGranularity: 1,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  fontFamily: "ShadowsIntoLight",
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
+                  fontSize: 18)),
+          actor.character!.isNotEmpty
+              ? AutoSizeText(
+                  minFontSize: 14,
+                  stepGranularity: 1,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  "${AppLocalizations.of(context)?.actor_job} ${actor.character}",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: "YsabeauInfant",
+                    color: Colors.white,
+                  ),
+                )
+              : Container()
+        ],
+      ),
+    );
+  }
+}

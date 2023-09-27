@@ -1,6 +1,7 @@
 //Core Packages
 import 'package:FilmFlu/ui/pages/main/main_screen.dart';
 import 'package:FilmFlu/ui/pages/personDetails/actor_details.dart';
+import 'package:FilmFlu/ui/pages/settings/settings_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:flutter/material.dart';
@@ -89,6 +90,9 @@ class FilmFlu extends StatelessWidget {
             break;
           case "/actorDetails":
             screen = ActorDetailsPage(actorId: args!.actorId);
+            break;
+          case "/settings":
+            screen = SettingsPage();
             break;
           default:
             screen = !kIsWeb ? SplashScreen() : MainPage();

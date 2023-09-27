@@ -22,6 +22,8 @@ class _ActorDetailsPage extends State<ActorDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
+      routeName: "",
+      isSearchVisible: true,
       isLightsOn: true,
       containerChild: SingleChildScrollView(
         controller: ScrollController(),

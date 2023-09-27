@@ -7,6 +7,8 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
+      routeName: "Inicio de Sesión",
+      isSearchVisible: false,
       containerChild: Padding(
         padding: const EdgeInsets.all(32.0),
         child: Center(

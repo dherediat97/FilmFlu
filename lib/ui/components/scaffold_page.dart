@@ -14,12 +14,17 @@ import 'package:FilmFlu/ui/pages/movieDetails/movie_details.dart';
 
 // ignore: must_be_immutable
 class ScaffoldPage extends StatefulWidget {
-  ScaffoldPage(
-      {super.key,
-      required this.containerChild,
-      this.floatingActionButton,
-      this.isLightsOn});
+  ScaffoldPage({
+    super.key,
+    required this.containerChild,
+    this.floatingActionButton,
+    this.isLightsOn,
+    required this.isSearchVisible,
+    required this.routeName,
+  });
   bool? isLightsOn = false;
+  bool isSearchVisible = true;
+  String routeName = "Pantalla Principal";
   Widget? floatingActionButton = null;
   final Widget containerChild;
 
@@ -50,48 +55,51 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                 automaticallyImplyLeading: false,
                 toolbarHeight: 100,
                 flexibleSpace: Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16),
-                  child: Center(
-                    child: SafeArea(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          DropdownMenu<Movie>(
-                            dropdownMenuEntries: [
-                              DropdownMenuEntry(
-                                  value: movieMock1,
-                                  label: "El castillo ambulante")
-                            ],
-                            width: 350,
-                            controller: _searchController,
-                            leadingIcon: Icon(Icons.search,
-                                color: Theme.of(context).colorScheme.primary),
-                            textStyle: TextStyle(
-                                color: Theme.of(context).colorScheme.primary),
-                            hintText:
-                                AppLocalizations.of(context)!.search_film_hint,
-                            inputDecorationTheme: InputDecorationTheme(
-                                border: InputBorder.none,
-                                hintStyle: TextStyle(
+                    padding: const EdgeInsets.only(left: 48, right: 48),
+                    child: Center(
+                        child: SafeArea(
+                            child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        widget.isSearchVisible == true
+                            ? DropdownMenu<Movie>(
+                                dropdownMenuEntries: [
+                                  DropdownMenuEntry(
+                                      value: movieMock1,
+                                      label: "El castillo ambulante")
+                                ],
+                                width: 350,
+                                controller: _searchController,
+                                leadingIcon: Icon(Icons.search,
                                     color:
                                         Theme.of(context).colorScheme.primary),
-                                contentPadding:
-                                    EdgeInsets.symmetric(vertical: 5.0)),
-                            onSelected: (Movie? movie) {
-                              setState(() {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => MovieDetailsPage(
-                                        movieId: movie!.id,
-                                        isTrailerSelected: false)));
-                              });
-                            },
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                                textStyle: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.primary),
+                                hintText: AppLocalizations.of(context)!
+                                    .search_film_hint,
+                                inputDecorationTheme: InputDecorationTheme(
+                                    border: InputBorder.none,
+                                    hintStyle: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary),
+                                    contentPadding:
+                                        EdgeInsets.symmetric(vertical: 5.0)),
+                                onSelected: (Movie? movie) {
+                                  setState(() {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (_) => MovieDetailsPage(
+                                                movieId: movie!.id,
+                                                isTrailerSelected: false)));
+                                  });
+                                },
+                              )
+                            : Text(widget.routeName),
+                      ],
+                    )))),
                 title: InkWell(
                     child: Image.asset('assets/images/transparent_logo.png',
                         height: 50),
@@ -186,13 +194,15 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
         ),
       ));
     }
-    actions.add(IconButton(
-      onPressed: () => Navigator.pushNamed(context, '/settings'),
-      icon: Icon(
-        Icons.settings,
-        color: Theme.of(context).colorScheme.primary,
-      ),
-    ));
+    if (widget.isSearchVisible) {
+      actions.add(IconButton(
+        onPressed: () => Navigator.pushNamed(context, '/settings'),
+        icon: Icon(
+          Icons.settings,
+          color: Theme.of(context).colorScheme.primary,
+        ),
+      ));
+    }
     return actions;
   }
 

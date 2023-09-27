@@ -26,23 +26,19 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: Duration(seconds: 4),
-      vsync: this,
-    );
+    _controller = AnimationController(vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
+      routeName: "",
+      isSearchVisible: false,
       containerChild: Center(
         child: Lottie.asset(
           'assets/animations/splash_animation.json',
           controller: _controller,
           height: MediaQuery.of(context).size.height,
-          animate: true,
-          reverse: false,
-          repeat: true,
           onLoaded: (composition) {
             _controller
               ..duration = composition.duration

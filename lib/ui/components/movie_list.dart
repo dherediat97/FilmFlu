@@ -3,9 +3,9 @@ import 'package:FilmFlu/ui/components/movie_carrousel_item.dart';
 import 'package:flutter/material.dart';
 
 class MovieList extends StatelessWidget {
-  const MovieList({super.key, required this.movies});
+  MovieList({super.key, required this.movies});
 
-  final List<Movie> movies;
+  late List<Movie> movies = [];
 
   @override
   Widget build(BuildContext context) {

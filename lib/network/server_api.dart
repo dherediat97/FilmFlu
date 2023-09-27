@@ -24,7 +24,7 @@ void main() async {
       .addHandler(_echoRequest);
 
   var server = await io.serve(handler, _hostname, port);
-  print('Serving at http://${server.address.host}:${server.port}');
+  // print('Serving at http://${server.address.host}:${server.port}');
 }
 
 Future<shelf.Response> _echoRequest(shelf.Request request) async {
