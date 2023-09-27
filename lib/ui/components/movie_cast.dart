@@ -1,13 +1,12 @@
 //Core Packages
-import 'package:FilmFlu/ui/pages/personDetails/actor_details.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 //My Packages
 import 'package:FilmFlu/dto/credits.dart';
+import 'package:FilmFlu/ui/pages/personDetails/actor_details.dart';
 import 'package:FilmFlu/dto/film_worker.dart';
 import 'package:FilmFlu/dto/actor.dart';
 import 'package:FilmFlu/network/client_api.dart';
@@ -32,34 +31,29 @@ class _FilmCastState extends State<FilmCast> {
       child: FutureBuilder<Credits>(
           future: Api().fetchCredits(widget.movieId),
           builder: (context, snapshot) {
-            if (snapshot.connectionState != ConnectionState.waiting) {
-              if (snapshot.data != null) {
-                final List<Actor>? cast = snapshot.data!.cast;
-                final List<FilmWorker>? crew = snapshot.data!.crew;
-                return GridView.builder(
-                  controller: TrackingScrollController(),
-                  shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 150,
-                    mainAxisSpacing: 0,
-                    crossAxisSpacing: 50,
-                    mainAxisExtent: 340,
-                    childAspectRatio: MediaQuery.of(context).size.aspectRatio,
-                  ),
-                  itemCount: widget.isCast ? cast?.length : crew?.length,
-                  itemBuilder: (context, index) => widget.isCast
-                      ? _buildGridActors(context, index, cast!)
-                      : _buildFilmWorker(context, index, crew!),
-                );
-              } else {
-                return Container();
-              }
-            } else {
+            if (snapshot.connectionState == ConnectionState.waiting) {
               return Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
                   child: Center(child: CircularProgressIndicator()));
             }
+            final List<Actor>? cast = snapshot.requireData.cast;
+            final List<FilmWorker>? crew = snapshot.requireData.crew;
+            return GridView.builder(
+              controller: TrackingScrollController(),
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 150,
+                mainAxisSpacing: 0,
+                crossAxisSpacing: 40,
+                mainAxisExtent: 340,
+                childAspectRatio: MediaQuery.of(context).size.aspectRatio,
+              ),
+              itemCount: widget.isCast ? cast?.length : crew?.length,
+              itemBuilder: (context, index) => widget.isCast
+                  ? _buildGridActors(context, index, cast!)
+                  : _buildFilmWorker(context, index, crew!),
+            );
           }),
     );
   }
@@ -72,32 +66,39 @@ class _FilmCastState extends State<FilmCast> {
           InkWell(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => ActorDetailsPage(actorId: actor.id!)));
+                  builder: (_) => ActorDetailsPage(actorId: actor.id)));
             },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(32.0),
-              child: CachedNetworkImage(
-                  imageUrl: '$personImgBaseUrl${actor.profilePath}',
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) =>
-                      const CircularProgressIndicator(),
-                  errorWidget: (context, url, error) {
-                    if (actor.profilePath == null || actor.gender == 2) {
-                      return SvgPicture.asset(
-                        "assets/icons/actor_icon.svg",
-                        height: 180,
-                        fit: BoxFit.cover,
-                        width: 120,
-                      );
-                    } else {
-                      return SvgPicture.asset(
-                        "assets/icons/actress_icon.svg",
-                        height: 180,
-                        fit: BoxFit.cover,
-                        width: 120,
-                      );
-                    }
-                  }),
+              child: Image.network('$personImgBaseUrl${actor.profilePath}',
+                  fit: BoxFit.cover, loadingBuilder: (BuildContext context,
+                      Widget child, ImageChunkEvent? loadingProgress) {
+                if (loadingProgress == null) return child;
+                return Center(
+                  child: CircularProgressIndicator(
+                    value: loadingProgress.expectedTotalBytes != null
+                        ? loadingProgress.cumulativeBytesLoaded /
+                            loadingProgress.expectedTotalBytes!
+                        : null,
+                  ),
+                );
+              }, errorBuilder: (context, url, error) {
+                if (actor.gender == 2) {
+                  return SvgPicture.asset(
+                    "assets/icons/actor_icon.svg",
+                    height: 220,
+                    fit: BoxFit.cover,
+                    width: 120,
+                  );
+                } else {
+                  return SvgPicture.asset(
+                    "assets/icons/actress_icon.svg",
+                    height: 220,
+                    fit: BoxFit.cover,
+                    width: 120,
+                  );
+                }
+              }),
             ),
           ),
           AutoSizeText(actor.name!,
@@ -138,35 +139,41 @@ class _FilmCastState extends State<FilmCast> {
       child: Column(
         children: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => ActorDetailsPage(actorId: filmWorker.id)));
+            },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(32.0),
-              child: CachedNetworkImage(
-                  imageUrl: '$personImgBaseUrl${filmWorker.profilePath}',
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) =>
-                      const CircularProgressIndicator(),
-                  errorWidget: (context, url, error) {
-                    if (filmWorker.profilePath == null ||
-                        filmWorker.gender == 2) {
-                      return SvgPicture.asset(
-                        "assets/icons/actor_icon.svg",
-                        height: 180,
-                        fit: BoxFit.cover,
-                        width: 120,
-                      );
-                    } else if (filmWorker.profilePath == null ||
-                        filmWorker.gender != 2) {
-                      return SvgPicture.asset(
-                        "assets/icons/actress_icon.svg",
-                        height: 180,
-                        fit: BoxFit.cover,
-                        width: 120,
-                      );
-                    } else {
-                      return CircularProgressIndicator();
-                    }
-                  }),
+              child: Image.network('$personImgBaseUrl${filmWorker.profilePath}',
+                  fit: BoxFit.cover, loadingBuilder: (BuildContext context,
+                      Widget child, ImageChunkEvent? loadingProgress) {
+                if (loadingProgress == null) return child;
+                return Center(
+                  child: CircularProgressIndicator(
+                    value: loadingProgress.expectedTotalBytes != null
+                        ? loadingProgress.cumulativeBytesLoaded /
+                            loadingProgress.expectedTotalBytes!
+                        : null,
+                  ),
+                );
+              }, errorBuilder: (context, url, error) {
+                if (filmWorker.gender == 2) {
+                  return SvgPicture.asset(
+                    "assets/icons/actor_icon.svg",
+                    height: 220,
+                    fit: BoxFit.cover,
+                    width: 120,
+                  );
+                } else {
+                  return SvgPicture.asset(
+                    "assets/icons/actress_icon.svg",
+                    height: 220,
+                    fit: BoxFit.cover,
+                    width: 120,
+                  );
+                }
+              }),
             ),
           ),
           Text(filmWorker.name!,

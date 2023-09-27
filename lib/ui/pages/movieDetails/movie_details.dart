@@ -55,10 +55,10 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
   Widget build(BuildContext context) {
     return ScaffoldPage(
         isLightsOn: !isTrailerSelected,
-        floatingActionButton: isTrailerSelected
-            ? Padding(
-                padding: const EdgeInsets.all(16),
-                child: FloatingActionButton(
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.all(16),
+          child: isTrailerSelected
+              ? FloatingActionButton(
                   mini: true,
                   backgroundColor: Colors.red,
                   foregroundColor: Colors.white,
@@ -70,34 +70,37 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                       isTrailerSelected = false;
                     });
                   },
-                ),
-              )
-            : Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: FloatingActionButton(
-                    backgroundColor: Colors.red,
-                    foregroundColor: Colors.white,
-                    onPressed: () {
-                      if (trailerVideosIds.isNotEmpty) {
-                        isTrailerSelected = true;
-                        initTrailerComponent();
-                        _trailerController.loadPlaylist(
-                            list: trailerVideosIds,
-                            listType: ListType.playlist);
-                        setState(() {});
-                      } else {
-                        SnackBar snackBar = SnackBar(
-                            content: Text("Esta película no tiene tráilers",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20)),
-                            duration: Duration(seconds: 2),
-                            backgroundColor:
-                                Theme.of(context).colorScheme.onBackground);
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      }
-                    },
-                    child: Icon(Icons.play_arrow)),
-              ),
+                )
+              : FloatingActionButton(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                  onPressed: () {
+                    if (trailerVideosIds.isNotEmpty) {
+                      isTrailerSelected = true;
+                      initTrailerComponent();
+                      _trailerController.loadPlaylist(
+                          list: trailerVideosIds, listType: ListType.playlist);
+                      setState(() {});
+                    } else {
+                      SnackBar snackBar = SnackBar(
+                          content: Text(
+                              AppLocalizations.of(context)!.no_trailers,
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20)),
+                          duration: Duration(seconds: 3),
+                          action: SnackBarAction(
+                              label: "Ok",
+                              onPressed: () {
+                                ScaffoldMessenger.of(context)
+                                    .hideCurrentSnackBar();
+                              }),
+                          backgroundColor:
+                              Theme.of(context).colorScheme.onBackground);
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
+                  },
+                  child: Icon(Icons.play_arrow)),
+        ),
         containerChild: !isTrailerSelected
             ? Container(
                 child: SingleChildScrollView(
@@ -143,7 +146,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                           child: SvgPicture.asset(
                                               height: 40,
                                               width: 40,
-                                              "assets/icons/${movie.originalLanguage}_flag.svg"),
+                                              "assets/icons/flags/${movie.originalLanguage}_flag.svg"),
                                           onTap: () {
                                             setState(() {
                                               movieTitle = movie.originalTitle!;

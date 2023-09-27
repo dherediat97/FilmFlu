@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 //My Packages
 import 'package:FilmFlu/constants.dart';
 import 'package:FilmFlu/dto/movie.dart';
@@ -109,7 +110,13 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                     )
                   ])
             : null,
-        body: SafeArea(child: widget.containerChild),
+        body: widget.isLightsOn == true
+            ? SafeArea(
+                child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: widget.containerChild,
+              ))
+            : widget.containerChild,
         bottomNavigationBar: widget.isLightsOn == true
             ? Container(
                 padding: EdgeInsets.all(16),

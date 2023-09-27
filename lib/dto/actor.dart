@@ -7,7 +7,7 @@ class Actor {
   Actor({
     this.adult,
     this.gender,
-    this.id,
+    required this.id,
     this.name,
     this.profilePath,
     this.character,
@@ -16,7 +16,7 @@ class Actor {
 
   bool? adult;
   int? gender;
-  int? id;
+  int id;
   String? name;
   String? profilePath;
   String? character;
