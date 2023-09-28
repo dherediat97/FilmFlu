@@ -34,20 +34,28 @@ class _SplashScreenState extends State<SplashScreen>
     return ScaffoldPage(
       routeName: "",
       isSearchVisible: false,
-      containerChild: Center(
-        child: Lottie.asset(
-          'assets/animations/splash_animation.json',
-          controller: _controller,
-          height: MediaQuery.of(context).size.height,
-          onLoaded: (composition) {
-            _controller
-              ..duration = composition.duration
-              ..forward().whenComplete(() => Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => MainPage()),
-                  ));
-          },
-        ),
+      containerChild: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: Lottie.asset(
+              'assets/animations/splash_animation.json',
+              controller: _controller,
+              height: MediaQuery.of(context).size.height / 2,
+              onLoaded: (composition) {
+                _controller
+                  ..duration = composition.duration
+                  ..forward().whenComplete(() => Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => MainPage()),
+                      ));
+              },
+            ),
+          ),
+          Center(
+              child: Text("3,2,1 ACCIÓN!",
+                  style: TextStyle(color: Colors.white, fontSize: 20))),
+        ],
       ),
     );
   }

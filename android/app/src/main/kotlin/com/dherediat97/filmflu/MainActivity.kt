@@ -1,4 +1,4 @@
-package com.example.filmflu
+package com.dherediat97.filmflu
 
 import io.flutter.embedding.android.FlutterActivity
 

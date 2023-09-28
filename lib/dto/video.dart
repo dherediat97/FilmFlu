@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'video.g.dart';
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
+@JsonSerializable(explicitToJson: false, fieldRename: FieldRename.snake)
 class Video {
   Video({
     required this.key,
