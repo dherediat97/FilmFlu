@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'movie.g.dart';
 
-@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
+@JsonSerializable(explicitToJson: false, fieldRename: FieldRename.snake)
 class Movie {
   Movie({
     this.adult,

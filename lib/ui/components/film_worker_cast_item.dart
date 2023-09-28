@@ -21,6 +21,7 @@ class _FilmWorkerItemState extends State<FilmWorkerItem> {
     int index = widget.index;
     List<FilmWorker> crew = widget.crew;
     FilmWorker filmWorker = crew[index];
+    debugPrint(filmWorker.job);
     return GridTile(
       child: Column(
         children: [
@@ -32,6 +33,8 @@ class _FilmWorkerItemState extends State<FilmWorkerItem> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(32.0),
               child: Image.network('$personImgBaseUrl${filmWorker.profilePath}',
+                  height: 220,
+                  width: 150,
                   fit: BoxFit.cover, loadingBuilder: (BuildContext context,
                       Widget child, ImageChunkEvent? loadingProgress) {
                 if (loadingProgress == null) return child;
@@ -49,14 +52,14 @@ class _FilmWorkerItemState extends State<FilmWorkerItem> {
                     "assets/icons/actor_icon.svg",
                     height: 220,
                     fit: BoxFit.cover,
-                    width: 120,
+                    width: 150,
                   );
                 } else {
                   return SvgPicture.asset(
                     "assets/icons/actress_icon.svg",
                     height: 220,
                     fit: BoxFit.cover,
-                    width: 120,
+                    width: 150,
                   );
                 }
               }),

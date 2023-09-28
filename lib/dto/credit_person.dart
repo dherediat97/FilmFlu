@@ -6,22 +6,28 @@ part 'credit_person.g.dart';
 class CreditPerson {
   CreditPerson({
     required this.id,
-    this.title,
+    this.originalTitle,
     this.backdropPath,
+    this.adult,
+    this.genreIds,
+    this.overview,
     this.posterPath,
     this.originalLanguage,
-    this.releaseDate,
+    // required this.releaseDate,
     this.character,
-    this.mediaType,
+    this.popularity,
   });
   int id;
-  String? title;
+  String? originalTitle;
   String? backdropPath;
+  bool? adult;
+  List<int>? genreIds;
+  String? overview;
   String? posterPath;
   String? originalLanguage;
-  String? releaseDate;
+  // String releaseDate;
   String? character;
-  String? mediaType;
+  double? popularity;
 
   factory CreditPerson.fromJson(Map<String, dynamic> json) =>
       _$CreditPersonFromJson(json);

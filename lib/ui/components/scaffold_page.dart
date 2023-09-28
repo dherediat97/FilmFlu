@@ -48,7 +48,6 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-        resizeToAvoidBottomInset: false,
         backgroundColor: Theme.of(context).colorScheme.onBackground,
         appBar: widget.isLightsOn == true
             ? AppBar(
@@ -106,8 +105,8 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                     onTap: () {
                       Navigator.pushNamed(context, "/");
                     }),
-                elevation: 2,
-                scrolledUnderElevation: 40,
+                elevation: 1,
+                scrolledUnderElevation: 20,
                 backgroundColor: Theme.of(context).colorScheme.background,
                 actions: [
                     Padding(

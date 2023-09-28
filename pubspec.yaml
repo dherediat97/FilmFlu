@@ -12,7 +12,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   envied:
-  json_annotation:
+  json_annotation: ^4.8.1
   http:
   cached_network_image:
   lottie: ^2.5.0
@@ -31,7 +31,7 @@ dev_dependencies:
   flutter_lints:
   envied_generator: ^0.3.0+3
   build_runner:
-  json_serializable:
+  json_serializable: ^6.7.1
   flutter_launcher_icons:
   youtube_player_iframe: ^4.0.4
   url_launcher: ^6.1.11

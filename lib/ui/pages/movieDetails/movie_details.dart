@@ -1,7 +1,7 @@
 //Core Packages;
+import 'package:FilmFlu/ui/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
@@ -120,8 +120,6 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                         return Column(
                           children: [
                             Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height,
                               child: DecoratedBox(
                                 child: Padding(
                                   padding: const EdgeInsets.all(16),
@@ -132,18 +130,19 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                1.3,
+                                                1.2,
                                             child: AutoSizeText(
                                               "$movieTitle(${releaseYear})",
                                               minFontSize: 10,
                                               stepGranularity: 10,
                                               maxLines: 2,
+                                              textAlign: TextAlign.start,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.white,
                                                   fontFamily: 'YsabeauInfant',
-                                                  fontSize: 40),
+                                                  fontSize: 20),
                                             )),
                                         // InkWell(
                                         //   child: SvgPicture.asset(
@@ -203,7 +202,6 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                     ),
                                     image: Image.network(
                                       "$movieLandscapeBaseUrl${movie.backdropPath}",
-                                      fit: BoxFit.fill,
                                       loadingBuilder: (BuildContext context,
                                           Widget child,
                                           ImageChunkEvent? loadingProgress) {
@@ -236,6 +234,18 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                 emptySelectionAllowed: false,
                                 showSelectedIcon: false,
                                 selected: <bool>{isCastSelected},
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.resolveWith<Color>(
+                                    (Set<MaterialState> states) {
+                                      if (states
+                                          .contains(MaterialState.selected)) {
+                                        return primaryColor;
+                                      }
+                                      return Colors.white24;
+                                    },
+                                  ),
+                                ),
                                 segments: [
                                   ButtonSegment<bool>(
                                     label: Text(
