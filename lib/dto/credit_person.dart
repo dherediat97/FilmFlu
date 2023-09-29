@@ -6,6 +6,7 @@ part 'credit_person.g.dart';
 class CreditPerson {
   CreditPerson({
     required this.id,
+    this.title,
     this.originalTitle,
     this.backdropPath,
     this.adult,
@@ -13,11 +14,12 @@ class CreditPerson {
     this.overview,
     this.posterPath,
     this.originalLanguage,
-    // required this.releaseDate,
+    this.job,
     this.character,
     this.popularity,
   });
   int id;
+  String? title;
   String? originalTitle;
   String? backdropPath;
   bool? adult;
@@ -25,7 +27,7 @@ class CreditPerson {
   String? overview;
   String? posterPath;
   String? originalLanguage;
-  // String releaseDate;
+  String? job;
   String? character;
   double? popularity;
 

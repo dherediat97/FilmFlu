@@ -2,6 +2,7 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -51,7 +52,23 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
         backgroundColor: Theme.of(context).colorScheme.onBackground,
         appBar: widget.isLightsOn == true
             ? AppBar(
-                automaticallyImplyLeading: false,
+                leading: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: InkWell(
+                      child: Image.asset(
+                        'assets/images/transparent_logo.png',
+                        height: 20,
+                        width: 20,
+                        fit: BoxFit.fitWidth,
+                      ),
+                      onTap: () {
+                        if (Navigator.canPop(context))
+                          Navigator.pop(context);
+                        else
+                          SystemChannels.platform
+                              .invokeMethod('SystemNavigator.pop');
+                      }),
+                ),
                 toolbarHeight: 100,
                 flexibleSpace: Padding(
                     padding: const EdgeInsets.only(left: 48, right: 48),
@@ -99,12 +116,6 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                             : Text(widget.routeName),
                       ],
                     )))),
-                title: InkWell(
-                    child: Image.asset('assets/images/transparent_logo.png',
-                        height: 50),
-                    onTap: () {
-                      Navigator.pushNamed(context, "/");
-                    }),
                 elevation: 1,
                 scrolledUnderElevation: 20,
                 backgroundColor: Theme.of(context).colorScheme.background,

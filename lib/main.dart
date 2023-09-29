@@ -1,8 +1,4 @@
 //Core Packages
-import 'package:FilmFlu/ui/pages/main/main_screen.dart';
-import 'package:FilmFlu/ui/pages/personDetails/actor_details.dart';
-import 'package:FilmFlu/ui/pages/settings/settings_screen.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:flutter/material.dart';
@@ -11,10 +7,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 //My Packages
 import 'package:FilmFlu/ui/pages/login/login_page.dart';
-import 'package:FilmFlu/ui/pages/splash/splash_screen.dart';
 import 'package:FilmFlu/dto/base_arguments.dart';
 import 'package:FilmFlu/ui/pages/movieDetails/movie_details.dart';
 import 'package:FilmFlu/ui/theme/colors.dart';
+import 'package:FilmFlu/ui/pages/main/main_screen.dart';
+import 'package:FilmFlu/ui/pages/personDetails/actor_details.dart';
+import 'package:FilmFlu/ui/pages/settings/settings_screen.dart';
 import 'package:FilmFlu/ui/util/utilScroll.dart';
 
 void main() {
@@ -107,7 +105,7 @@ class FilmFlu extends StatelessWidget {
             screen = SettingsPage();
             break;
           default:
-            screen = !kIsWeb ? SplashScreen() : MainPage();
+            screen = MainPage();
             break;
         }
         return MaterialPageRoute(builder: (context) {
