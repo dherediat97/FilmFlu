@@ -33,7 +33,7 @@ class _FilmActorItemState extends State<FilmActorItem> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(32.0),
               child: Image.network('$personImgBaseUrl${actor.profilePath}',
-                  height: 220,
+                  height: 160,
                   width: 150,
                   fit: BoxFit.cover, loadingBuilder: (BuildContext context,
                       Widget child, ImageChunkEvent? loadingProgress) {
@@ -50,14 +50,14 @@ class _FilmActorItemState extends State<FilmActorItem> {
                 if (actor.gender == 2) {
                   return SvgPicture.asset(
                     "assets/icons/actor_icon.svg",
-                    height: 220,
+                    height: 160,
                     fit: BoxFit.cover,
                     width: 150,
                   );
                 } else {
                   return SvgPicture.asset(
                     "assets/icons/actress_icon.svg",
-                    height: 220,
+                    height: 160,
                     fit: BoxFit.cover,
                     width: 150,
                   );

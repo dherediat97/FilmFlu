@@ -1,13 +1,13 @@
 //Core Packages;
 import 'package:FilmFlu/ui/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 //My Packages
 import 'package:FilmFlu/dto/movie.dart';
-import 'package:FilmFlu/ui/pages/splash/splash_screen.dart';
 import 'package:FilmFlu/network/client_api.dart';
 import 'package:FilmFlu/ui/components/scaffold_page.dart';
 import 'package:FilmFlu/ui/components/movie_cast.dart';
@@ -59,7 +59,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
         isSearchVisible: true,
         isLightsOn: !isTrailerSelected,
         floatingActionButton: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.only(top: 24),
           child: isTrailerSelected
               ? FloatingActionButton(
                   mini: true,
@@ -71,6 +71,12 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                       _trailerController.stopVideo();
                       _trailerController.close();
                       isTrailerSelected = false;
+                      SystemChrome.setPreferredOrientations([
+                        DeviceOrientation.portraitDown,
+                        DeviceOrientation.portraitUp,
+                      ]);
+                      SystemChrome.setEnabledSystemUIMode(
+                          SystemUiMode.edgeToEdge);
                     });
                   },
                 )
@@ -286,7 +292,10 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                           ],
                         );
                       } else {
-                        return SplashScreen();
+                        return Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height,
+                            child: Center(child: CircularProgressIndicator()));
                       }
                     },
                   ),
@@ -295,6 +304,10 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
             : FutureBuilder<List<String>>(
                 future: fetchMovieTrailers("es-ES"),
                 builder: (context, snapshot) {
+                  SystemChrome.setPreferredOrientations([
+                    DeviceOrientation.landscapeRight,
+                    DeviceOrientation.landscapeLeft,
+                  ]);
                   return YoutubePlayerScaffold(
                       controller: _trailerController,
                       builder: (context, player) {

@@ -41,9 +41,9 @@ class _FilmCastState extends State<FilmCast> {
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 150,
-                mainAxisSpacing: 20,
+                mainAxisSpacing: 0,
                 crossAxisSpacing: 40,
-                mainAxisExtent: 340,
+                mainAxisExtent: 250,
                 childAspectRatio: MediaQuery.of(context).size.aspectRatio,
               ),
               itemCount: widget.isCast ? cast?.length : crew?.length,

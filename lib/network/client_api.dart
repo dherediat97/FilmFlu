@@ -1,6 +1,7 @@
 //Core Packages
 import 'dart:convert';
 import 'package:FilmFlu/dto/credit_person.dart';
+import 'package:FilmFlu/dto/credits_person.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 
@@ -23,6 +24,12 @@ class Api {
     return parsed.map<Movie>((json) => Movie.fromJson(json)).toList();
   }
 
+  CreditsPerson parseCreditsPerson(String responseBody) {
+    final parsed = jsonDecode(responseBody);
+    CreditsPerson credits = CreditsPerson.fromJson(parsed);
+    return credits;
+  }
+
   Credits parseCredits(String responseBody) {
     final parsed = jsonDecode(responseBody);
     Credits credits = Credits.fromJson(parsed);
@@ -35,8 +42,8 @@ class Api {
     return person;
   }
 
-  List<CreditPerson> parsePersonCredits(String responseBody) {
-    final parsed = jsonDecode(responseBody)["cast"];
+  List<Credits> parsePersonCredits(String responseBody) {
+    final parsed = jsonDecode(responseBody);
     return parsed
         .map<CreditPerson>((json) => CreditPerson.fromJson(json))
         .toList();
@@ -90,11 +97,11 @@ class Api {
     return compute(parsePerson, response.body);
   }
 
-  Future<List<CreditPerson>> fetchPersonCredits(int personId) async {
+  Future<CreditsPerson> fetchPersonCredits(int personId) async {
     final response = await Client().get(
         Uri.parse(
             '$baseURL/person/${personId}/combined_credits?language=es-ES'),
         headers: baseHeaders);
-    return compute(parsePersonCredits, response.body);
+    return compute(parseCreditsPerson, response.body);
   }
 }
