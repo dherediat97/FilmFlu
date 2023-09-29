@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-        - uses: actions/checkout@v3
+        - uses: actions/checkout@v4
         - uses: subosito/flutter-action@v2
           with:
             channel: 'stable'
@@ -36,7 +36,7 @@ jobs:
             file_name: .env
         - run: flutter pub run build_runner build
         - run: flutter build web
-        - uses: bluefireteam/flutter-gh-pages@v7
+        - uses: bluefireteam/flutter-gh-pages@v8
           with:
             baseHref: /FilmFlu/
             targetBranch: gh-pages
