@@ -102,11 +102,9 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                         String? movieTitle =
                             widget.isFilm ? movie.title : movie.name;
                         return Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Container(
-                              height: kIsWeb
-                                  ? MediaQuery.of(context).size.height / 2
-                                  : 350,
                               child: DecoratedBox(
                                 child: Padding(
                                   padding: const EdgeInsets.all(16),
