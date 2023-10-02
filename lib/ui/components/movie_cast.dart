@@ -1,4 +1,5 @@
 //Core Packages
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 //My Packages
@@ -46,7 +47,7 @@ class _FilmCastState extends State<FilmCast> {
               controller: TrackingScrollController(),
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+                crossAxisCount: kIsWeb ? 4 : 2,
                 mainAxisSpacing: 20,
                 crossAxisSpacing: widget.isCast ? 20 : 40,
                 mainAxisExtent: widget.isCast ? 240 : 280,

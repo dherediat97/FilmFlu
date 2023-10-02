@@ -1,6 +1,7 @@
 //Core Packages;
 import 'package:FilmFlu/dto/video.dart';
 import 'package:FilmFlu/ui/components/movie_cast.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -48,44 +49,41 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
         routeName: "",
         isSearchVisible: true,
         isLightsOn: !isTrailerSelected,
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(top: 24),
-          child: isTrailerSelected
-              ? FloatingActionButton(
-                  mini: true,
-                  backgroundColor: Colors.red,
-                  foregroundColor: Colors.white,
-                  child: Icon(Icons.stop),
-                  onPressed: () {
-                    setState(() {
-                      _trailerController.stopVideo();
-                      _trailerController.close();
-                      isTrailerSelected = false;
-                      SystemChrome.setPreferredOrientations([
-                        DeviceOrientation.portraitDown,
-                        DeviceOrientation.portraitUp,
-                      ]);
-                      SystemChrome.setEnabledSystemUIMode(
-                          SystemUiMode.edgeToEdge);
-                    });
-                  },
-                )
-              : FutureBuilder<bool>(
-                  future: Future.value(haveTrailer),
-                  builder: (context, snapshot) {
-                    return FloatingActionButton(
-                        backgroundColor: Colors.red,
-                        foregroundColor: Colors.white,
-                        onPressed: () {
-                          initTrailerComponent();
-                          setState(() {
-                            isTrailerSelected = true;
-                          });
-                        },
-                        child: Icon(Icons.play_arrow));
-                  },
-                ),
-        ),
+        floatingActionButton: isTrailerSelected
+            ? FloatingActionButton(
+                mini: true,
+                backgroundColor: Colors.red,
+                foregroundColor: Colors.white,
+                child: Icon(Icons.stop),
+                onPressed: () {
+                  setState(() {
+                    _trailerController.stopVideo();
+                    _trailerController.close();
+                    isTrailerSelected = false;
+                    SystemChrome.setPreferredOrientations([
+                      DeviceOrientation.portraitDown,
+                      DeviceOrientation.portraitUp,
+                    ]);
+                    SystemChrome.setEnabledSystemUIMode(
+                        SystemUiMode.edgeToEdge);
+                  });
+                },
+              )
+            : FutureBuilder<bool>(
+                future: Future.value(haveTrailer),
+                builder: (context, snapshot) {
+                  return FloatingActionButton(
+                      backgroundColor: Colors.red,
+                      foregroundColor: Colors.white,
+                      onPressed: () {
+                        initTrailerComponent();
+                        setState(() {
+                          isTrailerSelected = true;
+                        });
+                      },
+                      child: Icon(Icons.play_arrow));
+                },
+              ),
         containerChild: !isTrailerSelected
             ? Container(
                 child: SingleChildScrollView(
@@ -106,6 +104,9 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                         return Column(
                           children: [
                             Container(
+                              height: kIsWeb
+                                  ? MediaQuery.of(context).size.height / 2
+                                  : 350,
                               child: DecoratedBox(
                                 child: Padding(
                                   padding: const EdgeInsets.all(16),
@@ -115,8 +116,8 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                         SizedBox(
                                             width: MediaQuery.of(context)
                                                     .size
-                                                    .width /
-                                                1.2,
+                                                    .width -
+                                                50,
                                             child: AutoSizeText(
                                               "$movieTitle(${releaseYear})",
                                               maxLines: 2,
@@ -207,7 +208,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                               ),
                             ),
                             SizedBox(
-                              height: 60,
+                              height: 20,
                             ),
                             Center(
                               child: SegmentedButton<bool>(

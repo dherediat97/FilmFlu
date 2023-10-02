@@ -53,7 +53,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
         appBar: widget.isLightsOn == true
             ? AppBar(
                 leading: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(14.0),
                   child: InkWell(
                       child: Image.asset(
                         'assets/images/transparent_logo.png',
@@ -131,11 +131,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                   ])
             : null,
         body: widget.isLightsOn == true
-            ? SafeArea(
-                child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: widget.containerChild,
-              ))
+            ? SafeArea(child: widget.containerChild)
             : widget.containerChild,
         bottomNavigationBar: widget.isLightsOn == true
             ? Container(
