@@ -360,6 +360,7 @@ class _ActorDetailsPage extends State<ActorDetailsPage> {
                                           itemBuilder: (context, index) {
                                             CreditPerson filmPerson =
                                                 creditsListAsProduction![index];
+                                            print(filmPerson);
                                             String? movieTitle = filmPerson
                                                         .title !=
                                                     null

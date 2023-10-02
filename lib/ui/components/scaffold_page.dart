@@ -134,33 +134,35 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
             ? SafeArea(child: widget.containerChild)
             : widget.containerChild,
         bottomNavigationBar: widget.isLightsOn == true
-            ? Container(
-                color: Color(0xFFFFFFFF),
-                height: 50,
-                child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 6.0),
-                        child: Row(children: [
-                          Text("Made with much",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold)),
-                          Icon(Icons.favorite, color: Colors.red),
-                        ]),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 6.0),
-                        child: Row(children: [
-                          Icon(Icons.copyright, color: Colors.black),
-                          Center(
-                            child: Text("${today.year} @dherediat97",
-                                style: TextStyle(fontSize: 15)),
-                          )
-                        ]),
-                      )
-                    ]),
+            ? SafeArea(
+                child: Container(
+                  color: Color(0xFFFFFFFF),
+                  height: 50,
+                  child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          child: Row(children: [
+                            Text("Made with much",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                            Icon(Icons.favorite, color: Colors.red),
+                          ]),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          child: Row(children: [
+                            Icon(Icons.copyright, color: Colors.black),
+                            Center(
+                              child: Text("${today.year} @dherediat97",
+                                  style: TextStyle(fontSize: 15)),
+                            )
+                          ]),
+                        )
+                      ]),
+                ),
               )
             : null,
         floatingActionButton: widget.floatingActionButton);

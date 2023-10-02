@@ -1,4 +1,5 @@
 //Core Packages
+import 'package:FilmFlu/ui/util/extension.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -41,8 +42,10 @@ class _FilmCastState extends State<FilmCast> {
                   height: MediaQuery.of(context).size.height,
                   child: Center(child: CircularProgressIndicator()));
             }
-            final List<Actor>? cast = snapshot.requireData.cast;
-            final List<FilmWorker>? crew = snapshot.requireData.crew;
+            final List<Actor>? cast =
+                snapshot.requireData.cast?.unique((element) => element.name);
+            final List<FilmWorker>? crew =
+                snapshot.requireData.crew?.unique((element) => element.name);
             return GridView.builder(
               controller: TrackingScrollController(),
               shrinkWrap: true,

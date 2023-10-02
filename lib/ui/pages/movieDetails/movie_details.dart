@@ -102,7 +102,6 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                         String? movieTitle =
                             widget.isFilm ? movie.title : movie.name;
                         return Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Container(
                               child: DecoratedBox(
@@ -125,7 +124,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.white,
                                                   fontFamily: 'YsabeauInfant',
-                                                  fontSize: 40),
+                                                  fontSize: 37),
                                             )),
                                         // InkWell(
                                         //   child: SvgPicture.asset(
@@ -140,7 +139,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                         // ),
                                       ],
                                     ),
-                                    SizedBox(height: 100),
+                                    SizedBox(height: 20),
                                     Column(
                                       children: [
                                         Container(

@@ -14,11 +14,7 @@ class MovieList extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       itemCount: items.length,
       itemBuilder: (context, index) {
-        return Builder(
-          builder: (BuildContext context) {
-            return MovieCarrouselItem(movie: items[index]);
-          },
-        );
+        return MovieCarrouselItem(movie: items[index]);
       },
     );
   }
