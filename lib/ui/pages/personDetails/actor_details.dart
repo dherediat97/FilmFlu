@@ -1,8 +1,4 @@
 //Core Packages
-import 'package:FilmFlu/dto/credits.dart';
-import 'package:FilmFlu/dto/credits_person.dart';
-import 'package:FilmFlu/ui/pages/movieDetails/movie_details.dart';
-import 'package:FilmFlu/ui/theme/colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +10,9 @@ import 'package:FilmFlu/ui/util/utilDate.dart';
 import 'package:FilmFlu/dto/person.dart';
 import 'package:FilmFlu/network/client_api.dart';
 import 'package:FilmFlu/ui/components/scaffold_page.dart';
+import 'package:FilmFlu/dto/credits_person.dart';
+import 'package:FilmFlu/ui/pages/movieDetails/movie_details.dart';
+import 'package:FilmFlu/ui/theme/colors.dart';
 
 class ActorDetailsPage extends StatefulWidget {
   const ActorDetailsPage({super.key, required this.actorId});
@@ -270,11 +269,12 @@ class _ActorDetailsPage extends State<ActorDetailsPage> {
                                                     MaterialPageRoute(
                                                         builder: (_) =>
                                                             MovieDetailsPage(
-                                                                isTrailerSelected:
-                                                                    false,
-                                                                movieId:
-                                                                    filmPerson
-                                                                        .id)));
+                                                              isTrailerSelected:
+                                                                  false,
+                                                              movieId:
+                                                                  filmPerson.id,
+                                                              isFilm: true,
+                                                            )));
                                               },
                                               child: GridTile(
                                                 child: Column(
@@ -371,11 +371,12 @@ class _ActorDetailsPage extends State<ActorDetailsPage> {
                                                     MaterialPageRoute(
                                                         builder: (_) =>
                                                             MovieDetailsPage(
-                                                                isTrailerSelected:
-                                                                    false,
-                                                                movieId:
-                                                                    filmPerson
-                                                                        .id)));
+                                                              isTrailerSelected:
+                                                                  false,
+                                                              movieId:
+                                                                  filmPerson.id,
+                                                              isFilm: true,
+                                                            )));
                                               },
                                               child: GridTile(
                                                 child: Column(

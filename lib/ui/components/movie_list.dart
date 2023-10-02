@@ -1,22 +1,22 @@
-import 'package:FilmFlu/dto/movie.dart';
+import 'package:FilmFlu/dto/media_item.dart';
 import 'package:FilmFlu/ui/components/movie_carrousel_item.dart';
 import 'package:flutter/material.dart';
 
 class MovieList extends StatelessWidget {
-  MovieList({super.key, required this.movies});
+  MovieList({super.key, required this.items});
 
-  late List<Movie> movies = [];
+  late List<MediaItem> items;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
       scrollDirection: Axis.horizontal,
-      itemCount: movies.length,
+      itemCount: items.length,
       itemBuilder: (context, index) {
         return Builder(
           builder: (BuildContext context) {
-            return MovieCarrouselItem(movie: movies[index]);
+            return MovieCarrouselItem(movie: items[index]);
           },
         );
       },

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 //My Packages
-import 'package:FilmFlu/dto/movie.dart';
+import 'package:FilmFlu/dto/media_item.dart';
 import 'package:FilmFlu/ui/components/movie_list.dart';
 import 'package:FilmFlu/network/client_api.dart';
 import 'package:FilmFlu/ui/components/scaffold_page.dart';
@@ -37,15 +37,15 @@ class _MainPageState extends State<MainPage> {
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       fontFamily: 'YsabeauInfant',
-                      fontSize: 40),
+                      fontSize: 30),
                 )),
             Expanded(
               child: Container(
-                child: FutureBuilder<List<Movie>>(
-                  future: Api().fetchPopularMovies("day"),
+                child: FutureBuilder<List<MediaItem>>(
+                  future: Api().fetchPopularMediaTypes("day", "movie"),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState != ConnectionState.waiting) {
-                      return MovieList(movies: snapshot.requireData);
+                      return MovieList(items: snapshot.requireData);
                     } else {
                       return Container(
                           width: MediaQuery.of(context).size.width,
@@ -55,7 +55,35 @@ class _MainPageState extends State<MainPage> {
                   },
                 ),
               ),
-            )
+            ),
+            SizedBox(height: 20),
+            Padding(
+                padding: EdgeInsets.only(left: 12.0),
+                child: Text(
+                  "Novedades en Series",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontFamily: 'YsabeauInfant',
+                      fontSize: 30),
+                )),
+            Expanded(
+              child: Container(
+                child: FutureBuilder<List<MediaItem>>(
+                  future: Api().fetchPopularMediaTypes("day", "tv"),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState != ConnectionState.waiting) {
+                      return MovieList(items: snapshot.requireData);
+                    } else {
+                      return Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height,
+                          child: Center(child: CircularProgressIndicator()));
+                    }
+                  },
+                ),
+              ),
+            ),
           ],
         ),
       ),
