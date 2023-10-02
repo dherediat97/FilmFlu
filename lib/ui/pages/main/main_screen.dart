@@ -26,18 +26,16 @@ class _MainPageState extends State<MainPage> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
               AppLocalizations.of(context)!.film_list_title,
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
-                  fontFamily: 'YsabeauInfant',
                   fontSize: 30),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Expanded(
               child: Container(
                 child: FutureBuilder<List<MediaItem>>(
@@ -56,16 +54,15 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Text(
-              "Novedades en Series",
+              AppLocalizations.of(context)!.tv_series_list_title,
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
-                  fontFamily: 'YsabeauInfant',
                   fontSize: 30),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Expanded(
               child: Container(
                 child: FutureBuilder<List<MediaItem>>(
