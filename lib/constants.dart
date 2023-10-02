@@ -1,4 +1,4 @@
-import 'package:FilmFlu/dto/movie.dart';
+import 'package:FilmFlu/dto/media_item.dart';
 import 'package:FilmFlu/env/env.dart';
 
 String version = "0.0.1";
@@ -15,7 +15,7 @@ const Map<String, String>? baseHeaders = {
   'Content-Type': 'application/json'
 };
 
-Movie movieMock1 = Movie(
+MediaItem movieMock1 = MediaItem(
   releaseDate: "2002-20-12",
   id: 4935,
   popularity: 100,

@@ -67,8 +67,6 @@ class _FilmActorItemState extends State<FilmActorItem> {
           ),
           AutoSizeText(actor.name!,
               textAlign: TextAlign.center,
-              minFontSize: 16,
-              stepGranularity: 1,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
@@ -78,14 +76,12 @@ class _FilmActorItemState extends State<FilmActorItem> {
                   fontSize: 18)),
           actor.character!.isNotEmpty
               ? AutoSizeText(
-                  minFontSize: 14,
-                  stepGranularity: 1,
-                  maxLines: 3,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   "${AppLocalizations.of(context)?.actor_job} ${actor.character}",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 15,
                     fontFamily: "YsabeauInfant",
                     color: Colors.white,
                   ),

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -64,17 +65,22 @@ class _FilmWorkerItemState extends State<FilmWorkerItem> {
               }),
             ),
           ),
-          Text(filmWorker.name!,
+          AutoSizeText(filmWorker.name!,
               textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                   fontFamily: "ShadowsIntoLight",
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.primary,
                   fontSize: 18)),
-          Text(
+          AutoSizeText(
             "${AppLocalizations.of(context)?.production_job} ${filmWorker.job} ${AppLocalizations.of(context)?.in_preposition} ${filmWorker.knownForDepartment}",
             textAlign: TextAlign.center,
+            maxLines: 4,
+            overflow: TextOverflow.ellipsis,
             style: TextStyle(
+              fontSize: 15,
               fontFamily: "YsabeauInfant",
               color: Colors.white,
             ),

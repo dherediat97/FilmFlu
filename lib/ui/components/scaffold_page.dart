@@ -9,7 +9,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 //My Packages
 import 'package:FilmFlu/constants.dart';
-import 'package:FilmFlu/dto/movie.dart';
+import 'package:FilmFlu/dto/media_item.dart';
 import 'package:FilmFlu/network/client_api.dart';
 import 'package:FilmFlu/ui/pages/movieDetails/movie_details.dart';
 
@@ -37,7 +37,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
   final TextEditingController _searchController = TextEditingController();
   final today = new DateTime.now();
   Timer? _debounce;
-  List<Movie> movieList = [];
+  List<MediaItem> movieList = [];
 
   @override
   void dispose() {
@@ -79,7 +79,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         widget.isSearchVisible == true
-                            ? DropdownMenu<Movie>(
+                            ? DropdownMenu<MediaItem>(
                                 dropdownMenuEntries: [
                                   DropdownMenuEntry(
                                       value: movieMock1,
@@ -103,13 +103,15 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                                             .primary),
                                     contentPadding:
                                         EdgeInsets.symmetric(vertical: 5.0)),
-                                onSelected: (Movie? movie) {
+                                onSelected: (MediaItem? movie) {
                                   setState(() {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
                                             builder: (_) => MovieDetailsPage(
-                                                movieId: movie!.id,
-                                                isTrailerSelected: false)));
+                                                  movieId: movie!.id,
+                                                  isTrailerSelected: false,
+                                                  isFilm: true,
+                                                )));
                                   });
                                 },
                               )

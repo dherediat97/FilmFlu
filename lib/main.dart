@@ -96,7 +96,9 @@ class FilmFlu extends StatelessWidget {
             break;
           case "/movieDetails":
             screen = MovieDetailsPage(
-                movieId: args!.movieId, isTrailerSelected: true);
+                movieId: args!.movieId,
+                isTrailerSelected: args.isTrailerSelected,
+                isFilm: args.isFilm);
             break;
           case "/actorDetails":
             screen = ActorDetailsPage(actorId: args!.actorId);

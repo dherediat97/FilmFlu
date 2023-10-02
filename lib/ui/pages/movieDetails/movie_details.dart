@@ -1,5 +1,6 @@
 //Core Packages;
-import 'package:FilmFlu/ui/theme/colors.dart';
+import 'package:FilmFlu/dto/video.dart';
+import 'package:FilmFlu/ui/components/movie_cast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -7,18 +8,22 @@ import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 //My Packages
-import 'package:FilmFlu/dto/movie.dart';
+import 'package:FilmFlu/dto/media_item.dart';
 import 'package:FilmFlu/network/client_api.dart';
 import 'package:FilmFlu/ui/components/scaffold_page.dart';
-import 'package:FilmFlu/ui/components/movie_cast.dart';
 import 'package:FilmFlu/constants.dart';
+import 'package:FilmFlu/ui/theme/colors.dart';
 
 class MovieDetailsPage extends StatefulWidget {
   const MovieDetailsPage(
-      {super.key, required this.movieId, required this.isTrailerSelected});
+      {super.key,
+      required this.movieId,
+      required this.isTrailerSelected,
+      required this.isFilm});
 
   final bool isTrailerSelected;
   final int movieId;
+  final bool isFilm;
   static const routeName = '/movieDetails';
 
   @override
@@ -28,28 +33,13 @@ class MovieDetailsPage extends StatefulWidget {
 class _MovieDetailsPageState extends State<MovieDetailsPage> {
   bool isCastSelected = true;
   bool isTrailerSelected = false;
-  List<String> trailerVideosIds = [];
+  bool haveTrailer = false;
   late YoutubePlayerController _trailerController;
 
   @override
   void initState() {
     super.initState();
-    trailerVideosIds.clear();
     initTrailerComponent();
-    _trailerController.listen((event) {
-      if (event.playerState == PlayerState.ended) {
-        setState(() {
-          isTrailerSelected = false;
-        });
-      }
-    });
-    fetchMovieTrailers("es-ES");
-  }
-
-  @override
-  void dispose() {
-    trailerVideosIds.clear();
-    super.dispose();
   }
 
   @override
@@ -80,35 +70,21 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                     });
                   },
                 )
-              : FloatingActionButton(
-                  backgroundColor: Colors.red,
-                  foregroundColor: Colors.white,
-                  onPressed: () {
-                    if (trailerVideosIds.isNotEmpty) {
-                      isTrailerSelected = true;
-                      initTrailerComponent();
-                      _trailerController.loadPlaylist(
-                          list: trailerVideosIds, listType: ListType.playlist);
-                      setState(() {});
-                    } else {
-                      SnackBar snackBar = SnackBar(
-                          content: Text(
-                              AppLocalizations.of(context)!.no_trailers,
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20)),
-                          duration: Duration(seconds: 3),
-                          action: SnackBarAction(
-                              label: "Ok",
-                              onPressed: () {
-                                ScaffoldMessenger.of(context)
-                                    .hideCurrentSnackBar();
-                              }),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.onBackground);
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    }
+              : FutureBuilder<bool>(
+                  future: Future.value(haveTrailer),
+                  builder: (context, snapshot) {
+                    return FloatingActionButton(
+                        backgroundColor: Colors.red,
+                        foregroundColor: Colors.white,
+                        onPressed: () {
+                          initTrailerComponent();
+                          setState(() {
+                            isTrailerSelected = true;
+                          });
+                        },
+                        child: Icon(Icons.play_arrow));
                   },
-                  child: Icon(Icons.play_arrow)),
+                ),
         ),
         containerChild: !isTrailerSelected
             ? Container(
@@ -116,13 +92,17 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                   controller: ScrollController(),
                   physics: ScrollPhysics(),
                   scrollDirection: Axis.vertical,
-                  child: FutureBuilder<Movie>(
-                    future: Api().fetchMovie(widget.movieId),
+                  child: FutureBuilder<MediaItem>(
+                    future: Api().fetchMovie(
+                        widget.movieId, widget.isFilm ? "movie" : "tv"),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState != ConnectionState.waiting) {
-                        Movie movie = snapshot.requireData;
-                        String releaseYear = movie.releaseDate.split("-")[0];
-                        String movieTitle = movie.title;
+                        MediaItem movie = snapshot.requireData;
+                        String releaseYear = widget.isFilm
+                            ? movie.releaseDate!.split("-")[0]
+                            : movie.firstAirDate!.split("-")[0];
+                        String? movieTitle =
+                            widget.isFilm ? movie.title : movie.name;
                         return Column(
                           children: [
                             Container(
@@ -139,8 +119,6 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                                 1.2,
                                             child: AutoSizeText(
                                               "$movieTitle(${releaseYear})",
-                                              minFontSize: 10,
-                                              stepGranularity: 10,
                                               maxLines: 2,
                                               textAlign: TextAlign.start,
                                               overflow: TextOverflow.ellipsis,
@@ -148,7 +126,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.white,
                                                   fontFamily: 'YsabeauInfant',
-                                                  fontSize: 20),
+                                                  fontSize: 40),
                                             )),
                                         // InkWell(
                                         //   child: SvgPicture.asset(
@@ -181,17 +159,14 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                         ),
                                         Container(
                                           alignment: Alignment.centerLeft,
-                                          child: SizedBox(
-                                            width: 400,
-                                            child: AutoSizeText(
-                                              movie.overview!,
-                                              overflow: TextOverflow.ellipsis,
-                                              maxLines: 20,
-                                              textAlign: TextAlign.justify,
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15,
-                                              ),
+                                          child: AutoSizeText(
+                                            movie.overview!,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 20,
+                                            textAlign: TextAlign.justify,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 15,
                                             ),
                                           ),
                                         ),
@@ -287,8 +262,14 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                               height: 16,
                             ),
                             isCastSelected
-                                ? FilmCast(movieId: movie.id, isCast: true)
-                                : FilmCast(movieId: movie.id, isCast: false)
+                                ? FilmCast(
+                                    movieId: movie.id,
+                                    isCast: true,
+                                    mediaType: widget.isFilm ? "movie" : "tv")
+                                : FilmCast(
+                                    movieId: movie.id,
+                                    isCast: false,
+                                    mediaType: widget.isFilm ? "movie" : "tv")
                           ],
                         );
                       } else {
@@ -301,9 +282,14 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                   ),
                 ),
               )
-            : FutureBuilder<List<String>>(
-                future: fetchMovieTrailers("es-ES"),
+            : FutureBuilder<Video>(
+                future: Api().fetchTrailer(
+                    widget.movieId, "es_ES", widget.isFilm ? "movie" : "tv"),
                 builder: (context, snapshot) {
+                  haveTrailer = snapshot.hasData;
+                  if (snapshot.data != null)
+                    _trailerController.loadVideoById(
+                        videoId: snapshot.data!.key);
                   SystemChrome.setPreferredOrientations([
                     DeviceOrientation.landscapeRight,
                     DeviceOrientation.landscapeLeft,
@@ -332,15 +318,5 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
       enableKeyboard: false,
       interfaceLanguage: "es",
     ));
-  }
-
-  fetchMovieTrailers(String language) {
-    Api().fetchTrailers(widget.movieId, language).then((trailerList) {
-      if (trailerList.isNotEmpty) {
-        trailerVideosIds = trailerList.map((e) => e.key).toList();
-      } else {
-        fetchMovieTrailers("");
-      }
-    });
   }
 }

@@ -1,11 +1,11 @@
 import 'package:FilmFlu/dto/credits.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'movie.g.dart';
+part 'media_item.g.dart';
 
 @JsonSerializable(explicitToJson: false, fieldRename: FieldRename.snake)
-class Movie {
-  Movie({
+class MediaItem {
+  MediaItem({
     this.adult,
     this.backdropPath,
     this.genreIds,
@@ -14,14 +14,15 @@ class Movie {
     this.originalTitle,
     required this.popularity,
     required this.posterPath,
-    required this.releaseDate,
-    required this.title,
-    required this.video,
+    this.releaseDate,
+    this.title,
+    this.video,
     required this.voteAverage,
     required this.voteCount,
     this.overview,
     this.runtime,
     this.credits,
+    this.name,
   });
 
   bool? adult;
@@ -32,16 +33,20 @@ class Movie {
   String? originalTitle;
   double popularity;
   String posterPath;
-  String releaseDate;
-  String title;
-  bool video;
+  String? releaseDate;
+  String? firstAirDate;
+  String? title;
+  bool? video;
   double voteAverage;
   int voteCount;
   String? overview;
   int? runtime;
   Credits? credits;
 
-  factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
+  String? name;
 
-  Map<String, dynamic> toJson() => _$MovieToJson(this);
+  factory MediaItem.fromJson(Map<String, dynamic> json) =>
+      _$MediaItemFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MediaItemToJson(this);
 }

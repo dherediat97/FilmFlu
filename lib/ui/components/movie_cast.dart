@@ -10,11 +10,17 @@ import 'package:FilmFlu/ui/components/film_worker_cast_item.dart';
 import 'package:FilmFlu/ui/components/film_actor_cast_item.dart';
 
 class FilmCast extends StatefulWidget {
-  const FilmCast({super.key, required this.movieId, required this.isCast});
+  const FilmCast({
+    super.key,
+    required this.movieId,
+    required this.isCast,
+    required this.mediaType,
+  });
 
   final bool isCast;
 
   final int movieId;
+  final String mediaType;
 
   @override
   State<FilmCast> createState() => _FilmCastState();
@@ -26,7 +32,7 @@ class _FilmCastState extends State<FilmCast> {
     return Container(
       padding: EdgeInsets.all(8),
       child: FutureBuilder<Credits>(
-          future: Api().fetchCredits(widget.movieId),
+          future: Api().fetchCredits(widget.movieId, widget.mediaType),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Container(
@@ -39,11 +45,11 @@ class _FilmCastState extends State<FilmCast> {
             return GridView.builder(
               controller: TrackingScrollController(),
               shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 150,
-                mainAxisSpacing: 0,
-                crossAxisSpacing: 40,
-                mainAxisExtent: 250,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 20,
+                crossAxisSpacing: widget.isCast ? 20 : 40,
+                mainAxisExtent: widget.isCast ? 240 : 280,
                 childAspectRatio: MediaQuery.of(context).size.aspectRatio,
               ),
               itemCount: widget.isCast ? cast?.length : crew?.length,

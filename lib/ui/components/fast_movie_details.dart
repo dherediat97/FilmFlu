@@ -1,12 +1,10 @@
 //Core Packages
-import 'package:FilmFlu/dto/base_arguments.dart';
-import 'package:FilmFlu/ui/pages/movieDetails/movie_details.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 //My Packages
-import 'package:FilmFlu/dto/movie.dart';
 import 'package:FilmFlu/network/client_api.dart';
+import 'package:FilmFlu/dto/media_item.dart';
 
 class FastMovieDetails extends StatefulWidget {
   const FastMovieDetails({super.key, required this.movieId});
@@ -23,8 +21,8 @@ class _FastMovieDetailsState extends State<FastMovieDetails> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: FutureBuilder<Movie>(
-          future: api.fetchMovie(widget.movieId),
+      child: FutureBuilder<MediaItem>(
+          future: api.fetchMovie(widget.movieId, "movie"),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               var movie = snapshot.requireData;
@@ -36,7 +34,7 @@ class _FastMovieDetailsState extends State<FastMovieDetails> {
                       children: [
                         SizedBox(
                           width: MediaQuery.of(context).size.width / 1.5,
-                          child: Text(movie.title,
+                          child: Text(movie.title!,
                               textAlign: TextAlign.start,
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
@@ -44,13 +42,7 @@ class _FastMovieDetailsState extends State<FastMovieDetails> {
                                   fontSize: 22, fontFamily: "LilitaOne")),
                         ),
                         Spacer(flex: 1),
-                        IconButton(
-                            onPressed: () {
-                              Navigator.pushReplacementNamed(
-                                  context, MovieDetailsPage.routeName,
-                                  arguments: BaseArguments(movie.id, 0));
-                            },
-                            icon: Icon(Icons.info)),
+                        IconButton(onPressed: () {}, icon: Icon(Icons.info)),
                       ],
                     ),
                     Text(AppLocalizations.of(context)!.synopsis,
