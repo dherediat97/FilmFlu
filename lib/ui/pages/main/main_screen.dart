@@ -27,6 +27,7 @@ class _MainPageState extends State<MainPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
           children: [
             Text(
               AppLocalizations.of(context)!.film_list_title,
@@ -43,7 +44,8 @@ class _MainPageState extends State<MainPage> {
                   future: Api().fetchPopularMediaTypes("day", "movie"),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState != ConnectionState.waiting) {
-                      return MovieList(items: snapshot.requireData);
+                      return Scrollbar(
+                          child: MovieList(items: snapshot.requireData));
                     } else {
                       return Container(
                           width: MediaQuery.of(context).size.width,
@@ -70,7 +72,8 @@ class _MainPageState extends State<MainPage> {
                   future: Api().fetchPopularMediaTypes("day", "tv"),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState != ConnectionState.waiting) {
-                      return MovieList(items: snapshot.requireData);
+                      return Scrollbar(
+                          child: MovieList(items: snapshot.requireData));
                     } else {
                       return Container(
                           width: MediaQuery.of(context).size.width,

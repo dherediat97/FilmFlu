@@ -8,5 +8,6 @@
   "production_job": "performed the work of",
   "actor_job": "play",
   "in_preposition": "in",
-  "no_trailers":"This film haven't trailer"
+  "no_trailers":"This film haven't trailer",
+  "tv_series_list_title":"TV Series Playing"
 }
