@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class MovieList extends StatelessWidget {
   MovieList({super.key, required this.items});
 
-  late List<MediaItem> items;
+  final List<MediaItem> items;
 
   @override
   Widget build(BuildContext context) {

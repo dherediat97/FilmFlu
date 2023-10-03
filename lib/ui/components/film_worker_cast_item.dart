@@ -9,8 +9,8 @@ import 'package:FilmFlu/ui/pages/personDetails/actor_details.dart';
 
 class FilmWorkerItem extends StatefulWidget {
   FilmWorkerItem({super.key, required this.index, required this.crew});
-  int index;
-  List<FilmWorker> crew;
+  final int index;
+  final List<FilmWorker> crew;
 
   @override
   State<FilmWorkerItem> createState() => _FilmWorkerItemState();

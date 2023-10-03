@@ -1,8 +1,4 @@
 //Core Packages;
-import 'package:FilmFlu/dto/video.dart';
-import 'package:FilmFlu/ui/components/movie_cast.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -14,6 +10,10 @@ import 'package:FilmFlu/network/client_api.dart';
 import 'package:FilmFlu/ui/components/scaffold_page.dart';
 import 'package:FilmFlu/constants.dart';
 import 'package:FilmFlu/ui/theme/colors.dart';
+import 'package:FilmFlu/dto/video.dart';
+import 'package:FilmFlu/ui/components/movie_cast.dart';
+import 'package:FilmFlu/ui/util/extension.dart';
+import 'package:flutter/material.dart';
 
 class MovieDetailsPage extends StatefulWidget {
   const MovieDetailsPage(
@@ -181,24 +181,12 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                     ),
                                     image: Image.network(
                                       "$movieLandscapeBaseUrl${movie.backdropPath}",
-                                      loadingBuilder: (BuildContext context,
-                                          Widget child,
-                                          ImageChunkEvent? loadingProgress) {
-                                        if (loadingProgress == null)
-                                          return child;
-                                        return Center(
-                                          child: CircularProgressIndicator(
-                                            value: loadingProgress
-                                                        .expectedTotalBytes !=
-                                                    null
-                                                ? loadingProgress
-                                                        .cumulativeBytesLoaded /
-                                                    loadingProgress
-                                                        .expectedTotalBytes!
-                                                : null,
-                                          ),
-                                        );
-                                      },
+                                      loadingBuilder:
+                                          (context, child, loadingProgress) =>
+                                              DefaultAsyncLoading(
+                                        child: child,
+                                        loadingProgress: loadingProgress,
+                                      ),
                                     ).image,
                                   ),
                                 ),
@@ -271,10 +259,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                           ],
                         );
                       } else {
-                        return Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height,
-                            child: Center(child: CircularProgressIndicator()));
+                        return DefaultSyncLoading();
                       }
                     },
                   ),

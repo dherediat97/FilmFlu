@@ -1,5 +1,5 @@
 //Core Packages
-import 'package:auto_size_text/auto_size_text.dart';
+import 'package:FilmFlu/ui/util/extension.dart';
 import 'package:flutter/material.dart';
 
 //My Packages
@@ -31,25 +31,19 @@ class MovieCarrouselItem extends StatelessWidget {
               );
             },
             child: Container(
-              width: 240,
+              width: 220,
               height: 300,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(62.0),
+                borderRadius: BorderRadius.all(Radius.circular(48)),
                 image: DecorationImage(
-                  fit: BoxFit.fill,
+                  fit: BoxFit.scaleDown,
                   image: Image.network(
                     '$movieImgBaseURL${movie.posterPath}',
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return Center(
-                        child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                                  loadingProgress.expectedTotalBytes!
-                              : null,
-                        ),
-                      );
-                    },
+                    loadingBuilder: (context, child, loadingProgress) =>
+                        DefaultAsyncLoading(
+                      child: child,
+                      loadingProgress: loadingProgress,
+                    ),
                   ).image,
                 ),
               ),
