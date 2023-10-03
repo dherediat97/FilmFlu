@@ -1,4 +1,6 @@
 //Core Packages
+import 'package:FilmFlu/ui/util/utilScroll.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +15,6 @@ import 'package:FilmFlu/ui/theme/colors.dart';
 import 'package:FilmFlu/ui/pages/main/main_screen.dart';
 import 'package:FilmFlu/ui/pages/personDetails/actor_details.dart';
 import 'package:FilmFlu/ui/pages/settings/settings_screen.dart';
-import 'package:FilmFlu/ui/util/utilScroll.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +39,7 @@ class FilmFlu extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      scrollBehavior: WebScrollBehavior(),
+      scrollBehavior: kIsWeb ? WebScrollBehavior() : MaterialScrollBehavior(),
       localizationsDelegates: [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

@@ -1,4 +1,5 @@
 //Core Packages
+import 'package:FilmFlu/ui/util/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -45,10 +46,7 @@ class _MainPageState extends State<MainPage> {
                       return Scrollbar(
                           child: MovieList(items: snapshot.requireData));
                     } else {
-                      return Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height,
-                          child: Center(child: CircularProgressIndicator()));
+                      return DefaultSyncLoading();
                     }
                   },
                 ),
@@ -72,10 +70,7 @@ class _MainPageState extends State<MainPage> {
                       return Scrollbar(
                           child: MovieList(items: snapshot.requireData));
                     } else {
-                      return Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height,
-                          child: Center(child: CircularProgressIndicator()));
+                      return DefaultSyncLoading();
                     }
                   },
                 ),

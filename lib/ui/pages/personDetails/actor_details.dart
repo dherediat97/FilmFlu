@@ -1,5 +1,7 @@
 //Core Packages
+import 'package:FilmFlu/ui/util/extension.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +15,7 @@ import 'package:FilmFlu/ui/components/scaffold_page.dart';
 import 'package:FilmFlu/dto/credits_person.dart';
 import 'package:FilmFlu/ui/pages/movieDetails/movie_details.dart';
 import 'package:FilmFlu/ui/theme/colors.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
 class ActorDetailsPage extends StatefulWidget {
   const ActorDetailsPage({super.key, required this.actorId});
@@ -37,16 +40,13 @@ class _ActorDetailsPage extends State<ActorDetailsPage> {
         physics: ScrollPhysics(),
         scrollDirection: Axis.vertical,
         child: Container(
-          padding: EdgeInsets.all(12),
+          padding: EdgeInsets.all(8),
           child: FutureBuilder<Person>(
               future: Api().fetchPerson(widget.actorId),
               builder: (context, snapshot) {
                 Person? person = snapshot.data;
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                      child: Center(child: CircularProgressIndicator()));
+                  return DefaultSyncLoading();
                 } else if (person != null) {
                   return Column(
                     children: [
@@ -108,7 +108,7 @@ class _ActorDetailsPage extends State<ActorDetailsPage> {
                                         child: Row(
                                           children: [
                                             Icon(
-                                              Icons.abc,
+                                              Symbols.skull,
                                               color: Colors.white,
                                             ),
                                             Padding(
@@ -124,7 +124,7 @@ class _ActorDetailsPage extends State<ActorDetailsPage> {
                                         ),
                                       )
                                     : Container(),
-                                SizedBox(height: 20),
+                                SizedBox(height: 10),
                                 Row(
                                   children: [
                                     Icon(
@@ -134,7 +134,7 @@ class _ActorDetailsPage extends State<ActorDetailsPage> {
                                     Padding(
                                       padding: const EdgeInsets.only(left: 8.0),
                                       child: SizedBox(
-                                        width: 180,
+                                        width: 220,
                                         child: AutoSizeText(
                                             "${person.placeOfBirth.trim()}",
                                             maxFontSize: 20,
@@ -235,9 +235,20 @@ class _ActorDetailsPage extends State<ActorDetailsPage> {
                                         ConnectionState.waiting &&
                                     snapshot.hasData) {
                                   List<CreditPerson> creditsListAsActor =
-                                      snapshot.data!.cast;
+                                      snapshot
+                                          .data!.cast
+                                          .where((element) =>
+                                              element.character != null)
+                                          .where((element) =>
+                                              element.title != null)
+                                          .toList();
                                   List<CreditPerson>? creditsListAsProduction =
-                                      snapshot.data?.crew;
+                                      snapshot.data?.crew!
+                                          .where(
+                                              (element) => element.job != null)
+                                          .where((element) =>
+                                              element.title != null)
+                                          .toList();
                                   return isActorWorkSelected
                                       ? GridView.builder(
                                           controller:
@@ -245,15 +256,11 @@ class _ActorDetailsPage extends State<ActorDetailsPage> {
                                           itemCount: creditsListAsActor.length,
                                           shrinkWrap: true,
                                           gridDelegate:
-                                              SliverGridDelegateWithMaxCrossAxisExtent(
-                                            maxCrossAxisExtent: 150,
-                                            mainAxisSpacing: 20,
+                                              SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: kIsWeb ? 4 : 2,
+                                            mainAxisSpacing: 5,
                                             crossAxisSpacing: 40,
-                                            mainAxisExtent: 340,
-                                            childAspectRatio:
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .aspectRatio,
+                                            mainAxisExtent: 400,
                                           ),
                                           itemBuilder: (context, index) {
                                             CreditPerson filmPerson =
@@ -282,38 +289,23 @@ class _ActorDetailsPage extends State<ActorDetailsPage> {
                                                     ClipRRect(
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                              32.0),
+                                                              96),
                                                       child: Image.network(
                                                         filmPerson.backdropPath !=
                                                                 null
                                                             ? "$personImgBaseUrl${filmPerson.backdropPath}"
                                                             : "$personImgBaseUrl${person.profilePath}",
-                                                        height: 220,
-                                                        width: 150,
-                                                        fit: BoxFit.cover,
-                                                        loadingBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                Widget child,
-                                                                ImageChunkEvent?
-                                                                    loadingProgress) {
-                                                          if (loadingProgress ==
-                                                              null)
-                                                            return child;
-                                                          return Center(
-                                                            child:
-                                                                CircularProgressIndicator(
-                                                              value: loadingProgress
-                                                                          .expectedTotalBytes !=
-                                                                      null
-                                                                  ? loadingProgress
-                                                                          .cumulativeBytesLoaded /
-                                                                      loadingProgress
-                                                                          .expectedTotalBytes!
-                                                                  : null,
-                                                            ),
-                                                          );
-                                                        },
+                                                        width: 500,
+                                                        height: 300,
+                                                        fit: BoxFit.scaleDown,
+                                                        loadingBuilder: (context,
+                                                                child,
+                                                                loadingProgress) =>
+                                                            DefaultAsyncLoading(
+                                                          child: child,
+                                                          loadingProgress:
+                                                              loadingProgress,
+                                                        ),
                                                       ),
                                                     ),
                                                     Padding(
@@ -347,20 +339,15 @@ class _ActorDetailsPage extends State<ActorDetailsPage> {
                                               creditsListAsProduction?.length,
                                           shrinkWrap: true,
                                           gridDelegate:
-                                              SliverGridDelegateWithMaxCrossAxisExtent(
-                                            maxCrossAxisExtent: 150,
-                                            mainAxisSpacing: 20,
+                                              SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: kIsWeb ? 4 : 2,
+                                            mainAxisSpacing: 5,
                                             crossAxisSpacing: 40,
-                                            mainAxisExtent: 340,
-                                            childAspectRatio:
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .aspectRatio,
+                                            mainAxisExtent: 400,
                                           ),
                                           itemBuilder: (context, index) {
                                             CreditPerson filmPerson =
                                                 creditsListAsProduction![index];
-                                            print(filmPerson);
                                             String? movieTitle = filmPerson
                                                         .title !=
                                                     null
@@ -391,32 +378,17 @@ class _ActorDetailsPage extends State<ActorDetailsPage> {
                                                                 null
                                                             ? "$personImgBaseUrl${filmPerson.backdropPath}"
                                                             : "$personImgBaseUrl${person.profilePath}",
-                                                        height: 220,
-                                                        width: 150,
-                                                        fit: BoxFit.cover,
-                                                        loadingBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                Widget child,
-                                                                ImageChunkEvent?
-                                                                    loadingProgress) {
-                                                          if (loadingProgress ==
-                                                              null)
-                                                            return child;
-                                                          return Center(
-                                                            child:
-                                                                CircularProgressIndicator(
-                                                              value: loadingProgress
-                                                                          .expectedTotalBytes !=
-                                                                      null
-                                                                  ? loadingProgress
-                                                                          .cumulativeBytesLoaded /
-                                                                      loadingProgress
-                                                                          .expectedTotalBytes!
-                                                                  : null,
-                                                            ),
-                                                          );
-                                                        },
+                                                        width: 500,
+                                                        height: 300,
+                                                        fit: BoxFit.scaleDown,
+                                                        loadingBuilder: (context,
+                                                                child,
+                                                                loadingProgress) =>
+                                                            DefaultAsyncLoading(
+                                                          child: child,
+                                                          loadingProgress:
+                                                              loadingProgress,
+                                                        ),
                                                       ),
                                                     ),
                                                     Padding(

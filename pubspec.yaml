@@ -1,7 +1,7 @@
 name: FilmFlu
 description: A project of movies and something more
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 0.0.7+7
+version: 0.0.8+8
 
 environment:
   sdk: '>=3.0.5 <4.0.0'
@@ -14,7 +14,6 @@ dependencies:
   envied:
   json_annotation: ^4.8.1
   http:
-  cached_network_image:
   lottie: ^2.5.0
   package_info_plus:
   intl:
@@ -22,6 +21,7 @@ dependencies:
   responsive_framework: ^1.1.0
   shelf: ^1.1.0
   auto_size_text: ^3.0.0
+  material_symbols_icons: ^4.2668.0
 
 dev_dependencies:
   flutter_test:

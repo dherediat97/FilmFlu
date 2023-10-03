@@ -1,7 +1,5 @@
 //Core Packages
 import 'dart:convert';
-import 'package:FilmFlu/dto/credit_person.dart';
-import 'package:FilmFlu/dto/credits_person.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 
@@ -11,6 +9,8 @@ import 'package:FilmFlu/dto/video.dart';
 import 'package:FilmFlu/dto/media_item.dart';
 import 'package:FilmFlu/constants.dart';
 import 'package:FilmFlu/dto/person.dart';
+import 'package:FilmFlu/dto/credit_person.dart';
+import 'package:FilmFlu/dto/credits_person.dart';
 
 class Api {
   MediaItem parseMovie(String responseBody) {

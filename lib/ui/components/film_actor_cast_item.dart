@@ -1,3 +1,4 @@
+import 'package:FilmFlu/ui/util/extension.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,8 +10,8 @@ import 'package:FilmFlu/ui/pages/personDetails/actor_details.dart';
 
 class FilmActorItem extends StatefulWidget {
   FilmActorItem({super.key, required this.index, required this.cast});
-  int index;
-  List<Actor> cast;
+  final int index;
+  final List<Actor> cast;
 
   @override
   State<FilmActorItem> createState() => _FilmActorItemState();
@@ -35,34 +36,29 @@ class _FilmActorItemState extends State<FilmActorItem> {
               child: Image.network('$personImgBaseUrl${actor.profilePath}',
                   height: 160,
                   width: 150,
-                  fit: BoxFit.cover, loadingBuilder: (BuildContext context,
-                      Widget child, ImageChunkEvent? loadingProgress) {
-                if (loadingProgress == null) return child;
-                return Center(
-                  child: CircularProgressIndicator(
-                    value: loadingProgress.expectedTotalBytes != null
-                        ? loadingProgress.cumulativeBytesLoaded /
-                            loadingProgress.expectedTotalBytes!
-                        : null,
-                  ),
-                );
-              }, errorBuilder: (context, url, error) {
-                if (actor.gender == 2) {
-                  return SvgPicture.asset(
-                    "assets/icons/actor_icon.svg",
-                    height: 160,
-                    fit: BoxFit.cover,
-                    width: 150,
-                  );
-                } else {
-                  return SvgPicture.asset(
-                    "assets/icons/actress_icon.svg",
-                    height: 160,
-                    fit: BoxFit.cover,
-                    width: 150,
-                  );
-                }
-              }),
+                  fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) =>
+                      DefaultAsyncLoading(
+                        child: child,
+                        loadingProgress: loadingProgress,
+                      ),
+                  errorBuilder: (context, url, error) {
+                    if (actor.gender == 2) {
+                      return SvgPicture.asset(
+                        "assets/icons/actor_icon.svg",
+                        height: 160,
+                        fit: BoxFit.cover,
+                        width: 150,
+                      );
+                    } else {
+                      return SvgPicture.asset(
+                        "assets/icons/actress_icon.svg",
+                        height: 160,
+                        fit: BoxFit.cover,
+                        width: 150,
+                      );
+                    }
+                  }),
             ),
           ),
           AutoSizeText(actor.name!,
