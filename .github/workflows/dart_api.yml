@@ -3,6 +3,7 @@ name: Film Flu API
 on:
   pull_request:
     branches: [api]
+  workflow_dispatch:
 
 jobs:
   build:
