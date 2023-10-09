@@ -68,6 +68,7 @@ class FilmFlu extends StatelessWidget {
         fontFamily: 'YsabeauInfant',
         primaryColor: primaryColor,
         useMaterial3: true,
+        highlightColor: Colors.transparent,
         scaffoldBackgroundColor: secondaryColor,
         textTheme: const TextTheme(
           bodyMedium: TextStyle(
@@ -75,9 +76,11 @@ class FilmFlu extends StatelessWidget {
             fontFamily: 'YsabeauInfant',
           ),
         ),
+        splashFactory: NoSplash.splashFactory,
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: primaryMaterialColor,
           backgroundColor: backgroundColor,
+          accentColor: secondaryColor,
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         scrollbarTheme: ScrollbarThemeData(

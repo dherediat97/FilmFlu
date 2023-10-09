@@ -1,5 +1,6 @@
 //Core Packages
 import 'dart:async';
+import 'package:FilmFlu/ui/theme/colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -49,7 +50,6 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-        backgroundColor: Theme.of(context).colorScheme.onBackground,
         appBar: widget.isLightsOn == true
             ? AppBar(
                 leading: Padding(
@@ -120,7 +120,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                     )))),
                 elevation: 1,
                 scrolledUnderElevation: 20,
-                backgroundColor: Theme.of(context).colorScheme.background,
+                backgroundColor: backgroundColor,
                 actions: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -140,26 +140,32 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                   height: 50,
                   child: Row(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                          child: Row(children: [
-                            Text("Made with much",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold)),
-                            Icon(Icons.favorite, color: Colors.red),
-                          ]),
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text("Made with much",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold)),
+                                Icon(Icons.favorite, color: Colors.red),
+                              ]),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                          child: Row(children: [
-                            Icon(Icons.copyright, color: Colors.black),
-                            Center(
-                              child: Text("${today.year} @dherediat97",
-                                  style: TextStyle(fontSize: 15)),
-                            )
-                          ]),
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(Icons.copyright, color: Colors.black),
+                                Center(
+                                  child: Text("${today.year} @dherediat97",
+                                      style: TextStyle(fontSize: 15)),
+                                )
+                              ]),
                         )
                       ]),
                 ),

@@ -289,7 +289,7 @@ class _ActorDetailsPage extends State<ActorDetailsPage> {
                                                     ClipRRect(
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                              96),
+                                                              32),
                                                       child: Image.network(
                                                         filmPerson.backdropPath !=
                                                                 null
