@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:shelf/shelf.dart' as shelf;
 import 'package:shelf/shelf_io.dart' as io;
 
@@ -24,7 +25,7 @@ void main() async {
       .addHandler(_echoRequest);
 
   var server = await io.serve(handler, _hostname, port);
-  // print('Serving at http://${server.address.host}:${server.port}');
+  debugPrint('Serving at http://${server.address.host}:${server.port}');
 }
 
 Future<shelf.Response> _echoRequest(shelf.Request request) async {

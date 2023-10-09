@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 final primaryColor = Color(0xFFC7CD18);
-final secondaryColor = Color(0x10F0F);
-final backgroundColor = Color(0x10F0F);
+final secondaryColor = Color(0x222629);
+final backgroundColor = Color(0x222629);
 
 final primaryMaterialColor = MaterialColor(primaryColor.value, <int, Color>{
   50: primaryColor.withOpacity(0.1),

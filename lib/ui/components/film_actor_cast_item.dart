@@ -70,7 +70,7 @@ class _FilmActorItemState extends State<FilmActorItem> {
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.primary,
                   fontSize: 18)),
-          actor.character!.isNotEmpty
+          actor.character!.isNotEmpty || actor.character != null
               ? AutoSizeText(
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -82,7 +82,7 @@ class _FilmActorItemState extends State<FilmActorItem> {
                     color: Colors.white,
                   ),
                 )
-              : Container()
+              : Text("Desconocido")
         ],
       ),
     );

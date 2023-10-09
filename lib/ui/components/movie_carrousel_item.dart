@@ -34,7 +34,7 @@ class MovieCarrouselItem extends StatelessWidget {
               width: 220,
               height: 300,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(48)),
+                borderRadius: BorderRadius.all(Radius.circular(32)),
                 image: DecorationImage(
                   fit: BoxFit.scaleDown,
                   image: Image.network(
