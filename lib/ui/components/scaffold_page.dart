@@ -1,6 +1,5 @@
 //Core Packages
 import 'dart:async';
-import 'package:FilmFlu/ui/theme/colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -120,7 +119,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                     )))),
                 elevation: 1,
                 scrolledUnderElevation: 20,
-                backgroundColor: backgroundColor,
+                backgroundColor: Theme.of(context).colorScheme.onBackground,
                 actions: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),

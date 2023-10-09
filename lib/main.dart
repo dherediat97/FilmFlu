@@ -69,7 +69,7 @@ class FilmFlu extends StatelessWidget {
         primaryColor: primaryColor,
         useMaterial3: true,
         highlightColor: Colors.transparent,
-        scaffoldBackgroundColor: secondaryColor,
+        scaffoldBackgroundColor: Colors.black,
         textTheme: const TextTheme(
           bodyMedium: TextStyle(
             color: Colors.black,
@@ -80,7 +80,7 @@ class FilmFlu extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: primaryMaterialColor,
           backgroundColor: backgroundColor,
-          accentColor: secondaryColor,
+          accentColor: backgroundColor,
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         scrollbarTheme: ScrollbarThemeData(
