@@ -14,9 +14,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return ScaffoldPage(
       routeName: "Ajustes",
       containerChild: Container(
-        child: Row(
-          children: [Text("Hola")],
-        ),
+        child: Row(),
       ),
       isLightsOn: true,
       isSearchVisible: false,
