@@ -1,5 +1,5 @@
 //Core Packages
-import 'package:FilmFlu/ui/util/extension.dart';
+import 'package:FilmFlu/ui/util/extensions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

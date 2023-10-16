@@ -1,7 +1,7 @@
 {
   "app_name": "Film Flu",
   "film_list_title": "Cartelera",
-  "search_film_hint": "Busca aquí tu película favorita...",
+  "search_film_hint": "Busca aquí",
   "synopsis": "Sinopsis",
   "character_cast": "Reparto",
   "production_cast": "Producción",

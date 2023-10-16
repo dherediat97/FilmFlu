@@ -1,16 +1,16 @@
 //Core Packages
-import 'package:FilmFlu/ui/util/utilScroll.dart';
+import 'package:FilmFlu/dto/language_constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 //My Packages
 import 'package:FilmFlu/ui/pages/login/login_page.dart';
 import 'package:FilmFlu/dto/base_arguments.dart';
 import 'package:FilmFlu/ui/pages/movieDetails/movie_details.dart';
+import 'package:FilmFlu/ui/util/utilScroll.dart';
 import 'package:FilmFlu/ui/theme/colors.dart';
 import 'package:FilmFlu/ui/pages/main/main_screen.dart';
 import 'package:FilmFlu/ui/pages/personDetails/actor_details.dart';
@@ -32,20 +32,45 @@ void main() {
   runApp(const FilmFlu());
 }
 
-class FilmFlu extends StatelessWidget {
-  const FilmFlu({super.key});
+class FilmFlu extends StatefulWidget {
+  const FilmFlu({Key? key}) : super(key: key);
+
+  static void setLocale(BuildContext context, Locale newLocale) {
+    _FilmFluState? state = context.findAncestorStateOfType<_FilmFluState>();
+    state?.setLocale(newLocale);
+  }
+
+  @override
+  State<FilmFlu> createState() => _FilmFluState();
+}
+
+class _FilmFluState extends State<FilmFlu> {
+  Locale? _locale;
+
+  setLocale(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
+  }
+
+  getLocaleState() {
+    getLocale().then((locale) => {setLocale(locale)});
+  }
+
+  @override
+  void didChangeDependencies() {
+    getLocaleState();
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       scrollBehavior: kIsWeb ? WebScrollBehavior() : MaterialScrollBehavior(),
-      localizationsDelegates: [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: _locale,
       builder: (context, child) => ResponsiveBreakpoints.builder(
         child: child!,
         breakpoints: [
@@ -56,14 +81,6 @@ class FilmFlu extends StatelessWidget {
         ],
       ),
       onGenerateTitle: (context) => AppLocalizations.of(context)!.app_name,
-      supportedLocales: [
-        Locale('es'),
-        Locale('en'),
-        Locale('fr'),
-        Locale('de'),
-        Locale('nl'),
-        Locale('is'),
-      ],
       theme: ThemeData(
         fontFamily: 'YsabeauInfant',
         primaryColor: primaryColor,
