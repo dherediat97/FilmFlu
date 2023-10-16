@@ -13,7 +13,7 @@ import 'package:FilmFlu/constants.dart';
 import 'package:FilmFlu/ui/theme/colors.dart';
 import 'package:FilmFlu/dto/video.dart';
 import 'package:FilmFlu/ui/components/movie_cast.dart';
-import 'package:FilmFlu/ui/util/extension.dart';
+import 'package:FilmFlu/ui/util/extensions.dart';
 import 'package:flutter/material.dart';
 
 class MovieDetailsPage extends StatefulWidget {

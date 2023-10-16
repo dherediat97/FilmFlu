@@ -1,5 +1,5 @@
 //Core Packages
-import 'package:FilmFlu/ui/util/extension.dart';
+import 'package:FilmFlu/ui/util/extensions.dart';
 import 'package:flutter/material.dart';
 
 //My Packages
@@ -30,41 +30,27 @@ class MovieCarrouselItem extends StatelessWidget {
                   ),
                 );
               },
-              child: Container(
-                width: 220,
-                height: 210,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(32)),
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: Image.network(
-                      '$movieImgBaseURL${movie.posterPath}',
-                      loadingBuilder: (context, child, loadingProgress) =>
-                          DefaultAsyncLoading(
-                        child: child,
-                        loadingProgress: loadingProgress,
-                      ),
-                    ).image,
+              child: SizedBox(
+                width: 250,
+                height: 320,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(32)),
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: Image.network(
+                        '$movieImgBaseURL${movie.posterPath}',
+                        loadingBuilder: (context, child, loadingProgress) =>
+                            DefaultAsyncLoading(
+                          child: child,
+                          loadingProgress: loadingProgress,
+                        ),
+                      ).image,
+                    ),
                   ),
                 ),
               ),
             ),
-            // SizedBox(height: 10),
-            // SizedBox(
-            //   width: 200,
-            //   height: 31,
-            //   child: AutoSizeText(
-            //     movie.title != null ? movie.title! : movie.name!,
-            //     maxFontSize: 24,
-            //     maxLines: 2,
-            //     overflow: TextOverflow.ellipsis,
-            //     textAlign: TextAlign.center,
-            //     style: TextStyle(
-            //       color: Colors.white,
-            //       fontWeight: FontWeight.bold,
-            //     ),
-            //   ),
-            // )
           ],
         ));
   }

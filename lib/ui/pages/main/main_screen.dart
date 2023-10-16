@@ -1,11 +1,11 @@
 //Core Packages
-import 'package:FilmFlu/ui/util/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 //My Packages
 import 'package:FilmFlu/dto/media_item.dart';
 import 'package:FilmFlu/ui/components/movie_list.dart';
+import 'package:FilmFlu/ui/util/extensions.dart';
 import 'package:FilmFlu/network/client_api.dart';
 import 'package:FilmFlu/ui/components/scaffold_page.dart';
 
@@ -25,58 +25,62 @@ class _MainPageState extends State<MainPage> {
       isLightsOn: true,
       containerChild: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              AppLocalizations.of(context)!.film_list_title,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  fontSize: 30),
-            ),
-            SizedBox(height: 10),
-            Expanded(
-              child: Container(
-                child: FutureBuilder<List<MediaItem>>(
-                  future: Api().fetchPopularMediaTypes("day", "movie"),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState != ConnectionState.waiting) {
-                      return Scrollbar(
-                          child: MovieList(items: snapshot.requireData));
-                    } else {
-                      return DefaultSyncLoading();
-                    }
-                  },
+        child: Container(
+          height: double.infinity,
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                AppLocalizations.of(context)!.film_list_title,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 30),
+              ),
+              SizedBox(height: 10),
+              Expanded(
+                child: Container(
+                  child: FutureBuilder<List<MediaItem>>(
+                    future: Api().fetchPopularMediaTypes("day", "movie"),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState != ConnectionState.waiting) {
+                        return Scrollbar(
+                            child: MovieList(items: snapshot.requireData));
+                      } else {
+                        return DefaultSyncLoading();
+                      }
+                    },
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              AppLocalizations.of(context)!.tv_series_list_title,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  fontSize: 30),
-            ),
-            SizedBox(height: 10),
-            Expanded(
-              child: Container(
-                child: FutureBuilder<List<MediaItem>>(
-                  future: Api().fetchPopularMediaTypes("day", "tv"),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState != ConnectionState.waiting) {
-                      return Scrollbar(
-                          child: MovieList(items: snapshot.requireData));
-                    } else {
-                      return DefaultSyncLoading();
-                    }
-                  },
+              SizedBox(height: 20),
+              Text(
+                AppLocalizations.of(context)!.tv_series_list_title,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 30),
+              ),
+              SizedBox(height: 20),
+              Expanded(
+                child: Container(
+                  child: FutureBuilder<List<MediaItem>>(
+                    future: Api().fetchPopularMediaTypes("day", "tv"),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState != ConnectionState.waiting) {
+                        return Scrollbar(
+                            child: MovieList(items: snapshot.requireData));
+                      } else {
+                        return DefaultSyncLoading();
+                      }
+                    },
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

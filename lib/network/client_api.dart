@@ -1,5 +1,6 @@
 //Core Packages
 import 'dart:convert';
+import 'package:FilmFlu/dto/language_constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 
@@ -58,14 +59,15 @@ class Api {
       String trendingType, String mediaType) async {
     final response = await Client().get(
         Uri.parse(
-            '$baseURL/trending/${mediaType}/$trendingType?language=es-ES'),
+            '$baseURL/trending/${mediaType}/$trendingType?language=${getLocale()}'),
         headers: baseHeaders);
     return compute(parseMediaItems, response.body);
   }
 
   Future<MediaItem> fetchMovie(int mediaTypeId, String mediaType) async {
     final response = await Client().get(
-        Uri.parse('$baseURL/${mediaType}/${mediaTypeId}?language=es-ES'),
+        Uri.parse(
+            '$baseURL/${mediaType}/${mediaTypeId}?language=${getLocale()}'),
         headers: baseHeaders);
     return compute(parseMovie, response.body);
   }
@@ -73,14 +75,16 @@ class Api {
   Future<Video> fetchTrailer(
       int movieId, String? language, String mediaType) async {
     final response = await Client().get(
-        Uri.parse('$baseURL/${mediaType}/${movieId}/videos?language=$language'),
+        Uri.parse(
+            '$baseURL/${mediaType}/${movieId}/videos?language=${getLocale()}'),
         headers: baseHeaders);
     return compute(parseVideo, response.body);
   }
 
   Future<Credits> fetchCredits(int movieId, String mediaType) async {
     final response = await Client().get(
-        Uri.parse('$baseURL/${mediaType}/${movieId}/credits?language=es-ES'),
+        Uri.parse(
+            '$baseURL/${mediaType}/${movieId}/credits?language=${getLocale()}'),
         headers: baseHeaders);
     return compute(parseCredits, response.body);
   }
@@ -88,14 +92,14 @@ class Api {
   Future<List<MediaItem>> searchMovie(String movieSearched) async {
     final response = await Client().get(
         Uri.parse(
-            '$baseURL/search/movie?query=${movieSearched}&include_adult=false&language=es-ES&page=1'),
+            '$baseURL/search/movie?query=${movieSearched}&include_adult=false&language=${getLocale()}&page=1'),
         headers: baseHeaders);
     return compute(parseMediaItems, response.body);
   }
 
   Future<Person> fetchPerson(int personId) async {
     final response = await Client().get(
-        Uri.parse('$baseURL/person/${personId}?language=es-ES'),
+        Uri.parse('$baseURL/person/${personId}?language=${getLocale()}'),
         headers: baseHeaders);
     return compute(parsePerson, response.body);
   }
@@ -103,7 +107,7 @@ class Api {
   Future<CreditsPerson> fetchPersonCredits(int personId) async {
     final response = await Client().get(
         Uri.parse(
-            '$baseURL/person/${personId}/combined_credits?language=es-ES'),
+            '$baseURL/person/${personId}/combined_credits?language=${getLocale()}'),
         headers: baseHeaders);
     return compute(parseCreditsPerson, response.body);
   }
