@@ -1,4 +1,5 @@
 //Core Packages
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -32,12 +33,14 @@ class _MainPageState extends State<MainPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              AutoSizeText(
                 AppLocalizations.of(context)!.film_list_title,
+                maxFontSize: 30,
+                minFontSize: 20,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
-                    fontSize: 30),
+                    fontSize: 40),
               ),
               SizedBox(height: 10),
               Expanded(
@@ -56,12 +59,14 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
               SizedBox(height: 20),
-              Text(
+              AutoSizeText(
                 AppLocalizations.of(context)!.tv_series_list_title,
+                maxFontSize: 30,
+                minFontSize: 20,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
-                    fontSize: 30),
+                    fontSize: 40),
               ),
               SizedBox(height: 20),
               Expanded(

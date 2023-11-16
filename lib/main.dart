@@ -40,6 +40,10 @@ class FilmFlu extends StatefulWidget {
     state?.setLocale(newLocale);
   }
 
+  static String getLocale() {
+    return _FilmFluState().getLocaleState();
+  }
+
   @override
   State<FilmFlu> createState() => _FilmFluState();
 }

@@ -1,6 +1,7 @@
 //Core Packages
 import 'dart:convert';
 import 'package:FilmFlu/dto/language_constants.dart';
+import 'package:FilmFlu/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 

@@ -1,3 +1,5 @@
+import 'package:FilmFlu/ui/pages/splash/splash_screen.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 extension Unique<E, Id> on List<E> {
@@ -38,6 +40,7 @@ class DefaultSyncLoading extends StatelessWidget {
     return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        child: Center(child: CircularProgressIndicator()));
+        child: Center(
+            child: kIsWeb ? CircularProgressIndicator() : SplashScreen()));
   }
 }
