@@ -31,7 +31,7 @@ dev_dependencies:
   graphs: 2.3.1
   dio: ^4.0.6
   flutter_lints:
-  envied_generator: ^0.3.0+3
+  envied_generator: ^0.5.2
   build_runner:
   json_serializable: ^6.7.1
   flutter_launcher_icons:
