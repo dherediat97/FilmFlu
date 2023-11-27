@@ -6,15 +6,15 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class MoviesModule extends Module {
   @override
-  List<Bind> get binds => [
-        Bind(((i) => MoviesRepository(i<ClientHttp>()))),
-      ];
+  void binds(i) {
+    i.add(((i) => MoviesRepository(i<ClientHttp>())));
+  }
 
   @override
-  List<ModularRoute> get routes => [
-        ChildRoute('/', child: (context, args) => const MainPage()),
-        ChildRoute('/movieDetails/:movieId',
-            child: (context, args) =>
-                MovieDetailsPage(movieId: args.params["movieId"] as String)),
-      ];
+  void routes(r) {
+    r.child('/', child: (context) => const MainPage());
+    r.child('/movieDetails/:movieId',
+        child: (context) =>
+            MovieDetailsPage(movieId: r.args.params["movieId"] as String));
+  }
 }
