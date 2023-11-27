@@ -12,22 +12,22 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class AppModule extends Module {
   @override
-  List<Bind> get binds => [
-        Bind<ClientHttp>((i) => DioClientHttp()),
-        Bind<LocalStorage>((i) => SharedPrefLocalStorage())
-      ];
+  void binds(b) {
+    b.add<ClientHttp>((i) => DioClientHttp());
+    b.add<LocalStorage>((i) => SharedPrefLocalStorage());
+  }
 
   @override
-  List<ModularRoute> get routes => [
-        ChildRoute('/', child: (context, args) => SplashPage()),
-        ModuleRoute('/login/', module: LoginModule()),
-        ModuleRoute('/main/', module: MoviesModule()),
-        ModuleRoute('/settings/', module: SettingsModule()),
-        ChildRoute('/movieDetails/:movieId',
-            child: (context, args) =>
-                MovieDetailsPage(movieId: args.params["movieId"] as String)),
-        ChildRoute('/personDetails/:personId',
-            child: (context, args) =>
-                PersonDetailsPage(actorId: args.params["personId"] as String)),
-      ];
+  void routes(r) {
+    r.child('/', child: (context) => SplashPage());
+    r.module('/login/', module: LoginModule());
+    r.module('/main/', module: MoviesModule());
+    r.module('/settings/', module: SettingsModule());
+    r.child('/movieDetails/:movieId',
+        child: (context) =>
+            MovieDetailsPage(movieId: r.args.params["movieId"] as String));
+    r.child('/personDetails/:personId',
+        child: (context) =>
+            PersonDetailsPage(actorId: r.args.params["personId"] as String));
+  }
 }

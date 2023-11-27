@@ -112,8 +112,7 @@ class _FilmFluState extends State<FilmFlu> {
                 thumbColor: MaterialStatePropertyAll(primaryColor),
               ),
             ),
-            routeInformationParser: Modular.routeInformationParser,
-            routerDelegate: Modular.routerDelegate,
+            routerConfig: Modular.routerConfig,
           );
         });
   }
