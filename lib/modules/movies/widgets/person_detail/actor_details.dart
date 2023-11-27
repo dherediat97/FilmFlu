@@ -17,16 +17,16 @@ import 'package:FilmFlu/core/constants/theme/colors.dart';
 import 'package:FilmFlu/core/extensions/loading_extension.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class ActorDetailsPage extends StatefulWidget {
-  const ActorDetailsPage({super.key, required this.actorId});
+class PersonDetailsPage extends StatefulWidget {
+  const PersonDetailsPage({super.key, required this.actorId});
 
-  final int actorId;
+  final String actorId;
 
   @override
-  State<ActorDetailsPage> createState() => _ActorDetailsPage();
+  State<PersonDetailsPage> createState() => _PersonDetailsPagePage();
 }
 
-class _ActorDetailsPage extends State<ActorDetailsPage> {
+class _PersonDetailsPagePage extends State<PersonDetailsPage> {
   bool isActorWorkSelected = true;
 
   @override
