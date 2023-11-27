@@ -3,10 +3,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import 'package:FilmFlu/core/constants/constants.dart';
 import 'package:FilmFlu/dto/actor.dart';
-import 'package:FilmFlu/modules/movies/widgets/person_detail/actor_details.dart';
 
 class FilmActorItem extends StatefulWidget {
   FilmActorItem({super.key, required this.index, required this.cast});
@@ -28,8 +28,7 @@ class _FilmActorItemState extends State<FilmActorItem> {
         children: [
           InkWell(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => ActorDetailsPage(actorId: actor.id)));
+              Modular.to.navigate("/personDetails/${actor.id.toInt()}");
             },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(32.0),

@@ -14,7 +14,6 @@ import 'package:FilmFlu/dto/credit_person.dart';
 import 'package:FilmFlu/dto/credits_person.dart';
 
 class Api {
-
   MediaItem parseMovie(String responseBody) {
     final parsed = jsonDecode(responseBody);
     MediaItem mediaItem = MediaItem.fromJson(parsed);
@@ -67,7 +66,8 @@ class Api {
 
   Future<MediaItem> fetchMovie(String mediaTypeId, String mediaType) async {
     final response = await Client().get(
-        Uri.parse('$baseURL/${mediaType}/${mediaTypeId}?language=${getLocale()}'),
+        Uri.parse(
+            '$baseURL/${mediaType}/${mediaTypeId}?language=${getLocale()}'),
         headers: baseHeaders);
     return compute(parseMovie, response.body);
   }
@@ -97,14 +97,14 @@ class Api {
     return compute(parseMediaItems, response.body);
   }
 
-  Future<Person> fetchPerson(int personId) async {
+  Future<Person> fetchPerson(String personId) async {
     final response = await Client().get(
         Uri.parse('$baseURL/person/${personId}?language=${getLocale()}'),
         headers: baseHeaders);
     return compute(parsePerson, response.body);
   }
 
-  Future<CreditsPerson> fetchPersonCredits(int personId) async {
+  Future<CreditsPerson> fetchPersonCredits(String personId) async {
     final response = await Client().get(
         Uri.parse(
             '$baseURL/person/${personId}/combined_credits?language=${getLocale()}'),
