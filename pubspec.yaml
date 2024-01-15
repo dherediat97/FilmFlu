@@ -14,7 +14,7 @@ dependencies:
   envied:
   json_annotation: ^4.8.1
   http:
-  lottie: ^2.7.0
+  lottie: ^3.0.0
   package_info_plus:
   intl:
   flutter_svg: ^2.0.7
