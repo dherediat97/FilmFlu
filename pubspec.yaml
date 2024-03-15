@@ -11,7 +11,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  envied:
+  envied: ^0.5.3
   json_annotation: ^4.8.1
   http: 1.2.1
   lottie: ^3.1.0
@@ -31,8 +31,8 @@ dev_dependencies:
   graphs: 2.3.1
   dio: ^5.3.4
   flutter_lints:
-  envied_generator: ^0.5.2
-  build_runner:
+  envied_generator: ^0.5.3
+  build_runner: ^2.4.8
   json_serializable: ^6.7.1
   flutter_launcher_icons:
   youtube_player_iframe: ^5.1.1
