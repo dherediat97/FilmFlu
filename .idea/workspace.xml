@@ -10,6 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e42b280c-2f95-4b71-aa86-2f7f24a22f3f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/flutter_android.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/flutter_android.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/constants/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/constants/constants.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/i18n/app_en.arb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/l10n/app_en.arb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/i18n/app_es.arb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/l10n/app_es.arb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_list/movie_carrousel_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_list/movie_carrousel_item.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/shared/widgets/scaffold_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/shared/widgets/scaffold_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,10 +74,10 @@
     "ignore.virus.scanning.warn.message": "true",
     "io.flutter.reload.alreadyRun": "true",
     "last_opened_file_path": "C:/Proyectos Programacion/FilmFlu",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "AndroidSdkUpdater",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "actions.on.save",
     "show.migrate.to.gradle.popup": "false"
   }
 }]]></component>
@@ -100,7 +108,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="devDavid" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

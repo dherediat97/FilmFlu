@@ -23,13 +23,13 @@ class MovieCarrouselItem extends StatelessWidget {
                 Modular.to.pushReplacementNamed("/movieDetails/${movie.id}");
               },
               child: SizedBox(
-                width: 250,
-                height: 220,
+                width: 140,
+                height: 200,
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(32)),
                     image: DecorationImage(
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                       image: Image.network(
                         '$movieImgBaseURL${movie.posterPath}',
                         loadingBuilder: (context, child, loadingProgress) =>
