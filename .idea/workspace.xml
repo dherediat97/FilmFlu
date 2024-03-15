@@ -10,19 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e42b280c-2f95-4b71-aa86-2f7f24a22f3f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/main_dart.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/main_dart.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/filmflu.iml" beforeDir="false" afterPath="$PROJECT_DIR$/filmflu.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/main/widgets/main_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/main/widgets/main_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_detail/film_actor_cast_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_detail/film_actor_cast_item.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_detail/film_worker_cast_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_detail/film_worker_cast_item.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_detail/movie_details_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_detail/movie_details_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/movies/widgets/person_detail/actor_details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/movies/widgets/person_detail/actor_details.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/shared/drivers/local_storage/local_storage_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/shared/drivers/local_storage/local_storage_service.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/shared/widgets/scaffold_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/shared/widgets/scaffold_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +61,8 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "com.google.services.firebase.aqiPopupShown": "true",
-    "git-widget-placeholder": "main",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "devDavid",
     "ignore.virus.scanning.warn.message": "true",
     "io.flutter.reload.alreadyRun": "true",
     "last_opened_file_path": "C:/Proyectos Programacion/FilmFlu",
