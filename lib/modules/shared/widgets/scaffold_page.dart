@@ -23,6 +23,7 @@ class ScaffoldPage extends StatefulWidget {
       this.floatingActionButton,
       this.isLightsOn,
       required this.isSearchVisible});
+
   bool? isLightsOn = false;
   bool isSearchVisible = true;
   Widget? floatingActionButton = null;
@@ -132,27 +133,30 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                 surfaceTintColor: Colors.white,
                 child: Container(
                   height: 50,
-                  child: Row(children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                      child: Row(children: [
-                        Text("Made with much",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
-                        Icon(Icons.favorite, color: Colors.red),
-                      ]),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                      child: Row(children: [
-                        Icon(Icons.copyright, color: Colors.black),
-                        Center(
-                          child: Text("${today.year} @dherediat97",
-                              style: TextStyle(fontSize: 14)),
+                  child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                          child: Row(children: [
+                            Text("Made with much",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                            Icon(Icons.favorite, color: Colors.red),
+                          ]),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                          child: Row(children: [
+                            Icon(Icons.copyright, color: Colors.black),
+                            Center(
+                              child: Text(" ${today.year} @dherediat97",
+                                  style: TextStyle(fontSize: 14)),
+                            )
+                          ]),
                         )
                       ]),
-                    )
-                  ]),
                 ),
               )
             : null,

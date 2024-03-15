@@ -1,7 +1,7 @@
 import 'package:FilmFlu/modules/movies/domain/entities/media_item.dart';
 import 'package:FilmFlu/env/env.dart';
 
-String version = "0.0.1";
+String version = "";
 const String baseURL = 'https://api.themoviedb.org/3';
 const String movieImgBaseURL =
     'https://image.tmdb.org/t/p/w300_and_h450_bestv2/';
