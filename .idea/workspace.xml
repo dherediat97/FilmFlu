@@ -10,32 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e42b280c-2f95-4b71-aa86-2f7f24a22f3f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/animations/splash_animation.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/de_flag.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/el_flag.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/en_flag.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/es_flag.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/fi_flag.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/fr_flag.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/hy_flag.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/is_flag.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/ja_flag.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/nl_flag.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/sk_flag.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/dto/actor.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/dto/actor.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/dto/credit_person.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/dto/credit_person.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/dto/film_worker.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/dto/film_worker.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/l10n/app_en.arb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/l10n/app_en.arb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/l10n/app_es.arb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/l10n/app_es.arb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/network/client_api.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/network/client_api.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/components/fast_movie_details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/components/fast_movie_details.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/components/movie_cast.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/components/movie_cast.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/components/scaffold_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/components/scaffold_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/pages/movieDetails/movie_details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/movieDetails/movie_details.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ui/pages/personDetails/actor_details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/pages/personDetails/actor_details.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,19 +46,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Proyectos/Filmflu&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "io.flutter.reload.alreadyRun": "true",
+    "last_opened_file_path": "C:/Proyectos/Filmflu",
+    "show.migrate.to.gradle.popup": "false"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Proyectos\Filmflu\lib\env" />
