@@ -15,7 +15,7 @@ dependencies:
   json_annotation: ^4.8.1
   http:
   lottie: ^2.7.0
-  package_info_plus:
+  package_info_plus: 5.0.1
   intl:
   flutter_svg: ^2.0.7
   responsive_framework: ^1.1.0
