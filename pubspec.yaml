@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
   envied:
   json_annotation: ^4.8.1
-  http:
+  http: 1.2.1
   lottie: ^2.7.0
   package_info_plus: 5.0.1
   intl:
