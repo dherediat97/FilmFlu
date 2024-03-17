@@ -51,6 +51,13 @@
             </list>
           </value>
         </entry>
+        <entry key="bazel_worker">
+          <value>
+            <list>
+              <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/bazel_worker-1.1.1/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="bloc">
           <value>
             <list>
@@ -86,6 +93,13 @@
             </list>
           </value>
         </entry>
+        <entry key="build_modules">
+          <value>
+            <list>
+              <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/build_modules-5.0.7/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="build_resolvers">
           <value>
             <list>
@@ -104,6 +118,13 @@
           <value>
             <list>
               <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/build_runner_core-7.3.0/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="build_web_compilers">
+          <value>
+            <list>
+              <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/build_web_compilers-4.0.9/lib" />
             </list>
           </value>
         </entry>
@@ -576,6 +597,13 @@
             </list>
           </value>
         </entry>
+        <entry key="protobuf">
+          <value>
+            <list>
+              <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/protobuf-3.1.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="provider">
           <value>
             <list>
@@ -615,6 +643,13 @@
           <value>
             <list>
               <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/result_dart-1.1.0/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="scratch_space">
+          <value>
+            <list>
+              <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/scratch_space-1.0.2/lib" />
             </list>
           </value>
         </entry>
@@ -699,6 +734,13 @@
           <value>
             <list>
               <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/source_helper-1.3.4/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="source_maps">
+          <value>
+            <list>
+              <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/source_maps-0.10.12/lib" />
             </list>
           </value>
         </entry>
@@ -971,14 +1013,17 @@
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/async-2.11.0/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/auto_injector-2.0.3/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/auto_size_text-3.0.0/lib" />
+      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/bazel_worker-1.1.1/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/bloc-8.1.3/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/boolean_selector-2.1.1/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/build-2.4.1/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/build_config-1.1.1/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/build_daemon-4.0.1/lib" />
+      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/build_modules-5.0.7/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/build_resolvers-2.4.2/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/build_runner-2.4.8/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/build_runner_core-7.3.0/lib" />
+      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/build_web_compilers-4.0.9/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/built_collection-5.1.1/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/built_value-8.9.1/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/characters-1.3.0/lib" />
@@ -1042,12 +1087,14 @@
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/plugin_platform_interface-2.1.8/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/pointycastle-3.7.4/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/pool-1.5.1/lib" />
+      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/protobuf-3.1.0/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/provider-6.1.2/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/pub_semver-2.1.4/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/pubspec_parse-1.2.3/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/recase-4.1.0/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/responsive_framework-1.4.0/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/result_dart-1.1.0/lib" />
+      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/scratch_space-1.0.2/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences-2.2.2/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_android-2.2.1/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_foundation-2.3.5/lib" />
@@ -1059,6 +1106,7 @@
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/shelf_web_socket-1.0.4/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/source_gen-1.5.0/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/source_helper-1.3.4/lib" />
+      <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/source_maps-0.10.12/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/source_span-1.10.0/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/sprintf-7.0.0/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/stack_trace-1.11.1/lib" />

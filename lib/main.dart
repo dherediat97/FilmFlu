@@ -23,6 +23,8 @@ void main() {
     statusBarIconBrightness: Brightness.dark,
   ));
 
+  Modular.setInitialRoute('/');
+
   //Setting SystemUIMode
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,
       overlays: [SystemUiOverlay.top]);
