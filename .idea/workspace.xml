@@ -10,6 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e42b280c-2f95-4b71-aa86-2f7f24a22f3f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/flutter_android.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/flutter_android.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/flutter_web.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/flutter_web.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
     </list>

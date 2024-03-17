@@ -39,7 +39,7 @@ jobs:
             file_name: .env
         - run: flutter clean
         - run: flutter pub run build_runner build --delete-conflicting-outputs
-        - run: flutter build apk
+        - run: flutter build apk -t lib/main/main.dart
         - uses: actions/upload-artifact@master
           with:
             name: release-apk
