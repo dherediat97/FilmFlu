@@ -10,7 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 //My Packages
 import 'package:FilmFlu/core/utils/utilScroll.dart';
 import 'package:FilmFlu/core/constants/theme/colors.dart';
-import 'package:FilmFlu/main/app_module.dart';
+import 'package:FilmFlu/app_module.dart';
 import 'package:FilmFlu/modules/shared/drivers/local_storage/local_storage_service.dart';
 
 void main() {

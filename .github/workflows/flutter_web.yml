@@ -37,10 +37,10 @@ jobs:
         - run: flutter clean
         - run: flutter pub run build_runner build --delete-conflicting-outputs
         - run: flutter gen-l10n
-        - run: flutter build web -t lib/main/main.dart
+        - run: flutter build web -t lib/main.dart
         - uses: bluefireteam/flutter-gh-pages@v7
           with:
             baseHref: /FilmFlu/
             targetBranch: gh-pages
             webRenderer: html
-            customArgs:  -t lib/main/main.dart
+            customArgs:  -t lib/main.dart
