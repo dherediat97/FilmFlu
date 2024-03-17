@@ -13,7 +13,6 @@
       <change beforePath="$PROJECT_DIR$/.github/workflows/flutter_android.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/flutter_android.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.github/workflows/flutter_web.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/flutter_web.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
