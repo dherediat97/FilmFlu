@@ -1,5 +1,6 @@
 //Core Packages
 import 'dart:async';
+import 'package:FilmFlu/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,7 +10,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 //My Packages
 import 'package:FilmFlu/core/constants/constants.dart';
-import 'package:FilmFlu/main/main.dart';
 import 'package:FilmFlu/modules/movies/domain/entities/media_item.dart';
 import 'package:FilmFlu/modules/shared/drivers/http/client_api.dart';
 import 'package:FilmFlu/core/constants/language.dart';
