@@ -43,3 +43,4 @@ jobs:
             baseHref: /FilmFlu/
             targetBranch: gh-pages
             webRenderer: html
+            customArgs:  -t lib/main/main.dart
