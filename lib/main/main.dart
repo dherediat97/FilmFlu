@@ -76,6 +76,8 @@ class _FilmFluState extends State<FilmFlu> {
                 kIsWeb ? WebScrollBehavior() : MaterialScrollBehavior(),
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
+            onGenerateTitle: (context) =>
+                AppLocalizations.of(context)!.app_name,
             locale: _locale,
             builder: (context, child) => ResponsiveBreakpoints.builder(
               child: child!,
@@ -86,8 +88,6 @@ class _FilmFluState extends State<FilmFlu> {
                 const Breakpoint(start: 1921, end: double.infinity, name: '4K'),
               ],
             ),
-            onGenerateTitle: (context) =>
-                AppLocalizations.of(context)!.app_name,
             theme: ThemeData(
               fontFamily: 'YsabeauInfant',
               primaryColor: primaryColor,
