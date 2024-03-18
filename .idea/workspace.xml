@@ -5,19 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60fe2d2f-1020-4586-bd8a-1a2578bf189e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.github/workflows/flutter_windows.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app_module.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app_module.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/extensions/loading_extension.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/extensions/loading_extension.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_detail/movie_cast.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_detail/movie_cast.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_detail/movie_details_module.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_detail/movie_details_module.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_detail/movie_details_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_detail/movie_details_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_list/movie_carrousel_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_list/movie_carrousel_item.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_list/movie_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_list/movie_list.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_list/movie_list_module.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_list/movie_list_module.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/movies/widgets/person_detail/actor_details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/movies/widgets/person_detail/actor_details.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/shared/drivers/http/client_api.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/shared/drivers/http/client_api.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/shared/widgets/scaffold_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/shared/widgets/scaffold_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,10 +45,14 @@
     "git-widget-placeholder": "devDavid",
     "ignore.virus.scanning.warn.message": "true",
     "io.flutter.reload.alreadyRun": "true",
+    "last_opened_file_path": "C:/Proyectos Programacion/FilmFlu/.github/workflows",
     "show.migrate.to.gradle.popup": "false"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Proyectos Programacion\FilmFlu\.github\workflows" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Proyectos Programacion\FilmFlu\lib" />
       <recent name="C:\Proyectos Programacion\FilmFlu\lib\modules" />
