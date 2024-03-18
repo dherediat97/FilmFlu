@@ -38,7 +38,8 @@ jobs:
         - run: flutter pub run build_runner build --delete-conflicting-outputs
         - run: flutter gen-l10n
         - run: flutter build web
-        - uses: peaceiris/actions-gh-pages@373f7f263a76c20808c831209c920827a82a2847
+        - uses: bluefireteam/flutter-gh-pages@v8
           with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_branch: gh-pages
+            baseHref: /FilmFlu/
+            targetBranch: gh-pages
+            webRenderer: html
