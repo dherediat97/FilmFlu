@@ -27,10 +27,9 @@ jobs:
         - run: flutter pub get
         - name: Write TMDB_KEY to .env
           run:
-            set -o noclobber
             echo TMDB_KEY={{ secrets.TMDB_KEY }} >> .env
         - name: Create .env
-          run: set "TMDB_KEY=${{ secrets.TMDB_KEY }}" > .env
+          run: setx TMDB_KEY ${{ secrets.TMDB_KEY }} > .env
         - name: Make envfile
           uses: SpicyPizza/create-envfile@v2.0
           with:
@@ -43,7 +42,7 @@ jobs:
         - run: flutter build windows
         - uses: actions/upload-artifact@master
           with:
-            name: release-apk
+            name: release-app
             path:  build/windows/x64/runner/Release/filmflu.exe
             
         - name: Create Release
@@ -53,7 +52,7 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
           with:
             tag_name: 0.1.1
-            release_name: Version Release 0.1.1
+            release_name: Windows App 0.1.1
             draft: false
             prerelease: true
 
