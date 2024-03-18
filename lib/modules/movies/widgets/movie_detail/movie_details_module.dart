@@ -11,8 +11,6 @@ class MovieDetailsModule extends Module {
 
   @override
   void routes(r) {
-    ChildRoute('/:movieId',
-        child: (context) =>
-            MovieDetailsPage(movieId: r.args.queryParams["movieId"] as String));
+    ChildRoute('/', child: (_) => MovieDetailsPage());
   }
 }

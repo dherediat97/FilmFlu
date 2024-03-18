@@ -1,4 +1,5 @@
 //Core Packages
+import 'package:FilmFlu/modules/movies/widgets/movie_detail/movie_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -20,7 +21,10 @@ class MovieCarrouselItem extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
-                Modular.to.pushReplacementNamed("/movieDetails/${movie.id}");
+                var isFilm = movie.firstAirDate == null ? true : false;
+                Navigator.pushNamed(context, "/movieDetails",
+                    arguments: DetailsMovieArguments(
+                        movieId: movie.id.toString(), isFilm: isFilm));
               },
               child: SizedBox(
                 width: 140,

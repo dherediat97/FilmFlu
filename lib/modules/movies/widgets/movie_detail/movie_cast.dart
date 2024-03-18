@@ -20,7 +20,7 @@ class FilmCast extends StatefulWidget {
 
   final bool isCast;
 
-  final int movieId;
+  final String movieId;
   final String mediaType;
 
   @override

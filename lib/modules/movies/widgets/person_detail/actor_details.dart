@@ -45,7 +45,7 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
               builder: (context, snapshot) {
                 Person? person = snapshot.data;
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return DefaultSyncLoading();
+                  return DefaultWidgetLoading();
                 } else if (person != null) {
                   return Column(
                     children: [

@@ -21,12 +21,10 @@ class AppModule extends Module {
   @override
   void routes(r) {
     r.child('/', child: (context) => SplashPage());
-    r.module('/login/', module: LoginModule());
-    r.module('/main/', module: MoviesModule());
-    r.module('/settings/', module: SettingsModule());
-    r.child('/movieDetails/:movieId',
-        child: (context) =>
-            MovieDetailsPage(movieId: r.args.params["movieId"] as String));
+    r.module('/login', module: LoginModule());
+    r.module('/main', module: MoviesModule());
+    r.module('/settings', module: SettingsModule());
+    r.child('/movieDetails', child: (context) => MovieDetailsPage());
     r.child('/personDetails/:personId',
         child: (context) =>
             PersonDetailsPage(actorId: r.args.params["personId"] as String));
