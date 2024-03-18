@@ -21,6 +21,7 @@ class AppModule extends Module {
   @override
   void routes(r) {
     r.child('/', child: (context) => SplashPage());
+    r.redirect('/FilmFlu/', to: '/');
     r.module('/login', module: LoginModule());
     r.module('/main', module: MoviesModule());
     r.module('/settings', module: SettingsModule());
