@@ -1,0 +1,69 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Film Flu Windows App
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    if: github.actor == 'dherediat97'
+    runs-on: ubuntu-latest
+
+    steps:
+        - uses: actions/checkout@v4
+        - uses: actions/setup-java@v4
+          with:
+            distribution: 'zulu'
+            java-version: '11'
+        - uses: subosito/flutter-action@v2
+          with:
+            channel: 'stable'
+        - run: flutter pub get
+        - name: Write TMDB_KEY to .env
+          run:
+            set -o noclobber
+            echo TMDB_KEY={{ secrets.TMDB_KEY }} >> .env
+        - name: Create .env
+          run: echo "TMDB_KEY=${{ secrets.TMDB_KEY }}" > .env
+        - name: Make envfile
+          uses: SpicyPizza/create-envfile@v2.0
+          with:
+            envkey_DEBUG: false
+            envkey_TMDB_KEY: ${{ secrets.TMDB_KEY }}
+            file_name: .env
+        - run: flutter clean
+        - run: flutter pub run build_runner build --delete-conflicting-outputs
+        - run: flutter gen-l10n
+        - run: flutter build windows -t lib/main.dart
+        - uses: actions/upload-artifact@master
+          with:
+            name: release-apk
+            path:  build/windows/x64/runner/Release/filmflu.exe
+            
+        - name: Create Release
+          id: create_release
+          uses: actions/create-release@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+          with:
+            tag_name: 0.1.1
+            release_name: Version Release 0.1.1
+            draft: false
+            prerelease: true
+
+        - name: Upload EXE to Release
+          id: upload-release-asset 
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }}
+            asset_path: build/windows/x64/runner/Release/filmflu.exe
+            asset_name: filmflu.exe
+            asset_content_type: application/zip
