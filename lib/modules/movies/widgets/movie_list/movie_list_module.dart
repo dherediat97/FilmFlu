@@ -13,8 +13,6 @@ class MoviesModule extends Module {
   @override
   void routes(r) {
     r.child('/', child: (context) => const MainPage());
-    r.child('/movieDetails/:movieId',
-        child: (context) =>
-            MovieDetailsPage(movieId: r.args.params["movieId"] as String));
+    r.child('/movieDetails', child: (context) => MovieDetailsPage());
   }
 }

@@ -5,13 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60fe2d2f-1020-4586-bd8a-1a2578bf189e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/flutter_web.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/flutter_web.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/app_module.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app_module.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/splash/widgets/splash_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/splash/widgets/splash_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/extensions/loading_extension.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/extensions/loading_extension.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_detail/movie_cast.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_detail/movie_cast.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_detail/movie_details_module.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_detail/movie_details_module.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_detail/movie_details_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_detail/movie_details_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_list/movie_carrousel_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_list/movie_carrousel_item.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_list/movie_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_list/movie_list.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_list/movie_list_module.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/movies/widgets/movie_list/movie_list_module.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/movies/widgets/person_detail/actor_details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/movies/widgets/person_detail/actor_details.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/shared/drivers/http/client_api.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/shared/drivers/http/client_api.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/shared/widgets/scaffold_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/shared/widgets/scaffold_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,9 +33,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2dpK11kh7fM4tNza6WdT9Umxvkv" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -40,12 +46,15 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "devDavid",
+    "ignore.virus.scanning.warn.message": "true",
     "io.flutter.reload.alreadyRun": "true",
     "show.migrate.to.gradle.popup": "false"
   }
@@ -66,5 +75,8 @@
       <updated>1710699363442</updated>
     </task>
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

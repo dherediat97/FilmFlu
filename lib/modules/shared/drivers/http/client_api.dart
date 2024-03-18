@@ -66,8 +66,7 @@ class Api {
 
   Future<MediaItem> fetchMovie(String mediaTypeId, String mediaType) async {
     final response = await Client().get(
-        Uri.parse(
-            '$baseURL/${mediaType}/${mediaTypeId}?language=${getLocale()}'),
+        Uri.parse('$baseURL/${mediaType}/${mediaTypeId}'),
         headers: baseHeaders);
     return compute(parseMovie, response.body);
   }
@@ -81,7 +80,7 @@ class Api {
     return compute(parseVideo, response.body);
   }
 
-  Future<Credits> fetchCredits(int movieId, String mediaType) async {
+  Future<Credits> fetchCredits(String movieId, String mediaType) async {
     final response = await Client().get(
         Uri.parse(
             '$baseURL/${mediaType}/${movieId}/credits?language=${getLocale()}'),

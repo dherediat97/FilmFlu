@@ -18,6 +18,9 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  final _moviesScrollController = ScrollController();
+  final _tvSeriesScrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
@@ -47,12 +50,14 @@ class _MainPageState extends State<MainPage> {
                   child: FutureBuilder<List<MediaItem>>(
                     future: Api().fetchPopularMediaTypes("day", "movie"),
                     builder: (context, snapshot) {
-                      if (snapshot.connectionState != ConnectionState.waiting) {
-                        return Scrollbar(
-                            child: MovieList(items: snapshot.requireData));
-                      } else {
-                        return DefaultSyncLoading();
-                      }
+                      if (snapshot.connectionState == ConnectionState.waiting)
+                        return DefaultWidgetLoading();
+                      return Scrollbar(
+                          thickness: 3,
+                          controller: _moviesScrollController,
+                          child: MovieList(
+                              items: snapshot.requireData,
+                              scrollController: _moviesScrollController));
                     },
                   ),
                 ),
@@ -73,12 +78,14 @@ class _MainPageState extends State<MainPage> {
                   child: FutureBuilder<List<MediaItem>>(
                     future: Api().fetchPopularMediaTypes("day", "tv"),
                     builder: (context, snapshot) {
-                      if (snapshot.connectionState != ConnectionState.waiting) {
-                        return Scrollbar(
-                            child: MovieList(items: snapshot.requireData));
-                      } else {
-                        return DefaultSyncLoading();
-                      }
+                      if (snapshot.connectionState == ConnectionState.waiting)
+                        return DefaultWidgetLoading();
+                      return Scrollbar(
+                          thickness: 3,
+                          controller: _tvSeriesScrollController,
+                          child: MovieList(
+                              items: snapshot.requireData,
+                              scrollController: _tvSeriesScrollController));
                     },
                   ),
                 ),

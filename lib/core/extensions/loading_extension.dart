@@ -30,8 +30,8 @@ class DefaultAsyncLoading extends StatelessWidget {
   }
 }
 
-class DefaultSyncLoading extends StatelessWidget {
-  const DefaultSyncLoading({super.key});
+class DefaultWidgetLoading extends StatelessWidget {
+  const DefaultWidgetLoading({super.key});
 
   @override
   Widget build(BuildContext context) {

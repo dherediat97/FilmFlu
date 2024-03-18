@@ -63,10 +63,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                         fit: BoxFit.contain,
                       ),
                       onTap: () {
-                        if (Modular.to.canPop())
-                          Modular.to.pop(context);
-                        else
-                          Modular.to.popAndPushNamed("/");
+                        Modular.to.navigate(Modular.initialRoute);
                       }),
                 ),
                 toolbarHeight: 100,
@@ -107,7 +104,10 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                                               .primary),
                                       contentPadding:
                                           EdgeInsets.symmetric(vertical: 5.0)),
-                                  onSelected: (MediaItem? movie) {},
+                                  onSelected: (MediaItem? movie) {
+                                    Modular.to
+                                        .navigate("/movieDetails/${movie?.id}");
+                                  },
                                 )
                               : Text(""),
                         ],
@@ -115,7 +115,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                 ),
                 elevation: 1,
                 scrolledUnderElevation: 20,
-                backgroundColor: Theme.of(context).colorScheme.onBackground,
+                backgroundColor: Theme.of(context).colorScheme.onPrimary,
                 actions: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
