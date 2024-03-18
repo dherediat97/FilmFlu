@@ -22,6 +22,7 @@ void main() {
     systemNavigationBarIconBrightness: Brightness.dark,
     statusBarIconBrightness: Brightness.dark,
   ));
+  Modular.setInitialRoute("/FilmFlu");
   //Setting SystemUIMode
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,
       overlays: [SystemUiOverlay.top]);
