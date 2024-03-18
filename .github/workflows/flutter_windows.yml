@@ -30,7 +30,7 @@ jobs:
             set -o noclobber
             echo TMDB_KEY={{ secrets.TMDB_KEY }} >> .env
         - name: Create .env
-          run: echo "TMDB_KEY=${{ secrets.TMDB_KEY }}" > .env
+          run: set "TMDB_KEY=${{ secrets.TMDB_KEY }}" > .env
         - name: Make envfile
           uses: SpicyPizza/create-envfile@v2.0
           with:
