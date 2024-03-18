@@ -22,6 +22,7 @@ class AppModule extends Module {
   void routes(r) {
     r.child('/', child: (context) => SplashPage());
     r.redirect('/FilmFlu/', to: '/');
+    r.wildcard(child: (context) => SplashPage());
     r.module('/login', module: LoginModule());
     r.module('/main', module: MoviesModule());
     r.module('/settings', module: SettingsModule());
