@@ -1,7 +1,6 @@
 //Core Packages
 import 'package:FilmFlu/modules/movies/widgets/movie_detail/movie_details_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 //My Packages
 import 'package:FilmFlu/modules/movies/domain/entities/media_item.dart';

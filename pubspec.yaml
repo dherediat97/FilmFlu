@@ -42,6 +42,7 @@ dev_dependencies:
   flutter_screenutil: ^5.5.4
   equatable: ^2.0.5
   build_web_compilers: ^4.0.4
+  msix: ^3.16.7
 
 flutter:
   generate: true
@@ -73,3 +74,18 @@ flutter_launcher_icons:
     image_path: "assets/images/transparent_logo.png"
     background_color: "#000"
     theme_color: "#000"
+
+  msix_config:
+    display_name: Film Flu
+    publisher_display_name: dherediat97
+    identity_name: com.dherediat97.filmflu
+    app_installer:
+      publish_folder_path: C:\Program Files\Film Flu
+      hours_between_update_checks: 0
+      automatic_background_task: true
+      update_blocks_activation: true
+      show_prompt: true
+      force_update_from_any_version: true
+    msix_version: 0.1.0
+    logo_path: C:\Proyectos Programacion\FilmFlu\assets\images\transparent_logo.png
+    capabilities: internetClient
