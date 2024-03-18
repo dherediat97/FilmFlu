@@ -40,7 +40,7 @@ jobs:
         - run: flutter clean
         - run: flutter pub run build_runner build --delete-conflicting-outputs
         - run: flutter gen-l10n
-        - run: flutter build windows -t lib/main.dart
+        - run: flutter build windows
         - uses: actions/upload-artifact@master
           with:
             name: release-apk
