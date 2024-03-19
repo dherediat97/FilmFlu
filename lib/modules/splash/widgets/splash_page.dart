@@ -1,6 +1,7 @@
 //Core Packages
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 //My Packages
 import 'package:FilmFlu/modules/shared/widgets/scaffold_page.dart';
@@ -43,7 +44,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
               _controller
                 ..duration = composition.duration
                 ..forward().whenComplete(
-                    () => Navigator.pushReplacementNamed(context, '/main/'));
+                    () => Modular.to.pushReplacementNamed('/FilmFlu'));
             },
           )),
           Center(

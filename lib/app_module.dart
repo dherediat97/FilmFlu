@@ -21,9 +21,9 @@ class AppModule extends Module {
   @override
   void routes(r) {
     r.child('/', child: (context) => SplashPage());
-    // r.wildcard(child: (context) => MainPage());
+    r.redirect('/main', to: '/FilmFlu');
     r.module('/login', module: LoginModule());
-    r.module('/main', module: MoviesModule());
+    r.module('/FilmFlu', module: MoviesModule());
     r.module('/settings', module: SettingsModule());
     r.child('/movieDetails', child: (context) => MovieDetailsPage());
     r.child('/personDetails/:personId',

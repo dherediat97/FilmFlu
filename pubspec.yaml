@@ -23,6 +23,7 @@ dependencies:
   auto_size_text: ^3.0.0
   material_symbols_icons: ^4.2668.0
   shared_preferences: ^2.0.13
+  lazy_load_scrollview: 1.3.0
 
 dev_dependencies:
   flutter_test:
@@ -87,5 +88,5 @@ flutter_launcher_icons:
       show_prompt: true
       force_update_from_any_version: true
     msix_version: 0.1.0
-    logo_path: C:\Proyectos Programacion\FilmFlu\assets\images\transparent_logo.png
+    logo_path: assets\images\transparent_logo.png
     capabilities: internetClient
