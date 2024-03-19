@@ -14,6 +14,7 @@ class MediaItem {
     this.originalTitle,
     required this.popularity,
     required this.posterPath,
+    this.mediaType,
     this.releaseDate,
     this.title,
     this.video,
@@ -33,6 +34,7 @@ class MediaItem {
   String? originalTitle;
   double popularity;
   String posterPath;
+  String? mediaType;
   String? releaseDate;
   String? firstAirDate;
   String? title;

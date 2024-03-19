@@ -1,4 +1,5 @@
 //Core Packages;
+import 'package:FilmFlu/modules/movies/domain/entities/detailsMovieArguments.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -43,6 +44,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
     return ScaffoldPage(
         isSearchVisible: true,
         isLightsOn: !isTrailerSelected,
+        fabLocation: FloatingActionButtonLocation.endTop,
         floatingActionButton: isTrailerSelected
             ? FloatingActionButton(
                 mini: true,
@@ -85,18 +87,17 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                   physics: ScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   child: FutureBuilder<MediaItem>(
-                    future: Api()
-                        .fetchMovie(args.movieId, args.isFilm ? "movie" : "tv"),
+                    future: Api().fetchMovie(args.movieId, args.mediaType),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting)
                         return DefaultWidgetLoading();
 
                       MediaItem movie = snapshot.requireData;
-                      String releaseYear = args.isFilm
+                      String releaseYear = args.mediaType == "movie"
                           ? movie.releaseDate!.split("-")[0]
                           : movie.firstAirDate!.split("-")[0];
                       String? movieTitle =
-                          args.isFilm ? movie.title : movie.name;
+                          args.mediaType == "movie" ? movie.title : movie.name;
                       return Column(
                         children: [
                           Container(
@@ -112,7 +113,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                                   .width -
                                               50,
                                           child: AutoSizeText(
-                                            "$movieTitle (${releaseYear})",
+                                            "${movieTitle} (${releaseYear})",
                                             maxLines: 2,
                                             textAlign: TextAlign.start,
                                             overflow: TextOverflow.ellipsis,
@@ -164,7 +165,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   maxLines: 20,
-                                                  textAlign: TextAlign.justify,
+                                                  textAlign: TextAlign.start,
                                                   style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 15,
@@ -267,11 +268,15 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                               ? FilmCast(
                                   movieId: args.movieId,
                                   isCast: true,
-                                  mediaType: args.isFilm ? "movie" : "tv")
+                                  mediaType: args.mediaType == "movie"
+                                      ? "movie"
+                                      : "tv")
                               : FilmCast(
                                   movieId: args.movieId,
                                   isCast: false,
-                                  mediaType: args.isFilm ? "movie" : "tv")
+                                  mediaType: args.mediaType == "movie"
+                                      ? "movie"
+                                      : "tv")
                         ],
                       );
                     },
@@ -279,8 +284,8 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                 ),
               )
             : FutureBuilder<Video>(
-                future: Api().fetchTrailer(
-                    args.movieId, "es_ES", args.isFilm ? "movie" : "tv"),
+                future: Api().fetchTrailer(args.movieId, "es_ES",
+                    args.mediaType == "movie" ? "movie" : "tv"),
                 builder: (context, snapshot) {
                   haveTrailer = snapshot.hasData;
                   if (snapshot.data != null)
@@ -315,11 +320,4 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
       interfaceLanguage: "es",
     ));
   }
-}
-
-class DetailsMovieArguments {
-  final String movieId;
-  final bool isFilm;
-
-  DetailsMovieArguments({required this.movieId, required this.isFilm});
 }

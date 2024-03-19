@@ -1,4 +1,3 @@
-import 'package:FilmFlu/main_widget.dart';
 import 'package:FilmFlu/modules/movies/widgets/movie_detail/movie_details_page.dart';
 import 'package:FilmFlu/modules/movies/widgets/person_detail/actor_details.dart';
 import 'package:FilmFlu/modules/shared/drivers/http/client_http.dart';
@@ -22,7 +21,7 @@ class AppModule extends Module {
   @override
   void routes(r) {
     r.child('/', child: (context) => SplashPage());
-    r.wildcard(child: (context) => MainPage());
+    // r.wildcard(child: (context) => MainPage());
     r.module('/login', module: LoginModule());
     r.module('/main', module: MoviesModule());
     r.module('/settings', module: SettingsModule());
