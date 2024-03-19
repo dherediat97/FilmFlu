@@ -25,4 +25,5 @@ MediaItem movieMock1 = MediaItem(
   video: true,
   voteAverage: 100,
   voteCount: 10000,
+  mediaType: 'movie',
 );

@@ -25,6 +25,24 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return ScaffoldPage(
       isSearchVisible: true,
+      fabLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButton: FloatingActionButton(
+        child: Container(
+          width: 240,
+          height: 240,
+          child: Icon(
+            Icons.search,
+            size: 30,
+            color: Colors.white,
+          ),
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: LinearGradient(
+                  colors: [Color(0xFF52c234), Color(0xFF061700)])),
+        ),
+        backgroundColor: Colors.transparent,
+        onPressed: () {},
+      ),
       isLightsOn: true,
       containerChild: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -84,8 +102,9 @@ class _MainPageState extends State<MainPage> {
                           thickness: 3,
                           controller: _tvSeriesScrollController,
                           child: MovieList(
-                              items: snapshot.requireData,
-                              scrollController: _tvSeriesScrollController));
+                            items: snapshot.requireData,
+                            scrollController: _tvSeriesScrollController,
+                          ));
                     },
                   ),
                 ),

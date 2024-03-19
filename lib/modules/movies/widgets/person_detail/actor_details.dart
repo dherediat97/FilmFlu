@@ -3,6 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
 
 //My Packages
@@ -15,7 +16,6 @@ import 'package:FilmFlu/modules/shared/widgets/scaffold_page.dart';
 import 'package:FilmFlu/dto/credits_person.dart';
 import 'package:FilmFlu/core/constants/theme/colors.dart';
 import 'package:FilmFlu/core/extensions/loading_extension.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 class PersonDetailsPage extends StatefulWidget {
   const PersonDetailsPage({super.key, required this.actorId});
@@ -271,7 +271,7 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                                 : "${filmPerson.character}";
                                             return InkWell(
                                               onTap: () {
-                                                Modular.to.pushReplacementNamed(
+                                                Navigator.pushNamed(context,
                                                     "/movieDetails/${filmPerson.id}");
                                               },
                                               child: GridTile(

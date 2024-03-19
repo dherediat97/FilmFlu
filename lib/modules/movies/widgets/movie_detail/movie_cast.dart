@@ -1,6 +1,4 @@
 //Core Packages
-import 'package:FilmFlu/core/extensions/loading_extension.dart';
-import 'package:FilmFlu/modules/movies/domain/entities/credits.dart';
 import 'package:flutter/material.dart';
 
 //My Packages
@@ -9,6 +7,8 @@ import 'package:FilmFlu/dto/actor.dart';
 import 'package:FilmFlu/modules/shared/drivers/http/client_api.dart';
 import 'package:FilmFlu/modules/movies/widgets/movie_detail/film_worker_cast_item.dart';
 import 'package:FilmFlu/modules/movies/widgets/movie_detail/film_actor_cast_item.dart';
+import 'package:FilmFlu/core/extensions/loading_extension.dart';
+import 'package:FilmFlu/modules/movies/domain/entities/credits.dart';
 
 class FilmCast extends StatefulWidget {
   const FilmCast({
@@ -35,21 +35,18 @@ class _FilmCastState extends State<FilmCast> {
       child: FutureBuilder<Credits>(
           future: Api().fetchCredits(widget.movieId, widget.mediaType),
           builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  child: Center(child: CircularProgressIndicator()));
-            }
-            final List<Actor>? cast =
+            if (snapshot.connectionState == ConnectionState.waiting)
+              return DefaultWidgetLoading();
+
+            List<Actor>? cast =
                 snapshot.requireData.cast?.unique((element) => element.name);
-            final List<FilmWorker>? crew =
+            List<FilmWorker>? crew =
                 snapshot.requireData.crew?.unique((element) => element.name);
             return GridView.builder(
               controller: TrackingScrollController(),
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
+                crossAxisCount: 3,
                 mainAxisSpacing: 20,
                 crossAxisSpacing: 20,
                 mainAxisExtent: 240,

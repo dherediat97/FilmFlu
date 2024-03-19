@@ -1,6 +1,5 @@
 //Core Packages
 import 'dart:convert';
-import 'package:FilmFlu/modules/movies/domain/entities/credits.dart';
 import 'package:FilmFlu/modules/shared/drivers/local_storage/local_storage_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
@@ -10,6 +9,7 @@ import 'package:FilmFlu/dto/video.dart';
 import 'package:FilmFlu/modules/movies/domain/entities/media_item.dart';
 import 'package:FilmFlu/core/constants/constants.dart';
 import 'package:FilmFlu/dto/person.dart';
+import 'package:FilmFlu/modules/movies/domain/entities/credits.dart';
 import 'package:FilmFlu/dto/credit_person.dart';
 import 'package:FilmFlu/dto/credits_person.dart';
 
@@ -57,33 +57,44 @@ class Api {
 
   Future<List<MediaItem>> fetchPopularMediaTypes(
       String trendingType, String mediaType) async {
+    String language = "";
+    await getLocale().then(
+        (value) => language = "${value.languageCode}-${value.countryCode}");
     final response = await Client().get(
         Uri.parse(
-            '$baseURL/trending/${mediaType}/$trendingType?language=${getLocale()}'),
+            '$baseURL/trending/${mediaType}/$trendingType?language=$language'),
         headers: baseHeaders);
     return compute(parseMediaItems, response.body);
   }
 
   Future<MediaItem> fetchMovie(String mediaTypeId, String mediaType) async {
+    String language = "";
+    await getLocale().then(
+        (value) => language = "${value.languageCode}-${value.countryCode}");
     final response = await Client().get(
-        Uri.parse('$baseURL/${mediaType}/${mediaTypeId}'),
+        Uri.parse('$baseURL/${mediaType}/${mediaTypeId}?language=$language'),
         headers: baseHeaders);
     return compute(parseMovie, response.body);
   }
 
   Future<Video> fetchTrailer(
       String movieId, String? language, String mediaType) async {
+    String language = "";
+    await getLocale().then(
+        (value) => language = "${value.languageCode}-${value.countryCode}");
     final response = await Client().get(
-        Uri.parse(
-            '$baseURL/${mediaType}/${movieId}/videos?language=${getLocale()}'),
+        Uri.parse('$baseURL/${mediaType}/${movieId}/videos?language=$language'),
         headers: baseHeaders);
     return compute(parseVideo, response.body);
   }
 
   Future<Credits> fetchCredits(String movieId, String mediaType) async {
+    String language = "";
+    await getLocale().then(
+        (value) => language = "${value.languageCode}-${value.countryCode}");
     final response = await Client().get(
         Uri.parse(
-            '$baseURL/${mediaType}/${movieId}/credits?language=${getLocale()}'),
+            '$baseURL/${mediaType}/${movieId}/credits?language=$language'),
         headers: baseHeaders);
     return compute(parseCredits, response.body);
   }
@@ -91,22 +102,28 @@ class Api {
   Future<List<MediaItem>> searchMovie(String movieSearched) async {
     final response = await Client().get(
         Uri.parse(
-            '$baseURL/search/movie?query=${movieSearched}&include_adult=false&language=${getLocale()}&page=1'),
+            '$baseURL/search/movie?query=${movieSearched}&include_adult=false&page=1'),
         headers: baseHeaders);
     return compute(parseMediaItems, response.body);
   }
 
   Future<Person> fetchPerson(String personId) async {
+    String language = "";
+    await getLocale().then(
+        (value) => language = "${value.languageCode}-${value.countryCode}");
     final response = await Client().get(
-        Uri.parse('$baseURL/person/${personId}?language=${getLocale()}'),
+        Uri.parse('$baseURL/person/${personId}?language=$language'),
         headers: baseHeaders);
     return compute(parsePerson, response.body);
   }
 
   Future<CreditsPerson> fetchPersonCredits(String personId) async {
+    String language = "";
+    await getLocale().then(
+        (value) => language = "${value.languageCode}-${value.countryCode}");
     final response = await Client().get(
         Uri.parse(
-            '$baseURL/person/${personId}/combined_credits?language=${getLocale()}'),
+            '$baseURL/person/${personId}/combined_credits?language=$language'),
         headers: baseHeaders);
     return compute(parseCreditsPerson, response.body);
   }
