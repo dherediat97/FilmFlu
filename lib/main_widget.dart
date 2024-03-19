@@ -25,20 +25,25 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return ScaffoldPage(
       isSearchVisible: true,
-      fabLocation: FloatingActionButtonLocation.endDocked,
+      fabLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
-        child: Container(
-          width: 240,
-          height: 240,
-          child: Icon(
-            Icons.search,
-            size: 30,
-            color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 4.0),
+          child: Container(
+            width: 100,
+            height: 100,
+            child: Icon(
+              Icons.search,
+              size: 24,
+              color: Colors.white,
+            ),
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(colors: [
+                  Theme.of(context).colorScheme.primaryContainer,
+                  Theme.of(context).colorScheme.primaryContainer,
+                ])),
           ),
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: LinearGradient(
-                  colors: [Color(0xFF52c234), Color(0xFF061700)])),
         ),
         backgroundColor: Colors.transparent,
         onPressed: () {},
@@ -47,8 +52,6 @@ class _MainPageState extends State<MainPage> {
       containerChild: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
-          height: double.infinity,
-          width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,

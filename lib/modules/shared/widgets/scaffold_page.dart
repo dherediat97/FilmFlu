@@ -59,7 +59,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                         if (Navigator.canPop(context))
                           Navigator.pop(context);
                         else
-                          Navigator.pushReplacementNamed(context, "/main/");
+                          Navigator.pushReplacementNamed(context, "/FilmFlu");
                       }),
                 ),
                 toolbarHeight: 100,
@@ -90,27 +90,30 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                 surfaceTintColor: Colors.white,
                 child: Container(
                   height: 50,
-                  child: Row(mainAxisSize: MainAxisSize.max, children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                      child: Row(children: [
-                        Text("Made with much",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
-                        Icon(Icons.favorite, color: Colors.red),
-                      ]),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                      child: Row(children: [
-                        Icon(Icons.copyright, color: Colors.black),
-                        Center(
-                          child: Text("${today.year}     @dherediat97",
-                              style: TextStyle(fontSize: 14)),
+                  child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                          child: Row(children: [
+                            Text("Made with much",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                            Icon(Icons.favorite, color: Colors.red),
+                          ]),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                          child: Row(children: [
+                            Icon(Icons.copyright, color: Colors.black),
+                            Center(
+                              child: Text("${today.year} @dherediat97",
+                                  style: TextStyle(fontSize: 14)),
+                            )
+                          ]),
                         )
                       ]),
-                    )
-                  ]),
                 ),
               )
             : null,
