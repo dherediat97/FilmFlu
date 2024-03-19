@@ -1,3 +1,0 @@
-arb-dir: lib/i18n
-template-arb-file: app_es.arb
-output-localization-file: app_localizations.dart
