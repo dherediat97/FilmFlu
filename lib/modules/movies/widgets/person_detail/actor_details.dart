@@ -1,7 +1,6 @@
 //Core Packages
 import 'package:FilmFlu/modules/movies/domain/entities/detailsMovieArguments.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -267,7 +266,6 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                           itemBuilder: (context, index) {
                                             CreditPerson filmPerson =
                                                 creditsListAsActor[index];
-                                            print(filmPerson.toJson());
                                             String? movieTitle = filmPerson
                                                         .title !=
                                                     null

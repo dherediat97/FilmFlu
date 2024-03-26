@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 //My Packages
 import 'package:FilmFlu/modules/shared/widgets/scaffold_page.dart';
@@ -48,7 +49,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
             },
           )),
           Center(
-              child: Text("3,2,1 ACCIÓN!",
+              child: Text('AppLocalizations.of(context)',
                   style: TextStyle(color: Colors.white, fontSize: 20))),
         ],
       ),

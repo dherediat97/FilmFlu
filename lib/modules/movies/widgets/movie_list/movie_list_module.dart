@@ -7,7 +7,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 class MoviesModule extends Module {
   @override
   void binds(i) {
-    i.add(((i) => MoviesRepository(i<ClientHttp>())));
+    i.add(((i) => HttpMoviesRepository(client: i<ClientHttp>())));
   }
 
   @override

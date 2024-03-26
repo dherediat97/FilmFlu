@@ -123,6 +123,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
   List<Widget> _appBarActions(BuildContext context) {
     List<Widget> actions = [];
     Locale _locale;
+    getLocale().then((value) => _locale = value);
 
     actions.add(DropdownButton<Language>(
         onChanged: (Language? language) async {

@@ -37,13 +37,11 @@ dev_dependencies:
   json_serializable: ^6.7.1
   flutter_launcher_icons:
   youtube_player_iframe: ^5.1.1
-  url_launcher: ^6.1.11
   flutter_bloc: ^8.1.1
   flutter_modular: ^6.3.2
   flutter_screenutil: ^5.5.4
   equatable: ^2.0.5
   build_web_compilers: ^4.0.4
-  msix: ^3.16.7
 
 flutter:
   generate: true
@@ -75,18 +73,3 @@ flutter_launcher_icons:
     image_path: "assets/images/transparent_logo.png"
     background_color: "#000"
     theme_color: "#000"
-
-  msix_config:
-    display_name: Film Flu
-    publisher_display_name: dherediat97
-    identity_name: com.dherediat97.filmflu
-    app_installer:
-      publish_folder_path: C:\Program Files\Film Flu
-      hours_between_update_checks: 0
-      automatic_background_task: true
-      update_blocks_activation: true
-      show_prompt: true
-      force_update_from_any_version: true
-    msix_version: 0.1.0
-    logo_path: assets\images\transparent_logo.png
-    capabilities: internetClient

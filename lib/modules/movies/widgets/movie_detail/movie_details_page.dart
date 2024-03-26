@@ -1,6 +1,5 @@
 //Core Packages;
 import 'package:FilmFlu/modules/movies/domain/entities/detailsMovieArguments.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -152,39 +151,24 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                           ),
                                         ),
                                       ),
-                                      kIsWeb
-                                          ? SizedBox(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  4,
-                                              child: Container(
-                                                alignment: Alignment.centerLeft,
-                                                child: AutoSizeText(
-                                                  movie.overview!,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  maxLines: 20,
-                                                  textAlign: TextAlign.start,
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 15,
-                                                  ),
-                                                ),
-                                              ))
-                                          : Container(
-                                              alignment: Alignment.centerLeft,
-                                              child: AutoSizeText(
-                                                movie.overview!,
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines: 20,
-                                                textAlign: TextAlign.justify,
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 15,
-                                                ),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              4,
+                                          child: Container(
+                                            alignment: Alignment.centerLeft,
+                                            child: AutoSizeText(
+                                              movie.overview!,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 20,
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15,
                                               ),
                                             ),
+                                          ))
                                     ],
                                   ),
                                 ]),
