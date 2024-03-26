@@ -45,11 +45,11 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
               _controller
                 ..duration = composition.duration
                 ..forward().whenComplete(
-                    () => Modular.to.pushReplacementNamed('/FilmFlu'));
+                    () => Modular.to.pushReplacementNamed('/FilmFlu/'));
             },
           )),
           Center(
-              child: Text('AppLocalizations.of(context)',
+              child: Text(AppLocalizations.of(context)!.loading_title,
                   style: TextStyle(color: Colors.white, fontSize: 20))),
         ],
       ),
