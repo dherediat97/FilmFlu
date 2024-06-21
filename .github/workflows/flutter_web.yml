@@ -7,7 +7,7 @@ name: Film Flu Web App
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "mainOld" ]
   workflow_dispatch:
 
 
@@ -35,11 +35,11 @@ jobs:
             envkey_TMDB_KEY: ${{ secrets.TMDB_KEY }}
             file_name: .env
         - run: flutter clean
-       # - run: flutter pub run build_runner build --delete-conflicting-outputs
+        - run: flutter pub run build_runner build --delete-conflicting-outputs
         - run: flutter gen-l10n
         - run: flutter build web
         - uses: bluefireteam/flutter-gh-pages@v8
           with:
-            baseHref: /FilmFluV2/
-            targetBranch: prod
+            baseHref: /FilmFlu/
+            targetBranch: gh-pages
             webRenderer: html
