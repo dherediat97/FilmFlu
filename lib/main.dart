@@ -4,66 +4,41 @@ import 'package:flutter/services.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_web_plugins/url_strategy.dart';
-
-//My Packages
 import 'package:FilmFlu/core/utils/utilScroll.dart';
 import 'package:FilmFlu/core/constants/theme/colors.dart';
-import 'package:FilmFlu/app_module.dart';
-import 'package:FilmFlu/modules/shared/drivers/local_storage/local_storage_service.dart';
+import 'package:go_router/go_router.dart';
+
+import 'presentation/home/home_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     systemStatusBarContrastEnforced: true,
     systemNavigationBarColor: Colors.transparent,
     systemNavigationBarDividerColor: Colors.transparent,
     systemNavigationBarIconBrightness: Brightness.dark,
     statusBarIconBrightness: Brightness.dark,
   ));
-  usePathUrlStrategy();
-  //Setting SystemUIMode
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,
       overlays: [SystemUiOverlay.top]);
-  runApp(ModularApp(module: AppModule(), child: const FilmFlu()));
+  runApp(const FilmFlu());
 }
 
-class FilmFlu extends StatefulWidget {
+final GoRouter _router = GoRouter(
+  routes: <RouteBase>[
+    GoRoute(
+      path: '/',
+      builder: (BuildContext context, GoRouterState state) {
+        return const HomeScreen();
+      },
+    ),
+  ],
+);
+
+class FilmFlu extends StatelessWidget {
   const FilmFlu({Key? key}) : super(key: key);
-
-  static void setLocale(BuildContext context, Locale newLocale) {
-    _FilmFluState? state = context.findAncestorStateOfType<_FilmFluState>();
-    state?.setLocale(newLocale);
-  }
-
-  static String getLocale() {
-    return _FilmFluState().getLocaleState();
-  }
-
-  @override
-  State<FilmFlu> createState() => _FilmFluState();
-}
-
-class _FilmFluState extends State<FilmFlu> {
-  Locale? _locale;
-
-  setLocale(Locale locale) {
-    setState(() {
-      _locale = locale;
-    });
-  }
-
-  getLocaleState() {
-    getLocale().then((locale) => {setLocale(locale)});
-  }
-
-  @override
-  void didChangeDependencies() {
-    getLocaleState();
-    super.didChangeDependencies();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,12 +49,11 @@ class _FilmFluState extends State<FilmFlu> {
           return MaterialApp.router(
             debugShowCheckedModeBanner: false,
             scrollBehavior:
-                kIsWeb ? WebScrollBehavior() : MaterialScrollBehavior(),
+                kIsWeb ? WebScrollBehavior() : const MaterialScrollBehavior(),
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             onGenerateTitle: (context) =>
                 AppLocalizations.of(context)!.app_name,
-            locale: _locale,
             builder: (context, child) => ResponsiveBreakpoints.builder(
               child: child!,
               breakpoints: [
@@ -89,6 +63,7 @@ class _FilmFluState extends State<FilmFlu> {
                 const Breakpoint(start: 1921, end: double.infinity, name: '4K'),
               ],
             ),
+            routerConfig: _router,
             theme: ThemeData(
               fontFamily: 'YsabeauInfant',
               primaryColor: primaryColor,
@@ -109,11 +84,10 @@ class _FilmFluState extends State<FilmFlu> {
               ),
               visualDensity: VisualDensity.adaptivePlatformDensity,
               scrollbarTheme: ScrollbarThemeData(
-                radius: Radius.circular(20),
+                radius: const Radius.circular(20),
                 thumbColor: MaterialStatePropertyAll(primaryColor),
               ),
             ),
-            routerConfig: Modular.routerConfig,
           );
         });
   }

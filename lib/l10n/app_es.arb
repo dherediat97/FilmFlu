@@ -9,5 +9,7 @@
   "actor_job": "Interpreta a",
   "in_preposition": "en",
   "no_trailers":"Esta película no tiene tráilers",
-  "tv_series_list_title":"Novedades en Series"
+  "tv_series_list_title":"Novedades en Series",
+  "loading_title":"3,2,1 ACCIÓN!!!",
+  "films_not_found":"No se han encontrado películas"
 }
