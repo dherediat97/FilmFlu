@@ -6,8 +6,8 @@
 name: Film Flu Web App
 
 on:
-  push:
-    branches: [ "mainOld" ]
+  #push:
+   # branches: [ "mainOld" ]
   workflow_dispatch:
 
 
