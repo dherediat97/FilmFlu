@@ -1,0 +1,19 @@
+name: Film Flu API
+
+on:
+  pull_request:
+    branches: [api]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+
+      - run: dart pub get
+      - run: dart format --output=none --set-exit-if-changed .
+      - run: dart analyze
+      - run: dart test
+      - run: dart run ./lib/network/server_api.dart
