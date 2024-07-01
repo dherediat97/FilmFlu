@@ -27,6 +27,7 @@ doc/api/
 .flutter-plugins-dependencies
 
 *.g.dart
+*.freezed.dart
 .env
 ./windows
 ./ios

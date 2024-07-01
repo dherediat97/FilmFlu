@@ -11,12 +11,44 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+
+  go_router: ^14.2.0
+
+  # Bussines Logic Component
+  #
+  # Controller class to management the bloc state in the package
+  # https://pub.dev/packages/flutter_bloc
+  flutter_bloc: ^8.1.6
+
+  # Freezed - Model Smart Generation
+  #
+  # Utility to generate smart data-model classes in the package
+  # https://pub.dev/packages/freezed
+  freezed: ^2.5.2
+
+  # Freezed - Model Smart Generation
+  #
+  # Annotations of Freezed package
+  # https://pub.dev/packages/freezed_annotation
+  freezed_annotation: ^2.4.1
+
+  # Json - Json Model Smart Generation
+  #
+  # Annotations to help freezed generate remote data-models classes
+  # https://pub.dev/packages/json_annotation
+  json_annotation: ^4.9.0
+
+  dio: ^5.0.0
+
+  retrofit: ^4.1.0
+  envied_generator: ^0.5.3
+  
+  intl: ^0.19.0
+  get_it: ^7.2.0
+  lottie: ^3.1.2
   envied: ^0.5.3
-  json_annotation: ^4.8.1
   http: 1.2.1
-  lottie: ^3.1.0
   package_info_plus: ^4.2.0
-  intl:
   flutter_svg: ^2.0.7
   responsive_framework: ^1.1.0
   shelf: ^1.1.0
@@ -24,24 +56,27 @@ dependencies:
   material_symbols_icons: ^4.2668.0
   shared_preferences: ^2.0.13
   lazy_load_scrollview: 1.3.0
-  freezed: ^2.5.2
-  go_router: ^14.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  source_gen:
-  graphs: 2.3.1
-  dio: ^5.3.4
-  flutter_lints:
-  envied_generator: ^0.5.3
-  build_runner: ^2.4.8
-  flutter_launcher_icons:
-  youtube_player_iframe: ^5.1.1
-  flutter_bloc: ^8.1.1
-  flutter_screenutil: ^5.5.4
-  equatable: ^2.0.5
-  build_web_compilers: ^4.0.4
+  flutter_lints: ^4.0.0
+  build_runner: ^2.4.11
+  json_serializable: ^6.8.0
+  retrofit_generator: ^8.1.0
+
+  # Testing
+  #
+  # A mock framework inspired by Mockito
+  # https://pub.dev/packages/mockito
+  mockito: ^5.4.4
+
+  # Utility Test library for Bloc 
+  #
+  # For test all of bloc lifecycle
+  # https://pub.dev/packages/bloc_test
+  bloc_test: ^9.1.7
+  url_launcher: ^6.1.11
 
 flutter:
   generate: true
@@ -73,3 +108,8 @@ flutter_launcher_icons:
     image_path: "assets/images/transparent_logo.png"
     background_color: "#000"
     theme_color: "#000"
+
+
+flutter_intl:
+  enabled: true
+  class_name: AppLocalizations
