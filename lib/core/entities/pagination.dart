@@ -1,27 +1,20 @@
-class Pagination<E> {
-  final List<E> results;
-  final int page;
-  final int totalPages;
-  final int totalResults;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  Pagination({
-    required this.results,
-    required this.page,
-    required this.totalPages,
-    required this.totalResults,
-  });
+part 'pagination.g.dart';
+part 'pagination.freezed.dart';
 
-  Pagination<E> copyWith({
-    List<E>? results,
+@freezed
+@JsonSerializable(genericArgumentFactories: true)
+class Pagination<T> with _$Pagination<T> {
+  const factory Pagination({
+    required List<T> results,
     int? page,
     int? totalPages,
     int? totalResults,
-  }) {
-    return Pagination<E>(
-      results: results ?? this.results,
-      page: page ?? this.page,
-      totalPages: totalPages ?? this.totalPages,
-      totalResults: totalResults ?? this.totalResults,
-    );
+  }) = _Pagination<T>;
+
+  factory Pagination.fromJson(
+      Map<String, dynamic> json, T Function(Object? json) fromJsonT) {
+    return _$PaginationFromJson<T>(json, fromJsonT);
   }
 }

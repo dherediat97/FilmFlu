@@ -6,10 +6,10 @@ class Language {
 
   static List<Language> languageList() {
     return <Language>[
-      Language("French", "fr"),
-      Language("English", "en"),
-      Language("Español", "es"),
-      Language("Italian", "it")
+      Language('French', 'fr'),
+      Language('English', 'en'),
+      Language('Español', 'es'),
+      Language('Italian', 'it')
     ];
   }
 }
