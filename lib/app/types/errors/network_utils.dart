@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:FilmFlu/app/constants/mock_constants.dart';
 import 'package:FilmFlu/app/types/errors/network_error.dart';
 
 NetworkError getErrorFromDioError(DioException error) {
@@ -12,9 +11,7 @@ NetworkError getErrorFromDioError(DioException error) {
       networkExceptions = const NetworkError.requestTimeout();
       break;
     case DioExceptionType.unknown:
-      if (error.error == MocksPaths.error) {
-        networkExceptions = const NetworkError.mockNotFoundError();
-      } else if (error.toString().contains('is not a subtype of')) {
+      if (error.toString().contains('is not a subtype of')) {
         networkExceptions = const NetworkError.unableToProcess();
       } else {
         networkExceptions = const NetworkError.noInternetConnection();

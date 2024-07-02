@@ -3,8 +3,13 @@ part of '../di.dart';
 final repositoryModulesDi = GetIt.instance;
 
 void _repositoryModulesInit() {
-  repositoryModulesDi.registerLazySingleton<MovieRepositoryContract>(
-    () => MovieRepository(
+  repositoryModulesDi.registerLazySingleton<MediaListRepositoryContract>(
+    () => MediaListRepository(
+      repositoryModulesDi(),
+    ),
+  );
+  repositoryModulesDi.registerLazySingleton<MediaRepositoryContract>(
+    () => MediaRepository(
       repositoryModulesDi(),
     ),
   );

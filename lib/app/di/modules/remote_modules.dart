@@ -3,7 +3,10 @@ part of '../di.dart';
 final remoteModulesDi = GetIt.instance;
 
 void _remoteModulesInit() {
-  remoteModulesDi.registerLazySingleton<MovieRemoteDataSourceContract>(
+  remoteModulesDi.registerLazySingleton<MediaListRemoteDataSourceContract>(
+    () => FilmFluRemoteDataSource(remoteModulesDi()),
+  );
+  remoteModulesDi.registerLazySingleton<MediaRemoteDataSourceContract>(
     () => FilmFluRemoteDataSource(remoteModulesDi()),
   );
 }

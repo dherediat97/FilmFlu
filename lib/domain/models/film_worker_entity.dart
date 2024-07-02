@@ -4,8 +4,8 @@ part 'film_worker_entity.freezed.dart';
 part 'film_worker_entity.g.dart';
 
 @freezed
-class FilmWorker with _$FilmWorker {
-  const factory FilmWorker({
+class FilmWorkerEntity with _$FilmWorkerEntity {
+  const factory FilmWorkerEntity({
     required int id,
     bool? adult,
     int? gender,
@@ -13,8 +13,8 @@ class FilmWorker with _$FilmWorker {
     String? name,
     String? profilePath,
     String? job,
-  }) = _FilmWorker;
+  }) = _FilmWorkerEntity;
 
-  factory FilmWorker.fromJson(Map<String, dynamic> json) =>
-      _$FilmWorkerFromJson(json);
+  factory FilmWorkerEntity.fromJson(Map<String, dynamic> json) =>
+      _$FilmWorkerEntityFromJson(json);
 }

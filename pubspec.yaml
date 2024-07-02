@@ -56,6 +56,7 @@ dependencies:
   material_symbols_icons: ^4.2668.0
   shared_preferences: ^2.0.13
   lazy_load_scrollview: 1.3.0
+  youtube_player_iframe: ^5.1.1
 
 dev_dependencies:
   flutter_test:
