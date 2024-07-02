@@ -9,21 +9,20 @@ import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class ScaffoldPage extends StatefulWidget {
-  ScaffoldPage({
+  const ScaffoldPage({
     super.key,
     required this.containerChild,
     this.floatingActionButton,
-    this.isLightsOn,
+    this.isLightsOn = false,
     required this.isSearchVisible,
-    this.fabLocation,
+    this.fabLocation = FloatingActionButtonLocation.endTop,
   });
 
-  bool? isLightsOn = false;
-  bool isSearchVisible = true;
-  Widget? floatingActionButton;
-  FloatingActionButtonLocation? fabLocation =
-      FloatingActionButtonLocation.endTop;
   final Widget containerChild;
+  final Widget? floatingActionButton;
+  final bool isLightsOn;
+  final bool isSearchVisible;
+  final FloatingActionButtonLocation fabLocation;
 
   @override
   State<ScaffoldPage> createState() => _ScaffoldPageState();

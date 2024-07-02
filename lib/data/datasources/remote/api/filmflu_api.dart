@@ -14,16 +14,18 @@ abstract class FilmFluApi {
   factory FilmFluApi(Dio dio, {String? baseUrl}) = _FilmFluApi;
 
   @GET('/trending/{mediaType}/{trendingType}')
-  Future<Pagination<MediaItemRemoteEntity>> fetchPopularMediaTypes(
-    @Path('trendingType') String trendingType,
-    @Path('mediaType') String mediaType,
-  );
+  Future<Pagination<MediaItemRemoteEntity>> fetchPopularMediaTypes({
+    @Path('trendingType') required String trendingType,
+    @Path('mediaType') required String mediaType,
+    @Query('language') String language = 'es-ES',
+  });
 
-  @GET('/fetchMovie')
-  Future<MediaItemRemoteEntity> fetchMovie(
-    String mediaTypeId,
-    String mediaType,
-  );
+  @GET('/{mediaType}/{mediaTypeId}')
+  Future<MediaItemRemoteEntity> fetchMovie({
+    @Path('mediaType') required String mediaType,
+    @Path('mediaTypeId') required String mediaTypeId,
+    @Query('language') String language = 'es-ES',
+  });
 
   @GET('/fetchTrailer')
   Future<VideoRemoteEntity> fetchTrailer(
@@ -32,11 +34,12 @@ abstract class FilmFluApi {
     String mediaType,
   );
 
-  @GET('/fetchCredits')
-  Future<CreditsPersonRemoteEntity> fetchCredits(
-    String movieId,
-    String mediaType,
-  );
+  @GET('/{mediaType}/{mediaTypeId}/credits')
+  Future<CreditsPersonRemoteEntity> fetchCredits({
+    @Path('mediaType') required String mediaType,
+    @Path('mediaTypeId') required String mediaTypeId,
+    @Query('language') String language = 'es-ES',
+  });
 
   @GET('/searchMovie')
   Future<List<MediaItemRemoteEntity>> searchMovie(String movieSearched);

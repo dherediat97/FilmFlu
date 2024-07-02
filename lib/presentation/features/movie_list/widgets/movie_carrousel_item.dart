@@ -1,12 +1,16 @@
 import 'package:FilmFlu/app/constants/app_constants.dart';
+import 'package:FilmFlu/app/constants/app_urls.dart';
 import 'package:FilmFlu/app/extensions/custom_loading.dart';
-import 'package:FilmFlu/domain/models/details_movie_arguments.dart';
+import 'package:FilmFlu/app/routes/app_path.dart';
 import 'package:FilmFlu/domain/models/media_item_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class MovieCarrouselItem extends StatelessWidget {
-  const MovieCarrouselItem({super.key, required this.movie});
+  const MovieCarrouselItem({
+    super.key,
+    required this.movie,
+  });
 
   final MediaItemEntity movie;
 
@@ -18,12 +22,15 @@ class MovieCarrouselItem extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
-                context.pushNamed(
-                  '/movieDetails',
-                  extra: DetailsMovieArguments(
-                    movieId: movie.id.toString(),
-                    mediaType: movie.mediaType!,
-                  ),
+                AppConstants.mediaType = movie.mediaType.toString();
+                AppConstants.mediaTypeId = movie.id.toString();
+
+                context.push(
+                  AppRoutePath.mediaDetails,
+                  extra: {
+                    'mediaId': movie.id,
+                    'mediaType': movie.mediaType,
+                  },
                 );
               },
               child: SizedBox(
@@ -35,7 +42,7 @@ class MovieCarrouselItem extends StatelessWidget {
                     image: DecorationImage(
                       fit: BoxFit.fill,
                       image: Image.network(
-                        '${AppConstants.movieImgBaseURL}${movie.posterPath}',
+                        '${AppUrls.movieImgBaseURL}${movie.posterPath}',
                         loadingBuilder: (context, child, loadingProgress) =>
                             DefaultAsyncLoading(
                           loadingProgress: loadingProgress,

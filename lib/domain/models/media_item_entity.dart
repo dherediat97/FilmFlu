@@ -16,6 +16,7 @@ class MediaItemEntity with _$MediaItemEntity {
     required String posterPath,
     String? mediaType,
     String? releaseDate,
+    String? firstAirDate,
     String? title,
     bool? video,
     required double voteAverage,

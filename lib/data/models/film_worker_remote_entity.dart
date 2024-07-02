@@ -1,3 +1,4 @@
+import 'package:FilmFlu/domain/models/film_worker_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'film_worker_remote_entity.freezed.dart';
@@ -9,12 +10,24 @@ class FilmWorkerRemoteEntity with _$FilmWorkerRemoteEntity {
     @JsonKey(name: 'id') required int id,
     @JsonKey(name: 'adult') required bool adult,
     @JsonKey(name: 'gender') required int gender,
-    @JsonKey(name: 'knownForDepartment') required String knownForDepartment,
+    @JsonKey(name: 'known_for_department') required String knownForDepartment,
     @JsonKey(name: 'name') required String name,
-    @JsonKey(name: 'profilePath') required String profilePath,
+    @JsonKey(name: 'profile_path') String? profilePath,
     @JsonKey(name: 'job') required String job,
   }) = _FilmWorkerRemoteEntity;
 
   factory FilmWorkerRemoteEntity.fromJson(Map<String, dynamic> json) =>
       _$FilmWorkerRemoteEntityFromJson(json);
+}
+
+extension FilmWorkerEntityToRemoteEntityExtension on FilmWorkerRemoteEntity {
+  FilmWorkerEntity toFilmWorkerEntity() => FilmWorkerEntity(
+        id: id,
+        adult: adult,
+        job: job,
+        name: name,
+        gender: gender,
+        knownForDepartment: knownForDepartment,
+        profilePath: profilePath,
+      );
 }

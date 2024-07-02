@@ -10,9 +10,9 @@ class PersonEntity with _$PersonEntity {
     @JsonKey(name: 'id') required int id,
     @JsonKey(name: 'birthday') required String birthday,
     @JsonKey(name: 'deathday') required String deathday,
-    @JsonKey(name: 'placeOfBirth') required String placeOfBirth,
+    @JsonKey(name: 'place_of_birth') required String placeOfBirth,
     @JsonKey(name: 'biography') required String biography,
-    @JsonKey(name: 'profilePath') required String profilePath,
+    @JsonKey(name: 'profile_path') required String profilePath,
   }) = _PersonEntity;
 
   factory PersonEntity.fromJson(Map<String, dynamic> json) =>

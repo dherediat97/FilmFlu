@@ -1,3 +1,5 @@
+import 'package:FilmFlu/app/constants/app_constants.dart';
+import 'package:FilmFlu/presentation/features/details/bloc/media_detail_bloc.dart';
 import 'package:FilmFlu/presentation/features/movie_list/bloc/media_list_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,6 +22,21 @@ class TopBlocProviders extends StatelessWidget {
             )
             ..add(
               const MediaListEvent.getTVSeriesData(),
+            ),
+        ),
+        BlocProvider(
+          create: (context) => _getIt<MediaDetailBloc>()
+            ..add(
+              MediaDetailEvent.getMediaDetails(
+                AppConstants.mediaType,
+                AppConstants.mediaTypeId,
+              ),
+            )
+            ..add(
+              MediaDetailEvent.getCredits(
+                AppConstants.mediaType,
+                AppConstants.mediaTypeId,
+              ),
             ),
         ),
       ],

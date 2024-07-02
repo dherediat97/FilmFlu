@@ -1,4 +1,4 @@
-import 'package:FilmFlu/env/env.dart';
+import 'package:FilmFlu/app/constants/app_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
@@ -23,8 +23,7 @@ class DioClient {
       ..options.receiveTimeout =
           const Duration(milliseconds: _defaultReceiveTimeout)
       ..httpClientAdapter;
-    _dio.options.headers['Authorization'] = 'Bearer ${Env.tmdbApiKey}';
-    _dio.options.headers['Content-Type'] = 'application/json';
+    _dio.options.headers = AppConstants.baseHeaders;
     if (interceptors.isNotEmpty) {
       _dio.interceptors.addAll(interceptors);
     }
