@@ -1,7 +1,7 @@
-import 'package:FilmFlu/app/routes/app_path.dart';
-import 'package:FilmFlu/presentation/features/home/home_screen.dart';
-import 'package:FilmFlu/presentation/features/media_list/bloc/media_list_bloc.dart';
-import 'package:FilmFlu/presentation/features/splash_screen/splash_screen.dart';
+import 'package:film_flu/app/routes/app_path.dart';
+import 'package:film_flu/presentation/features/home/home_screen.dart';
+import 'package:film_flu/presentation/features/media_list/bloc/media_list_bloc.dart';
+import 'package:film_flu/presentation/features/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

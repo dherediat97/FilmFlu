@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:FilmFlu/app/types/errors/network_error.dart';
+import 'package:film_flu/app/types/errors/network_error.dart';
 
 NetworkError getErrorFromDioError(DioException error) {
   final NetworkError networkExceptions;

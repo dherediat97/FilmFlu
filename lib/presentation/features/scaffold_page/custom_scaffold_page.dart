@@ -1,7 +1,7 @@
-import 'package:FilmFlu/app/constants/app_constants.dart';
-import 'package:FilmFlu/app/di/top_bloc_providers.dart';
-import 'package:FilmFlu/app/extensions/localizations_extensions.dart';
-import 'package:FilmFlu/core/constants/language.dart';
+import 'package:film_flu/app/constants/app_constants.dart';
+import 'package:film_flu/app/di/top_bloc_providers.dart';
+import 'package:film_flu/app/extensions/localizations_extensions.dart';
+import 'package:film_flu/core/constants/language.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

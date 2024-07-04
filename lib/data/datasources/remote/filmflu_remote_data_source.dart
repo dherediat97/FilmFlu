@@ -1,10 +1,10 @@
-import 'package:FilmFlu/data/datasources/remote/api/filmflu_api.dart';
-import 'package:FilmFlu/data/models/credits_media_remote_entity.dart';
-import 'package:FilmFlu/data/models/media_item_remote_entity.dart';
-import 'package:FilmFlu/data/models/person_remote_entity.dart';
-import 'package:FilmFlu/data/repositories/remote/media_list_remote_data_source_contract.dart';
-import 'package:FilmFlu/data/repositories/remote/media_remote_data_source_contract.dart';
-import 'package:FilmFlu/data/repositories/remote/person_remote_data_source_contract.dart';
+import 'package:film_flu/data/datasources/remote/api/filmflu_api.dart';
+import 'package:film_flu/data/models/credits_media_remote_entity.dart';
+import 'package:film_flu/data/models/media_item_remote_entity.dart';
+import 'package:film_flu/data/models/person_remote_entity.dart';
+import 'package:film_flu/data/repositories/remote/media_list_remote_data_source_contract.dart';
+import 'package:film_flu/data/repositories/remote/media_remote_data_source_contract.dart';
+import 'package:film_flu/data/repositories/remote/person_remote_data_source_contract.dart';
 
 class FilmFluRemoteDataSource
     implements
@@ -27,7 +27,7 @@ class FilmFluRemoteDataSource
   @override
   Future<MediaItemRemoteEntity> getMediaDetail(
     String mediaType,
-    String mediaTypeId,
+    int mediaTypeId,
   ) async {
     final mediaData = await _filmFluApi.fetchMediaItem(
       mediaType: mediaType,
@@ -40,7 +40,7 @@ class FilmFluRemoteDataSource
   @override
   Future<CreditsMediaRemoteEntity> getCredits(
     String mediaType,
-    String mediaTypeId,
+    int mediaTypeId,
   ) async {
     final mediaData = await _filmFluApi.fetchCredits(
       mediaType: mediaType,
@@ -52,7 +52,7 @@ class FilmFluRemoteDataSource
 
   @override
   Future<PersonRemoteEntity> fetchPersonData(
-    String personId,
+    int personId,
   ) async {
     final personData = await _filmFluApi.fetchPerson(
       personId: personId,

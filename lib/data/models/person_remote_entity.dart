@@ -1,5 +1,5 @@
-import 'package:FilmFlu/data/models/credits_person_remote_entity.dart';
-import 'package:FilmFlu/domain/models/person_entity.dart';
+import 'package:film_flu/data/models/credits_person_remote_entity.dart';
+import 'package:film_flu/domain/models/person_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'person_remote_entity.freezed.dart';

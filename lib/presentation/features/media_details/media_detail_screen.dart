@@ -1,16 +1,15 @@
-import 'package:FilmFlu/app/constants/app_constants.dart';
-import 'package:FilmFlu/app/constants/app_urls.dart';
-import 'package:FilmFlu/app/extensions/custom_loading.dart';
-import 'package:FilmFlu/app/extensions/localizations_extensions.dart';
-import 'package:FilmFlu/domain/models/details_movie_arguments.dart';
-import 'package:FilmFlu/domain/models/media_item_entity.dart';
-import 'package:FilmFlu/presentation/features/media_details/bloc/media_detail_bloc.dart';
-import 'package:FilmFlu/presentation/features/media_details/widgets/media_cast_list.dart';
-import 'package:FilmFlu/presentation/features/scaffold_page/custom_scaffold_page.dart';
+import 'package:film_flu/app/constants/app_constants.dart';
+import 'package:film_flu/app/constants/app_urls.dart';
+import 'package:film_flu/app/extensions/custom_loading.dart';
+import 'package:film_flu/app/extensions/localizations_extensions.dart';
+import 'package:film_flu/domain/models/media_item_entity.dart';
+import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
+import 'package:film_flu/presentation/features/media_details/widgets/media_cast_list.dart';
+import 'package:film_flu/presentation/features/scaffold_page/custom_scaffold_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:FilmFlu/core/constants/theme/colors.dart';
+import 'package:film_flu/core/constants/theme/colors.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -18,10 +17,10 @@ import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 class MediaItemScreenDetails extends StatefulWidget {
   const MediaItemScreenDetails({
     super.key,
-    required this.movieArguments,
+    required this.movieId,
   });
 
-  final DetailsMovieArguments movieArguments;
+  final String movieId;
 
   @override
   State<MediaItemScreenDetails> createState() => _MovieDetailsPageState();
@@ -79,9 +78,9 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
               ),
         containerChild: BlocBuilder<MediaDetailBloc, MediaDetailState>(
           builder: (context, state) {
-            DetailsMovieArguments movieArguments = widget.movieArguments;
             MediaItemEntity? movie = state.mediaItem;
-            if (movie?.videos?.results != null) {
+
+            if (movie?.videos?.results.isNotEmpty == true) {
               _trailerController.loadVideoById(
                 videoId: movie!.videos!.results
                     .firstWhere((element) =>
@@ -90,9 +89,8 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
               );
             }
 
-            String? movieTitle = movieArguments.mediaType == 'movie'
-                ? movie?.title
-                : movie?.name;
+            String? movieTitle =
+                movie?.title != '' ? movie?.title : movie?.name;
 
             if (movie == null) return Container();
 

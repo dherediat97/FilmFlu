@@ -1,4 +1,4 @@
-import 'package:FilmFlu/app/constants/app_constants.dart';
+import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 

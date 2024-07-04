@@ -1,11 +1,11 @@
-import 'package:FilmFlu/app/di/di.dart';
-import 'package:FilmFlu/app/l10n/localizations/app_localizations.dart';
-import 'package:FilmFlu/app/routes/app_routes.dart';
+import 'package:film_flu/app/di/di.dart';
+import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
+import 'package:film_flu/app/routes/app_routes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:FilmFlu/core/utils/util_scroll.dart';
-import 'package:FilmFlu/core/constants/theme/colors.dart';
+import 'package:film_flu/core/utils/util_scroll.dart';
+import 'package:film_flu/core/constants/theme/colors.dart';
 import 'package:go_router/go_router.dart';
 
 void main() async {

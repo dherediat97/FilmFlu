@@ -1,6 +1,7 @@
-import 'package:FilmFlu/app/types/ui_state.dart';
-import 'package:FilmFlu/domain/models/media_item_entity.dart';
-import 'package:FilmFlu/domain/repository_contracts/media_list_repository_contract.dart';
+import 'package:film_flu/app/types/ui_state.dart';
+import 'package:film_flu/domain/models/media_item_entity.dart';
+import 'package:film_flu/domain/repository_contracts/media_list_repository_contract.dart';
+import 'package:film_flu/presentation/features/media_list/constants/media_list_constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -26,7 +27,8 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
   _getMovieData(MediaListEvent event, Emitter<MediaListState> emit) async {
     emit(state.copyWith(uiState: const UiState.loading()));
 
-    final movieData = await _repository.getMediaList('movie');
+    final movieData =
+        await _repository.getMediaList(MediaListConstants.movieMediaType);
     movieData.when(
       failure: (errorMessage) {
         emit(
@@ -41,7 +43,8 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
   _getTVSeriesData(MediaListEvent event, Emitter<MediaListState> emit) async {
     emit(state.copyWith(uiState: const UiState.loading()));
 
-    final seriesData = await _repository.getMediaList('tv');
+    final seriesData =
+        await _repository.getMediaList(MediaListConstants.serieMediaType);
     seriesData.when(
       failure: (errorMessage) {
         emit(

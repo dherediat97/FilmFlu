@@ -1,4 +1,4 @@
-import 'package:FilmFlu/domain/models/film_worker_entity.dart';
+import 'package:film_flu/domain/models/film_worker_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'film_worker_remote_entity.freezed.dart';

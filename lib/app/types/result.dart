@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:FilmFlu/app/types/repository_error.dart';
+import 'package:film_flu/app/types/repository_error.dart';
 
 part 'result.freezed.dart';
 

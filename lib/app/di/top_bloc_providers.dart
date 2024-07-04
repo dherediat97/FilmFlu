@@ -1,7 +1,7 @@
-import 'package:FilmFlu/app/constants/app_constants.dart';
-import 'package:FilmFlu/presentation/features/media_details/bloc/media_detail_bloc.dart';
-import 'package:FilmFlu/presentation/features/media_list/bloc/media_list_bloc.dart';
-import 'package:FilmFlu/presentation/features/person_detail/bloc/person_detail_bloc.dart';
+import 'package:film_flu/app/constants/app_constants.dart';
+import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
+import 'package:film_flu/presentation/features/media_list/bloc/media_list_bloc.dart';
+import 'package:film_flu/presentation/features/person_detail/bloc/person_detail_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';

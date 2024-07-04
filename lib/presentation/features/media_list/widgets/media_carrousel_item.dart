@@ -1,8 +1,8 @@
-import 'package:FilmFlu/app/constants/app_constants.dart';
-import 'package:FilmFlu/app/constants/app_urls.dart';
-import 'package:FilmFlu/app/extensions/custom_loading.dart';
-import 'package:FilmFlu/app/routes/app_path.dart';
-import 'package:FilmFlu/domain/models/media_item_entity.dart';
+import 'package:film_flu/app/constants/app_constants.dart';
+import 'package:film_flu/app/constants/app_urls.dart';
+import 'package:film_flu/app/extensions/custom_loading.dart';
+import 'package:film_flu/app/routes/app_path.dart';
+import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -23,15 +23,10 @@ class MovieCarrouselItem extends StatelessWidget {
             InkWell(
               onTap: () {
                 AppConstants.mediaType = movie.title != '' ? 'movie' : 'tv';
-                AppConstants.mediaTypeId = movie.id.toString();
+                AppConstants.mediaTypeId = movie.id;
 
-                context.push(
-                  AppRoutePath.mediaDetails,
-                  extra: {
-                    'mediaId': movie.id,
-                    'mediaType': movie.mediaType,
-                  },
-                );
+                context
+                    .push('${AppRoutePath.mediaDetails}/${movie.id.toInt()}');
               },
               child: SizedBox(
                 width: 140,

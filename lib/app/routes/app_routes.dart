@@ -1,9 +1,8 @@
-import 'package:FilmFlu/app/routes/app_path.dart';
-import 'package:FilmFlu/domain/models/details_movie_arguments.dart';
-import 'package:FilmFlu/presentation/features/home/home_screen.dart';
-import 'package:FilmFlu/presentation/features/media_details/media_detail_controller.dart';
-import 'package:FilmFlu/presentation/features/person_detail/person_detail_screen.dart';
-import 'package:FilmFlu/presentation/features/splash_screen/splash_screen.dart';
+import 'package:film_flu/app/routes/app_path.dart';
+import 'package:film_flu/presentation/features/home/home_screen.dart';
+import 'package:film_flu/presentation/features/media_details/media_detail_controller.dart';
+import 'package:film_flu/presentation/features/person_detail/person_detail_screen.dart';
+import 'package:film_flu/presentation/features/splash_screen/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
 List<GoRoute> appRoutes = [
@@ -18,14 +17,10 @@ List<GoRoute> appRoutes = [
         builder: (context, state) => const HomeScreen(),
       ),
       GoRoute(
-        path: 'mediaItemDetails',
+        path: 'mediaItemDetails/:movieId',
         builder: (context, state) {
-          final arguments = state.extra as Map<String, dynamic>;
           return MediaDetailController(
-            movieArguments: DetailsMovieArguments(
-              movieId: arguments['mediaId'].toString(),
-              mediaType: arguments['mediaType'],
-            ),
+            movieId: state.pathParameters['movieId'].toString(),
           );
         },
       ),

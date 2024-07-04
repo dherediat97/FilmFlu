@@ -1,14 +1,13 @@
-import 'package:FilmFlu/app/constants/app_urls.dart';
-import 'package:FilmFlu/app/extensions/custom_loading.dart';
-import 'package:FilmFlu/app/extensions/localizations_extensions.dart';
-import 'package:FilmFlu/core/constants/theme/colors.dart';
-import 'package:FilmFlu/core/utils/util_date.dart';
-import 'package:FilmFlu/domain/models/credit_actor_entity.dart';
-import 'package:FilmFlu/domain/models/credit_production_entity.dart';
-import 'package:FilmFlu/domain/models/details_movie_arguments.dart';
-import 'package:FilmFlu/domain/models/person_entity.dart';
-import 'package:FilmFlu/presentation/features/person_detail/bloc/person_detail_bloc.dart';
-import 'package:FilmFlu/presentation/features/scaffold_page/custom_scaffold_page.dart';
+import 'package:film_flu/app/constants/app_urls.dart';
+import 'package:film_flu/app/extensions/custom_loading.dart';
+import 'package:film_flu/app/extensions/localizations_extensions.dart';
+import 'package:film_flu/core/constants/theme/colors.dart';
+import 'package:film_flu/core/utils/util_date.dart';
+import 'package:film_flu/domain/models/credit_actor_entity.dart';
+import 'package:film_flu/domain/models/credit_production_entity.dart';
+import 'package:film_flu/domain/models/person_entity.dart';
+import 'package:film_flu/presentation/features/person_detail/bloc/person_detail_bloc.dart';
+import 'package:film_flu/presentation/features/scaffold_page/custom_scaffold_page.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -266,11 +265,7 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                   return InkWell(
                                     onTap: () {
                                       context.push(
-                                        '/mediaItemDetails',
-                                        extra: DetailsMovieArguments(
-                                          movieId: filmPerson.id.toString(),
-                                          mediaType: 'movie',
-                                        ),
+                                        '/mediaItemDetails/${filmPerson.id}',
                                       );
                                     },
                                     child: GridTile(
@@ -337,11 +332,7 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                     return InkWell(
                                       onTap: () {
                                         context.go(
-                                          '/mediaItemDetails',
-                                          extra: DetailsMovieArguments(
-                                            movieId: filmPerson.id.toString(),
-                                            mediaType: 'movie',
-                                          ),
+                                          '/mediaItemDetails/${filmPerson.id}',
                                         );
                                       },
                                       child: GridTile(

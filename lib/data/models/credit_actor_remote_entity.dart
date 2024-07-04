@@ -1,4 +1,4 @@
-import 'package:FilmFlu/domain/models/credit_actor_entity.dart';
+import 'package:film_flu/domain/models/credit_actor_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'credit_actor_remote_entity.freezed.dart';

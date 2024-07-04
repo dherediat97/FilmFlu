@@ -1,5 +1,5 @@
-import 'package:FilmFlu/domain/models/media_item_entity.dart';
-import 'package:FilmFlu/presentation/features/media_list/widgets/media_carrousel_item.dart';
+import 'package:film_flu/domain/models/media_item_entity.dart';
+import 'package:film_flu/presentation/features/media_list/widgets/media_carrousel_item.dart';
 import 'package:flutter/material.dart';
 
 class MediaList extends StatelessWidget {

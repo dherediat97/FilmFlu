@@ -1,7 +1,7 @@
-import 'package:FilmFlu/app/extensions/custom_loading.dart';
-import 'package:FilmFlu/data/models/actor_remote_entity.dart';
-import 'package:FilmFlu/data/models/film_worker_remote_entity.dart';
-import 'package:FilmFlu/domain/models/credits_media_entity.dart';
+import 'package:film_flu/app/extensions/custom_loading.dart';
+import 'package:film_flu/data/models/actor_remote_entity.dart';
+import 'package:film_flu/data/models/film_worker_remote_entity.dart';
+import 'package:film_flu/domain/models/credits_media_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'credits_media_remote_entity.freezed.dart';
