@@ -1,12 +1,16 @@
 import 'package:FilmFlu/app/extensions/localizations_extensions.dart';
-import 'package:FilmFlu/app/routes/app_path.dart';
 import 'package:FilmFlu/presentation/features/scaffold_page/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashPage extends StatefulWidget {
-  const SplashPage({super.key});
+  const SplashPage({
+    super.key,
+    required this.routePath,
+  });
+
+  final String routePath;
 
   @override
   State<SplashPage> createState() => _SplashPageState();
@@ -43,7 +47,9 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
               _controller
                 ..duration = composition.duration
                 ..forward().whenComplete(
-                  () => context.push(AppRoutePath.homeController),
+                  () {
+                    return context.push(widget.routePath);
+                  },
                 );
             },
           )),
@@ -52,7 +58,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
               context.localizations.loading_title,
               style: const TextStyle(
                 color: Colors.white,
-                fontSize: 20,
+                fontSize: 40,
               ),
             ),
           ),

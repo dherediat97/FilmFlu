@@ -1,6 +1,7 @@
 import 'package:FilmFlu/app/constants/app_constants.dart';
-import 'package:FilmFlu/presentation/features/details/bloc/media_detail_bloc.dart';
-import 'package:FilmFlu/presentation/features/movie_list/bloc/media_list_bloc.dart';
+import 'package:FilmFlu/presentation/features/media_details/bloc/media_detail_bloc.dart';
+import 'package:FilmFlu/presentation/features/media_list/bloc/media_list_bloc.dart';
+import 'package:FilmFlu/presentation/features/person_detail/bloc/person_detail_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -36,6 +37,14 @@ class TopBlocProviders extends StatelessWidget {
               MediaDetailEvent.getCredits(
                 AppConstants.mediaType,
                 AppConstants.mediaTypeId,
+              ),
+            ),
+        ),
+        BlocProvider(
+          create: (context) => _getIt<PersonDetailBloc>()
+            ..add(
+              PersonDetailEvent.getPersonData(
+                AppConstants.personId,
               ),
             ),
         ),

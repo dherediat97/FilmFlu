@@ -24,7 +24,7 @@ class CurlLoggerDioInterceptor extends Interceptor {
     ResponseInterceptorHandler handler,
   ) {
     // If printOnSuccess is defined and set to true, call the _renderCurlRepresentation method and pass the requestOptions from the response
-    if (printOnSuccess != null && printOnSuccess == true) {
+    if (printOnSuccess == true) {
       _renderCurlRepresentation(response.requestOptions);
     }
 

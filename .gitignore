@@ -34,3 +34,4 @@ doc/api/
 ./linux
 
 .idea/
+coverage/

@@ -163,7 +163,7 @@ abstract class AppLocalizations {
   /// No description provided for @loading_title.
   ///
   /// In es, this message translates to:
-  /// **'3,2,1 ACCIÓN!!!'**
+  /// **'3, 2, 1 ACCIÓN !!!'**
   String get loading_title;
 
   /// No description provided for @films_not_found.

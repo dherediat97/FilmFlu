@@ -8,7 +8,7 @@ void _apiModulesInit() {
 
     dioClient.addInterceptors([
       ...EnvironmentConfig.environment == 'dev'
-          ? [CurlLoggerDioInterceptor(printOnSuccess: true)]
+          ? [CurlLoggerDioInterceptor(printOnSuccess: false)]
           : [],
     ]);
 

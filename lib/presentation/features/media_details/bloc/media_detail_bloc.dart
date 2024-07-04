@@ -1,5 +1,5 @@
 import 'package:FilmFlu/app/types/ui_state.dart';
-import 'package:FilmFlu/domain/models/credits_person_entity.dart';
+import 'package:FilmFlu/domain/models/credits_media_entity.dart';
 import 'package:FilmFlu/domain/models/media_item_entity.dart';
 import 'package:FilmFlu/domain/repository_contracts/media_repository_contract.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -64,13 +64,13 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
 
     creditsData.when(
       failure: (errorMessage) {
-        print(errorMessage);
         emit(
           state.copyWith(uiState: const UiState.error()),
         );
       },
-      success: (value) => emit(
-          state.copyWith(uiState: const UiState.success(), credits: value)),
+      success: (value) {
+        emit(state.copyWith(uiState: const UiState.success(), credits: value));
+      },
     );
   }
 }
