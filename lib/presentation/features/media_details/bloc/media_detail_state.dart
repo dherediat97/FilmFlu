@@ -4,7 +4,7 @@ part of 'media_detail_bloc.dart';
 class MediaDetailState with _$MediaDetailState {
   const factory MediaDetailState({
     MediaItemEntity? mediaItem,
-    CreditsPersonEntity? credits,
+    CreditsMediaEntity? credits,
     required UiState uiState,
   }) = _MediaDetailState;
 

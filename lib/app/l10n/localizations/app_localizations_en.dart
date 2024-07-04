@@ -40,7 +40,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tv_series_list_title => 'TV Series Playing';
 
   @override
-  String get loading_title => '3,2,1 ACTION!!!';
+  String get loading_title => '3, 2, 1 ACTION !!!';
 
   @override
   String get films_not_found => 'Films not found';

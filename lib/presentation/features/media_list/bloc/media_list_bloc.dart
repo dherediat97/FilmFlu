@@ -49,7 +49,9 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
         );
       },
       success: (value) => emit(state.copyWith(
-          uiState: const UiState.success(), tvSeriesList: value)),
+        uiState: const UiState.success(),
+        tvSeriesList: value,
+      )),
     );
   }
 }

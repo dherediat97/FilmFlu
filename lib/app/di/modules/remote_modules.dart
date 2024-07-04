@@ -9,4 +9,7 @@ void _remoteModulesInit() {
   remoteModulesDi.registerLazySingleton<MediaRemoteDataSourceContract>(
     () => FilmFluRemoteDataSource(remoteModulesDi()),
   );
+  remoteModulesDi.registerLazySingleton<PersonRemoteDataSourceContract>(
+    () => FilmFluRemoteDataSource(remoteModulesDi()),
+  );
 }

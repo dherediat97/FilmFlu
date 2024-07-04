@@ -1,3 +1,4 @@
+import 'package:FilmFlu/app/constants/app_constants.dart';
 import 'package:FilmFlu/app/constants/app_urls.dart';
 import 'package:FilmFlu/app/extensions/localizations_extensions.dart';
 import 'package:FilmFlu/domain/models/film_worker_entity.dart';
@@ -26,12 +27,14 @@ class _FilmWorkerItemState extends State<FilmWorkerItem> {
     int index = widget.index;
     List<FilmWorkerEntity> crew = widget.crew;
     FilmWorkerEntity filmWorker = crew[index];
+
     return GridTile(
       child: Column(
         children: [
           InkWell(
             onTap: () {
-              context.go('/personDetails/${filmWorker.id.toInt()}');
+              AppConstants.personId = filmWorker.id.toString();
+              context.push('/personDetails/${filmWorker.id.toInt()}');
             },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(32.0),

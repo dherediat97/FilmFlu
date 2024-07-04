@@ -58,10 +58,6 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                     _trailerController.stopVideo();
                     _trailerController.close();
                     isTrailerSelected = false;
-                    SystemChrome.setPreferredOrientations([
-                      DeviceOrientation.portraitDown,
-                      DeviceOrientation.portraitUp,
-                    ]);
                     SystemChrome.setEnabledSystemUIMode(
                         SystemUiMode.edgeToEdge);
                   });
@@ -85,209 +81,188 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
           builder: (context, state) {
             DetailsMovieArguments movieArguments = widget.movieArguments;
             MediaItemEntity? movie = state.mediaItem;
-            if (movie == null) {
-              return Container();
+            if (movie?.videos?.results != null) {
+              _trailerController.loadVideoById(
+                videoId: movie!.videos!.results
+                    .firstWhere((element) =>
+                        element.official && element.type == 'Trailer')
+                    .key,
+              );
             }
 
-            String? movieTitle =
-                movieArguments.mediaType == 'movie' ? movie.title : movie.name;
+            String? movieTitle = movieArguments.mediaType == 'movie'
+                ? movie?.title
+                : movie?.name;
 
-            return SingleChildScrollView(
-                child: Column(
-              children: [
-                DecoratedBox(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      colorFilter: ColorFilter.mode(
-                        Colors.black.withOpacity(0.6),
-                        BlendMode.darken,
-                      ),
-                      image: Image.network(
-                        '${AppUrls.movieLandscapeBaseUrl}${movie.backdropPath}',
-                        loadingBuilder: (context, child, loadingProgress) =>
-                            DefaultAsyncLoading(
-                          loadingProgress: loadingProgress,
-                          child: child,
-                        ),
-                      ).image,
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(children: [
-                      Row(
-                        children: [
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width - 50,
-                              child: AutoSizeText(
-                                '$movieTitle',
-                                maxLines: 2,
-                                textAlign: TextAlign.start,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    fontFamily: 'YsabeauInfant',
-                                    fontSize: 37),
-                              )),
-                          // InkWell(
-                          //   child: SvgPicture.asset(
-                          //       height: 40,
-                          //       width: 40,
-                          //       "assets/icons/flags/${movie.originalLanguage}_flag.svg"),
-                          //   onTap: () {
-                          //     setState(() {
-                          //       movieTitle = movie.originalTitle!;
-                          //     });
-                          //   },
-                          // ),
-                        ],
-                      ),
-                      const SizedBox(height: 20),
-                      Column(
-                        children: [
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              context.localizations.synopsis,
-                              textAlign: TextAlign.start,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'YsabeauInfant',
-                                fontSize: 40,
+            if (movie == null) return Container();
+
+            return !isTrailerSelected
+                ? SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        DecoratedBox(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              colorFilter: ColorFilter.mode(
+                                Colors.black.withOpacity(0.6),
+                                BlendMode.darken,
                               ),
+                              image: Image.network(
+                                '${AppUrls.movieLandscapeBaseUrl}${movie.backdropPath}',
+                                loadingBuilder:
+                                    (context, child, loadingProgress) =>
+                                        DefaultAsyncLoading(
+                                  loadingProgress: loadingProgress,
+                                  child: child,
+                                ),
+                              ).image,
                             ),
                           ),
-                          kIsWeb
-                              ? SizedBox(
-                                  height:
-                                      MediaQuery.of(context).size.height / 4,
-                                  child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Column(children: [
+                              Row(
+                                children: [
+                                  SizedBox(
+                                      width: MediaQuery.of(context).size.width -
+                                          50,
+                                      child: AutoSizeText(
+                                        movieTitle.toString(),
+                                        maxLines: 2,
+                                        textAlign: TextAlign.start,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            fontFamily: 'YsabeauInfant',
+                                            fontSize: 37),
+                                      )),
+                                ],
+                              ),
+                              const SizedBox(height: 20),
+                              Column(
+                                children: [
+                                  Container(
                                     alignment: Alignment.centerLeft,
-                                    child: AutoSizeText(
-                                      movie.overview ?? '',
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 20,
+                                    child: Text(
+                                      context.localizations.synopsis,
                                       textAlign: TextAlign.start,
                                       style: const TextStyle(
                                         color: Colors.white,
-                                        fontSize: 15,
+                                        fontFamily: 'YsabeauInfant',
+                                        fontSize: 40,
                                       ),
                                     ),
-                                  ))
-                              : Container(
-                                  alignment: Alignment.centerLeft,
-                                  child: AutoSizeText(
-                                    movie.overview ?? '',
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 20,
-                                    textAlign: TextAlign.justify,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
+                                  ),
+                                  kIsWeb
+                                      ? SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              4,
+                                          child: Container(
+                                            alignment: Alignment.centerLeft,
+                                            child: AutoSizeText(
+                                              movie.overview ?? '',
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 20,
+                                              textAlign: TextAlign.start,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          ))
+                                      : Container(
+                                          alignment: Alignment.centerLeft,
+                                          child: AutoSizeText(
+                                            movie.overview ?? '',
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 20,
+                                            textAlign: TextAlign.justify,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                        ),
+                                ],
+                              ),
+                            ]),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Center(
+                          child: SegmentedButton<bool>(
+                            selectedIcon: null,
+                            emptySelectionAllowed: false,
+                            showSelectedIcon: false,
+                            selected: <bool>{isCastSelected},
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  WidgetStateProperty.resolveWith<Color>(
+                                (Set<WidgetState> states) {
+                                  if (states.contains(WidgetState.selected)) {
+                                    return primaryColor;
+                                  }
+                                  return Colors.white24;
+                                },
+                              ),
+                            ),
+                            segments: [
+                              ButtonSegment<bool>(
+                                label: Text(
+                                  context.localizations.character_cast,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
                                   ),
                                 ),
-                        ],
-                      ),
-                    ]),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Center(
-                  child: SegmentedButton<bool>(
-                    selectedIcon: null,
-                    emptySelectionAllowed: false,
-                    showSelectedIcon: false,
-                    selected: <bool>{isCastSelected},
-                    style: ButtonStyle(
-                      backgroundColor: WidgetStateProperty.resolveWith<Color>(
-                        (Set<WidgetState> states) {
-                          if (states.contains(WidgetState.selected)) {
-                            return primaryColor;
-                          }
-                          return Colors.white24;
-                        },
-                      ),
+                                value: true,
+                              ),
+                              ButtonSegment<bool>(
+                                label: Text(
+                                  context.localizations.production_cast,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                value: false,
+                              ),
+                            ],
+                            onSelectionChanged: (Set<bool> newSelection) {
+                              setState(() {
+                                isCastSelected = newSelection.first;
+                              });
+                            },
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        isCastSelected
+                            ? FilmCast(
+                                movieId: AppConstants.mediaTypeId,
+                                isCast: true,
+                                mediaType: AppConstants.mediaType,
+                              )
+                            : FilmCast(
+                                movieId: AppConstants.mediaTypeId,
+                                isCast: false,
+                                mediaType: AppConstants.mediaType,
+                              )
+                      ],
                     ),
-                    segments: [
-                      ButtonSegment<bool>(
-                        label: Text(
-                          context.localizations.character_cast,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        ),
-                        value: true,
-                      ),
-                      ButtonSegment<bool>(
-                        label: Text(
-                          context.localizations.production_cast,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        ),
-                        value: false,
-                      ),
-                    ],
-                    onSelectionChanged: (Set<bool> newSelection) {
-                      setState(() {
-                        isCastSelected = newSelection.first;
-                      });
-                    },
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                isCastSelected
-                    ? FilmCast(
-                        movieId: AppConstants.mediaTypeId,
-                        isCast: true,
-                        mediaType: AppConstants.mediaType,
-                      )
-                    : FilmCast(
-                        movieId: AppConstants.mediaTypeId,
-                        isCast: false,
-                        mediaType: AppConstants.mediaType,
-                      )
-              ],
-            ));
+                  )
+                : YoutubePlayer(
+                    controller: _trailerController,
+                    enableFullScreenOnVerticalDrag: true,
+                  );
           },
-        )
-        // :
-        // FutureBuilder<VideoEntity>(
-        //   future: Api().fetchTrailer(args.movieId, 'es_ES',
-        //       args.mediaType == 'movie' ? 'movie' : 'tv'),
-        //   builder: (context, snapshot) {
-        //     haveTrailer = snapshot.hasData;
-        //     if (snapshot.data != null) {
-        //       _trailerController.loadVideoById(
-        //           videoId: snapshot.data!.key);
-        //     }
-        //     SystemChrome.setPreferredOrientations([
-        //       DeviceOrientation.landscapeRight,
-        //       DeviceOrientation.landscapeLeft,
-        //     ]);
-        //     return YoutubePlayerScaffold(
-        //         controller: _trailerController,
-        //         builder: (context, player) {
-        //           return Column(
-        //             children: [
-        //               Container(
-        //                   height: MediaQuery.of(context).size.height,
-        //                   padding: const EdgeInsets.only(top: 50),
-        //                   child: player),
-        //             ],
-        //           );
-        //         });
-        //   },
-        // ),
-        );
+        ));
   }
 }

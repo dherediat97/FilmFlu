@@ -30,6 +30,7 @@ class FilmFlu extends StatelessWidget {
 
   final GoRouter _router = GoRouter(
     debugLogDiagnostics: kDebugMode,
+    initialLocation: '/',
     routes: appRoutes,
   );
 

@@ -1,3 +1,4 @@
+import 'package:FilmFlu/app/constants/app_constants.dart';
 import 'package:FilmFlu/app/constants/app_urls.dart';
 import 'package:FilmFlu/app/extensions/custom_loading.dart';
 import 'package:FilmFlu/app/extensions/localizations_extensions.dart';
@@ -27,53 +28,59 @@ class _FilmActorItemState extends State<FilmActorItem> {
     int index = widget.index;
     List<ActorEntity> cast = widget.cast;
     ActorEntity actor = cast[index];
+
     return GridTile(
       child: Column(
         children: [
           InkWell(
             onTap: () {
-              context.go('/personDetails/${actor.id.toInt()}');
+              AppConstants.personId = actor.id.toString();
+              context.push('/personDetails/${actor.id.toString()}');
             },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(32.0),
               child: Image.network(
-                  '${AppUrls.personImgBaseUrl}${actor.profilePath}',
-                  height: 160,
-                  width: 150,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (context, child, loadingProgress) =>
-                      DefaultAsyncLoading(
-                        loadingProgress: loadingProgress,
-                        child: child,
-                      ),
-                  errorBuilder: (context, url, error) {
-                    if (actor.gender == 2) {
-                      return SvgPicture.asset(
-                        'assets/icons/actor_icon.svg',
-                        height: 160,
-                        fit: BoxFit.cover,
-                        width: 150,
-                      );
-                    } else {
-                      return SvgPicture.asset(
-                        'assets/icons/actress_icon.svg',
-                        height: 160,
-                        fit: BoxFit.cover,
-                        width: 150,
-                      );
-                    }
-                  }),
+                '${AppUrls.personImgBaseUrl}${actor.profilePath}',
+                height: 160,
+                width: 150,
+                fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) =>
+                    DefaultAsyncLoading(
+                  loadingProgress: loadingProgress,
+                  child: child,
+                ),
+                errorBuilder: (context, url, error) {
+                  if (actor.gender == 2) {
+                    return SvgPicture.asset(
+                      'assets/icons/actor_icon.svg',
+                      height: 160,
+                      fit: BoxFit.cover,
+                      width: 150,
+                    );
+                  } else {
+                    return SvgPicture.asset(
+                      'assets/icons/actress_icon.svg',
+                      height: 160,
+                      fit: BoxFit.cover,
+                      width: 150,
+                    );
+                  }
+                },
+              ),
             ),
           ),
-          AutoSizeText(actor.name!,
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                  fontFamily: 'ShadowsIntoLight',
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
-                  fontSize: 18)),
+          AutoSizeText(
+            actor.name!,
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontFamily: 'ShadowsIntoLight',
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.primary,
+              fontSize: 18,
+            ),
+          ),
           actor.character!.isNotEmpty || actor.character != null
               ? AutoSizeText(
                   maxLines: 2,

@@ -22,7 +22,7 @@ class MovieCarrouselItem extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
-                AppConstants.mediaType = movie.mediaType.toString();
+                AppConstants.mediaType = movie.title != '' ? 'movie' : 'tv';
                 AppConstants.mediaTypeId = movie.id.toString();
 
                 context.push(

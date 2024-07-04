@@ -1,10 +1,10 @@
 import 'package:FilmFlu/app/types/errors/network_error.dart';
 import 'package:FilmFlu/app/types/repository_error.dart';
 import 'package:FilmFlu/app/types/result.dart';
-import 'package:FilmFlu/data/models/credits_person_remote_entity.dart';
+import 'package:FilmFlu/data/models/credits_media_remote_entity.dart';
 import 'package:FilmFlu/data/models/media_item_remote_entity.dart';
 import 'package:FilmFlu/data/repositories/remote/media_remote_data_source_contract.dart';
-import 'package:FilmFlu/domain/models/credits_person_entity.dart';
+import 'package:FilmFlu/domain/models/credits_media_entity.dart';
 import 'package:FilmFlu/domain/models/media_item_entity.dart';
 import 'package:FilmFlu/domain/repository_contracts/media_repository_contract.dart';
 
@@ -37,7 +37,7 @@ class MediaRepository implements MediaRepositoryContract {
   }
 
   @override
-  Future<Result<CreditsPersonEntity>> getCredits(
+  Future<Result<CreditsMediaEntity>> getCredits(
     String mediaType,
     String mediaTypeId,
   ) async {

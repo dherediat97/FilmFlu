@@ -12,4 +12,5 @@ class AppConstants {
   };
   static String mediaType = '';
   static String mediaTypeId = '';
+  static String personId = '';
 }

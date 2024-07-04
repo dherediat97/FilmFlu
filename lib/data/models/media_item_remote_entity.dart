@@ -1,5 +1,7 @@
+import 'package:FilmFlu/core/entities/pagination.dart';
 import 'package:FilmFlu/data/models/credits_person_remote_entity.dart';
 import 'package:FilmFlu/domain/models/media_item_entity.dart';
+import 'package:FilmFlu/domain/models/video_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'media_item_remote_entity.freezed.dart';
@@ -14,15 +16,16 @@ class MediaItemRemoteEntity with _$MediaItemRemoteEntity {
     @JsonKey(name: 'id') required int id,
     @JsonKey(name: 'original_language') String? originalLanguage,
     @JsonKey(name: 'original_title') String? originalTitle,
-    @JsonKey(name: 'popularity') required double popularity,
+    @JsonKey(name: 'popularity') double? popularity,
     @JsonKey(name: 'poster_path') String? posterPath,
     @JsonKey(name: 'media_type') String? mediaType,
     @JsonKey(name: 'release_date') String? releaseDate,
-    @JsonKey(name: 'first_airdate') String? firstAirDate,
+    @JsonKey(name: 'first_air_date') String? firstAirDate,
     @JsonKey(name: 'title') String? title,
     @JsonKey(name: 'video') bool? video,
-    @JsonKey(name: 'vote_average') required double? voteAverage,
-    @JsonKey(name: 'vote_count') required int? voteCount,
+    @JsonKey(name: 'videos') Pagination<VideoEntity>? videos,
+    @JsonKey(name: 'vote_average') double? voteAverage,
+    @JsonKey(name: 'vote_count') int? voteCount,
     @JsonKey(name: 'overview') String? overview,
     @JsonKey(name: 'runtime') int? runtime,
     @JsonKey(name: 'credits') CreditsPersonRemoteEntity? credits,
@@ -36,23 +39,24 @@ class MediaItemRemoteEntity with _$MediaItemRemoteEntity {
 extension MediaItemToRemoteEntityExtension on MediaItemRemoteEntity {
   MediaItemEntity toMediaEntity() => MediaItemEntity(
         id: id,
-        popularity: popularity,
+        popularity: popularity ?? 0.0,
         posterPath: posterPath ?? '',
         voteAverage: voteAverage ?? 0,
         voteCount: voteCount ?? 0,
         adult: adult,
         backdropPath: backdropPath ?? '',
         credits: credits,
-        genreIds: genreIds,
-        mediaType: mediaType,
+        genreIds: genreIds ?? [],
+        mediaType: mediaType ?? '',
         firstAirDate: firstAirDate ?? '',
-        name: name,
-        originalLanguage: originalLanguage,
-        originalTitle: originalTitle,
-        overview: overview,
-        releaseDate: releaseDate,
-        runtime: runtime,
-        title: title,
+        name: name ?? '',
+        originalLanguage: originalLanguage ?? '',
+        originalTitle: originalTitle ?? '',
+        overview: overview ?? '',
+        releaseDate: releaseDate ?? '',
+        runtime: runtime ?? 0,
+        title: title ?? '',
         video: video,
+        videos: videos,
       );
 }
