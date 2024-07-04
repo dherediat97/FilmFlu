@@ -1,12 +1,15 @@
 import 'package:FilmFlu/app/constants/app_constants.dart';
 import 'package:FilmFlu/app/di/top_bloc_providers.dart';
 import 'package:FilmFlu/app/extensions/localizations_extensions.dart';
+import 'package:FilmFlu/core/constants/language.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ScaffoldPage extends StatefulWidget {
   const ScaffoldPage({
@@ -29,7 +32,6 @@ class ScaffoldPage extends StatefulWidget {
 }
 
 class _ScaffoldPageState extends State<ScaffoldPage> {
-  // final TextEditingController _searchController = TextEditingController();
   final today = DateTime.now();
 
   @override
@@ -122,50 +124,39 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
 
   List<Widget> _appBarActions(BuildContext context) {
     List<Widget> actions = [];
-    Locale _locale;
+    // Locale _locale;
 
-    // actions.add(DropdownButton<Language>(
-    //     onChanged: (Language? language) async {
-    //       if (language != null) {
-    //         _locale = await setLocale(language.languageCode);
-    //         FilmFlu.setLocale(context, _locale);
-    //         setState(() {});
-    //       }
-    //     },
-    //     dropdownColor: Colors.black,
-    //     icon: FutureBuilder<Locale>(
-    //         future: getLocale(),
-    //         builder: (context, snapshot) {
-    //           if (snapshot.connectionState == ConnectionState.waiting)
-    //             return Container();
-
-    //           return SvgPicture.asset(
-    //             "assets/icons/flags/${snapshot.requireData.countryCode}_flag.svg",
-    //             height: 20,
-    //             width: 20,
-    //           );
-    //         }),
-    //     underline: const SizedBox(),
-    //     items: Language.languageList()
-    //         .map<DropdownMenuItem<Language>>((Language language) {
-    //       return DropdownMenuItem<Language>(
-    //         value: language,
-    //         child: Row(
-    //           mainAxisAlignment: MainAxisAlignment.spaceAround,
-    //           children: [
-    //             SvgPicture.asset(
-    //               "assets/icons/flags/${language.languageCode}_flag.svg",
-    //               height: 20,
-    //               width: 20,
-    //             ),
-    //             Text(
-    //               language.name,
-    //               style: TextStyle(color: Colors.white),
-    //             )
-    //           ],
-    //         ),
-    //       );
-    //     }).toList()));
+    actions.add(DropdownButton<Language>(
+        onChanged: (Language? language) async {
+          if (language != null) {}
+        },
+        dropdownColor: Colors.black,
+        icon: SvgPicture.asset(
+          'assets/icons/flags/es_flag.svg',
+          height: 20,
+          width: 20,
+        ),
+        underline: const SizedBox(),
+        items: Language.languageList()
+            .map<DropdownMenuItem<Language>>((Language language) {
+          return DropdownMenuItem<Language>(
+            value: language,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                SvgPicture.asset(
+                  'assets/icons/flags/${language.languageCode}_flag.svg',
+                  height: 20,
+                  width: 20,
+                ),
+                Text(
+                  language.name,
+                  style: const TextStyle(color: Colors.white),
+                )
+              ],
+            ),
+          );
+        }).toList()));
     if (kIsWeb) {
       actions.add(IconButton(
         onPressed: () async {
@@ -173,7 +164,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
           AppConstants.version = packageInfo.version;
           //Descargar App Android
           final Uri url = Uri.parse(AppConstants.appDownloadBaseUrl);
-          // launchUrl(url);
+          await launchUrl(url);
         },
         icon: Icon(
           Icons.android,

@@ -4,7 +4,7 @@ import 'package:FilmFlu/app/routes/app_routes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:FilmFlu/core/utils/utilScroll.dart';
+import 'package:FilmFlu/core/utils/util_scroll.dart';
 import 'package:FilmFlu/core/constants/theme/colors.dart';
 import 'package:go_router/go_router.dart';
 

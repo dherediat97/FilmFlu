@@ -64,13 +64,13 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
 
     creditsData.when(
       failure: (errorMessage) {
-        print(errorMessage);
         emit(
           state.copyWith(uiState: const UiState.error()),
         );
       },
-      success: (value) => emit(
-          state.copyWith(uiState: const UiState.success(), credits: value)),
+      success: (value) {
+        emit(state.copyWith(uiState: const UiState.success(), credits: value));
+      },
     );
   }
 }

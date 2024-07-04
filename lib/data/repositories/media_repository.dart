@@ -48,7 +48,6 @@ class MediaRepository implements MediaRepositoryContract {
       );
       return Result.success(creditData.toCreditsEntity());
     } catch (error) {
-      print(error);
       return Result.failure(
         error: RepositoryError.fromDataSourceError(
           NetworkError.fromException(error),

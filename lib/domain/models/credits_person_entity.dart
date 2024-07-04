@@ -8,8 +8,8 @@ part 'credits_person_entity.g.dart';
 @freezed
 class CreditsPersonEntity with _$CreditsPersonEntity {
   const factory CreditsPersonEntity({
-    List<ActorEntity>? cast,
-    List<FilmWorkerEntity>? crew,
+    required List<ActorEntity> cast,
+    required List<FilmWorkerEntity> crew,
   }) = _CreditsPersonEntity;
 
   factory CreditsPersonEntity.fromJson(Map<String, dynamic> json) =>

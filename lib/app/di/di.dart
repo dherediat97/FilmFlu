@@ -10,8 +10,8 @@ import 'package:FilmFlu/data/repositories/remote/media_list_remote_data_source_c
 import 'package:FilmFlu/data/repositories/remote/media_remote_data_source_contract.dart';
 import 'package:FilmFlu/domain/repository_contracts/media_list_repository_contract.dart';
 import 'package:FilmFlu/domain/repository_contracts/media_repository_contract.dart';
-import 'package:FilmFlu/presentation/features/details/bloc/media_detail_bloc.dart';
-import 'package:FilmFlu/presentation/features/movie_list/bloc/media_list_bloc.dart';
+import 'package:FilmFlu/presentation/features/media_details/bloc/media_detail_bloc.dart';
+import 'package:FilmFlu/presentation/features/media_list/bloc/media_list_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 part 'modules/api_modules.dart';
