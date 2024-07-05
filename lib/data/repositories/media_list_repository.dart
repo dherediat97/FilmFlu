@@ -14,10 +14,17 @@ class MediaListRepository implements MediaListRepositoryContract {
   );
 
   @override
-  Future<Result<List<MediaItemEntity>>> getMediaList(String mediaType) async {
+  Future<Result<List<MediaItemEntity>>> getMediaList({
+    required String mediaType,
+    required int genreId,
+    String? languageId,
+  }) async {
     try {
-      final movieData =
-          await _movieRemoteDataSourceContract.getMediaTypeList(mediaType);
+      final movieData = await _movieRemoteDataSourceContract.getMediaTypeList(
+        mediaType: mediaType,
+        genreId: genreId,
+        languageId: languageId ?? '',
+      );
       return Result.success(movieData.map((e) => e.toMediaEntity()).toList());
     } catch (error) {
       return Result.failure(

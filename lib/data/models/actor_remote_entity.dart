@@ -10,6 +10,7 @@ class ActorRemoteEntity with _$ActorRemoteEntity {
     @JsonKey(name: 'adult') required bool adult,
     @JsonKey(name: 'gender') required int gender,
     @JsonKey(name: 'id') required int id,
+    @JsonKey(name: 'genre_ids') required List<int> genreIds,
     @JsonKey(name: 'name') required String name,
     @JsonKey(name: 'profile_path') String? profilePath,
     @JsonKey(name: 'character') required String character,
@@ -29,5 +30,6 @@ extension ActorEntityToRemoteEntityExtension on ActorRemoteEntity {
         gender: gender,
         order: order,
         profilePath: profilePath,
+        genreIds: genreIds,
       );
 }

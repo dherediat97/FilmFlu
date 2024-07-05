@@ -13,6 +13,7 @@ class ActorEntity with _$ActorEntity {
     String? profilePath,
     String? character,
     int? order,
+    required List<int> genreIds,
   }) = _ActorEntity;
 
   factory ActorEntity.fromJson(Map<String, dynamic> json) =>

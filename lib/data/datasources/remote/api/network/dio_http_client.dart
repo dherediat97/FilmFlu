@@ -27,7 +27,7 @@ class DioClient {
     if (interceptors.isNotEmpty) {
       _dio.interceptors.addAll(interceptors);
     }
-    if (kDebugMode) {
+    if (!kDebugMode) {
       _dio.interceptors.add(LogInterceptor(
         responseBody: true,
         error: true,

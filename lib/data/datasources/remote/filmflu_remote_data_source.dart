@@ -16,10 +16,16 @@ class FilmFluRemoteDataSource
   FilmFluRemoteDataSource(this._filmFluApi);
 
   @override
-  Future<List<MediaItemRemoteEntity>> getMediaTypeList(String mediaType) async {
+  Future<List<MediaItemRemoteEntity>> getMediaTypeList({
+    required String mediaType,
+    required int genreId,
+    String? languageId,
+  }) async {
     final mediaData = await _filmFluApi.fetchPopularMediaTypes(
       mediaType: mediaType,
       language: 'es-ES',
+      genres: genreId,
+      languageId: languageId ?? '',
     );
     return mediaData.results;
   }

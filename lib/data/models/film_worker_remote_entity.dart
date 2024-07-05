@@ -13,6 +13,7 @@ class FilmWorkerRemoteEntity with _$FilmWorkerRemoteEntity {
     @JsonKey(name: 'known_for_department') required String knownForDepartment,
     @JsonKey(name: 'name') required String name,
     @JsonKey(name: 'profile_path') String? profilePath,
+    @JsonKey(name: 'genre_ids') required List<int> genreIds,
     @JsonKey(name: 'job') required String job,
   }) = _FilmWorkerRemoteEntity;
 
@@ -29,5 +30,6 @@ extension FilmWorkerEntityToRemoteEntityExtension on FilmWorkerRemoteEntity {
         gender: gender,
         knownForDepartment: knownForDepartment,
         profilePath: profilePath,
+        genreIds: genreIds,
       );
 }

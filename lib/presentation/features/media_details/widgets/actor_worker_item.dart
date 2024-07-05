@@ -52,14 +52,18 @@ class _FilmActorItemState extends State<FilmActorItem> {
                 errorBuilder: (context, url, error) {
                   if (actor.gender == 2) {
                     return SvgPicture.asset(
-                      'assets/icons/actor_icon.svg',
+                      !actor.genreIds.contains(16)
+                          ? 'assets/icons/actor_icon.svg'
+                          : 'assets/icons/anime_boy.svg',
                       height: 160,
                       fit: BoxFit.cover,
                       width: 150,
                     );
                   } else {
                     return SvgPicture.asset(
-                      'assets/icons/actress_icon.svg',
+                      !actor.genreIds.contains(16)
+                          ? 'assets/icons/actress_icon.svg'
+                          : 'assets/icons/anime_girl.svg',
                       height: 160,
                       fit: BoxFit.cover,
                       width: 150,

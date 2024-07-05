@@ -18,17 +18,25 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
         super(MediaListState.initial()) {
     on<MediaListEvent>((event, emit) async {
       await event.when(
-        getMovieData: () => _getMovieData(event, emit),
-        getTVSeriesData: () => _getTVSeriesData(event, emit),
+        getMovieData: (int genreId) => _getMovieData(event, emit, genreId),
+        getTVSeriesData: (int genreId, String languageId) => _getTVSeriesData(
+          event,
+          emit,
+          genreId,
+          languageId,
+        ),
       );
     });
   }
 
-  _getMovieData(MediaListEvent event, Emitter<MediaListState> emit) async {
+  _getMovieData(
+      MediaListEvent event, Emitter<MediaListState> emit, genreId) async {
     emit(state.copyWith(uiState: const UiState.loading()));
 
-    final movieData =
-        await _repository.getMediaList(MediaListConstants.movieMediaType);
+    final movieData = await _repository.getMediaList(
+      mediaType: MediaListConstants.movieMediaType,
+      genreId: genreId,
+    );
     movieData.when(
       failure: (errorMessage) {
         emit(
@@ -40,11 +48,19 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
     );
   }
 
-  _getTVSeriesData(MediaListEvent event, Emitter<MediaListState> emit) async {
+  _getTVSeriesData(
+    MediaListEvent event,
+    Emitter<MediaListState> emit,
+    int genreId,
+    String languageId,
+  ) async {
     emit(state.copyWith(uiState: const UiState.loading()));
 
-    final seriesData =
-        await _repository.getMediaList(MediaListConstants.serieMediaType);
+    final seriesData = await _repository.getMediaList(
+      mediaType: MediaListConstants.serieMediaType,
+      genreId: genreId,
+      languageId: languageId,
+    );
     seriesData.when(
       failure: (errorMessage) {
         emit(
