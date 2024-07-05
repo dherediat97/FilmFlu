@@ -252,11 +252,15 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                                     movieId: widget.mediaTypeId.toString(),
                                     isCast: true,
                                     mediaType: AppConstants.mediaType,
+                                    cast: movie.credits!.cast,
+                                    crew: movie.credits!.crew,
                                   )
                                 : FilmCast(
                                     movieId: widget.mediaTypeId.toString(),
                                     isCast: false,
                                     mediaType: AppConstants.mediaType,
+                                    cast: movie.credits!.cast,
+                                    crew: movie.credits!.crew,
                                   )
                           ],
                         ),

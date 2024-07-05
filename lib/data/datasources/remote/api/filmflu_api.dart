@@ -29,7 +29,7 @@ abstract class FilmFluApi {
     @Path('mediaType') required String mediaType,
     @Path('mediaTypeId') required int mediaTypeId,
     @Query('language') String language = 'es-ES',
-    @Query('append_to_response') String moreResponse = 'videos',
+    @Query('append_to_response') String moreResponse = 'videos,credits',
   });
 
   @GET('/fetchTrailer')

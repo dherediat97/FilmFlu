@@ -12,12 +12,17 @@ class FilmCast extends StatefulWidget {
     required this.movieId,
     required this.isCast,
     required this.mediaType,
+    required this.cast,
+    required this.crew,
   });
 
   final bool isCast;
 
   final String movieId;
   final String mediaType;
+
+  final List<ActorEntity>? cast;
+  final List<FilmWorkerEntity>? crew;
 
   @override
   State<FilmCast> createState() => _FilmCastState();
@@ -28,11 +33,7 @@ class _FilmCastState extends State<FilmCast> {
   Widget build(BuildContext context) {
     return BlocBuilder<MediaDetailBloc, MediaDetailState>(
       builder: (context, state) {
-        List<ActorEntity>? cast = state.credits?.cast;
-
-        List<FilmWorkerEntity>? crew = state.credits?.crew;
-
-        return cast != null && crew != null
+        return widget.cast != null && widget.crew != null
             ? Container(
                 padding: const EdgeInsets.all(8),
                 child: GridView.builder(
@@ -45,13 +46,16 @@ class _FilmCastState extends State<FilmCast> {
                     mainAxisExtent: 240,
                     childAspectRatio: MediaQuery.of(context).size.aspectRatio,
                   ),
-                  itemCount: widget.isCast ? cast.length : crew.length,
+                  itemCount:
+                      widget.isCast ? widget.cast?.length : widget.crew?.length,
                   itemBuilder: (context, index) => widget.isCast
-                      ? FilmActorItem(index: index, cast: cast)
-                      : FilmWorkerItem(index: index, crew: crew),
+                      ? FilmActorItem(index: index, cast: widget.cast!)
+                      : FilmWorkerItem(index: index, crew: widget.crew!),
                 ),
               )
-            : Container();
+            : const Center(
+                child: CircularProgressIndicator(),
+              );
       },
     );
   }

@@ -26,20 +26,14 @@ class TopBlocProviders extends StatelessWidget {
             ),
         ),
         BlocProvider(
-            create: (context) => _getIt<MediaDetailBloc>()
-              ..add(
-                MediaDetailEvent.getMediaDetails(
-                  AppConstants.mediaType,
-                  AppConstants.mediaTypeId.toString(),
-                ),
-              )
-            // ..add(
-            //   MediaDetailEvent.getCredits(
-            //     AppConstants.mediaType,
-            //     AppConstants.mediaTypeId,
-            //   ),
-            // ),
+          create: (context) => _getIt<MediaDetailBloc>()
+            ..add(
+              MediaDetailEvent.getMediaDetails(
+                AppConstants.mediaType,
+                AppConstants.mediaTypeId.toString(),
+              ),
             ),
+        ),
         BlocProvider(
           create: (context) => _getIt<PersonDetailBloc>()
             ..add(
