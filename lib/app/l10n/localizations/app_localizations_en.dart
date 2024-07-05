@@ -10,7 +10,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get app_name => 'Film Flu';
 
   @override
-  String get film_list_title => 'Film Playing';
+  String get film_list_title => 'Drama Film Playing';
 
   @override
   String get search_film_hint => 'Search here';
@@ -37,7 +37,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get no_trailers => 'This film haven\'t trailer';
 
   @override
-  String get tv_series_list_title => 'TV Series Playing';
+  String get tv_series_list_title => 'Anime Playing';
 
   @override
   String get loading_title => '3, 2, 1 ACTION !!!';

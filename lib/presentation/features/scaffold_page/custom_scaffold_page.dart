@@ -1,7 +1,9 @@
-import 'package:FilmFlu/app/constants/app_constants.dart';
-import 'package:FilmFlu/app/di/top_bloc_providers.dart';
-import 'package:FilmFlu/app/extensions/localizations_extensions.dart';
-import 'package:FilmFlu/core/constants/language.dart';
+import 'package:film_flu/app/constants/app_assets.dart';
+import 'package:film_flu/app/constants/app_constants.dart';
+import 'package:film_flu/app/di/top_bloc_providers.dart';
+import 'package:film_flu/app/extensions/localizations_extensions.dart';
+import 'package:film_flu/app/routes/app_path.dart';
+import 'package:film_flu/core/constants/language.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -47,16 +49,16 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                     padding: const EdgeInsets.all(12.0),
                     child: InkWell(
                         child: Image.asset(
-                          'assets/images/transparent_logo.png',
+                          AppAssets.transparentLogo,
                           height: 20,
                           width: 20,
                           fit: BoxFit.contain,
                         ),
                         onTap: () {
-                          if (Navigator.canPop(context)) {
+                          if (context.canPop()) {
                             context.pop();
                           } else {
-                            context.pushReplacementNamed('/');
+                            context.pushReplacementNamed(AppRoutePath.home);
                           }
                         }),
                   ),

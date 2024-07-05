@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:FilmFlu/app/types/errors/network_error.dart';
+import 'package:film_flu/app/types/errors/network_error.dart';
 
 part 'repository_error.freezed.dart';
 

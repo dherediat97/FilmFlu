@@ -1,4 +1,4 @@
-import 'package:FilmFlu/env/env.dart';
+import 'package:film_flu/env/env.dart';
 
 class AppConstants {
   static const String appName = 'FilmFlu';
@@ -11,6 +11,6 @@ class AppConstants {
     'Content-Type': 'application/json'
   };
   static String mediaType = '';
-  static String mediaTypeId = '';
-  static String personId = '';
+  static int mediaTypeId = 0;
+  static int personId = 0;
 }

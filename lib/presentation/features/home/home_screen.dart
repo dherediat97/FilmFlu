@@ -1,8 +1,8 @@
-import 'package:FilmFlu/app/extensions/localizations_extensions.dart';
-import 'package:FilmFlu/presentation/features/media_list/bloc/media_list_bloc.dart';
-import 'package:FilmFlu/presentation/features/media_list/widgets/media_list.dart';
-import 'package:FilmFlu/presentation/features/scaffold_page/custom_scaffold_page.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:film_flu/app/extensions/localizations_extensions.dart';
+import 'package:film_flu/presentation/features/media_list/bloc/media_list_bloc.dart';
+import 'package:film_flu/presentation/features/media_list/widgets/media_list.dart';
+import 'package:film_flu/presentation/features/scaffold_page/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

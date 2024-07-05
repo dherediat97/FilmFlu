@@ -1,6 +1,7 @@
-import 'package:FilmFlu/app/types/ui_state.dart';
-import 'package:FilmFlu/domain/models/media_item_entity.dart';
-import 'package:FilmFlu/domain/repository_contracts/media_list_repository_contract.dart';
+import 'package:film_flu/app/types/ui_state.dart';
+import 'package:film_flu/domain/models/media_item_entity.dart';
+import 'package:film_flu/domain/repository_contracts/media_list_repository_contract.dart';
+import 'package:film_flu/presentation/features/media_list/constants/media_list_constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -17,16 +18,25 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
         super(MediaListState.initial()) {
     on<MediaListEvent>((event, emit) async {
       await event.when(
-        getMovieData: () => _getMovieData(event, emit),
-        getTVSeriesData: () => _getTVSeriesData(event, emit),
+        getMovieData: (int genreId) => _getMovieData(event, emit, genreId),
+        getTVSeriesData: (int genreId, String languageId) => _getTVSeriesData(
+          event,
+          emit,
+          genreId,
+          languageId,
+        ),
       );
     });
   }
 
-  _getMovieData(MediaListEvent event, Emitter<MediaListState> emit) async {
+  _getMovieData(
+      MediaListEvent event, Emitter<MediaListState> emit, genreId) async {
     emit(state.copyWith(uiState: const UiState.loading()));
 
-    final movieData = await _repository.getMediaList('movie');
+    final movieData = await _repository.getMediaList(
+      mediaType: MediaListConstants.movieMediaType,
+      genreId: genreId,
+    );
     movieData.when(
       failure: (errorMessage) {
         emit(
@@ -38,10 +48,19 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
     );
   }
 
-  _getTVSeriesData(MediaListEvent event, Emitter<MediaListState> emit) async {
+  _getTVSeriesData(
+    MediaListEvent event,
+    Emitter<MediaListState> emit,
+    int genreId,
+    String languageId,
+  ) async {
     emit(state.copyWith(uiState: const UiState.loading()));
 
-    final seriesData = await _repository.getMediaList('tv');
+    final seriesData = await _repository.getMediaList(
+      mediaType: MediaListConstants.serieMediaType,
+      genreId: genreId,
+      languageId: languageId,
+    );
     seriesData.when(
       failure: (errorMessage) {
         emit(

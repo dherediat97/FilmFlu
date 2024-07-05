@@ -1,6 +1,6 @@
 {
   "app_name": "Film Flu",
-  "film_list_title": "Film Playing",
+  "film_list_title": "Drama Film Playing",
   "search_film_hint": "Search here",
   "synopsis": "Synopsis",
   "character_cast": "Character Cast",
@@ -9,7 +9,7 @@
   "actor_job": "Play",
   "in_preposition": "in",
   "no_trailers":"This film haven't trailer",
-  "tv_series_list_title":"TV Series Playing",
+  "tv_series_list_title":"Anime Playing",
   "loading_title":"3, 2, 1 ACTION !!!",
   "films_not_found":"Films not found"
 }

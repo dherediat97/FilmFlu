@@ -9,6 +9,17 @@ class MediaDetailEvent with _$MediaDetailEvent {
 
   const factory MediaDetailEvent.getCredits(
     String mediaType,
-    String mediaItemId,
+    int mediaItemId,
   ) = _GetCredits;
+
+  const factory MediaDetailEvent.setCreditsType(
+    bool isCastSelected,
+  ) = _SetCreditsType;
+
+  const factory MediaDetailEvent.openTrailer(
+    String mediaType,
+    MediaItemEntity mediaItem,
+  ) = _OpenTrailer;
+
+  const factory MediaDetailEvent.closeTrailer() = _CloseTrailer;
 }

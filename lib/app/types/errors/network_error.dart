@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:FilmFlu/app/types/errors/network_utils.dart';
+import 'package:film_flu/app/types/errors/network_utils.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

@@ -1,8 +1,8 @@
-import 'package:FilmFlu/app/types/result.dart';
-import 'package:FilmFlu/domain/models/person_entity.dart';
+import 'package:film_flu/app/types/result.dart';
+import 'package:film_flu/domain/models/person_entity.dart';
 
 abstract class PersonRepositoryContract {
   Future<Result<PersonEntity>> fetchPersonData(
-    String personId,
+    int personId,
   );
 }

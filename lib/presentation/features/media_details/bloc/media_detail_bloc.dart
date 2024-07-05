@@ -1,7 +1,8 @@
-import 'package:FilmFlu/app/types/ui_state.dart';
-import 'package:FilmFlu/domain/models/credits_media_entity.dart';
-import 'package:FilmFlu/domain/models/media_item_entity.dart';
-import 'package:FilmFlu/domain/repository_contracts/media_repository_contract.dart';
+import 'package:film_flu/app/types/ui_state.dart';
+import 'package:film_flu/domain/models/credits_media_entity.dart';
+import 'package:film_flu/domain/models/media_item_entity.dart';
+import 'package:film_flu/domain/repository_contracts/media_repository_contract.dart';
+import 'package:film_flu/presentation/features/media_list/constants/media_list_constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -20,13 +21,18 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
       await event.when(
         getMediaDetails: (String mediaType, String mediaItemId) =>
             _getMediaDetails(event, emit, mediaType, mediaItemId),
-        getCredits: (String mediaType, String mediaItemId) =>
+        getCredits: (String mediaType, int mediaItemId) =>
             _getCredits(event, emit, mediaType, mediaItemId),
+        setCreditsType: (bool isCastSelected) =>
+            _setCreditsType(event, emit, isCastSelected),
+        openTrailer: (String mediaType, MediaItemEntity mediaItem) =>
+            _openTrailer(event, emit, mediaType, mediaItem),
+        closeTrailer: () => _closeTrailer(event, emit),
       );
     });
   }
 
-  _getMediaDetails(
+  Future<void> _getMediaDetails(
     MediaDetailEvent event,
     Emitter<MediaDetailState> emit,
     String mediaType,
@@ -36,7 +42,7 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
 
     final movieData = await _repository.getMediaItem(
       mediaType,
-      mediaItemId,
+      int.parse(mediaItemId),
     );
     movieData.when(
       failure: (errorMessage) {
@@ -44,16 +50,24 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
           state.copyWith(uiState: const UiState.error()),
         );
       },
-      success: (value) => emit(
-          state.copyWith(uiState: const UiState.success(), mediaItem: value)),
+      success: (movie) {
+        emit(state.copyWith(
+          uiState: const UiState.success(),
+          mediaItem: movie,
+          trailerId: _getTrailerId(movie, mediaType),
+          movieName: movie.title?.isNotEmpty == true
+              ? movie.title.toString()
+              : movie.name.toString(),
+        ));
+      },
     );
   }
 
-  _getCredits(
+  Future<void> _getCredits(
     MediaDetailEvent event,
     Emitter<MediaDetailState> emit,
     String mediaType,
-    String mediaTypeId,
+    int mediaTypeId,
   ) async {
     emit(state.copyWith(uiState: const UiState.loading()));
 
@@ -72,5 +86,45 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
         emit(state.copyWith(uiState: const UiState.success(), credits: value));
       },
     );
+  }
+
+  Future<void> _setCreditsType(
+    MediaDetailEvent event,
+    Emitter<MediaDetailState> emit,
+    bool isCastSelected,
+  ) async {
+    emit(state.copyWith(isCastSelected: isCastSelected));
+  }
+
+  Future<void> _openTrailer(
+    MediaDetailEvent event,
+    Emitter<MediaDetailState> emit,
+    String mediaType,
+    MediaItemEntity movie,
+  ) async {
+    emit(state.copyWith(
+      isTrailerOpened: true,
+    ));
+  }
+
+  Future<void> _closeTrailer(
+    MediaDetailEvent event,
+    Emitter<MediaDetailState> emit,
+  ) async {
+    emit(state.copyWith(
+      isTrailerOpened: false,
+    ));
+  }
+
+  String _getTrailerId(MediaItemEntity mediaItemEntity, String mediaType) {
+    if (mediaItemEntity.videos == null) return '';
+    if (mediaItemEntity.videos!.results.isEmpty) return '';
+
+    return mediaItemEntity.videos!.results
+        .firstWhere((element) =>
+            element.type == MediaListConstants.trailer ||
+            element.type == MediaListConstants.teaser)
+        .key
+        .toString();
   }
 }

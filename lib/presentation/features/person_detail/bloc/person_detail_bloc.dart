@@ -1,6 +1,6 @@
-import 'package:FilmFlu/app/types/ui_state.dart';
-import 'package:FilmFlu/domain/models/person_entity.dart';
-import 'package:FilmFlu/domain/repository_contracts/person_repository_contract.dart';
+import 'package:film_flu/app/types/ui_state.dart';
+import 'package:film_flu/domain/models/person_entity.dart';
+import 'package:film_flu/domain/repository_contracts/person_repository_contract.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -17,7 +17,7 @@ class PersonDetailBloc extends Bloc<PersonDetailEvent, PersonDetailState> {
         super(PersonDetailState.initial()) {
     on<PersonDetailEvent>((event, emit) async {
       await event.when(
-        getPersonData: (String personId) => _getPersonData(
+        getPersonData: (int personId) => _getPersonData(
           event,
           emit,
           personId,
@@ -29,7 +29,7 @@ class PersonDetailBloc extends Bloc<PersonDetailEvent, PersonDetailState> {
   _getPersonData(
     PersonDetailEvent event,
     Emitter<PersonDetailState> emit,
-    String personId,
+    int personId,
   ) async {
     emit(state.copyWith(uiState: const UiState.loading()));
 

@@ -1,8 +1,8 @@
-import 'package:FilmFlu/domain/models/actor_entity.dart';
-import 'package:FilmFlu/domain/models/film_worker_entity.dart';
-import 'package:FilmFlu/presentation/features/media_details/bloc/media_detail_bloc.dart';
-import 'package:FilmFlu/presentation/features/media_details/widgets/actor_worker_item.dart';
-import 'package:FilmFlu/presentation/features/media_details/widgets/film_worker_item.dart';
+import 'package:film_flu/domain/models/actor_entity.dart';
+import 'package:film_flu/domain/models/film_worker_entity.dart';
+import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
+import 'package:film_flu/presentation/features/media_details/widgets/actor_worker_item.dart';
+import 'package:film_flu/presentation/features/media_details/widgets/film_worker_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,8 +1,8 @@
-import 'package:FilmFlu/app/constants/app_constants.dart';
-import 'package:FilmFlu/app/constants/app_urls.dart';
-import 'package:FilmFlu/app/extensions/custom_loading.dart';
-import 'package:FilmFlu/app/extensions/localizations_extensions.dart';
-import 'package:FilmFlu/domain/models/actor_entity.dart';
+import 'package:film_flu/app/constants/app_constants.dart';
+import 'package:film_flu/app/constants/app_urls.dart';
+import 'package:film_flu/app/extensions/custom_loading.dart';
+import 'package:film_flu/app/extensions/localizations_extensions.dart';
+import 'package:film_flu/domain/models/actor_entity.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -34,8 +34,8 @@ class _FilmActorItemState extends State<FilmActorItem> {
         children: [
           InkWell(
             onTap: () {
-              AppConstants.personId = actor.id.toString();
-              context.push('/personDetails/${actor.id.toString()}');
+              AppConstants.personId = actor.id;
+              context.push('/personDetails/${actor.id}');
             },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(32.0),
@@ -52,14 +52,18 @@ class _FilmActorItemState extends State<FilmActorItem> {
                 errorBuilder: (context, url, error) {
                   if (actor.gender == 2) {
                     return SvgPicture.asset(
-                      'assets/icons/actor_icon.svg',
+                      !actor.genreIds.contains(16)
+                          ? 'assets/icons/actor_icon.svg'
+                          : 'assets/icons/anime_boy.svg',
                       height: 160,
                       fit: BoxFit.cover,
                       width: 150,
                     );
                   } else {
                     return SvgPicture.asset(
-                      'assets/icons/actress_icon.svg',
+                      !actor.genreIds.contains(16)
+                          ? 'assets/icons/actress_icon.svg'
+                          : 'assets/icons/anime_girl.svg',
                       height: 160,
                       fit: BoxFit.cover,
                       width: 150,

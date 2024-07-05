@@ -1,6 +1,6 @@
-import 'package:FilmFlu/data/models/credit_actor_remote_entity.dart';
-import 'package:FilmFlu/data/models/credit_production_remote_entity.dart';
-import 'package:FilmFlu/domain/models/credits_person_entity.dart';
+import 'package:film_flu/data/models/credit_actor_remote_entity.dart';
+import 'package:film_flu/data/models/credit_production_remote_entity.dart';
+import 'package:film_flu/domain/models/credits_person_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'credits_person_remote_entity.freezed.dart';

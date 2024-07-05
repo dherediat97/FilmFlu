@@ -1,10 +1,10 @@
-import 'package:FilmFlu/core/entities/pagination.dart';
-import 'package:FilmFlu/data/models/credits_media_remote_entity.dart';
-import 'package:FilmFlu/data/models/credits_person_remote_entity.dart';
-import 'package:FilmFlu/data/models/media_item_remote_entity.dart';
-import 'package:FilmFlu/data/models/person_remote_entity.dart';
-import 'package:FilmFlu/data/models/video_remote_entity.dart';
-import 'package:FilmFlu/domain/models/language_entity.dart';
+import 'package:film_flu/core/entities/pagination.dart';
+import 'package:film_flu/data/models/credits_media_remote_entity.dart';
+import 'package:film_flu/data/models/credits_person_remote_entity.dart';
+import 'package:film_flu/data/models/media_item_remote_entity.dart';
+import 'package:film_flu/data/models/person_remote_entity.dart';
+import 'package:film_flu/data/models/video_remote_entity.dart';
+import 'package:film_flu/domain/models/language_entity.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
@@ -20,14 +20,14 @@ abstract class FilmFluApi {
     @Path('mediaType') required String mediaType,
     @Query('language') String language = 'es-ES',
     @Query('sort_by') String sortBy = 'popularity.desc',
-    @Query('region') String year = 'es',
-    @Query('with_genres') String genres = '',
+    @Query('with_genres') required int genres,
+    @Query('with_original_language') String? languageId,
   });
 
   @GET('/{mediaType}/{mediaTypeId}')
   Future<MediaItemRemoteEntity> fetchMediaItem({
     @Path('mediaType') required String mediaType,
-    @Path('mediaTypeId') required String mediaTypeId,
+    @Path('mediaTypeId') required int mediaTypeId,
     @Query('language') String language = 'es-ES',
     @Query('append_to_response') String moreResponse = 'videos',
   });
@@ -42,7 +42,7 @@ abstract class FilmFluApi {
   @GET('/{mediaType}/{mediaTypeId}/credits')
   Future<CreditsMediaRemoteEntity> fetchCredits({
     @Path('mediaType') required String mediaType,
-    @Path('mediaTypeId') required String mediaTypeId,
+    @Path('mediaTypeId') required int mediaTypeId,
     @Query('language') String language = 'es-ES',
   });
 
@@ -51,7 +51,7 @@ abstract class FilmFluApi {
 
   @GET('/person/{personId}')
   Future<PersonRemoteEntity> fetchPerson({
-    @Path('personId') required String personId,
+    @Path('personId') required int personId,
     @Query('language') String language = 'es-ES',
     @Query('append_to_response') String moreResponse = 'credits',
   });

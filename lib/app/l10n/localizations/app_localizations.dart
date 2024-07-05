@@ -103,7 +103,7 @@ abstract class AppLocalizations {
   /// No description provided for @film_list_title.
   ///
   /// In es, this message translates to:
-  /// **'Novedades en Películas'**
+  /// **'Novedades en películas de drama'**
   String get film_list_title;
 
   /// No description provided for @search_film_hint.
@@ -157,7 +157,7 @@ abstract class AppLocalizations {
   /// No description provided for @tv_series_list_title.
   ///
   /// In es, this message translates to:
-  /// **'Novedades en Series'**
+  /// **'Novedades en series de Anime'**
   String get tv_series_list_title;
 
   /// No description provided for @loading_title.

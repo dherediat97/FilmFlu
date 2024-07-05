@@ -1,4 +1,4 @@
-import 'package:FilmFlu/domain/models/credit_production_entity.dart';
+import 'package:film_flu/domain/models/credit_production_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'credit_production_remote_entity.freezed.dart';

@@ -1,8 +1,9 @@
-import 'package:FilmFlu/app/constants/app_constants.dart';
-import 'package:FilmFlu/app/constants/app_urls.dart';
-import 'package:FilmFlu/app/extensions/custom_loading.dart';
-import 'package:FilmFlu/app/routes/app_path.dart';
-import 'package:FilmFlu/domain/models/media_item_entity.dart';
+import 'package:film_flu/app/constants/app_constants.dart';
+import 'package:film_flu/app/constants/app_urls.dart';
+import 'package:film_flu/app/extensions/custom_loading.dart';
+import 'package:film_flu/app/routes/app_path.dart';
+import 'package:film_flu/domain/models/media_item_entity.dart';
+import 'package:film_flu/presentation/features/media_list/constants/media_list_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,44 +18,43 @@ class MovieCarrouselItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          children: [
-            InkWell(
-              onTap: () {
-                AppConstants.mediaType = movie.title != '' ? 'movie' : 'tv';
-                AppConstants.mediaTypeId = movie.id.toString();
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        children: [
+          InkWell(
+            onTap: () {
+              AppConstants.mediaType = movie.title != ''
+                  ? MediaListConstants.movieMediaType
+                  : MediaListConstants.serieMediaType;
 
-                context.push(
-                  AppRoutePath.mediaDetails,
-                  extra: {
-                    'mediaId': movie.id,
-                    'mediaType': movie.mediaType,
-                  },
-                );
-              },
-              child: SizedBox(
-                width: 140,
-                height: 200,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(32)),
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: Image.network(
-                        '${AppUrls.movieImgBaseURL}${movie.posterPath}',
-                        loadingBuilder: (context, child, loadingProgress) =>
-                            DefaultAsyncLoading(
-                          loadingProgress: loadingProgress,
-                          child: child,
-                        ),
-                      ).image,
-                    ),
+              AppConstants.mediaTypeId = movie.id;
+              context.push('${AppRoutePath.mediaDetails}/${movie.id}');
+            },
+            child: SizedBox(
+              width: 140,
+              height: 200,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(32),
+                  ),
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: Image.network(
+                      '${AppUrls.movieImgBaseURL}${movie.posterPath}',
+                      loadingBuilder: (context, child, loadingProgress) =>
+                          DefaultAsyncLoading(
+                        loadingProgress: loadingProgress,
+                        child: child,
+                      ),
+                    ).image,
                   ),
                 ),
               ),
             ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }
