@@ -13,7 +13,6 @@ class FilmWorkerEntity with _$FilmWorkerEntity {
     String? name,
     String? profilePath,
     String? job,
-    required List<int> genreIds,
   }) = _FilmWorkerEntity;
 
   factory FilmWorkerEntity.fromJson(Map<String, dynamic> json) =>

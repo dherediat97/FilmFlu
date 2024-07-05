@@ -56,18 +56,14 @@ class _FilmWorkerItemState extends State<FilmWorkerItem> {
               }, errorBuilder: (context, url, error) {
                 if (filmWorker.gender == 2) {
                   return SvgPicture.asset(
-                    !filmWorker.genreIds.contains(16)
-                        ? 'assets/icons/actor_icon.svg'
-                        : 'assets/icons/anime_boy.svg',
+                    'assets/icons/actor_icon.svg',
                     height: 160,
                     fit: BoxFit.cover,
                     width: 150,
                   );
                 } else {
                   return SvgPicture.asset(
-                    !filmWorker.genreIds.contains(16)
-                        ? 'assets/icons/actress_icon.svg'
-                        : 'assets/icons/anime_girl.svg',
+                    'assets/icons/actress_icon.svg',
                     height: 160,
                     fit: BoxFit.cover,
                     width: 150,

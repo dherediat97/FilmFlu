@@ -1,5 +1,5 @@
 import 'package:film_flu/core/entities/pagination.dart';
-import 'package:film_flu/data/models/credits_person_remote_entity.dart';
+import 'package:film_flu/data/models/credits_media_remote_entity.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/domain/models/video_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -28,7 +28,7 @@ class MediaItemRemoteEntity with _$MediaItemRemoteEntity {
     @JsonKey(name: 'vote_count') int? voteCount,
     @JsonKey(name: 'overview') String? overview,
     @JsonKey(name: 'runtime') int? runtime,
-    @JsonKey(name: 'credits') CreditsPersonRemoteEntity? credits,
+    @JsonKey(name: 'credits') CreditsMediaRemoteEntity? credits,
     @JsonKey(name: 'name') String? name,
   }) = _MediaItemRemoteEntity;
 
@@ -45,7 +45,7 @@ extension MediaItemToRemoteEntityExtension on MediaItemRemoteEntity {
         voteCount: voteCount ?? 0,
         adult: adult,
         backdropPath: backdropPath ?? '',
-        credits: credits,
+        credits: credits?.toCreditsEntity(),
         genreIds: genreIds ?? [],
         mediaType: mediaType ?? '',
         firstAirDate: firstAirDate ?? '',
