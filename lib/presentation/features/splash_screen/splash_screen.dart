@@ -7,7 +7,7 @@ import 'package:lottie/lottie.dart';
 class SplashPage extends StatefulWidget {
   const SplashPage({
     super.key,
-    required this.routePath,
+    this.routePath = '',
   });
 
   final String routePath;
@@ -48,7 +48,9 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                 ..duration = composition.duration
                 ..forward().whenComplete(
                   () {
-                    return context.push(widget.routePath);
+                    if (widget.routePath.isNotEmpty) {
+                      return context.push(widget.routePath);
+                    }
                   },
                 );
             },

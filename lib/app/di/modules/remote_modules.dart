@@ -4,12 +4,12 @@ final remoteModulesDi = GetIt.instance;
 
 void _remoteModulesInit() {
   remoteModulesDi.registerLazySingleton<MediaListRemoteDataSourceContract>(
-    () => FilmFluRemoteDataSource(remoteModulesDi()),
+    () => FilmFluRemoteDataSource(remoteModulesDi(), localModulesDi()),
   );
   remoteModulesDi.registerLazySingleton<MediaRemoteDataSourceContract>(
-    () => FilmFluRemoteDataSource(remoteModulesDi()),
+    () => FilmFluRemoteDataSource(remoteModulesDi(), localModulesDi()),
   );
   remoteModulesDi.registerLazySingleton<PersonRemoteDataSourceContract>(
-    () => FilmFluRemoteDataSource(remoteModulesDi()),
+    () => FilmFluRemoteDataSource(remoteModulesDi(), localModulesDi()),
   );
 }

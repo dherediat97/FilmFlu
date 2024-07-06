@@ -1,0 +1,15 @@
+{
+  "app_name": "Film Flu",
+  "film_list_title": "Dramafilm läuft",
+  "search_film_hint": "Hier suchen",
+  "synopsis": "Zusammenfassung",
+  "character_cast": "Charakterbesetzung",
+  "produktion_cast": "Produktion",
+  "produktion_job": "hat die Arbeit ausgeführt von",
+  "actor_job": "Spielen",
+  "in_preposition": "in",
+  "no_trailers": "Dieser Film hat keinen Trailer",
+  "tv_series_list_title": "Anime wird abgespielt",
+  "loading_title": "3, 2, 1 AKTION !!!",
+  "films_not_found": "Filme nicht gefunden"
+}

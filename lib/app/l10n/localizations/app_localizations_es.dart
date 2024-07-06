@@ -10,7 +10,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get app_name => 'Film Flu';
 
   @override
-  String get film_list_title => 'Novedades en películas de drama';
+  String get film_list_title => 'Las mejores películas de drama';
 
   @override
   String get search_film_hint => 'Busca aquí';
@@ -37,11 +37,14 @@ class AppLocalizationsEs extends AppLocalizations {
   String get no_trailers => 'Esta película no tiene tráilers';
 
   @override
-  String get tv_series_list_title => 'Novedades en series de Anime';
+  String get tv_series_list_title => 'El mejor Anime Japonés';
 
   @override
   String get loading_title => '3, 2, 1 ACCIÓN !!!';
 
   @override
   String get films_not_found => 'No se han encontrado películas';
+
+  @override
+  String get made_with_love => 'Made with much';
 }

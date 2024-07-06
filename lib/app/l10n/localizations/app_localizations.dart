@@ -127,7 +127,7 @@ abstract class AppLocalizations {
   /// No description provided for @film_list_title.
   ///
   /// In es, this message translates to:
-  /// **'Novedades en películas de drama'**
+  /// **'Las mejores películas de drama'**
   String get film_list_title;
 
   /// No description provided for @search_film_hint.
@@ -181,7 +181,7 @@ abstract class AppLocalizations {
   /// No description provided for @tv_series_list_title.
   ///
   /// In es, this message translates to:
-  /// **'Novedades en series de Anime'**
+  /// **'El mejor Anime Japonés'**
   String get tv_series_list_title;
 
   /// No description provided for @loading_title.
@@ -195,6 +195,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'No se han encontrado películas'**
   String get films_not_found;
+
+  /// No description provided for @made_with_love.
+  ///
+  /// In es, this message translates to:
+  /// **'Made with much'**
+  String get made_with_love;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

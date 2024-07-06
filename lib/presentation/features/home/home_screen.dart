@@ -12,12 +12,13 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
-        isSearchVisible: true,
-        fabLocation: FloatingActionButtonLocation.endFloat,
-        isLightsOn: true,
-        containerChild: BlocBuilder<MediaListBloc, MediaListState>(
-          builder: (context, state) {
-            return Padding(
+      isSearchVisible: true,
+      fabLocation: FloatingActionButtonLocation.endFloat,
+      isLightsOn: true,
+      containerChild: BlocBuilder<MediaListBloc, MediaListState>(
+        builder: (context, state) {
+          return SingleChildScrollView(
+            child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -54,8 +55,10 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            );
-          },
-        ));
+            ),
+          );
+        },
+      ),
+    );
   }
 }

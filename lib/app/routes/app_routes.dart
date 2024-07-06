@@ -1,4 +1,4 @@
-import 'package:film_flu/app/routes/app_path.dart';
+import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/presentation/features/home/home_controller.dart';
 import 'package:film_flu/presentation/features/media_details/media_detail_controller.dart';
 import 'package:film_flu/presentation/features/person_detail/person_detail_screen.dart';
@@ -9,7 +9,7 @@ List<GoRoute> appRoutes = [
   GoRoute(
     path: '/',
     builder: (context, state) => SplashPage(
-      routePath: AppRoutePath.home,
+      routePath: AppRoutePaths.home,
     ),
     routes: [
       GoRoute(
