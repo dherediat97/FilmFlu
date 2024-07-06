@@ -44,4 +44,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get films_not_found => 'Films not found';
+
+  @override
+  String get made_with_love => 'Made with much';
 }

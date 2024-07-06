@@ -1,6 +1,7 @@
 import 'package:film_flu/app/di/top_bloc_providers.dart';
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/media_detail_screen.dart';
+import 'package:film_flu/presentation/features/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,7 +22,7 @@ class MediaDetailController extends StatelessWidget {
             initial: () => Container(),
             success: () => MediaItemScreenDetails(mediaTypeId: mediaTypeId),
             error: (error) => Container(),
-            loading: () => const Center(child: CircularProgressIndicator()),
+            loading: () => const SplashPage(routePath: ''),
           );
         },
       ),

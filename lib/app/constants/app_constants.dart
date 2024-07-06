@@ -13,4 +13,5 @@ class AppConstants {
   static String mediaType = '';
   static int mediaTypeId = 0;
   static int personId = 0;
+  static const bool debugRequest = false;
 }

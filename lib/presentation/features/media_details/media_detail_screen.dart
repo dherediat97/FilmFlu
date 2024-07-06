@@ -271,7 +271,8 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                                   child: player),
                             ],
                           );
-                        }),
+                        },
+                      ),
               )
             : const Center(
                 child: CircularProgressIndicator(),

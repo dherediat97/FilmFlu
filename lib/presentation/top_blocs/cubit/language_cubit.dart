@@ -1,25 +1,29 @@
 import 'dart:ui';
 
+import 'package:film_flu/data/repositories/local/app_local_data_source_contract.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 part 'language_state.dart';
 part 'language_cubit.freezed.dart';
 
 class LanguageCubit extends Cubit<Locale> {
-  LanguageCubit() : super(const Locale('es', 'ES'));
+  final AppLocalDataSourceContract _appLocalDataSourceContract;
+
+  LanguageCubit({
+    required AppLocalDataSourceContract appLocalDataSourceContract,
+  })  : _appLocalDataSourceContract = appLocalDataSourceContract,
+        super(const Locale('es', 'ES'));
 
   void changeStartLang() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? langCode = prefs.getString('LANGUAGE');
+    String? langCode = await _appLocalDataSourceContract.getLanguage();
 
     emit(Locale(langCode.toString()));
   }
 
   void changeLang(context, String data) async {
     emit(Locale(data));
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('LANGUAGE', data);
+
+    await _appLocalDataSourceContract.setLanguage(data);
   }
 }

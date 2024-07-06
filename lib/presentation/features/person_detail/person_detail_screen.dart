@@ -1,6 +1,7 @@
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/extensions/custom_loading.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
+import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/core/constants/theme/colors.dart';
 import 'package:film_flu/core/utils/util_date.dart';
 import 'package:film_flu/domain/models/credit_actor_entity.dart';
@@ -12,7 +13,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 
 class PersonDetailsPage extends StatefulWidget {
   const PersonDetailsPage({
@@ -146,13 +146,15 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                         child: SizedBox(
                                           width: 220,
                                           child: AutoSizeText(
-                                              person.placeOfBirth.trim(),
-                                              maxFontSize: 20,
-                                              minFontSize: 15,
-                                              overflow: TextOverflow.ellipsis,
-                                              maxLines: 3,
-                                              style: const TextStyle(
-                                                  color: Colors.white)),
+                                            person.placeOfBirth.trim(),
+                                            maxFontSize: 20,
+                                            minFontSize: 15,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 3,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -170,10 +172,13 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 16.0),
-                                  child: Text(person.biography,
-                                      textAlign: TextAlign.start,
-                                      style:
-                                          const TextStyle(color: Colors.white)),
+                                  child: Text(
+                                    person.biography,
+                                    textAlign: TextAlign.start,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 16.0),
@@ -183,7 +188,9 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                       'Papeles que ha realizado',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                          fontSize: 20, color: Colors.white),
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -246,15 +253,14 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                         ),
                         isActorWorkSelected
                             ? GridView.builder(
-                                controller: TrackingScrollController(),
                                 itemCount: creditsListAsActor!.length,
                                 shrinkWrap: true,
                                 gridDelegate:
                                     const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 3,
-                                  mainAxisSpacing: 40,
-                                  crossAxisSpacing: 60,
-                                  mainAxisExtent: 420,
+                                  mainAxisSpacing: 20,
+                                  crossAxisSpacing: 20,
+                                  mainAxisExtent: 240,
                                 ),
                                 itemBuilder: (context, index) {
                                   CreditActorEntity filmPerson =
@@ -273,13 +279,13 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                         children: [
                                           ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(32),
+                                                BorderRadius.circular(32.0),
                                             child: Image.network(
                                               filmPerson.backdropPath != null
                                                   ? '${AppUrls.personImgBaseUrl}${filmPerson.backdropPath}'
                                                   : '${AppUrls.personImgBaseUrl}${person.profilePath}',
-                                              width: 250,
-                                              height: 320,
+                                              height: 160,
+                                              width: 150,
                                               loadingBuilder: (context, child,
                                                       loadingProgress) =>
                                                   DefaultAsyncLoading(
@@ -309,73 +315,70 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                   );
                                 },
                               )
-                            : LazyLoadScrollView(
-                                onEndOfPage: () {},
-                                child: GridView.builder(
-                                  controller: TrackingScrollController(),
-                                  itemCount: creditsListAsProduction?.length,
-                                  shrinkWrap: true,
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
-                                    mainAxisSpacing: 5,
-                                    crossAxisSpacing: 40,
-                                    mainAxisExtent: 400,
-                                  ),
-                                  itemBuilder: (context, index) {
-                                    CreditProductionEntity filmPerson =
-                                        creditsListAsProduction![index];
-                                    String? movieTitle = filmPerson.title !=
-                                            null
-                                        ? '${filmPerson.job} ${context.localizations.in_preposition} ${filmPerson.title}'
-                                        : '${filmPerson.job}';
-                                    return InkWell(
-                                      onTap: () {
-                                        context.go(
-                                          '/mediaItemDetails/${filmPerson.id}',
-                                        );
-                                      },
-                                      child: GridTile(
-                                        child: Column(
-                                          children: [
-                                            ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(32.0),
-                                              child: Image.network(
-                                                filmPerson.backdropPath != null
-                                                    ? '${AppUrls.personImgBaseUrl}${filmPerson.backdropPath}'
-                                                    : '${AppUrls.personImgBaseUrl}${person.profilePath}',
-                                                width: 250,
-                                                height: 320,
-                                                loadingBuilder: (context, child,
-                                                        loadingProgress) =>
-                                                    DefaultAsyncLoading(
-                                                  loadingProgress:
-                                                      loadingProgress,
-                                                  child: child,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 16.0),
-                                              child: AutoSizeText(
-                                                '${context.localizations.production_job} $movieTitle',
-                                                textAlign: TextAlign.center,
-                                                maxLines: 3,
-                                                minFontSize: 14,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: const TextStyle(
-                                                    fontSize: 16,
-                                                    color: Colors.white),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    );
-                                  },
+                            : GridView.builder(
+                                itemCount: creditsListAsProduction?.length,
+                                shrinkWrap: true,
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  mainAxisSpacing: 20,
+                                  crossAxisSpacing: 20,
+                                  mainAxisExtent: 240,
                                 ),
+                                itemBuilder: (context, index) {
+                                  CreditProductionEntity filmPerson =
+                                      creditsListAsProduction![index];
+                                  String? movieTitle = filmPerson.title != null
+                                      ? '${filmPerson.job} ${context.localizations.in_preposition} ${filmPerson.title}'
+                                      : '${filmPerson.job}';
+                                  return InkWell(
+                                    onTap: () {
+                                      context.go(
+                                        '${AppRoutePaths.mediaDetails}/${filmPerson.id}',
+                                      );
+                                    },
+                                    child: GridTile(
+                                      child: Column(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(32.0),
+                                            child: Image.network(
+                                              filmPerson.backdropPath != null
+                                                  ? '${AppUrls.personImgBaseUrl}${filmPerson.backdropPath}'
+                                                  : '${AppUrls.personImgBaseUrl}${person.profilePath}',
+                                              height: 160,
+                                              width: 150,
+                                              loadingBuilder: (context, child,
+                                                      loadingProgress) =>
+                                                  DefaultAsyncLoading(
+                                                loadingProgress:
+                                                    loadingProgress,
+                                                child: child,
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              top: 16.0,
+                                            ),
+                                            child: AutoSizeText(
+                                              '${context.localizations.production_job} $movieTitle',
+                                              textAlign: TextAlign.center,
+                                              maxLines: 3,
+                                              minFontSize: 14,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
                       ],
                     ),

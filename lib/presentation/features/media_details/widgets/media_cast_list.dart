@@ -37,7 +37,6 @@ class _FilmCastState extends State<FilmCast> {
             ? Container(
                 padding: const EdgeInsets.all(8),
                 child: GridView.builder(
-                  controller: TrackingScrollController(),
                   shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,

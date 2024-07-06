@@ -2,10 +2,10 @@ import 'package:film_flu/data/datasources/remote/api/filmflu_api.dart';
 import 'package:film_flu/data/models/credits_media_remote_entity.dart';
 import 'package:film_flu/data/models/media_item_remote_entity.dart';
 import 'package:film_flu/data/models/person_remote_entity.dart';
+import 'package:film_flu/data/repositories/local/app_local_data_source_contract.dart';
 import 'package:film_flu/data/repositories/remote/media_list_remote_data_source_contract.dart';
 import 'package:film_flu/data/repositories/remote/media_remote_data_source_contract.dart';
 import 'package:film_flu/data/repositories/remote/person_remote_data_source_contract.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class FilmFluRemoteDataSource
     implements
@@ -14,7 +14,9 @@ class FilmFluRemoteDataSource
         PersonRemoteDataSourceContract {
   final FilmFluApi _filmFluApi;
 
-  FilmFluRemoteDataSource(this._filmFluApi);
+  final AppLocalDataSourceContract _appLocalDataSourceContract;
+
+  FilmFluRemoteDataSource(this._filmFluApi, this._appLocalDataSourceContract);
 
   @override
   Future<List<MediaItemRemoteEntity>> getMediaTypeList({
@@ -22,11 +24,9 @@ class FilmFluRemoteDataSource
     required int genreId,
     String? languageId,
   }) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String languageCode = prefs.getString('LANGUAGE') ?? 'es-ES';
     final mediaData = await _filmFluApi.fetchPopularMediaTypes(
       mediaType: mediaType,
-      language: languageCode,
+      language: await _appLocalDataSourceContract.getLanguage(),
       genres: genreId,
       languageId: languageId ?? '',
     );
@@ -38,12 +38,10 @@ class FilmFluRemoteDataSource
     String mediaType,
     int mediaTypeId,
   ) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String languageCode = prefs.getString('LANGUAGE') ?? 'es-ES';
     final mediaData = await _filmFluApi.fetchMediaItem(
       mediaType: mediaType,
       mediaTypeId: mediaTypeId,
-      language: languageCode,
+      language: await _appLocalDataSourceContract.getLanguage(),
     );
     return mediaData;
   }
@@ -53,12 +51,10 @@ class FilmFluRemoteDataSource
     String mediaType,
     int mediaTypeId,
   ) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String languageCode = prefs.getString('LANGUAGE') ?? 'es-ES';
     final mediaData = await _filmFluApi.fetchCredits(
       mediaType: mediaType,
       mediaTypeId: mediaTypeId,
-      language: languageCode,
+      language: await _appLocalDataSourceContract.getLanguage(),
     );
     return mediaData;
   }
@@ -67,11 +63,9 @@ class FilmFluRemoteDataSource
   Future<PersonRemoteEntity> fetchPersonData(
     int personId,
   ) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String languageCode = prefs.getString('LANGUAGE') ?? 'es-ES';
     final personData = await _filmFluApi.fetchPerson(
       personId: personId,
-      language: languageCode,
+      language: await _appLocalDataSourceContract.getLanguage(),
     );
     return personData;
   }

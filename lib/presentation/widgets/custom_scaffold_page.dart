@@ -1,11 +1,13 @@
 import 'package:film_flu/app/constants/app_assets.dart';
+import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/di/top_bloc_providers.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
-import 'package:film_flu/app/routes/app_path.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/presentation/top_blocs/cubit/language_cubit.dart';
+import 'package:film_flu/presentation/widgets/flip_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,6 +38,7 @@ class ScaffoldPage extends StatefulWidget {
 
 class _ScaffoldPageState extends State<ScaffoldPage> {
   final today = DateTime.now();
+  bool loveTapped = false;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +48,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
       child: Scaffold(
         floatingActionButtonLocation: widget.fabLocation,
         resizeToAvoidBottomInset: true,
-        appBar: widget.isLightsOn == true
+        appBar: widget.isLightsOn
             ? AppBar(
                 leadingWidth: 60,
                 leading: Padding(
@@ -61,7 +64,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                         if (context.canPop()) {
                           context.pop();
                         } else {
-                          context.pushReplacementNamed(AppRoutePath.home);
+                          context.pushReplacementNamed(AppRoutePaths.home);
                         }
                       }),
                 ),
@@ -77,13 +80,14 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                 scrolledUnderElevation: 1,
                 backgroundColor: Theme.of(context).colorScheme.onSurface,
                 actions: [
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        children: _appBarActions(context),
-                      ),
-                    )
-                  ])
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      children: _appBarActions(context),
+                    ),
+                  )
+                ],
+              )
             : null,
         body: SafeArea(child: widget.containerChild),
         bottomNavigationBar: widget.isLightsOn == true
@@ -97,14 +101,37 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 24.0),
-                          child: Row(children: [
-                            Text('Made with much',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold)),
-                            Icon(Icons.favorite, color: Colors.red),
-                          ]),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                          child: Row(
+                            children: [
+                              Text(
+                                context.localizations.made_with_love,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    loveTapped = !loveTapped;
+                                  });
+                                },
+                                child: FlipCard(
+                                  toggler: !loveTapped,
+                                  frontCard: SvgPicture.asset(
+                                    AppAssets.fullHeartIcon,
+                                    color: Colors.red,
+                                  ),
+                                  backCard: SvgPicture.asset(
+                                    AppAssets.fullHeartIcon,
+                                    color: AppColors.andalucianColor,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -127,6 +154,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
 
   List<Widget> _appBarActions(BuildContext context) {
     List<Widget> actions = [];
+
     actions.add(DropdownButton<Locale>(
         onChanged: (language) => context
             .read<LanguageCubit>()
