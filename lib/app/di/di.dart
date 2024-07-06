@@ -16,6 +16,7 @@ import 'package:film_flu/domain/repository_contracts/person_repository_contract.
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
 import 'package:film_flu/presentation/features/media_list/bloc/media_list_bloc.dart';
 import 'package:film_flu/presentation/features/person_detail/bloc/person_detail_bloc.dart';
+import 'package:film_flu/presentation/top_blocs/cubit/language_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 part 'modules/api_modules.dart';

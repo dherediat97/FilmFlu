@@ -5,6 +5,7 @@ import 'package:film_flu/data/models/person_remote_entity.dart';
 import 'package:film_flu/data/repositories/remote/media_list_remote_data_source_contract.dart';
 import 'package:film_flu/data/repositories/remote/media_remote_data_source_contract.dart';
 import 'package:film_flu/data/repositories/remote/person_remote_data_source_contract.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FilmFluRemoteDataSource
     implements
@@ -21,9 +22,11 @@ class FilmFluRemoteDataSource
     required int genreId,
     String? languageId,
   }) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String languageCode = prefs.getString('LANGUAGE') ?? 'es-ES';
     final mediaData = await _filmFluApi.fetchPopularMediaTypes(
       mediaType: mediaType,
-      language: 'es-ES',
+      language: languageCode,
       genres: genreId,
       languageId: languageId ?? '',
     );
@@ -35,10 +38,12 @@ class FilmFluRemoteDataSource
     String mediaType,
     int mediaTypeId,
   ) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String languageCode = prefs.getString('LANGUAGE') ?? 'es-ES';
     final mediaData = await _filmFluApi.fetchMediaItem(
       mediaType: mediaType,
       mediaTypeId: mediaTypeId,
-      language: 'es-ES',
+      language: languageCode,
     );
     return mediaData;
   }
@@ -48,10 +53,12 @@ class FilmFluRemoteDataSource
     String mediaType,
     int mediaTypeId,
   ) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String languageCode = prefs.getString('LANGUAGE') ?? 'es-ES';
     final mediaData = await _filmFluApi.fetchCredits(
       mediaType: mediaType,
       mediaTypeId: mediaTypeId,
-      language: 'es-ES',
+      language: languageCode,
     );
     return mediaData;
   }
@@ -60,8 +67,11 @@ class FilmFluRemoteDataSource
   Future<PersonRemoteEntity> fetchPersonData(
     int personId,
   ) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String languageCode = prefs.getString('LANGUAGE') ?? 'es-ES';
     final personData = await _filmFluApi.fetchPerson(
       personId: personId,
+      language: languageCode,
     );
     return personData;
   }

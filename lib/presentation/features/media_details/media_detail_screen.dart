@@ -5,7 +5,7 @@ import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/media_cast_list.dart';
-import 'package:film_flu/presentation/features/scaffold_page/custom_scaffold_page.dart';
+import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -120,22 +120,17 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                                   children: [
                                     Row(
                                       children: [
-                                        SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width -
-                                                50,
-                                            child: AutoSizeText(
-                                              state.movieName,
-                                              maxLines: 2,
-                                              textAlign: TextAlign.start,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white,
-                                                  fontFamily: 'YsabeauInfant',
-                                                  fontSize: 37),
-                                            )),
+                                        AutoSizeText(
+                                          state.movieName,
+                                          maxLines: 2,
+                                          textAlign: TextAlign.start,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                              fontFamily: 'YsabeauInfant',
+                                              fontSize: 37),
+                                        ),
                                       ],
                                     ),
                                     const SizedBox(height: 20),
