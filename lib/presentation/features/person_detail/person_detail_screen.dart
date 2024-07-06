@@ -7,7 +7,7 @@ import 'package:film_flu/domain/models/credit_actor_entity.dart';
 import 'package:film_flu/domain/models/credit_production_entity.dart';
 import 'package:film_flu/domain/models/person_entity.dart';
 import 'package:film_flu/presentation/features/person_detail/bloc/person_detail_bloc.dart';
-import 'package:film_flu/presentation/features/scaffold_page/custom_scaffold_page.dart';
+import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
