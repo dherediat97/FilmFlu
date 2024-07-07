@@ -6,7 +6,7 @@ import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
-import 'package:film_flu/presentation/top_blocs/cubit/language_cubit.dart';
+import 'package:film_flu/presentation/top_blocs/language_cubit.dart';
 import 'package:film_flu/presentation/widgets/flip_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

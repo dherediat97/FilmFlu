@@ -1,6 +1,7 @@
 import 'package:film_flu/core/entities/pagination.dart';
 import 'package:film_flu/data/models/credits_media_remote_entity.dart';
 import 'package:film_flu/data/models/credits_person_remote_entity.dart';
+import 'package:film_flu/data/models/genre_result_remote_entity.dart';
 import 'package:film_flu/data/models/media_item_remote_entity.dart';
 import 'package:film_flu/data/models/person_remote_entity.dart';
 import 'package:film_flu/data/models/video_remote_entity.dart';
@@ -22,6 +23,11 @@ abstract class FilmFluApi {
     @Query('sort_by') String sortBy = 'popularity.desc',
     @Query('with_genres') required int genres,
     @Query('with_original_language') String? languageId,
+  });
+
+  @GET('/genre/{mediaType}/list')
+  Future<GenreResultRemoteEntity> fetchGenreList({
+    @Path('mediaType') required String mediaType,
   });
 
   @GET('/{mediaType}/{mediaTypeId}')

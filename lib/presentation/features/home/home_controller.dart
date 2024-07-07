@@ -16,14 +16,11 @@ class HomeController extends StatelessWidget {
         builder: (context, state) {
           return state.uiState.when(
             success: () => const HomeScreen(),
-            loading: () => SplashPage(routePath: AppRoutePaths.homeController),
+            loading: () => SplashPage(routePath: AppRoutePaths.home),
             initial: () {
               context
                   .read<MediaListBloc>()
-                  .add(const MediaListEvent.getMovieData(18));
-              context
-                  .read<MediaListBloc>()
-                  .add(const MediaListEvent.getTVSeriesData(16, 'ja'));
+                  .add(const MediaListEvent.getMediaData());
               return Container();
             },
             error: (error) => const Text('An error happened'),

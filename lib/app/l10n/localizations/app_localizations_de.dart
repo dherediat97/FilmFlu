@@ -10,7 +10,31 @@ class AppLocalizationsDe extends AppLocalizations {
   String get app_name => 'Film Flu';
 
   @override
-  String get film_list_title => 'Dramafilm läuft';
+  String get action_movies => 'Películas de acción';
+
+  @override
+  String get drama_movies => 'Películas de drama';
+
+  @override
+  String get comedy_movies => 'Películas de comedia';
+
+  @override
+  String get thriller_movies => 'Películas de suspense';
+
+  @override
+  String get fiction_movies => 'Películas de ciencia ficción';
+
+  @override
+  String get love_movies => 'Películas de romance';
+
+  @override
+  String get anime_series => 'Anime Japonés';
+
+  @override
+  String get animation_series => 'Series de Animación';
+
+  @override
+  String get documental_series => 'Documentales';
 
   @override
   String get synopsis => 'Zusammenfassung';
@@ -29,9 +53,6 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get in_preposition => 'in';
-
-  @override
-  String get tv_series_list_title => 'Anime wird abgespielt';
 
   @override
   String get loading_title => 'Dre, Zwei, Eins... ACTION!!!';
