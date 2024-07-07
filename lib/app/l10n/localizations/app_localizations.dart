@@ -12,7 +12,6 @@ import 'app_localizations_es.dart';
 import 'app_localizations_fi.dart';
 import 'app_localizations_fr.dart';
 import 'app_localizations_hi.dart';
-import 'app_localizations_hy.dart';
 import 'app_localizations_is.dart';
 import 'app_localizations_it.dart';
 import 'app_localizations_ja.dart';
@@ -108,7 +107,6 @@ abstract class AppLocalizations {
     Locale('fi'),
     Locale('fr'),
     Locale('hi'),
-    Locale('hy'),
     Locale('is'),
     Locale('it'),
     Locale('ja'),
@@ -129,12 +127,6 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Las mejores películas de drama'**
   String get film_list_title;
-
-  /// No description provided for @search_film_hint.
-  ///
-  /// In es, this message translates to:
-  /// **'Busca aquí'**
-  String get search_film_hint;
 
   /// No description provided for @synopsis.
   ///
@@ -172,12 +164,6 @@ abstract class AppLocalizations {
   /// **'en'**
   String get in_preposition;
 
-  /// No description provided for @no_trailers.
-  ///
-  /// In es, this message translates to:
-  /// **'Esta película no tiene tráilers'**
-  String get no_trailers;
-
   /// No description provided for @tv_series_list_title.
   ///
   /// In es, this message translates to:
@@ -187,20 +173,20 @@ abstract class AppLocalizations {
   /// No description provided for @loading_title.
   ///
   /// In es, this message translates to:
-  /// **'3, 2, 1 ACCIÓN !!!'**
+  /// **'Tres, Dos, Uno... ACCIÓN!!!'**
   String get loading_title;
-
-  /// No description provided for @films_not_found.
-  ///
-  /// In es, this message translates to:
-  /// **'No se han encontrado películas'**
-  String get films_not_found;
 
   /// No description provided for @made_with_love.
   ///
   /// In es, this message translates to:
-  /// **'Made with much'**
+  /// **'Hecho con mucho'**
   String get made_with_love;
+
+  /// No description provided for @films_worked.
+  ///
+  /// In es, this message translates to:
+  /// **'Papeles que ha realizado'**
+  String get films_worked;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -212,7 +198,7 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['de', 'en', 'es', 'fi', 'fr', 'hi', 'hy', 'is', 'it', 'ja', 'nl', 'pt', 'sk', 'sv'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['de', 'en', 'es', 'fi', 'fr', 'hi', 'is', 'it', 'ja', 'nl', 'pt', 'sk', 'sv'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -229,7 +215,6 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
     case 'fi': return AppLocalizationsFi();
     case 'fr': return AppLocalizationsFr();
     case 'hi': return AppLocalizationsHi();
-    case 'hy': return AppLocalizationsHy();
     case 'is': return AppLocalizationsIs();
     case 'it': return AppLocalizationsIt();
     case 'ja': return AppLocalizationsJa();

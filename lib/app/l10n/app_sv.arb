@@ -1,15 +1,13 @@
 {
   "app_name": "Film Flu",
-  "film_list_title": "Drama Film Playing",
-  "search_film_hint": "Search here",
+  "film_list_title": "Dramafilm spelas",
   "synopsis": "Synopsis",
-  "character_cast": "Character Cast",
-  "production_cast": "Production",
-  "production_job": "performed the work of",
-  "actor_job": "Play",
-  "in_preposition": "in",
-  "no_trailers":"This film haven't trailer",
-  "tv_series_list_title":"Anime Playing",
-  "loading_title":"3, 2, 1 ACTION !!!",
-  "films_not_found":"Films not found"
+  "character_cast": "Rollfigur",
+  "production_cast": "Produktion",
+  "production_job": "Utfört arbetet med",
+  "actor_job": "Spela",
+  "in_preposition": "i",
+  "tv_series_list_title":"Anime spelar",
+  "made_with_love": "Gjord med mycket",
+  "loading_title":"Tre, två, en... Action!!!"
 }

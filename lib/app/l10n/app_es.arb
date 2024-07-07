@@ -1,16 +1,14 @@
 {
   "app_name": "Film Flu",
   "film_list_title": "Las mejores películas de drama",
-  "search_film_hint": "Busca aquí",
   "synopsis": "Sinopsis",
   "character_cast": "Reparto",
   "production_cast": "Producción",
   "production_job": "realizó el trabajo de",
   "actor_job": "Interpreta a",
   "in_preposition": "en",
-  "no_trailers":"Esta película no tiene tráilers",
   "tv_series_list_title":"El mejor Anime Japonés",
-  "loading_title":"3, 2, 1 ACCIÓN !!!",
-  "films_not_found":"No se han encontrado películas",
-  "made_with_love": "Made with much"
+  "loading_title":"Tres, Dos, Uno... ACCIÓN!!!",
+  "made_with_love": "Hecho con mucho",
+  "films_worked":"Papeles que ha realizado"
 }

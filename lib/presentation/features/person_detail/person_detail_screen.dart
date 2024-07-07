@@ -184,10 +184,10 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                   padding: const EdgeInsets.only(bottom: 16.0),
                                   child: SizedBox(
                                     width: MediaQuery.of(context).size.width,
-                                    child: const Text(
-                                      'Papeles que ha realizado',
+                                    child: Text(
+                                      context.localizations.films_worked,
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 20,
                                         color: Colors.white,
                                       ),
@@ -297,7 +297,8 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.only(
-                                                top: 16.0),
+                                              top: 16.0,
+                                            ),
                                             child: AutoSizeText(
                                               '${context.localizations.actor_job} $movieTitle',
                                               textAlign: TextAlign.center,
@@ -305,8 +306,9 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                               minFontSize: 14,
                                               overflow: TextOverflow.ellipsis,
                                               style: const TextStyle(
-                                                  fontSize: 16,
-                                                  color: Colors.white),
+                                                fontSize: 16,
+                                                color: Colors.white,
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -328,6 +330,7 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                 itemBuilder: (context, index) {
                                   CreditProductionEntity filmPerson =
                                       creditsListAsProduction![index];
+
                                   String? movieTitle = filmPerson.title != null
                                       ? '${filmPerson.job} ${context.localizations.in_preposition} ${filmPerson.title}'
                                       : '${filmPerson.job}';

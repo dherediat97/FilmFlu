@@ -1,15 +1,13 @@
 {
   "app_name": "Film Flu",
-  "film_list_title": "Drama Film Playing",
-  "search_film_hint": "Search here",
+  "film_list_title": "Draamaelokuvan toisto",
   "synopsis": "Synopsis",
-  "character_cast": "Character Cast",
-  "production_cast": "Production",
-  "production_job": "performed the work of",
-  "actor_job": "Play",
-  "in_preposition": "in",
-  "no_trailers":"This film haven't trailer",
-  "tv_series_list_title":"Anime Playing",
-  "loading_title":"3, 2, 1 ACTION !!!",
-  "films_not_found":"Films not found"
+  "character_cast": "Hahmo Cast",
+  "production_cast": "Tuotanto",
+  "production_job": "Suoritti työn",
+  "actor_job": "Pelata",
+  "in_preposition": "sisään",
+  "tv_series_list_title":"Anime pelaaminen",  
+  "made_with_love": "Tehty paljon",
+  "loading_title":"Kolme, Kaksi, Yksi... Toimintaa!!!"
 }

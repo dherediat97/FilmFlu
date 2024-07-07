@@ -10,41 +10,35 @@ class AppLocalizationsHi extends AppLocalizations {
   String get app_name => 'Film Flu';
 
   @override
-  String get film_list_title => 'Drama Film Playing';
+  String get film_list_title => 'ड्रामा फिल्म प्लेइंग';
 
   @override
-  String get search_film_hint => 'Search here';
+  String get synopsis => 'सारांश';
 
   @override
-  String get synopsis => 'Synopsis';
+  String get character_cast => 'चरित्र कलाकार';
 
   @override
-  String get character_cast => 'Character Cast';
+  String get production_cast => 'निर्माण';
 
   @override
-  String get production_cast => 'Production';
+  String get production_job => 'ने';
 
   @override
-  String get production_job => 'performed the work of';
+  String get actor_job => 'प्ले';
 
   @override
-  String get actor_job => 'Play';
+  String get in_preposition => 'में';
 
   @override
-  String get in_preposition => 'in';
+  String get tv_series_list_title => 'एनीमे प्लेइंग';
 
   @override
-  String get no_trailers => 'This film haven\'t trailer';
+  String get loading_title => 'थ्री, टू, वन... एक्शन!!!';
 
   @override
-  String get tv_series_list_title => 'Anime Playing';
+  String get made_with_love => 'बहुत अधिक के साथ बनाया गया';
 
   @override
-  String get loading_title => '3, 2, 1 ACTION !!!';
-
-  @override
-  String get films_not_found => 'Films not found';
-
-  @override
-  String get made_with_love => 'Made with much';
+  String get films_worked => 'Papeles que ha realizado';
 }
