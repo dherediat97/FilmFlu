@@ -1,19 +1,16 @@
+import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:film_flu/app/di/di.dart';
+import 'package:film_flu/app/di/top_bloc_providers.dart';
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/app/routes/app_routes.dart';
-import 'package:film_flu/data/repositories/local/app_local_data_source_contract.dart';
 import 'package:film_flu/presentation/top_blocs/cubit/language_cubit.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:film_flu/core/utils/util_scroll.dart';
-import 'package:film_flu/core/constants/theme/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:get_it/get_it.dart';
-
-GetIt getIt = GetIt.instance;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,8 +22,10 @@ void main() async {
     statusBarIconBrightness: Brightness.dark,
   ));
   //Setting SystemUIMode
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,
-      overlays: [SystemUiOverlay.top]);
+  SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.edgeToEdge,
+    overlays: [SystemUiOverlay.top],
+  );
 
   await initDi();
   runApp(FilmFlu());
@@ -43,11 +42,7 @@ class FilmFlu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    getIt<AppLocalDataSourceContract>().setLanguage('es');
-
-    return BlocProvider(
-      create: (context) => LanguageCubit(
-          appLocalDataSourceContract: getIt<AppLocalDataSourceContract>()),
+    return TopBlocProviders(
       child: BlocBuilder<LanguageCubit, Locale>(
         builder: (context, locale) {
           return MaterialApp.router(
@@ -60,7 +55,7 @@ class FilmFlu extends StatelessWidget {
             routerConfig: _router,
             theme: ThemeData(
               fontFamily: 'YsabeauInfant',
-              primaryColor: primaryColor,
+              primaryColor: AppColors.primaryColor,
               useMaterial3: true,
               highlightColor: Colors.transparent,
               scaffoldBackgroundColor: Colors.black,
@@ -72,14 +67,14 @@ class FilmFlu extends StatelessWidget {
               ),
               splashFactory: NoSplash.splashFactory,
               colorScheme: ColorScheme.fromSwatch(
-                primarySwatch: primaryMaterialColor,
-                backgroundColor: backgroundColor,
-                accentColor: backgroundColor,
+                primarySwatch: AppColors.primaryMaterialColor,
+                backgroundColor: AppColors.backgroundColor,
+                accentColor: AppColors.backgroundColor,
               ),
               visualDensity: VisualDensity.adaptivePlatformDensity,
               scrollbarTheme: const ScrollbarThemeData(
                 radius: Radius.circular(20),
-                thumbColor: WidgetStatePropertyAll(primaryColor),
+                thumbColor: WidgetStatePropertyAll(AppColors.primaryColor),
               ),
             ),
           );

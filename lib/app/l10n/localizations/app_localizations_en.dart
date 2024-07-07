@@ -25,7 +25,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get production_cast => 'Production';
 
   @override
-  String get production_job => 'performed the work of';
+  String get production_job => 'Performed the work of';
 
   @override
   String get actor_job => 'Play';

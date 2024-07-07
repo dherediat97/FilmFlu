@@ -1,6 +1,10 @@
+import 'package:film_flu/app/config/enviroment_config.dart';
+
 class AppAssets {
-  static const String imagesFolder = 'images';
-  static const String iconsFolder = 'icons';
+  static const String assetsFolder =
+      EnvironmentConfig.environment == 'prod' ? 'assets' : '';
+  static const String imagesFolder = '$assetsFolder/images';
+  static const String iconsFolder = '$assetsFolder/icons';
 
   static const String transparentLogo = '$imagesFolder/transparent_logo.png';
   static const String andalucianHeartIcon = '$iconsFolder/andalucian_heart.svg';

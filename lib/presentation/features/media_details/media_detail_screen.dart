@@ -1,3 +1,4 @@
+import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/extensions/custom_loading.dart';
@@ -9,7 +10,6 @@ import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:film_flu/core/constants/theme/colors.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -202,7 +202,7 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                                     (Set<WidgetState> states) {
                                       if (states
                                           .contains(WidgetState.selected)) {
-                                        return primaryColor;
+                                        return AppColors.primaryColor;
                                       }
                                       return Colors.white24;
                                     },

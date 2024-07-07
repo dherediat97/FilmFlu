@@ -1,8 +1,8 @@
+import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/extensions/custom_loading.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
-import 'package:film_flu/core/constants/theme/colors.dart';
 import 'package:film_flu/core/utils/util_date.dart';
 import 'package:film_flu/domain/models/credit_actor_entity.dart';
 import 'package:film_flu/domain/models/credit_production_entity.dart';
@@ -209,7 +209,7 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                           (Set<WidgetState> states) {
                                             if (states.contains(
                                                 WidgetState.selected)) {
-                                              return primaryColor;
+                                              return AppColors.primaryColor;
                                             }
                                             return Colors.white24;
                                           },
