@@ -70,12 +70,15 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                 ),
                 toolbarHeight: 100,
                 centerTitle: true,
-                title: AutoSizeText(context.localizations.app_name,
-                    minFontSize: 40,
-                    maxFontSize: 80,
-                    style: TextStyle(
-                        fontFamily: 'YsabeauInfant',
-                        color: Theme.of(context).colorScheme.primaryContainer)),
+                title: AutoSizeText(
+                  context.localizations.app_name,
+                  minFontSize: 40,
+                  maxFontSize: 80,
+                  style: TextStyle(
+                    fontFamily: 'YsabeauInfant',
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                  ),
+                ),
                 elevation: 60,
                 scrolledUnderElevation: 1,
                 backgroundColor: Theme.of(context).colorScheme.onSurface,
@@ -98,52 +101,61 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                 child: SizedBox(
                   height: 50,
                   child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                          child: Row(
-                            children: [
-                              Text(
-                                context.localizations.made_with_love,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              context.localizations.made_with_love,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    loveTapped = !loveTapped;
-                                  });
-                                },
-                                child: FlipCard(
-                                  toggler: !loveTapped,
-                                  frontCard: SvgPicture.asset(
-                                    AppAssets.fullHeartIcon,
-                                    color: Colors.red,
-                                  ),
-                                  backCard: SvgPicture.asset(
-                                    AppAssets.fullHeartIcon,
-                                    color: AppColors.andalucianColor,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  loveTapped = !loveTapped;
+                                });
+                              },
+                              child: FlipCard(
+                                toggler: !loveTapped,
+                                frontCard: SvgPicture.asset(
+                                  AppAssets.fullHeartIcon,
+                                  colorFilter: const ColorFilter.mode(
+                                    Colors.red,
+                                    BlendMode.srcIn,
                                   ),
                                 ),
+                                backCard: SvgPicture.asset(
+                                  AppAssets.fullHeartIcon,
+                                  colorFilter: const ColorFilter.mode(
+                                    AppColors.andalucianColor,
+                                    BlendMode.srcIn,
+                                  ),
+                                ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                          child: Row(children: [
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                        child: Row(
+                          children: [
                             const Icon(Icons.copyright, color: Colors.black),
                             Center(
                               child: Text('${today.year} @dherediat97',
                                   style: const TextStyle(fontSize: 14)),
                             )
-                          ]),
-                        )
-                      ]),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               )
             : null,
@@ -156,9 +168,13 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
     List<Widget> actions = [];
 
     actions.add(DropdownButton<Locale>(
-        onChanged: (language) => context
-            .read<LanguageCubit>()
-            .changeLang(context, language?.toString() ?? ''),
+        onChanged: (language) {
+          setState(() {
+            context
+                .read<LanguageCubit>()
+                .changeLang(context, language?.toString() ?? '');
+          });
+        },
         dropdownColor: Colors.black,
         value: context.read<LanguageCubit>().state,
         underline: const SizedBox(),
@@ -184,19 +200,21 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
           );
         }).toList()));
     if (kIsWeb) {
-      actions.add(IconButton(
-        onPressed: () async {
-          PackageInfo packageInfo = await PackageInfo.fromPlatform();
-          AppConstants.version = packageInfo.version;
-          //Descargar App Android
-          final Uri url = Uri.parse(AppConstants.appDownloadBaseUrl);
-          await launchUrl(url);
-        },
-        icon: Icon(
-          Icons.android,
-          color: Theme.of(context).colorScheme.primary,
+      actions.add(
+        IconButton(
+          onPressed: () async {
+            PackageInfo packageInfo = await PackageInfo.fromPlatform();
+            AppConstants.version = packageInfo.version;
+            //Descargar App Android
+            final Uri url = Uri.parse(AppConstants.appDownloadBaseUrl);
+            await launchUrl(url);
+          },
+          icon: Icon(
+            Icons.android,
+            color: Theme.of(context).colorScheme.primary,
+          ),
         ),
-      ));
+      );
     }
     return actions;
   }
