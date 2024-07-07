@@ -11,7 +11,7 @@ class AppLocalDataSource implements AppLocalDataSourceContract {
 
   @override
   Future<String> getLanguage() async {
-    return sharedPreferencesInstance.getString(_languageKey) ?? 'es_ES';
+    return sharedPreferencesInstance.getString(_languageKey) ?? 'es';
   }
 
   @override
@@ -19,7 +19,7 @@ class AppLocalDataSource implements AppLocalDataSourceContract {
     if (await getLanguage() != '') {
       await sharedPreferencesInstance.setString(_languageKey, value);
     } else {
-      await sharedPreferencesInstance.setString(_languageKey, 'es_ES');
+      await sharedPreferencesInstance.setString(_languageKey, 'es');
     }
 
     return;

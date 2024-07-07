@@ -13,7 +13,7 @@ class LanguageCubit extends Cubit<Locale> {
   LanguageCubit({
     required AppLocalDataSourceContract appLocalDataSourceContract,
   })  : _appLocalDataSourceContract = appLocalDataSourceContract,
-        super(const Locale('es', 'ES'));
+        super(const Locale('es'));
 
   void changeStartLang() async {
     String? langCode = await _appLocalDataSourceContract.getLanguage();

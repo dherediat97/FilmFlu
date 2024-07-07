@@ -184,7 +184,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
           setState(() {
             context
                 .read<LanguageCubit>()
-                .changeLang(context, language?.toString() ?? '');
+                .changeLang(context, language?.toString() ?? 'es');
           });
         },
         dropdownColor: Colors.black,
