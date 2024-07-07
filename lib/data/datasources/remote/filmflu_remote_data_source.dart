@@ -1,5 +1,6 @@
 import 'package:film_flu/data/datasources/remote/api/filmflu_api.dart';
 import 'package:film_flu/data/models/credits_media_remote_entity.dart';
+import 'package:film_flu/data/models/genre_remote_entity.dart';
 import 'package:film_flu/data/models/media_item_remote_entity.dart';
 import 'package:film_flu/data/models/person_remote_entity.dart';
 import 'package:film_flu/data/repositories/local/app_local_data_source_contract.dart';
@@ -31,6 +32,16 @@ class FilmFluRemoteDataSource
       languageId: languageId ?? '',
     );
     return mediaData.results;
+  }
+
+  @override
+  Future<List<GenreRemoteEntity>> getGenreList({
+    required String mediaType,
+  }) async {
+    final mediaData = await _filmFluApi.fetchGenreList(
+      mediaType: mediaType,
+    );
+    return mediaData.genres;
   }
 
   @override

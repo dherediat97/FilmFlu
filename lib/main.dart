@@ -4,7 +4,7 @@ import 'package:film_flu/app/di/top_bloc_providers.dart';
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/app/routes/app_routes.dart';
-import 'package:film_flu/presentation/top_blocs/cubit/language_cubit.dart';
+import 'package:film_flu/presentation/top_blocs/language_cubit.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';

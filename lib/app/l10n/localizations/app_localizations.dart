@@ -122,11 +122,59 @@ abstract class AppLocalizations {
   /// **'Film Flu'**
   String get app_name;
 
-  /// No description provided for @film_list_title.
+  /// No description provided for @action_movies.
   ///
   /// In es, this message translates to:
-  /// **'Las mejores películas de drama'**
-  String get film_list_title;
+  /// **'Películas de acción'**
+  String get action_movies;
+
+  /// No description provided for @drama_movies.
+  ///
+  /// In es, this message translates to:
+  /// **'Películas de drama'**
+  String get drama_movies;
+
+  /// No description provided for @comedy_movies.
+  ///
+  /// In es, this message translates to:
+  /// **'Películas de comedia'**
+  String get comedy_movies;
+
+  /// No description provided for @thriller_movies.
+  ///
+  /// In es, this message translates to:
+  /// **'Películas de suspense'**
+  String get thriller_movies;
+
+  /// No description provided for @fiction_movies.
+  ///
+  /// In es, this message translates to:
+  /// **'Películas de ciencia ficción'**
+  String get fiction_movies;
+
+  /// No description provided for @love_movies.
+  ///
+  /// In es, this message translates to:
+  /// **'Películas de romance'**
+  String get love_movies;
+
+  /// No description provided for @anime_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Anime Japonés'**
+  String get anime_series;
+
+  /// No description provided for @animation_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Series de Animación'**
+  String get animation_series;
+
+  /// No description provided for @documental_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Documentales'**
+  String get documental_series;
 
   /// No description provided for @synopsis.
   ///
@@ -163,12 +211,6 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'en'**
   String get in_preposition;
-
-  /// No description provided for @tv_series_list_title.
-  ///
-  /// In es, this message translates to:
-  /// **'El mejor Anime Japonés'**
-  String get tv_series_list_title;
 
   /// No description provided for @loading_title.
   ///
