@@ -1,15 +1,13 @@
 {
   "app_name": "Film Flu",
-  "film_list_title": "Drama Film Playing",
-  "search_film_hint": "Search here",
-  "synopsis": "Synopsis",
-  "character_cast": "Character Cast",
-  "production_cast": "Production",
-  "production_job": "performed the work of",
-  "actor_job": "Play",
-  "in_preposition": "in",
-  "no_trailers":"This film haven't trailer",
-  "tv_series_list_title":"Anime Playing",
-  "loading_title":"3, 2, 1 ACTION !!!",
-  "films_not_found":"Films not found"
+  "film_list_title": "ड्रामा फिल्म प्लेइंग",
+  "synopsis": "सारांश",
+  "character_cast": "चरित्र कलाकार",
+  "production_cast": "निर्माण",
+  "production_job": "ने",
+  "actor_job": "प्ले",
+  "in_preposition": "में",
+  "tv_series_list_title":"एनीमे प्लेइंग",
+  "made_with_love": "बहुत अधिक के साथ बनाया गया",
+  "loading_title":"थ्री, टू, वन... एक्शन!!!"
 }

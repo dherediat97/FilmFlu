@@ -1,15 +1,13 @@
 {
   "app_name": "Film Flu",
-  "film_list_title": "Drama Film Playing",
-  "search_film_hint": "Search here",
-  "synopsis": "Synopsis",
-  "character_cast": "Character Cast",
-  "production_cast": "Production",
-  "production_job": "performed the work of",
-  "actor_job": "Play",
+  "film_list_title": "Dramafilm afspelen",
+  "synopsis": "Korte inhoud",
+  "character_cast": "Karaktercast",
+  "production_cast": "Productie",
+  "production_job": "verrichtte het werk van",
+  "actor_job": "Toneelstuk",
   "in_preposition": "in",
-  "no_trailers":"This film haven't trailer",
-  "tv_series_list_title":"Anime Playing",
-  "loading_title":"3, 2, 1 ACTION !!!",
-  "films_not_found":"Films not found"
+  "tv_series_list_title":"Anime spelen", 
+  "made_with_love": "Gemaakt met veel",
+  "loading_title":"Drie, Twee, Één... Actie!!!"
 }

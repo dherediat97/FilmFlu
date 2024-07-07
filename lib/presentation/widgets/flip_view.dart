@@ -17,11 +17,11 @@ class FlipCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 800),
+        duration: const Duration(milliseconds: 600),
         transitionBuilder: _transitionBuilder,
         layoutBuilder: (widget, list) => Stack(children: [widget!, ...list]),
-        switchInCurve: Curves.ease,
-        switchOutCurve: Curves.ease.flipped,
+        switchInCurve: Curves.ease.flipped,
+        switchOutCurve: Curves.easeIn.flipped,
         child: toggler
             ? SizedBox(key: const ValueKey('front'), child: frontCard)
             : SizedBox(key: const ValueKey('back'), child: backCard),

@@ -10,41 +10,35 @@ class AppLocalizationsIs extends AppLocalizations {
   String get app_name => 'Film Flu';
 
   @override
-  String get film_list_title => 'Drama Film Playing';
+  String get film_list_title => 'Drama kvikmynd í spilun';
 
   @override
-  String get search_film_hint => 'Search here';
+  String get synopsis => 'Samantekt';
 
   @override
-  String get synopsis => 'Synopsis';
+  String get character_cast => 'Persónuleikari';
 
   @override
-  String get character_cast => 'Character Cast';
+  String get production_cast => 'Framleiðsla';
 
   @override
-  String get production_cast => 'Production';
+  String get production_job => 'sinnti verki';
 
   @override
-  String get production_job => 'performed the work of';
+  String get actor_job => 'Leika';
 
   @override
-  String get actor_job => 'Play';
+  String get in_preposition => 'inn';
 
   @override
-  String get in_preposition => 'in';
+  String get tv_series_list_title => 'Anime spila';
 
   @override
-  String get no_trailers => 'This film haven\'t trailer';
+  String get loading_title => 'Þrír, tveir, einn... Action!!!';
 
   @override
-  String get tv_series_list_title => 'Anime Playing';
+  String get made_with_love => 'Búið til með miklu';
 
   @override
-  String get loading_title => '3, 2, 1 ACTION !!!';
-
-  @override
-  String get films_not_found => 'Films not found';
-
-  @override
-  String get made_with_love => 'Made with much';
+  String get films_worked => 'Papeles que ha realizado';
 }

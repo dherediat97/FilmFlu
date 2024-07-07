@@ -13,19 +13,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get film_list_title => 'Dramafilm läuft';
 
   @override
-  String get search_film_hint => 'Hier suchen';
-
-  @override
   String get synopsis => 'Zusammenfassung';
 
   @override
   String get character_cast => 'Charakterbesetzung';
 
   @override
-  String get production_cast => 'Producción';
+  String get production_cast => 'Produktion';
 
   @override
-  String get production_job => 'realizó el trabajo de';
+  String get production_job => 'Hat die Arbeit ausgeführt von';
 
   @override
   String get actor_job => 'Spielen';
@@ -34,17 +31,14 @@ class AppLocalizationsDe extends AppLocalizations {
   String get in_preposition => 'in';
 
   @override
-  String get no_trailers => 'Dieser Film hat keinen Trailer';
-
-  @override
   String get tv_series_list_title => 'Anime wird abgespielt';
 
   @override
-  String get loading_title => '3, 2, 1 AKTION !!!';
+  String get loading_title => 'Dre, Zwei, Eins... ACTION!!!';
 
   @override
-  String get films_not_found => 'Filme nicht gefunden';
+  String get made_with_love => 'Mit viel Liebe gemacht';
 
   @override
-  String get made_with_love => 'Made with much';
+  String get films_worked => 'Charaktere, die ich gemacht habe';
 }

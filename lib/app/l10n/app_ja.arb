@@ -1,15 +1,13 @@
 {
   "app_name": "Film Flu",
   "film_list_title": "ドラマ映画のニュース",
-  "search_film_hint": "Busca aquí",
   "synopsis": "あらすじ",
   "character_cast": "分布",
   "production_cast": "生産",
   "production_job": "の仕事をしました",
   "actor_job": "解釈する",
   "in_preposition": "で",
-  "no_trailers":"Esta película no tiene tráilers",
   "tv_series_list_title":"アニメシリーズのニュース",
-  "loading_title":"3,2,1 アクション!!!",
-  "films_not_found":"No se han encontrado películas"
+  "made_with_love": "たくさんの作品で作られました",
+  "loading_title":"三、二、一 アクション!!!"
 }

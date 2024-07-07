@@ -108,11 +108,17 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                         padding: const EdgeInsets.symmetric(horizontal: 24.0),
                         child: Row(
                           children: [
-                            Text(
-                              context.localizations.made_with_love,
-                              style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                            Center(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 20),
+                                child: Text(
+                                  context.localizations.made_with_love,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
                             ),
                             GestureDetector(
@@ -125,6 +131,8 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                                 toggler: !loveTapped,
                                 frontCard: SvgPicture.asset(
                                   AppAssets.fullHeartIcon,
+                                  height: 24,
+                                  width: 24,
                                   colorFilter: const ColorFilter.mode(
                                     Colors.red,
                                     BlendMode.srcIn,
@@ -132,6 +140,8 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                                 ),
                                 backCard: SvgPicture.asset(
                                   AppAssets.fullHeartIcon,
+                                  height: 24,
+                                  width: 24,
                                   colorFilter: const ColorFilter.mode(
                                     AppColors.andalucianColor,
                                     BlendMode.srcIn,
@@ -148,8 +158,10 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                           children: [
                             const Icon(Icons.copyright, color: Colors.black),
                             Center(
-                              child: Text('${today.year} @dherediat97',
-                                  style: const TextStyle(fontSize: 14)),
+                              child: Text(
+                                '${today.year} @dherediat97',
+                                style: const TextStyle(fontSize: 14),
+                              ),
                             )
                           ],
                         ),

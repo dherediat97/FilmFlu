@@ -1,15 +1,14 @@
 {
   "app_name": "Film Flu",
-  "film_list_title": "Drama Film Playing",
-  "search_film_hint": "Search here",
-  "synopsis": "Synopsis",
-  "character_cast": "Character Cast",
-  "production_cast": "Production",
-  "production_job": "performed the work of",
-  "actor_job": "Play",
-  "in_preposition": "in",
-  "no_trailers":"This film haven't trailer",
-  "tv_series_list_title":"Anime Playing",
-  "loading_title":"3, 2, 1 ACTION !!!",
-  "films_not_found":"Films not found"
+  "film_list_title": "Lecture de films dramatiques",
+  "synopsis": "Le sommaire",
+  "character_cast": "Casting des personnages",
+  "production_cast": "La Réalisation",
+  "production_job": "Effectué le travail de",
+  "actor_job": "Acte",
+  "in_preposition": "dans",
+  "tv_series_list_title":"Jeu d'anime",
+  "loading_title":"Trois, Deux, Un, Roulant!!!",
+  "made_with_love": "Fait avec beaucoup",
+  "films_worked":"Personnages que j'ai créés"
 }

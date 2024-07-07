@@ -13,38 +13,32 @@ class AppLocalizationsSk extends AppLocalizations {
   String get film_list_title => 'Drama Film Playing';
 
   @override
-  String get search_film_hint => 'Search here';
+  String get synopsis => 'Súhrn';
 
   @override
-  String get synopsis => 'Synopsis';
+  String get character_cast => 'Obsadenie postavy';
 
   @override
-  String get character_cast => 'Character Cast';
+  String get production_cast => 'Výroba';
 
   @override
-  String get production_cast => 'Production';
+  String get production_job => 'Vykonal prácu';
 
   @override
-  String get production_job => 'performed the work of';
+  String get actor_job => 'Hrať';
 
   @override
-  String get actor_job => 'Play';
+  String get in_preposition => 'v';
 
   @override
-  String get in_preposition => 'in';
+  String get tv_series_list_title => 'Hranie anime';
 
   @override
-  String get no_trailers => 'This film haven\'t trailer';
+  String get loading_title => 'Tri, Dva, Jedna... Akcia!!!';
 
   @override
-  String get tv_series_list_title => 'Anime Playing';
+  String get made_with_love => 'Vyrobené s veľa';
 
   @override
-  String get loading_title => '3, 2, 1 ACTION !!!';
-
-  @override
-  String get films_not_found => 'Films not found';
-
-  @override
-  String get made_with_love => 'Made with much';
+  String get films_worked => 'Papeles que ha realizado';
 }
