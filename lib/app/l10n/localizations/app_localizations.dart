@@ -176,6 +176,12 @@ abstract class AppLocalizations {
   /// **'Documentales'**
   String get documental_series;
 
+  /// No description provided for @tv_show_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Programas de Televisión'**
+  String get tv_show_series;
+
   /// No description provided for @synopsis.
   ///
   /// In es, this message translates to:

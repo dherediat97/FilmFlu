@@ -10,31 +10,34 @@ class AppLocalizationsEn extends AppLocalizations {
   String get app_name => 'Film Flu';
 
   @override
-  String get action_movies => 'Películas de acción';
+  String get action_movies => 'Action Movies';
 
   @override
-  String get drama_movies => 'Películas de drama';
+  String get drama_movies => 'Drama Movies';
 
   @override
-  String get comedy_movies => 'Películas de comedia';
+  String get comedy_movies => 'Comedy Movies';
 
   @override
-  String get thriller_movies => 'Películas de suspense';
+  String get thriller_movies => 'Thriller Movies';
 
   @override
-  String get fiction_movies => 'Películas de ciencia ficción';
+  String get fiction_movies => 'Sci-Fi Movies';
 
   @override
-  String get love_movies => 'Películas de romance';
+  String get love_movies => 'Love Movies';
 
   @override
-  String get anime_series => 'Anime Japonés';
+  String get anime_series => 'Japanese Anime';
 
   @override
-  String get animation_series => 'Series de Animación';
+  String get animation_series => 'Animation Drawing';
 
   @override
-  String get documental_series => 'Documentales';
+  String get documental_series => 'Documentary';
+
+  @override
+  String get tv_show_series => 'TV Shows';
 
   @override
   String get synopsis => 'Synopsis';

@@ -17,12 +17,7 @@ class HomeController extends StatelessWidget {
           return state.uiState.when(
             success: () => const HomeScreen(),
             loading: () => SplashPage(routePath: AppRoutePaths.home),
-            initial: () {
-              context
-                  .read<MediaListBloc>()
-                  .add(const MediaListEvent.getMediaData());
-              return Container();
-            },
+            initial: () => Container(),
             error: (error) => const Text('An error happened'),
           );
         },

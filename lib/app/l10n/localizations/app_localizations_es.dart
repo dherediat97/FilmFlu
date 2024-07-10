@@ -37,6 +37,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get documental_series => 'Documentales';
 
   @override
+  String get tv_show_series => 'Programas de Televisión';
+
+  @override
   String get synopsis => 'Sinopsis';
 
   @override

@@ -105,17 +105,17 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
                         child: Row(
                           children: [
                             Center(
                               child: Padding(
-                                padding: const EdgeInsets.only(right: 20),
+                                padding: const EdgeInsets.only(right: 8),
                                 child: Text(
                                   context.localizations.made_with_love,
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -153,14 +153,17 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
                         child: Row(
                           children: [
                             const Icon(Icons.copyright, color: Colors.black),
                             Center(
-                              child: Text(
-                                '${today.year} @dherediat97',
-                                style: const TextStyle(fontSize: 14),
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 8),
+                                child: Text(
+                                  '${today.year} @dherediat97',
+                                  style: const TextStyle(fontSize: 14),
+                                ),
                               ),
                             )
                           ],
