@@ -3,6 +3,7 @@ import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/domain/models/film_worker_entity.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:film_flu/presentation/widgets/default_circular_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -42,16 +43,14 @@ class _FilmWorkerItemState extends State<FilmWorkerItem> {
                   '${AppUrls.personImgBaseUrl}${filmWorker.profilePath}',
                   height: 160,
                   width: 150,
-                  fit: BoxFit.cover, loadingBuilder: (BuildContext context,
-                      Widget child, ImageChunkEvent? loadingProgress) {
-                if (loadingProgress == null) return child;
-                return Center(
-                  child: CircularProgressIndicator(
-                    value: loadingProgress.expectedTotalBytes != null
-                        ? loadingProgress.cumulativeBytesLoaded /
-                            loadingProgress.expectedTotalBytes!
-                        : null,
-                  ),
+                  fit: BoxFit.cover, loadingBuilder: (
+                BuildContext context,
+                Widget child,
+                ImageChunkEvent? loadingProgress,
+              ) {
+                return DefaultCircularLoader(
+                  loadingProgress: loadingProgress,
+                  child: child,
                 );
               }, errorBuilder: (context, url, error) {
                 if (filmWorker.gender == 2) {
@@ -72,15 +71,18 @@ class _FilmWorkerItemState extends State<FilmWorkerItem> {
               }),
             ),
           ),
-          AutoSizeText(filmWorker.name!,
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                  fontFamily: 'ShadowsIntoLight',
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
-                  fontSize: 18)),
+          AutoSizeText(
+            filmWorker.name!,
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontFamily: 'ShadowsIntoLight',
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.primary,
+              fontSize: 18,
+            ),
+          ),
           AutoSizeText(
             '${context.localizations.production_job} ${filmWorker.job} ${context.localizations.in_preposition} ${filmWorker.knownForDepartment}',
             textAlign: TextAlign.center,

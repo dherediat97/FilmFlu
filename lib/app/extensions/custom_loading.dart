@@ -9,27 +9,6 @@ extension Unique<E, Id> on List<E> {
   }
 }
 
-class DefaultAsyncLoading extends StatelessWidget {
-  final Widget child;
-  final ImageChunkEvent? loadingProgress;
-
-  const DefaultAsyncLoading(
-      {super.key, required this.child, required this.loadingProgress});
-
-  @override
-  Widget build(BuildContext context) {
-    if (loadingProgress == null) return child;
-    return Center(
-      child: CircularProgressIndicator(
-        value: loadingProgress!.expectedTotalBytes != null
-            ? loadingProgress!.cumulativeBytesLoaded /
-                loadingProgress!.expectedTotalBytes!
-            : null,
-      ),
-    );
-  }
-}
-
 class DefaultWidgetLoading extends StatelessWidget {
   const DefaultWidgetLoading({super.key});
 

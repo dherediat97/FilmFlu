@@ -8,13 +8,15 @@ part 'person_entity.g.dart';
 class PersonEntity with _$PersonEntity {
   const factory PersonEntity({
     required String name,
+    required int gender,
+    required List<String> alias,
     required int id,
-    required String birthday,
+    String? birthday,
     String? deathday,
-    required String placeOfBirth,
-    required String biography,
+    String? placeOfBirth,
+    String? biography,
     String? profilePath,
-    required CreditsPersonEntity credits,
+    CreditsPersonEntity? credits,
   }) = _PersonEntity;
 
   factory PersonEntity.fromJson(Map<String, dynamic> json) =>

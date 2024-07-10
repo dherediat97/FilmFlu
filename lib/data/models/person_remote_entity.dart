@@ -9,13 +9,15 @@ part 'person_remote_entity.g.dart';
 class PersonRemoteEntity with _$PersonRemoteEntity {
   const factory PersonRemoteEntity({
     @JsonKey(name: 'name') required String name,
+    @JsonKey(name: 'also_know_as') required List<String> alias,
     @JsonKey(name: 'id') required int id,
     @JsonKey(name: 'birthday') String? birthday,
     @JsonKey(name: 'deathday') String? deathday,
     @JsonKey(name: 'place_of_birth') String? placeOfBirth,
+    @JsonKey(name: 'gender') required int gender,
     @JsonKey(name: 'biography') String? biography,
-    @JsonKey(name: 'profile_path') required String profilePath,
-    @JsonKey(name: 'credits') required CreditsPersonRemoteEntity credits,
+    @JsonKey(name: 'profile_path') String? profilePath,
+    @JsonKey(name: 'credits') CreditsPersonRemoteEntity? credits,
   }) = _PersonRemoteEntity;
 
   factory PersonRemoteEntity.fromJson(Map<String, dynamic> json) =>
@@ -26,11 +28,13 @@ extension MediaItemToRemoteEntityExtension on PersonRemoteEntity {
   PersonEntity toPersonEntity() => PersonEntity(
         id: id,
         name: name,
+        gender: gender,
+        alias: alias,
         biography: biography ?? '',
         birthday: birthday ?? '',
         placeOfBirth: placeOfBirth ?? '',
         deathday: deathday ?? '',
-        profilePath: profilePath,
-        credits: credits.toCreditsPersonEntity(),
+        profilePath: profilePath ?? '',
+        credits: credits?.toCreditsPersonEntity(),
       );
 }

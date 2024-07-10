@@ -1,9 +1,9 @@
 import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
-import 'package:film_flu/app/extensions/custom_loading.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/domain/models/actor_entity.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:film_flu/presentation/widgets/default_circular_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -45,7 +45,7 @@ class _FilmActorItemState extends State<FilmActorItem> {
                 width: 150,
                 fit: BoxFit.cover,
                 loadingBuilder: (context, child, loadingProgress) =>
-                    DefaultAsyncLoading(
+                    DefaultCircularLoader(
                   loadingProgress: loadingProgress,
                   child: child,
                 ),

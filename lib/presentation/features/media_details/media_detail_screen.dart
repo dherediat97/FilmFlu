@@ -1,12 +1,12 @@
 import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
-import 'package:film_flu/app/extensions/custom_loading.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/media_cast_list.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
+import 'package:film_flu/presentation/widgets/default_circular_loader.dart';
 import 'package:flutter/foundation.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -107,7 +107,7 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                                     '${AppUrls.movieLandscapeBaseUrl}${movie.backdropPath}',
                                     loadingBuilder:
                                         (context, child, loadingProgress) =>
-                                            DefaultAsyncLoading(
+                                            DefaultCircularLoader(
                                       loadingProgress: loadingProgress,
                                       child: child,
                                     ),
@@ -126,10 +126,10 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                                           textAlign: TextAlign.start,
                                           overflow: TextOverflow.ellipsis,
                                           style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                              fontFamily: 'YsabeauInfant',
-                                              fontSize: 37),
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            fontSize: 37,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -143,7 +143,6 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                                             textAlign: TextAlign.start,
                                             style: const TextStyle(
                                               color: Colors.white,
-                                              fontFamily: 'YsabeauInfant',
                                               fontSize: 40,
                                             ),
                                           ),
@@ -168,7 +167,8 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                                                       fontSize: 15,
                                                     ),
                                                   ),
-                                                ))
+                                                ),
+                                              )
                                             : Container(
                                                 alignment: Alignment.centerLeft,
                                                 child: AutoSizeText(
@@ -266,9 +266,10 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                           return Column(
                             children: [
                               Container(
-                                  height: MediaQuery.of(context).size.height,
-                                  padding: const EdgeInsets.only(top: 50),
-                                  child: player),
+                                height: MediaQuery.of(context).size.height,
+                                padding: const EdgeInsets.only(top: 50),
+                                child: player,
+                              ),
                             ],
                           );
                         },

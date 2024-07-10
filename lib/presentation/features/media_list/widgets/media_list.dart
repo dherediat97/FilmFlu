@@ -18,7 +18,6 @@ class _MediaListState extends State<MediaList> {
   @override
   void initState() {
     super.initState();
-    context.read<MediaListBloc>().add(const MediaListEvent.getMediaData());
   }
 
   @override
@@ -199,6 +198,27 @@ class _MediaListState extends State<MediaList> {
                   itemBuilder: (context, index) {
                     return MovieCarrouselItem(
                         movie: state.mediaData!.documentalSeries[index]);
+                  },
+                ),
+              ),
+              const SizedBox(height: 20),
+              AutoSizeText(context.localizations.tv_show_series,
+                  maxFontSize: 30,
+                  minFontSize: 20,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 40,
+                  )),
+              const SizedBox(height: 20),
+              SizedBox(
+                height: 220,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: state.mediaData?.tvShowsSeries.length,
+                  itemBuilder: (context, index) {
+                    return MovieCarrouselItem(
+                        movie: state.mediaData!.tvShowsSeries[index]);
                   },
                 ),
               ),

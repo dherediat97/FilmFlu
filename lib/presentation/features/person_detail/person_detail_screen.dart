@@ -1,6 +1,5 @@
 import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
-import 'package:film_flu/app/extensions/custom_loading.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/core/utils/util_date.dart';
@@ -10,9 +9,11 @@ import 'package:film_flu/domain/models/person_entity.dart';
 import 'package:film_flu/presentation/features/person_detail/bloc/person_detail_bloc.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:film_flu/presentation/widgets/default_circular_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class PersonDetailsPage extends StatefulWidget {
   const PersonDetailsPage({
@@ -41,15 +42,16 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
         child: BlocBuilder<PersonDetailBloc, PersonDetailState>(
           builder: (context, state) {
             PersonEntity? person = state.person;
+            print(person);
 
             List<CreditActorEntity>? creditsListAsActor = state
-                .person?.credits.cast
+                .person?.credits?.cast
                 .where((element) => element.character != null)
                 .where((element) => element.title != null)
                 .toList();
 
             List<CreditProductionEntity>? creditsListAsProduction = state
-                .person?.credits.crew
+                .person?.credits?.crew
                 .where((element) => element.job != null)
                 .where((element) => element.title != null)
                 .toList();
@@ -102,7 +104,7 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                           padding:
                                               const EdgeInsets.only(left: 8.0),
                                           child: Text(
-                                              '${parseDate(person.birthday)}',
+                                              '${parseDate(person.birthday!)}',
                                               textAlign: TextAlign.start,
                                               style: const TextStyle(
                                                   color: Colors.white)),
@@ -110,29 +112,33 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                       ],
                                     ),
                                   ),
-                                  // person.deathday != null
-                                  //     ? Padding(
-                                  //         padding:
-                                  //             const EdgeInsets.only(top: 16.0),
-                                  //         child: Row(
-                                  //           children: [
-                                  //             const Icon(
-                                  //               Symbols.skull,
-                                  //               color: Colors.white,
-                                  //             ),
-                                  //             Padding(
-                                  //               padding: const EdgeInsets.only(
-                                  //                   left: 8.0),
-                                  //               child: Text(
-                                  //                   parseDate(person.deathday!),
-                                  //                   textAlign: TextAlign.start,
-                                  //                   style: const TextStyle(
-                                  //                       color: Colors.white)),
-                                  //             ),
-                                  //           ],
-                                  //         ),
-                                  //       )
-                                  //     : Container(),
+                                  person.deathday!.isNotEmpty
+                                      ? Padding(
+                                          padding: const EdgeInsets.only(
+                                            top: 16.0,
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              const Icon(
+                                                Symbols.skull,
+                                                color: Colors.white,
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  left: 8.0,
+                                                ),
+                                                child: Text(
+                                                  parseDate(person.deathday!),
+                                                  textAlign: TextAlign.start,
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      : Container(),
                                   const SizedBox(height: 10),
                                   Row(
                                     children: [
@@ -146,7 +152,9 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                         child: SizedBox(
                                           width: 220,
                                           child: AutoSizeText(
-                                            person.placeOfBirth.trim(),
+                                            person.placeOfBirth
+                                                .toString()
+                                                .trim(),
                                             maxFontSize: 20,
                                             minFontSize: 15,
                                             overflow: TextOverflow.ellipsis,
@@ -173,7 +181,7 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 16.0),
                                   child: Text(
-                                    person.biography,
+                                    person.biography.toString(),
                                     textAlign: TextAlign.start,
                                     style: const TextStyle(
                                       color: Colors.white,
@@ -288,7 +296,7 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                               width: 150,
                                               loadingBuilder: (context, child,
                                                       loadingProgress) =>
-                                                  DefaultAsyncLoading(
+                                                  DefaultCircularLoader(
                                                 loadingProgress:
                                                     loadingProgress,
                                                 child: child,
@@ -354,7 +362,7 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                               width: 150,
                                               loadingBuilder: (context, child,
                                                       loadingProgress) =>
-                                                  DefaultAsyncLoading(
+                                                  DefaultCircularLoader(
                                                 loadingProgress:
                                                     loadingProgress,
                                                 child: child,

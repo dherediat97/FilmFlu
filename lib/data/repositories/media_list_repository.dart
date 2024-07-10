@@ -107,9 +107,13 @@ class MediaListRepository implements MediaListRepositoryContract {
   }
 
   Future<List<GenreEntity>> getGenreList(String mediaType) async {
-    final genreList = await _movieRemoteDataSourceContract.getGenreList(
-      mediaType: mediaType,
-    );
+    List<GenreRemoteEntity> genreList = List.empty();
+
+    if (genreList.isEmpty) {
+      genreList = await _movieRemoteDataSourceContract.getGenreList(
+        mediaType: mediaType,
+      );
+    }
     return genreList.map((e) => e.toGenreEntity()).toList();
   }
 }
