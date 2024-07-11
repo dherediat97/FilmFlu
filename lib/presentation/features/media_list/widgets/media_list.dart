@@ -5,20 +5,10 @@ import 'package:film_flu/presentation/features/media_list/widgets/media_carrouse
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MediaList extends StatefulWidget {
+class MediaList extends StatelessWidget {
   const MediaList({
     super.key,
   });
-
-  @override
-  State<MediaList> createState() => _MediaListState();
-}
-
-class _MediaListState extends State<MediaList> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +41,8 @@ class _MediaListState extends State<MediaList> {
                   itemCount: state.mediaData?.actionMovies.length,
                   itemBuilder: (context, index) {
                     return MovieCarrouselItem(
-                        movie: state.mediaData!.actionMovies[index]);
+                      movie: state.mediaData!.actionMovies[index],
+                    );
                   },
                 ),
               ),
@@ -72,7 +63,8 @@ class _MediaListState extends State<MediaList> {
                   itemCount: state.mediaData?.animeSeries.length,
                   itemBuilder: (context, index) {
                     return MovieCarrouselItem(
-                        movie: state.mediaData!.animeSeries[index]);
+                      movie: state.mediaData!.animeSeries[index],
+                    );
                   },
                 ),
               ),
@@ -92,7 +84,8 @@ class _MediaListState extends State<MediaList> {
                   itemCount: state.mediaData?.animationSeries.length,
                   itemBuilder: (context, index) {
                     return MovieCarrouselItem(
-                        movie: state.mediaData!.animationSeries[index]);
+                      movie: state.mediaData!.animationSeries[index],
+                    );
                   },
                 ),
               ),
@@ -113,7 +106,8 @@ class _MediaListState extends State<MediaList> {
                   itemCount: state.mediaData?.fictionMovies.length,
                   itemBuilder: (context, index) {
                     return MovieCarrouselItem(
-                        movie: state.mediaData!.fictionMovies[index]);
+                      movie: state.mediaData!.fictionMovies[index],
+                    );
                   },
                 ),
               ),
@@ -134,7 +128,8 @@ class _MediaListState extends State<MediaList> {
                   itemCount: state.mediaData?.romanceMovies.length,
                   itemBuilder: (context, index) {
                     return MovieCarrouselItem(
-                        movie: state.mediaData!.romanceMovies[index]);
+                      movie: state.mediaData!.romanceMovies[index],
+                    );
                   },
                 ),
               ),
@@ -160,14 +155,16 @@ class _MediaListState extends State<MediaList> {
                 ),
               ),
               const SizedBox(height: 20),
-              AutoSizeText(context.localizations.thriller_movies,
-                  maxFontSize: 30,
-                  minFontSize: 20,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 40,
-                  )),
+              AutoSizeText(
+                context.localizations.thriller_movies,
+                maxFontSize: 30,
+                minFontSize: 20,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 40,
+                ),
+              ),
               const SizedBox(height: 20),
               SizedBox(
                 height: 220,
@@ -176,7 +173,8 @@ class _MediaListState extends State<MediaList> {
                   itemCount: state.mediaData?.suspenseMovies.length,
                   itemBuilder: (context, index) {
                     return MovieCarrouselItem(
-                        movie: state.mediaData!.suspenseMovies[index]);
+                      movie: state.mediaData!.suspenseMovies[index],
+                    );
                   },
                 ),
               ),
@@ -197,7 +195,8 @@ class _MediaListState extends State<MediaList> {
                   itemCount: state.mediaData?.documentalSeries.length,
                   itemBuilder: (context, index) {
                     return MovieCarrouselItem(
-                        movie: state.mediaData!.documentalSeries[index]);
+                      movie: state.mediaData!.documentalSeries[index],
+                    );
                   },
                 ),
               ),
@@ -218,7 +217,8 @@ class _MediaListState extends State<MediaList> {
                   itemCount: state.mediaData?.tvShowsSeries.length,
                   itemBuilder: (context, index) {
                     return MovieCarrouselItem(
-                        movie: state.mediaData!.tvShowsSeries[index]);
+                      movie: state.mediaData!.tvShowsSeries[index],
+                    );
                   },
                 ),
               ),

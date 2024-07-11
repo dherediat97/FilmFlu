@@ -7,6 +7,13 @@ abstract class MediaListRemoteDataSourceContract {
     required int genreId,
     String languageId,
   });
+
+  Future<List<MediaItemRemoteEntity>> paginateMediaData({
+    required String mediaType,
+    required int genreId,
+    required int page,
+  });
+
   Future<List<GenreRemoteEntity>> getGenreList({
     required String mediaType,
   });

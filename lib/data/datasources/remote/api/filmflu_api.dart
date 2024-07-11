@@ -17,12 +17,14 @@ abstract class FilmFluApi {
   factory FilmFluApi(Dio dio, {String? baseUrl}) = _FilmFluApi;
 
   @GET('/discover/{mediaType}')
-  Future<Pagination<MediaItemRemoteEntity>> fetchPopularMediaTypes({
+  Future<Pagination<MediaItemRemoteEntity>> fetchMediaData({
     @Path('mediaType') required String mediaType,
     @Query('language') String language = 'es-ES',
     @Query('sort_by') String sortBy = 'popularity.desc',
     @Query('with_genres') required int genres,
     @Query('with_original_language') String? languageId,
+    @Query('primary_release_year') int? primaryReleaseYear = 2024,
+    @Query('page') int? page = 1,
   });
 
   @GET('/genre/{mediaType}/list')

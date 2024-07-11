@@ -79,6 +79,30 @@ class MediaListRepository implements MediaListRepositoryContract {
     }
   }
 
+  @override
+  Future<Result<List<MediaItemEntity>>> paginateMediaData({
+    required String mediaType,
+    required int genreId,
+    required int page,
+  }) async {
+    try {
+      List<MediaItemRemoteEntity> movieList =
+          await _movieRemoteDataSourceContract.paginateMediaData(
+        mediaType: mediaType,
+        genreId: genreId,
+        page: page,
+      );
+
+      return Result.success(movieList.map((e) => e.toMediaEntity()).toList());
+    } catch (error) {
+      return Result.failure(
+        error: RepositoryError.fromDataSourceError(
+          NetworkError.fromException(error),
+        ),
+      );
+    }
+  }
+
   Future<List<MediaItemEntity>> getMovies({
     required int genre,
     String? languageId = '',
