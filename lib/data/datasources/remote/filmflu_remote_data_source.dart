@@ -25,11 +25,26 @@ class FilmFluRemoteDataSource
     required int genreId,
     String? languageId,
   }) async {
-    final mediaData = await _filmFluApi.fetchPopularMediaTypes(
+    final mediaData = await _filmFluApi.fetchMediaData(
       mediaType: mediaType,
       language: await _appLocalDataSourceContract.getLanguage(),
       genres: genreId,
       languageId: languageId ?? '',
+    );
+    return mediaData.results;
+  }
+
+  @override
+  Future<List<MediaItemRemoteEntity>> paginateMediaData({
+    required String mediaType,
+    required int genreId,
+    required int page,
+  }) async {
+    final mediaData = await _filmFluApi.fetchMediaData(
+      mediaType: mediaType,
+      language: await _appLocalDataSourceContract.getLanguage(),
+      genres: genreId,
+      page: page,
     );
     return mediaData.results;
   }

@@ -42,7 +42,6 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
         child: BlocBuilder<PersonDetailBloc, PersonDetailState>(
           builder: (context, state) {
             PersonEntity? person = state.person;
-            print(person);
 
             List<CreditActorEntity>? creditsListAsActor = state
                 .person?.credits?.cast

@@ -209,26 +209,28 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                                   ),
                                 ),
                                 segments: [
-                                  ButtonSegment(
-                                    label: Text(
-                                      context.localizations.character_cast,
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
+                                  if (movie.credits?.cast.isNotEmpty == true)
+                                    ButtonSegment(
+                                      label: Text(
+                                        context.localizations.character_cast,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                        ),
                                       ),
+                                      value: true,
                                     ),
-                                    value: true,
-                                  ),
-                                  ButtonSegment(
-                                    label: Text(
-                                      context.localizations.production_cast,
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
+                                  if (movie.credits?.crew.isNotEmpty == true)
+                                    ButtonSegment(
+                                      label: Text(
+                                        context.localizations.production_cast,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                        ),
                                       ),
+                                      value: false,
                                     ),
-                                    value: false,
-                                  ),
                                 ],
                                 onSelectionChanged: (Set<bool> castSelected) {
                                   context

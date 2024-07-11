@@ -1,5 +1,6 @@
 import 'package:film_flu/app/types/ui_state.dart';
 import 'package:film_flu/domain/models/media_data_entity.dart';
+import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/domain/repository_contracts/media_list_repository_contract.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -17,9 +18,13 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
         super(MediaListState.initial()) {
     on<MediaListEvent>((event, emit) async {
       await event.when(
-        getMediaData: () => _getMediaData(
+        getMediaData: () => _getMediaData(event, emit),
+        loadMoreMediaData: (mediaType, page, genreId) => _loadMoreMediaData(
           event,
           emit,
+          mediaType,
+          page,
+          genreId,
         ),
       );
     });
@@ -45,6 +50,35 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
         state.copyWith(
           uiState: const UiState.success(),
           mediaData: value,
+        ),
+      ),
+    );
+  }
+
+  _loadMoreMediaData(
+    MediaListEvent event,
+    Emitter<MediaListState> emit,
+    String mediaType,
+    int page,
+    int genreId,
+  ) async {
+    emit(state.copyWith(uiState: const UiState.loading()));
+
+    final movieData = await _repository.paginateMediaData(
+        mediaType: mediaType, page: page, genreId: genreId);
+    movieData.when(
+      failure: (errorMessage) {
+        emit(
+          state.copyWith(
+            uiState: const UiState.error(),
+            mediaData: null,
+          ),
+        );
+      },
+      success: (value) => emit(
+        state.copyWith(
+          uiState: const UiState.success(),
+          mediaList: value,
         ),
       ),
     );
