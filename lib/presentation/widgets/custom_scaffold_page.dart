@@ -64,7 +64,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                         if (context.canPop()) {
                           context.pop();
                         } else {
-                          context.pushReplacementNamed(AppRoutePaths.home);
+                          context.go(AppRoutePaths.home);
                         }
                       }),
                 ),
@@ -184,11 +184,10 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
 
     actions.add(DropdownButton<Locale>(
         onChanged: (language) {
-          setState(() {
-            context
-                .read<LanguageCubit>()
-                .changeLang(context, language?.toString() ?? 'es');
-          });
+          context
+              .read<LanguageCubit>()
+              .changeLang(context, language?.toString() ?? 'es');
+          context.push(AppRoutePaths.main);
         },
         dropdownColor: Colors.black,
         value: context.read<LanguageCubit>().state,
