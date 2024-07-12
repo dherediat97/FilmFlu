@@ -1,13 +1,22 @@
 {
   "app_name": "Film Flu",
-  "film_list_title": "Draamaelokuvan toisto",
+  "action_movies": "toimintaelokuvat",
+  "drama_movies": "Draamaelokuvat",
+  "comedy_movies": "Komediaelokuvat",
+  "thriller_movies": "Thrillerielokuvat",
+  "fiction_movies": "Scifi-elokuvat",
+  "love_movies": "Romanssielokuvat",
+  "anime_series":"Japanilainen anime",
+  "animation_series":"Animaatiosarja",
+  "documental_series":"Dokumentit",
+  "tv_show_series": "Televisio-ohjelmat",
   "synopsis": "Synopsis",
   "character_cast": "Hahmo Cast",
   "production_cast": "Tuotanto",
   "production_job": "Suoritti työn",
   "actor_job": "Pelata",
-  "in_preposition": "sisään",
-  "tv_series_list_title":"Anime pelaaminen",  
+  "in_preposition": "sisään", 
   "made_with_love": "Tehty paljon",
-  "loading_title":"Kolme, Kaksi, Yksi... Toimintaa!!!"
+  "loading_title":"Kolme, Kaksi, Yksi... Toimintaa!!!",
+  "films_worked":"Hänen roolit"
 }

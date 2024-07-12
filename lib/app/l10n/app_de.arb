@@ -1,14 +1,22 @@
 {
   "app_name": "Film Flu",
-  "film_list_title": "Dramafilm läuft",
+  "action_movies": "Actionfilme",
+  "drama_movies": "Dramafilme",
+  "comedy_movies": "Komödienfilme",
+  "thriller_movies": "Thrillerfilme",
+  "fiction_movies": "Science-Fiction-Filme",
+  "love_movies": "Liebesfilme",
+  "anime_series": "Japanischer Anime",
+  "animation_series": "Animationsserie",
+  "documental_series": "Dokumentarfilme",
+  "tv_show_series": "Fernsehsendungen",
   "synopsis": "Zusammenfassung",
   "character_cast": "Charakterbesetzung",
   "production_cast": "Produktion",
   "production_job": "Hat die Arbeit ausgeführt von",
   "actor_job": "Spielen",
   "in_preposition": "in",
-  "tv_series_list_title": "Anime wird abgespielt",
   "loading_title": "Dre, Zwei, Eins... ACTION!!!",
   "made_with_love": "Mit viel Liebe gemacht",
-  "films_worked":"Charaktere, die ich gemacht habe"
+  "films_worked": "Rollen, die er gespielt hat"
 }

@@ -10,34 +10,34 @@ class AppLocalizationsSk extends AppLocalizations {
   String get app_name => 'Film Flu';
 
   @override
-  String get action_movies => 'Películas de acción';
+  String get action_movies => 'Akčné filmy';
 
   @override
-  String get drama_movies => 'Películas de drama';
+  String get drama_movies => 'Filmové drámy';
 
   @override
-  String get comedy_movies => 'Películas de comedia';
+  String get comedy_movies => 'Komediálne filmy';
 
   @override
-  String get thriller_movies => 'Películas de suspense';
+  String get thriller_movies => 'Filmové trilery';
 
   @override
-  String get fiction_movies => 'Películas de ciencia ficción';
+  String get fiction_movies => 'Sci-fi filmy';
 
   @override
-  String get love_movies => 'Películas de romance';
+  String get love_movies => 'Romantické filmy';
 
   @override
-  String get anime_series => 'Anime Japonés';
+  String get anime_series => 'Japonské anime';
 
   @override
-  String get animation_series => 'Series de Animación';
+  String get animation_series => 'Animačný seriál';
 
   @override
-  String get documental_series => 'Documentales';
+  String get documental_series => 'Dokumentárne filmy';
 
   @override
-  String get tv_show_series => 'Programas de Televisión';
+  String get tv_show_series => 'Televízne relácie';
 
   @override
   String get synopsis => 'Súhrn';
@@ -64,5 +64,5 @@ class AppLocalizationsSk extends AppLocalizations {
   String get made_with_love => 'Vyrobené s veľa';
 
   @override
-  String get films_worked => 'Papeles que ha realizado';
+  String get films_worked => 'Úlohy, ktoré stvárnil';
 }

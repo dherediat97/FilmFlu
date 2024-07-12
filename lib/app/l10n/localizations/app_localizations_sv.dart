@@ -10,34 +10,34 @@ class AppLocalizationsSv extends AppLocalizations {
   String get app_name => 'Film Flu';
 
   @override
-  String get action_movies => 'Películas de acción';
+  String get action_movies => 'Actionfilmer';
 
   @override
-  String get drama_movies => 'Películas de drama';
+  String get drama_movies => 'Dramafilmer';
 
   @override
-  String get comedy_movies => 'Películas de comedia';
+  String get comedy_movies => 'Komedifilmer';
 
   @override
-  String get thriller_movies => 'Películas de suspense';
+  String get thriller_movies => 'Thrillerfilmer';
 
   @override
-  String get fiction_movies => 'Películas de ciencia ficción';
+  String get fiction_movies => 'Science fiction-filmer';
 
   @override
-  String get love_movies => 'Películas de romance';
+  String get love_movies => 'Romanska filmer';
 
   @override
-  String get anime_series => 'Anime Japonés';
+  String get anime_series => 'Japansk anime';
 
   @override
-  String get animation_series => 'Series de Animación';
+  String get animation_series => 'Animationsserie';
 
   @override
-  String get documental_series => 'Documentales';
+  String get documental_series => 'Dokumentärer';
 
   @override
-  String get tv_show_series => 'Programas de Televisión';
+  String get tv_show_series => 'TV-program';
 
   @override
   String get synopsis => 'Synopsis';
@@ -64,5 +64,5 @@ class AppLocalizationsSv extends AppLocalizations {
   String get made_with_love => 'Gjord med mycket';
 
   @override
-  String get films_worked => 'Papeles que ha realizado';
+  String get films_worked => 'Roller han har gjort';
 }

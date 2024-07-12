@@ -1,13 +1,22 @@
 {
   "app_name": "Film Flu",
-  "film_list_title": "Riproduzione di film drammatici",
+  "action_movies": "Film d'azione",
+  "drama_movies": "Film drammatici",
+  "comedy_movies": "Film commedia",
+  "thriller_movies": "Film thriller",
+  "fiction_movies": "Film di fantascienza",
+  "love_movies": "Film romantici",
+  "anime_series": "Anime giapponesi",
+  "animation_series": "Serie di animazioni",
+  "documental_series": "Documentari",
+  "tv_show_series": "Spettacoli televisivi",
   "synopsis": "Sinossi",
   "character_cast": "Cast dei personaggi",
   "production_cast": "Produzione",
   "production_job": "Ha eseguito il lavoro di",
   "actor_job": "Giocare",
   "in_preposition": "in",
-  "tv_series_list_title":"Gioco di anime",
   "made_with_love": "Fatto con molto",
-  "loading_title":"Tre, Due, Uno... Azione!!!"
+  "loading_title":"Tre, Due, Uno... Azione!!!",
+  "films_worked": "Ruoli che ha interpretato"
 }

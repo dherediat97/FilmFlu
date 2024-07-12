@@ -1,13 +1,22 @@
 {
   "app_name": "Film Flu",
-  "film_list_title": "ड्रामा फिल्म प्लेइंग",
+  "action_movies": "एक्शन फिल्में",
+  "drama_movies": "ड्रामा मूवीज़",
+  "comedy_movies": "कॉमेडी फिल्में",
+  "thriller_movies": "थ्रिलर फ़िल्में",
+  "fiction_movies": "साइंस फ़िक्शन फ़िल्में",
+  "love_movies": "रोमांस फिल्में",
+  "anime_series": "जापानी एनीमे",
+  "animation_series":"एनीमेशन सीरीज़",
+  "documental_series":"वृत्तचित्र",
+"tv_show_series": "टेलीविज़न शो",
   "synopsis": "सारांश",
   "character_cast": "चरित्र कलाकार",
   "production_cast": "निर्माण",
   "production_job": "ने",
   "actor_job": "प्ले",
   "in_preposition": "में",
-  "tv_series_list_title":"एनीमे प्लेइंग",
   "made_with_love": "बहुत अधिक के साथ बनाया गया",
-  "loading_title":"थ्री, टू, वन... एक्शन!!!"
+  "loading_title":"थ्री, टू, वन... एक्शन!!!",
+  "films_worked": "उन्होंने जो भूमिकाएँ निभाईं"
 }

@@ -10,34 +10,34 @@ class AppLocalizationsJa extends AppLocalizations {
   String get app_name => 'Film Flu';
 
   @override
-  String get action_movies => 'Películas de acción';
+  String get action_movies => 'アクション映画';
 
   @override
-  String get drama_movies => 'Películas de drama';
+  String get drama_movies => 'ドラマ映画';
 
   @override
-  String get comedy_movies => 'Películas de comedia';
+  String get comedy_movies => 'コメディ映画';
 
   @override
-  String get thriller_movies => 'Películas de suspense';
+  String get thriller_movies => 'スリラー映画';
 
   @override
-  String get fiction_movies => 'Películas de ciencia ficción';
+  String get fiction_movies => 'SF 映画';
 
   @override
-  String get love_movies => 'Películas de romance';
+  String get love_movies => '恋愛映画';
 
   @override
-  String get anime_series => 'Anime Japonés';
+  String get anime_series => '日本のアニメ';
 
   @override
-  String get animation_series => 'Series de Animación';
+  String get animation_series => 'アニメーション シリーズ';
 
   @override
-  String get documental_series => 'Documentales';
+  String get documental_series => 'ドキュメンタリー';
 
   @override
-  String get tv_show_series => 'Programas de Televisión';
+  String get tv_show_series => 'テレビ番組';
 
   @override
   String get synopsis => 'あらすじ';
@@ -64,5 +64,5 @@ class AppLocalizationsJa extends AppLocalizations {
   String get made_with_love => 'たくさんの作品で作られました';
 
   @override
-  String get films_worked => 'Papeles que ha realizado';
+  String get films_worked => '彼が演じた役割';
 }

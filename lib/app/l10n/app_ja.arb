@@ -1,13 +1,22 @@
 {
   "app_name": "Film Flu",
-  "film_list_title": "ドラマ映画のニュース",
+  "action_movies": "アクション映画",
+  "drama_movies": "ドラマ映画",
+  "comedy_movies": "コメディ映画",
+  "thriller_movies": "スリラー映画",
+  "fiction_movies": "SF 映画",
+  "love_movies": "恋愛映画",
+  "anime_series":"日本のアニメ",
+  "animation_series":"アニメーション シリーズ",
+  "documental_series":"ドキュメンタリー",
+  "tv_show_series": "テレビ番組",
   "synopsis": "あらすじ",
   "character_cast": "分布",
   "production_cast": "生産",
   "production_job": "の仕事をしました",
   "actor_job": "解釈する",
   "in_preposition": "で",
-  "tv_series_list_title":"アニメシリーズのニュース",
   "made_with_love": "たくさんの作品で作られました",
-  "loading_title":"三、二、一 アクション!!!"
+  "loading_title":"三、二、一 アクション!!!",
+  "films_worked":"彼が演じた役割"
 }
