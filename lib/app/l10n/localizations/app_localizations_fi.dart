@@ -10,34 +10,34 @@ class AppLocalizationsFi extends AppLocalizations {
   String get app_name => 'Film Flu';
 
   @override
-  String get action_movies => 'Películas de acción';
+  String get action_movies => 'toimintaelokuvat';
 
   @override
-  String get drama_movies => 'Películas de drama';
+  String get drama_movies => 'Draamaelokuvat';
 
   @override
-  String get comedy_movies => 'Películas de comedia';
+  String get comedy_movies => 'Komediaelokuvat';
 
   @override
-  String get thriller_movies => 'Películas de suspense';
+  String get thriller_movies => 'Thrillerielokuvat';
 
   @override
-  String get fiction_movies => 'Películas de ciencia ficción';
+  String get fiction_movies => 'Scifi-elokuvat';
 
   @override
-  String get love_movies => 'Películas de romance';
+  String get love_movies => 'Romanssielokuvat';
 
   @override
-  String get anime_series => 'Anime Japonés';
+  String get anime_series => 'Japanilainen anime';
 
   @override
-  String get animation_series => 'Series de Animación';
+  String get animation_series => 'Animaatiosarja';
 
   @override
-  String get documental_series => 'Documentales';
+  String get documental_series => 'Dokumentit';
 
   @override
-  String get tv_show_series => 'Programas de Televisión';
+  String get tv_show_series => 'Televisio-ohjelmat';
 
   @override
   String get synopsis => 'Synopsis';
@@ -64,5 +64,5 @@ class AppLocalizationsFi extends AppLocalizations {
   String get made_with_love => 'Tehty paljon';
 
   @override
-  String get films_worked => 'Papeles que ha realizado';
+  String get films_worked => 'Hänen roolit';
 }

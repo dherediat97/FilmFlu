@@ -1,13 +1,23 @@
 {
   "app_name": "Film Flu",
-  "film_list_title": "Drama kvikmynd í spilun",
+  "action_movies": "Hasarmyndir",
+  "drama_movies": "Dramamyndir",
+  "comedy_movies": "Gínmyndir",
+  "thriller_movies": "Spennumyndir",
+  "fiction_movies": "Vísindaskáldskaparmyndir",
+  "love_movies": "Rómantískar kvikmyndir",
+  "anime_series":"Japönsk anime",
+  "animation_series":"Hreyfimyndasería",
+  "documental_series":"Heimildarmyndir",
+  "tv_show_series": "Sjónvarpsþættir",
   "synopsis": "Samantekt",
   "character_cast": "Persónuleikari",
   "production_cast": "Framleiðsla",
   "production_job": "sinnti verki",
   "actor_job": "Leika",
   "in_preposition": "inn",
-  "tv_series_list_title":"Anime spila", 
   "made_with_love": "Búið til með miklu",
-  "loading_title":"Þrír, tveir, einn... Action!!!"
+  "loading_title":"Þrír, tveir, einn... Action!!!",
+  "films_worked": "Rollen, die er gespielt hat",
+  "films_worked":"Hlutverk sem hann hefur leikið"
 }

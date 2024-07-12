@@ -1,13 +1,22 @@
 {
   "app_name": "Film Flu",
-  "film_list_title": "Dramafilm spelas",
+  "action_movies": "Actionfilmer",
+  "drama_movies": "Dramafilmer",
+  "comedy_movies": "Komedifilmer",
+  "thriller_movies": "Thrillerfilmer",
+  "fiction_movies": "Science fiction-filmer",
+  "love_movies": "Romanska filmer",
+  "anime_series":"Japansk anime",
+  "animation_series":"Animationsserie",
+  "documental_series":"Dokumentärer",
+  "tv_show_series": "TV-program",
   "synopsis": "Synopsis",
   "character_cast": "Rollfigur",
   "production_cast": "Produktion",
   "production_job": "Utfört arbetet med",
   "actor_job": "Spela",
   "in_preposition": "i",
-  "tv_series_list_title":"Anime spelar",
   "made_with_love": "Gjord med mycket",
-  "loading_title":"Tre, två, en... Action!!!"
+  "loading_title":"Tre, två, en... Action!!!",
+  "films_worked":"Roller han har gjort"
 }

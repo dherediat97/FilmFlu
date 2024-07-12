@@ -1,13 +1,22 @@
 {
   "app_name": "Film Flu",
-  "film_list_title": "Reprodução de filme dramático",
+  "action_movies": "Filmes de ação",
+  "drama_movies": "Filmes de drama",
+  "comedy_movies": "Filmes de comédia",
+  "thriller_movies": "Filmes de suspense",
+  "fiction_movies": "Filmes de ficção científica",
+  "love_movies": "Filmes de romance",
+  "anime_series":"Anime Japonês",
+  "animation_series":"Série de Animação",
+  "documental_series":"Documentários",
+  "tv_show_series": "Programas de televisão",
   "synopsis": "Sinopse",
   "character_cast": "Elenco de personagens",
   "production_cast": "Produção",
   "production_job": "realizou o trabalho de",
   "actor_job": "Brincadeira",
   "in_preposition": "em",
-  "tv_series_list_title":"Jogando anime",
   "made_with_love": "Feito com muito",
-  "loading_title":"Três, Dois, Um... Ação!!!"
+  "loading_title":"Três, Dois, Um... Ação!!!",
+  "films_worked":"Papéis que interpretou"
 }

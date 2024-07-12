@@ -1,13 +1,22 @@
 {
   "app_name": "Film Flu",
-  "film_list_title": "Drama Film Playing",
+  "action_movies": "Akčné filmy",
+  "drama_movies": "Filmové drámy",
+  "comedy_movies": "Komediálne filmy",
+  "thriller_movies": "Filmové trilery",
+  "fiction_movies": "Sci-fi filmy",
+  "love_movies": "Romantické filmy",
+  "anime_series":"Japonské anime",
+  "animation_series":"Animačný seriál",
+  "documental_series":"Dokumentárne filmy",
+  "tv_show_series": "Televízne relácie",
   "synopsis": "Súhrn",
   "character_cast": "Obsadenie postavy",
   "production_cast": "Výroba",
   "production_job": "Vykonal prácu",
   "actor_job": "Hrať",
   "in_preposition": "v",
-  "tv_series_list_title":"Hranie anime", 
   "made_with_love": "Vyrobené s veľa",
-  "loading_title":"Tri, Dva, Jedna... Akcia!!!"
+  "loading_title":"Tri, Dva, Jedna... Akcia!!!",
+  "films_worked":"Úlohy, ktoré stvárnil"
 }

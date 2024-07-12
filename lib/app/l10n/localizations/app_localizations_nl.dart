@@ -10,34 +10,34 @@ class AppLocalizationsNl extends AppLocalizations {
   String get app_name => 'Film Flu';
 
   @override
-  String get action_movies => 'Películas de acción';
+  String get action_movies => 'Actiefilms';
 
   @override
-  String get drama_movies => 'Películas de drama';
+  String get drama_movies => 'Dramafilms';
 
   @override
-  String get comedy_movies => 'Películas de comedia';
+  String get comedy_movies => 'Comedyfilms';
 
   @override
-  String get thriller_movies => 'Películas de suspense';
+  String get thriller_movies => 'Thrillerfilms';
 
   @override
-  String get fiction_movies => 'Películas de ciencia ficción';
+  String get fiction_movies => 'Sciencefictionfilms';
 
   @override
-  String get love_movies => 'Películas de romance';
+  String get love_movies => 'Romantische films';
 
   @override
-  String get anime_series => 'Anime Japonés';
+  String get anime_series => 'Japanse anime';
 
   @override
-  String get animation_series => 'Series de Animación';
+  String get animation_series => 'Animatieserie';
 
   @override
-  String get documental_series => 'Documentales';
+  String get documental_series => 'Documentaires';
 
   @override
-  String get tv_show_series => 'Programas de Televisión';
+  String get tv_show_series => 'Televisieprogramma\'s';
 
   @override
   String get synopsis => 'Korte inhoud';
@@ -64,5 +64,5 @@ class AppLocalizationsNl extends AppLocalizations {
   String get made_with_love => 'Gemaakt met veel';
 
   @override
-  String get films_worked => 'Papeles que ha realizado';
+  String get films_worked => 'Rollen die hij heeft gespeeld';
 }
