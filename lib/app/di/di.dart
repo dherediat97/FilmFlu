@@ -17,7 +17,8 @@ import 'package:film_flu/domain/repository_contracts/media_repository_contract.d
 import 'package:film_flu/domain/repository_contracts/person_repository_contract.dart';
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
 import 'package:film_flu/presentation/features/media_list/bloc/media_list_bloc.dart';
-import 'package:film_flu/presentation/features/person_detail/bloc/person_detail_bloc.dart';
+import 'package:film_flu/presentation/features/person_details/bloc/person_details_bloc.dart';
+import 'package:film_flu/presentation/features/splash_screen/bloc/splash_bloc.dart';
 import 'package:film_flu/presentation/top_blocs/language_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';

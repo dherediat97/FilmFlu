@@ -10,17 +10,22 @@ void _uiModulesInit() {
   );
 
   uiModulesDi.registerFactory(
+    () => SplashBloc(),
+  );
+
+  uiModulesDi.registerFactory(
     () => MediaListBloc(
       repositoryContract: uiModulesDi(),
     ),
   );
+
   uiModulesDi.registerFactory(
     () => MediaDetailBloc(
       repositoryContract: uiModulesDi(),
     ),
   );
   uiModulesDi.registerFactory(
-    () => PersonDetailBloc(
+    () => PersonDetailsBloc(
       repositoryContract: uiModulesDi(),
     ),
   );

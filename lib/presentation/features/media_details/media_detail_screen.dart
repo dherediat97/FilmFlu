@@ -7,7 +7,6 @@ import 'package:film_flu/presentation/features/media_details/bloc/media_detail_b
 import 'package:film_flu/presentation/features/media_details/widgets/media_cast_list.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:film_flu/presentation/widgets/default_circular_loader.dart';
-import 'package:flutter/foundation.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -27,7 +26,6 @@ class MediaItemScreenDetails extends StatefulWidget {
 }
 
 class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
-  bool haveTrailer = false;
   YoutubePlayerController? _trailerController;
 
   @override
@@ -51,8 +49,8 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
         return movie != null
             ? ScaffoldPage(
                 isSearchVisible: true,
-                isLightsOn: !state.isTrailerOpened,
-                fabLocation: FloatingActionButtonLocation.endTop,
+                fullScreenMode: state.isTrailerOpened,
+                fabLocation: FloatingActionButtonLocation.endFloat,
                 floatingActionButton: state.trailerId.isNotEmpty
                     ? Container(
                         child: state.isTrailerOpened
@@ -105,12 +103,16 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                                   ),
                                   image: Image.network(
                                     '${AppUrls.movieLandscapeBaseUrl}${movie.backdropPath}',
-                                    loadingBuilder:
-                                        (context, child, loadingProgress) =>
-                                            DefaultCircularLoader(
-                                      loadingProgress: loadingProgress,
-                                      child: child,
-                                    ),
+                                    loadingBuilder: (
+                                      context,
+                                      child,
+                                      loadingProgress,
+                                    ) {
+                                      return DefaultCircularLoader(
+                                        loadingProgress: loadingProgress,
+                                        child: child,
+                                      );
+                                    },
                                   ).image,
                                 ),
                               ),
@@ -122,13 +124,13 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                                       children: [
                                         AutoSizeText(
                                           state.movieName,
-                                          maxLines: 2,
+                                          maxLines: 4,
                                           textAlign: TextAlign.start,
                                           overflow: TextOverflow.ellipsis,
                                           style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: Colors.white,
-                                            fontSize: 37,
+                                            fontSize: 32,
                                           ),
                                         ),
                                       ],
@@ -147,42 +149,25 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                                             ),
                                           ),
                                         ),
-                                        kIsWeb
-                                            ? SizedBox(
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    4,
-                                                child: Container(
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  child: AutoSizeText(
-                                                    movie.overview ?? '',
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    maxLines: 20,
-                                                    textAlign: TextAlign.start,
-                                                    style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 15,
-                                                    ),
-                                                  ),
-                                                ),
-                                              )
-                                            : Container(
-                                                alignment: Alignment.centerLeft,
-                                                child: AutoSizeText(
-                                                  movie.overview ?? '',
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  maxLines: 20,
-                                                  textAlign: TextAlign.justify,
-                                                  style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 15,
-                                                  ),
-                                                ),
+                                        SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              4,
+                                          child: Container(
+                                            alignment: Alignment.centerLeft,
+                                            child: AutoSizeText(
+                                              movie.overview ?? '',
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 20,
+                                              textAlign: TextAlign.start,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15,
                                               ),
+                                            ),
+                                          ),
+                                        )
                                       ],
                                     ),
                                   ],

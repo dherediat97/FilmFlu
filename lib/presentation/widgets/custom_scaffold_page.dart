@@ -21,14 +21,14 @@ class ScaffoldPage extends StatefulWidget {
     super.key,
     required this.containerChild,
     this.floatingActionButton,
-    this.isLightsOn = false,
-    required this.isSearchVisible,
+    this.fullScreenMode = false,
+    this.isSearchVisible = true,
     this.fabLocation = FloatingActionButtonLocation.endTop,
   });
 
   final Widget containerChild;
   final Widget? floatingActionButton;
-  final bool isLightsOn;
+  final bool fullScreenMode;
   final bool isSearchVisible;
   final FloatingActionButtonLocation fabLocation;
 
@@ -48,11 +48,11 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
       child: Scaffold(
         floatingActionButtonLocation: widget.fabLocation,
         resizeToAvoidBottomInset: true,
-        appBar: widget.isLightsOn
+        appBar: !widget.fullScreenMode
             ? AppBar(
                 leadingWidth: 60,
                 leading: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: InkWell(
                       child: Image.asset(
                         AppAssets.transparentLogo,
@@ -64,19 +64,21 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                         if (context.canPop()) {
                           context.pop();
                         } else {
-                          context.go(AppRoutePaths.home);
+                          context.push(AppRoutePaths.startRoute);
                         }
                       }),
                 ),
-                toolbarHeight: 100,
+                toolbarHeight: 75,
                 centerTitle: true,
-                title: AutoSizeText(
-                  context.localizations.app_name,
-                  minFontSize: 40,
-                  maxFontSize: 80,
-                  style: TextStyle(
-                    fontFamily: 'YsabeauInfant',
-                    color: Theme.of(context).colorScheme.primaryContainer,
+                title: Center(
+                  child: AutoSizeText(
+                    context.localizations.app_name,
+                    minFontSize: 40,
+                    maxFontSize: 80,
+                    style: TextStyle(
+                      fontFamily: 'YsabeauInfant',
+                      color: Theme.of(context).colorScheme.primaryContainer,
+                    ),
                   ),
                 ),
                 elevation: 60,
@@ -93,7 +95,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
               )
             : null,
         body: SafeArea(child: widget.containerChild),
-        bottomNavigationBar: widget.isLightsOn == true
+        bottomNavigationBar: !widget.fullScreenMode
             ? BottomAppBar(
                 height: 50,
                 padding: EdgeInsets.zero,
@@ -187,7 +189,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
           context
               .read<LanguageCubit>()
               .changeLang(context, language?.toString() ?? 'es');
-          context.push(AppRoutePaths.main);
+          context.push(AppRoutePaths.startRoute);
         },
         dropdownColor: Colors.black,
         value: context.read<LanguageCubit>().state,

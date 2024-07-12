@@ -4,17 +4,17 @@ import 'package:film_flu/domain/repository_contracts/person_repository_contract.
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'person_detail_event.dart';
-part 'person_detail_state.dart';
-part 'person_detail_bloc.freezed.dart';
+part 'person_details_event.dart';
+part 'person_details_state.dart';
+part 'person_details_bloc.freezed.dart';
 
-class PersonDetailBloc extends Bloc<PersonDetailEvent, PersonDetailState> {
+class PersonDetailsBloc extends Bloc<PersonDetailEvent, PersonDetailsState> {
   final PersonRepositoryContract _repository;
 
-  PersonDetailBloc({
+  PersonDetailsBloc({
     required PersonRepositoryContract repositoryContract,
   })  : _repository = repositoryContract,
-        super(PersonDetailState.initial()) {
+        super(PersonDetailsState.initial()) {
     on<PersonDetailEvent>((event, emit) async {
       await event.when(
         getPersonData: (int personId) => _getPersonData(
@@ -28,7 +28,7 @@ class PersonDetailBloc extends Bloc<PersonDetailEvent, PersonDetailState> {
 
   _getPersonData(
     PersonDetailEvent event,
-    Emitter<PersonDetailState> emit,
+    Emitter<PersonDetailsState> emit,
     int personId,
   ) async {
     emit(state.copyWith(uiState: const UiState.loading()));

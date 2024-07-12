@@ -1,5 +1,4 @@
 import 'package:film_flu/app/di/top_bloc_providers.dart';
-import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/presentation/features/home/home_screen.dart';
 import 'package:film_flu/presentation/features/media_list/bloc/media_list_bloc.dart';
 import 'package:film_flu/presentation/features/splash_screen/splash_screen.dart';
@@ -16,7 +15,7 @@ class HomeController extends StatelessWidget {
         builder: (context, state) {
           return state.uiState.when(
             success: () => const HomeScreen(),
-            loading: () => SplashPage(routePath: AppRoutePaths.home),
+            loading: () => const SplashPage(),
             initial: () => Container(),
             error: (error) => const Text('An error happened'),
           );
