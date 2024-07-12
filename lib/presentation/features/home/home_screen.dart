@@ -8,9 +8,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const ScaffoldPage(
-      isSearchVisible: true,
-      fabLocation: FloatingActionButtonLocation.endFloat,
-      isLightsOn: true,
       containerChild: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(8.0),

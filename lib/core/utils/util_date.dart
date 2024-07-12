@@ -1,6 +1,8 @@
 import 'package:intl/intl.dart';
 
-parseDate(String date) {
+String? parseDate(String date) {
+  if (date.isEmpty) return null;
+
   var inputFormat = DateFormat('yyyy-MM-dd');
   var inputDate = inputFormat.parse(date);
 

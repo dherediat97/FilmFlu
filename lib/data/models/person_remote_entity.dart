@@ -9,7 +9,7 @@ part 'person_remote_entity.g.dart';
 class PersonRemoteEntity with _$PersonRemoteEntity {
   const factory PersonRemoteEntity({
     @JsonKey(name: 'name') required String name,
-    @JsonKey(name: 'also_know_as') required List<String> alias,
+    @JsonKey(name: 'also_known_as') List<String>? alias,
     @JsonKey(name: 'id') required int id,
     @JsonKey(name: 'birthday') String? birthday,
     @JsonKey(name: 'deathday') String? deathday,
@@ -29,7 +29,7 @@ extension MediaItemToRemoteEntityExtension on PersonRemoteEntity {
         id: id,
         name: name,
         gender: gender,
-        alias: alias,
+        alias: alias ?? [],
         biography: biography ?? '',
         birthday: birthday ?? '',
         placeOfBirth: placeOfBirth ?? '',

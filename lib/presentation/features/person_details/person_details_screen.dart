@@ -6,7 +6,7 @@ import 'package:film_flu/core/utils/util_date.dart';
 import 'package:film_flu/domain/models/credit_actor_entity.dart';
 import 'package:film_flu/domain/models/credit_production_entity.dart';
 import 'package:film_flu/domain/models/person_entity.dart';
-import 'package:film_flu/presentation/features/person_detail/bloc/person_detail_bloc.dart';
+import 'package:film_flu/presentation/features/person_details/bloc/person_details_bloc.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:film_flu/presentation/widgets/default_circular_loader.dart';
@@ -33,13 +33,9 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
-      isSearchVisible: true,
-      isLightsOn: true,
       containerChild: SingleChildScrollView(
         controller: ScrollController(),
-        physics: const ScrollPhysics(),
-        scrollDirection: Axis.vertical,
-        child: BlocBuilder<PersonDetailBloc, PersonDetailState>(
+        child: BlocBuilder<PersonDetailsBloc, PersonDetailsState>(
           builder: (context, state) {
             PersonEntity? person = state.person;
 
@@ -68,8 +64,8 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                               borderRadius: BorderRadius.circular(32),
                               child: Image.network(
                                 '${AppUrls.personImgBaseUrl}${person.profilePath}',
-                                height: 150,
-                                width: 100,
+                                height: 160,
+                                width: 150,
                               ),
                             ),
                             Padding(
@@ -78,94 +74,109 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  AutoSizeText(person.name,
-                                      textAlign: TextAlign.start,
-                                      maxFontSize: 26,
-                                      minFontSize: 20,
-                                      stepGranularity: 1,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                        fontSize: 30,
-                                        fontFamily: 'ShadowsIntoLight',
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      )),
+                                  AutoSizeText(
+                                    person.name,
+                                    textAlign: TextAlign.start,
+                                    maxFontSize: 26,
+                                    minFontSize: 20,
+                                    stepGranularity: 1,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      fontSize: 30,
+                                      fontFamily: 'ShadowsIntoLight',
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                   Padding(
                                     padding: const EdgeInsets.only(top: 16.0),
                                     child: Row(
                                       children: [
+                                        if (person.birthday != null &&
+                                            person.birthday?.isNotEmpty ==
+                                                true) ...[
+                                          const Icon(
+                                            Icons.celebration,
+                                            color: Colors.white,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 8.0,
+                                            ),
+                                            child: Text(
+                                              parseDate(person.birthday!)
+                                                  .toString(),
+                                              textAlign: TextAlign.start,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ]
+                                      ],
+                                    ),
+                                  ),
+                                  if (person.deathday != null &&
+                                      person.deathday?.isNotEmpty == true) ...[
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                        top: 16.0,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          const Icon(
+                                            Symbols.skull,
+                                            color: Colors.white,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 8.0,
+                                            ),
+                                            child: Text(
+                                              parseDate(person.deathday!)
+                                                  .toString(),
+                                              textAlign: TextAlign.start,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                  const SizedBox(height: 10),
+                                  if (person.placeOfBirth != null &&
+                                      person.placeOfBirth!.isNotEmpty) ...[
+                                    Row(
+                                      children: [
                                         const Icon(
-                                          Icons.celebration,
+                                          Icons.public,
                                           color: Colors.white,
                                         ),
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(left: 8.0),
-                                          child: Text(
-                                              '${parseDate(person.birthday!)}',
-                                              textAlign: TextAlign.start,
+                                          child: SizedBox(
+                                            width: 220,
+                                            child: AutoSizeText(
+                                              person.placeOfBirth
+                                                  .toString()
+                                                  .trim(),
+                                              maxFontSize: 20,
+                                              minFontSize: 15,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 3,
                                               style: const TextStyle(
-                                                  color: Colors.white)),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  person.deathday!.isNotEmpty
-                                      ? Padding(
-                                          padding: const EdgeInsets.only(
-                                            top: 16.0,
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              const Icon(
-                                                Symbols.skull,
                                                 color: Colors.white,
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                  left: 8.0,
-                                                ),
-                                                child: Text(
-                                                  parseDate(person.deathday!),
-                                                  textAlign: TextAlign.start,
-                                                  style: const TextStyle(
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      : Container(),
-                                  const SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      const Icon(
-                                        Icons.public,
-                                        color: Colors.white,
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 8.0),
-                                        child: SizedBox(
-                                          width: 220,
-                                          child: AutoSizeText(
-                                            person.placeOfBirth
-                                                .toString()
-                                                .trim(),
-                                            maxFontSize: 20,
-                                            minFontSize: 15,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 3,
-                                            style: const TextStyle(
-                                              color: Colors.white,
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
+                                      ],
+                                    ),
+                                  ],
                                 ],
                               ),
                             ),
@@ -177,16 +188,20 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 16.0),
-                                  child: Text(
-                                    person.biography.toString(),
-                                    textAlign: TextAlign.start,
-                                    style: const TextStyle(
-                                      color: Colors.white,
+                                if (person.biography != null &&
+                                    person.biography!.isNotEmpty) ...[
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.only(bottom: 16.0),
+                                    child: Text(
+                                      person.biography.toString(),
+                                      textAlign: TextAlign.start,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                      ),
                                     ),
-                                  ),
-                                ),
+                                  )
+                                ],
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 16.0),
                                   child: SizedBox(
@@ -263,11 +278,10 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                 itemCount: creditsListAsActor!.length,
                                 shrinkWrap: true,
                                 gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3,
-                                  mainAxisSpacing: 20,
-                                  crossAxisSpacing: 20,
-                                  mainAxisExtent: 240,
+                                    const SliverGridDelegateWithMaxCrossAxisExtent(
+                                  maxCrossAxisExtent: 400,
+                                  mainAxisSpacing: 50,
+                                  crossAxisSpacing: 50,
                                 ),
                                 itemBuilder: (context, index) {
                                   CreditActorEntity filmPerson =
@@ -288,18 +302,35 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                             borderRadius:
                                                 BorderRadius.circular(32.0),
                                             child: Image.network(
-                                              filmPerson.backdropPath != null
-                                                  ? '${AppUrls.personImgBaseUrl}${filmPerson.backdropPath}'
-                                                  : '${AppUrls.personImgBaseUrl}${person.profilePath}',
+                                              '${AppUrls.personImgBaseUrl}${filmPerson.backdropPath}',
                                               height: 160,
                                               width: 150,
-                                              loadingBuilder: (context, child,
-                                                      loadingProgress) =>
+                                              fit: BoxFit.cover,
+                                              frameBuilder: (context, child,
+                                                      loadingProgress, sync) =>
                                                   DefaultCircularLoader(
-                                                loadingProgress:
-                                                    loadingProgress,
+                                                loadingProgress: null,
                                                 child: child,
                                               ),
+                                              errorBuilder:
+                                                  (context, error, stackTrace) {
+                                                return Image.network(
+                                                  height: 160,
+                                                  width: 150,
+                                                  fit: BoxFit.cover,
+                                                  '${AppUrls.personImgBaseUrl}${person.profilePath}',
+                                                );
+                                              },
+                                              loadingBuilder:
+                                                  (BuildContext context,
+                                                      Widget child,
+                                                      ImageChunkEvent?
+                                                          loadingProgress) {
+                                                return DefaultCircularLoader(
+                                                    loadingProgress:
+                                                        loadingProgress,
+                                                    child: child);
+                                              },
                                             ),
                                           ),
                                           Padding(
@@ -328,11 +359,10 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                 itemCount: creditsListAsProduction?.length,
                                 shrinkWrap: true,
                                 gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3,
-                                  mainAxisSpacing: 20,
-                                  crossAxisSpacing: 20,
-                                  mainAxisExtent: 240,
+                                    const SliverGridDelegateWithMaxCrossAxisExtent(
+                                  maxCrossAxisExtent: 400,
+                                  mainAxisSpacing: 50,
+                                  crossAxisSpacing: 50,
                                 ),
                                 itemBuilder: (context, index) {
                                   CreditProductionEntity filmPerson =
@@ -343,8 +373,8 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                       : '${filmPerson.job}';
                                   return InkWell(
                                     onTap: () {
-                                      context.go(
-                                        '${AppRoutePaths.mediaDetails}/${filmPerson.id}',
+                                      context.push(
+                                        '${AppRoutePaths.mediaDetailsRoute}/${filmPerson.id}',
                                       );
                                     },
                                     child: GridTile(
@@ -359,13 +389,32 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                                   : '${AppUrls.personImgBaseUrl}${person.profilePath}',
                                               height: 160,
                                               width: 150,
-                                              loadingBuilder: (context, child,
-                                                      loadingProgress) =>
+                                              fit: BoxFit.cover,
+                                              frameBuilder: (context, child,
+                                                      loadingProgress, sync) =>
                                                   DefaultCircularLoader(
-                                                loadingProgress:
-                                                    loadingProgress,
+                                                loadingProgress: null,
                                                 child: child,
                                               ),
+                                              errorBuilder:
+                                                  (context, error, stackTrace) {
+                                                return Image.network(
+                                                  height: 160,
+                                                  width: 150,
+                                                  fit: BoxFit.cover,
+                                                  '${AppUrls.personImgBaseUrl}${person.profilePath}',
+                                                );
+                                              },
+                                              loadingBuilder:
+                                                  (BuildContext context,
+                                                      Widget child,
+                                                      ImageChunkEvent?
+                                                          loadingProgress) {
+                                                return DefaultCircularLoader(
+                                                    loadingProgress:
+                                                        loadingProgress,
+                                                    child: child);
+                                              },
                                             ),
                                           ),
                                           Padding(

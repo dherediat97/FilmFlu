@@ -1,7 +1,9 @@
 import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
 import 'package:film_flu/presentation/features/media_list/bloc/media_list_bloc.dart';
-import 'package:film_flu/presentation/features/person_detail/bloc/person_detail_bloc.dart';
+import 'package:film_flu/presentation/features/person_details/bloc/person_details_bloc.dart';
+import 'package:film_flu/presentation/features/splash_screen/bloc/splash_bloc.dart';
+import 'package:film_flu/presentation/features/splash_screen/bloc/splash_event.dart';
 import 'package:film_flu/presentation/top_blocs/language_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +21,12 @@ class TopBlocProviders extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => _getIt<LanguageCubit>()),
         BlocProvider(
+          create: (context) => _getIt<SplashBloc>()
+            ..add(
+              const SplashEvent.unSplashInNMilliseconds(3000),
+            ),
+        ),
+        BlocProvider(
             create: (context) => _getIt<MediaListBloc>()
               ..add(
                 const MediaListEvent.getMediaData(),
@@ -33,7 +41,7 @@ class TopBlocProviders extends StatelessWidget {
             ),
         ),
         BlocProvider(
-          create: (context) => _getIt<PersonDetailBloc>()
+          create: (context) => _getIt<PersonDetailsBloc>()
             ..add(
               PersonDetailEvent.getPersonData(
                 AppConstants.personId,

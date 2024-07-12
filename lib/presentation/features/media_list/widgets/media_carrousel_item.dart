@@ -28,7 +28,7 @@ class MovieCarrouselItem extends StatelessWidget {
                   : MediaListConstants.serieMediaType;
 
               AppConstants.mediaTypeId = movie.id;
-              context.push('${AppRoutePaths.mediaDetails}/${movie.id}');
+              context.push('${AppRoutePaths.mediaDetailsRoute}/${movie.id}');
             },
             child: SizedBox(
               width: 140,

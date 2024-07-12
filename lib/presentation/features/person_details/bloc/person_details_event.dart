@@ -1,4 +1,4 @@
-part of 'person_detail_bloc.dart';
+part of 'person_details_bloc.dart';
 
 @freezed
 class PersonDetailEvent with _$PersonDetailEvent {

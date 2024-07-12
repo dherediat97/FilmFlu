@@ -1,12 +1,12 @@
 class AppRoutePaths {
-  static String main = '/';
+  static String startRoute = '/';
 
-  static String home = '/main';
-  static String homeController = '$home/homeScreen';
+  static String homeRoute = '/main';
+  static String homeControllerRoute = '$homeRoute/homeScreen';
 
-  static String mediaDetails = '/mediaItemDetails';
-  static String mediaDetailsController = '$mediaDetails/controller';
+  static String mediaDetailsRoute = '/mediaItemDetails';
+  static String mediaDetailsControllerRoute = '$mediaDetailsRoute/controller';
 
-  static String personDetails = '/personDetails';
-  static String personDetailsController = '$personDetails/controller';
+  static String personDetailsRoute = '/personDetails';
+  static String personDetailsControllerRoute = '$personDetailsRoute/controller';
 }
