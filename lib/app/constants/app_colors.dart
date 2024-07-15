@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const Color andalucianColor = Color(0xFF007932);
-  static const Color primaryColor = Color(0xFFC7CD18);
-  static const Color backgroundColor = Color(0x00010f0f);
+  static const Color primaryColor = Color(0xFFD42029);
+  static const Color textPrimaryColor = Color(0xFFFFFFFF);
+  static const Color backgroundColorLight = Color(0x0fffffff);
+  static const Color backgroundColorDark = Color(0x00000000);
   static const Color secondaryColor = Color(0x00010f0f);
 
   static MaterialColor primaryMaterialColor =

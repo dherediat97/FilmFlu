@@ -6,7 +6,8 @@ class AppAssets {
   static const String imagesFolder = '$assetsFolder/images';
   static const String iconsFolder = '$assetsFolder/icons';
 
-  static const String transparentLogo = '$imagesFolder/transparent_logo.png';
+  static const String logoSvgIcon = '$imagesFolder/logo.svg';
+  static const String logoIcon = '$imagesFolder/logo.png';
   static const String andalucianHeartIcon = '$iconsFolder/andalucian_heart.svg';
   static const String fullHeartIcon = '$iconsFolder/full_heart.svg';
 

@@ -89,7 +89,7 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                               ),
                       )
                     : Container(),
-                containerChild: !state.isTrailerOpened
+                child: !state.isTrailerOpened
                     ? SingleChildScrollView(
                         child: Column(
                           children: [

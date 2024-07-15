@@ -25,14 +25,12 @@ class MediaList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 20),
-              AutoSizeText(context.localizations.action_movies,
-                  maxFontSize: 30,
-                  minFontSize: 20,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 40,
-                  )),
+              AutoSizeText(
+                context.localizations.action_movies,
+                maxFontSize: 30,
+                minFontSize: 20,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
               const SizedBox(height: 20),
               SizedBox(
                 height: 220,
@@ -47,14 +45,12 @@ class MediaList extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              AutoSizeText(context.localizations.anime_series,
-                  maxFontSize: 30,
-                  minFontSize: 20,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 40,
-                  )),
+              AutoSizeText(
+                context.localizations.anime_series,
+                maxFontSize: 30,
+                minFontSize: 20,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
               const SizedBox(height: 20),
               SizedBox(
                 height: 220,
@@ -68,14 +64,12 @@ class MediaList extends StatelessWidget {
                   },
                 ),
               ),
-              AutoSizeText(context.localizations.animation_series,
-                  maxFontSize: 30,
-                  minFontSize: 20,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 40,
-                  )),
+              AutoSizeText(
+                context.localizations.animation_series,
+                maxFontSize: 30,
+                minFontSize: 20,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
               const SizedBox(height: 20),
               SizedBox(
                 height: 220,
@@ -90,14 +84,12 @@ class MediaList extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              AutoSizeText(context.localizations.fiction_movies,
-                  maxFontSize: 30,
-                  minFontSize: 20,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 40,
-                  )),
+              AutoSizeText(
+                context.localizations.fiction_movies,
+                maxFontSize: 30,
+                minFontSize: 20,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
               const SizedBox(height: 20),
               SizedBox(
                 height: 220,
@@ -112,14 +104,12 @@ class MediaList extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              AutoSizeText(context.localizations.love_movies,
-                  maxFontSize: 30,
-                  minFontSize: 20,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 40,
-                  )),
+              AutoSizeText(
+                context.localizations.love_movies,
+                maxFontSize: 30,
+                minFontSize: 20,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
               const SizedBox(height: 20),
               SizedBox(
                 height: 220,
@@ -134,14 +124,12 @@ class MediaList extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              AutoSizeText(context.localizations.comedy_movies,
-                  maxFontSize: 30,
-                  minFontSize: 20,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 40,
-                  )),
+              AutoSizeText(
+                context.localizations.comedy_movies,
+                maxFontSize: 30,
+                minFontSize: 20,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
               const SizedBox(height: 20),
               SizedBox(
                 height: 220,
@@ -159,11 +147,7 @@ class MediaList extends StatelessWidget {
                 context.localizations.thriller_movies,
                 maxFontSize: 30,
                 minFontSize: 20,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  fontSize: 40,
-                ),
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 20),
               SizedBox(
@@ -179,14 +163,12 @@ class MediaList extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              AutoSizeText(context.localizations.documental_series,
-                  maxFontSize: 30,
-                  minFontSize: 20,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 40,
-                  )),
+              AutoSizeText(
+                context.localizations.documental_series,
+                maxFontSize: 30,
+                minFontSize: 20,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
               const SizedBox(height: 20),
               SizedBox(
                 height: 220,
@@ -201,14 +183,12 @@ class MediaList extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              AutoSizeText(context.localizations.tv_show_series,
-                  maxFontSize: 30,
-                  minFontSize: 20,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 40,
-                  )),
+              AutoSizeText(
+                context.localizations.tv_show_series,
+                maxFontSize: 30,
+                minFontSize: 20,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
               const SizedBox(height: 20),
               SizedBox(
                 height: 220,

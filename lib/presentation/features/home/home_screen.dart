@@ -8,7 +8,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const ScaffoldPage(
-      containerChild: SingleChildScrollView(
+      child: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(8.0),
           child: MediaList(),

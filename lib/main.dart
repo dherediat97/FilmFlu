@@ -57,19 +57,22 @@ class FilmFlu extends StatelessWidget {
               fontFamily: 'YsabeauInfant',
               primaryColor: AppColors.primaryColor,
               useMaterial3: true,
-              highlightColor: Colors.transparent,
               scaffoldBackgroundColor: Colors.black,
               textTheme: const TextTheme(
                 bodyMedium: TextStyle(
                   color: Colors.black,
                   fontFamily: 'YsabeauInfant',
                 ),
+                titleLarge: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textPrimaryColor,
+                  fontSize: 40,
+                ),
               ),
-              splashFactory: NoSplash.splashFactory,
+              primaryColorDark: AppColors.primaryColor,
               colorScheme: ColorScheme.fromSwatch(
                 primarySwatch: AppColors.primaryMaterialColor,
-                backgroundColor: AppColors.backgroundColor,
-                accentColor: AppColors.backgroundColor,
+                backgroundColor: AppColors.backgroundColorDark,
               ),
               visualDensity: VisualDensity.adaptivePlatformDensity,
               scrollbarTheme: const ScrollbarThemeData(
