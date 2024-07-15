@@ -9,4 +9,6 @@ class AppRoutePaths {
 
   static String personDetailsRoute = '/personDetails';
   static String personDetailsControllerRoute = '$personDetailsRoute/controller';
+
+  static String settingsRoute = '/settings';
 }

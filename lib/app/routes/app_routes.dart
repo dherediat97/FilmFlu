@@ -1,7 +1,8 @@
 import 'package:film_flu/presentation/features/home/home_controller.dart';
 import 'package:film_flu/presentation/features/media_details/media_detail_controller.dart';
 import 'package:film_flu/presentation/features/person_details/person_details_controller.dart';
-import 'package:film_flu/presentation/features/splash_screen/splash_controller.dart';
+import 'package:film_flu/presentation/features/settings/settings_screen.dart';
+import 'package:film_flu/presentation/features/splash/splash_controller.dart';
 import 'package:go_router/go_router.dart';
 
 List<GoRoute> appRoutes = [
@@ -26,6 +27,10 @@ List<GoRoute> appRoutes = [
         builder: (context, state) => PersonDetailsController(
           personId: state.pathParameters['personId'].toString(),
         ),
+      ),
+      GoRoute(
+        path: 'settings',
+        builder: (context, state) => const SettingsScreen(),
       ),
     ],
   ),

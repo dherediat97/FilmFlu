@@ -1,7 +1,7 @@
 import 'package:film_flu/app/di/top_bloc_providers.dart';
 import 'package:film_flu/presentation/features/person_details/bloc/person_details_bloc.dart';
 import 'package:film_flu/presentation/features/person_details/person_details_screen.dart';
-import 'package:film_flu/presentation/features/splash_screen/splash_screen.dart';
+import 'package:film_flu/presentation/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,7 +22,7 @@ class PersonDetailsController extends StatelessWidget {
             initial: () => Container(),
             success: () => PersonDetailsPage(personId: personId),
             error: (error) => Container(),
-            loading: () => const SplashPage(),
+            loading: () => const SplashScreen(),
           );
         },
       ),
