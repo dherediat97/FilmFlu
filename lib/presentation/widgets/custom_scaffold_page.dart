@@ -48,12 +48,12 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                 leadingWidth: 100,
                 leading: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: InkWell(
-                      child: Image.asset(
+                  child: IconButton(
+                      icon: Image.asset(
                         AppAssets.logoIcon,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fitHeight,
                       ),
-                      onTap: () {
+                      onPressed: () {
                         if (context.canPop()) {
                           context.pop();
                         } else {
