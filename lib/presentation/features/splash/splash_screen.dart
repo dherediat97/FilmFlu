@@ -1,12 +1,16 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({
     super.key,
+    required this.route,
   });
+
+  final String route;
 
   @override
   State<SplashScreen> createState() => _SplashScreen();
@@ -41,7 +45,11 @@ class _SplashScreen extends State<SplashScreen> with TickerProviderStateMixin {
             onLoaded: (composition) {
               _controller
                 ..duration = composition.duration
-                ..forward();
+                ..forward().whenCompleteOrCancel(
+                  () {
+                    context.pushReplacement(widget.route);
+                  },
+                );
             },
           ),
           Center(

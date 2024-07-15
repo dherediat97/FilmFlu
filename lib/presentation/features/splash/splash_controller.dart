@@ -20,7 +20,9 @@ class SplashController extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return const SplashScreen();
+        return SplashScreen(
+          route: AppRoutePaths.homeRoute,
+        );
       },
     );
   }
