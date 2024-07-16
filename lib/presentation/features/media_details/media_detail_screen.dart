@@ -121,6 +121,7 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                                   ),
                                   image: Image.network(
                                     '${AppUrls.movieLandscapeBaseUrl}${movie.backdropPath}',
+                                    height: 800,
                                     loadingBuilder: (_, child, progress) =>
                                         DefaultCircularLoader(
                                             progress: progress, child: child),
@@ -133,52 +134,63 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                                   children: [
                                     Row(
                                       children: [
-                                        AutoSizeText(
-                                          state.movieName,
-                                          maxLines: 4,
-                                          textAlign: TextAlign.start,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                            fontSize: 32,
+                                        SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              1.5,
+                                          child: AutoSizeText(
+                                            state.movieName,
+                                            maxLines: 3,
+                                            textAlign: TextAlign.start,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                              fontSize: 32,
+                                            ),
                                           ),
                                         ),
                                       ],
                                     ),
                                     const SizedBox(height: 20),
                                     Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Container(
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            context.localizations.synopsis,
-                                            textAlign: TextAlign.start,
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 40,
+                                        if (movie.overview != null &&
+                                            movie.overview!.isNotEmpty) ...[
+                                          Container(
+                                            alignment: Alignment.topLeft,
+                                            child: Text(
+                                              context.localizations.synopsis,
+                                              textAlign: TextAlign.start,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 40,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              4,
-                                          child: Container(
-                                            alignment: Alignment.centerLeft,
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2,
+                                            alignment: Alignment.topLeft,
                                             child: AutoSizeText(
                                               movie.overview ?? '',
-                                              overflow: TextOverflow.ellipsis,
                                               maxLines: 20,
+                                              overflow: TextOverflow.ellipsis,
                                               textAlign: TextAlign.start,
                                               style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 15,
                                               ),
                                             ),
-                                          ),
-                                        )
+                                          )
+                                        ],
                                       ],
                                     ),
                                   ],
