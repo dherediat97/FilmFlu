@@ -39,6 +39,7 @@ class _SplashScreen extends State<SplashScreen> with TickerProviderStateMixin {
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
+          mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Lottie.asset(
@@ -54,12 +55,13 @@ class _SplashScreen extends State<SplashScreen> with TickerProviderStateMixin {
                   });
               },
             ),
-            Center(
+            Container(
+              alignment: Alignment.center,
               child: Text(
                 context.localizations.loading_title,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 35,
+                  fontSize: 30,
                 ),
               ),
             ),

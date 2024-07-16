@@ -35,7 +35,6 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
   Widget build(BuildContext context) {
     return ScaffoldPage(
       child: SingleChildScrollView(
-        controller: ScrollController(),
         child: BlocBuilder<PersonDetailsBloc, PersonDetailsState>(
           builder: (context, state) {
             PersonEntity? person = state.person;
@@ -54,7 +53,7 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
 
             return person != null
                 ? Container(
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(16),
                     child: Column(
                       children: [
                         Row(

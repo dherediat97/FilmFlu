@@ -111,7 +111,9 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                     ? SingleChildScrollView(
                         child: Column(
                           children: [
-                            DecoratedBox(
+                            Container(
+                              height: 600,
+                              width: MediaQuery.of(context).size.width,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   fit: BoxFit.cover,
@@ -121,7 +123,7 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                                   ),
                                   image: Image.network(
                                     '${AppUrls.movieLandscapeBaseUrl}${movie.backdropPath}',
-                                    height: 800,
+                                    fit: BoxFit.cover,
                                     loadingBuilder: (_, child, progress) =>
                                         DefaultCircularLoader(
                                             progress: progress, child: child),
@@ -200,73 +202,75 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                             const SizedBox(
                               height: 20,
                             ),
-                            Center(
-                              child: SegmentedButton<bool>(
-                                showSelectedIcon: false,
-                                selected: <bool>{state.isCastSelected},
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      WidgetStateProperty.resolveWith<Color>(
-                                    (Set<WidgetState> states) {
-                                      if (states
-                                          .contains(WidgetState.selected)) {
-                                        return AppColors.primaryColor;
-                                      }
-                                      return Colors.white24;
-                                    },
+                            if (movie.credits != null) ...[
+                              Center(
+                                child: SegmentedButton<bool>(
+                                  showSelectedIcon: false,
+                                  selected: <bool>{state.isCastSelected},
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        WidgetStateProperty.resolveWith<Color>(
+                                      (Set<WidgetState> states) {
+                                        if (states
+                                            .contains(WidgetState.selected)) {
+                                          return AppColors.primaryColor;
+                                        }
+                                        return Colors.white24;
+                                      },
+                                    ),
                                   ),
+                                  segments: [
+                                    if (movie.credits?.cast.isNotEmpty == true)
+                                      ButtonSegment(
+                                        label: Text(
+                                          context.localizations.character_cast,
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                          ),
+                                        ),
+                                        value: true,
+                                      ),
+                                    if (movie.credits?.crew.isNotEmpty == true)
+                                      ButtonSegment(
+                                        label: Text(
+                                          context.localizations.production_cast,
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                          ),
+                                        ),
+                                        value: false,
+                                      ),
+                                  ],
+                                  onSelectionChanged: (Set<bool> castSelected) {
+                                    context
+                                        .read<MediaDetailBloc>()
+                                        .add(MediaDetailEvent.setCreditsType(
+                                          castSelected.first,
+                                        ));
+                                  },
                                 ),
-                                segments: [
-                                  if (movie.credits?.cast.isNotEmpty == true)
-                                    ButtonSegment(
-                                      label: Text(
-                                        context.localizations.character_cast,
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                      value: true,
-                                    ),
-                                  if (movie.credits?.crew.isNotEmpty == true)
-                                    ButtonSegment(
-                                      label: Text(
-                                        context.localizations.production_cast,
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                      value: false,
-                                    ),
-                                ],
-                                onSelectionChanged: (Set<bool> castSelected) {
-                                  context
-                                      .read<MediaDetailBloc>()
-                                      .add(MediaDetailEvent.setCreditsType(
-                                        castSelected.first,
-                                      ));
-                                },
                               ),
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            state.isCastSelected
-                                ? FilmCast(
-                                    movieId: widget.mediaTypeId.toString(),
-                                    isCast: true,
-                                    mediaType: AppConstants.mediaType,
-                                    cast: movie.credits!.cast,
-                                    crew: movie.credits!.crew,
-                                  )
-                                : FilmCast(
-                                    movieId: widget.mediaTypeId.toString(),
-                                    isCast: false,
-                                    mediaType: AppConstants.mediaType,
-                                    cast: movie.credits!.cast,
-                                    crew: movie.credits!.crew,
-                                  )
+                              const SizedBox(
+                                height: 16,
+                              ),
+                              state.isCastSelected
+                                  ? FilmCast(
+                                      movieId: widget.mediaTypeId.toString(),
+                                      isCast: true,
+                                      mediaType: AppConstants.mediaType,
+                                      cast: movie.credits!.cast,
+                                      crew: movie.credits!.crew,
+                                    )
+                                  : FilmCast(
+                                      movieId: widget.mediaTypeId.toString(),
+                                      isCast: false,
+                                      mediaType: AppConstants.mediaType,
+                                      cast: movie.credits!.cast,
+                                      crew: movie.credits!.crew,
+                                    )
+                            ],
                           ],
                         ),
                       )
