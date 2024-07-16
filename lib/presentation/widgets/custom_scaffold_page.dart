@@ -75,7 +75,9 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                 ],
               )
             : null,
-        body: SafeArea(child: widget.child),
+        body: SafeArea(
+          child: widget.child,
+        ),
         bottomNavigationBar: !widget.fullScreenMode
             ? BottomAppBar(
                 height: 50,

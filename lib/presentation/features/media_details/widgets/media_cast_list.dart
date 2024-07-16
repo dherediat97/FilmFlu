@@ -35,7 +35,7 @@ class _FilmCastState extends State<FilmCast> {
       builder: (context, state) {
         return widget.cast != null && widget.crew != null
             ? Container(
-                padding: const EdgeInsets.all(4),
+                padding: const EdgeInsets.all(16),
                 child: GridView.builder(
                   shrinkWrap: true,
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
