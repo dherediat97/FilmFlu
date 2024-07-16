@@ -1,3 +1,4 @@
+import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class _SplashScreen extends State<SplashScreen> with TickerProviderStateMixin {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Lottie.asset(
-              'assets/animations/splash_animation.json',
+              AppAssets.loadingAnimation,
               controller: _controller,
               height: MediaQuery.of(context).size.height / 3,
               onLoaded: (composition) {

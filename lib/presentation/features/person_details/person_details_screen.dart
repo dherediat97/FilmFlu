@@ -1,3 +1,4 @@
+import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
@@ -12,6 +13,7 @@ import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class PersonDetailsPage extends StatefulWidget {
@@ -65,6 +67,23 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage> {
                                 '${AppUrls.personImgBaseUrl}${person.profilePath}',
                                 height: 160,
                                 width: 150,
+                                errorBuilder: (context, error, stackTrace) {
+                                  if (person.gender == 2) {
+                                    return SvgPicture.asset(
+                                      AppAssets.actorImageIcon,
+                                      height: 160,
+                                      width: 150,
+                                      fit: BoxFit.cover,
+                                    );
+                                  } else {
+                                    return SvgPicture.asset(
+                                      AppAssets.actressImageIcon,
+                                      height: 160,
+                                      width: 150,
+                                      fit: BoxFit.cover,
+                                    );
+                                  }
+                                },
                               ),
                             ),
                             Padding(
