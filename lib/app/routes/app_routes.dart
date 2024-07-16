@@ -4,6 +4,7 @@ import 'package:film_flu/presentation/features/person_details/person_details_con
 import 'package:film_flu/presentation/features/settings/settings_screen.dart';
 import 'package:film_flu/presentation/features/splash/splash_controller.dart';
 import 'package:go_router/go_router.dart';
+import 'package:horusvision/presentation/features/horusvision.dart';
 
 List<GoRoute> appRoutes = [
   GoRoute(
@@ -31,6 +32,10 @@ List<GoRoute> appRoutes = [
       GoRoute(
         path: 'settings',
         builder: (context, state) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: 'horusVision',
+        builder: (context, state) => const HorusVision(),
       ),
     ],
   ),

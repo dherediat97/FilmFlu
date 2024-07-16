@@ -4,22 +4,22 @@ class DefaultCircularLoader extends StatelessWidget {
   const DefaultCircularLoader({
     super.key,
     required this.child,
-    required this.loadingProgress,
+    required this.progress,
   });
 
   final Widget child;
-  final ImageChunkEvent? loadingProgress;
+  final ImageChunkEvent? progress;
 
   @override
   Widget build(BuildContext context) {
-    if (loadingProgress == null) return child;
+    if (progress == null) return child;
 
     return Center(
-      child: loadingProgress?.expectedTotalBytes == null
+      child: progress?.expectedTotalBytes == null
           ? const CircularProgressIndicator()
           : CircularProgressIndicator(
-              value: loadingProgress!.cumulativeBytesLoaded /
-                  loadingProgress!.expectedTotalBytes!,
+              value: progress!.cumulativeBytesLoaded /
+                  progress!.expectedTotalBytes!,
             ),
     );
   }

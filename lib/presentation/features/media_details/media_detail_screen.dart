@@ -51,44 +51,62 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                 isSearchVisible: true,
                 fullScreenMode: state.isTrailerOpened,
                 fabLocation: FloatingActionButtonLocation.endFloat,
-                floatingActionButton: state.trailerId.isNotEmpty
-                    ? Container(
-                        child: state.isTrailerOpened
-                            ? FloatingActionButton(
-                                mini: true,
-                                backgroundColor: Colors.red,
-                                foregroundColor: Colors.white,
-                                child: const Icon(Icons.stop),
-                                onPressed: () {
-                                  context.read<MediaDetailBloc>().add(
-                                      const MediaDetailEvent.closeTrailer());
-                                  _trailerController = null;
-                                  SystemChrome.setEnabledSystemUIMode(
-                                    SystemUiMode.edgeToEdge,
-                                  );
-                                },
-                              )
-                            : FloatingActionButton(
-                                backgroundColor: Colors.red,
-                                foregroundColor: Colors.white,
-                                onPressed: () {
-                                  context
-                                      .read<MediaDetailBloc>()
-                                      .add(MediaDetailEvent.openTrailer(
-                                        AppConstants.mediaType,
-                                        movie,
-                                      ));
-                                  _trailerController = initTrailerController();
-                                  if (state.trailerId.isNotEmpty) {
-                                    _trailerController?.loadVideoById(
-                                      videoId: state.trailerId.toString(),
-                                    );
-                                  }
-                                },
-                                child: const Icon(Icons.play_arrow),
-                              ),
-                      )
-                    : Container(),
+                floatingActionButton: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      // FloatingActionButton.extended(
+                      //   label: const Text('Comprar entradas'),
+                      //   icon: const Icon(Icons.shopping_bag_rounded),
+                      //   onPressed: () {
+                      //     context.push('/horusVision');
+                      //   },
+                      // ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      state.trailerId.isNotEmpty
+                          ? Container(
+                              child: state.isTrailerOpened
+                                  ? FloatingActionButton(
+                                      mini: true,
+                                      child: const Icon(Icons.stop),
+                                      onPressed: () {
+                                        context.read<MediaDetailBloc>().add(
+                                            const MediaDetailEvent
+                                                .closeTrailer());
+                                        _trailerController = null;
+                                        SystemChrome.setEnabledSystemUIMode(
+                                          SystemUiMode.edgeToEdge,
+                                        );
+                                      },
+                                    )
+                                  : FloatingActionButton.extended(
+                                      icon: const Icon(Icons.play_arrow),
+                                      label: const Text('Ver trailer'),
+                                      onPressed: () {
+                                        context
+                                            .read<MediaDetailBloc>()
+                                            .add(MediaDetailEvent.openTrailer(
+                                              AppConstants.mediaType,
+                                              movie,
+                                            ));
+                                        _trailerController =
+                                            initTrailerController();
+                                        if (state.trailerId.isNotEmpty) {
+                                          _trailerController?.loadVideoById(
+                                            videoId: state.trailerId.toString(),
+                                          );
+                                        }
+                                      },
+                                    ),
+                            )
+                          : Container(),
+                    ],
+                  ),
+                ),
                 child: !state.isTrailerOpened
                     ? SingleChildScrollView(
                         child: Column(
@@ -103,16 +121,9 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                                   ),
                                   image: Image.network(
                                     '${AppUrls.movieLandscapeBaseUrl}${movie.backdropPath}',
-                                    loadingBuilder: (
-                                      context,
-                                      child,
-                                      loadingProgress,
-                                    ) {
-                                      return DefaultCircularLoader(
-                                        loadingProgress: loadingProgress,
-                                        child: child,
-                                      );
-                                    },
+                                    loadingBuilder: (_, child, progress) =>
+                                        DefaultCircularLoader(
+                                            progress: progress, child: child),
                                   ).image,
                                 ),
                               ),

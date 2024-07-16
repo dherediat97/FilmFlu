@@ -42,9 +42,9 @@ class MovieCarrouselItem extends StatelessWidget {
                     fit: BoxFit.fill,
                     image: Image.network(
                       '${AppUrls.movieImgBaseURL}${movie.posterPath}',
-                      loadingBuilder: (context, child, loadingProgress) =>
+                      loadingBuilder: (_, child, progress) =>
                           DefaultCircularLoader(
-                        loadingProgress: loadingProgress,
+                        progress: progress,
                         child: child,
                       ),
                     ).image,
