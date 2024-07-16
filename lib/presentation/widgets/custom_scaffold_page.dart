@@ -187,6 +187,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
     );
 
     actions.add(DropdownButton<Locale>(
+        iconEnabledColor: Colors.white,
         onChanged: (language) {
           context
               .read<LanguageCubit>()

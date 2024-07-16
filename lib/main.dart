@@ -26,8 +26,8 @@ void main() async {
     SystemUiMode.edgeToEdge,
     overlays: [SystemUiOverlay.top],
   );
-
   await initDi();
+  //await horus_vision.initDi();
   runApp(FilmFlu());
 }
 

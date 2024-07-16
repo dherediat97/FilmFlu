@@ -1,4 +1,4 @@
-import 'package:film_flu/presentation/features/media_list/widgets/media_list.dart';
+import 'package:film_flu/presentation/features/media_list/media_list.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
 

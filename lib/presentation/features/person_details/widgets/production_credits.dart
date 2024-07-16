@@ -52,11 +52,6 @@ class ProductionCreditsWidget extends StatelessWidget {
                     height: 160,
                     width: 150,
                     fit: BoxFit.cover,
-                    frameBuilder: (context, child, loadingProgress, sync) =>
-                        DefaultCircularLoader(
-                      loadingProgress: null,
-                      child: child,
-                    ),
                     errorBuilder: (context, error, stackTrace) {
                       return Image.network(
                         height: 160,
@@ -65,11 +60,8 @@ class ProductionCreditsWidget extends StatelessWidget {
                         '${AppUrls.personImgBaseUrl}${person.profilePath}',
                       );
                     },
-                    loadingBuilder: (BuildContext context, Widget child,
-                        ImageChunkEvent? loadingProgress) {
-                      return DefaultCircularLoader(
-                          loadingProgress: loadingProgress, child: child);
-                    },
+                    loadingBuilder: (_, child, progress) =>
+                        DefaultCircularLoader(progress: progress, child: child),
                   ),
                 ),
                 Padding(
