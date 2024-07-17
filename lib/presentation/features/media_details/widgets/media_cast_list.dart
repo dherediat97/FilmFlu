@@ -37,6 +37,7 @@ class _FilmCastState extends State<FilmCast> {
             ? Container(
                 padding: const EdgeInsets.all(16),
                 child: GridView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: 280,

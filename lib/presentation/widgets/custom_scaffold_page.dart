@@ -45,23 +45,30 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
         resizeToAvoidBottomInset: true,
         appBar: !widget.fullScreenMode
             ? AppBar(
-                leadingWidth: 100,
-                leading: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: IconButton(
-                      icon: Image.asset(
-                        AppAssets.logoIcon,
-                        fit: BoxFit.fitHeight,
-                      ),
-                      onPressed: () {
-                        if (context.canPop()) {
-                          context.pop();
-                        } else {
-                          context.push(AppRoutePaths.startRoute);
-                        }
-                      }),
-                ),
-                toolbarHeight: 75,
+                automaticallyImplyLeading: true,
+                leadingWidth: 120,
+                leading: IconButton(
+                    padding: EdgeInsets.zero,
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.transparent),
+                      elevation: MaterialStateProperty.all(0.0),
+                      splashFactory: NoSplash.splashFactory,
+                      overlayColor:
+                          MaterialStateProperty.all(Colors.transparent),
+                    ),
+                    icon: Image.asset(
+                      AppAssets.logoIcon,
+                      fit: BoxFit.fitHeight,
+                    ),
+                    onPressed: () {
+                      if (context.canPop()) {
+                        context.pop();
+                      } else {
+                        context.push(AppRoutePaths.startRoute);
+                      }
+                    }),
+                toolbarHeight: 100,
                 elevation: 60,
                 scrolledUnderElevation: 1,
                 backgroundColor: Theme.of(context).colorScheme.primary,
@@ -196,9 +203,10 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
               .changeLang(context, language?.toString() ?? 'es');
           context.push(AppRoutePaths.startRoute);
         },
+        padding: const EdgeInsets.all(8),
         dropdownColor: Colors.black,
         value: context.read<LanguageCubit>().state,
-        underline: const SizedBox(),
+        underline: const SizedBox(height: 0),
         items: AppLocalizations.supportedLocales
             .map<DropdownMenuItem<Locale>>((Locale language) {
           return DropdownMenuItem<Locale>(
@@ -212,6 +220,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                   height: 20,
                   width: 20,
                 ),
+                const SizedBox(height: 40),
                 Text(
                   language.languageCode,
                   style: const TextStyle(color: Colors.white),
