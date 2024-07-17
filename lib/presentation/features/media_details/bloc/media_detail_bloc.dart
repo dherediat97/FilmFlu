@@ -117,14 +117,15 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
   }
 
   String _getTrailerId(MediaItemEntity mediaItemEntity, String mediaType) {
-    if (mediaItemEntity.videos == null) return '';
-    if (mediaItemEntity.videos!.results.isEmpty) return '';
-
-    return mediaItemEntity.videos!.results
-        .firstWhere((element) =>
-            element.type == MediaListConstants.trailer ||
-            element.type == MediaListConstants.teaser)
-        .key
-        .toString();
+    try {
+      return mediaItemEntity.videos!.results
+          .firstWhere((element) =>
+              element.type == MediaListConstants.trailer ||
+              element.type == MediaListConstants.teaser)
+          .key
+          .toString();
+    } catch (ex) {
+      return '';
+    }
   }
 }

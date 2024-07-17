@@ -24,6 +24,7 @@ class ProductionCreditsWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GridView.builder(
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: credits.length,
         shrinkWrap: true,
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
