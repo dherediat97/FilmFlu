@@ -50,12 +50,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                 leading: IconButton(
                     padding: EdgeInsets.zero,
                     style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.transparent),
-                      elevation: MaterialStateProperty.all(0.0),
-                      splashFactory: NoSplash.splashFactory,
-                      overlayColor:
-                          MaterialStateProperty.all(Colors.transparent),
+                      overlayColor: WidgetStateProperty.all(Colors.transparent),
                     ),
                     icon: Image.asset(
                       AppAssets.logoIcon,

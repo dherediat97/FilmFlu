@@ -49,7 +49,7 @@ class AppLocalizationsIs extends AppLocalizations {
   String get production_cast => 'Framleiðsla';
 
   @override
-  String get production_job => 'sinnti verki';
+  String get production_job => 'Sinnti verki';
 
   @override
   String get actor_job => 'Leika';

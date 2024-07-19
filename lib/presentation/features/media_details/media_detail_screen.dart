@@ -1,13 +1,8 @@
-import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:film_flu/app/constants/app_constants.dart';
-import 'package:film_flu/app/constants/app_urls.dart';
-import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
-import 'package:film_flu/presentation/features/media_details/widgets/media_cast_list.dart';
+import 'package:film_flu/presentation/features/media_details/widgets/credits_widget.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
-import 'package:film_flu/presentation/widgets/default_circular_loader.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,9 +39,9 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
   Widget build(BuildContext context) {
     return BlocBuilder<MediaDetailBloc, MediaDetailState>(
       builder: (context, state) {
-        MediaItemEntity? movie = state.mediaItem;
+        MediaItemEntity? mediaItem = state.mediaItem;
 
-        return movie != null
+        return mediaItem != null
             ? ScaffoldPage(
                 isSearchVisible: true,
                 fullScreenMode: state.isTrailerOpened,
@@ -91,7 +86,7 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                                             .read<MediaDetailBloc>()
                                             .add(MediaDetailEvent.openTrailer(
                                               AppConstants.mediaType,
-                                              movie,
+                                              mediaItem,
                                             ));
                                         _trailerController =
                                             initTrailerController();
@@ -108,172 +103,7 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                   ),
                 ),
                 child: !state.isTrailerOpened
-                    ? SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 600,
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  colorFilter: ColorFilter.mode(
-                                    Colors.black.withOpacity(0.6),
-                                    BlendMode.darken,
-                                  ),
-                                  image: Image.network(
-                                    '${AppUrls.movieLandscapeBaseUrl}${movie.backdropPath}',
-                                    fit: BoxFit.cover,
-                                    loadingBuilder: (_, child, progress) =>
-                                        DefaultCircularLoader(
-                                            progress: progress, child: child),
-                                  ).image,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(16),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.5,
-                                          child: AutoSizeText(
-                                            state.movieName,
-                                            maxLines: 3,
-                                            textAlign: TextAlign.start,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                              fontSize: 32,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 20),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        if (movie.overview != null &&
-                                            movie.overview!.isNotEmpty) ...[
-                                          Container(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              context.localizations.synopsis,
-                                              textAlign: TextAlign.start,
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 40,
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2,
-                                            alignment: Alignment.topLeft,
-                                            child: AutoSizeText(
-                                              movie.overview ?? '',
-                                              maxLines: 20,
-                                              overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.start,
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15,
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            if (movie.credits != null) ...[
-                              Center(
-                                child: SegmentedButton<bool>(
-                                  showSelectedIcon: false,
-                                  selected: <bool>{state.isCastSelected},
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                        WidgetStateProperty.resolveWith<Color>(
-                                      (Set<WidgetState> states) {
-                                        if (states
-                                            .contains(WidgetState.selected)) {
-                                          return AppColors.primaryColor;
-                                        }
-                                        return Colors.white24;
-                                      },
-                                    ),
-                                  ),
-                                  segments: [
-                                    if (movie.credits?.cast.isNotEmpty == true)
-                                      ButtonSegment(
-                                        label: Text(
-                                          context.localizations.character_cast,
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                          ),
-                                        ),
-                                        value: true,
-                                      ),
-                                    if (movie.credits?.crew.isNotEmpty == true)
-                                      ButtonSegment(
-                                        label: Text(
-                                          context.localizations.production_cast,
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                          ),
-                                        ),
-                                        value: false,
-                                      ),
-                                  ],
-                                  onSelectionChanged: (Set<bool> castSelected) {
-                                    context
-                                        .read<MediaDetailBloc>()
-                                        .add(MediaDetailEvent.setCreditsType(
-                                          castSelected.first,
-                                        ));
-                                  },
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 16,
-                              ),
-                              state.isCastSelected
-                                  ? FilmCast(
-                                      movieId: widget.mediaTypeId.toString(),
-                                      isCast: true,
-                                      mediaType: AppConstants.mediaType,
-                                      cast: movie.credits!.cast,
-                                      crew: movie.credits!.crew,
-                                    )
-                                  : FilmCast(
-                                      movieId: widget.mediaTypeId.toString(),
-                                      isCast: false,
-                                      mediaType: AppConstants.mediaType,
-                                      cast: movie.credits!.cast,
-                                      crew: movie.credits!.crew,
-                                    )
-                            ],
-                          ],
-                        ),
-                      )
+                    ? const CreditsWidget()
                     : YoutubePlayerScaffold(
                         controller: _trailerController!,
                         builder: (context, player) {

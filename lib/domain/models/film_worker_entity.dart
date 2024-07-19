@@ -7,10 +7,10 @@ part 'film_worker_entity.g.dart';
 class FilmWorkerEntity with _$FilmWorkerEntity {
   const factory FilmWorkerEntity({
     required int id,
-    bool? adult,
     int? gender,
     String? knownForDepartment,
     String? name,
+    String? originalName,
     String? profilePath,
     String? job,
   }) = _FilmWorkerEntity;

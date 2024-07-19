@@ -7,7 +7,6 @@ part 'credit_production_remote_entity.g.dart';
 @freezed
 class CreditProductionRemoteEntity with _$CreditProductionRemoteEntity {
   const factory CreditProductionRemoteEntity({
-    @JsonKey(name: 'adult') required bool adult,
     @JsonKey(name: 'backdrop_path') required String? backdropPath,
     @JsonKey(name: 'genre_ids') required List<int> genreIds,
     @JsonKey(name: 'id') required int id,
@@ -35,7 +34,6 @@ extension CreditProductionToRemoteEntityExtension
   CreditProductionEntity toCreditProduction() => CreditProductionEntity(
         id: id,
         popularity: popularity ?? 0.0,
-        adult: adult,
         backdropPath: backdropPath ?? '',
         genreIds: genreIds,
         job: job,

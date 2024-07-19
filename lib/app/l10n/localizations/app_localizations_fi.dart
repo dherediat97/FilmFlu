@@ -10,7 +10,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get app_name => 'Film Flu';
 
   @override
-  String get action_movies => 'toimintaelokuvat';
+  String get action_movies => 'Toimintaelokuvat';
 
   @override
   String get drama_movies => 'Draamaelokuvat';

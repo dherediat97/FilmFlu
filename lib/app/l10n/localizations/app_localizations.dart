@@ -203,7 +203,7 @@ abstract class AppLocalizations {
   /// No description provided for @production_job.
   ///
   /// In es, this message translates to:
-  /// **'realizó el trabajo de'**
+  /// **'Realizó el trabajo de'**
   String get production_job;
 
   /// No description provided for @actor_job.
