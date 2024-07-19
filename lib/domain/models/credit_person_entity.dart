@@ -10,7 +10,6 @@ class CreditPersonEntity with _$CreditPersonEntity {
     String? title,
     String? originalTitle,
     String? backdropPath,
-    bool? adult,
     List<int>? genreIds,
     String? overview,
     String? posterPath,

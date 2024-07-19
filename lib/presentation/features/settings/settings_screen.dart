@@ -1,3 +1,4 @@
+import 'package:film_flu/presentation/features/settings/widgets/settings_item.dart';
 import 'package:film_flu/presentation/top_blocs/language_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,6 +49,7 @@ class SettingsScreen extends StatelessWidget {
               children: [
                 Row(
                   children: [
+                    const SettingsItem(title: 'Idioma'),
                     const Text(
                       'Idioma:',
                     ),
@@ -67,6 +69,8 @@ class SettingsScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+                Container(),
+                Container(),
               ],
             ),
           ),

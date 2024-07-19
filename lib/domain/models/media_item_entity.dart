@@ -1,5 +1,6 @@
 import 'package:film_flu/core/entities/pagination.dart';
 import 'package:film_flu/domain/models/credits_media_entity.dart';
+import 'package:film_flu/domain/models/genre_entity.dart';
 import 'package:film_flu/domain/models/video_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -9,9 +10,8 @@ part 'media_item_entity.g.dart';
 @freezed
 class MediaItemEntity with _$MediaItemEntity {
   const factory MediaItemEntity({
-    bool? adult,
     String? backdropPath,
-    List<int>? genreIds,
+    List<GenreEntity>? genres,
     required int id,
     String? originalLanguage,
     String? originalTitle,
@@ -21,7 +21,6 @@ class MediaItemEntity with _$MediaItemEntity {
     String? releaseDate,
     String? firstAirDate,
     String? title,
-    bool? video,
     Pagination<VideoEntity>? videos,
     double? voteAverage,
     int? voteCount,

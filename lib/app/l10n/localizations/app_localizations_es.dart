@@ -49,7 +49,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get production_cast => 'Producción';
 
   @override
-  String get production_job => 'realizó el trabajo de';
+  String get production_job => 'Realizó el trabajo de';
 
   @override
   String get actor_job => 'Interpreta a';

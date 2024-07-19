@@ -8,10 +8,10 @@ part 'film_worker_remote_entity.g.dart';
 class FilmWorkerRemoteEntity with _$FilmWorkerRemoteEntity {
   const factory FilmWorkerRemoteEntity({
     @JsonKey(name: 'id') required int id,
-    @JsonKey(name: 'adult') required bool adult,
     @JsonKey(name: 'gender') required int gender,
     @JsonKey(name: 'known_for_department') required String knownForDepartment,
     @JsonKey(name: 'name') required String name,
+    @JsonKey(name: 'original_name') required String originalName,
     @JsonKey(name: 'profile_path') String? profilePath,
     @JsonKey(name: 'job') required String job,
   }) = _FilmWorkerRemoteEntity;
@@ -23,9 +23,9 @@ class FilmWorkerRemoteEntity with _$FilmWorkerRemoteEntity {
 extension FilmWorkerEntityToRemoteEntityExtension on FilmWorkerRemoteEntity {
   FilmWorkerEntity toFilmWorkerEntity() => FilmWorkerEntity(
         id: id,
-        adult: adult,
         job: job,
         name: name,
+        originalName: originalName,
         gender: gender,
         knownForDepartment: knownForDepartment,
         profilePath: profilePath,

@@ -7,7 +7,6 @@ part 'credit_actor_remote_entity.g.dart';
 @freezed
 class CreditActorRemoteEntity with _$CreditActorRemoteEntity {
   const factory CreditActorRemoteEntity({
-    @JsonKey(name: 'adult') required bool adult,
     @JsonKey(name: 'backdrop_path') required String? backdropPath,
     @JsonKey(name: 'genre_ids') required List<int> genreIds,
     @JsonKey(name: 'id') required int id,
@@ -23,7 +22,6 @@ class CreditActorRemoteEntity with _$CreditActorRemoteEntity {
     @JsonKey(name: 'vote_count') int? voteCount,
     @JsonKey(name: 'character') required String character,
     @JsonKey(name: 'credit_id') required String creditId,
-    @JsonKey(name: 'order') int? order,
   }) = _CreditActorRemoteEntity;
 
   factory CreditActorRemoteEntity.fromJson(Map<String, dynamic> json) =>
@@ -34,7 +32,6 @@ extension CreditActorToRemoteEntityExtension on CreditActorRemoteEntity {
   CreditActorEntity toCreditActorEntity() => CreditActorEntity(
         id: id,
         popularity: popularity ?? 0.0,
-        adult: adult,
         backdropPath: backdropPath ?? '',
         genreIds: genreIds,
         character: character,
