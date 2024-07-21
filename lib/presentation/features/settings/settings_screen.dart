@@ -1,5 +1,5 @@
 import 'package:film_flu/presentation/features/settings/widgets/settings_item.dart';
-import 'package:film_flu/presentation/top_blocs/language_cubit.dart';
+import 'package:film_flu/presentation/top_blocs/app_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,7 +9,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LanguageCubit, Locale>(
+    return BlocBuilder<AppBloc, AppState>(
       builder: (context, state) {
         return DefaultTabController(
           initialIndex: 1,
@@ -58,12 +58,12 @@ class SettingsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SvgPicture.asset(
-                          'assets/icons/flags/${state.languageCode}_flag.svg',
+                          'assets/icons/flags/${state.locale.languageCode}_flag.svg',
                           height: 20,
                           width: 20,
                         ),
                         Text(
-                          state.languageCode,
+                          state.locale.languageCode,
                         )
                       ],
                     ),
