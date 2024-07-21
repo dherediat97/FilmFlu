@@ -4,12 +4,6 @@ final uiModulesDi = GetIt.instance;
 
 void _uiModulesInit() {
   uiModulesDi.registerFactory(
-    () => LanguageCubit(
-      appLocalDataSourceContract: uiModulesDi(),
-    ),
-  );
-
-  uiModulesDi.registerFactory(
     () => SplashBloc(),
   );
 

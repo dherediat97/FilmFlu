@@ -1,10 +1,9 @@
 import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/constants/app_colors.dart';
-import 'package:film_flu/app/di/top_bloc_providers.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
-import 'package:film_flu/presentation/top_blocs/language_cubit.dart';
+import 'package:film_flu/presentation/top_blocs/app_bloc.dart';
 import 'package:film_flu/presentation/widgets/flip_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,146 +36,143 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
 
   @override
   Widget build(BuildContext context) {
-    context.read<LanguageCubit>().changeStartLang();
+    context.read<AppBloc>().add(const AppEvent.changeStartLang());
 
-    return TopBlocProviders(
-      child: Scaffold(
-        floatingActionButtonLocation: widget.fabLocation,
-        resizeToAvoidBottomInset: true,
-        appBar: !widget.fullScreenMode
-            ? AppBar(
-                automaticallyImplyLeading: true,
-                leadingWidth: 120,
-                leading: IconButton(
-                    padding: EdgeInsets.zero,
-                    style: ButtonStyle(
-                      overlayColor: WidgetStateProperty.all(Colors.transparent),
-                    ),
-                    icon: Image.asset(
-                      AppAssets.logoIcon,
-                      fit: BoxFit.fitHeight,
-                    ),
-                    onPressed: () {
-                      if (context.canPop()) {
-                        context.pop();
-                      } else {
-                        context.push(AppRoutePaths.startRoute);
-                      }
-                    }),
-                toolbarHeight: 100,
-                elevation: 60,
-                scrolledUnderElevation: 1,
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                actions: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      children: _appBarActions(context),
-                    ),
-                  )
-                ],
-              )
-            : null,
-        body: SafeArea(
-          child: widget.child,
-        ),
-        bottomNavigationBar: !widget.fullScreenMode
-            ? BottomAppBar(
-                height: 50,
-                padding: EdgeInsets.zero,
-                color: Theme.of(context).colorScheme.primary,
-                child: SizedBox(
-                  height: 50,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                        child: Row(
-                          children: [
-                            Center(
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 8),
-                                child: Text(
-                                  context.localizations.made_with_love,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color:
-                                        Theme.of(context).colorScheme.onPrimary,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  loveTapped = !loveTapped;
-                                });
-                              },
-                              child: FlipCard(
-                                toggler: !loveTapped,
-                                frontCard: SvgPicture.asset(
-                                  AppAssets.fullHeartIcon,
-                                  height: 24,
-                                  width: 24,
-                                  colorFilter: ColorFilter.mode(
-                                    Theme.of(context).colorScheme.onPrimary,
-                                    BlendMode.srcIn,
-                                  ),
-                                ),
-                                backCard: SvgPicture.asset(
-                                  AppAssets.fullHeartIcon,
-                                  height: 24,
-                                  width: 24,
-                                  colorFilter: const ColorFilter.mode(
-                                    AppColors.andalucianColor,
-                                    BlendMode.srcIn,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.copyright,
-                              color: Theme.of(context).colorScheme.onPrimary,
-                            ),
-                            Center(
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 8),
-                                child: Text(
-                                  '${today.year} @dherediat97',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onPrimary),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
+    return Scaffold(
+      floatingActionButtonLocation: widget.fabLocation,
+      resizeToAvoidBottomInset: true,
+      appBar: !widget.fullScreenMode
+          ? AppBar(
+              automaticallyImplyLeading: true,
+              leadingWidth: 120,
+              leading: IconButton(
+                  padding: EdgeInsets.zero,
+                  style: ButtonStyle(
+                    overlayColor: WidgetStateProperty.all(Colors.transparent),
                   ),
-                ),
-              )
-            : null,
-        floatingActionButton: widget.floatingActionButton,
+                  icon: Image.asset(
+                    AppAssets.logoIcon,
+                    fit: BoxFit.fitHeight,
+                  ),
+                  onPressed: () {
+                    if (context.canPop()) {
+                      context.pop();
+                    } else {
+                      context.push(AppRoutePaths.startRoute);
+                    }
+                  }),
+              toolbarHeight: 100,
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: _appBarActions(context),
+                  ),
+                )
+              ],
+            )
+          : null,
+      body: SafeArea(
+        child: widget.child,
       ),
+      bottomNavigationBar: !widget.fullScreenMode
+          ? BottomAppBar(
+              height: 50,
+              padding: EdgeInsets.zero,
+              color: Theme.of(context).colorScheme.primary,
+              child: SizedBox(
+                height: 50,
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: Row(
+                        children: [
+                          Center(
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: Text(
+                                context.localizations.made_with_love,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                loveTapped = !loveTapped;
+                              });
+                            },
+                            child: FlipCard(
+                              toggler: !loveTapped,
+                              frontCard: SvgPicture.asset(
+                                AppAssets.fullHeartIcon,
+                                height: 24,
+                                width: 24,
+                                colorFilter: const ColorFilter.mode(
+                                  Colors.white,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                              backCard: SvgPicture.asset(
+                                AppAssets.fullHeartIcon,
+                                height: 24,
+                                width: 24,
+                                colorFilter: const ColorFilter.mode(
+                                  AppColors.andalucianColor,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.copyright,
+                            color: Colors.white,
+                          ),
+                          Center(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 8),
+                              child: Text(
+                                '${today.year} @dherediat97',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            )
+          : null,
+      floatingActionButton: widget.floatingActionButton,
     );
   }
 
   List<Widget> _appBarActions(BuildContext context) {
     List<Widget> actions = [];
+
+    bool isLightMode =
+        ThemeMode.dark == context.read<AppBloc>().state.themeMode;
 
     actions.add(
       IconButton(
@@ -190,17 +186,29 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
       ),
     );
 
+    actions.add(
+      IconButton(
+        icon: Icon(
+          isLightMode ? Icons.light_mode : Icons.dark_mode,
+          color: Colors.white,
+        ),
+        onPressed: () {
+          context.read<AppBloc>().add(AppEvent.toogleTheme(isLightMode));
+        },
+      ),
+    );
+
     actions.add(DropdownButton<Locale>(
         iconEnabledColor: Colors.white,
         onChanged: (language) {
           context
-              .read<LanguageCubit>()
-              .changeLang(context, language?.toString() ?? 'es');
+              .read<AppBloc>()
+              .add(AppEvent.changeLang(language?.toString() ?? 'es'));
           context.push(AppRoutePaths.startRoute);
         },
         padding: const EdgeInsets.all(8),
         dropdownColor: Colors.black,
-        value: context.read<LanguageCubit>().state,
+        value: context.read<AppBloc>().state.locale,
         underline: const SizedBox(height: 0),
         items: AppLocalizations.supportedLocales
             .map<DropdownMenuItem<Locale>>((Locale language) {
@@ -214,6 +222,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                   'assets/icons/flags/${language.languageCode}_flag.svg',
                   height: 20,
                   width: 20,
+                  fit: BoxFit.contain,
                 ),
                 const SizedBox(height: 40),
                 Text(
