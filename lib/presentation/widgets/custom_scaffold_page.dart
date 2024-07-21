@@ -1,14 +1,18 @@
 import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/constants/app_colors.dart';
+import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/presentation/top_blocs/app_bloc.dart';
 import 'package:film_flu/presentation/widgets/flip_view.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ScaffoldPage extends StatefulWidget {
   const ScaffoldPage({
@@ -62,7 +66,6 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                     }
                   }),
               toolbarHeight: 100,
-              backgroundColor: Theme.of(context).colorScheme.primary,
               actions: [
                 Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -78,89 +81,85 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
       ),
       bottomNavigationBar: !widget.fullScreenMode
           ? BottomAppBar(
-              height: 50,
-              padding: EdgeInsets.zero,
-              color: Theme.of(context).colorScheme.primary,
-              child: SizedBox(
-                height: 50,
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Row(
-                        children: [
-                          Center(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: Text(
-                                context.localizations.made_with_love,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Row(
+                      children: [
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: Text(
+                              context.localizations.made_with_love,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              loveTapped = !loveTapped;
+                            });
+                          },
+                          child: FlipCard(
+                            toggler: !loveTapped,
+                            frontCard: SvgPicture.asset(
+                              AppAssets.fullHeartIcon,
+                              height: 24,
+                              width: 24,
+                              colorFilter: ColorFilter.mode(
+                                Theme.of(context).colorScheme.onSecondary,
+                                BlendMode.srcIn,
+                              ),
+                            ),
+                            backCard: SvgPicture.asset(
+                              AppAssets.fullHeartIcon,
+                              height: 24,
+                              width: 24,
+                              colorFilter: const ColorFilter.mode(
+                                AppColors.andalucianColor,
+                                BlendMode.srcIn,
                               ),
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                loveTapped = !loveTapped;
-                              });
-                            },
-                            child: FlipCard(
-                              toggler: !loveTapped,
-                              frontCard: SvgPicture.asset(
-                                AppAssets.fullHeartIcon,
-                                height: 24,
-                                width: 24,
-                                colorFilter: const ColorFilter.mode(
-                                  Colors.white,
-                                  BlendMode.srcIn,
-                                ),
-                              ),
-                              backCard: SvgPicture.asset(
-                                AppAssets.fullHeartIcon,
-                                height: 24,
-                                width: 24,
-                                colorFilter: const ColorFilter.mode(
-                                  AppColors.andalucianColor,
-                                  BlendMode.srcIn,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.copyright,
-                            color: Colors.white,
-                          ),
-                          Center(
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 8),
-                              child: Text(
-                                '${today.year} @dherediat97',
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.copyright,
+                          color: Theme.of(context).colorScheme.onSecondary,
+                        ),
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 8),
+                            child: MouseRegion(
+                              cursor: SystemMouseCursors.click,
+                              child: GestureDetector(
+                                onTap: () {
+                                  launchUrl(AppConstants.myGithubPage);
+                                },
+                                child: Text(
+                                  '${today.year} @dherediat97',
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
                                 ),
                               ),
                             ),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
               ),
             )
           : null,
@@ -174,23 +173,23 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
     bool isLightMode =
         ThemeMode.dark == context.read<AppBloc>().state.themeMode;
 
-    actions.add(
-      IconButton(
-        icon: const Icon(
-          Icons.settings,
-          color: Colors.white,
-        ),
-        onPressed: () {
-          context.go(AppRoutePaths.settingsRoute);
-        },
-      ),
-    );
+    // actions.add(
+    //   IconButton(
+    //     icon: Icon(
+    //       Icons.settings,
+    //       color: Theme.of(context).colorScheme.onSecondary,
+    //     ),
+    //     onPressed: () {
+    //       context.go(AppRoutePaths.settingsRoute);
+    //     },
+    //   ),
+    // );
 
     actions.add(
       IconButton(
         icon: Icon(
           isLightMode ? Icons.light_mode : Icons.dark_mode,
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.onSecondary,
         ),
         onPressed: () {
           context.read<AppBloc>().add(AppEvent.toogleTheme(isLightMode));
@@ -199,7 +198,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
     );
 
     actions.add(DropdownButton<Locale>(
-        iconEnabledColor: Colors.white,
+        iconEnabledColor: Theme.of(context).colorScheme.onSecondary,
         onChanged: (language) {
           context
               .read<AppBloc>()
@@ -219,7 +218,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SvgPicture.asset(
-                  'assets/icons/flags/${language.languageCode}_flag.svg',
+                  'assets/flags/${language.languageCode}_flag.svg',
                   height: 20,
                   width: 20,
                   fit: BoxFit.contain,
@@ -227,30 +226,32 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                 const SizedBox(height: 40),
                 Text(
                   language.languageCode,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSecondary,
+                  ),
                 )
               ],
             ),
           );
         }).toList()));
-    // if (kIsWeb) {
-    //   actions.add(
-    //     IconButton(
-    //       onPressed: () async {
-    //         PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    //         AppConstants.version = packageInfo.version;
+    if (kIsWeb) {
+      actions.add(
+        IconButton(
+          onPressed: () async {
+            PackageInfo packageInfo = await PackageInfo.fromPlatform();
+            AppConstants.version = packageInfo.version;
 
-    //         final Uri url = Uri.parse(AppConstants.appDownloadBaseUrl);
-    //         //Lanzar url que descarga la app para android
-    //         await launchUrl(url);
-    //       },
-    //       icon: Icon(
-    //         Icons.android,
-    //         color: Theme.of(context).colorScheme.primary,
-    //       ),
-    //     ),
-    //   );
-    // }
+            final Uri url = Uri.parse(AppConstants.appDownloadBaseUrl);
+            //Lanzar url que descarga la app para android
+            await launchUrl(url);
+          },
+          icon: Icon(
+            Icons.android,
+            color: Theme.of(context).colorScheme.onSecondary,
+          ),
+        ),
+      );
+    }
     return actions;
   }
 }

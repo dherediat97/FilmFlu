@@ -1,3 +1,4 @@
+import 'package:film_flu/app/constants/app_fonts.dart';
 import 'package:film_flu/app/constants/app_theme.dart';
 import 'package:film_flu/app/di/di.dart';
 import 'package:film_flu/app/di/top_bloc_providers.dart';
@@ -46,6 +47,11 @@ class FilmFlu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextTheme textTheme =
+        createTextTheme(context, AppFonts.primaryFont, AppFonts.tertiaryFont);
+
+    AppTheme theme = AppTheme(textTheme);
+
     return BlocProvider(
       create: (context) => AppBloc(
           appLocalDataSourceContract: getIt<AppLocalDataSourceContract>()),
@@ -61,8 +67,10 @@ class FilmFlu extends StatelessWidget {
               supportedLocales: AppLocalizations.supportedLocales,
               routerConfig: _router,
               themeMode: state.themeMode,
-              theme: ThemeData.from(colorScheme: AppTheme.lightScheme()),
-              darkTheme: ThemeData.from(colorScheme: AppTheme.darkScheme()),
+              theme: theme.light(),
+              darkTheme: theme.dark(),
+              highContrastDarkTheme: theme.darkHighContrast(),
+              highContrastTheme: theme.lightHighContrast(),
             ),
           );
         },
