@@ -21,7 +21,7 @@ class MovieCarrouselItem extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: Column(
         children: [
-          InkWell(
+          GestureDetector(
             onTap: () {
               AppConstants.mediaType = movie.title != ''
                   ? MediaListConstants.movieMediaType

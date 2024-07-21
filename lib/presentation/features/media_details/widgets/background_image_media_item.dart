@@ -39,17 +39,13 @@ class BackgroundImageMediaItem extends StatelessWidget {
               Row(
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width / 1.5,
+                    width: MediaQuery.of(context).size.width / 2,
                     child: AutoSizeText(
                       movieName,
                       maxLines: 3,
-                      textAlign: TextAlign.start,
+                      textAlign: TextAlign.justify,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 32,
-                      ),
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
                 ],
@@ -66,10 +62,7 @@ class BackgroundImageMediaItem extends StatelessWidget {
                       child: Text(
                         context.localizations.synopsis,
                         textAlign: TextAlign.start,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 40,
-                        ),
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ),
                     Container(
@@ -80,10 +73,7 @@ class BackgroundImageMediaItem extends StatelessWidget {
                         maxLines: 20,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.start,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                        ),
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     )
                   ],

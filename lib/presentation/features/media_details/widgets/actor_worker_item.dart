@@ -76,12 +76,7 @@ class _FilmActorItemState extends State<FilmActorItem> {
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontFamily: 'ShadowsIntoLight',
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.primary,
-              fontSize: 18,
-            ),
+            style: Theme.of(context).textTheme.displayLarge,
           ),
           actor.character!.isNotEmpty || actor.character != null
               ? AutoSizeText(
@@ -89,11 +84,7 @@ class _FilmActorItemState extends State<FilmActorItem> {
                   overflow: TextOverflow.ellipsis,
                   '${context.localizations.actor_job} ${actor.character}',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontFamily: 'YsabeauInfant',
-                    color: Colors.white,
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 )
               : const Text('Desconocido')
         ],

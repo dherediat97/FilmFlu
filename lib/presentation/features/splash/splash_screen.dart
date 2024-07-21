@@ -59,10 +59,7 @@ class _SplashScreen extends State<SplashScreen> with TickerProviderStateMixin {
               alignment: Alignment.center,
               child: Text(
                 context.localizations.loading_title,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
-                ),
+                style: Theme.of(context).textTheme.titleLarge,
               ),
             ),
           ],

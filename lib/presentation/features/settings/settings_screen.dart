@@ -58,7 +58,7 @@ class SettingsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SvgPicture.asset(
-                          'assets/icons/flags/${state.locale.languageCode}_flag.svg',
+                          'assets/flags/${state.locale.languageCode}_flag.svg',
                           height: 20,
                           width: 20,
                         ),

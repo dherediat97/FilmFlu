@@ -60,29 +60,18 @@ class _CreditsWidget extends State<CreditsWidget>
                           SliverPersistentHeader(
                             floating: true,
                             delegate: SliverAppBarDelegate(
-                              TabBar(
-                                  controller: _tabController,
-                                  unselectedLabelColor:
-                                      Theme.of(context).colorScheme.onPrimary,
-                                  labelColor:
-                                      Theme.of(context).colorScheme.onPrimary,
-                                  indicatorColor:
-                                      Theme.of(context).colorScheme.primary,
-                                  dividerColor: Colors.transparent,
-                                  tabs: [
-                                    if (lengthCast != 0)
-                                      Tab(
-                                        icon: const Icon(Icons.movie),
-                                        text: context
-                                            .localizations.character_cast,
-                                      ),
-                                    if (lengthCrew != 0)
-                                      Tab(
-                                        icon: const Icon(Icons.movie),
-                                        text: context
-                                            .localizations.production_cast,
-                                      )
-                                  ]),
+                              TabBar(controller: _tabController, tabs: [
+                                if (lengthCast != 0)
+                                  Tab(
+                                    icon: const Icon(Icons.movie),
+                                    text: context.localizations.character_cast,
+                                  ),
+                                if (lengthCrew != 0)
+                                  Tab(
+                                    icon: const Icon(Icons.movie),
+                                    text: context.localizations.production_cast,
+                                  )
+                              ]),
                             ),
                           ),
                         ];
