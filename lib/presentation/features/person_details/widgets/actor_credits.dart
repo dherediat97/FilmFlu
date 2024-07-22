@@ -24,9 +24,7 @@ class ActorCreditsWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GridView.builder(
-        physics: const NeverScrollableScrollPhysics(),
         itemCount: credits.length,
-        shrinkWrap: true,
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 280,
           mainAxisExtent: 240,
@@ -77,10 +75,7 @@ class ActorCreditsWidget extends StatelessWidget {
                   maxLines: 3,
                   minFontSize: 14,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                  ),
+                  style: Theme.of(context).textTheme.displayMedium,
                 ),
               ),
               child: Container(),

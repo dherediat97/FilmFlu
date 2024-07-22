@@ -27,6 +27,12 @@ class _CreditsWidget extends State<CreditsWidget>
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _tabController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<MediaDetailBloc, MediaDetailState>(
       builder: (context, state) {
@@ -49,6 +55,8 @@ class _CreditsWidget extends State<CreditsWidget>
                             pinned: false,
                             floating: false,
                             snap: false,
+                            backgroundColor:
+                                Theme.of(context).colorScheme.surface,
                             toolbarHeight: 0,
                             flexibleSpace: FlexibleSpaceBar(
                               background: BackgroundImageMediaItem(

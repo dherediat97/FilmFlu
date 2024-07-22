@@ -1,4 +1,6 @@
 import 'package:film_flu/app/types/ui_state.dart';
+import 'package:film_flu/domain/models/credit_actor_entity.dart';
+import 'package:film_flu/domain/models/credit_production_entity.dart';
 import 'package:film_flu/domain/models/person_entity.dart';
 import 'package:film_flu/domain/repository_contracts/person_repository_contract.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,8 +42,27 @@ class PersonDetailsBloc extends Bloc<PersonDetailEvent, PersonDetailsState> {
           state.copyWith(uiState: const UiState.error(), person: null),
         );
       },
-      success: (value) =>
-          emit(state.copyWith(uiState: const UiState.success(), person: value)),
+      success: (value) {
+        List<CreditActorEntity> creditsAsActor = List.empty();
+        List<CreditProductionEntity> creditsAsProduction = List.empty();
+        if (value.credits != null) {
+          creditsAsActor = value.credits!.cast
+              .where((element) => element.character != null)
+              .where((element) => element.title != null)
+              .toList();
+
+          creditsAsProduction = value.credits!.crew
+              .where((element) => element.job != null)
+              .where((element) => element.title != null)
+              .toList();
+        }
+        emit(state.copyWith(
+          uiState: const UiState.success(),
+          person: value,
+          creditsAsActor: creditsAsActor,
+          creditsAsProduction: creditsAsProduction,
+        ));
+      },
     );
   }
 }

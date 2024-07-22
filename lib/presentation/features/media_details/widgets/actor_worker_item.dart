@@ -84,7 +84,7 @@ class _FilmActorItemState extends State<FilmActorItem> {
                   overflow: TextOverflow.ellipsis,
                   '${context.localizations.actor_job} ${actor.character}',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: Theme.of(context).textTheme.bodySmall,
                 )
               : const Text('Desconocido')
         ],
