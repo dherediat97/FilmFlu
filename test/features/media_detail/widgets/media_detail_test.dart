@@ -1,9 +1,12 @@
 import 'package:film_flu/presentation/features/media_details/media_detail_screen.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../instruments/pump_app.dart';
+
 void main() {
   testWidgets('Testing Media Detail Screen', (WidgetTester tester) async {
-    tester.pumpWidget(
+    await pumpApp(
+      tester,
       const MediaItemScreenDetails(mediaTypeId: '1111'),
     );
   });
