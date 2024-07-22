@@ -1,7 +1,6 @@
-#!/bin/bash
 # Generate `coverage/lcov.info` file
 flutter test --coverage
 # Generate HTML report
-genhtml coverage/lcov.info -o coverage/html
+/c/ProgramData/chocolatey/lib/lcov/tools/bin/genhtml coverage/lcov.info -o coverage/html
 # Open the report
-open coverage/html/index.html
+start coverage/html/index.html
