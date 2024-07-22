@@ -1,10 +1,10 @@
+import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppFonts {
-  static String primaryFont = 'Ysabeau';
+  static String primaryFont = 'YsabeauInfant';
   static String secondaryFont = 'LilitaOne';
-  static String tertiaryFont = 'Shadows Into Light';
+  static String tertiaryFont = 'ShadowsIntoLight';
 
   const AppFonts(
     primaryFont,
@@ -13,69 +13,85 @@ class AppFonts {
   );
 }
 
-TextTheme createTextTheme(
-    BuildContext context, String bodyFontString, String displayFontString) {
-  TextTheme baseTextTheme = Theme.of(context).textTheme;
-
-  TextTheme titleTextTheme =
-      GoogleFonts.getTextTheme(bodyFontString, baseTextTheme);
-
-  TextTheme bodyTextTheme =
-      GoogleFonts.getTextTheme(bodyFontString, baseTextTheme);
-
-  TextTheme displayTextTheme =
-      GoogleFonts.getTextTheme(displayFontString, baseTextTheme);
-
-  TextTheme textTheme = displayTextTheme.copyWith(
-    displayLarge: displayTextTheme.displayLarge?.copyWith(
-      fontSize: 22,
-      fontWeight: FontWeight.bold,
-      color: Theme.of(context).colorScheme.primary,
-    ),
-    displayMedium: displayTextTheme.displayMedium?.copyWith(
-      fontSize: 15,
-      color: Theme.of(context).colorScheme.secondary,
-    ),
-    displaySmall: displayTextTheme.displaySmall?.copyWith(
-      fontSize: 12,
-      color: Theme.of(context).colorScheme.secondary,
-    ),
-    bodyLarge: bodyTextTheme.bodyLarge?.copyWith(
-      fontSize: 24,
-      color: Theme.of(context).colorScheme.secondary,
-    ),
-    bodyMedium: bodyTextTheme.bodyMedium?.copyWith(
-      fontSize: 15,
-      color: Theme.of(context).colorScheme.secondary,
-    ),
-    bodySmall: bodyTextTheme.bodySmall?.copyWith(
-      fontSize: 15,
-      color: Theme.of(context).colorScheme.secondary,
-    ),
-    labelLarge: bodyTextTheme.labelLarge?.copyWith(
-      fontSize: 12,
-      color: Theme.of(context).colorScheme.secondary,
-    ),
-    labelMedium: bodyTextTheme.labelMedium?.copyWith(
-      fontSize: 14,
-      color: Theme.of(context).colorScheme.secondary,
-    ),
-    labelSmall: bodyTextTheme.labelSmall?.copyWith(
-      fontSize: 14,
-      color: Theme.of(context).colorScheme.secondary,
-    ),
-    titleLarge: titleTextTheme.titleLarge?.copyWith(
+TextTheme createTextTheme(bool isLightMode) {
+  TextTheme textTheme = TextTheme(
+    titleLarge: TextStyle(
+      fontFamily: AppFonts.primaryFont,
       fontSize: 40,
-      color: Theme.of(context).colorScheme.secondary,
+      color: isLightMode
+          ? AppColors.textSecondaryColor
+          : AppColors.textPrimaryColor,
     ),
-    titleMedium: titleTextTheme.titleMedium?.copyWith(
-      fontSize: 14,
-      color: Theme.of(context).colorScheme.secondary,
+    titleMedium: TextStyle(
+      fontFamily: AppFonts.primaryFont,
+      fontSize: 30,
+      color: AppColors.textPrimaryColor,
     ),
-    titleSmall: titleTextTheme.titleSmall?.copyWith(
+    titleSmall: TextStyle(
+      fontFamily: AppFonts.primaryFont,
       fontSize: 16,
-      color: Theme.of(context).colorScheme.secondary,
+      color: isLightMode
+          ? AppColors.textSecondaryColor
+          : AppColors.textPrimaryColor,
+    ),
+    displayLarge: TextStyle(
+      fontFamily: AppFonts.tertiaryFont,
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+      color: AppColors.primaryColor,
+    ),
+    displayMedium: TextStyle(
+      fontFamily: AppFonts.primaryFont,
+      fontSize: 15,
+      color: isLightMode
+          ? AppColors.textSecondaryColor
+          : AppColors.textPrimaryColor,
+    ),
+    displaySmall: TextStyle(
+      fontFamily: AppFonts.primaryFont,
+      fontSize: 12,
+      color: isLightMode
+          ? AppColors.textSecondaryColor
+          : AppColors.textPrimaryColor,
+    ),
+    bodyLarge: TextStyle(
+      fontFamily: AppFonts.primaryFont,
+      fontSize: 24,
+      color: isLightMode
+          ? AppColors.textSecondaryColor
+          : AppColors.textPrimaryColor,
+    ),
+    bodyMedium: TextStyle(
+      fontFamily: AppFonts.primaryFont,
+      fontSize: 15,
+      color: AppColors.textPrimaryColor,
+    ),
+    bodySmall: TextStyle(
+      fontFamily: AppFonts.primaryFont,
+      fontSize: 15,
+      color: isLightMode
+          ? AppColors.textSecondaryColor
+          : AppColors.textPrimaryColor,
+    ),
+    labelLarge: TextStyle(
+      fontSize: 12,
+      color: isLightMode
+          ? AppColors.textSecondaryColor
+          : AppColors.textPrimaryColor,
+    ),
+    labelMedium: TextStyle(
+      fontFamily: AppFonts.primaryFont,
+      fontSize: 14,
+      color: AppColors.textPrimaryColor,
+    ),
+    labelSmall: TextStyle(
+      fontFamily: AppFonts.primaryFont,
+      fontSize: 14,
+      color: isLightMode
+          ? AppColors.textSecondaryColor
+          : AppColors.textPrimaryColor,
     ),
   );
+
   return textTheme;
 }

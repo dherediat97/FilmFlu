@@ -87,7 +87,7 @@ class _FilmWorkerItemState extends State<FilmWorkerItem> {
             textAlign: TextAlign.center,
             maxLines: 4,
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         ],
       ),

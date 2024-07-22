@@ -23,7 +23,7 @@ class BackgroundImageMediaItem extends StatelessWidget {
           image: DecorationImage(
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.6),
+              Colors.black.withOpacity(0.8),
               BlendMode.darken,
             ),
             image: Image.network(
@@ -45,7 +45,7 @@ class BackgroundImageMediaItem extends StatelessWidget {
                       maxLines: 3,
                       textAlign: TextAlign.justify,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ),
                 ],
@@ -62,7 +62,7 @@ class BackgroundImageMediaItem extends StatelessWidget {
                       child: Text(
                         context.localizations.synopsis,
                         textAlign: TextAlign.start,
-                        style: Theme.of(context).textTheme.titleLarge,
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
                     Container(

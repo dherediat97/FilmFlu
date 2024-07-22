@@ -95,7 +95,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                             child: Text(
                               context.localizations.made_with_love,
                               textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.titleMedium,
+                              style: Theme.of(context).textTheme.labelMedium,
                             ),
                           ),
                         ),
@@ -111,8 +111,8 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                               AppAssets.fullHeartIcon,
                               height: 24,
                               width: 24,
-                              colorFilter: ColorFilter.mode(
-                                Theme.of(context).colorScheme.onSecondary,
+                              colorFilter: const ColorFilter.mode(
+                                AppColors.backgroundColorLight,
                                 BlendMode.srcIn,
                               ),
                             ),
@@ -134,24 +134,17 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                     padding: const EdgeInsets.symmetric(horizontal: 12.0),
                     child: Row(
                       children: [
-                        Icon(
-                          Icons.copyright,
-                          color: Theme.of(context).colorScheme.onSecondary,
-                        ),
+                        const Icon(Icons.copyright),
                         Center(
                           child: Padding(
                             padding: const EdgeInsets.only(left: 8),
-                            child: MouseRegion(
-                              cursor: SystemMouseCursors.click,
-                              child: GestureDetector(
-                                onTap: () {
-                                  launchUrl(AppConstants.myGithubPage);
-                                },
-                                child: Text(
-                                  '${today.year} @dherediat97',
-                                  style:
-                                      Theme.of(context).textTheme.titleMedium,
-                                ),
+                            child: InkWell(
+                              onTap: () {
+                                launchUrl(AppConstants.myGithubPage);
+                              },
+                              child: Text(
+                                '${today.year} @dherediat97',
+                                style: Theme.of(context).textTheme.labelMedium,
                               ),
                             ),
                           ),
@@ -189,7 +182,6 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
       IconButton(
         icon: Icon(
           isLightMode ? Icons.light_mode : Icons.dark_mode,
-          color: Theme.of(context).colorScheme.onSecondary,
         ),
         onPressed: () {
           context.read<AppBloc>().add(AppEvent.toogleTheme(isLightMode));
@@ -206,7 +198,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
           context.push(AppRoutePaths.startRoute);
         },
         padding: const EdgeInsets.all(8),
-        dropdownColor: Colors.black,
+        dropdownColor: Theme.of(context).colorScheme.surface,
         value: context.read<AppBloc>().state.locale,
         underline: const SizedBox(height: 0),
         items: AppLocalizations.supportedLocales
@@ -226,9 +218,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                 const SizedBox(height: 40),
                 Text(
                   language.languageCode,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSecondary,
-                  ),
+                  style: Theme.of(context).textTheme.labelMedium,
                 )
               ],
             ),
@@ -245,9 +235,8 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
             //Lanzar url que descarga la app para android
             await launchUrl(url);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.android,
-            color: Theme.of(context).colorScheme.onSecondary,
           ),
         ),
       );
