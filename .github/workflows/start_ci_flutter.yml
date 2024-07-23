@@ -16,7 +16,14 @@ jobs:
             channel: 'stable'
       - run: flutter clean
       - run: flutter pub get
-
+      - name: Write TMDB_KEY to .env
+        run:
+          set -o noclobber
+          echo TMDB_KEY={{ secrets.TMDB_KEY }} >> .env
+      - name: Create .env
+        run: echo "TMDB_KEY=${{ secrets.TMDB_KEY }}" > .env
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v2.0
       - name: Build & compile classes
         run: flutter pub run build_runner build --delete-conflicting-outputs
 
