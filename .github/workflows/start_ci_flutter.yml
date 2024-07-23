@@ -24,8 +24,13 @@ jobs:
         run: echo "TMDB_KEY=${{ secrets.TMDB_KEY }}" > .env
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v2.0
+        with:
+            envkey_DEBUG: false
+            envkey_TMDB_KEY: ${{ secrets.TMDB_KEY }}
+            file_name: .env
       - name: Build & compile classes
         run: flutter pub run build_runner build --delete-conflicting-outputs
+      - run: flutter gen-l10n
 
       # Uncomment this step to verify the use of 'dart format' on each commit.
       #- name: Verify formatting
