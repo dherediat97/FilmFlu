@@ -89,11 +89,11 @@ release:
         name: release-ipa
 
     # Upload ipa file to Fiebase
-    - name: Upload artifact to Firebase App Distribution
-      uses: wzieba/Firebase-Distribution-Github-Action@v1
-      with:
-        appId: ${{secrets.FIREBASE_IOS_APP_ID}}
-        token: ${{secrets.FIREBASE_TOKEN}}
-        groups: ios-developers
-        file: {film_flu_app}.ipa
+    # - name: Upload artifact to Firebase App Distribution
+      # uses: wzieba/Firebase-Distribution-Github-Action@v1
+      # with:
+      #   appId: ${{secrets.FIREBASE_IOS_APP_ID}}
+      #   token: ${{secrets.FIREBASE_TOKEN}}
+      #   groups: ios-developers
+      #   file: {film_flu_app}.ipa
            
