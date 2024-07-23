@@ -1,7 +1,10 @@
 import 'dart:async';
-import 'package:film_flu/presentation/features/splash/bloc/splash_event.dart';
-import 'package:film_flu/presentation/features/splash/bloc/splash_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'splash_event.dart';
+part 'splash_state.dart';
+part 'splash_bloc.freezed.dart';
 
 class SplashBloc extends Bloc<SplashEvent, SplashState> {
   SplashBloc() : super(const SplashState.initial()) {

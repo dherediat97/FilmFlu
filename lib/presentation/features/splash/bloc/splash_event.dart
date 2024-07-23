@@ -1,6 +1,4 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'splash_event.freezed.dart';
+part of 'splash_bloc.dart';
 
 @freezed
 class SplashEvent with _$SplashEvent {
