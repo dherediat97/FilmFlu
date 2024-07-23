@@ -1,6 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:film_flu/app/types/ui_state.dart';
-import 'package:film_flu/domain/repository_contracts/person_repository_contract.dart';
 import 'package:film_flu/presentation/features/person_details/bloc/person_details_bloc.dart';
 import 'package:mockito/annotations.dart';
 import 'package:test/scaffolding.dart';
@@ -9,7 +8,6 @@ import 'person_detail_bloc_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<PersonDetailsBloc>(),
-  MockSpec<PersonRepositoryContract>(),
 ])
 void main() {
   late MockPersonDetailsBloc mockBlock;
