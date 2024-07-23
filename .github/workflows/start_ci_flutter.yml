@@ -1,12 +1,7 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-name: Dart
+name: Test Units FilmFlu
 
 on:
-  push:
+  pull_request:
     branches: [ "main" ]
   workflow_dispatch:
 
@@ -21,6 +16,9 @@ jobs:
             channel: 'stable'
       - run: flutter clean
       - run: flutter pub get
+
+      - name: Build & compile classes
+      - run: flutter pub run build_runner build --delete-conflicting-outputs
 
       # Uncomment this step to verify the use of 'dart format' on each commit.
       #- name: Verify formatting
