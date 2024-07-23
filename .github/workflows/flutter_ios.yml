@@ -63,7 +63,7 @@ jobs:
         # Collect the file and upload as artifact         
       - name: collect ipa artifacts
         uses: actions/upload-artifact@v2
-          with:
+        with:
           name: release-ipa
           # Path to the release files
           path: build/ios/ipa/*.ipa
