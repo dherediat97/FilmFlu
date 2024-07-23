@@ -94,5 +94,5 @@ release:
         appId: ${{secrets.FIREBASE_IOS_APP_ID}}
         token: ${{secrets.FIREBASE_TOKEN}}
         groups: ios-developers
-        file: {your_app_name}.ipa
+        file: {film_flu_app}.ipa
            
