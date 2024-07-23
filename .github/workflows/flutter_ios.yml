@@ -78,10 +78,11 @@ release:
     name: Release ipa to Firebase
     needs: [ build ]
     runs-on: ubuntu-latest
+
     steps:
     
     # Retrieve ipa file from GitHub artifacts
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Get release-ipa from artifacts
       uses: actions/download-artifact@v2
       with:
