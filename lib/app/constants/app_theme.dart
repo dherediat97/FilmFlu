@@ -144,7 +144,7 @@ class AppTheme {
         canvasColor: colorScheme.surface,
         tabBarTheme: TabBarTheme(
           indicatorColor: colorScheme.primary,
-          labelColor: colorScheme.primary,
+          labelColor: colorScheme.secondary,
           dividerColor: Colors.transparent,
           unselectedLabelColor: colorScheme.secondary,
           indicatorSize: TabBarIndicatorSize.tab,

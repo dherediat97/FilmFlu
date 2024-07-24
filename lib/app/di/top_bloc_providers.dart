@@ -33,7 +33,7 @@ class TopBlocProviders extends StatelessWidget {
             ..add(
               MediaDetailEvent.getMediaDetails(
                 AppConstants.mediaType,
-                AppConstants.mediaTypeId.toString(),
+                AppConstants.mediaTypeId,
               ),
             ),
         ),

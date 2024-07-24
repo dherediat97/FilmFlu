@@ -5,8 +5,7 @@ import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/domain/models/film_worker_entity.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:film_flu/domain/models/genre_entity.dart';
-import 'package:film_flu/presentation/widgets/default_circular_loader.dart';
+import 'package:film_flu/presentation/widgets/default_image_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -14,13 +13,11 @@ import 'package:go_router/go_router.dart';
 class FilmWorkerItem extends StatefulWidget {
   const FilmWorkerItem({
     super.key,
-    required this.mainGenre,
     required this.index,
     required this.crew,
   });
 
   final int index;
-  final GenreEntity mainGenre;
   final List<FilmWorkerEntity> crew;
 
   @override
@@ -48,22 +45,18 @@ class _FilmWorkerItemState extends State<FilmWorkerItem> {
             width: 150,
             fit: BoxFit.cover,
             loadingBuilder: (_, child, loadingProgress) =>
-                DefaultCircularLoader(progress: loadingProgress, child: child),
+                DefaultImageLoader(progress: loadingProgress, child: child),
             errorBuilder: (context, url, error) {
               if (filmWorker.gender == 2) {
                 return SvgPicture.asset(
-                  widget.mainGenre.id == 16
-                      ? AppAssets.animeActorImageIcon
-                      : AppAssets.actorImageIcon,
+                  AppAssets.actorImageIcon,
                   height: 160,
                   width: 150,
                   fit: BoxFit.cover,
                 );
               } else {
                 return SvgPicture.asset(
-                  widget.mainGenre.id == 16
-                      ? AppAssets.animeActressImageIcon
-                      : AppAssets.actressImageIcon,
+                  AppAssets.actressImageIcon,
                   height: 160,
                   width: 150,
                   fit: BoxFit.cover,

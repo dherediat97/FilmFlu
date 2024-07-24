@@ -5,8 +5,7 @@ import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/domain/models/actor_entity.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:film_flu/domain/models/genre_entity.dart';
-import 'package:film_flu/presentation/widgets/default_circular_loader.dart';
+import 'package:film_flu/presentation/widgets/default_image_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -14,13 +13,11 @@ import 'package:go_router/go_router.dart';
 class FilmActorItem extends StatefulWidget {
   const FilmActorItem({
     super.key,
-    required this.mainGenre,
     required this.index,
     required this.cast,
   });
 
   final int index;
-  final GenreEntity mainGenre;
   final List<ActorEntity> cast;
 
   @override
@@ -48,7 +45,7 @@ class _FilmActorItemState extends State<FilmActorItem> {
             width: 150,
             fit: BoxFit.cover,
             loadingBuilder: (_, child, progress) =>
-                DefaultCircularLoader(progress: progress, child: child),
+                DefaultImageLoader(progress: progress, child: child),
             errorBuilder: (context, url, error) {
               if (actor.gender == 2) {
                 return SvgPicture.asset(

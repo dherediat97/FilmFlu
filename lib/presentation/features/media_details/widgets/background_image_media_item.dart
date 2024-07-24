@@ -1,6 +1,4 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
-import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:flutter/material.dart';
 
@@ -16,73 +14,55 @@ class BackgroundImageMediaItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Container(
-        height: 800,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.8),
-              BlendMode.darken,
+    return SizedBox(
+      height: 330,
+      child: Stack(
+        children: [
+          ClipRRect(
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(64),
+              bottomRight: Radius.circular(64),
             ),
-            image: Image.network(
-              '${AppUrls.movieLandscapeBaseUrl}${mediaItem?.backdropPath}',
-              fit: BoxFit.cover,
-            ).image,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 2,
-                    child: AutoSizeText(
-                      movieName,
-                      maxLines: 3,
-                      textAlign: TextAlign.justify,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                  ),
-                ],
+            child: Opacity(
+              opacity: 0.4,
+              child: Image.network(
+                '${AppUrls.movieLandscapeBaseUrl}${mediaItem?.backdropPath}',
+                width: MediaQuery.of(context).size.width,
+                height: 600,
+                fit: BoxFit.cover,
               ),
-              const SizedBox(height: 20),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (mediaItem?.overview != null &&
-                      mediaItem!.overview!.isNotEmpty) ...[
-                    Container(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        context.localizations.synopsis,
-                        textAlign: TextAlign.start,
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width / 2,
-                      alignment: Alignment.topLeft,
-                      child: AutoSizeText(
-                        mediaItem!.overview!,
-                        maxLines: 20,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.start,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    )
-                  ],
-                ],
-              ),
-            ],
+            ),
           ),
-        ),
+          Container(
+            margin: const EdgeInsets.only(left: 32, top: 64),
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.network(
+                  '${AppUrls.movieImgBaseURL}${mediaItem?.posterPath}',
+                  width: 110,
+                  height: 140,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 255,
+            left: 155,
+            child: SizedBox(
+              child: Text(
+                movieName,
+                style: const TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
-    ]);
+    );
   }
 }

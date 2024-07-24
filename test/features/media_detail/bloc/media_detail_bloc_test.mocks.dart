@@ -3,11 +3,17 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
+import 'dart:async' as _i4;
 
+import 'package:film_flu/app/types/result.dart' as _i3;
+import 'package:film_flu/domain/models/credits_media_entity.dart' as _i8;
+import 'package:film_flu/domain/models/media_item_entity.dart' as _i7;
+import 'package:film_flu/domain/models/review_entity.dart' as _i9;
+import 'package:film_flu/domain/repository_contracts/media_repository_contract.dart'
+    as _i6;
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart'
     as _i2;
-import 'package:flutter_bloc/flutter_bloc.dart' as _i4;
+import 'package:flutter_bloc/flutter_bloc.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -34,6 +40,16 @@ class _FakeMediaDetailState_0 extends _i1.SmartFake
         );
 }
 
+class _FakeResult_1<T> extends _i1.SmartFake implements _i3.Result<T> {
+  _FakeResult_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [MediaDetailBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -52,11 +68,11 @@ class MockMediaDetailBloc extends _i1.Mock implements _i2.MediaDetailBloc {
       ) as _i2.MediaDetailState);
 
   @override
-  _i3.Stream<_i2.MediaDetailState> get stream => (super.noSuchMethod(
+  _i4.Stream<_i2.MediaDetailState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i3.Stream<_i2.MediaDetailState>.empty(),
-        returnValueForMissingStub: _i3.Stream<_i2.MediaDetailState>.empty(),
-      ) as _i3.Stream<_i2.MediaDetailState>);
+        returnValue: _i4.Stream<_i2.MediaDetailState>.empty(),
+        returnValueForMissingStub: _i4.Stream<_i2.MediaDetailState>.empty(),
+      ) as _i4.Stream<_i2.MediaDetailState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -94,8 +110,8 @@ class MockMediaDetailBloc extends _i1.Mock implements _i2.MediaDetailBloc {
 
   @override
   void on<E extends _i2.MediaDetailEvent>(
-    _i4.EventHandler<E, _i2.MediaDetailState>? handler, {
-    _i4.EventTransformer<E>? transformer,
+    _i5.EventHandler<E, _i2.MediaDetailState>? handler, {
+    _i5.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -108,7 +124,7 @@ class MockMediaDetailBloc extends _i1.Mock implements _i2.MediaDetailBloc {
 
   @override
   void onTransition(
-          _i4.Transition<_i2.MediaDetailEvent, _i2.MediaDetailState>?
+          _i5.Transition<_i2.MediaDetailEvent, _i2.MediaDetailState>?
               transition) =>
       super.noSuchMethod(
         Invocation.method(
@@ -119,17 +135,17 @@ class MockMediaDetailBloc extends _i1.Mock implements _i2.MediaDetailBloc {
       );
 
   @override
-  _i3.Future<void> close() => (super.noSuchMethod(
+  _i4.Future<void> close() => (super.noSuchMethod(
         Invocation.method(
           #close,
           [],
         ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
-  void onChange(_i4.Change<_i2.MediaDetailState>? change) => super.noSuchMethod(
+  void onChange(_i5.Change<_i2.MediaDetailState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -168,4 +184,133 @@ class MockMediaDetailBloc extends _i1.Mock implements _i2.MediaDetailBloc {
         ),
         returnValueForMissingStub: null,
       );
+}
+
+/// A class which mocks [MediaRepositoryContract].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockMediaRepositoryContract extends _i1.Mock
+    implements _i6.MediaRepositoryContract {
+  @override
+  _i4.Future<_i3.Result<_i7.MediaItemEntity>> getMediaItem({
+    required String? mediaType,
+    required int? mediaTypeId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getMediaItem,
+          [],
+          {
+            #mediaType: mediaType,
+            #mediaTypeId: mediaTypeId,
+          },
+        ),
+        returnValue: _i4.Future<_i3.Result<_i7.MediaItemEntity>>.value(
+            _FakeResult_1<_i7.MediaItemEntity>(
+          this,
+          Invocation.method(
+            #getMediaItem,
+            [],
+            {
+              #mediaType: mediaType,
+              #mediaTypeId: mediaTypeId,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i3.Result<_i7.MediaItemEntity>>.value(
+                _FakeResult_1<_i7.MediaItemEntity>(
+          this,
+          Invocation.method(
+            #getMediaItem,
+            [],
+            {
+              #mediaType: mediaType,
+              #mediaTypeId: mediaTypeId,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i3.Result<_i7.MediaItemEntity>>);
+
+  @override
+  _i4.Future<_i3.Result<_i8.CreditsMediaEntity>> getCredits({
+    required String? mediaType,
+    required int? mediaTypeId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getCredits,
+          [],
+          {
+            #mediaType: mediaType,
+            #mediaTypeId: mediaTypeId,
+          },
+        ),
+        returnValue: _i4.Future<_i3.Result<_i8.CreditsMediaEntity>>.value(
+            _FakeResult_1<_i8.CreditsMediaEntity>(
+          this,
+          Invocation.method(
+            #getCredits,
+            [],
+            {
+              #mediaType: mediaType,
+              #mediaTypeId: mediaTypeId,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i3.Result<_i8.CreditsMediaEntity>>.value(
+                _FakeResult_1<_i8.CreditsMediaEntity>(
+          this,
+          Invocation.method(
+            #getCredits,
+            [],
+            {
+              #mediaType: mediaType,
+              #mediaTypeId: mediaTypeId,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i3.Result<_i8.CreditsMediaEntity>>);
+
+  @override
+  _i4.Future<_i3.Result<List<_i9.ReviewEntity>>> getReviews({
+    required String? mediaType,
+    required int? mediaTypeId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getReviews,
+          [],
+          {
+            #mediaType: mediaType,
+            #mediaTypeId: mediaTypeId,
+          },
+        ),
+        returnValue: _i4.Future<_i3.Result<List<_i9.ReviewEntity>>>.value(
+            _FakeResult_1<List<_i9.ReviewEntity>>(
+          this,
+          Invocation.method(
+            #getReviews,
+            [],
+            {
+              #mediaType: mediaType,
+              #mediaTypeId: mediaTypeId,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i3.Result<List<_i9.ReviewEntity>>>.value(
+                _FakeResult_1<List<_i9.ReviewEntity>>(
+          this,
+          Invocation.method(
+            #getReviews,
+            [],
+            {
+              #mediaType: mediaType,
+              #mediaTypeId: mediaTypeId,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i3.Result<List<_i9.ReviewEntity>>>);
 }

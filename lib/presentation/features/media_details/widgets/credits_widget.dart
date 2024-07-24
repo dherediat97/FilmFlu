@@ -1,16 +1,24 @@
-import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
+import 'package:film_flu/domain/models/actor_entity.dart';
+import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
+import 'package:film_flu/presentation/features/media_details/widgets/actor_worker_item.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/background_image_media_item.dart';
-import 'package:film_flu/presentation/features/media_details/widgets/media_cast_list.dart';
-import 'package:film_flu/presentation/features/media_details/widgets/sliver_app_delegate.dart';
+import 'package:film_flu/presentation/features/media_details/widgets/container_tab_media_item.dart';
+import 'package:film_flu/presentation/features/media_details/widgets/reviews_widget_item.dart';
+import 'package:film_flu/presentation/widgets/default_circular_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CreditsWidget extends StatefulWidget {
   const CreditsWidget({
     super.key,
+    required this.mediaItemType,
+    required this.mediaItemId,
   });
+
+  final String mediaItemType;
+  final int mediaItemId;
 
   @override
   State<CreditsWidget> createState() => _CreditsWidget();
@@ -23,7 +31,23 @@ class _CreditsWidget extends State<CreditsWidget>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
+    _tabController.addListener(
+      () {
+        var index = _tabController.index;
+        switch (index) {
+          case 0:
+            break;
+          case 1:
+            context.read<MediaDetailBloc>().add(MediaDetailEvent.getReviews(
+                widget.mediaItemType, widget.mediaItemId));
+          case 2:
+            context.read<MediaDetailBloc>().add(MediaDetailEvent.getCredits(
+                widget.mediaItemType, widget.mediaItemId));
+          default:
+        }
+      },
+    );
   }
 
   @override
@@ -36,85 +60,83 @@ class _CreditsWidget extends State<CreditsWidget>
   Widget build(BuildContext context) {
     return BlocBuilder<MediaDetailBloc, MediaDetailState>(
       builder: (context, state) {
-        int lengthCast =
-            state.mediaItem?.credits?.cast.isNotEmpty == true ? 1 : 0;
-        int lengthCrew =
-            state.mediaItem?.credits?.crew.isNotEmpty == true ? 1 : 0;
-
         return state.mediaItem != null
-            ? lengthCrew + lengthCast != 0
-                ? DefaultTabController(
-                    length: lengthCast + lengthCrew,
-                    child: NestedScrollView(
-                      headerSliverBuilder:
-                          (BuildContext context, bool innerBoxIsScrolled) {
-                        return <Widget>[
-                          SliverAppBar(
-                            automaticallyImplyLeading: false,
-                            expandedHeight: 800,
-                            pinned: false,
-                            floating: false,
-                            snap: false,
-                            backgroundColor:
-                                Theme.of(context).colorScheme.surface,
-                            toolbarHeight: 0,
-                            flexibleSpace: FlexibleSpaceBar(
-                              background: BackgroundImageMediaItem(
-                                mediaItem: state.mediaItem,
-                                movieName: state.movieName,
-                              ),
-                            ),
-                          ),
-                          SliverPersistentHeader(
-                            floating: true,
-                            delegate: SliverAppBarDelegate(
-                              TabBar(controller: _tabController, tabs: [
-                                if (lengthCast != 0)
-                                  Tab(
-                                    icon: const Icon(Icons.movie),
-                                    text: context.localizations.character_cast,
-                                  ),
-                                if (lengthCrew != 0)
-                                  Tab(
-                                    icon: const Icon(Icons.movie),
-                                    text: context.localizations.production_cast,
-                                  )
-                              ]),
-                            ),
-                          ),
-                        ];
-                      },
-                      body: lengthCrew + lengthCast != 0
-                          ? TabBarView(
-                              controller: _tabController,
-                              children: [
-                                if (lengthCast != 0)
-                                  FilmCast(
-                                    genres: state.mediaItem!.genres,
-                                    movieId: state.mediaItem!.id.toString(),
-                                    isCast: true,
-                                    mediaType: AppConstants.mediaType,
-                                    cast: state.mediaItem!.credits!.cast,
-                                    crew: state.mediaItem!.credits!.crew,
-                                  ),
-                                if (lengthCrew != 0)
-                                  FilmCast(
-                                    genres: state.mediaItem!.genres,
-                                    movieId: state.mediaItem!.id.toString(),
-                                    isCast: false,
-                                    mediaType: AppConstants.mediaType,
-                                    cast: state.mediaItem!.credits!.cast,
-                                    crew: state.mediaItem!.credits!.crew,
-                                  )
-                              ],
-                            )
-                          : Container(),
+            ? SingleChildScrollView(
+                child: Column(
+                  children: [
+                    BackgroundImageMediaItem(
+                      mediaItem: state.mediaItem,
+                      movieName: state.movieName,
                     ),
-                  )
-                : BackgroundImageMediaItem(
-                    mediaItem: state.mediaItem,
-                    movieName: state.movieName,
-                  )
+                    Padding(
+                      padding: const EdgeInsets.all(24),
+                      child: DefaultTabController(
+                        length: 3,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TabBar(
+                              controller: _tabController,
+                              tabs: [
+                                const Tab(text: 'Sobre la película'),
+                                const Tab(text: 'Reseñas'),
+                                Tab(text: context.localizations.character_cast),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 400,
+                              child: TabBarView(
+                                controller: _tabController,
+                                children: [
+                                  ContainerTabMediaItem(
+                                    child: Text(
+                                      state.mediaItem!.overview.toString(),
+                                      textAlign: TextAlign.start,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium,
+                                    ),
+                                  ),
+                                  ContainerTabMediaItem(
+                                      child: state.reviews != null
+                                          ? ListView.builder(
+                                              itemCount: state.reviews?.length,
+                                              itemBuilder: (context, index) {
+                                                ReviewEntity review =
+                                                    state.reviews![index];
+
+                                                return ReviewsWidgetItem(
+                                                  review: review,
+                                                );
+                                              },
+                                            )
+                                          : const DefaultCircularLoader()),
+                                  ContainerTabMediaItem(
+                                      child: state.credits != null
+                                          ? ListView.builder(
+                                              itemCount:
+                                                  state.credits?.cast.length,
+                                              itemBuilder: (context, index) {
+                                                List<ActorEntity> cast =
+                                                    state.credits!.cast;
+
+                                                return FilmActorItem(
+                                                  index: index,
+                                                  cast: cast,
+                                                );
+                                              },
+                                            )
+                                          : const DefaultCircularLoader()),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              )
             : Container();
       },
     );

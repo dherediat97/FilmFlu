@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 Future<void> pumpApp(WidgetTester tester, Widget child) {
   return tester.pumpWidget(MultiBlocProvider(
-      providers: [],
+      providers: const [],
       child: MaterialApp(
         home: child,
       )));

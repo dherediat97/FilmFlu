@@ -37,34 +37,23 @@ class _FilmCastState extends State<FilmCast> {
     return BlocBuilder<MediaDetailBloc, MediaDetailState>(
       builder: (context, state) {
         return widget.cast != null && widget.crew != null
-            ? Padding(
-                padding: const EdgeInsets.all(16),
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 280,
-                      mainAxisExtent: 240,
-                      mainAxisSpacing: 18,
-                      crossAxisSpacing: 18,
-                    ),
-                    itemCount: widget.isCast
-                        ? widget.cast?.length
-                        : widget.crew?.length,
-                    itemBuilder: (context, index) => widget.isCast
-                        ? FilmActorItem(
-                            index: index,
-                            cast: widget.cast!,
-                            mainGenre: widget.genres!.first,
-                          )
-                        : FilmWorkerItem(
-                            index: index,
-                            crew: widget.crew!,
-                            mainGenre: widget.genres!.first,
-                          ),
-                  ),
+            ? GridView.builder(
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 280,
+                  mainAxisExtent: 240,
+                  mainAxisSpacing: 18,
+                  crossAxisSpacing: 18,
                 ),
+                itemCount: widget.cast?.length,
+                itemBuilder: (context, index) => widget.isCast
+                    ? FilmActorItem(
+                        index: index,
+                        cast: widget.cast!,
+                      )
+                    : FilmWorkerItem(
+                        index: index,
+                        crew: widget.crew!,
+                      ),
               )
             : const Center(
                 child: CircularProgressIndicator(),

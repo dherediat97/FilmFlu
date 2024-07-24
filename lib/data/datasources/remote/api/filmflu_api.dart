@@ -4,6 +4,7 @@ import 'package:film_flu/data/models/credits_person_remote_entity.dart';
 import 'package:film_flu/data/models/genre_result_remote_entity.dart';
 import 'package:film_flu/data/models/media_item_remote_entity.dart';
 import 'package:film_flu/data/models/person_remote_entity.dart';
+import 'package:film_flu/data/models/review_remote_entity.dart';
 import 'package:film_flu/data/models/video_remote_entity.dart';
 import 'package:film_flu/domain/models/language_entity.dart';
 import 'package:dio/dio.dart';
@@ -37,7 +38,7 @@ abstract class FilmFluApi {
     @Path('mediaType') required String mediaType,
     @Path('mediaTypeId') required int mediaTypeId,
     @Query('language') String language = 'es-ES',
-    @Query('append_to_response') String moreResponse = 'videos,credits',
+    @Query('append_to_response') String moreResponse = 'videos',
   });
 
   @GET('/fetchTrailer')
@@ -49,6 +50,13 @@ abstract class FilmFluApi {
 
   @GET('/{mediaType}/{mediaTypeId}/credits')
   Future<CreditsMediaRemoteEntity> fetchCredits({
+    @Path('mediaType') required String mediaType,
+    @Path('mediaTypeId') required int mediaTypeId,
+    @Query('language') String language = 'es-ES',
+  });
+
+  @GET('/{mediaType}/{mediaTypeId}/reviews')
+  Future<Pagination<ReviewRemoteEntity>> fetchReviews({
     @Path('mediaType') required String mediaType,
     @Path('mediaTypeId') required int mediaTypeId,
     @Query('language') String language = 'es-ES',

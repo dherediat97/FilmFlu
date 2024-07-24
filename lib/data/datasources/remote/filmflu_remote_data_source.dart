@@ -1,8 +1,10 @@
+import 'package:film_flu/core/entities/pagination.dart';
 import 'package:film_flu/data/datasources/remote/api/filmflu_api.dart';
 import 'package:film_flu/data/models/credits_media_remote_entity.dart';
 import 'package:film_flu/data/models/genre_remote_entity.dart';
 import 'package:film_flu/data/models/media_item_remote_entity.dart';
 import 'package:film_flu/data/models/person_remote_entity.dart';
+import 'package:film_flu/data/models/review_remote_entity.dart';
 import 'package:film_flu/data/repositories/local/app_local_data_source_contract.dart';
 import 'package:film_flu/data/repositories/remote/media_list_remote_data_source_contract.dart';
 import 'package:film_flu/data/repositories/remote/media_remote_data_source_contract.dart';
@@ -60,10 +62,10 @@ class FilmFluRemoteDataSource
   }
 
   @override
-  Future<MediaItemRemoteEntity> getMediaDetail(
-    String mediaType,
-    int mediaTypeId,
-  ) async {
+  Future<MediaItemRemoteEntity> getMediaDetail({
+    required String mediaType,
+    required int mediaTypeId,
+  }) async {
     final mediaData = await _filmFluApi.fetchMediaItem(
       mediaType: mediaType,
       mediaTypeId: mediaTypeId,
@@ -73,10 +75,10 @@ class FilmFluRemoteDataSource
   }
 
   @override
-  Future<CreditsMediaRemoteEntity> getCredits(
-    String mediaType,
-    int mediaTypeId,
-  ) async {
+  Future<CreditsMediaRemoteEntity> getCredits({
+    required String mediaType,
+    required int mediaTypeId,
+  }) async {
     final mediaData = await _filmFluApi.fetchCredits(
       mediaType: mediaType,
       mediaTypeId: mediaTypeId,
@@ -94,5 +96,18 @@ class FilmFluRemoteDataSource
       language: await _appLocalDataSourceContract.getLanguage(),
     );
     return personData;
+  }
+
+  @override
+  Future<Pagination<ReviewRemoteEntity>>? getReviews({
+    required String mediaType,
+    required int mediaTypeId,
+  }) async {
+    final reviewData = await _filmFluApi.fetchReviews(
+      mediaType: mediaType,
+      mediaTypeId: mediaTypeId,
+      language: await _appLocalDataSourceContract.getLanguage(),
+    );
+    return reviewData;
   }
 }

@@ -2,6 +2,7 @@ import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/credits_widget.dart';
+import 'package:film_flu/presentation/features/media_list/constants/media_list_constants.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,6 +41,9 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
     return BlocBuilder<MediaDetailBloc, MediaDetailState>(
       builder: (context, state) {
         MediaItemEntity? mediaItem = state.mediaItem;
+        String mediaItemType = mediaItem?.title != ''
+            ? MediaListConstants.movieMediaType
+            : MediaListConstants.serieMediaType;
 
         return mediaItem != null
             ? ScaffoldPage(
@@ -52,13 +56,6 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      // FloatingActionButton.extended(
-                      //   label: const Text('Comprar entradas'),
-                      //   icon: const Icon(Icons.shopping_bag_rounded),
-                      //   onPressed: () {
-                      //     context.push('/horusVision');
-                      //   },
-                      // ),
                       const SizedBox(
                         height: 20,
                       ),
@@ -103,7 +100,10 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                   ),
                 ),
                 child: !state.isTrailerOpened
-                    ? const CreditsWidget()
+                    ? CreditsWidget(
+                        mediaItemType: mediaItemType,
+                        mediaItemId: state.mediaItem!.id,
+                      )
                     : YoutubePlayerScaffold(
                         controller: _trailerController!,
                         builder: (context, player) {
