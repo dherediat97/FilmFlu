@@ -1,6 +1,7 @@
 import 'package:film_flu/app/types/ui_state.dart';
 import 'package:film_flu/domain/models/credits_media_entity.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
+import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:film_flu/domain/repository_contracts/media_repository_contract.dart';
 import 'package:film_flu/presentation/features/media_list/constants/media_list_constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,10 +20,12 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
         super(MediaDetailState.initial()) {
     on<MediaDetailEvent>((event, emit) async {
       await event.when(
-        getMediaDetails: (String mediaType, String mediaItemId) =>
+        getMediaDetails: (String mediaType, int mediaItemId) =>
             _getMediaDetails(event, emit, mediaType, mediaItemId),
         getCredits: (String mediaType, int mediaItemId) =>
             _getCredits(event, emit, mediaType, mediaItemId),
+        getReviews: (String mediaType, int mediaItemId) =>
+            _getReviews(event, emit, mediaType, mediaItemId),
         setCreditsType: (bool isCastSelected) =>
             _setCreditsType(event, emit, isCastSelected),
         openTrailer: (String mediaType, MediaItemEntity mediaItem) =>
@@ -36,13 +39,13 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
     MediaDetailEvent event,
     Emitter<MediaDetailState> emit,
     String mediaType,
-    String mediaItemId,
+    int mediaItemId,
   ) async {
     emit(state.copyWith(uiState: const UiState.loading()));
 
     final movieData = await _repository.getMediaItem(
-      mediaType,
-      int.parse(mediaItemId),
+      mediaType: mediaType,
+      mediaTypeId: mediaItemId,
     );
     movieData.when(
       failure: (errorMessage) {
@@ -69,11 +72,9 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
     String mediaType,
     int mediaTypeId,
   ) async {
-    emit(state.copyWith(uiState: const UiState.loading()));
-
     final creditsData = await _repository.getCredits(
-      mediaType,
-      mediaTypeId,
+      mediaType: mediaType,
+      mediaTypeId: mediaTypeId,
     );
 
     creditsData.when(
@@ -84,6 +85,28 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
       },
       success: (value) {
         emit(state.copyWith(uiState: const UiState.success(), credits: value));
+      },
+    );
+  }
+
+  Future<void> _getReviews(
+    MediaDetailEvent event,
+    Emitter<MediaDetailState> emit,
+    String mediaType,
+    int mediaTypeId,
+  ) async {
+    final reviewList = await _repository.getReviews(
+      mediaType: mediaType,
+      mediaTypeId: mediaTypeId,
+    );
+    reviewList.when(
+      failure: (errorMessage) {
+        emit(
+          state.copyWith(uiState: const UiState.error()),
+        );
+      },
+      success: (value) {
+        emit(state.copyWith(uiState: const UiState.success(), reviews: value));
       },
     );
   }

@@ -5,7 +5,7 @@ import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/domain/models/credit_actor_entity.dart';
 import 'package:film_flu/domain/models/person_entity.dart';
-import 'package:film_flu/presentation/widgets/default_circular_loader.dart';
+import 'package:film_flu/presentation/widgets/default_image_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -62,7 +62,7 @@ class ActorCreditsWidget extends StatelessWidget {
                     );
                   },
                   loadingBuilder: (_, child, progress) =>
-                      DefaultCircularLoader(progress: progress, child: child),
+                      DefaultImageLoader(progress: progress, child: child),
                 ),
               ),
               footer: Padding(

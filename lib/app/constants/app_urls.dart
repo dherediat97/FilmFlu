@@ -6,5 +6,8 @@ class AppUrls {
       'https://image.tmdb.org/t/p/original';
   static const String personImgBaseUrl =
       'https://image.tmdb.org/t/p/w600_and_h900_bestv2';
+  static const String profileImgBaseUrl =
+      'https://secure.gravatar.com/avatar/';
+
   AppUrls._();
 }
