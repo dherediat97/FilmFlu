@@ -31,42 +31,40 @@ class _FilmWorkerItemState extends State<FilmWorkerItem> {
     List<FilmWorkerEntity> crew = widget.crew;
     FilmWorkerEntity filmWorker = crew[index];
 
-    return GridTile(
-      header: IconButton(
-        onPressed: () {
-          AppConstants.personId = filmWorker.id;
-          context.push('${AppRoutePaths.personDetailsRoute}/${filmWorker.id}');
-        },
-        icon: ClipRRect(
-          borderRadius: BorderRadius.circular(32.0),
-          child: Image.network(
-            '${AppUrls.personImgBaseUrl}${filmWorker.profilePath}',
-            height: 160,
-            width: 150,
-            fit: BoxFit.cover,
-            loadingBuilder: (_, child, loadingProgress) =>
-                DefaultImageLoader(progress: loadingProgress, child: child),
-            errorBuilder: (context, url, error) {
-              if (filmWorker.gender == 2) {
-                return SvgPicture.asset(
-                  AppAssets.actorImageIcon,
-                  height: 160,
-                  width: 150,
-                  fit: BoxFit.cover,
-                );
-              } else {
-                return SvgPicture.asset(
-                  AppAssets.actressImageIcon,
-                  height: 160,
-                  width: 150,
-                  fit: BoxFit.cover,
-                );
-              }
-            },
-          ),
+    return ListTile(
+      onTap: () {
+        AppConstants.personId = filmWorker.id;
+        context.push('${AppRoutePaths.personDetailsRoute}/${filmWorker.id}');
+      },
+      title: ClipRRect(
+        borderRadius: BorderRadius.circular(32.0),
+        child: Image.network(
+          '${AppUrls.personImgBaseUrl}${filmWorker.profilePath}',
+          height: 200,
+          width: 150,
+          fit: BoxFit.cover,
+          loadingBuilder: (_, child, loadingProgress) =>
+              DefaultImageLoader(progress: loadingProgress, child: child),
+          errorBuilder: (context, url, error) {
+            if (filmWorker.gender == 2) {
+              return SvgPicture.asset(
+                AppAssets.actorImageIcon,
+                height: 160,
+                width: 150,
+                fit: BoxFit.cover,
+              );
+            } else {
+              return SvgPicture.asset(
+                AppAssets.actressImageIcon,
+                height: 160,
+                width: 150,
+                fit: BoxFit.cover,
+              );
+            }
+          },
         ),
       ),
-      footer: Column(
+      subtitle: Column(
         children: [
           AutoSizeText(
             filmWorker.originalName!,
@@ -84,7 +82,6 @@ class _FilmWorkerItemState extends State<FilmWorkerItem> {
           ),
         ],
       ),
-      child: Container(),
     );
   }
 }

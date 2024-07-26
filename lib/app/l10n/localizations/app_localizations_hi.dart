@@ -64,5 +64,17 @@ class AppLocalizationsHi extends AppLocalizations {
   String get made_with_love => 'बहुत अधिक के साथ बनाया गया';
 
   @override
+  String get play_trailer => 'Ver tráiler';
+
+  @override
   String get films_worked => 'उन्होंने जो भूमिकाएँ निभाईं';
+
+  @override
+  String get about_movie => 'Sobre la Película';
+
+  @override
+  String get about_serie => 'Sobre la Serie';
+
+  @override
+  String get reviews => 'Reseñas';
 }

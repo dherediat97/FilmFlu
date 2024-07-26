@@ -15,7 +15,7 @@ class AppConstants {
   static int personId = 0;
   static const bool debugRequest = false;
 
-  static Uri myGithubPage = Uri.parse('https://github.com/dherediat97');
+  static String myGithubPage = 'https://github.com/dherediat97';
 
   //PREFERENCES KEYS
   static const languageKey = 'languageCode';

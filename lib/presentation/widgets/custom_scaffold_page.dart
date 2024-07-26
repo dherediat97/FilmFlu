@@ -81,6 +81,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
       ),
       bottomNavigationBar: !widget.fullScreenMode
           ? BottomAppBar(
+              height: 50,
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -140,7 +141,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                             padding: const EdgeInsets.only(left: 8),
                             child: InkWell(
                               onTap: () {
-                                launchUrl(AppConstants.myGithubPage);
+                                launchUrl(Uri.parse(AppConstants.myGithubPage));
                               },
                               child: Text(
                                 '${today.year} @dherediat97',

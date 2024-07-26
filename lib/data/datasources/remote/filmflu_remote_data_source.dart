@@ -31,6 +31,7 @@ class FilmFluRemoteDataSource
       mediaType: mediaType,
       language: await _appLocalDataSourceContract.getLanguage(),
       genres: genreId,
+      page: 1,
       languageId: languageId ?? '',
     );
     return mediaData.results;

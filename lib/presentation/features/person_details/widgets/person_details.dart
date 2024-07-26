@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
-import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/core/utils/util_date.dart';
 import 'package:film_flu/domain/models/person_entity.dart';
 import 'package:flutter/material.dart';
@@ -168,18 +167,7 @@ class PersonDetails extends StatelessWidget {
                             style: Theme.of(context).textTheme.displayMedium,
                           ),
                         )
-                      ],
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        child: Text(
-                          context.localizations.films_worked,
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.displayLarge,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 100,
-                      )
+                      ]
                     ],
                   ),
                 ),

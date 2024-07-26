@@ -7,13 +7,13 @@ import 'package:film_flu/presentation/widgets/default_image_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class MovieCarrouselItem extends StatelessWidget {
-  const MovieCarrouselItem({
+class MediaCarrouselItem extends StatelessWidget {
+  const MediaCarrouselItem({
     super.key,
-    required this.movie,
+    required this.mediaItem,
   });
 
-  final MediaItemEntity movie;
+  final MediaItemEntity mediaItem;
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +23,13 @@ class MovieCarrouselItem extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              AppConstants.mediaType = movie.title != ''
+              AppConstants.mediaType = mediaItem.title != ''
                   ? MediaListConstants.movieMediaType
                   : MediaListConstants.serieMediaType;
 
-              AppConstants.mediaTypeId = movie.id;
-              context.push('${AppRoutePaths.mediaDetailsRoute}/${movie.id}');
+              AppConstants.mediaTypeId = mediaItem.id;
+              context
+                  .push('${AppRoutePaths.mediaDetailsRoute}/${mediaItem.id}');
             },
             child: SizedBox(
               width: 140,
@@ -41,7 +42,7 @@ class MovieCarrouselItem extends StatelessWidget {
                   image: DecorationImage(
                     fit: BoxFit.fill,
                     image: Image.network(
-                      '${AppUrls.movieImgBaseURL}${movie.posterPath}',
+                      '${AppUrls.movieImgBaseURL}${mediaItem.posterPath}',
                       loadingBuilder: (_, child, progress) =>
                           DefaultImageLoader(
                         progress: progress,

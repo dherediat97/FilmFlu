@@ -1,7 +1,8 @@
 import 'package:film_flu/app/constants/app_constants.dart';
+import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
-import 'package:film_flu/presentation/features/media_details/widgets/credits_widget.dart';
+import 'package:film_flu/presentation/features/media_details/widgets/detail_tab_media_item.dart';
 import 'package:film_flu/presentation/features/media_list/constants/media_list_constants.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
@@ -52,52 +53,43 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                 fabLocation: FloatingActionButtonLocation.endFloat,
                 floatingActionButton: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      state.trailerId.isNotEmpty
-                          ? Container(
-                              child: state.isTrailerOpened
-                                  ? FloatingActionButton(
-                                      mini: true,
-                                      child: const Icon(Icons.stop),
-                                      onPressed: () {
-                                        context.read<MediaDetailBloc>().add(
-                                            const MediaDetailEvent
-                                                .closeTrailer());
-                                        _trailerController = null;
-                                        SystemChrome.setEnabledSystemUIMode(
-                                          SystemUiMode.edgeToEdge,
-                                        );
-                                      },
-                                    )
-                                  : FloatingActionButton.extended(
-                                      icon: const Icon(Icons.play_arrow),
-                                      label: const Text('Ver trailer'),
-                                      onPressed: () {
-                                        context
-                                            .read<MediaDetailBloc>()
-                                            .add(MediaDetailEvent.openTrailer(
-                                              AppConstants.mediaType,
-                                              mediaItem,
-                                            ));
-                                        _trailerController =
-                                            initTrailerController();
-                                        if (state.trailerId.isNotEmpty) {
-                                          _trailerController?.loadVideoById(
-                                            videoId: state.trailerId.toString(),
-                                          );
-                                        }
-                                      },
-                                    ),
-                            )
-                          : Container(),
-                    ],
-                  ),
+                  child: state.trailerId.isNotEmpty
+                      ? Container(
+                          child: state.isTrailerOpened
+                              ? FloatingActionButton(
+                                  mini: true,
+                                  child: const Icon(Icons.stop),
+                                  onPressed: () {
+                                    context.read<MediaDetailBloc>().add(
+                                        const MediaDetailEvent.closeTrailer());
+                                    _trailerController = null;
+                                    SystemChrome.setEnabledSystemUIMode(
+                                      SystemUiMode.edgeToEdge,
+                                    );
+                                  },
+                                )
+                              : FloatingActionButton.extended(
+                                  icon: const Icon(Icons.play_arrow),
+                                  label:
+                                      Text(context.localizations.play_trailer),
+                                  onPressed: () {
+                                    context
+                                        .read<MediaDetailBloc>()
+                                        .add(MediaDetailEvent.openTrailer(
+                                          AppConstants.mediaType,
+                                          mediaItem,
+                                        ));
+                                    _trailerController =
+                                        initTrailerController();
+                                    if (state.trailerId.isNotEmpty) {
+                                      _trailerController?.loadVideoById(
+                                        videoId: state.trailerId.toString(),
+                                      );
+                                    }
+                                  },
+                                ),
+                        )
+                      : Container(),
                 ),
                 child: !state.isTrailerOpened
                     ? CreditsWidget(

@@ -7,16 +7,8 @@ part 'media_data_entity.g.dart';
 @freezed
 class MediaDataEntity with _$MediaDataEntity {
   const factory MediaDataEntity({
-    required List<MediaItemEntity> fictionMovies,
-    required List<MediaItemEntity> dramasMovies,
-    required List<MediaItemEntity> actionMovies,
-    required List<MediaItemEntity> romanceMovies,
-    required List<MediaItemEntity> comedyMovies,
-    required List<MediaItemEntity> suspenseMovies,
-    required List<MediaItemEntity> animeSeries,
-    required List<MediaItemEntity> animationSeries,
-    required List<MediaItemEntity> tvShowsSeries,
-    required List<MediaItemEntity> documentalSeries,
+    required List<MediaItemEntity> movies,
+    required List<MediaItemEntity> series,
   }) = _MediaDataEntity;
 
   factory MediaDataEntity.fromJson(Map<String, dynamic> json) =>

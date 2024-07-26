@@ -64,5 +64,17 @@ class AppLocalizationsNl extends AppLocalizations {
   String get made_with_love => 'Gemaakt met veel';
 
   @override
+  String get play_trailer => 'Ver tráiler';
+
+  @override
   String get films_worked => 'Rollen die hij heeft gespeeld';
+
+  @override
+  String get about_movie => 'Sobre la Película';
+
+  @override
+  String get about_serie => 'Sobre la Serie';
+
+  @override
+  String get reviews => 'Reseñas';
 }

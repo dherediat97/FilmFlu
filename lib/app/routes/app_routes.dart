@@ -1,4 +1,4 @@
-import 'package:film_flu/presentation/features/home/home_controller.dart';
+import 'package:film_flu/presentation/features/home/home_screen.dart';
 import 'package:film_flu/presentation/features/media_details/media_detail_controller.dart';
 import 'package:film_flu/presentation/features/person_details/person_details_controller.dart';
 import 'package:film_flu/presentation/features/settings/settings_screen.dart';
@@ -13,7 +13,7 @@ List<GoRoute> appRoutes = [
     routes: [
       GoRoute(
         path: 'main',
-        builder: (context, state) => const HomeController(),
+        builder: (context, state) => const HomeScreen(),
       ),
       GoRoute(
         path: 'mediaItemDetails/:mediaTypeId',

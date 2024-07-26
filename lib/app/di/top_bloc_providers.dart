@@ -23,11 +23,7 @@ class TopBlocProviders extends StatelessWidget {
               const SplashEvent.unSplashInNMilliseconds(2000),
             ),
         ),
-        BlocProvider(
-            create: (context) => _getIt<MediaListBloc>()
-              ..add(
-                const MediaListEvent.getMediaData(),
-              )),
+        BlocProvider(create: (context) => _getIt<MediaListBloc>()),
         BlocProvider(
           create: (context) => _getIt<MediaDetailBloc>()
             ..add(

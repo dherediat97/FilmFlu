@@ -18,5 +18,9 @@
   "in_preposition": "en",
   "loading_title":"Tres, Dos, Uno... ACCIÓN!!!",
   "made_with_love": "Hecho con mucho",
-  "films_worked":"Papeles que ha realizado"
+  "play_trailer": "Ver tráiler",
+  "films_worked":"Papeles que ha realizado",
+  "about_movie":"Sobre la Película",
+  "about_serie":"Sobre la Serie",
+  "reviews": "Reseñas"
 }
