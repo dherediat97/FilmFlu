@@ -40,42 +40,37 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
         uiState: const UiState.loading(),
       ),
     );
-    try {
-      final movieData =
-          await _repository.getMediaDataByGenre(mediaType, genreId);
-      movieData.when(
-        failure: (errorMessage) {
+    final movieData = await _repository.getMediaDataByGenre(mediaType, genreId);
+    movieData.when(
+      failure: (errorMessage) {
+        emit(
+          state.copyWith(
+            uiState: const UiState.error(),
+          ),
+        );
+      },
+      success: (value) {
+        if (mediaType == MediaListConstants.movieMediaType) {
           emit(
             state.copyWith(
-              uiState: const UiState.error(),
+              uiState: const UiState.success(),
+              movies: value
+                  .where((element) => element.genreIds!.contains(genreId))
+                  .toList(),
             ),
           );
-        },
-        success: (value) {
-          if (mediaType == MediaListConstants.movieMediaType) {
-            emit(
-              state.copyWith(
-                uiState: const UiState.success(),
-                movies: value
-                    .where((element) => element.genreIds!.contains(genreId))
-                    .toList(),
-              ),
-            );
-          } else {
-            emit(
-              state.copyWith(
-                uiState: const UiState.success(),
-                series: value
-                    .where((element) => element.genreIds!.contains(genreId))
-                    .toList(),
-              ),
-            );
-          }
-        },
-      );
-    } catch (e) {
-      print(e);
-    }
+        } else {
+          emit(
+            state.copyWith(
+              uiState: const UiState.success(),
+              series: value
+                  .where((element) => element.genreIds!.contains(genreId))
+                  .toList(),
+            ),
+          );
+        }
+      },
+    );
   }
 
   _loadMoreMediaData(
@@ -94,14 +89,11 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
         emit(
           state.copyWith(
             uiState: const UiState.error(),
-            mediaList: [],
           ),
         );
       },
       success: (value) => emit(
-        state.copyWith(
-          mediaList: value,
-        ),
+        state.copyWith(),
       ),
     );
   }

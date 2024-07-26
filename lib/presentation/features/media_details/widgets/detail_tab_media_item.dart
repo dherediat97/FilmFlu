@@ -7,6 +7,7 @@ import 'package:film_flu/presentation/features/media_details/widgets/film_worker
 import 'package:film_flu/presentation/widgets/container_tab_media_item.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/reviews_widget_item.dart';
 import 'package:film_flu/presentation/features/media_list/constants/media_list_constants.dart';
+import 'package:film_flu/presentation/widgets/empty_state_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -128,7 +129,7 @@ class _CreditsWidget extends State<CreditsWidget>
                                               ? ReviewsWidgetItem(
                                                   review: review,
                                                 )
-                                              : EmptyState();
+                                              : const EmptyStateWidget();
                                         },
                                       )),
                                   state.credits?.cast != null
