@@ -30,9 +30,7 @@ void main() {
         act: (bloc) =>
             bloc.add(const MediaListEvent.getMediaDataByGenre('action', 0)),
         expect: () => [
-          MediaListState.initial().copyWith(
-            mediaList: List.empty(),
-          ),
+          MediaListState.initial().copyWith(),
         ],
       );
     },

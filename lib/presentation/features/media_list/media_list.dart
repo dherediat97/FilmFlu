@@ -76,7 +76,6 @@ class _MediaDataList extends State<MediaList> {
                     ? state.movies?.length
                     : state.series?.length,
                 itemBuilder: (context, index) {
-                  print(state.movies![index]);
                   return MediaCarrouselItem(
                     mediaItem:
                         widget.mediaType == MediaListConstants.movieMediaType
