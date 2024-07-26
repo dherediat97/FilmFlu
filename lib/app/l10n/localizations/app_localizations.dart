@@ -230,11 +230,35 @@ abstract class AppLocalizations {
   /// **'Hecho con mucho'**
   String get made_with_love;
 
+  /// No description provided for @play_trailer.
+  ///
+  /// In es, this message translates to:
+  /// **'Ver tráiler'**
+  String get play_trailer;
+
   /// No description provided for @films_worked.
   ///
   /// In es, this message translates to:
   /// **'Papeles que ha realizado'**
   String get films_worked;
+
+  /// No description provided for @about_movie.
+  ///
+  /// In es, this message translates to:
+  /// **'Sobre la Película'**
+  String get about_movie;
+
+  /// No description provided for @about_serie.
+  ///
+  /// In es, this message translates to:
+  /// **'Sobre la Serie'**
+  String get about_serie;
+
+  /// No description provided for @reviews.
+  ///
+  /// In es, this message translates to:
+  /// **'Reseñas'**
+  String get reviews;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

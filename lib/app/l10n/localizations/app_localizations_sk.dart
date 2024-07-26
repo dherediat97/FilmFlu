@@ -64,5 +64,17 @@ class AppLocalizationsSk extends AppLocalizations {
   String get made_with_love => 'Vyrobené s veľa';
 
   @override
+  String get play_trailer => 'Ver tráiler';
+
+  @override
   String get films_worked => 'Úlohy, ktoré stvárnil';
+
+  @override
+  String get about_movie => 'Sobre la Película';
+
+  @override
+  String get about_serie => 'Sobre la Serie';
+
+  @override
+  String get reviews => 'Reseñas';
 }

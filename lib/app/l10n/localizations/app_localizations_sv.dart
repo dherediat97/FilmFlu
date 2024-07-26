@@ -64,5 +64,17 @@ class AppLocalizationsSv extends AppLocalizations {
   String get made_with_love => 'Gjord med mycket';
 
   @override
+  String get play_trailer => 'Ver tráiler';
+
+  @override
   String get films_worked => 'Roller han har gjort';
+
+  @override
+  String get about_movie => 'Sobre la Película';
+
+  @override
+  String get about_serie => 'Sobre la Serie';
+
+  @override
+  String get reviews => 'Reseñas';
 }

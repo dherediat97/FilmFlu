@@ -64,5 +64,17 @@ class AppLocalizationsJa extends AppLocalizations {
   String get made_with_love => 'たくさんの作品で作られました';
 
   @override
+  String get play_trailer => 'Ver tráiler';
+
+  @override
   String get films_worked => '彼が演じた役割';
+
+  @override
+  String get about_movie => 'Sobre la Película';
+
+  @override
+  String get about_serie => 'Sobre la Serie';
+
+  @override
+  String get reviews => 'Reseñas';
 }

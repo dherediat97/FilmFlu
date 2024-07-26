@@ -64,5 +64,17 @@ class AppLocalizationsPt extends AppLocalizations {
   String get made_with_love => 'Feito com muito';
 
   @override
+  String get play_trailer => 'Ver tráiler';
+
+  @override
   String get films_worked => 'Papéis que interpretou';
+
+  @override
+  String get about_movie => 'Sobre la Película';
+
+  @override
+  String get about_serie => 'Sobre la Serie';
+
+  @override
+  String get reviews => 'Reseñas';
 }

@@ -1,6 +1,6 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/domain/models/person_entity.dart';
-import 'package:film_flu/presentation/features/media_details/widgets/sliver_app_delegate.dart';
+import 'package:film_flu/presentation/features/person_details/widgets/sliver_app_delegate.dart';
 import 'package:film_flu/presentation/features/person_details/bloc/person_details_bloc.dart';
 import 'package:film_flu/presentation/features/person_details/widgets/actor_credits.dart';
 import 'package:film_flu/presentation/features/person_details/widgets/person_details.dart';

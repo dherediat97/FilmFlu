@@ -64,5 +64,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get made_with_love => 'Made with much';
 
   @override
+  String get play_trailer => 'Play trailer';
+
+  @override
   String get films_worked => 'Characters I have made';
+
+  @override
+  String get about_movie => 'About Movie';
+
+  @override
+  String get about_serie => 'About Serie';
+
+  @override
+  String get reviews => 'Reviews';
 }

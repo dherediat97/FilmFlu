@@ -64,5 +64,17 @@ class AppLocalizationsFr extends AppLocalizations {
   String get made_with_love => 'Fait avec beaucoup';
 
   @override
+  String get play_trailer => 'Ver tráiler';
+
+  @override
   String get films_worked => 'Personnages que j\'ai créés';
+
+  @override
+  String get about_movie => 'Sobre la Película';
+
+  @override
+  String get about_serie => 'Sobre la Serie';
+
+  @override
+  String get reviews => 'Reseñas';
 }

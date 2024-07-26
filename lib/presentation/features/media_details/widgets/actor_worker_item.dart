@@ -18,7 +18,7 @@ class FilmActorItem extends StatefulWidget {
   });
 
   final int index;
-  final List<ActorEntity> cast;
+  final List<ActorEntity>? cast;
 
   @override
   State<FilmActorItem> createState() => _FilmActorItemState();
@@ -28,45 +28,43 @@ class _FilmActorItemState extends State<FilmActorItem> {
   @override
   Widget build(BuildContext context) {
     int index = widget.index;
-    List<ActorEntity> cast = widget.cast;
-    ActorEntity actor = cast[index];
+    List<ActorEntity>? cast = widget.cast;
+    ActorEntity actor = cast![index];
 
-    return GridTile(
-      header: IconButton(
-        onPressed: () {
-          AppConstants.personId = actor.id;
-          context.push('${AppRoutePaths.personDetailsRoute}/${actor.id}');
-        },
-        icon: ClipRRect(
-          borderRadius: BorderRadius.circular(32.0),
-          child: Image.network(
-            '${AppUrls.personImgBaseUrl}${actor.profilePath}',
-            height: 160,
-            width: 150,
-            fit: BoxFit.cover,
-            loadingBuilder: (_, child, progress) =>
-                DefaultImageLoader(progress: progress, child: child),
-            errorBuilder: (context, url, error) {
-              if (actor.gender == 2) {
-                return SvgPicture.asset(
-                  AppAssets.actorImageIcon,
-                  height: 160,
-                  width: 150,
-                  fit: BoxFit.cover,
-                );
-              } else {
-                return SvgPicture.asset(
-                  AppAssets.actressImageIcon,
-                  height: 160,
-                  width: 150,
-                  fit: BoxFit.cover,
-                );
-              }
-            },
-          ),
+    return ListTile(
+      onTap: () {
+        AppConstants.personId = actor.id;
+        context.push('${AppRoutePaths.personDetailsRoute}/${actor.id}');
+      },
+      title: ClipRRect(
+        borderRadius: BorderRadius.circular(32.0),
+        child: Image.network(
+          '${AppUrls.personImgBaseUrl}${actor.profilePath}',
+          height: 200,
+          width: 150,
+          fit: BoxFit.cover,
+          loadingBuilder: (_, child, progress) =>
+              DefaultImageLoader(progress: progress, child: child),
+          errorBuilder: (context, url, error) {
+            if (actor.gender == 2) {
+              return SvgPicture.asset(
+                AppAssets.actorImageIcon,
+                height: 160,
+                width: 150,
+                fit: BoxFit.cover,
+              );
+            } else {
+              return SvgPicture.asset(
+                AppAssets.actressImageIcon,
+                height: 160,
+                width: 150,
+                fit: BoxFit.cover,
+              );
+            }
+          },
         ),
       ),
-      footer: Column(
+      subtitle: Column(
         children: [
           AutoSizeText(
             actor.originalName!,
@@ -86,7 +84,6 @@ class _FilmActorItemState extends State<FilmActorItem> {
               : const Text('Desconocido')
         ],
       ),
-      child: Container(),
     );
   }
 }
