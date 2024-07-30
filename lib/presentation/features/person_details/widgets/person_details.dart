@@ -149,30 +149,21 @@ class PersonDetails extends StatelessWidget {
                 ),
               ],
             ),
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 24.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (person.biography != null &&
-                          person.biography!.isNotEmpty) ...[
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 16.0),
-                          child: Text(
-                            person.biography.toString(),
-                            textAlign: TextAlign.start,
-                            style: Theme.of(context).textTheme.displayMedium,
-                          ),
-                        )
-                      ]
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            if (person.biography != null && person.biography!.isNotEmpty)
+              Column(
+                children: [
+                  Padding(
+                      padding: const EdgeInsets.only(top: 24.0),
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0),
+                        child: Text(
+                          person.biography.toString(),
+                          textAlign: TextAlign.start,
+                          style: Theme.of(context).textTheme.displayMedium,
+                        ),
+                      )),
+                ],
+              ),
           ],
         ),
       ),

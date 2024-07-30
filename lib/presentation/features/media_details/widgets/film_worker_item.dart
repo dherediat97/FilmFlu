@@ -5,7 +5,6 @@ import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/domain/models/film_worker_entity.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:film_flu/presentation/widgets/default_image_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -13,12 +12,10 @@ import 'package:go_router/go_router.dart';
 class FilmWorkerItem extends StatefulWidget {
   const FilmWorkerItem({
     super.key,
-    required this.index,
-    required this.crew,
+    required this.filmWorker,
   });
 
-  final int index;
-  final List<FilmWorkerEntity> crew;
+  final FilmWorkerEntity? filmWorker;
 
   @override
   State<FilmWorkerItem> createState() => _FilmWorkerItemState();
@@ -27,37 +24,32 @@ class FilmWorkerItem extends StatefulWidget {
 class _FilmWorkerItemState extends State<FilmWorkerItem> {
   @override
   Widget build(BuildContext context) {
-    int index = widget.index;
-    List<FilmWorkerEntity> crew = widget.crew;
-    FilmWorkerEntity filmWorker = crew[index];
-
     return ListTile(
       onTap: () {
-        AppConstants.personId = filmWorker.id;
-        context.push('${AppRoutePaths.personDetailsRoute}/${filmWorker.id}');
+        AppConstants.personId = widget.filmWorker!.id;
+        context.push(
+            '${AppRoutePaths.personDetailsRoute}/${widget.filmWorker?.id}');
       },
       title: ClipRRect(
         borderRadius: BorderRadius.circular(32.0),
         child: Image.network(
-          '${AppUrls.personImgBaseUrl}${filmWorker.profilePath}',
+          '${AppUrls.personImgBaseUrl}${widget.filmWorker?.profilePath}',
           height: 200,
-          width: 150,
+          width: 120,
           fit: BoxFit.cover,
-          loadingBuilder: (_, child, loadingProgress) =>
-              DefaultImageLoader(progress: loadingProgress, child: child),
           errorBuilder: (context, url, error) {
-            if (filmWorker.gender == 2) {
+            if (widget.filmWorker?.gender == 2) {
               return SvgPicture.asset(
                 AppAssets.actorImageIcon,
-                height: 160,
-                width: 150,
+                height: 200,
+                width: 120,
                 fit: BoxFit.cover,
               );
             } else {
               return SvgPicture.asset(
                 AppAssets.actressImageIcon,
-                height: 160,
-                width: 150,
+                height: 200,
+                width: 120,
                 fit: BoxFit.cover,
               );
             }
@@ -67,14 +59,14 @@ class _FilmWorkerItemState extends State<FilmWorkerItem> {
       subtitle: Column(
         children: [
           AutoSizeText(
-            filmWorker.originalName!,
+            widget.filmWorker!.originalName!,
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.displayLarge,
           ),
           AutoSizeText(
-            '${context.localizations.production_job} ${filmWorker.job} ${context.localizations.in_preposition} ${filmWorker.knownForDepartment}',
+            '${context.localizations.production_job} ${widget.filmWorker?.job} ${context.localizations.in_preposition} ${widget.filmWorker?.knownForDepartment}',
             textAlign: TextAlign.center,
             maxLines: 4,
             overflow: TextOverflow.ellipsis,

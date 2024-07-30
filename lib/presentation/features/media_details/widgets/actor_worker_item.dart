@@ -5,7 +5,6 @@ import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/domain/models/actor_entity.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:film_flu/presentation/widgets/default_image_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -13,12 +12,10 @@ import 'package:go_router/go_router.dart';
 class FilmActorItem extends StatefulWidget {
   const FilmActorItem({
     super.key,
-    required this.index,
-    required this.cast,
+    required this.actor,
   });
 
-  final int index;
-  final List<ActorEntity>? cast;
+  final ActorEntity? actor;
 
   @override
   State<FilmActorItem> createState() => _FilmActorItemState();
@@ -27,37 +24,31 @@ class FilmActorItem extends StatefulWidget {
 class _FilmActorItemState extends State<FilmActorItem> {
   @override
   Widget build(BuildContext context) {
-    int index = widget.index;
-    List<ActorEntity>? cast = widget.cast;
-    ActorEntity actor = cast![index];
-
     return ListTile(
       onTap: () {
-        AppConstants.personId = actor.id;
-        context.push('${AppRoutePaths.personDetailsRoute}/${actor.id}');
+        AppConstants.personId = widget.actor!.id;
+        context.push('${AppRoutePaths.personDetailsRoute}/${widget.actor?.id}');
       },
       title: ClipRRect(
         borderRadius: BorderRadius.circular(32.0),
         child: Image.network(
-          '${AppUrls.personImgBaseUrl}${actor.profilePath}',
+          '${AppUrls.personImgBaseUrl}${widget.actor?.profilePath}',
           height: 200,
-          width: 150,
+          width: 120,
           fit: BoxFit.cover,
-          loadingBuilder: (_, child, progress) =>
-              DefaultImageLoader(progress: progress, child: child),
           errorBuilder: (context, url, error) {
-            if (actor.gender == 2) {
+            if (widget.actor?.gender == 2) {
               return SvgPicture.asset(
                 AppAssets.actorImageIcon,
-                height: 160,
-                width: 150,
+                height: 200,
+                width: 120,
                 fit: BoxFit.cover,
               );
             } else {
               return SvgPicture.asset(
                 AppAssets.actressImageIcon,
-                height: 160,
-                width: 150,
+                height: 200,
+                width: 120,
                 fit: BoxFit.cover,
               );
             }
@@ -67,17 +58,17 @@ class _FilmActorItemState extends State<FilmActorItem> {
       subtitle: Column(
         children: [
           AutoSizeText(
-            actor.originalName!,
+            widget.actor!.originalName.toString(),
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.displayLarge,
           ),
-          actor.character!.isNotEmpty || actor.character != null
+          widget.actor!.character!.isNotEmpty || widget.actor?.character != null
               ? AutoSizeText(
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  '${context.localizations.actor_job} ${actor.character}',
+                  '${context.localizations.actor_job} ${widget.actor?.character}',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodySmall,
                 )

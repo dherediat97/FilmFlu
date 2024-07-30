@@ -10,6 +10,7 @@ class AppAssets {
 
   static const String logoSvgIcon = '$imagesFolder/logo.svg';
   static const String logoIcon = '$imagesFolder/logo.png';
+  static const String emptyStateImage = '$imagesFolder/empty_state.jpg';
 
   static const String actorImageIcon = '$iconsFolder/actor_icon.svg';
   static const String actressImageIcon = '$iconsFolder/actress_icon.svg';

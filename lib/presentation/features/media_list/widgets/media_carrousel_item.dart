@@ -3,7 +3,6 @@ import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/presentation/features/media_list/constants/media_list_constants.dart';
-import 'package:film_flu/presentation/widgets/default_image_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -13,7 +12,7 @@ class MediaCarrouselItem extends StatelessWidget {
     required this.mediaItem,
   });
 
-  final MediaItemEntity mediaItem;
+  final MediaItemEntity? mediaItem;
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +22,13 @@ class MediaCarrouselItem extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              AppConstants.mediaType = mediaItem.title != ''
+              AppConstants.mediaType = mediaItem?.title != ''
                   ? MediaListConstants.movieMediaType
                   : MediaListConstants.serieMediaType;
 
-              AppConstants.mediaTypeId = mediaItem.id;
+              AppConstants.mediaTypeId = mediaItem!.id;
               context
-                  .push('${AppRoutePaths.mediaDetailsRoute}/${mediaItem.id}');
+                  .push('${AppRoutePaths.mediaDetailsRoute}/${mediaItem?.id}');
             },
             child: SizedBox(
               width: 140,
@@ -42,12 +41,7 @@ class MediaCarrouselItem extends StatelessWidget {
                   image: DecorationImage(
                     fit: BoxFit.fill,
                     image: Image.network(
-                      '${AppUrls.movieImgBaseURL}${mediaItem.posterPath}',
-                      loadingBuilder: (_, child, progress) =>
-                          DefaultImageLoader(
-                        progress: progress,
-                        child: child,
-                      ),
+                      '${AppUrls.movieImgBaseURL}${mediaItem?.posterPath}',
                     ).image,
                   ),
                 ),
