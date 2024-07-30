@@ -3,8 +3,7 @@ part of 'media_list_bloc.dart';
 @freezed
 class MediaListState with _$MediaListState {
   const factory MediaListState({
-    required List<MediaItemEntity>? movies,
-    required List<MediaItemEntity>? series,
+    required Map<int, List<MediaItemEntity>> mediaData,
     required UiState uiState,
     required int pageLoaded,
   }) = _MediaListState;
@@ -12,8 +11,7 @@ class MediaListState with _$MediaListState {
   factory MediaListState.initial() {
     return const MediaListState(
       pageLoaded: 1,
-      movies: [],
-      series: [],
+      mediaData: {},
       uiState: UiState.initial(),
     );
   }

@@ -1,4 +1,6 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
+import 'package:film_flu/domain/models/actor_entity.dart';
+import 'package:film_flu/domain/models/film_worker_entity.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/actor_worker_item.dart';
@@ -11,8 +13,8 @@ import 'package:film_flu/presentation/widgets/empty_state_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CreditsWidget extends StatefulWidget {
-  const CreditsWidget({
+class DetailTabMediaItem extends StatefulWidget {
+  const DetailTabMediaItem({
     super.key,
     required this.mediaItemType,
     required this.mediaItemId,
@@ -22,10 +24,10 @@ class CreditsWidget extends StatefulWidget {
   final int mediaItemId;
 
   @override
-  State<CreditsWidget> createState() => _CreditsWidget();
+  State<DetailTabMediaItem> createState() => _DetailTabMediaItem();
 }
 
-class _CreditsWidget extends State<CreditsWidget>
+class _DetailTabMediaItem extends State<DetailTabMediaItem>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -48,6 +50,13 @@ class _CreditsWidget extends State<CreditsWidget>
                 );
             break;
           case 2:
+            context.read<MediaDetailBloc>().add(
+                  MediaDetailEvent.getCredits(
+                    widget.mediaItemType,
+                    widget.mediaItemId,
+                  ),
+                );
+            break;
           case 3:
             context.read<MediaDetailBloc>().add(
                   MediaDetailEvent.getCredits(
@@ -71,122 +80,127 @@ class _CreditsWidget extends State<CreditsWidget>
   Widget build(BuildContext context) {
     return BlocBuilder<MediaDetailBloc, MediaDetailState>(
       builder: (context, state) {
-        return state.mediaItem != null
-            ? SingleChildScrollView(
-                child: Column(
-                  children: [
-                    BackgroundImageMediaItem(
-                      mediaItem: state.mediaItem,
-                      movieName: state.movieName,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(24),
-                      child: DefaultTabController(
-                        length: 4,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            TabBar(
-                              controller: _tabController,
-                              tabs: [
-                                Tab(
-                                  text: widget.mediaItemType ==
-                                          MediaListConstants.movieMediaType
-                                      ? context.localizations.about_movie
-                                      : context.localizations.about_serie,
-                                ),
-                                Tab(text: context.localizations.reviews),
-                                Tab(text: context.localizations.character_cast),
-                                Tab(
-                                    text:
-                                        context.localizations.production_cast),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 400,
-                              child: TabBarView(
-                                controller: _tabController,
-                                children: [
-                                  ContainerTabMediaItem(
-                                    item: state.mediaItem!.overview,
-                                    child: Text(
-                                      state.mediaItem!.overview.toString(),
-                                      textAlign: TextAlign.start,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium,
-                                    ),
-                                  ),
-                                  ContainerTabMediaItem(
-                                      item: state.reviews,
-                                      child: ListView.builder(
-                                        itemCount: state.reviews?.length,
-                                        itemBuilder: (context, index) {
-                                          ReviewEntity? review =
-                                              state.reviews?[index];
+        bool isMovie =
+            widget.mediaItemType == MediaListConstants.movieMediaType;
 
-                                          return review != null
-                                              ? ReviewsWidgetItem(
-                                                  review: review,
-                                                )
-                                              : const EmptyStateWidget();
-                                        },
-                                      )),
-                                  state.credits?.cast != null
-                                      ? ContainerTabMediaItem(
-                                          item: state.credits,
-                                          child: GridView.custom(
-                                            gridDelegate:
-                                                const SliverGridDelegateWithMaxCrossAxisExtent(
-                                              maxCrossAxisExtent: 340,
-                                            ),
-                                            childrenDelegate:
-                                                SliverChildBuilderDelegate(
-                                              childCount:
-                                                  state.credits!.cast.length,
-                                              (_, index) {
-                                                return FilmActorItem(
-                                                  index: index,
-                                                  cast: state.credits!.cast,
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                        )
-                                      : Container(),
-                                  state.credits?.crew != null
-                                      ? ContainerTabMediaItem(
-                                          item: state.credits,
-                                          child: GridView.custom(
-                                            gridDelegate:
-                                                const SliverGridDelegateWithMaxCrossAxisExtent(
-                                              maxCrossAxisExtent: 340,
-                                            ),
-                                            childrenDelegate:
-                                                SliverChildBuilderDelegate(
-                                              childCount:
-                                                  state.credits!.crew.length,
-                                              (_, index) {
-                                                return FilmWorkerItem(
-                                                  index: index,
-                                                  crew: state.credits!.crew,
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                        )
-                                      : Container(),
-                                ],
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              BackgroundImageMediaItem(
+                mediaItem: state.mediaItem,
+                movieName: state.movieName,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(24),
+                child: DefaultTabController(
+                  length: 4,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TabBar(
+                        controller: _tabController,
+                        tabs: [
+                          Tab(
+                            text: isMovie
+                                ? context.localizations.about_movie
+                                : context.localizations.about_serie,
+                          ),
+                          Tab(text: context.localizations.reviews),
+                          Tab(text: context.localizations.character_cast),
+                          Tab(text: context.localizations.production_cast),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 500,
+                        child: TabBarView(
+                          controller: _tabController,
+                          children: [
+                            ContainerTabMediaItem(
+                              state: state.uiState,
+                              item: state.mediaItem?.overview,
+                              child: Text(
+                                state.mediaItem!.overview.toString(),
+                                textAlign: TextAlign.start,
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ),
+                            ContainerTabMediaItem(
+                              state: state.uiState,
+                              item: state.reviews,
+                              child: state.reviews == null
+                                  ? ListView.builder(
+                                      itemCount: state.reviews?.length,
+                                      itemBuilder: (context, index) {
+                                        ReviewEntity? review =
+                                            state.reviews?[index];
+
+                                        return ReviewsWidgetItem(
+                                          review: review,
+                                        );
+                                      },
+                                    )
+                                  : const EmptyStateWidget(
+                                      errorMessage:
+                                          'No se han encontrado reseñas'),
+                            ),
+                            ContainerTabMediaItem(
+                              state: state.uiState,
+                              item: state.credits?.cast,
+                              child: GridView.custom(
+                                gridDelegate:
+                                    const SliverGridDelegateWithMaxCrossAxisExtent(
+                                  maxCrossAxisExtent: 240,
+                                  mainAxisExtent: 340,
+                                  mainAxisSpacing: 18,
+                                  crossAxisSpacing: 18,
+                                ),
+                                childrenDelegate: SliverChildBuilderDelegate(
+                                  childCount: state.credits?.cast.length,
+                                  (_, index) {
+                                    ActorEntity? actor =
+                                        state.credits?.cast[index];
+
+                                    return FilmActorItem(
+                                      actor: actor,
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                            ContainerTabMediaItem(
+                              state: state.uiState,
+                              item: state.credits?.crew,
+                              child: GridView.custom(
+                                gridDelegate:
+                                    const SliverGridDelegateWithMaxCrossAxisExtent(
+                                  maxCrossAxisExtent: 240,
+                                  mainAxisExtent: 340,
+                                  mainAxisSpacing: 18,
+                                  crossAxisSpacing: 18,
+                                ),
+                                childrenDelegate: SliverChildBuilderDelegate(
+                                  childCount: state.credits?.crew.length,
+                                  (_, index) {
+                                    FilmWorkerEntity? filmWorker =
+                                        state.credits?.crew[index];
+
+                                    return FilmWorkerItem(
+                                      filmWorker: filmWorker,
+                                    );
+                                  },
+                                ),
                               ),
                             )
                           ],
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               )
-            : Container();
+            ],
+          ),
+        );
       },
     );
   }

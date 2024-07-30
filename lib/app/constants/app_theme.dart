@@ -149,8 +149,5 @@ class AppTheme {
           unselectedLabelColor: colorScheme.secondary,
           indicatorSize: TabBarIndicatorSize.tab,
         ),
-        scrollbarTheme: const ScrollbarThemeData(
-          thumbVisibility: WidgetStatePropertyAll(true),
-        ),
       );
 }

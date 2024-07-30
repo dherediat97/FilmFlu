@@ -14,4 +14,6 @@ extension UiStateExtension on UiState {
   bool isLoading() => maybeWhen(orElse: () => false, loading: () => true);
 
   bool isError() => maybeWhen(orElse: () => false, error: (_) => true);
+
+  bool isSuccess() => maybeWhen(orElse: () => false, success: () => true);
 }

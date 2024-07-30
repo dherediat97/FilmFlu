@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:film_flu/presentation/features/media_list/bloc/media_list_bloc.dart';
-import 'package:film_flu/presentation/features/media_list/constants/media_list_constants.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/media_carrousel_item.dart';
+import 'package:film_flu/presentation/widgets/placeholder_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -55,6 +55,7 @@ class _MediaDataList extends State<MediaList> {
   Widget build(BuildContext context) {
     return BlocBuilder<MediaListBloc, MediaListState>(
       builder: (context, state) {
+        var mediaList = state.mediaData;
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,21 +70,22 @@ class _MediaDataList extends State<MediaList> {
             const SizedBox(height: 20),
             SizedBox(
               height: 220,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                controller: _scrollController,
-                itemCount: widget.mediaType == MediaListConstants.movieMediaType
-                    ? state.movies?.length
-                    : state.series?.length,
-                itemBuilder: (context, index) {
-                  return MediaCarrouselItem(
-                    mediaItem:
-                        widget.mediaType == MediaListConstants.movieMediaType
-                            ? state.movies![index]
-                            : state.series![index],
-                  );
-                },
-              ),
+              child: mediaList.values.isEmpty
+                  ? const PlaceholderLoader()
+                  : ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      controller: _scrollController,
+                      itemCount: 20,
+                      itemBuilder: (context, index) {
+                        var item = mediaList.entries
+                            .where((element) => element.key == widget.genreId)
+                            .firstOrNull
+                            ?.value;
+                        return MediaCarrouselItem(
+                          mediaItem: item?[index],
+                        );
+                      },
+                    ),
             ),
           ],
         );

@@ -56,7 +56,7 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage>
                       return <Widget>[
                         SliverAppBar(
                           automaticallyImplyLeading: false,
-                          expandedHeight: 500,
+                          expandedHeight: 300,
                           pinned: false,
                           floating: false,
                           snap: false,

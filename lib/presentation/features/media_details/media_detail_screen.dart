@@ -46,74 +46,61 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
             ? MediaListConstants.movieMediaType
             : MediaListConstants.serieMediaType;
 
-        return mediaItem != null
-            ? ScaffoldPage(
-                isSearchVisible: true,
-                fullScreenMode: state.isTrailerOpened,
-                fabLocation: FloatingActionButtonLocation.endFloat,
-                floatingActionButton: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: state.trailerId.isNotEmpty
-                      ? Container(
-                          child: state.isTrailerOpened
-                              ? FloatingActionButton(
-                                  mini: true,
-                                  child: const Icon(Icons.stop),
-                                  onPressed: () {
-                                    context.read<MediaDetailBloc>().add(
-                                        const MediaDetailEvent.closeTrailer());
-                                    _trailerController = null;
-                                    SystemChrome.setEnabledSystemUIMode(
-                                      SystemUiMode.edgeToEdge,
-                                    );
-                                  },
-                                )
-                              : FloatingActionButton.extended(
-                                  icon: const Icon(Icons.play_arrow),
-                                  label:
-                                      Text(context.localizations.play_trailer),
-                                  onPressed: () {
-                                    context
-                                        .read<MediaDetailBloc>()
-                                        .add(MediaDetailEvent.openTrailer(
-                                          AppConstants.mediaType,
-                                          mediaItem,
-                                        ));
-                                    _trailerController =
-                                        initTrailerController();
-                                    if (state.trailerId.isNotEmpty) {
-                                      _trailerController?.loadVideoById(
-                                        videoId: state.trailerId.toString(),
-                                      );
-                                    }
-                                  },
-                                ),
-                        )
-                      : Container(),
+        return ScaffoldPage(
+          isSearchVisible: true,
+          fullScreenMode: state.isTrailerOpened,
+          fabLocation: FloatingActionButtonLocation.endFloat,
+          floatingActionButton: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: state.trailerId.isNotEmpty
+                ? Container(
+                    child: state.isTrailerOpened
+                        ? FloatingActionButton(
+                            mini: true,
+                            child: const Icon(Icons.stop),
+                            onPressed: () {
+                              context
+                                  .read<MediaDetailBloc>()
+                                  .add(const MediaDetailEvent.closeTrailer());
+                              _trailerController = null;
+                              SystemChrome.setEnabledSystemUIMode(
+                                SystemUiMode.edgeToEdge,
+                              );
+                            },
+                          )
+                        : FloatingActionButton.extended(
+                            icon: const Icon(Icons.play_arrow),
+                            label: Text(context.localizations.play_trailer),
+                            onPressed: () {
+                              context
+                                  .read<MediaDetailBloc>()
+                                  .add(MediaDetailEvent.openTrailer(
+                                    AppConstants.mediaType,
+                                    mediaItem!,
+                                  ));
+                              _trailerController = initTrailerController();
+                              if (state.trailerId.isNotEmpty) {
+                                _trailerController?.loadVideoById(
+                                  videoId: state.trailerId.toString(),
+                                );
+                              }
+                            },
+                          ),
+                  )
+                : Container(),
+          ),
+          child: !state.isTrailerOpened
+              ? DetailTabMediaItem(
+                  mediaItemType: mediaItemType,
+                  mediaItemId: state.mediaItem!.id,
+                )
+              : YoutubePlayerScaffold(
+                  controller: _trailerController!,
+                  builder: (context, player) {
+                    return player;
+                  },
                 ),
-                child: !state.isTrailerOpened
-                    ? CreditsWidget(
-                        mediaItemType: mediaItemType,
-                        mediaItemId: state.mediaItem!.id,
-                      )
-                    : YoutubePlayerScaffold(
-                        controller: _trailerController!,
-                        builder: (context, player) {
-                          return Column(
-                            children: [
-                              Container(
-                                height: MediaQuery.of(context).size.height,
-                                padding: const EdgeInsets.only(top: 50),
-                                child: player,
-                              ),
-                            ],
-                          );
-                        },
-                      ),
-              )
-            : const Center(
-                child: CircularProgressIndicator(),
-              );
+        );
       },
     );
   }

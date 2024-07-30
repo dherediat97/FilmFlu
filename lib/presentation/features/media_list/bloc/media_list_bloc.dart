@@ -29,7 +29,7 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
     );
   }
 
-  _getMediaDataByGenreId(
+  Future<void> _getMediaDataByGenreId(
     MediaListEvent event,
     Emitter<MediaListState> emit,
     int genreId,
@@ -49,31 +49,14 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
           ),
         );
       },
-      success: (value) {
-        if (mediaType == MediaListConstants.movieMediaType) {
-          emit(
-            state.copyWith(
-              uiState: const UiState.success(),
-              movies: value
-                  .where((element) => element.genreIds!.contains(genreId))
-                  .toList(),
-            ),
-          );
-        } else {
-          emit(
-            state.copyWith(
-              uiState: const UiState.success(),
-              series: value
-                  .where((element) => element.genreIds!.contains(genreId))
-                  .toList(),
-            ),
-          );
-        }
+      success: (mediaDataList) {
+        MediaListConstants.mediaData.addAll({genreId: mediaDataList});
+        emit(state.copyWith(mediaData: MediaListConstants.mediaData));
       },
     );
   }
 
-  _loadMoreMediaData(
+  Future<void> _loadMoreMediaData(
     MediaListEvent event,
     Emitter<MediaListState> emit,
     String mediaType,
@@ -98,7 +81,7 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
     );
   }
 
-  _nextPage(
+  Future<void> _nextPage(
     MediaListEvent event,
     Emitter<MediaListState> emit,
     int page,
