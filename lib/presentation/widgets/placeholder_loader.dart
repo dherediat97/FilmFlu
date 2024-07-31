@@ -16,7 +16,7 @@ class PlaceholderLoader extends StatelessWidget {
       highlightColor: Theme.of(context).colorScheme.primary,
       loop: 10000,
       direction: ShimmerDirection.rtl,
-      period: const Duration(seconds: 1),
+      period: const Duration(milliseconds: 200),
       child: child ?? Container(),
     );
   }

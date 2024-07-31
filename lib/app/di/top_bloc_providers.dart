@@ -1,4 +1,5 @@
 import 'package:film_flu/app/constants/app_constants.dart';
+import 'package:film_flu/presentation/features/media_day/bloc/media_day_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
 import 'package:film_flu/presentation/features/media_list/bloc/media_list_bloc.dart';
 import 'package:film_flu/presentation/features/person_details/bloc/person_details_bloc.dart';
@@ -24,6 +25,7 @@ class TopBlocProviders extends StatelessWidget {
             ),
         ),
         BlocProvider(create: (context) => _getIt<MediaListBloc>()),
+        BlocProvider(create: (context) => _getIt<MediaDayBloc>()),
         BlocProvider(
           create: (context) => _getIt<MediaDetailBloc>()
             ..add(

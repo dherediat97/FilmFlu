@@ -56,38 +56,42 @@ class _MediaDataList extends State<MediaList> {
     return BlocBuilder<MediaListBloc, MediaListState>(
       builder: (context, state) {
         var mediaList = state.mediaData;
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 20),
-            AutoSizeText(
-              widget.title,
-              maxFontSize: 30,
-              minFontSize: 20,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              height: 220,
-              child: mediaList.values.isEmpty
-                  ? const PlaceholderLoader()
-                  : ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      controller: _scrollController,
-                      itemCount: 20,
-                      itemBuilder: (context, index) {
-                        var item = mediaList.entries
-                            .where((element) => element.key == widget.genreId)
-                            .firstOrNull
-                            ?.value;
-                        return MediaCarrouselItem(
-                          mediaItem: item?[index],
-                        );
-                      },
-                    ),
-            ),
-          ],
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 20),
+              AutoSizeText(
+                widget.title,
+                maxFontSize: 30,
+                minFontSize: 20,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                height: 220,
+                child: mediaList.values.isEmpty
+                    ? const PlaceholderLoader()
+                    : ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        controller: _scrollController,
+                        itemCount: 20,
+                        itemBuilder: (context, index) {
+                          var item = mediaList.entries
+                              .where((element) => element.key == widget.genreId)
+                              .firstOrNull
+                              ?.value
+                              .elementAt(index);
+                          return MediaCarrouselItem(
+                            mediaItem: item,
+                          );
+                        },
+                      ),
+              ),
+            ],
+          ),
         );
       },
     );

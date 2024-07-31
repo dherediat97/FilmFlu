@@ -1,4 +1,3 @@
-import 'package:film_flu/data/models/genre_remote_entity.dart';
 import 'package:film_flu/data/models/media_item_remote_entity.dart';
 
 abstract class MediaListRemoteDataSourceContract {
@@ -14,7 +13,5 @@ abstract class MediaListRemoteDataSourceContract {
     required int page,
   });
 
-  Future<List<GenreRemoteEntity>> getGenreList({
-    required String mediaType,
-  });
+  Future<MediaItemRemoteEntity> getMediaDataDay();
 }

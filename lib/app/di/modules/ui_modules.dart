@@ -6,6 +6,11 @@ void _uiModulesInit() {
   uiModulesDi.registerFactory(
     () => SplashBloc(),
   );
+  uiModulesDi.registerFactory(
+    () => MediaDayBloc(
+      repositoryContract: uiModulesDi(),
+    ),
+  );
 
   uiModulesDi.registerFactory(
     () => MediaListBloc(

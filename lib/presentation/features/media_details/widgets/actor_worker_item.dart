@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
@@ -8,6 +9,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:octo_image/octo_image.dart';
 
 class FilmActorItem extends StatefulWidget {
   const FilmActorItem({
@@ -31,12 +33,16 @@ class _FilmActorItemState extends State<FilmActorItem> {
       },
       title: ClipRRect(
         borderRadius: BorderRadius.circular(32.0),
-        child: Image.network(
-          '${AppUrls.personImgBaseUrl}${widget.actor?.profilePath}',
+        child: OctoImage(
+          image: CachedNetworkImageProvider(
+            '${AppUrls.personImgBaseUrl}${widget.actor?.profilePath}',
+          ),
+          progressIndicatorBuilder:
+              OctoProgressIndicator.circularProgressIndicator(),
           height: 200,
           width: 120,
           fit: BoxFit.cover,
-          errorBuilder: (context, url, error) {
+          errorBuilder: (context, error, stackTrace) {
             if (widget.actor?.gender == 2) {
               return SvgPicture.asset(
                 AppAssets.actorImageIcon,

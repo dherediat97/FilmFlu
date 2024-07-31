@@ -6,10 +6,12 @@ abstract class MediaListRepositoryContract {
     String mediaType,
     int genreId,
   );
+
   Future<Result<List<MediaItemEntity>>> getMovies({
     required int genreId,
     String languageId = '',
   });
+
   Future<Result<List<MediaItemEntity>>> getTVSeries({
     required int genreId,
     String languageId = '',
@@ -20,4 +22,6 @@ abstract class MediaListRepositoryContract {
     required int page,
     required int genreId,
   });
+
+  Future<Result<MediaItemEntity>> getMediaDataDay();
 }
