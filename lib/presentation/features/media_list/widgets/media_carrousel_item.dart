@@ -7,7 +7,6 @@ import 'package:film_flu/presentation/features/media_list/constants/media_list_c
 import 'package:film_flu/presentation/widgets/placeholder_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:octo_image/octo_image.dart';
 
 class MediaCarrouselItem extends StatelessWidget {
   const MediaCarrouselItem({
@@ -37,21 +36,22 @@ class MediaCarrouselItem extends StatelessWidget {
               width: 140,
               height: 200,
               child: mediaItem != null
-                  ? Container(
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(32),
-                        ),
-                        image: DecorationImage(
+                  ? CachedNetworkImage(
+                      imageUrl:
+                          '${AppUrls.movieImgBaseURL}${mediaItem?.posterPath}',
+                      imageBuilder: (context, imageProvider) => Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(32),
+                          image: DecorationImage(
+                            image: imageProvider,
                             fit: BoxFit.fill,
-                            image: OctoImage(
-                              image: CachedNetworkImageProvider(
-                                '${AppUrls.movieImgBaseURL}${mediaItem?.posterPath}',
-                              ),
-                              progressIndicatorBuilder: OctoProgressIndicator
-                                  .circularProgressIndicator(),
-                            ).image),
+                          ),
+                        ),
                       ),
+                      placeholder: (context, url) =>
+                          const Center(child: PlaceholderLoader()),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     )
                   : const PlaceholderLoader(),
             ),

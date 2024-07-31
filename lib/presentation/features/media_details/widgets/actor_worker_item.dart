@@ -6,10 +6,10 @@ import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/domain/models/actor_entity.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:film_flu/presentation/widgets/placeholder_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:octo_image/octo_image.dart';
 
 class FilmActorItem extends StatefulWidget {
   const FilmActorItem({
@@ -32,17 +32,23 @@ class _FilmActorItemState extends State<FilmActorItem> {
         context.push('${AppRoutePaths.personDetailsRoute}/${widget.actor?.id}');
       },
       title: ClipRRect(
-        borderRadius: BorderRadius.circular(32.0),
-        child: OctoImage(
-          image: CachedNetworkImageProvider(
-            '${AppUrls.personImgBaseUrl}${widget.actor?.profilePath}',
+        child: CachedNetworkImage(
+          imageUrl: '${AppUrls.personImgBaseUrl}${widget.actor?.profilePath}',
+          imageBuilder: (context, imageProvider) => Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(32),
+              image: DecorationImage(
+                image: imageProvider,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
-          progressIndicatorBuilder:
-              OctoProgressIndicator.circularProgressIndicator(),
+          placeholder: (context, url) =>
+              const Center(child: PlaceholderLoader()),
           height: 200,
           width: 120,
           fit: BoxFit.cover,
-          errorBuilder: (context, error, stackTrace) {
+          errorWidget: (context, error, stackTrace) {
             if (widget.actor?.gender == 2) {
               return SvgPicture.asset(
                 AppAssets.actorImageIcon,

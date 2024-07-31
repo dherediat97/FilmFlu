@@ -27,6 +27,7 @@ class BackgroundImageMediaItem extends StatelessWidget {
         background: Stack(fit: StackFit.expand, children: [
           mediaItem != null
               ? DefaultImageLoader(
+                  darkenImage: true,
                   imageUrl:
                       '${AppUrls.movieLandscapeBaseUrl}${mediaItem?.backdropPath}',
                 )

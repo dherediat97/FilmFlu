@@ -6,9 +6,9 @@ import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/domain/models/credit_actor_entity.dart';
 import 'package:film_flu/domain/models/person_entity.dart';
+import 'package:film_flu/presentation/widgets/placeholder_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:octo_image/octo_image.dart';
 
 class ActorCreditsWidget extends StatelessWidget {
   const ActorCreditsWidget({
@@ -48,14 +48,25 @@ class ActorCreditsWidget extends StatelessWidget {
             },
             title: ClipRRect(
               borderRadius: BorderRadius.circular(32.0),
-              child: OctoImage(
-                image: CachedNetworkImageProvider(actor.backdropPath != null
+              child: CachedNetworkImage(
+                imageUrl: actor.backdropPath != null
                     ? '${AppUrls.personImgBaseUrl}${actor.backdropPath}'
-                    : '${AppUrls.personImgBaseUrl}${person.profilePath}'),
+                    : '${AppUrls.personImgBaseUrl}${person.profilePath}',
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(32),
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                placeholder: (context, url) =>
+                    const Center(child: PlaceholderLoader()),
                 height: 200,
                 width: 120,
                 fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
+                errorWidget: (context, error, stackTrace) {
                   return Image.network(
                     '${AppUrls.personImgBaseUrl}${person.profilePath}',
                     height: 200,
