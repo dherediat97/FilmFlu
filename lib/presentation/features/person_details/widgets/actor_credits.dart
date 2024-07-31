@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
@@ -7,6 +8,7 @@ import 'package:film_flu/domain/models/credit_actor_entity.dart';
 import 'package:film_flu/domain/models/person_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:octo_image/octo_image.dart';
 
 class ActorCreditsWidget extends StatelessWidget {
   const ActorCreditsWidget({
@@ -31,32 +33,34 @@ class ActorCreditsWidget extends StatelessWidget {
           crossAxisSpacing: 18,
         ),
         itemBuilder: (context, index) {
-          CreditActorEntity filmPerson = credits[index];
+          CreditActorEntity actor = credits[index];
 
-          String? movieTitle = filmPerson.title != null
-              ? '${filmPerson.character} ${context.localizations.in_preposition} ${filmPerson.title}'
-              : '${filmPerson.character}';
+          String? movieTitle = actor.title != null
+              ? '${actor.character} ${context.localizations.in_preposition} ${actor.title}'
+              : '${actor.character}';
 
           return ListTile(
             onTap: () {
-              AppConstants.mediaTypeId = filmPerson.id;
+              AppConstants.mediaTypeId = actor.id;
               context.push(
-                '${AppRoutePaths.mediaDetailsRoute}/${filmPerson.id}',
+                '${AppRoutePaths.mediaDetailsRoute}/${actor.id}',
               );
             },
             title: ClipRRect(
               borderRadius: BorderRadius.circular(32.0),
-              child: Image.network(
-                '${AppUrls.personImgBaseUrl}${filmPerson.backdropPath}',
+              child: OctoImage(
+                image: CachedNetworkImageProvider(actor.backdropPath != null
+                    ? '${AppUrls.personImgBaseUrl}${actor.backdropPath}'
+                    : '${AppUrls.personImgBaseUrl}${person.profilePath}'),
                 height: 200,
                 width: 120,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
                   return Image.network(
+                    '${AppUrls.personImgBaseUrl}${person.profilePath}',
                     height: 200,
                     width: 120,
                     fit: BoxFit.cover,
-                    '${AppUrls.personImgBaseUrl}${person.profilePath}',
                   );
                 },
               ),

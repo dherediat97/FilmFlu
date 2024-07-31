@@ -22,8 +22,8 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
       await event.when(
         getMediaDetails: (String mediaType, int mediaItemId) =>
             _getMediaDetails(event, emit, mediaType, mediaItemId),
-        getCredits: (String mediaType, int mediaItemId) =>
-            _getCredits(event, emit, mediaType, mediaItemId),
+        getCredits: (String mediaType, int mediaItemId, bool isCast) =>
+            _getCredits(event, emit, mediaType, mediaItemId, isCast),
         getReviews: (String mediaType, int mediaItemId) =>
             _getReviews(event, emit, mediaType, mediaItemId),
         setCreditsType: (bool isCastSelected) =>
@@ -71,6 +71,7 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
     Emitter<MediaDetailState> emit,
     String mediaType,
     int mediaTypeId,
+    bool isCast,
   ) async {
     final creditsData = await _repository.getCredits(
       mediaType: mediaType,
@@ -106,7 +107,12 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
         );
       },
       success: (value) {
-        emit(state.copyWith(uiState: const UiState.success(), reviews: value));
+        if (value.isNotEmpty) {
+          emit(
+              state.copyWith(uiState: const UiState.success(), reviews: value));
+        } else {
+          emit(state.copyWith(reviews: null));
+        }
       },
     );
   }

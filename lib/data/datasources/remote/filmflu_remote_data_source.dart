@@ -1,7 +1,6 @@
 import 'package:film_flu/core/entities/pagination.dart';
 import 'package:film_flu/data/datasources/remote/api/filmflu_api.dart';
 import 'package:film_flu/data/models/credits_media_remote_entity.dart';
-import 'package:film_flu/data/models/genre_remote_entity.dart';
 import 'package:film_flu/data/models/media_item_remote_entity.dart';
 import 'package:film_flu/data/models/person_remote_entity.dart';
 import 'package:film_flu/data/models/review_remote_entity.dart';
@@ -38,6 +37,12 @@ class FilmFluRemoteDataSource
   }
 
   @override
+  Future<MediaItemRemoteEntity> getMediaDataDay() async {
+    final mediaDataDay = await _filmFluApi.fetchMediaDataDay();
+    return mediaDataDay.results[0];
+  }
+
+  @override
   Future<List<MediaItemRemoteEntity>> paginateMediaData({
     required String mediaType,
     required int genreId,
@@ -50,16 +55,6 @@ class FilmFluRemoteDataSource
       page: page,
     );
     return mediaData.results;
-  }
-
-  @override
-  Future<List<GenreRemoteEntity>> getGenreList({
-    required String mediaType,
-  }) async {
-    final mediaData = await _filmFluApi.fetchGenreList(
-      mediaType: mediaType,
-    );
-    return mediaData.genres;
   }
 
   @override

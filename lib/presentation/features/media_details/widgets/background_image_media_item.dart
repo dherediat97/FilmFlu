@@ -1,5 +1,7 @@
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
+import 'package:film_flu/presentation/widgets/default_image_loader.dart';
+import 'package:film_flu/presentation/widgets/placeholder_loader.dart';
 import 'package:flutter/material.dart';
 
 class BackgroundImageMediaItem extends StatelessWidget {
@@ -7,59 +9,64 @@ class BackgroundImageMediaItem extends StatelessWidget {
     super.key,
     this.mediaItem,
     required this.movieName,
+    required this.isHomeScreen,
   });
 
   final MediaItemEntity? mediaItem;
   final String movieName;
+  final bool isHomeScreen;
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.passthrough,
-      children: [
-        ClipRRect(
-          borderRadius: const BorderRadius.only(
-            bottomLeft: Radius.circular(64),
-            bottomRight: Radius.circular(64),
-          ),
-          child: Opacity(
-            opacity: 0.6,
-            child: Image.network(
-              '${AppUrls.movieLandscapeBaseUrl}${mediaItem?.backdropPath}',
-              width: MediaQuery.of(context).size.width,
-              height: 300,
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(left: 32, top: 64),
-          child: Align(
-            alignment: Alignment.bottomLeft,
-            child: Column(
+    return SliverAppBar(
+      toolbarHeight: 0,
+      automaticallyImplyLeading: false,
+      expandedHeight: MediaQuery.of(context).size.height / 1.20,
+      flexibleSpace: FlexibleSpaceBar(
+        collapseMode: CollapseMode.pin,
+        background: Stack(fit: StackFit.expand, children: [
+          mediaItem != null
+              ? DefaultImageLoader(
+                  imageUrl:
+                      '${AppUrls.movieLandscapeBaseUrl}${mediaItem?.backdropPath}',
+                )
+              : const PlaceholderLoader(),
+          Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: Image.network(
-                    '${AppUrls.movieImgBaseURL}${mediaItem?.posterPath}',
-                    width: 110,
-                    height: 140,
-                    fit: BoxFit.cover,
-                  ),
+                const Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      'Añadir a mi lista',
+                      style: TextStyle(color: Colors.white, fontSize: 11),
+                    )
+                  ],
                 ),
-                Text(
-                  movieName,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.w500,
+                if (isHomeScreen) ...[
+                  const Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Icon(Icons.info_outline, color: Colors.white),
+                      Text(
+                        'Información',
+                        style: TextStyle(color: Colors.white, fontSize: 11),
+                      )
+                    ],
                   ),
-                ),
+                ],
               ],
             ),
           ),
-        ),
-      ],
+        ]),
+      ),
     );
   }
 }

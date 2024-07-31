@@ -15,6 +15,7 @@ import 'package:film_flu/data/repositories/remote/person_remote_data_source_cont
 import 'package:film_flu/domain/repository_contracts/media_list_repository_contract.dart';
 import 'package:film_flu/domain/repository_contracts/media_repository_contract.dart';
 import 'package:film_flu/domain/repository_contracts/person_repository_contract.dart';
+import 'package:film_flu/presentation/features/media_day/bloc/media_day_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
 import 'package:film_flu/presentation/features/media_list/bloc/media_list_bloc.dart';
 import 'package:film_flu/presentation/features/person_details/bloc/person_details_bloc.dart';

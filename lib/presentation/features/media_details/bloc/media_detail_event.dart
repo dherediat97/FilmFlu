@@ -10,6 +10,7 @@ class MediaDetailEvent with _$MediaDetailEvent {
   const factory MediaDetailEvent.getCredits(
     String mediaType,
     int mediaItemId,
+    bool isCast,
   ) = _GetCredits;
 
   const factory MediaDetailEvent.getReviews(

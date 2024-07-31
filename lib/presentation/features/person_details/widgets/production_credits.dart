@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
@@ -7,6 +8,7 @@ import 'package:film_flu/domain/models/credit_production_entity.dart';
 import 'package:film_flu/domain/models/person_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:octo_image/octo_image.dart';
 
 class ProductionCreditsWidget extends StatelessWidget {
   const ProductionCreditsWidget({
@@ -46,19 +48,20 @@ class ProductionCreditsWidget extends StatelessWidget {
             },
             title: ClipRRect(
               borderRadius: BorderRadius.circular(32.0),
-              child: Image.network(
-                filmPerson.backdropPath != null
+              child: OctoImage(
+                image: CachedNetworkImageProvider(filmPerson.backdropPath !=
+                        null
                     ? '${AppUrls.personImgBaseUrl}${filmPerson.backdropPath}'
-                    : '${AppUrls.personImgBaseUrl}${person.profilePath}',
+                    : '${AppUrls.personImgBaseUrl}${person.profilePath}'),
                 height: 200,
                 width: 120,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
                   return Image.network(
+                    '${AppUrls.personImgBaseUrl}${person.profilePath}',
                     height: 200,
                     width: 120,
                     fit: BoxFit.cover,
-                    '${AppUrls.personImgBaseUrl}${person.profilePath}',
                   );
                 },
               ),

@@ -10,6 +10,7 @@ import 'package:film_flu/presentation/widgets/container_tab_media_item.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/reviews_widget_item.dart';
 import 'package:film_flu/presentation/features/media_list/constants/media_list_constants.dart';
 import 'package:film_flu/presentation/widgets/empty_state_widget.dart';
+import 'package:film_flu/presentation/widgets/placeholder_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,39 +36,31 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
   void initState() {
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
-    _tabController.addListener(
-      () {
-        var index = _tabController.index;
-        switch (index) {
-          case 0:
-            break;
-          case 1:
-            context.read<MediaDetailBloc>().add(
-                  MediaDetailEvent.getReviews(
-                    widget.mediaItemType,
-                    widget.mediaItemId,
-                  ),
-                );
-            break;
-          case 2:
-            context.read<MediaDetailBloc>().add(
-                  MediaDetailEvent.getCredits(
-                    widget.mediaItemType,
-                    widget.mediaItemId,
-                  ),
-                );
-            break;
-          case 3:
-            context.read<MediaDetailBloc>().add(
-                  MediaDetailEvent.getCredits(
-                    widget.mediaItemType,
-                    widget.mediaItemId,
-                  ),
-                );
-            break;
-        }
-      },
-    );
+    _tabController.addListener(() {
+      var index = _tabController.index;
+      switch (index) {
+        case 0:
+          break;
+        case 1:
+          context.read<MediaDetailBloc>().add(MediaDetailEvent.getReviews(
+              widget.mediaItemType, widget.mediaItemId));
+          break;
+        case 2:
+          context.read<MediaDetailBloc>().add(MediaDetailEvent.getCredits(
+                widget.mediaItemType,
+                widget.mediaItemId,
+                true,
+              ));
+          break;
+        case 3:
+          context.read<MediaDetailBloc>().add(MediaDetailEvent.getCredits(
+                widget.mediaItemType,
+                widget.mediaItemId,
+                false,
+              ));
+          break;
+      }
+    });
   }
 
   @override
@@ -83,124 +76,138 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
         bool isMovie =
             widget.mediaItemType == MediaListConstants.movieMediaType;
 
-        return SingleChildScrollView(
-          child: Column(
-            children: [
-              BackgroundImageMediaItem(
-                mediaItem: state.mediaItem,
-                movieName: state.movieName,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(24),
-                child: DefaultTabController(
-                  length: 4,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TabBar(
-                        controller: _tabController,
-                        tabs: [
-                          Tab(
-                            text: isMovie
-                                ? context.localizations.about_movie
-                                : context.localizations.about_serie,
-                          ),
-                          Tab(text: context.localizations.reviews),
-                          Tab(text: context.localizations.character_cast),
-                          Tab(text: context.localizations.production_cast),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 500,
-                        child: TabBarView(
+        return CustomScrollView(slivers: [
+          BackgroundImageMediaItem(
+            isHomeScreen: false,
+            mediaItem: state.mediaItem,
+            movieName: state.movieName,
+          ),
+          SliverList.list(children: [
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: DefaultTabController(
+                    length: 4,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TabBar(
                           controller: _tabController,
-                          children: [
-                            ContainerTabMediaItem(
-                              state: state.uiState,
-                              item: state.mediaItem?.overview,
-                              child: Text(
-                                state.mediaItem!.overview.toString(),
-                                textAlign: TextAlign.start,
-                                style: Theme.of(context).textTheme.bodyMedium,
-                              ),
+                          tabs: [
+                            Tab(
+                              text: isMovie
+                                  ? context.localizations.about_movie
+                                  : context.localizations.about_serie,
                             ),
-                            ContainerTabMediaItem(
-                              state: state.uiState,
-                              item: state.reviews,
-                              child: state.reviews == null
-                                  ? ListView.builder(
-                                      itemCount: state.reviews?.length,
-                                      itemBuilder: (context, index) {
-                                        ReviewEntity? review =
-                                            state.reviews?[index];
-
-                                        return ReviewsWidgetItem(
-                                          review: review,
-                                        );
-                                      },
-                                    )
-                                  : const EmptyStateWidget(
-                                      errorMessage:
-                                          'No se han encontrado reseñas'),
-                            ),
-                            ContainerTabMediaItem(
-                              state: state.uiState,
-                              item: state.credits?.cast,
-                              child: GridView.custom(
-                                gridDelegate:
-                                    const SliverGridDelegateWithMaxCrossAxisExtent(
-                                  maxCrossAxisExtent: 240,
-                                  mainAxisExtent: 340,
-                                  mainAxisSpacing: 18,
-                                  crossAxisSpacing: 18,
-                                ),
-                                childrenDelegate: SliverChildBuilderDelegate(
-                                  childCount: state.credits?.cast.length,
-                                  (_, index) {
-                                    ActorEntity? actor =
-                                        state.credits?.cast[index];
-
-                                    return FilmActorItem(
-                                      actor: actor,
-                                    );
-                                  },
-                                ),
-                              ),
-                            ),
-                            ContainerTabMediaItem(
-                              state: state.uiState,
-                              item: state.credits?.crew,
-                              child: GridView.custom(
-                                gridDelegate:
-                                    const SliverGridDelegateWithMaxCrossAxisExtent(
-                                  maxCrossAxisExtent: 240,
-                                  mainAxisExtent: 340,
-                                  mainAxisSpacing: 18,
-                                  crossAxisSpacing: 18,
-                                ),
-                                childrenDelegate: SliverChildBuilderDelegate(
-                                  childCount: state.credits?.crew.length,
-                                  (_, index) {
-                                    FilmWorkerEntity? filmWorker =
-                                        state.credits?.crew[index];
-
-                                    return FilmWorkerItem(
-                                      filmWorker: filmWorker,
-                                    );
-                                  },
-                                ),
-                              ),
-                            )
+                            Tab(text: context.localizations.reviews),
+                            Tab(text: context.localizations.character_cast),
+                            Tab(text: context.localizations.production_cast),
                           ],
                         ),
-                      )
-                    ],
+                        SizedBox(
+                          height: 500,
+                          child: TabBarView(
+                            controller: _tabController,
+                            children: [
+                              ContainerTabMediaItem(
+                                state: state.uiState,
+                                child: state.mediaItem?.overview != null
+                                    ? Text(
+                                        state.mediaItem!.overview.toString(),
+                                        textAlign: TextAlign.start,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium,
+                                      )
+                                    : const EmptyStateWidget(
+                                        errorMessage:
+                                            'No se ha encontrado descripción'),
+                              ),
+                              ContainerTabMediaItem(
+                                state: state.uiState,
+                                child: state.reviews != null ||
+                                        state.reviews?.isNotEmpty == true
+                                    ? ListView.builder(
+                                        itemCount: state.reviews?.length,
+                                        itemBuilder: (context, index) {
+                                          ReviewEntity? review =
+                                              state.reviews?[index];
+
+                                          return ReviewsWidgetItem(
+                                            review: review,
+                                          );
+                                        },
+                                      )
+                                    : const PlaceholderLoader(),
+                              ),
+                              ContainerTabMediaItem(
+                                state: state.uiState,
+                                child: state.credits?.cast != null ||
+                                        state.credits?.cast.isNotEmpty == true
+                                    ? GridView.custom(
+                                        gridDelegate:
+                                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                                          maxCrossAxisExtent: 240,
+                                          mainAxisExtent: 340,
+                                          mainAxisSpacing: 18,
+                                          crossAxisSpacing: 18,
+                                        ),
+                                        childrenDelegate:
+                                            SliverChildBuilderDelegate(
+                                          childCount:
+                                              state.credits?.cast.length,
+                                          (_, index) {
+                                            ActorEntity? actor =
+                                                state.credits?.cast[index];
+
+                                            return FilmActorItem(
+                                              actor: actor,
+                                            );
+                                          },
+                                        ),
+                                      )
+                                    : const PlaceholderLoader(),
+                              ),
+                              ContainerTabMediaItem(
+                                state: state.uiState,
+                                child: state.credits?.crew != null ||
+                                        state.credits?.crew.isNotEmpty == true
+                                    ? GridView.custom(
+                                        gridDelegate:
+                                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                                          maxCrossAxisExtent: 240,
+                                          mainAxisExtent: 340,
+                                          mainAxisSpacing: 18,
+                                          crossAxisSpacing: 18,
+                                        ),
+                                        childrenDelegate:
+                                            SliverChildBuilderDelegate(
+                                          childCount:
+                                              state.credits?.crew.length,
+                                          (_, index) {
+                                            FilmWorkerEntity? filmWorker =
+                                                state.credits?.crew[index];
+
+                                            return FilmWorkerItem(
+                                              filmWorker: filmWorker,
+                                            );
+                                          },
+                                        ),
+                                      )
+                                    : const PlaceholderLoader(),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
-          ),
-        );
+                )
+              ],
+            )
+          ])
+        ]);
       },
     );
   }

@@ -100,4 +100,19 @@ class MediaListRepository implements MediaListRepositoryContract {
       );
     }
   }
+
+  @override
+  Future<Result<MediaItemEntity>> getMediaDataDay() async {
+    try {
+      MediaItemRemoteEntity movie =
+          await _movieRemoteDataSourceContract.getMediaDataDay();
+      return Result.success(movie.toMediaEntity());
+    } catch (error) {
+      return Result.failure(
+        error: RepositoryError.fromDataSourceError(
+          NetworkError.fromException(error),
+        ),
+      );
+    }
+  }
 }

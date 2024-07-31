@@ -1,11 +1,9 @@
 import 'package:film_flu/core/entities/pagination.dart';
 import 'package:film_flu/data/models/credits_media_remote_entity.dart';
-import 'package:film_flu/data/models/credits_person_remote_entity.dart';
 import 'package:film_flu/data/models/genre_result_remote_entity.dart';
 import 'package:film_flu/data/models/media_item_remote_entity.dart';
 import 'package:film_flu/data/models/person_remote_entity.dart';
 import 'package:film_flu/data/models/review_remote_entity.dart';
-import 'package:film_flu/data/models/video_remote_entity.dart';
 import 'package:film_flu/domain/models/language_entity.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
@@ -41,12 +39,8 @@ abstract class FilmFluApi {
     @Query('append_to_response') String moreResponse = 'videos',
   });
 
-  @GET('/fetchTrailer')
-  Future<VideoRemoteEntity> fetchTrailer(
-    String movieId,
-    String? language,
-    String mediaType,
-  );
+  @GET('/movie/now_playing')
+  Future<Pagination<MediaItemRemoteEntity>> fetchMediaDataDay();
 
   @GET('/{mediaType}/{mediaTypeId}/credits')
   Future<CreditsMediaRemoteEntity> fetchCredits({
@@ -71,9 +65,6 @@ abstract class FilmFluApi {
     @Query('language') String language = 'es-ES',
     @Query('append_to_response') String moreResponse = 'credits',
   });
-
-  @GET('/fetchPersonCredits')
-  Future<CreditsPersonRemoteEntity> fetchPersonCredits(String personId);
 
   @GET('/configuration/languages')
   Future<LanguageEntity> fetchLanguages();

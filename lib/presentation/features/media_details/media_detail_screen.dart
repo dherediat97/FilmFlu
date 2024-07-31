@@ -54,21 +54,8 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
             padding: const EdgeInsets.all(8.0),
             child: state.trailerId.isNotEmpty
                 ? Container(
-                    child: state.isTrailerOpened
-                        ? FloatingActionButton(
-                            mini: true,
-                            child: const Icon(Icons.stop),
-                            onPressed: () {
-                              context
-                                  .read<MediaDetailBloc>()
-                                  .add(const MediaDetailEvent.closeTrailer());
-                              _trailerController = null;
-                              SystemChrome.setEnabledSystemUIMode(
-                                SystemUiMode.edgeToEdge,
-                              );
-                            },
-                          )
-                        : FloatingActionButton.extended(
+                    child: !state.isTrailerOpened
+                        ? FloatingActionButton.extended(
                             icon: const Icon(Icons.play_arrow),
                             label: Text(context.localizations.play_trailer),
                             onPressed: () {
@@ -85,7 +72,8 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                                 );
                               }
                             },
-                          ),
+                          )
+                        : Container(),
                   )
                 : Container(),
           ),
@@ -97,7 +85,27 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
               : YoutubePlayerScaffold(
                   controller: _trailerController!,
                   builder: (context, player) {
-                    return player;
+                    return Stack(
+                      alignment: Alignment.bottomRight,
+                      children: [
+                        player,
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: FloatingActionButton(
+                            child: const Icon(Icons.stop),
+                            onPressed: () {
+                              context
+                                  .read<MediaDetailBloc>()
+                                  .add(const MediaDetailEvent.closeTrailer());
+                              _trailerController = null;
+                              SystemChrome.setEnabledSystemUIMode(
+                                SystemUiMode.edgeToEdge,
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    );
                   },
                 ),
         );
