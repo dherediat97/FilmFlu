@@ -12,16 +12,16 @@ List<GoRoute> appRoutes = [
     builder: (context, state) => const SplashController(),
     routes: [
       GoRoute(
-        path: 'main',
-        builder: (context, state) => const HomeScreen(),
+        path: 'main/:mediaType',
+        builder: (context, state) => HomeScreen(
+          mediaType: state.pathParameters['mediaType'].toString(),
+        ),
       ),
       GoRoute(
         path: 'mediaItemDetails/:mediaTypeId',
-        builder: (context, state) {
-          return MediaDetailController(
-            mediaTypeId: state.pathParameters['mediaTypeId'].toString(),
-          );
-        },
+        builder: (context, state) => MediaDetailController(
+          mediaTypeId: state.pathParameters['mediaTypeId'].toString(),
+        ),
       ),
       GoRoute(
         path: 'personDetails/:personId',

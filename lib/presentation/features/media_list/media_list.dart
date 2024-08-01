@@ -11,10 +11,12 @@ class MediaList extends StatefulWidget {
     required this.mediaType,
     required this.genreId,
     required this.title,
+    this.languageId = 'en',
   });
 
   final String mediaType;
   final String title;
+  final String languageId;
   final int genreId;
 
   @override
@@ -29,8 +31,8 @@ class _MediaDataList extends State<MediaList> {
   void initState() {
     super.initState();
     _scrollController.addListener(_loadMore);
-    context.read<MediaListBloc>().add(
-        MediaListEvent.getMediaDataByGenre(widget.mediaType, widget.genreId));
+    context.read<MediaListBloc>().add(MediaListEvent.getMediaDataByGenre(
+        widget.mediaType, widget.genreId, widget.languageId));
   }
 
   @override
@@ -77,7 +79,7 @@ class _MediaDataList extends State<MediaList> {
                     : ListView.builder(
                         scrollDirection: Axis.horizontal,
                         controller: _scrollController,
-                        itemCount: 20,
+                        itemCount: 10,
                         itemBuilder: (context, index) {
                           var item = mediaList.entries
                               .where((element) => element.key == widget.genreId)

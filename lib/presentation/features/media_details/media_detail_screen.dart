@@ -53,28 +53,26 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
           floatingActionButton: Padding(
             padding: const EdgeInsets.all(8.0),
             child: state.trailerId.isNotEmpty
-                ? Container(
-                    child: !state.isTrailerOpened
-                        ? FloatingActionButton.extended(
-                            icon: const Icon(Icons.play_arrow),
-                            label: Text(context.localizations.play_trailer),
-                            onPressed: () {
-                              context
-                                  .read<MediaDetailBloc>()
-                                  .add(MediaDetailEvent.openTrailer(
-                                    AppConstants.mediaType,
-                                    mediaItem!,
-                                  ));
-                              _trailerController = initTrailerController();
-                              if (state.trailerId.isNotEmpty) {
-                                _trailerController?.loadVideoById(
-                                  videoId: state.trailerId.toString(),
-                                );
-                              }
-                            },
-                          )
-                        : Container(),
-                  )
+                ? !state.isTrailerOpened
+                    ? FloatingActionButton.extended(
+                        icon: const Icon(Icons.play_arrow),
+                        label: Text(context.localizations.play_trailer),
+                        onPressed: () {
+                          context
+                              .read<MediaDetailBloc>()
+                              .add(MediaDetailEvent.openTrailer(
+                                AppConstants.mediaType,
+                                mediaItem!,
+                              ));
+                          _trailerController = initTrailerController();
+                          if (state.trailerId.isNotEmpty) {
+                            _trailerController?.loadVideoById(
+                              videoId: state.trailerId.toString(),
+                            );
+                          }
+                        },
+                      )
+                    : Container()
                 : Container(),
           ),
           child: !state.isTrailerOpened
@@ -85,24 +83,23 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
               : YoutubePlayerScaffold(
                   controller: _trailerController!,
                   builder: (context, player) {
-                    return Stack(
-                      alignment: Alignment.bottomRight,
+                    return Row(
                       children: [
-                        player,
                         Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: FloatingActionButton(
-                            child: const Icon(Icons.stop),
-                            onPressed: () {
-                              context
-                                  .read<MediaDetailBloc>()
-                                  .add(const MediaDetailEvent.closeTrailer());
-                              _trailerController = null;
-                              SystemChrome.setEnabledSystemUIMode(
-                                SystemUiMode.edgeToEdge,
-                              );
-                            },
-                          ),
+                          padding: const EdgeInsets.all(32.0),
+                          child: player,
+                        ),
+                        FloatingActionButton(
+                          child: const Icon(Icons.stop),
+                          onPressed: () {
+                            context
+                                .read<MediaDetailBloc>()
+                                .add(const MediaDetailEvent.closeTrailer());
+                            _trailerController = null;
+                            SystemChrome.setEnabledSystemUIMode(
+                              SystemUiMode.edgeToEdge,
+                            );
+                          },
                         ),
                       ],
                     );
@@ -122,7 +119,7 @@ YoutubePlayerController initTrailerController() {
       captionLanguage: 'es',
       enableKeyboard: false,
       interfaceLanguage: 'es',
-      playsInline: true,
+      strictRelatedVideos: true,
     ),
   );
 }

@@ -13,6 +13,39 @@ class AppLocalizationsIs extends AppLocalizations {
   String get action_movies => 'Hasarmyndir';
 
   @override
+  String get adventure_movies => 'Películas de aventura';
+
+  @override
+  String get animation_movies => 'Películas de animación';
+
+  @override
+  String get crime_movies => 'Películas de crimen';
+
+  @override
+  String get family_movies => 'Películas de familia';
+
+  @override
+  String get fantasy_movies => 'Películas de fantasía';
+
+  @override
+  String get history_movies => 'Películas de historia';
+
+  @override
+  String get horror_movies => 'Películas de horror';
+
+  @override
+  String get music_movies => 'Películas de música';
+
+  @override
+  String get tv_movies => 'Películas de televisión';
+
+  @override
+  String get war_movies => 'Películas de guerra';
+
+  @override
+  String get western_movies => 'Películas del oeste';
+
+  @override
   String get drama_movies => 'Dramamyndir';
 
   @override
@@ -26,9 +59,6 @@ class AppLocalizationsIs extends AppLocalizations {
 
   @override
   String get love_movies => 'Rómantískar kvikmyndir';
-
-  @override
-  String get anime_series => 'Japönsk anime';
 
   @override
   String get animation_series => 'Hreyfimyndasería';

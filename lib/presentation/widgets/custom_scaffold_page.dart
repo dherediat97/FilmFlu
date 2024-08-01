@@ -44,6 +44,8 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
 
     return Scaffold(
       floatingActionButtonLocation: widget.fabLocation,
+      extendBody: true,
+      extendBodyBehindAppBar: true,
       appBar: !widget.fullScreenMode
           ? AppBar(
               automaticallyImplyLeading: true,
@@ -64,7 +66,6 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                       context.push(AppRoutePaths.startRoute);
                     }
                   }),
-              toolbarHeight: 100,
               actions: [
                 Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -78,7 +79,6 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
       body: widget.child,
       bottomNavigationBar: !widget.fullScreenMode
           ? BottomAppBar(
-              height: 50,
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

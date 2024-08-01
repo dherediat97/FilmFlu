@@ -128,6 +128,72 @@ abstract class AppLocalizations {
   /// **'Películas de acción'**
   String get action_movies;
 
+  /// No description provided for @adventure_movies.
+  ///
+  /// In es, this message translates to:
+  /// **'Películas de aventura'**
+  String get adventure_movies;
+
+  /// No description provided for @animation_movies.
+  ///
+  /// In es, this message translates to:
+  /// **'Películas de animación'**
+  String get animation_movies;
+
+  /// No description provided for @crime_movies.
+  ///
+  /// In es, this message translates to:
+  /// **'Películas de crimen'**
+  String get crime_movies;
+
+  /// No description provided for @family_movies.
+  ///
+  /// In es, this message translates to:
+  /// **'Películas de familia'**
+  String get family_movies;
+
+  /// No description provided for @fantasy_movies.
+  ///
+  /// In es, this message translates to:
+  /// **'Películas de fantasía'**
+  String get fantasy_movies;
+
+  /// No description provided for @history_movies.
+  ///
+  /// In es, this message translates to:
+  /// **'Películas de historia'**
+  String get history_movies;
+
+  /// No description provided for @horror_movies.
+  ///
+  /// In es, this message translates to:
+  /// **'Películas de horror'**
+  String get horror_movies;
+
+  /// No description provided for @music_movies.
+  ///
+  /// In es, this message translates to:
+  /// **'Películas de música'**
+  String get music_movies;
+
+  /// No description provided for @tv_movies.
+  ///
+  /// In es, this message translates to:
+  /// **'Películas de televisión'**
+  String get tv_movies;
+
+  /// No description provided for @war_movies.
+  ///
+  /// In es, this message translates to:
+  /// **'Películas de guerra'**
+  String get war_movies;
+
+  /// No description provided for @western_movies.
+  ///
+  /// In es, this message translates to:
+  /// **'Películas del oeste'**
+  String get western_movies;
+
   /// No description provided for @drama_movies.
   ///
   /// In es, this message translates to:
@@ -158,16 +224,10 @@ abstract class AppLocalizations {
   /// **'Películas de romance'**
   String get love_movies;
 
-  /// No description provided for @anime_series.
-  ///
-  /// In es, this message translates to:
-  /// **'Anime Japonés'**
-  String get anime_series;
-
   /// No description provided for @animation_series.
   ///
   /// In es, this message translates to:
-  /// **'Series de Animación'**
+  /// **'Anime Japonés'**
   String get animation_series;
 
   /// No description provided for @documental_series.

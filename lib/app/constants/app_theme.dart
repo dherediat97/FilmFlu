@@ -119,11 +119,13 @@ class AppTheme {
   ThemeData theme(ColorScheme colorScheme) => ThemeData(
         brightness: colorScheme.brightness,
         colorScheme: colorScheme,
-        bottomAppBarTheme: BottomAppBarTheme(
-          color: colorScheme.primary,
-        ),
         appBarTheme: AppBarTheme(
           color: colorScheme.primary,
+          toolbarHeight: 75,
+        ),
+        bottomAppBarTheme: BottomAppBarTheme(
+          color: colorScheme.primary,
+          height: 50,
         ),
         textTheme: textTheme,
         iconTheme: const IconThemeData(
@@ -145,7 +147,7 @@ class AppTheme {
         tabBarTheme: TabBarTheme(
           indicatorColor: colorScheme.primary,
           labelColor: colorScheme.secondary,
-          dividerColor: Colors.transparent,
+          splashFactory: NoSplash.splashFactory,
           unselectedLabelColor: colorScheme.secondary,
           indicatorSize: TabBarIndicatorSize.tab,
         ),

@@ -19,8 +19,10 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
     on<MediaListEvent>(
       (event, emit) async {
         await event.when(
-          getMediaDataByGenre: (String mediaType, int genreId) =>
-              _getMediaDataByGenreId(event, emit, genreId, mediaType),
+          getMediaDataByGenre:
+              (String mediaType, int genreId, String languageId) =>
+                  _getMediaDataByGenreId(
+                      event, emit, genreId, mediaType, languageId),
           loadMoreMediaData: (String mediaType, int genreId) =>
               _loadMoreMediaData(event, emit, mediaType, genreId),
           nextPage: (int page) => _nextPage(event, emit, page),
@@ -34,13 +36,15 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
     Emitter<MediaListState> emit,
     int genreId,
     String mediaType,
+    String languageId,
   ) async {
     emit(
       state.copyWith(
         uiState: const UiState.loading(),
       ),
     );
-    final movieData = await _repository.getMediaDataByGenre(mediaType, genreId);
+    final movieData =
+        await _repository.getMediaDataByGenre(mediaType, genreId, languageId);
     movieData.when(
       failure: (errorMessage) {
         emit(

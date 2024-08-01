@@ -5,6 +5,7 @@ abstract class MediaListRepositoryContract {
   Future<Result<List<MediaItemEntity>>> getMediaDataByGenre(
     String mediaType,
     int genreId,
+    String languageId,
   );
 
   Future<Result<List<MediaItemEntity>>> getMovies({
