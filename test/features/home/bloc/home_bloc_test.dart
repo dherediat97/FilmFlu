@@ -27,8 +27,8 @@ void main() {
       blocTest(
         'Given HomeScreenBloc when load the bloc then return the expected result',
         build: () => mockBlock,
-        act: (bloc) =>
-            bloc.add(const MediaListEvent.getMediaDataByGenre('action', 0)),
+        act: (bloc) => bloc
+            .add(const MediaListEvent.getMediaDataByGenre('action', 0, 'null')),
         expect: () => [
           MediaListState.initial().copyWith(),
         ],

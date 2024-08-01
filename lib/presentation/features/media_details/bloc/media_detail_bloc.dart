@@ -1,5 +1,6 @@
 import 'package:film_flu/app/types/ui_state.dart';
-import 'package:film_flu/domain/models/credits_media_entity.dart';
+import 'package:film_flu/domain/models/actor_entity.dart';
+import 'package:film_flu/domain/models/film_worker_entity.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:film_flu/domain/repository_contracts/media_repository_contract.dart';
@@ -85,7 +86,13 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
         );
       },
       success: (value) {
-        emit(state.copyWith(uiState: const UiState.success(), credits: value));
+        if (isCast) {
+          emit(state.copyWith(
+              uiState: const UiState.success(), cast: value.cast));
+        } else {
+          emit(state.copyWith(
+              uiState: const UiState.success(), crew: value.crew));
+        }
       },
     );
   }

@@ -9,7 +9,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({
+    super.key,
+    required this.mediaType,
+  });
+
+  final String mediaType;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -32,46 +37,102 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Column(
                 children: [
-                  MediaList(
-                    genreId: 28,
-                    mediaType: MediaListConstants.movieMediaType,
-                    title: context.localizations.action_movies,
-                  ),
-                  MediaList(
-                    genreId: 35,
-                    mediaType: MediaListConstants.movieMediaType,
-                    title: context.localizations.comedy_movies,
-                  ),
-                  MediaList(
-                    genreId: 16,
-                    mediaType: MediaListConstants.serieMediaType,
-                    title: context.localizations.anime_series,
-                  ),
-                  MediaList(
-                    genreId: 10749,
-                    mediaType: MediaListConstants.movieMediaType,
-                    title: context.localizations.love_movies,
-                  ),
-                  MediaList(
-                    genreId: 53,
-                    mediaType: MediaListConstants.movieMediaType,
-                    title: context.localizations.drama_movies,
-                  ),
-                  MediaList(
-                    genreId: 878,
-                    mediaType: MediaListConstants.movieMediaType,
-                    title: context.localizations.fiction_movies,
-                  ),
-                  MediaList(
-                    genreId: 10767,
-                    mediaType: MediaListConstants.serieMediaType,
-                    title: context.localizations.tv_show_series,
-                  ),
-                  MediaList(
-                    genreId: 99,
-                    mediaType: MediaListConstants.serieMediaType,
-                    title: context.localizations.documental_series,
-                  ),
+                  if (widget.mediaType ==
+                      MediaListConstants.movieMediaType) ...[
+                    MediaList(
+                      genreId: 28,
+                      mediaType: MediaListConstants.movieMediaType,
+                      title: context.localizations.action_movies,
+                    ),
+                    MediaList(
+                      genreId: 12,
+                      mediaType: MediaListConstants.movieMediaType,
+                      title: context.localizations.adventure_movies,
+                    ),
+                    MediaList(
+                      genreId: 35,
+                      mediaType: MediaListConstants.movieMediaType,
+                      title: context.localizations.comedy_movies,
+                    ),
+                    MediaList(
+                      genreId: 80,
+                      mediaType: MediaListConstants.movieMediaType,
+                      title: context.localizations.crime_movies,
+                    ),
+                    MediaList(
+                      genreId: 99,
+                      mediaType: MediaListConstants.movieMediaType,
+                      title: context.localizations.documental_series,
+                    ),
+                    MediaList(
+                      genreId: 10751,
+                      mediaType: MediaListConstants.movieMediaType,
+                      title: context.localizations.family_movies,
+                    ),
+                    MediaList(
+                      genreId: 14,
+                      mediaType: MediaListConstants.movieMediaType,
+                      title: context.localizations.fantasy_movies,
+                    ),
+                    MediaList(
+                      genreId: 36,
+                      mediaType: MediaListConstants.movieMediaType,
+                      title: context.localizations.history_movies,
+                    ),
+                    MediaList(
+                      genreId: 27,
+                      mediaType: MediaListConstants.movieMediaType,
+                      title: context.localizations.horror_movies,
+                    ),
+                    MediaList(
+                      genreId: 10402,
+                      mediaType: MediaListConstants.movieMediaType,
+                      title: context.localizations.music_movies,
+                    ),
+                    MediaList(
+                      genreId: 10749,
+                      mediaType: MediaListConstants.movieMediaType,
+                      title: context.localizations.love_movies,
+                    ),
+                    MediaList(
+                      genreId: 878,
+                      mediaType: MediaListConstants.movieMediaType,
+                      title: context.localizations.fiction_movies,
+                    ),
+                    MediaList(
+                      genreId: 10770,
+                      mediaType: MediaListConstants.movieMediaType,
+                      title: context.localizations.tv_movies,
+                    ),
+                    MediaList(
+                      genreId: 53,
+                      mediaType: MediaListConstants.movieMediaType,
+                      title: context.localizations.thriller_movies,
+                    ),
+                    MediaList(
+                      genreId: 10752,
+                      mediaType: MediaListConstants.movieMediaType,
+                      title: context.localizations.war_movies,
+                    ),
+                    MediaList(
+                      genreId: 37,
+                      mediaType: MediaListConstants.movieMediaType,
+                      title: context.localizations.western_movies,
+                    ),
+                  ]
+                  // else ...[
+                  //   MediaList(
+                  //     genreId: 16,
+                  //     mediaType: MediaListConstants.serieMediaType,
+                  //     title: context.localizations.animation_series,
+                  //   ),
+                  //   MediaList(
+                  //     genreId: 16,
+                  //     mediaType: MediaListConstants.serieMediaType,
+                  //     title: context.localizations.animation_series,
+                  //     languageId: 'ja-JA',
+                  //   ),
+                  // ],
                 ],
               )
             ],

@@ -18,11 +18,12 @@ class MediaListRepository implements MediaListRepositoryContract {
   Future<Result<List<MediaItemEntity>>> getMediaDataByGenre(
     String mediaType,
     int genreId,
+    String languageId,
   ) async {
     try {
       return mediaType == MediaListConstants.movieMediaType
-          ? getMovies(genreId: genreId)
-          : getTVSeries(genreId: genreId);
+          ? getMovies(genreId: genreId, languageId: languageId)
+          : getTVSeries(genreId: genreId, languageId: languageId);
     } catch (error) {
       return Result.failure(
         error: RepositoryError.fromDataSourceError(

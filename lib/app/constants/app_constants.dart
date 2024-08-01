@@ -14,6 +14,7 @@ class AppConstants {
   static int mediaTypeId = 0;
   static int personId = 0;
   static const bool debugRequest = false;
+  static const bool isAdult = true;
 
   static String myGithubPage = 'https://github.com/dherediat97';
 

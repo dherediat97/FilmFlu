@@ -5,6 +5,7 @@ class MediaListEvent with _$MediaListEvent {
   const factory MediaListEvent.getMediaDataByGenre(
     String mediaType,
     int genreId,
+    String languageId,
   ) = _GetMediaDataByGenre;
 
   const factory MediaListEvent.loadMoreMediaData(

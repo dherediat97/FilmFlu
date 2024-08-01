@@ -43,7 +43,9 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
           break;
         case 1:
           context.read<MediaDetailBloc>().add(MediaDetailEvent.getReviews(
-              widget.mediaItemType, widget.mediaItemId));
+                widget.mediaItemType,
+                widget.mediaItemId,
+              ));
           break;
         case 2:
           context.read<MediaDetailBloc>().add(MediaDetailEvent.getCredits(
@@ -143,8 +145,8 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
                               ),
                               ContainerTabMediaItem(
                                 state: state.uiState,
-                                child: state.credits?.cast != null ||
-                                        state.credits?.cast.isNotEmpty == true
+                                child: state.cast != null ||
+                                        state.cast?.isNotEmpty == true
                                     ? GridView.custom(
                                         gridDelegate:
                                             const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -155,11 +157,10 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
                                         ),
                                         childrenDelegate:
                                             SliverChildBuilderDelegate(
-                                          childCount:
-                                              state.credits?.cast.length,
+                                          childCount: state.cast?.length,
                                           (_, index) {
                                             ActorEntity? actor =
-                                                state.credits?.cast[index];
+                                                state.cast?[index];
 
                                             return FilmActorItem(
                                               actor: actor,
@@ -171,8 +172,8 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
                               ),
                               ContainerTabMediaItem(
                                 state: state.uiState,
-                                child: state.credits?.crew != null ||
-                                        state.credits?.crew.isNotEmpty == true
+                                child: state.crew != null ||
+                                        state.crew?.isNotEmpty == true
                                     ? GridView.custom(
                                         gridDelegate:
                                             const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -183,11 +184,10 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
                                         ),
                                         childrenDelegate:
                                             SliverChildBuilderDelegate(
-                                          childCount:
-                                              state.credits?.crew.length,
+                                          childCount: state.crew?.length,
                                           (_, index) {
                                             FilmWorkerEntity? filmWorker =
-                                                state.credits?.crew[index];
+                                                state.crew?[index];
 
                                             return FilmWorkerItem(
                                               filmWorker: filmWorker,

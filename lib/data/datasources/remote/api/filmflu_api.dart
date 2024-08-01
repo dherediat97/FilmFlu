@@ -22,7 +22,7 @@ abstract class FilmFluApi {
     @Query('sort_by') String sortBy = 'popularity.desc',
     @Query('with_genres') required int genres,
     @Query('with_original_language') String? languageId,
-    @Query('primary_release_year') int? primaryReleaseYear = 2024,
+    @Query('include_adult') bool? isAdult = false,
     @Query('page') int? page = 1,
   });
 
