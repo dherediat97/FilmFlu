@@ -1,4 +1,3 @@
-import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/core/entities/pagination.dart';
 import 'package:film_flu/data/datasources/remote/api/filmflu_api.dart';
 import 'package:film_flu/data/models/credits_media_remote_entity.dart';
@@ -33,7 +32,6 @@ class FilmFluRemoteDataSource
       genres: genreId,
       page: 1,
       languageId: languageId ?? '',
-      isAdult: AppConstants.isAdult,
     );
     return mediaData.results;
   }
