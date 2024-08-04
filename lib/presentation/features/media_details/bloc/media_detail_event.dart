@@ -22,10 +22,7 @@ class MediaDetailEvent with _$MediaDetailEvent {
     bool isCastSelected,
   ) = _SetCreditsType;
 
-  const factory MediaDetailEvent.openTrailer(
-    String mediaType,
-    MediaItemEntity mediaItem,
-  ) = _OpenTrailer;
+  const factory MediaDetailEvent.openTrailer() = _OpenTrailer;
 
   const factory MediaDetailEvent.closeTrailer() = _CloseTrailer;
 }

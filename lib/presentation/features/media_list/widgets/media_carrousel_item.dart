@@ -3,7 +3,6 @@ import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
-import 'package:film_flu/presentation/features/media_list/constants/media_list_constants.dart';
 import 'package:film_flu/presentation/widgets/placeholder_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -24,10 +23,6 @@ class MediaCarrouselItem extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              AppConstants.mediaType = mediaItem?.title != ''
-                  ? MediaListConstants.movieMediaType
-                  : MediaListConstants.serieMediaType;
-
               AppConstants.mediaTypeId = mediaItem!.id;
               context
                   .push('${AppRoutePaths.mediaDetailsRoute}/${mediaItem?.id}');

@@ -122,6 +122,18 @@ abstract class AppLocalizations {
   /// **'Film Flu'**
   String get app_name;
 
+  /// No description provided for @movies.
+  ///
+  /// In es, this message translates to:
+  /// **'Películas'**
+  String get movies;
+
+  /// No description provided for @series.
+  ///
+  /// In es, this message translates to:
+  /// **'Series'**
+  String get series;
+
   /// No description provided for @action_movies.
   ///
   /// In es, this message translates to:
@@ -227,7 +239,7 @@ abstract class AppLocalizations {
   /// No description provided for @animation_series.
   ///
   /// In es, this message translates to:
-  /// **'Anime Japonés'**
+  /// **'Series de animación'**
   String get animation_series;
 
   /// No description provided for @documental_series.
@@ -241,6 +253,114 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Programas de Televisión'**
   String get tv_show_series;
+
+  /// No description provided for @action_adventure_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Series de acción y aventura'**
+  String get action_adventure_series;
+
+  /// No description provided for @crime_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Series de crimen'**
+  String get crime_series;
+
+  /// No description provided for @family_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Series de familia'**
+  String get family_series;
+
+  /// No description provided for @kids_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Series para niños'**
+  String get kids_series;
+
+  /// No description provided for @reality_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Realitys'**
+  String get reality_series;
+
+  /// No description provided for @talk_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Programas informativos'**
+  String get talk_series;
+
+  /// No description provided for @mistery_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Series de misterio'**
+  String get mistery_series;
+
+  /// No description provided for @history_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Series de historia'**
+  String get history_series;
+
+  /// No description provided for @horror_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Series de horror'**
+  String get horror_series;
+
+  /// No description provided for @music_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Series de música'**
+  String get music_series;
+
+  /// No description provided for @tv_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Series de televisión'**
+  String get tv_series;
+
+  /// No description provided for @war_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Series de guerra'**
+  String get war_series;
+
+  /// No description provided for @western_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Series del oeste'**
+  String get western_series;
+
+  /// No description provided for @drama_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Series de drama'**
+  String get drama_series;
+
+  /// No description provided for @comedy_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Series de comedia'**
+  String get comedy_series;
+
+  /// No description provided for @thriller_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Series de suspense'**
+  String get thriller_series;
+
+  /// No description provided for @fiction_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Series de ciencia ficción y fantasía'**
+  String get fiction_series;
+
+  /// No description provided for @love_series.
+  ///
+  /// In es, this message translates to:
+  /// **'Series de romance'**
+  String get love_series;
 
   /// No description provided for @synopsis.
   ///
@@ -319,6 +439,24 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Reseñas'**
   String get reviews;
+
+  /// No description provided for @information.
+  ///
+  /// In es, this message translates to:
+  /// **'Información'**
+  String get information;
+
+  /// No description provided for @add_to_my_list.
+  ///
+  /// In es, this message translates to:
+  /// **'Añadir a mi lista'**
+  String get add_to_my_list;
+
+  /// No description provided for @unknown.
+  ///
+  /// In es, this message translates to:
+  /// **'Desconocido'**
+  String get unknown;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

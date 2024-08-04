@@ -37,8 +37,10 @@ class FilmFluRemoteDataSource
   }
 
   @override
-  Future<MediaItemRemoteEntity> getMediaDataDay() async {
-    final mediaDataDay = await _filmFluApi.fetchMediaDataDay();
+  Future<MediaItemRemoteEntity> getMediaDataDay(
+      {required String mediaType}) async {
+    final mediaDataDay =
+        await _filmFluApi.fetchMediaDataDay(mediaType: mediaType);
     return mediaDataDay.results[0];
   }
 

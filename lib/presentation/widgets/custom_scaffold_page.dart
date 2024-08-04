@@ -44,8 +44,6 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
 
     return Scaffold(
       floatingActionButtonLocation: widget.fabLocation,
-      extendBody: true,
-      extendBodyBehindAppBar: true,
       appBar: !widget.fullScreenMode
           ? AppBar(
               automaticallyImplyLeading: true,

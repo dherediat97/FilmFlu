@@ -24,5 +24,7 @@ abstract class MediaListRepositoryContract {
     required int genreId,
   });
 
-  Future<Result<MediaItemEntity>> getMediaDataDay();
+  Future<Result<MediaItemEntity>> getMediaDataDay({
+    required String mediaType,
+  });
 }

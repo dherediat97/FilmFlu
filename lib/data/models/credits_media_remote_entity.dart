@@ -1,4 +1,3 @@
-import 'package:film_flu/app/extensions/custom_loading.dart';
 import 'package:film_flu/data/models/actor_remote_entity.dart';
 import 'package:film_flu/data/models/film_worker_remote_entity.dart';
 import 'package:film_flu/domain/models/credits_media_entity.dart';
@@ -20,13 +19,7 @@ class CreditsMediaRemoteEntity with _$CreditsMediaRemoteEntity {
 
 extension CreditsPersonToRemoteEntityExtension on CreditsMediaRemoteEntity {
   CreditsMediaEntity toCreditsEntity() => CreditsMediaEntity(
-        cast: cast
-            .map((e) => e.toActorEntity())
-            .toList()
-            .unique((element) => element.name),
-        crew: crew
-            .map((e) => e.toFilmWorkerEntity())
-            .toList()
-            .unique((element) => element.name),
+        cast: cast.map((e) => e.toActorEntity()).toList(),
+        crew: crew.map((e) => e.toFilmWorkerEntity()).toList(),
       );
 }

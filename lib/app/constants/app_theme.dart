@@ -148,8 +148,9 @@ class AppTheme {
           indicatorColor: colorScheme.primary,
           labelColor: colorScheme.secondary,
           splashFactory: NoSplash.splashFactory,
+          labelPadding: EdgeInsets.zero,
           unselectedLabelColor: colorScheme.secondary,
-          indicatorSize: TabBarIndicatorSize.tab,
+          indicatorSize: TabBarIndicatorSize.label,
         ),
       );
 }

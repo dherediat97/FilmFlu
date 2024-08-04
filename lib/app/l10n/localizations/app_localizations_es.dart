@@ -10,6 +10,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get app_name => 'Film Flu';
 
   @override
+  String get movies => 'Películas';
+
+  @override
+  String get series => 'Series';
+
+  @override
   String get action_movies => 'Películas de acción';
 
   @override
@@ -61,13 +67,67 @@ class AppLocalizationsEs extends AppLocalizations {
   String get love_movies => 'Películas de romance';
 
   @override
-  String get animation_series => 'Anime Japonés';
+  String get animation_series => 'Series de animación';
 
   @override
   String get documental_series => 'Documentales';
 
   @override
   String get tv_show_series => 'Programas de Televisión';
+
+  @override
+  String get action_adventure_series => 'Series de acción y aventura';
+
+  @override
+  String get crime_series => 'Series de crimen';
+
+  @override
+  String get family_series => 'Series de familia';
+
+  @override
+  String get kids_series => 'Series para niños';
+
+  @override
+  String get reality_series => 'Realitys';
+
+  @override
+  String get talk_series => 'Programas informativos';
+
+  @override
+  String get mistery_series => 'Series de misterio';
+
+  @override
+  String get history_series => 'Series de historia';
+
+  @override
+  String get horror_series => 'Series de horror';
+
+  @override
+  String get music_series => 'Series de música';
+
+  @override
+  String get tv_series => 'Series de televisión';
+
+  @override
+  String get war_series => 'Series de guerra';
+
+  @override
+  String get western_series => 'Series del oeste';
+
+  @override
+  String get drama_series => 'Series de drama';
+
+  @override
+  String get comedy_series => 'Series de comedia';
+
+  @override
+  String get thriller_series => 'Series de suspense';
+
+  @override
+  String get fiction_series => 'Series de ciencia ficción y fantasía';
+
+  @override
+  String get love_series => 'Series de romance';
 
   @override
   String get synopsis => 'Sinopsis';
@@ -107,4 +167,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get reviews => 'Reseñas';
+
+  @override
+  String get information => 'Información';
+
+  @override
+  String get add_to_my_list => 'Añadir a mi lista';
+
+  @override
+  String get unknown => 'Desconocido';
 }

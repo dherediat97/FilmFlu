@@ -274,7 +274,7 @@ class MockMediaRepositoryContract extends _i1.Mock
       ) as _i4.Future<_i3.Result<_i8.CreditsMediaEntity>>);
 
   @override
-  _i4.Future<_i3.Result<List<_i9.ReviewEntity>>> getReviews({
+  _i4.Future<_i3.Result<List<_i9.ReviewEntity>?>> getReviews({
     required String? mediaType,
     required int? mediaTypeId,
   }) =>
@@ -287,8 +287,8 @@ class MockMediaRepositoryContract extends _i1.Mock
             #mediaTypeId: mediaTypeId,
           },
         ),
-        returnValue: _i4.Future<_i3.Result<List<_i9.ReviewEntity>>>.value(
-            _FakeResult_1<List<_i9.ReviewEntity>>(
+        returnValue: _i4.Future<_i3.Result<List<_i9.ReviewEntity>?>>.value(
+            _FakeResult_1<List<_i9.ReviewEntity>?>(
           this,
           Invocation.method(
             #getReviews,
@@ -300,8 +300,8 @@ class MockMediaRepositoryContract extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i4.Future<_i3.Result<List<_i9.ReviewEntity>>>.value(
-                _FakeResult_1<List<_i9.ReviewEntity>>(
+            _i4.Future<_i3.Result<List<_i9.ReviewEntity>?>>.value(
+                _FakeResult_1<List<_i9.ReviewEntity>?>(
           this,
           Invocation.method(
             #getReviews,
@@ -312,5 +312,5 @@ class MockMediaRepositoryContract extends _i1.Mock
             },
           ),
         )),
-      ) as _i4.Future<_i3.Result<List<_i9.ReviewEntity>>>);
+      ) as _i4.Future<_i3.Result<List<_i9.ReviewEntity>?>>);
 }
