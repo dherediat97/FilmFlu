@@ -39,8 +39,10 @@ abstract class FilmFluApi {
     @Query('append_to_response') String moreResponse = 'videos',
   });
 
-  @GET('/movie/now_playing')
-  Future<Pagination<MediaItemRemoteEntity>> fetchMediaDataDay();
+  @GET('/{mediaType}/now_playing')
+  Future<Pagination<MediaItemRemoteEntity>> fetchMediaDataDay({
+    @Path('mediaType') required String mediaType,
+  });
 
   @GET('/{mediaType}/{mediaTypeId}/credits')
   Future<CreditsMediaRemoteEntity> fetchCredits({

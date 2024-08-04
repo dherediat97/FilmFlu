@@ -14,7 +14,7 @@ abstract class MediaRepositoryContract {
     required int mediaTypeId,
   });
 
-  Future<Result<List<ReviewEntity>>> getReviews({
+  Future<Result<List<ReviewEntity>?>> getReviews({
     required String mediaType,
     required int mediaTypeId,
   });

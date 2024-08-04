@@ -1,6 +1,7 @@
 import 'package:film_flu/core/entities/pagination.dart';
 import 'package:film_flu/data/models/credits_media_remote_entity.dart';
-import 'package:film_flu/domain/models/genre_entity.dart';
+import 'package:film_flu/data/models/genre_remote_entity.dart';
+import 'package:film_flu/data/models/production_company_remote_entity.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/domain/models/video_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -14,8 +15,10 @@ class MediaItemRemoteEntity with _$MediaItemRemoteEntity {
     @JsonKey(name: 'name') String? name,
     @JsonKey(name: 'title') String? title,
     @JsonKey(name: 'backdrop_path') String? backdropPath,
-    @JsonKey(name: 'genres') List<GenreEntity>? genres,
+    @JsonKey(name: 'genres') List<GenreRemoteEntity>? genres,
     @JsonKey(name: 'genre_ids') List<int>? genreIds,
+    @JsonKey(name: 'production_companies')
+    List<ProductionCompanyRemoteEntity>? productionCompanies,
     @JsonKey(name: 'id') required int id,
     @JsonKey(name: 'original_language') String? originalLanguage,
     @JsonKey(name: 'original_title') String? originalTitle,
@@ -48,7 +51,11 @@ extension MediaItemToRemoteEntityExtension on MediaItemRemoteEntity {
         voteCount: voteCount ?? 0,
         backdropPath: backdropPath ?? '',
         credits: credits?.toCreditsEntity(),
-        genres: genres ?? [],
+        genres: genres?.map((e) => e.toGenreEntity()).toList() ?? [],
+        productionCompanies: productionCompanies
+                ?.map((e) => e.toProductionCompanyEntity())
+                .toList() ??
+            [],
         mediaType: mediaType ?? '',
         firstAirDate: firstAirDate ?? '',
         originalLanguage: originalLanguage ?? '',

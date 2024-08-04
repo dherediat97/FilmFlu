@@ -21,16 +21,15 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
         super(MediaDetailState.initial()) {
     on<MediaDetailEvent>((event, emit) async {
       await event.when(
-        getMediaDetails: (String mediaType, int mediaItemId) =>
+        getMediaDetails: (mediaType, mediaItemId) =>
             _getMediaDetails(event, emit, mediaType, mediaItemId),
-        getCredits: (String mediaType, int mediaItemId, bool isCast) =>
+        getCredits: (mediaType, mediaItemId, isCast) =>
             _getCredits(event, emit, mediaType, mediaItemId, isCast),
-        getReviews: (String mediaType, int mediaItemId) =>
+        getReviews: (mediaType, mediaItemId) =>
             _getReviews(event, emit, mediaType, mediaItemId),
-        setCreditsType: (bool isCastSelected) =>
+        setCreditsType: (isCastSelected) =>
             _setCreditsType(event, emit, isCastSelected),
-        openTrailer: (String mediaType, MediaItemEntity mediaItem) =>
-            _openTrailer(event, emit, mediaType, mediaItem),
+        openTrailer: () => _openTrailer(event, emit),
         closeTrailer: () => _closeTrailer(event, emit),
       );
     });
@@ -48,6 +47,7 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
       mediaType: mediaType,
       mediaTypeId: mediaItemId,
     );
+
     movieData.when(
       failure: (errorMessage) {
         emit(
@@ -55,14 +55,18 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
         );
       },
       success: (movie) {
-        emit(state.copyWith(
-          uiState: const UiState.success(),
-          mediaItem: movie,
-          trailerId: _getTrailerId(movie, mediaType),
-          movieName: movie.title?.isNotEmpty == true
-              ? movie.title.toString()
-              : movie.name.toString(),
-        ));
+        emit(
+          state.copyWith(
+            uiState: const UiState.success(),
+            mediaItem: movie,
+            trailerId: _getTrailerId(movie, mediaType),
+            productionCompanyImage:
+                movie.productionCompanies?.firstOrNull?.logoPath ?? '',
+            movieName: movie.title?.isNotEmpty == true
+                ? movie.title.toString()
+                : movie.name.toString(),
+          ),
+        );
       },
     );
   }
@@ -82,16 +86,26 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
     creditsData.when(
       failure: (errorMessage) {
         emit(
-          state.copyWith(uiState: const UiState.error()),
+          state.copyWith(
+            uiState: const UiState.error(),
+          ),
         );
       },
       success: (value) {
         if (isCast) {
-          emit(state.copyWith(
-              uiState: const UiState.success(), cast: value.cast));
+          emit(
+            state.copyWith(
+              uiState: const UiState.success(),
+              cast: value.cast,
+            ),
+          );
         } else {
-          emit(state.copyWith(
-              uiState: const UiState.success(), crew: value.crew));
+          emit(
+            state.copyWith(
+              uiState: const UiState.success(),
+              crew: value.crew,
+            ),
+          );
         }
       },
     );
@@ -103,23 +117,25 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
     String mediaType,
     int mediaTypeId,
   ) async {
-    final reviewList = await _repository.getReviews(
+    final reviewResponseData = await _repository.getReviews(
       mediaType: mediaType,
       mediaTypeId: mediaTypeId,
     );
-    reviewList.when(
+    reviewResponseData.when(
       failure: (errorMessage) {
         emit(
           state.copyWith(uiState: const UiState.error()),
         );
       },
-      success: (value) {
-        if (value.isNotEmpty) {
-          emit(
-              state.copyWith(uiState: const UiState.success(), reviews: value));
-        } else {
-          emit(state.copyWith(reviews: null));
-        }
+      success: (reviewList) {
+        emit(
+          state.copyWith(
+            uiState: reviewList != null
+                ? const UiState.success()
+                : const UiState.error(),
+            reviews: reviewList ?? [],
+          ),
+        );
       },
     );
   }
@@ -135,21 +151,23 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
   Future<void> _openTrailer(
     MediaDetailEvent event,
     Emitter<MediaDetailState> emit,
-    String mediaType,
-    MediaItemEntity movie,
   ) async {
-    emit(state.copyWith(
-      isTrailerOpened: true,
-    ));
+    emit(
+      state.copyWith(
+        isTrailerOpened: true,
+      ),
+    );
   }
 
   Future<void> _closeTrailer(
     MediaDetailEvent event,
     Emitter<MediaDetailState> emit,
   ) async {
-    emit(state.copyWith(
-      isTrailerOpened: false,
-    ));
+    emit(
+      state.copyWith(
+        isTrailerOpened: false,
+      ),
+    );
   }
 
   String _getTrailerId(MediaItemEntity mediaItemEntity, String mediaType) {

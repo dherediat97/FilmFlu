@@ -26,67 +26,69 @@ class FilmActorItem extends StatefulWidget {
 class _FilmActorItemState extends State<FilmActorItem> {
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: () {
-        AppConstants.personId = widget.actor!.id;
-        context.push('${AppRoutePaths.personDetailsRoute}/${widget.actor?.id}');
-      },
-      title: ClipRRect(
-        child: CachedNetworkImage(
-          imageUrl: '${AppUrls.personImgBaseUrl}${widget.actor?.profilePath}',
-          imageBuilder: (context, imageProvider) => Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(32),
-              image: DecorationImage(
-                image: imageProvider,
+    return widget.actor != null
+        ? ListTile(
+            onTap: () {
+              AppConstants.personId = widget.actor!.id;
+              context.push(
+                  '${AppRoutePaths.personDetailsRoute}/${widget.actor?.id}');
+            },
+            title: ClipRRect(
+              child: CachedNetworkImage(
+                imageUrl:
+                    '${AppUrls.personImgBaseUrl}${widget.actor?.profilePath}',
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(32),
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                placeholder: (context, url) =>
+                    const Center(child: PlaceholderLoader()),
+                height: 200,
+                width: 120,
                 fit: BoxFit.cover,
+                errorWidget: (context, error, stackTrace) {
+                  if (widget.actor?.gender == 2) {
+                    return SvgPicture.asset(
+                      AppAssets.actorImageIcon,
+                      height: 200,
+                      width: 120,
+                      fit: BoxFit.cover,
+                    );
+                  } else {
+                    return SvgPicture.asset(
+                      AppAssets.actressImageIcon,
+                      height: 200,
+                      width: 120,
+                      fit: BoxFit.cover,
+                    );
+                  }
+                },
               ),
             ),
-          ),
-          placeholder: (context, url) =>
-              const Center(child: PlaceholderLoader()),
-          height: 200,
-          width: 120,
-          fit: BoxFit.cover,
-          errorWidget: (context, error, stackTrace) {
-            if (widget.actor?.gender == 2) {
-              return SvgPicture.asset(
-                AppAssets.actorImageIcon,
-                height: 200,
-                width: 120,
-                fit: BoxFit.cover,
-              );
-            } else {
-              return SvgPicture.asset(
-                AppAssets.actressImageIcon,
-                height: 200,
-                width: 120,
-                fit: BoxFit.cover,
-              );
-            }
-          },
-        ),
-      ),
-      subtitle: Column(
-        children: [
-          AutoSizeText(
-            widget.actor!.originalName.toString(),
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.displayLarge,
-          ),
-          widget.actor!.character!.isNotEmpty || widget.actor?.character != null
-              ? AutoSizeText(
+            subtitle: Column(
+              children: [
+                AutoSizeText(
+                  widget.actor!.originalName.toString(),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.displayLarge,
+                ),
+                AutoSizeText(
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   '${context.localizations.actor_job} ${widget.actor?.character}',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodySmall,
                 )
-              : const Text('Desconocido')
-        ],
-      ),
-    );
+              ],
+            ),
+          )
+        : const PlaceholderLoader();
   }
 }

@@ -103,11 +103,13 @@ class MediaListRepository implements MediaListRepositoryContract {
   }
 
   @override
-  Future<Result<MediaItemEntity>> getMediaDataDay() async {
+  Future<Result<MediaItemEntity>> getMediaDataDay({
+    required String mediaType,
+  }) async {
     try {
-      MediaItemRemoteEntity movie =
-          await _movieRemoteDataSourceContract.getMediaDataDay();
-      return Result.success(movie.toMediaEntity());
+      MediaItemRemoteEntity mediaData = await _movieRemoteDataSourceContract
+          .getMediaDataDay(mediaType: mediaType);
+      return Result.success(mediaData.toMediaEntity());
     } catch (error) {
       return Result.failure(
         error: RepositoryError.fromDataSourceError(

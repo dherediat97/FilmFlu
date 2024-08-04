@@ -13,5 +13,7 @@ abstract class MediaListRemoteDataSourceContract {
     required int page,
   });
 
-  Future<MediaItemRemoteEntity> getMediaDataDay();
+  Future<MediaItemRemoteEntity> getMediaDataDay({
+    required String mediaType,
+  });
 }

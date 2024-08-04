@@ -12,10 +12,8 @@ List<GoRoute> appRoutes = [
     builder: (context, state) => const SplashController(),
     routes: [
       GoRoute(
-        path: 'main/:mediaType',
-        builder: (context, state) => HomeScreen(
-          mediaType: state.pathParameters['mediaType'].toString(),
-        ),
+        path: 'main',
+        builder: (context, state) => const HomeScreen(),
       ),
       GoRoute(
         path: 'mediaItemDetails/:mediaTypeId',
