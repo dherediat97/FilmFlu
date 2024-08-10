@@ -6,11 +6,12 @@
 import 'dart:async' as _i4;
 
 import 'package:film_flu/app/types/result.dart' as _i3;
-import 'package:film_flu/domain/models/credits_media_entity.dart' as _i8;
+import 'package:film_flu/domain/models/credits_media_entity.dart' as _i9;
 import 'package:film_flu/domain/models/media_item_entity.dart' as _i7;
-import 'package:film_flu/domain/models/review_entity.dart' as _i9;
+import 'package:film_flu/domain/models/review_entity.dart' as _i10;
 import 'package:film_flu/domain/repository_contracts/media_repository_contract.dart'
     as _i6;
+import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart' as _i8;
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart'
     as _i2;
 import 'package:flutter_bloc/flutter_bloc.dart' as _i5;
@@ -193,15 +194,15 @@ class MockMediaRepositoryContract extends _i1.Mock
     implements _i6.MediaRepositoryContract {
   @override
   _i4.Future<_i3.Result<_i7.MediaItemEntity>> getMediaItem({
-    required String? mediaType,
-    required int? mediaTypeId,
+    required _i8.MediaType? mediaTypeSelected,
+    required String? mediaTypeId,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
           #getMediaItem,
           [],
           {
-            #mediaType: mediaType,
+            #mediaTypeSelected: mediaTypeSelected,
             #mediaTypeId: mediaTypeId,
           },
         ),
@@ -212,7 +213,7 @@ class MockMediaRepositoryContract extends _i1.Mock
             #getMediaItem,
             [],
             {
-              #mediaType: mediaType,
+              #mediaTypeSelected: mediaTypeSelected,
               #mediaTypeId: mediaTypeId,
             },
           ),
@@ -225,7 +226,7 @@ class MockMediaRepositoryContract extends _i1.Mock
             #getMediaItem,
             [],
             {
-              #mediaType: mediaType,
+              #mediaTypeSelected: mediaTypeSelected,
               #mediaTypeId: mediaTypeId,
             },
           ),
@@ -233,8 +234,8 @@ class MockMediaRepositoryContract extends _i1.Mock
       ) as _i4.Future<_i3.Result<_i7.MediaItemEntity>>);
 
   @override
-  _i4.Future<_i3.Result<_i8.CreditsMediaEntity>> getCredits({
-    required String? mediaType,
+  _i4.Future<_i3.Result<_i9.CreditsMediaEntity>> getCredits({
+    required _i8.MediaType? mediaTypeSelected,
     required int? mediaTypeId,
   }) =>
       (super.noSuchMethod(
@@ -242,40 +243,40 @@ class MockMediaRepositoryContract extends _i1.Mock
           #getCredits,
           [],
           {
-            #mediaType: mediaType,
+            #mediaTypeSelected: mediaTypeSelected,
             #mediaTypeId: mediaTypeId,
           },
         ),
-        returnValue: _i4.Future<_i3.Result<_i8.CreditsMediaEntity>>.value(
-            _FakeResult_1<_i8.CreditsMediaEntity>(
+        returnValue: _i4.Future<_i3.Result<_i9.CreditsMediaEntity>>.value(
+            _FakeResult_1<_i9.CreditsMediaEntity>(
           this,
           Invocation.method(
             #getCredits,
             [],
             {
-              #mediaType: mediaType,
+              #mediaTypeSelected: mediaTypeSelected,
               #mediaTypeId: mediaTypeId,
             },
           ),
         )),
         returnValueForMissingStub:
-            _i4.Future<_i3.Result<_i8.CreditsMediaEntity>>.value(
-                _FakeResult_1<_i8.CreditsMediaEntity>(
+            _i4.Future<_i3.Result<_i9.CreditsMediaEntity>>.value(
+                _FakeResult_1<_i9.CreditsMediaEntity>(
           this,
           Invocation.method(
             #getCredits,
             [],
             {
-              #mediaType: mediaType,
+              #mediaTypeSelected: mediaTypeSelected,
               #mediaTypeId: mediaTypeId,
             },
           ),
         )),
-      ) as _i4.Future<_i3.Result<_i8.CreditsMediaEntity>>);
+      ) as _i4.Future<_i3.Result<_i9.CreditsMediaEntity>>);
 
   @override
-  _i4.Future<_i3.Result<List<_i9.ReviewEntity>?>> getReviews({
-    required String? mediaType,
+  _i4.Future<_i3.Result<List<_i10.ReviewEntity>?>> getReviews({
+    required _i8.MediaType? mediaTypeSelected,
     required int? mediaTypeId,
   }) =>
       (super.noSuchMethod(
@@ -283,34 +284,34 @@ class MockMediaRepositoryContract extends _i1.Mock
           #getReviews,
           [],
           {
-            #mediaType: mediaType,
+            #mediaTypeSelected: mediaTypeSelected,
             #mediaTypeId: mediaTypeId,
           },
         ),
-        returnValue: _i4.Future<_i3.Result<List<_i9.ReviewEntity>?>>.value(
-            _FakeResult_1<List<_i9.ReviewEntity>?>(
+        returnValue: _i4.Future<_i3.Result<List<_i10.ReviewEntity>?>>.value(
+            _FakeResult_1<List<_i10.ReviewEntity>?>(
           this,
           Invocation.method(
             #getReviews,
             [],
             {
-              #mediaType: mediaType,
+              #mediaTypeSelected: mediaTypeSelected,
               #mediaTypeId: mediaTypeId,
             },
           ),
         )),
         returnValueForMissingStub:
-            _i4.Future<_i3.Result<List<_i9.ReviewEntity>?>>.value(
-                _FakeResult_1<List<_i9.ReviewEntity>?>(
+            _i4.Future<_i3.Result<List<_i10.ReviewEntity>?>>.value(
+                _FakeResult_1<List<_i10.ReviewEntity>?>(
           this,
           Invocation.method(
             #getReviews,
             [],
             {
-              #mediaType: mediaType,
+              #mediaTypeSelected: mediaTypeSelected,
               #mediaTypeId: mediaTypeId,
             },
           ),
         )),
-      ) as _i4.Future<_i3.Result<List<_i9.ReviewEntity>?>>);
+      ) as _i4.Future<_i3.Result<List<_i10.ReviewEntity>?>>);
 }

@@ -10,82 +10,82 @@ class AppLocalizationsEn extends AppLocalizations {
   String get app_name => 'Film Flu';
 
   @override
-  String get movies => 'Películas';
+  String get movies => 'Movies';
 
   @override
   String get series => 'Series';
 
   @override
-  String get action_movies => 'Action Movies';
+  String get action_movies => 'Action';
 
   @override
-  String get adventure_movies => 'Películas de aventura';
+  String get adventure_movies => 'Adventure';
 
   @override
-  String get animation_movies => 'Películas de animación';
+  String get animation_movies => 'Animation';
 
   @override
-  String get crime_movies => 'Películas de crimen';
+  String get crime_movies => 'Crime';
 
   @override
-  String get family_movies => 'Películas de familia';
+  String get family_movies => 'Family';
 
   @override
-  String get fantasy_movies => 'Películas de fantasía';
+  String get fantasy_movies => 'Fantasy';
 
   @override
-  String get history_movies => 'Películas de historia';
+  String get history_movies => 'History';
 
   @override
-  String get horror_movies => 'Películas de horror';
+  String get horror_movies => 'Horror';
 
   @override
-  String get music_movies => 'Películas de música';
+  String get music_movies => 'Music';
 
   @override
-  String get tv_movies => 'Películas de televisión';
+  String get tv_movies => 'Televisión';
 
   @override
-  String get war_movies => 'Películas de guerra';
+  String get war_movies => 'War';
 
   @override
-  String get western_movies => 'Películas del oeste';
+  String get western_movies => 'western';
 
   @override
-  String get drama_movies => 'Drama Movies';
+  String get drama_movies => 'Drama';
 
   @override
-  String get comedy_movies => 'Comedy Movies';
+  String get comedy_movies => 'Comedy';
 
   @override
-  String get thriller_movies => 'Thriller Movies';
+  String get thriller_movies => 'Thriller';
 
   @override
-  String get fiction_movies => 'Sci-Fi Movies';
+  String get fiction_movies => 'Sci-Fi';
 
   @override
-  String get love_movies => 'Love Movies';
+  String get love_movies => 'Love';
 
   @override
-  String get animation_series => 'Animation Drawing';
+  String get animation_series => 'Animation Series';
 
   @override
   String get documental_series => 'Documentary';
 
   @override
-  String get tv_show_series => 'TV Shows';
+  String get tv_show_series => 'TV Programs';
 
   @override
-  String get action_adventure_series => 'Series de acción y aventura';
+  String get action_adventure_series => 'Action & Adventure Series';
 
   @override
-  String get crime_series => 'Series de crimen';
+  String get crime_series => 'Crime Series';
 
   @override
-  String get family_series => 'Series de familia';
+  String get family_series => 'Family Series';
 
   @override
-  String get kids_series => 'Series para niños';
+  String get kids_series => 'Kids Series';
 
   @override
   String get reality_series => 'Realitys';
@@ -94,40 +94,40 @@ class AppLocalizationsEn extends AppLocalizations {
   String get talk_series => 'Programas informativos';
 
   @override
-  String get mistery_series => 'Series de misterio';
+  String get mistery_series => 'Mistery Series';
 
   @override
-  String get history_series => 'Series de historia';
+  String get history_series => 'History Series';
 
   @override
-  String get horror_series => 'Series de horror';
+  String get horror_series => 'Horror Series';
 
   @override
-  String get music_series => 'Series de música';
+  String get music_series => 'Music Series';
 
   @override
   String get tv_series => 'Series de televisión';
 
   @override
-  String get war_series => 'Series de guerra';
+  String get war_series => 'War Series';
 
   @override
-  String get western_series => 'Series del oeste';
+  String get western_series => 'Western Series';
 
   @override
-  String get drama_series => 'Series de drama';
+  String get drama_series => 'Drama Series';
 
   @override
-  String get comedy_series => 'Series de comedia';
+  String get comedy_series => 'Comedy Series';
 
   @override
-  String get thriller_series => 'Series de suspense';
+  String get thriller_series => 'Thriller Series';
 
   @override
-  String get fiction_series => 'Series de ciencia ficción y fantasía';
+  String get fiction_series => 'Sci-Fi & Fantasy Series';
 
   @override
-  String get love_series => 'Series de romance';
+  String get love_series => 'Love Series';
 
   @override
   String get synopsis => 'Synopsis';
@@ -169,11 +169,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reviews => 'Reviews';
 
   @override
-  String get information => 'Información';
+  String get information => 'Info';
 
   @override
-  String get add_to_my_list => 'Añadir a mi lista';
+  String get add_to_my_list => 'Add to my list';
 
   @override
-  String get unknown => 'Desconocido';
+  String get unknown => 'Unknown';
+
+  @override
+  String get search => 'Buscar';
 }

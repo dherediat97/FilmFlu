@@ -1,12 +1,12 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
+import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/background_image_media_item.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/container_tab_media_item.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/media_data_cast.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/media_data_production.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/reviews_widget_item.dart';
-import 'package:film_flu/presentation/features/media_list/constants/media_list_constants.dart';
 import 'package:film_flu/presentation/widgets/empty_state_widget.dart';
 import 'package:film_flu/presentation/widgets/placeholder_loader.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +15,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class DetailTabMediaItem extends StatefulWidget {
   const DetailTabMediaItem({
     super.key,
-    required this.mediaItemType,
+    required this.mediaTypeSelected,
     required this.mediaItemId,
   });
 
-  final String mediaItemType;
+  final MediaType mediaTypeSelected;
   final int mediaItemId;
 
   @override
@@ -41,20 +41,20 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
           break;
         case 1:
           context.read<MediaDetailBloc>().add(MediaDetailEvent.getReviews(
-                widget.mediaItemType,
+                widget.mediaTypeSelected,
                 widget.mediaItemId,
               ));
           break;
         case 2:
           context.read<MediaDetailBloc>().add(MediaDetailEvent.getCredits(
-                widget.mediaItemType,
+                widget.mediaTypeSelected,
                 widget.mediaItemId,
                 true,
               ));
           break;
         case 3:
           context.read<MediaDetailBloc>().add(MediaDetailEvent.getCredits(
-                widget.mediaItemType,
+                widget.mediaTypeSelected,
                 widget.mediaItemId,
                 false,
               ));
@@ -73,99 +73,87 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
   Widget build(BuildContext context) {
     return BlocBuilder<MediaDetailBloc, MediaDetailState>(
       builder: (context, state) {
-        bool isMovie =
-            widget.mediaItemType == MediaListConstants.movieMediaType;
+        bool isMovie = widget.mediaTypeSelected == MediaType.movie;
 
-        return CustomScrollView(
-          slivers: [
-            state.mediaItem != null
-                ? BackgroundImageMediaItem(
-                    productionCompanyImage: state.productionCompanyImage,
-                    isHomeScreen: false,
-                    mediaItem: state.mediaItem,
-                    movieName: state.movieName,
-                  )
-                : const SliverToBoxAdapter(
-                    child: PlaceholderLoader(),
-                  ),
-            SliverList.list(
-              children: [
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(24),
-                      child: DefaultTabController(
-                        length: 4,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              state.mediaItem != null
+                  ? BackgroundImageMediaItem(
+                      productionCompanyImage: state.productionCompanyImage,
+                      isHomeScreen: false,
+                      mediaItem: state.mediaItem,
+                      mediaDataName: state.movieName,
+                    )
+                  : const PlaceholderLoader(),
+              Padding(
+                padding: const EdgeInsets.all(24),
+                child: DefaultTabController(
+                  length: 4,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TabBar(
+                        controller: _tabController,
+                        tabs: [
+                          Tab(
+                            text: isMovie
+                                ? context.localizations.about_movie
+                                : context.localizations.about_serie,
+                          ),
+                          Tab(text: context.localizations.reviews),
+                          Tab(text: context.localizations.character_cast),
+                          Tab(text: context.localizations.production_cast),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 500,
+                        child: TabBarView(
+                          controller: _tabController,
                           children: [
-                            TabBar(
-                              controller: _tabController,
-                              tabs: [
-                                Tab(
-                                  text: isMovie
-                                      ? context.localizations.about_movie
-                                      : context.localizations.about_serie,
-                                ),
-                                Tab(text: context.localizations.reviews),
-                                Tab(text: context.localizations.character_cast),
-                                Tab(
-                                    text:
-                                        context.localizations.production_cast),
-                              ],
+                            ContainerTabMediaItem(
+                              child: state.mediaItem?.overview != null
+                                  ? Text(
+                                      state.mediaItem!.overview!,
+                                      textAlign: TextAlign.start,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium,
+                                    )
+                                  : const EmptyStateWidget(
+                                      errorMessage:
+                                          'No se ha encontrado descripción'),
                             ),
-                            SizedBox(
-                              height: 500,
-                              child: TabBarView(
-                                controller: _tabController,
-                                children: [
-                                  ContainerTabMediaItem(
-                                    child: state.mediaItem?.overview != null
-                                        ? Text(
-                                            state.mediaItem!.overview!,
-                                            textAlign: TextAlign.start,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyMedium,
-                                          )
-                                        : const EmptyStateWidget(
-                                            errorMessage:
-                                                'No se ha encontrado descripción'),
-                                  ),
-                                  ContainerTabMediaItem(
-                                    child: state.reviews != null
-                                        ? ListView.builder(
-                                            itemCount: state.reviews?.length,
-                                            itemBuilder: (context, index) {
-                                              ReviewEntity? review =
-                                                  state.reviews?[index];
+                            ContainerTabMediaItem(
+                              child: state.reviews != null
+                                  ? ListView.builder(
+                                      itemCount: state.reviews?.length,
+                                      itemBuilder: (context, index) {
+                                        ReviewEntity? review =
+                                            state.reviews?[index];
 
-                                              return ReviewsWidgetItem(
-                                                review: review,
-                                              );
-                                            },
-                                          )
-                                        : const PlaceholderLoader(),
-                                  ),
-                                  ContainerTabMediaItem(
-                                    child: MediaDataCast(cast: state.cast),
-                                  ),
-                                  ContainerTabMediaItem(
-                                    child:
-                                        MediaDataProduction(crew: state.crew),
-                                  )
-                                ],
-                              ),
+                                        return ReviewsWidgetItem(
+                                          review: review,
+                                        );
+                                      },
+                                    )
+                                  : const PlaceholderLoader(),
+                            ),
+                            ContainerTabMediaItem(
+                              child: MediaDataCast(cast: state.cast),
+                            ),
+                            ContainerTabMediaItem(
+                              child: MediaDataProduction(crew: state.crew),
                             )
                           ],
                         ),
-                      ),
-                    )
-                  ],
-                )
-              ],
-            )
-          ],
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         );
       },
     );

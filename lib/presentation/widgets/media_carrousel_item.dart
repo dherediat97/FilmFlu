@@ -3,6 +3,7 @@ import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
+import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/widgets/placeholder_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -11,27 +12,30 @@ class MediaCarrouselItem extends StatelessWidget {
   const MediaCarrouselItem({
     super.key,
     required this.mediaItem,
+    required this.mediaTypeSelected,
   });
 
   final MediaItemEntity? mediaItem;
+  final MediaType mediaTypeSelected;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: Column(
-        children: [
-          GestureDetector(
-            onTap: () {
-              AppConstants.mediaTypeId = mediaItem!.id;
-              context
-                  .push('${AppRoutePaths.mediaDetailsRoute}/${mediaItem?.id}');
-            },
-            child: SizedBox(
-              width: 140,
-              height: 200,
-              child: mediaItem != null
-                  ? CachedNetworkImage(
+    return mediaItem != null
+        ? Padding(
+            key: Key(mediaItem!.id.toString()),
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    AppConstants.mediaTypeId = mediaItem!.id.toString();
+                    context.pushReplacement(
+                        '${AppRoutePaths.mediaDetailsRoute}/${mediaTypeSelected.name}/${mediaItem?.id}');
+                  },
+                  child: SizedBox(
+                    width: 140,
+                    height: 200,
+                    child: CachedNetworkImage(
                       imageUrl:
                           '${AppUrls.movieImgBaseURL}${mediaItem?.posterPath}',
                       imageBuilder: (context, imageProvider) => Container(
@@ -47,12 +51,12 @@ class MediaCarrouselItem extends StatelessWidget {
                           const Center(child: PlaceholderLoader()),
                       errorWidget: (context, url, error) =>
                           const Icon(Icons.error),
-                    )
-                  : const PlaceholderLoader(),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
-    );
+          )
+        : const PlaceholderLoader();
   }
 }

@@ -9,6 +9,7 @@ import 'package:film_flu/domain/models/credits_media_entity.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:film_flu/domain/repository_contracts/media_repository_contract.dart';
+import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
 
 class MediaRepository implements MediaRepositoryContract {
   final MediaRemoteDataSourceContract _movieRemoteDataSourceContract;
@@ -19,12 +20,12 @@ class MediaRepository implements MediaRepositoryContract {
 
   @override
   Future<Result<MediaItemEntity>> getMediaItem({
-    required String mediaType,
-    required int mediaTypeId,
+    required MediaType mediaTypeSelected,
+    required String mediaTypeId,
   }) async {
     try {
       final mediaItemData = await _movieRemoteDataSourceContract.getMediaDetail(
-        mediaType: mediaType,
+        mediaTypeSelected: mediaTypeSelected,
         mediaTypeId: mediaTypeId,
       );
 
@@ -40,12 +41,12 @@ class MediaRepository implements MediaRepositoryContract {
 
   @override
   Future<Result<CreditsMediaEntity>> getCredits({
-    required String mediaType,
+    required MediaType mediaTypeSelected,
     required int mediaTypeId,
   }) async {
     try {
       final creditData = await _movieRemoteDataSourceContract.getCredits(
-        mediaType: mediaType,
+        mediaTypeSelected: mediaTypeSelected,
         mediaTypeId: mediaTypeId,
       );
       return Result.success(creditData.toCreditsEntity());
@@ -60,12 +61,12 @@ class MediaRepository implements MediaRepositoryContract {
 
   @override
   Future<Result<List<ReviewEntity>?>> getReviews({
-    required String mediaType,
+    required MediaType mediaTypeSelected,
     required int mediaTypeId,
   }) async {
     try {
       final reviewData = await _movieRemoteDataSourceContract.getReviews(
-        mediaType: mediaType,
+        mediaTypeSelected: mediaTypeSelected,
         mediaTypeId: mediaTypeId,
       );
 

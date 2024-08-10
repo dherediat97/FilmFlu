@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
-import 'package:film_flu/presentation/features/media_list/bloc/media_list_bloc.dart'
+import 'package:film_flu/presentation/top_blocs/media_list/media_list_bloc.dart'
     as _i2;
 import 'package:flutter_bloc/flutter_bloc.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;

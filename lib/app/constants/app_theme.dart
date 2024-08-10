@@ -144,6 +144,10 @@ class AppTheme {
         ),
         scaffoldBackgroundColor: colorScheme.surface,
         canvasColor: colorScheme.surface,
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: colorScheme.primary,
+          selectedItemColor: colorScheme.onSurface,
+        ),
         tabBarTheme: TabBarTheme(
           indicatorColor: colorScheme.primary,
           labelColor: colorScheme.secondary,

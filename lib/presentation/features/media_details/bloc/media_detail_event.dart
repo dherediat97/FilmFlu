@@ -3,18 +3,18 @@ part of 'media_detail_bloc.dart';
 @freezed
 class MediaDetailEvent with _$MediaDetailEvent {
   const factory MediaDetailEvent.getMediaDetails(
-    String mediaType,
-    int mediaItemId,
+    MediaType mediaType,
+    String mediaItemId,
   ) = _GetMediaDetails;
 
   const factory MediaDetailEvent.getCredits(
-    String mediaType,
+    MediaType mediaTypeSelected,
     int mediaItemId,
     bool isCast,
   ) = _GetCredits;
 
   const factory MediaDetailEvent.getReviews(
-    String mediaType,
+    MediaType mediaType,
     int mediaItemId,
   ) = _GetReviews;
 
