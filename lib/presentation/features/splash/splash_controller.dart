@@ -1,9 +1,6 @@
 import 'package:film_flu/app/routes/app_paths.dart';
-import 'package:film_flu/presentation/features/splash/bloc/splash_bloc.dart';
 import 'package:film_flu/presentation/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 class SplashController extends StatelessWidget {
   const SplashController({
@@ -12,17 +9,8 @@ class SplashController extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SplashBloc, SplashState>(
-      listener: (context, state) {
-        if (state.isSplashed()) {
-          context.push(AppRoutePaths.homeRoute);
-        }
-      },
-      builder: (context, state) {
-        return SplashScreen(
-          route: AppRoutePaths.homeRoute,
-        );
-      },
+    return SplashScreen(
+      route: AppRoutePaths.moviesRoute,
     );
   }
 }

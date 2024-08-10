@@ -1,8 +1,8 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
+import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/detail_tab_media_item.dart';
-import 'package:film_flu/presentation/features/media_list/constants/media_list_constants.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -43,9 +43,8 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
     return BlocBuilder<MediaDetailBloc, MediaDetailState>(
       builder: (context, state) {
         MediaItemEntity? mediaItem = state.mediaItem;
-        String mediaItemType = mediaItem?.title != ''
-            ? MediaListConstants.movieMediaType
-            : MediaListConstants.serieMediaType;
+        MediaType mediaTypeSelected =
+            mediaItem?.title != '' ? MediaType.movie : MediaType.tv;
 
         return ScaffoldPage(
           isSearchVisible: true,
@@ -103,7 +102,7 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                 : Container(),
           ),
           child: DetailTabMediaItem(
-            mediaItemType: mediaItemType,
+            mediaTypeSelected: mediaTypeSelected,
             mediaItemId: state.mediaItem?.id ?? 0,
           ),
         );

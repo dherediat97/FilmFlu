@@ -22,7 +22,6 @@ abstract class FilmFluApi {
     @Query('sort_by') String sortBy = 'popularity.desc',
     @Query('with_genres') required int genres,
     @Query('with_original_language') String? languageId,
-    @Query('include_adult') bool? isAdult = false,
     @Query('page') int? page = 1,
   });
 
@@ -34,15 +33,16 @@ abstract class FilmFluApi {
   @GET('/{mediaType}/{mediaTypeId}')
   Future<MediaItemRemoteEntity> fetchMediaItem({
     @Path('mediaType') required String mediaType,
-    @Path('mediaTypeId') required int mediaTypeId,
+    @Path('mediaTypeId') required String mediaTypeId,
     @Query('language') String language = 'es-ES',
     @Query('append_to_response') String moreResponse = 'videos',
   });
 
-  @GET('/{mediaType}/now_playing')
-  Future<Pagination<MediaItemRemoteEntity>> fetchMediaDataDay({
-    @Path('mediaType') required String mediaType,
-  });
+  @GET('/movie/now_playing')
+  Future<Pagination<MediaItemRemoteEntity>> fetchMovieDay();
+
+  @GET('/tv/on_the_air')
+  Future<Pagination<MediaItemRemoteEntity>> fetchSerieDay();
 
   @GET('/{mediaType}/{mediaTypeId}/credits')
   Future<CreditsMediaRemoteEntity> fetchCredits({
@@ -58,8 +58,12 @@ abstract class FilmFluApi {
     @Query('language') String language = 'es-ES',
   });
 
-  @GET('/searchMovie')
-  Future<List<MediaItemRemoteEntity>> searchMovie(String movieSearched);
+  @GET('/search/{mediaType}')
+  Future<Pagination<MediaItemRemoteEntity>> searchMovie({
+    @Path('mediaType') required String mediaType,
+    @Query('language') String language = 'es-ES',
+    @Query('query') required String query,
+  });
 
   @GET('/person/{personId}')
   Future<PersonRemoteEntity> fetchPerson({

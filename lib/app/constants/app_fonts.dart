@@ -15,6 +15,11 @@ class AppFonts {
 
 TextTheme createTextTheme(bool isLightMode) {
   TextTheme textTheme = TextTheme(
+    headlineLarge: TextStyle(
+      fontFamily: AppFonts.primaryFont,
+      fontSize: 40,
+      color: AppColors.textPrimaryColor,
+    ),
     titleLarge: TextStyle(
       fontFamily: AppFonts.primaryFont,
       fontSize: 40,

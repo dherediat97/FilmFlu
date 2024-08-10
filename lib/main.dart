@@ -4,7 +4,7 @@ import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/app/routes/app_routes.dart';
 import 'package:film_flu/data/repositories/local/app_local_data_source_contract.dart';
-import 'package:film_flu/presentation/top_blocs/app_bloc.dart';
+import 'package:film_flu/presentation/top_blocs/app/app_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:film_flu/core/utils/util_scroll.dart';
@@ -15,21 +15,10 @@ import 'package:go_router/go_router.dart';
 GetIt getIt = GetIt.instance;
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-  //   systemStatusBarContrastEnforced: true,
-  //   systemNavigationBarColor: Colors.transparent,
-  //   systemNavigationBarDividerColor: Colors.transparent,
-  //   systemNavigationBarIconBrightness: Brightness.dark,
-  //   statusBarIconBrightness: Brightness.dark,
-  // ));
-  // //Setting SystemUIMode
-  // SystemChrome.setEnabledSystemUIMode(
-  //   SystemUiMode.edgeToEdge,
-  //   overlays: [SystemUiOverlay.top],
-  // );
   await initDi();
   //await horus_vision.initDi();
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(FilmFlu());
 }
 
@@ -38,7 +27,7 @@ class FilmFlu extends StatelessWidget {
 
   final GoRouter _router = GoRouter(
     debugLogDiagnostics: kDebugMode,
-    initialLocation: AppRoutePaths.startRoute,
+    initialLocation: AppRoutePaths.moviesRoute,
     routes: appRoutes,
   );
 

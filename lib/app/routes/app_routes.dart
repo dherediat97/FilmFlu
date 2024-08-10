@@ -1,4 +1,7 @@
 import 'package:film_flu/presentation/features/home/home_screen.dart';
+import 'package:film_flu/presentation/features/movies/movies_list.dart';
+import 'package:film_flu/presentation/features/search/search_screen.dart';
+import 'package:film_flu/presentation/features/series/series_list.dart';
 import 'package:film_flu/presentation/features/media_details/media_detail_controller.dart';
 import 'package:film_flu/presentation/features/person_details/person_details_controller.dart';
 import 'package:film_flu/presentation/features/settings/settings_screen.dart';
@@ -14,10 +17,25 @@ List<GoRoute> appRoutes = [
       GoRoute(
         path: 'main',
         builder: (context, state) => const HomeScreen(),
+        routes: [
+          GoRoute(
+            path: 'movies',
+            builder: (context, state) => const MoviesList(),
+          ),
+          GoRoute(
+            path: 'series',
+            builder: (context, state) => const SeriesList(),
+          ),
+          GoRoute(
+            path: 'search',
+            builder: (context, state) => const SearchScreen(),
+          ),
+        ],
       ),
       GoRoute(
-        path: 'mediaItemDetails/:mediaTypeId',
+        path: 'mediaItemDetails/:mediaType/:mediaTypeId',
         builder: (context, state) => MediaDetailController(
+          mediaType: state.pathParameters['mediaType'].toString(),
           mediaTypeId: state.pathParameters['mediaTypeId'].toString(),
         ),
       ),

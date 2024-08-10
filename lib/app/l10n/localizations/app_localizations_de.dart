@@ -19,37 +19,37 @@ class AppLocalizationsDe extends AppLocalizations {
   String get action_movies => 'Actionfilme';
 
   @override
-  String get adventure_movies => 'Películas de aventura';
+  String get adventure_movies => 'Aventura';
 
   @override
-  String get animation_movies => 'Películas de animación';
+  String get animation_movies => 'Animadas';
 
   @override
-  String get crime_movies => 'Películas de crimen';
+  String get crime_movies => 'de Crimen';
 
   @override
-  String get family_movies => 'Películas de familia';
+  String get family_movies => 'Con la Familia';
 
   @override
-  String get fantasy_movies => 'Películas de fantasía';
+  String get fantasy_movies => 'De Fantasía';
 
   @override
-  String get history_movies => 'Películas de historia';
+  String get history_movies => 'Históricas';
 
   @override
-  String get horror_movies => 'Películas de horror';
+  String get horror_movies => 'De Miedo';
 
   @override
-  String get music_movies => 'Películas de música';
+  String get music_movies => 'Musicales';
 
   @override
-  String get tv_movies => 'Películas de televisión';
+  String get tv_movies => 'Televisión';
 
   @override
-  String get war_movies => 'Películas de guerra';
+  String get war_movies => 'Guerra';
 
   @override
-  String get western_movies => 'Películas del oeste';
+  String get western_movies => 'Del Oeste';
 
   @override
   String get drama_movies => 'Dramafilme';
@@ -176,4 +176,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get unknown => 'Desconocido';
+
+  @override
+  String get search => 'Buscar';
 }

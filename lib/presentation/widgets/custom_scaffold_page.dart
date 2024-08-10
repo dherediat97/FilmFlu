@@ -1,11 +1,11 @@
 import 'package:film_flu/app/constants/app_assets.dart';
-import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
-import 'package:film_flu/presentation/top_blocs/app_bloc.dart';
-import 'package:film_flu/presentation/widgets/flip_view.dart';
+import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
+import 'package:film_flu/presentation/top_blocs/app/app_bloc.dart';
+import 'package:film_flu/presentation/widgets/bottom_app_bar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,9 +35,6 @@ class ScaffoldPage extends StatefulWidget {
 }
 
 class _ScaffoldPageState extends State<ScaffoldPage> {
-  final today = DateTime.now();
-  bool loveTapped = false;
-
   @override
   Widget build(BuildContext context) {
     context.read<AppBloc>().add(const AppEvent.changeStartLang());
@@ -46,7 +43,10 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
       floatingActionButtonLocation: widget.fabLocation,
       appBar: !widget.fullScreenMode
           ? AppBar(
+              title: titleScaffold(),
               automaticallyImplyLeading: true,
+              centerTitle: true,
+              titleTextStyle: Theme.of(context).textTheme.headlineLarge,
               leadingWidth: 120,
               leading: IconButton(
                   padding: EdgeInsets.zero,
@@ -61,7 +61,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                     if (context.canPop()) {
                       context.pop();
                     } else {
-                      context.push(AppRoutePaths.startRoute);
+                      context.pushReplacement(AppRoutePaths.startRoute);
                     }
                   }),
               actions: [
@@ -75,83 +75,8 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
             )
           : null,
       body: widget.child,
-      bottomNavigationBar: !widget.fullScreenMode
-          ? BottomAppBar(
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                    child: Row(
-                      children: [
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 8),
-                            child: Text(
-                              context.localizations.made_with_love,
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.labelMedium,
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              loveTapped = !loveTapped;
-                            });
-                          },
-                          child: FlipCard(
-                            toggler: !loveTapped,
-                            frontCard: SvgPicture.asset(
-                              AppAssets.fullHeartIcon,
-                              height: 24,
-                              width: 24,
-                              colorFilter: const ColorFilter.mode(
-                                AppColors.backgroundColorLight,
-                                BlendMode.srcIn,
-                              ),
-                            ),
-                            backCard: SvgPicture.asset(
-                              AppAssets.fullHeartIcon,
-                              height: 24,
-                              width: 24,
-                              colorFilter: const ColorFilter.mode(
-                                AppColors.andalucianColor,
-                                BlendMode.srcIn,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.copyright),
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 8),
-                            child: InkWell(
-                              onTap: () {
-                                launchUrl(Uri.parse(AppConstants.myGithubPage));
-                              },
-                              child: Text(
-                                '${today.year} @dherediat97',
-                                style: Theme.of(context).textTheme.labelMedium,
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            )
-          : null,
+      bottomNavigationBar:
+          !widget.fullScreenMode ? const MyBottomNavigationBar() : null,
       floatingActionButton: widget.floatingActionButton,
     );
   }
@@ -191,7 +116,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
           context
               .read<AppBloc>()
               .add(AppEvent.changeLang(language?.toString() ?? 'es'));
-          context.push(AppRoutePaths.startRoute);
+          context.pushReplacement(AppRoutePaths.startRoute);
         },
         padding: const EdgeInsets.all(8),
         dropdownColor: Theme.of(context).colorScheme.surface,
@@ -238,5 +163,17 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
       );
     }
     return actions;
+  }
+
+  Widget titleScaffold() {
+    MediaType mediaTypeSelected =
+        context.read<HomeBloc>().state.mediaTypeSelected;
+    if (mediaTypeSelected == MediaType.movie) {
+      return Text(context.localizations.movies);
+    } else if (mediaTypeSelected == MediaType.tv) {
+      return Text(context.localizations.series);
+    } else {
+      return const SearchBar();
+    }
   }
 }

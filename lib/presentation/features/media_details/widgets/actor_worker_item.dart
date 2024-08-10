@@ -30,7 +30,7 @@ class _FilmActorItemState extends State<FilmActorItem> {
         ? ListTile(
             onTap: () {
               AppConstants.personId = widget.actor!.id;
-              context.push(
+              context.pushReplacement(
                   '${AppRoutePaths.personDetailsRoute}/${widget.actor?.id}');
             },
             title: ClipRRect(

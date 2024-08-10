@@ -137,97 +137,97 @@ abstract class AppLocalizations {
   /// No description provided for @action_movies.
   ///
   /// In es, this message translates to:
-  /// **'Películas de acción'**
+  /// **'Acción'**
   String get action_movies;
 
   /// No description provided for @adventure_movies.
   ///
   /// In es, this message translates to:
-  /// **'Películas de aventura'**
+  /// **'Aventura'**
   String get adventure_movies;
 
   /// No description provided for @animation_movies.
   ///
   /// In es, this message translates to:
-  /// **'Películas de animación'**
+  /// **'Animadas'**
   String get animation_movies;
 
   /// No description provided for @crime_movies.
   ///
   /// In es, this message translates to:
-  /// **'Películas de crimen'**
+  /// **'de Crimen'**
   String get crime_movies;
 
   /// No description provided for @family_movies.
   ///
   /// In es, this message translates to:
-  /// **'Películas de familia'**
+  /// **'Con la Familia'**
   String get family_movies;
 
   /// No description provided for @fantasy_movies.
   ///
   /// In es, this message translates to:
-  /// **'Películas de fantasía'**
+  /// **'De Fantasía'**
   String get fantasy_movies;
 
   /// No description provided for @history_movies.
   ///
   /// In es, this message translates to:
-  /// **'Películas de historia'**
+  /// **'Históricas'**
   String get history_movies;
 
   /// No description provided for @horror_movies.
   ///
   /// In es, this message translates to:
-  /// **'Películas de horror'**
+  /// **'De Miedo'**
   String get horror_movies;
 
   /// No description provided for @music_movies.
   ///
   /// In es, this message translates to:
-  /// **'Películas de música'**
+  /// **'Musicales'**
   String get music_movies;
 
   /// No description provided for @tv_movies.
   ///
   /// In es, this message translates to:
-  /// **'Películas de televisión'**
+  /// **'Televisión'**
   String get tv_movies;
 
   /// No description provided for @war_movies.
   ///
   /// In es, this message translates to:
-  /// **'Películas de guerra'**
+  /// **'Guerra'**
   String get war_movies;
 
   /// No description provided for @western_movies.
   ///
   /// In es, this message translates to:
-  /// **'Películas del oeste'**
+  /// **'Del Oeste'**
   String get western_movies;
 
   /// No description provided for @drama_movies.
   ///
   /// In es, this message translates to:
-  /// **'Películas de drama'**
+  /// **'Dramáticas'**
   String get drama_movies;
 
   /// No description provided for @comedy_movies.
   ///
   /// In es, this message translates to:
-  /// **'Películas de comedia'**
+  /// **'Comedias'**
   String get comedy_movies;
 
   /// No description provided for @thriller_movies.
   ///
   /// In es, this message translates to:
-  /// **'Películas de suspense'**
+  /// **'De Suspense'**
   String get thriller_movies;
 
   /// No description provided for @fiction_movies.
   ///
   /// In es, this message translates to:
-  /// **'Películas de ciencia ficción'**
+  /// **'Ciencia ficción'**
   String get fiction_movies;
 
   /// No description provided for @love_movies.
@@ -457,6 +457,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Desconocido'**
   String get unknown;
+
+  /// No description provided for @search.
+  ///
+  /// In es, this message translates to:
+  /// **'Buscar'**
+  String get search;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

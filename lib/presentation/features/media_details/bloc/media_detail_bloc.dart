@@ -1,10 +1,11 @@
+import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/types/ui_state.dart';
 import 'package:film_flu/domain/models/actor_entity.dart';
 import 'package:film_flu/domain/models/film_worker_entity.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:film_flu/domain/repository_contracts/media_repository_contract.dart';
-import 'package:film_flu/presentation/features/media_list/constants/media_list_constants.dart';
+import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -38,13 +39,13 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
   Future<void> _getMediaDetails(
     MediaDetailEvent event,
     Emitter<MediaDetailState> emit,
-    String mediaType,
-    int mediaItemId,
+    MediaType mediaTypeSelected,
+    String mediaItemId,
   ) async {
     emit(state.copyWith(uiState: const UiState.loading()));
 
     final movieData = await _repository.getMediaItem(
-      mediaType: mediaType,
+      mediaTypeSelected: mediaTypeSelected,
       mediaTypeId: mediaItemId,
     );
 
@@ -59,7 +60,7 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
           state.copyWith(
             uiState: const UiState.success(),
             mediaItem: movie,
-            trailerId: _getTrailerId(movie, mediaType),
+            trailerId: _getTrailerId(movie),
             productionCompanyImage:
                 movie.productionCompanies?.firstOrNull?.logoPath ?? '',
             movieName: movie.title?.isNotEmpty == true
@@ -74,12 +75,12 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
   Future<void> _getCredits(
     MediaDetailEvent event,
     Emitter<MediaDetailState> emit,
-    String mediaType,
+    MediaType mediaTypeSelected,
     int mediaTypeId,
     bool isCast,
   ) async {
     final creditsData = await _repository.getCredits(
-      mediaType: mediaType,
+      mediaTypeSelected: mediaTypeSelected,
       mediaTypeId: mediaTypeId,
     );
 
@@ -114,11 +115,11 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
   Future<void> _getReviews(
     MediaDetailEvent event,
     Emitter<MediaDetailState> emit,
-    String mediaType,
+    MediaType mediaTypeSelected,
     int mediaTypeId,
   ) async {
     final reviewResponseData = await _repository.getReviews(
-      mediaType: mediaType,
+      mediaTypeSelected: mediaTypeSelected,
       mediaTypeId: mediaTypeId,
     );
     reviewResponseData.when(
@@ -170,12 +171,12 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
     );
   }
 
-  String _getTrailerId(MediaItemEntity mediaItemEntity, String mediaType) {
+  String _getTrailerId(MediaItemEntity mediaItemEntity) {
     try {
       return mediaItemEntity.videos!.results
           .firstWhere((element) =>
-              element.type == MediaListConstants.trailer ||
-              element.type == MediaListConstants.teaser)
+              element.type == AppConstants.trailer ||
+              element.type == AppConstants.teaser)
           .key
           .toString();
     } catch (ex) {

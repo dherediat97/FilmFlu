@@ -5,7 +5,7 @@ import 'package:film_flu/data/models/media_item_remote_entity.dart';
 import 'package:film_flu/data/repositories/remote/media_list_remote_data_source_contract.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/domain/repository_contracts/media_list_repository_contract.dart';
-import 'package:film_flu/presentation/features/media_list/constants/media_list_constants.dart';
+import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
 
 class MediaListRepository implements MediaListRepositoryContract {
   final MediaListRemoteDataSourceContract _movieRemoteDataSourceContract;
@@ -16,12 +16,12 @@ class MediaListRepository implements MediaListRepositoryContract {
 
   @override
   Future<Result<List<MediaItemEntity>>> getMediaDataByGenre(
-    String mediaType,
+    MediaType mediaTypeSelected,
     int genreId,
     String languageId,
   ) async {
     try {
-      return mediaType == MediaListConstants.movieMediaType
+      return mediaTypeSelected == MediaType.movie
           ? getMovies(genreId: genreId, languageId: languageId)
           : getTVSeries(genreId: genreId, languageId: languageId);
     } catch (error) {
@@ -35,14 +35,14 @@ class MediaListRepository implements MediaListRepositoryContract {
 
   @override
   Future<Result<List<MediaItemEntity>>> paginateMediaData({
-    required String mediaType,
+    required MediaType mediaTypeSelected,
     required int genreId,
     required int page,
   }) async {
     try {
       List<MediaItemRemoteEntity> movieList =
           await _movieRemoteDataSourceContract.paginateMediaData(
-        mediaType: mediaType,
+        mediaTypeSelected: mediaTypeSelected,
         genreId: genreId,
         page: page,
       );
@@ -65,7 +65,7 @@ class MediaListRepository implements MediaListRepositoryContract {
     try {
       List<MediaItemRemoteEntity> movieList =
           await _movieRemoteDataSourceContract.getMediaTypeList(
-        mediaType: MediaListConstants.movieMediaType,
+        mediaTypeSelected: MediaType.movie,
         genreId: genreId,
         languageId: languageId ?? '',
       );
@@ -88,7 +88,7 @@ class MediaListRepository implements MediaListRepositoryContract {
     try {
       List<MediaItemRemoteEntity> serieList =
           await _movieRemoteDataSourceContract.getMediaTypeList(
-        mediaType: MediaListConstants.serieMediaType,
+        mediaTypeSelected: MediaType.tv,
         genreId: genreId,
         languageId: languageId,
       );
@@ -103,12 +103,33 @@ class MediaListRepository implements MediaListRepositoryContract {
   }
 
   @override
+  Future<Result<List<MediaItemEntity>>> searchMediaData({
+    required MediaType mediaTypeSelected,
+    required String query,
+  }) async {
+    try {
+      List<MediaItemRemoteEntity> mediaData =
+          await _movieRemoteDataSourceContract.searchMediaData(
+        mediaTypeSelected: mediaTypeSelected,
+        query: query,
+      );
+      return Result.success(mediaData.map((e) => e.toMediaEntity()).toList());
+    } catch (error) {
+      return Result.failure(
+        error: RepositoryError.fromDataSourceError(
+          NetworkError.fromException(error),
+        ),
+      );
+    }
+  }
+
+  @override
   Future<Result<MediaItemEntity>> getMediaDataDay({
-    required String mediaType,
+    required MediaType mediaTypeSelected,
   }) async {
     try {
       MediaItemRemoteEntity mediaData = await _movieRemoteDataSourceContract
-          .getMediaDataDay(mediaType: mediaType);
+          .getMediaDataDay(mediaTypeSelected: mediaTypeSelected);
       return Result.success(mediaData.toMediaEntity());
     } catch (error) {
       return Result.failure(

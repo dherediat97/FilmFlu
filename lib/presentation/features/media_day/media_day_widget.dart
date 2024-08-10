@@ -7,25 +7,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class MediaDayWidget extends StatelessWidget {
   const MediaDayWidget({
     super.key,
-    required this.isMovie,
   });
-
-  final bool isMovie;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MediaDayBloc, MediaDayState>(
       builder: (context, state) {
-        return state.movie != null
+        return state.mediaItem != null
             ? BackgroundImageMediaItem(
                 isHomeScreen: true,
-                productionCompanyImage: '',
-                mediaItem: isMovie ? state.movie : state.serie,
-                movieName: isMovie
-                    ? state.movie!.title.toString()
-                    : state.serie!.name.toString(),
+                mediaItem: state.mediaItem,
+                mediaDataName: state.mediaItemName,
               )
-            : const SliverToBoxAdapter(child: PlaceholderLoader());
+            : const PlaceholderLoader();
       },
     );
   }
