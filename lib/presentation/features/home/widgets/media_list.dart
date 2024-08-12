@@ -3,6 +3,7 @@ import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/top_blocs/media_list/media_list_bloc.dart';
 import 'package:film_flu/presentation/widgets/media_carrousel_item.dart';
+import 'package:film_flu/presentation/widgets/placeholder_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,6 +33,7 @@ class _MediaDataList extends State<MediaList> {
   void initState() {
     super.initState();
     _scrollController.addListener(_loadMore);
+
     mediaTypeSelected = context.read<HomeBloc>().state.mediaTypeSelected;
     context.read<MediaListBloc>().add(
           MediaListEvent.getMediaDataByGenre(
@@ -74,67 +76,63 @@ class _MediaDataList extends State<MediaList> {
         return state.uiState.map(
           initial: (e) => Container(),
           error: (e) => Container(),
-          loading: (e) => Container(),
+          loading: (e) => const PlaceholderLoader(),
           success: (e) {
-            List<MediaItemEntity>? mediaDataList;
-            if (mediaTypeSelected == MediaType.movie) {
-              mediaDataList = state.mediaData?.movieDataByGenre[widget.genreId];
-            } else {
-              mediaDataList = state.mediaData?.serieDataByGenre[widget.genreId];
-            }
+            List<MediaItemEntity>? mediaDataList =
+                mediaTypeSelected == MediaType.movie
+                    ? state.mediaData?.movieDataByGenre![widget.genreId]
+                    : state.mediaData?.serieDataByGenre?[widget.genreId];
 
-            return Padding(
-              key: widget.key,
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 20),
-                  AutoSizeText(
-                    widget.title,
-                    maxFontSize: 30,
-                    minFontSize: 20,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  const SizedBox(height: 20),
-                  if (mediaTypeSelected == MediaType.movie)
-                    SizedBox(
-                      height: 220,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        controller: _scrollController,
-                        itemCount: mediaDataList?.length,
-                        itemBuilder: (context, index) {
-                          return mediaDataList == null
-                              ? Container()
-                              : MediaCarrouselItem(
-                                  mediaTypeSelected: mediaTypeSelected,
+            return mediaDataList != null
+                ? Padding(
+                    key: widget.key,
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 20),
+                        AutoSizeText(
+                          widget.title,
+                          maxFontSize: 30,
+                          minFontSize: 20,
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        const SizedBox(height: 20),
+                        if (mediaTypeSelected == MediaType.movie)
+                          SizedBox(
+                            height: 220,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              controller: _scrollController,
+                              itemCount: mediaDataList.length,
+                              itemBuilder: (context, index) {
+                                return MediaCarrouselItem(
+                                  mediaTypeSelected: MediaType.movie,
                                   mediaItem: mediaDataList[index],
                                 );
-                        },
-                      ),
-                    ),
-                  if (mediaTypeSelected == MediaType.tv)
-                    SizedBox(
-                      height: 220,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        controller: _scrollController,
-                        itemCount: 20,
-                        itemBuilder: (context, index) {
-                          return mediaDataList == null
-                              ? Container()
-                              : MediaCarrouselItem(
-                                  mediaTypeSelected: mediaTypeSelected,
+                              },
+                            ),
+                          ),
+                        if (mediaTypeSelected == MediaType.tv)
+                          SizedBox(
+                            height: 220,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              controller: _scrollController,
+                              itemCount: mediaDataList.length,
+                              itemBuilder: (context, index) {
+                                return MediaCarrouselItem(
+                                  mediaTypeSelected: MediaType.tv,
                                   mediaItem: mediaDataList[index],
                                 );
-                        },
-                      ),
+                              },
+                            ),
+                          ),
+                      ],
                     ),
-                ],
-              ),
-            );
+                  )
+                : Container();
           },
         );
       },

@@ -46,17 +46,20 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
         context
             .read<HomeBloc>()
             .add(const HomeEvent.switchCategory(MediaType.movie));
-        context.pushReplacement(AppRoutePaths.moviesRoute);
+        context.go(AppRoutePaths.moviesRoute);
         break;
 
       case 1:
         context
             .read<HomeBloc>()
             .add(const HomeEvent.switchCategory(MediaType.tv));
-        context.pushReplacement(AppRoutePaths.seriesRoute);
+        context.go(AppRoutePaths.seriesRoute);
         break;
       case 2:
-        context.pushReplacement(AppRoutePaths.searchRoute);
+        context
+            .read<HomeBloc>()
+            .add(const HomeEvent.switchCategory(MediaType.search));
+        context.go(AppRoutePaths.searchRoute);
         break;
     }
   }

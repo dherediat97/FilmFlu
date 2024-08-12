@@ -14,26 +14,24 @@ class DefaultImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return imageUrl != null
-        ? CachedNetworkImage(
-            imageUrl: imageUrl!,
-            fit: BoxFit.cover,
-            errorWidget: (context, url, error) => const Icon(Icons.error),
-            progressIndicatorBuilder: (context, url, progress) =>
-                const Center(child: PlaceholderLoader()),
-            imageBuilder: (context, imageProvider) => darkenImage
-                ? Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      image: DecorationImage(
-                        image: imageProvider,
-                        fit: BoxFit.cover,
-                        opacity: darkenImage ? 0.6 : 1.0,
-                      ),
-                    ),
-                  )
-                : Container(),
-          )
-        : const PlaceholderLoader();
+    return CachedNetworkImage(
+      imageUrl: imageUrl!,
+      fit: BoxFit.cover,
+      errorWidget: (context, url, error) => const Icon(Icons.error),
+      progressIndicatorBuilder: (context, url, progress) =>
+          const Center(child: PlaceholderLoader()),
+      imageBuilder: (context, imageProvider) => darkenImage
+          ? Container(
+              decoration: BoxDecoration(
+                color: Colors.black,
+                image: DecorationImage(
+                  image: imageProvider,
+                  fit: BoxFit.cover,
+                  opacity: darkenImage ? 0.6 : 1.0,
+                ),
+              ),
+            )
+          : Container(),
+    );
   }
 }

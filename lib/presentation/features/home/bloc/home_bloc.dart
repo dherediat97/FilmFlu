@@ -7,7 +7,8 @@ part 'home_bloc.freezed.dart';
 
 enum MediaType {
   movie(mediaType: 1),
-  tv(mediaType: 2);
+  tv(mediaType: 2),
+  search(mediaType: 3);
 
   const MediaType({required int mediaType});
 }

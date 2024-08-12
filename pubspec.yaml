@@ -50,7 +50,7 @@ dependencies:
   lottie: ^3.1.2
   envied: ^0.5.3
   http: ^1.2.2
-  package_info_plus: ^4.2.0
+  package_info_plus: ^8.0.2
   flutter_svg: ^2.0.7
   responsive_framework: ^1.1.0
   shelf: ^1.1.0

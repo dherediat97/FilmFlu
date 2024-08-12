@@ -14,8 +14,9 @@ class HomeScreen extends StatelessWidget {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         return switch (state.mediaTypeSelected) {
-          MediaType.movie => const MoviesList(),
-          MediaType.tv => const SeriesList(),
+          MediaType.movie => const MoviesListWidget(),
+          MediaType.tv => const SeriesListWidget(),
+          MediaType.search => Container(),
         };
       },
     );

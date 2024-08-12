@@ -8,10 +8,6 @@ class MediaListEvent with _$MediaListEvent {
     String languageId,
   ) = _GetMediaDataByGenre;
 
-  const factory MediaListEvent.searchMediaData(
-    String query,
-  ) = _SearchMediaData;
-
   const factory MediaListEvent.nextPage(
     int pageLoaded,
     MediaType categorySelected,

@@ -19,7 +19,6 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
     on<MediaListEvent>(
       (event, emit) async {
         await event.when(
-          searchMediaData: (query) => _searchMediaData(event, emit, query),
           getMediaDataByGenre: (categorySelected, genreId, languageId) =>
               _getMediaDataByGenreId(
                   event, emit, genreId, categorySelected, languageId),
@@ -34,12 +33,12 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
     MediaListEvent event,
     Emitter<MediaListState> emit,
     int genreId,
-    MediaType categorySelected,
+    MediaType mediaTypeSelected,
     String languageId,
   ) async {
     emit(state.copyWith(uiState: const UiState.loading()));
     final mediaData = await _repository.getMediaDataByGenre(
-      categorySelected,
+      mediaTypeSelected,
       genreId,
       languageId,
     );
@@ -48,21 +47,28 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
         emit(state.copyWith(uiState: const UiState.error()));
       },
       success: (value) {
-        final Map<int, List<MediaItemEntity>> movieMap = {
-          if (state.mediaData != null) ...state.mediaData!.movieDataByGenre,
-          ...{genreId: value}
-        };
-        final Map<int, List<MediaItemEntity>> serieMap = {
-          if (state.mediaData != null) ...state.mediaData!.serieDataByGenre,
-          ...{genreId: value}
-        };
-        final mediaData =
-            MediaData(movieDataByGenre: movieMap, serieDataByGenre: serieMap);
+        Map<int, List<MediaItemEntity>>? movieMap;
+        Map<int, List<MediaItemEntity>>? serieMap;
+        if (mediaTypeSelected == MediaType.movie) {
+          movieMap = {
+            ...?state.mediaData?.movieDataByGenre,
+            ...{genreId: value}
+          };
+        } else {
+          serieMap = {
+            ...?state.mediaData?.serieDataByGenre,
+            ...{genreId: value}
+          };
+        }
+
+        final mediaData = MediaData(
+          movieDataByGenre: movieMap ?? {},
+          serieDataByGenre: serieMap ?? {},
+        );
+
         emit(
           state.copyWith(
-            uiState: genreId == 37
-                ? const UiState.success()
-                : const UiState.loading(),
+            uiState: const UiState.success(),
             mediaData: mediaData,
           ),
         );
@@ -87,47 +93,29 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
         emit(state.copyWith(uiState: const UiState.error()));
       },
       success: (value) {
-        final Map<int, List<MediaItemEntity>> movieMap = {
-          if (state.mediaData != null) ...state.mediaData!.movieDataByGenre,
-          ...{genreId: value}
-        };
-        final Map<int, List<MediaItemEntity>> serieMap = {
-          if (state.mediaData != null) ...state.mediaData!.serieDataByGenre,
-          ...{genreId: value}
-        };
-        final mediaData =
-            MediaData(movieDataByGenre: movieMap, serieDataByGenre: serieMap);
+        Map<int, List<MediaItemEntity>>? movieMap;
+        Map<int, List<MediaItemEntity>>? serieMap;
+        if (mediaTypeSelected == MediaType.movie) {
+          movieMap = {
+            ...?state.mediaData?.movieDataByGenre,
+            ...{genreId: value}
+          };
+        } else {
+          serieMap = {
+            ...?state.mediaData?.serieDataByGenre,
+            ...{genreId: value}
+          };
+        }
+
+        final mediaData = MediaData(
+          movieDataByGenre: movieMap ?? {},
+          serieDataByGenre: serieMap ?? {},
+        );
+
         emit(state.copyWith(
           uiState: const UiState.success(),
           mediaData: mediaData,
         ));
-      },
-    );
-  }
-
-  Future<void> _searchMediaData(
-    MediaListEvent event,
-    Emitter<MediaListState> emit,
-    String query,
-  ) async {
-    Future.delayed(const Duration(milliseconds: 2000));
-    final movieData = await _repository.searchMediaData(
-      mediaTypeSelected: MediaType.movie,
-      query: query,
-    );
-    movieData.when(
-      failure: (errorMessage) {
-        emit(
-          state.copyWith(),
-        );
-      },
-      success: (value) {
-        emit(
-          state.copyWith(
-            mediaSearchedList: value,
-            uiState: const UiState.success(),
-          ),
-        );
       },
     );
   }

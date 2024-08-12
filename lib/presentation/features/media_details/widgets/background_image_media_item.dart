@@ -15,10 +15,10 @@ class BackgroundImageMediaItem extends StatelessWidget {
     required this.mediaItem,
     required this.mediaDataName,
     required this.isHomeScreen,
-    this.productionCompanyImage,
+    required this.productionCompanyImage,
   });
 
-  final String? productionCompanyImage;
+  final String productionCompanyImage;
   final MediaItemEntity? mediaItem;
   final String mediaDataName;
   final bool isHomeScreen;
@@ -26,124 +26,127 @@ class BackgroundImageMediaItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return mediaItem != null
-        ? Stack(children: [
-            DefaultImageWidget(
-              darkenImage: true,
-              imageUrl:
-                  '${AppUrls.movieLandscapeBaseUrl}${mediaItem!.backdropPath}',
-            ),
-            Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  if (productionCompanyImage != null)
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Image.network(
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.contain,
-                          alignment: Alignment.topCenter,
-                          '${AppUrls.providerImgBaseUrl}$productionCompanyImage',
-                        ),
-                      ],
-                    ),
-                  Text(
-                    mediaDataName,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        '${(mediaItem!.voteAverage!.round() * 10)}% de los usuarios les gusta',
-                        style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: Colors.greenAccent,
-                                  fontSize: 26,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                      ),
-                      if (mediaItem != null) ...[
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        const Icon(
-                          Icons.date_range_outlined,
-                          size: 24,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          getYear(mediaItem!.releaseDate!) ?? '',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ]
-                    ],
-                  ),
-                  if (isHomeScreen) ...[
-                    const Spacer(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.add,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Text(
-                              context.localizations.add_to_my_list,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                MediaType mediaTypeSelected =
-                                    mediaItem!.title != ''
-                                        ? MediaType.movie
-                                        : MediaType.tv;
-
-                                AppConstants.mediaTypeId =
-                                    mediaItem!.id.toString();
-
-                                context.pushReplacement(
-                                    '${AppRoutePaths.mediaDetailsRoute}/${mediaTypeSelected.name}/${mediaItem?.id}');
-                              },
-                              icon: const Icon(
-                                Icons.info_outline,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Text(
-                              context.localizations.information,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ],
+        ? SizedBox(
+            height: MediaQuery.of(context).size.height / 2,
+            child: Stack(children: [
+              DefaultImageWidget(
+                darkenImage: true,
+                imageUrl:
+                    '${AppUrls.movieLandscapeBaseUrl}${mediaItem?.backdropPath}',
               ),
-            )
-          ])
+              Padding(
+                padding: const EdgeInsets.all(32.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    if (productionCompanyImage.isNotEmpty)
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Image.network(
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.contain,
+                            alignment: Alignment.topCenter,
+                            '${AppUrls.providerImgBaseUrl}$productionCompanyImage',
+                          ),
+                        ],
+                      ),
+                    Text(
+                      mediaDataName,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          '${(mediaItem!.voteAverage!.round() * 10)}% de los usuarios les gusta',
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: Colors.greenAccent,
+                                    fontSize: 26,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                        if (mediaItem != null) ...[
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          const Icon(
+                            Icons.date_range_outlined,
+                            size: 24,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            getYear(mediaItem!.releaseDate!) ?? '',
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                        ]
+                      ],
+                    ),
+                    if (isHomeScreen) ...[
+                      const Spacer(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Text(
+                                context.localizations.add_to_my_list,
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  MediaType mediaTypeSelected =
+                                      mediaItem!.title != ''
+                                          ? MediaType.movie
+                                          : MediaType.tv;
+
+                                  AppConstants.mediaTypeId =
+                                      mediaItem!.id.toString();
+
+                                  context.pushReplacement(
+                                      '${AppRoutePaths.mediaDetailsRoute}/${mediaTypeSelected.name}/${mediaItem?.id}');
+                                },
+                                icon: const Icon(
+                                  Icons.info_outline,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Text(
+                                context.localizations.information,
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ],
+                ),
+              )
+            ]),
+          )
         : Container();
   }
 }

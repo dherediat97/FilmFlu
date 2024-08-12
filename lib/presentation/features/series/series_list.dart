@@ -1,20 +1,23 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/presentation/features/home/widgets/media_list.dart';
+import 'package:film_flu/presentation/features/media_day/bloc/media_day_bloc.dart';
+import 'package:film_flu/presentation/features/media_day/media_day_widget.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SeriesList extends StatefulWidget {
-  const SeriesList({super.key});
+class SeriesListWidget extends StatefulWidget {
+  const SeriesListWidget({super.key});
 
   @override
-  State<SeriesList> createState() => _SeriesListState();
+  State<SeriesListWidget> createState() => _SeriesListState();
 }
 
-class _SeriesListState extends State<SeriesList> {
+class _SeriesListState extends State<SeriesListWidget> {
   @override
   void initState() {
     super.initState();
-    // context.read<MediaDayBloc>().add(const MediaDayEvent.fetchMediaDataDay());
+    context.read<MediaDayBloc>().add(const MediaDayEvent.fetchMediaDataDay());
   }
 
   @override
@@ -23,7 +26,7 @@ class _SeriesListState extends State<SeriesList> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            // const MediaDayWidget(),
+            const MediaDayWidget(),
             MediaList(
               genreId: 10759,
               key: const ValueKey('10759'),

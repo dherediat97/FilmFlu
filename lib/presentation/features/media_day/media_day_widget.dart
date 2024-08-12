@@ -18,6 +18,7 @@ class MediaDayWidget extends StatelessWidget {
                 isHomeScreen: true,
                 mediaItem: state.mediaItem,
                 mediaDataName: state.mediaItemName,
+                productionCompanyImage: '',
               )
             : const PlaceholderLoader();
       },
