@@ -18,7 +18,7 @@ class MediaListState with _$MediaListState {
 @freezed
 class MediaData with _$MediaData {
   const factory MediaData({
-    required Map<int, List<MediaItemEntity>>? movieDataByGenre,
-    required Map<int, List<MediaItemEntity>>? serieDataByGenre,
+    required Map<int, List<MediaSimpleItemEntity>>? movieDataByGenre,
+    required Map<int, List<MediaSimpleItemEntity>>? serieDataByGenre,
   }) = _MovieData;
 }

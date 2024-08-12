@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
-import 'package:film_flu/domain/models/media_item_entity.dart';
+import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/widgets/placeholder_loader.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ class MediaCarrouselItem extends StatelessWidget {
     required this.mediaTypeSelected,
   });
 
-  final MediaItemEntity? mediaItem;
+  final MediaSimpleItemEntity? mediaItem;
   final MediaType mediaTypeSelected;
 
   @override

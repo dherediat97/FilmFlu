@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:film_flu/domain/models/media_item_entity.dart';
+import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/top_blocs/media_list/media_list_bloc.dart';
 import 'package:film_flu/presentation/widgets/media_carrousel_item.dart';
@@ -78,7 +78,7 @@ class _MediaDataList extends State<MediaList> {
           error: (e) => Container(),
           loading: (e) => const PlaceholderLoader(),
           success: (e) {
-            List<MediaItemEntity>? mediaDataList =
+            List<MediaSimpleItemEntity>? mediaDataList =
                 mediaTypeSelected == MediaType.movie
                     ? state.mediaData?.movieDataByGenre![widget.genreId]
                     : state.mediaData?.serieDataByGenre?[widget.genreId];
