@@ -73,7 +73,8 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
   Widget build(BuildContext context) {
     return BlocBuilder<MediaDetailBloc, MediaDetailState>(
       builder: (context, state) {
-        bool isMovie = widget.mediaTypeSelected == MediaType.movie;
+        MediaType mediaTypeSelected =
+            context.read<HomeBloc>().state.mediaTypeSelected;
 
         return SingleChildScrollView(
           child: Column(
@@ -97,7 +98,7 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
                         controller: _tabController,
                         tabs: [
                           Tab(
-                            text: isMovie
+                            text: mediaTypeSelected == MediaType.movie
                                 ? context.localizations.about_movie
                                 : context.localizations.about_serie,
                           ),

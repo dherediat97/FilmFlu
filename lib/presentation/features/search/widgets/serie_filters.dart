@@ -1,50 +1,77 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
+import 'package:film_flu/presentation/features/search/bloc/search_bloc.dart';
 import 'package:film_flu/presentation/features/search/widgets/media_category.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
-class SerieFilters extends StatelessWidget {
-  const SerieFilters({super.key});
+class SerieFiltersWidget extends StatelessWidget {
+  const SerieFiltersWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 6,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Text(context.localizations.series),
-        MediaCategory(
-          categoryIcon: Symbols.helicopter,
-          categoryName: context.localizations.action_movies,
+        Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            MediaCategory(
+              onItemClick: () => addSerieFilter(context),
+              categoryIcon: Symbols.helicopter,
+              categoryName: context.localizations.action_movies,
+            ),
+            MediaCategory(
+              onItemClick: () => addSerieFilter(context),
+              categoryIcon: Symbols.compass_calibration,
+              categoryName: context.localizations.adventure_movies,
+            ),
+            MediaCategory(
+              onItemClick: () => addSerieFilter(context),
+              categoryIcon: Symbols.heat_pump_rounded,
+              categoryName: context.localizations.love_movies,
+            ),
+            MediaCategory(
+              onItemClick: () => addSerieFilter(context),
+              categoryIcon: Symbols.animation,
+              categoryName: context.localizations.animation_series,
+            ),
+          ],
         ),
-        MediaCategory(
-          categoryIcon: Symbols.compass_calibration,
-          categoryName: context.localizations.adventure_movies,
-        ),
-        MediaCategory(
-          categoryIcon: Symbols.compass_calibration,
-          categoryName: context.localizations.love_movies,
-        ),
-        MediaCategory(
-          categoryIcon: Symbols.compass_calibration,
-          categoryName: context.localizations.animation_series,
-        ),
-        MediaCategory(
-          categoryIcon: Symbols.compass_calibration,
-          categoryName: context.localizations.fiction_movies,
-        ),
-        MediaCategory(
-          categoryIcon: Symbols.compass_calibration,
-          categoryName: context.localizations.fantasy_movies,
-        ),
-        MediaCategory(
-          categoryIcon: Symbols.compass_calibration,
-          categoryName: context.localizations.thriller_movies,
-        ),
-        MediaCategory(
-          categoryIcon: Symbols.compass_calibration,
-          categoryName: context.localizations.drama_movies,
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            MediaCategory(
+              onItemClick: () => addSerieFilter(context),
+              categoryIcon: Symbols.science,
+              categoryName: context.localizations.fiction_series,
+            ),
+            MediaCategory(
+              onItemClick: () => addSerieFilter(context),
+              categoryIcon: Symbols.castle,
+              categoryName: context.localizations.family_series,
+            ),
+            MediaCategory(
+              onItemClick: () => addSerieFilter(context),
+              categoryIcon: Symbols.comedy_mask,
+              categoryName: context.localizations.thriller_series,
+            ),
+            MediaCategory(
+              onItemClick: () => addSerieFilter(context),
+              categoryIcon: Symbols.filter_drama,
+              categoryName: context.localizations.drama_series,
+            ),
+          ],
         )
       ],
     );
+  }
+
+  addSerieFilter(BuildContext context) {
+    context
+        .read<SearchBloc>()
+        .add(const SearchEvent.addSerieFilters(SerieFilters(
+          isActionSeriesFiltered: true,
+        )));
   }
 }

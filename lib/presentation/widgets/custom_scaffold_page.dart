@@ -1,9 +1,9 @@
 import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/constants/app_constants.dart';
-import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
+import 'package:film_flu/presentation/features/search/bloc/search_bloc.dart';
 import 'package:film_flu/presentation/top_blocs/app/app_bloc.dart';
 import 'package:film_flu/presentation/widgets/bottom_app_bar.dart';
 import 'package:flutter/foundation.dart';
@@ -43,7 +43,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
       floatingActionButtonLocation: widget.fabLocation,
       appBar: !widget.fullScreenMode
           ? AppBar(
-              title: titleScaffold(),
+              title: titleScaffold(context),
               automaticallyImplyLeading: true,
               centerTitle: true,
               titleTextStyle: Theme.of(context).textTheme.headlineLarge,
@@ -165,15 +165,19 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
     return actions;
   }
 
-  Widget titleScaffold() {
+  Widget titleScaffold(BuildContext context) {
     MediaType mediaTypeSelected =
         context.read<HomeBloc>().state.mediaTypeSelected;
-    if (mediaTypeSelected == MediaType.movie) {
-      return Text(context.localizations.movies);
-    } else if (mediaTypeSelected == MediaType.tv) {
-      return Text(context.localizations.series);
+    if (mediaTypeSelected != MediaType.movie &&
+        mediaTypeSelected != MediaType.tv) {
+      return SearchBar(onChanged: (value) {
+        context.read<SearchBloc>().add(SearchEvent.searchMovie(
+              query: value,
+              movieFilters: const MovieFilters(),
+            ));
+      });
     } else {
-      return const SearchBar();
+      return Container();
     }
   }
 }

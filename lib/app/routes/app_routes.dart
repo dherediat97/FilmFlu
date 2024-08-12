@@ -20,11 +20,11 @@ List<GoRoute> appRoutes = [
         routes: [
           GoRoute(
             path: 'movies',
-            builder: (context, state) => const MoviesList(),
+            builder: (context, state) => const MoviesListWidget(),
           ),
           GoRoute(
             path: 'series',
-            builder: (context, state) => const SeriesList(),
+            builder: (context, state) => const SeriesListWidget(),
           ),
           GoRoute(
             path: 'search',
