@@ -3,6 +3,7 @@ import 'package:film_flu/data/models/credits_media_remote_entity.dart';
 import 'package:film_flu/data/models/genre_remote_entity.dart';
 import 'package:film_flu/data/models/production_company_remote_entity.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
+import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/domain/models/video_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -64,5 +65,11 @@ extension MediaItemToRemoteEntityExtension on MediaItemRemoteEntity {
         releaseDate: releaseDate ?? '',
         runtime: runtime ?? 0,
         videos: videos,
+      );
+
+  MediaSimpleItemEntity toSimpleMediaEntity() => MediaSimpleItemEntity(
+        genreIds: genreIds,
+        id: id,
+        posterPath: posterPath ?? '',
       );
 }

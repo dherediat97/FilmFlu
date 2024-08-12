@@ -1,5 +1,5 @@
 import 'package:film_flu/app/types/ui_state.dart';
-import 'package:film_flu/domain/models/media_item_entity.dart';
+import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/domain/repository_contracts/media_list_repository_contract.dart';
 import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,8 +47,8 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
         emit(state.copyWith(uiState: const UiState.error()));
       },
       success: (value) {
-        Map<int, List<MediaItemEntity>>? movieMap;
-        Map<int, List<MediaItemEntity>>? serieMap;
+        Map<int, List<MediaSimpleItemEntity>>? movieMap;
+        Map<int, List<MediaSimpleItemEntity>>? serieMap;
         if (mediaTypeSelected == MediaType.movie) {
           movieMap = {
             ...?state.mediaData?.movieDataByGenre,
@@ -93,8 +93,8 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
         emit(state.copyWith(uiState: const UiState.error()));
       },
       success: (value) {
-        Map<int, List<MediaItemEntity>>? movieMap;
-        Map<int, List<MediaItemEntity>>? serieMap;
+        Map<int, List<MediaSimpleItemEntity>>? movieMap;
+        Map<int, List<MediaSimpleItemEntity>>? serieMap;
         if (mediaTypeSelected == MediaType.movie) {
           movieMap = {
             ...?state.mediaData?.movieDataByGenre,
