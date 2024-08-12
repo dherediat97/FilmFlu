@@ -1,7 +1,7 @@
 name: film_flu
 description: A project of movies and something more
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 1.0.0+14
+version: 1.0.1+15
 
 environment:
   sdk: '>=3.0.5 <4.0.0'
@@ -20,7 +20,7 @@ dependencies:
   #
   # Controller class to management the bloc state in the package
   # https://pub.dev/packages/flutter_bloc
-  flutter_bloc: ^8.1.6
+  flutter_bloc: ^8.1.4
 
   # Freezed - Model Smart Generation
   #

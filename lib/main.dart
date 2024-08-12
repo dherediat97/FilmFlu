@@ -4,7 +4,11 @@ import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/app/routes/app_routes.dart';
 import 'package:film_flu/data/repositories/local/app_local_data_source_contract.dart';
+import 'package:film_flu/domain/repository_contracts/media_list_repository_contract.dart';
+import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
+import 'package:film_flu/presentation/features/media_day/bloc/media_day_bloc.dart';
 import 'package:film_flu/presentation/top_blocs/app/app_bloc.dart';
+import 'package:film_flu/presentation/top_blocs/media_list/media_list_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:film_flu/core/utils/util_scroll.dart';
@@ -33,9 +37,24 @@ class FilmFlu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AppBloc(
-          appLocalDataSourceContract: getIt<AppLocalDataSourceContract>()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AppBloc(
+              appLocalDataSourceContract: getIt<AppLocalDataSourceContract>()),
+        ),
+        BlocProvider(create: (context) => HomeBloc()),
+        BlocProvider(
+          create: (context) => MediaListBloc(
+            repositoryContract: getIt<MediaListRepositoryContract>(),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => MediaDayBloc(
+            repositoryContract: getIt<MediaListRepositoryContract>(),
+          ),
+        ),
+      ],
       child: BlocBuilder<AppBloc, AppState>(
         builder: (context, state) {
           return TopBlocProviders(
