@@ -10,11 +10,11 @@ part 'media_list_state.dart';
 part 'media_list_bloc.freezed.dart';
 
 class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
-  final MediaListRepositoryContract _repository;
+  final MediaListRepositoryContract _mediaListRepository;
 
   MediaListBloc({
-    required MediaListRepositoryContract repositoryContract,
-  })  : _repository = repositoryContract,
+    required MediaListRepositoryContract mediaListRepository,
+  })  : _mediaListRepository = mediaListRepository,
         super(MediaListState.initial()) {
     on<MediaListEvent>(
       (event, emit) async {
@@ -37,7 +37,7 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
     String languageId,
   ) async {
     emit(state.copyWith(uiState: const UiState.loading()));
-    final mediaData = await _repository.getMediaDataByGenre(
+    final mediaData = await _mediaListRepository.getMediaDataByGenre(
       mediaTypeSelected,
       genreId,
       languageId,
@@ -83,7 +83,7 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
     MediaType mediaTypeSelected,
     int genreId,
   ) async {
-    final movieData = await _repository.paginateMediaData(
+    final movieData = await _mediaListRepository.paginateMediaData(
       mediaTypeSelected: mediaTypeSelected,
       page: page,
       genreId: genreId,

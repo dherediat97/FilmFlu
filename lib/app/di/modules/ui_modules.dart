@@ -4,18 +4,14 @@ final uiModulesDi = GetIt.instance;
 
 void _uiModulesInit() {
   uiModulesDi.registerFactory(
-    () => HomeBloc(),
-  );
-
-  uiModulesDi.registerFactory(
-    () => MediaDayBloc(
+    () => HomeBloc(
       repositoryContract: uiModulesDi(),
     ),
   );
 
   uiModulesDi.registerFactory(
     () => MediaListBloc(
-      repositoryContract: uiModulesDi(),
+      mediaListRepository: uiModulesDi(),
     ),
   );
 

@@ -256,12 +256,6 @@ abstract class AppLocalizations {
   /// **'Programas de Televisión'**
   String get tv_show_series;
 
-  /// No description provided for @action_adventure_series.
-  ///
-  /// In es, this message translates to:
-  /// **'Series de acción y aventura'**
-  String get action_adventure_series;
-
   /// No description provided for @crime_series.
   ///
   /// In es, this message translates to:
@@ -273,24 +267,6 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Series de familia'**
   String get family_series;
-
-  /// No description provided for @kids_series.
-  ///
-  /// In es, this message translates to:
-  /// **'Series para niños'**
-  String get kids_series;
-
-  /// No description provided for @reality_series.
-  ///
-  /// In es, this message translates to:
-  /// **'Realitys'**
-  String get reality_series;
-
-  /// No description provided for @talk_series.
-  ///
-  /// In es, this message translates to:
-  /// **'Programas informativos'**
-  String get talk_series;
 
   /// No description provided for @mistery_series.
   ///

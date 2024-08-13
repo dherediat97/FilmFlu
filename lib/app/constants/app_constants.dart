@@ -1,7 +1,6 @@
 import 'package:film_flu/env/env.dart';
 
 class AppConstants {
-  static const String appName = 'FilmFlu';
   static String version = '';
 
   static String appDownloadBaseUrl =

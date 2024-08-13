@@ -1,6 +1,6 @@
+import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
-import 'package:film_flu/presentation/features/movies/movies_list.dart';
-import 'package:film_flu/presentation/features/series/series_list.dart';
+import 'package:film_flu/presentation/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,11 +13,19 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
-        return switch (state.mediaTypeSelected) {
-          MediaType.movie => const MoviesListWidget(),
-          MediaType.tv => const SeriesListWidget(),
-          MediaType.search => Container(),
-        };
+        String route;
+        switch (state.mediaTypeSelected) {
+          case MediaType.movie:
+            route = AppRoutePaths.moviesRoute;
+            break;
+          case MediaType.tv:
+            route = AppRoutePaths.seriesRoute;
+            break;
+          case MediaType.search:
+            route = AppRoutePaths.searchRoute;
+            break;
+        }
+        return SplashScreen(route: route);
       },
     );
   }

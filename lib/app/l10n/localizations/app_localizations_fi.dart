@@ -78,22 +78,10 @@ class AppLocalizationsFi extends AppLocalizations {
   String get tv_show_series => 'Televisio-ohjelmat';
 
   @override
-  String get action_adventure_series => 'Series de acción y aventura';
-
-  @override
   String get crime_series => 'Series de crimen';
 
   @override
   String get family_series => 'Series de familia';
-
-  @override
-  String get kids_series => 'Series para niños';
-
-  @override
-  String get reality_series => 'Realitys';
-
-  @override
-  String get talk_series => 'Programas informativos';
 
   @override
   String get mistery_series => 'Series de misterio';

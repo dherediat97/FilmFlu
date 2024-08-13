@@ -20,7 +20,7 @@ class MediaRepository implements MediaRepositoryContract {
 
   @override
   Future<Result<MediaItemEntity>> getMediaItem({
-    required MediaType mediaTypeSelected,
+    required String mediaTypeSelected,
     required String mediaTypeId,
   }) async {
     try {

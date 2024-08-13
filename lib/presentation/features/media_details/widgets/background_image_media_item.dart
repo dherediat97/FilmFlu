@@ -13,24 +13,27 @@ class BackgroundImageMediaItem extends StatelessWidget {
   const BackgroundImageMediaItem({
     super.key,
     required this.mediaItem,
-    required this.mediaDataName,
     required this.isHomeScreen,
     required this.productionCompanyImage,
   });
 
   final String productionCompanyImage;
   final MediaItemEntity? mediaItem;
-  final String mediaDataName;
   final bool isHomeScreen;
 
   @override
   Widget build(BuildContext context) {
+    String title;
+    if (mediaItem!.title!.isNotEmpty) {
+      title = mediaItem!.title!;
+    } else {
+      title = mediaItem!.name!;
+    }
     return mediaItem != null
         ? SizedBox(
             height: MediaQuery.of(context).size.height / 2,
             child: Stack(children: [
               DefaultImageWidget(
-                darkenImage: true,
                 imageUrl:
                     '${AppUrls.movieLandscapeBaseUrl}${mediaItem?.backdropPath}',
               ),
@@ -55,7 +58,7 @@ class BackgroundImageMediaItem extends StatelessWidget {
                         ],
                       ),
                     Text(
-                      mediaDataName,
+                      title,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     Row(
@@ -70,7 +73,8 @@ class BackgroundImageMediaItem extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                   ),
                         ),
-                        if (mediaItem != null) ...[
+                        if (mediaItem?.releaseDate != null &&
+                            mediaItem?.firstAirDate != null) ...[
                           const SizedBox(
                             width: 20,
                           ),
@@ -82,7 +86,7 @@ class BackgroundImageMediaItem extends StatelessWidget {
                             width: 10,
                           ),
                           Text(
-                            getYear(mediaItem!.releaseDate!) ?? '',
+                            getYear(mediaItem!) ?? '',
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ]

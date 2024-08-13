@@ -134,7 +134,7 @@ class MediaListRepository implements MediaListRepositoryContract {
     try {
       MediaItemRemoteEntity mediaData = await _movieRemoteDataSourceContract
           .getMediaDataDay(mediaTypeSelected: mediaTypeSelected);
-      return Result.success(mediaData.toMediaEntity());
+      return Result.success(mediaData.toMediaDayEntity());
     } catch (error) {
       return Result.failure(
         error: RepositoryError.fromDataSourceError(

@@ -1,12 +1,14 @@
 import 'package:film_flu/app/di/di.dart';
-import 'package:film_flu/app/di/top_bloc_providers.dart';
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/app/routes/app_routes.dart';
 import 'package:film_flu/data/repositories/local/app_local_data_source_contract.dart';
 import 'package:film_flu/domain/repository_contracts/media_list_repository_contract.dart';
+import 'package:film_flu/domain/repository_contracts/media_repository_contract.dart';
+import 'package:film_flu/domain/repository_contracts/person_repository_contract.dart';
 import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
-import 'package:film_flu/presentation/features/media_day/bloc/media_day_bloc.dart';
+import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
+import 'package:film_flu/presentation/features/person_details/bloc/person_details_bloc.dart';
 import 'package:film_flu/presentation/top_blocs/app/app_bloc.dart';
 import 'package:film_flu/presentation/top_blocs/media_list/media_list_bloc.dart';
 import 'package:flutter/foundation.dart';
@@ -31,7 +33,7 @@ class FilmFlu extends StatelessWidget {
 
   final GoRouter _router = GoRouter(
     debugLogDiagnostics: kDebugMode,
-    initialLocation: AppRoutePaths.moviesRoute,
+    initialLocation: AppRoutePaths.startRoute,
     routes: appRoutes,
   );
 
@@ -41,35 +43,40 @@ class FilmFlu extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => AppBloc(
-              appLocalDataSourceContract: getIt<AppLocalDataSourceContract>()),
+            appLocalDataSourceContract: getIt<AppLocalDataSourceContract>(),
+          ),
         ),
-        BlocProvider(create: (context) => HomeBloc()),
+        BlocProvider(
+            create: (context) => HomeBloc(
+                  repositoryContract: getIt<MediaListRepositoryContract>(),
+                )),
         BlocProvider(
           create: (context) => MediaListBloc(
-            repositoryContract: getIt<MediaListRepositoryContract>(),
+            mediaListRepository: getIt<MediaListRepositoryContract>(),
           ),
         ),
         BlocProvider(
-          create: (context) => MediaDayBloc(
-            repositoryContract: getIt<MediaListRepositoryContract>(),
-          ),
+          create: (context) => MediaDetailBloc(
+              repositoryContract: getIt<MediaRepositoryContract>()),
         ),
+        BlocProvider(
+          create: (context) => PersonDetailsBloc(
+              repositoryContract: getIt<PersonRepositoryContract>()),
+        )
       ],
       child: BlocBuilder<AppBloc, AppState>(
         builder: (context, state) {
-          return TopBlocProviders(
-            child: MaterialApp.router(
-              debugShowCheckedModeBanner: false,
-              scrollBehavior:
-                  kIsWeb ? WebScrollBehavior() : const MaterialScrollBehavior(),
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              locale: state.locale,
-              supportedLocales: AppLocalizations.supportedLocales,
-              routerConfig: _router,
-              themeMode: state.themeMode,
-              theme: state.theme.light(),
-              darkTheme: state.theme.dark(),
-            ),
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            scrollBehavior:
+                kIsWeb ? WebScrollBehavior() : const MaterialScrollBehavior(),
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            locale: state.locale,
+            supportedLocales: AppLocalizations.supportedLocales,
+            routerConfig: _router,
+            themeMode: state.themeMode,
+            theme: state.theme.light(),
+            darkTheme: state.theme.dark(),
           );
         },
       ),
