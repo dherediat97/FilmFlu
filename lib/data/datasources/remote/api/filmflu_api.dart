@@ -20,6 +20,7 @@ abstract class FilmFluApi {
     @Path('mediaType') required String mediaType,
     @Query('language') String language = 'es-ES',
     @Query('sort_by') String sortBy = 'popularity.desc',
+    @Query('region') String region = 'es-ES',
     @Query('with_genres') required int genres,
     @Query('with_original_language') String? languageId,
     @Query('page') int? page = 1,

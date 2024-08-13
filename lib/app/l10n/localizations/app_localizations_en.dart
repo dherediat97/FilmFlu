@@ -78,22 +78,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tv_show_series => 'TV Programs';
 
   @override
-  String get action_adventure_series => 'Action & Adventure Series';
-
-  @override
   String get crime_series => 'Crime Series';
 
   @override
   String get family_series => 'Family Series';
-
-  @override
-  String get kids_series => 'Kids Series';
-
-  @override
-  String get reality_series => 'Realitys';
-
-  @override
-  String get talk_series => 'Programas informativos';
 
   @override
   String get mistery_series => 'Mistery Series';

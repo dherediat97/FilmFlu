@@ -16,6 +16,16 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   int _selectedIndex = 0;
 
   @override
+  void initState() {
+    super.initState();
+    if (_selectedIndex == 0) {
+      context
+          .read<HomeBloc>()
+          .add(const HomeEvent.switchCategory(MediaType.movie));
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       items: [
@@ -43,10 +53,10 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
     });
     switch (_selectedIndex) {
       case 0:
+        context.go(AppRoutePaths.moviesRoute);
         context
             .read<HomeBloc>()
             .add(const HomeEvent.switchCategory(MediaType.movie));
-        context.go(AppRoutePaths.moviesRoute);
         break;
 
       case 1:

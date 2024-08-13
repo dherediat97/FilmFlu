@@ -43,7 +43,7 @@ class ProductionCreditsWidget extends StatelessWidget {
             onTap: () {
               AppConstants.mediaTypeId = filmPerson.id.toString();
               context.pushReplacement(
-                '${AppRoutePaths.mediaDetailsRoute}/${filmPerson.id}',
+                '${AppRoutePaths.personDetailsRoute}/${filmPerson.id}',
               );
             },
             title: ClipRRect(

@@ -1,24 +1,11 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/presentation/features/home/widgets/media_list.dart';
-import 'package:film_flu/presentation/features/media_day/bloc/media_day_bloc.dart';
 import 'package:film_flu/presentation/features/media_day/media_day_widget.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MoviesListWidget extends StatefulWidget {
+class MoviesListWidget extends StatelessWidget {
   const MoviesListWidget({super.key});
-
-  @override
-  State<MoviesListWidget> createState() => _MoviesListState();
-}
-
-class _MoviesListState extends State<MoviesListWidget> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<MediaDayBloc>().add(const MediaDayEvent.fetchMediaDataDay());
-  }
 
   @override
   Widget build(BuildContext context) {

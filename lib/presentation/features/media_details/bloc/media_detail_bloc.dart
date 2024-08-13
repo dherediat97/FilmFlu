@@ -32,6 +32,7 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
             _setCreditsType(event, emit, isCastSelected),
         openTrailer: () => _openTrailer(event, emit),
         closeTrailer: () => _closeTrailer(event, emit),
+        clearState: () => _clearState(event, emit),
       );
     });
   }
@@ -39,9 +40,10 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
   Future<void> _getMediaDetails(
     MediaDetailEvent event,
     Emitter<MediaDetailState> emit,
-    MediaType mediaTypeSelected,
+    String mediaTypeSelected,
     String mediaItemId,
   ) async {
+    _clearState(event, emit);
     emit(state.copyWith(uiState: const UiState.loading()));
 
     final movieData = await _repository.getMediaItem(
@@ -182,5 +184,12 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
     } catch (ex) {
       return '';
     }
+  }
+
+  _clearState(
+    MediaDetailEvent event,
+    Emitter<MediaDetailState> emit,
+  ) async* {
+    yield state;
   }
 }

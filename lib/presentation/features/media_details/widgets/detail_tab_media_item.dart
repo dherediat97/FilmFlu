@@ -84,7 +84,6 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
                       productionCompanyImage: state.productionCompanyImage,
                       isHomeScreen: false,
                       mediaItem: state.mediaItem,
-                      mediaDataName: state.movieName,
                     )
                   : const PlaceholderLoader(),
               Padding(

@@ -3,7 +3,7 @@ part of 'media_detail_bloc.dart';
 @freezed
 class MediaDetailEvent with _$MediaDetailEvent {
   const factory MediaDetailEvent.getMediaDetails(
-    MediaType mediaType,
+    String mediaType,
     String mediaItemId,
   ) = _GetMediaDetails;
 
@@ -25,4 +25,6 @@ class MediaDetailEvent with _$MediaDetailEvent {
   const factory MediaDetailEvent.openTrailer() = _OpenTrailer;
 
   const factory MediaDetailEvent.closeTrailer() = _CloseTrailer;
+
+  const factory MediaDetailEvent.clearState() = _ClearState;
 }

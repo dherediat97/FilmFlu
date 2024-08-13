@@ -72,4 +72,14 @@ extension MediaItemToRemoteEntityExtension on MediaItemRemoteEntity {
         id: id,
         posterPath: posterPath ?? '',
       );
+
+  MediaItemEntity toMediaDayEntity() => MediaItemEntity(
+        title: title ?? '',
+        name: name ?? '',
+        id: id,
+        backdropPath: backdropPath ?? '',
+        voteAverage: voteAverage ?? 0,
+        firstAirDate: firstAirDate ?? '',
+        releaseDate: releaseDate ?? '',
+      );
 }

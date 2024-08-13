@@ -4,11 +4,15 @@ part of 'home_bloc.dart';
 class HomeState with _$HomeState {
   const factory HomeState({
     required MediaType mediaTypeSelected,
+    required UiState uiState,
+    required MediaItemEntity? mediaItem,
   }) = _MediaDayState;
 
   factory HomeState.initial() {
     return const HomeState(
       mediaTypeSelected: MediaType.movie,
+      uiState: UiState.initial(),
+      mediaItem: null,
     );
   }
 }

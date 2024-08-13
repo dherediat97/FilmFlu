@@ -6,11 +6,9 @@ class DefaultImageWidget extends StatelessWidget {
   const DefaultImageWidget({
     super.key,
     required this.imageUrl,
-    this.darkenImage = false,
   });
 
   final String? imageUrl;
-  final bool darkenImage;
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +18,16 @@ class DefaultImageWidget extends StatelessWidget {
       errorWidget: (context, url, error) => const Icon(Icons.error),
       progressIndicatorBuilder: (context, url, progress) =>
           const Center(child: PlaceholderLoader()),
-      imageBuilder: (context, imageProvider) => darkenImage
-          ? Container(
-              decoration: BoxDecoration(
-                color: Colors.black,
-                image: DecorationImage(
-                  image: imageProvider,
-                  fit: BoxFit.cover,
-                  opacity: darkenImage ? 0.6 : 1.0,
-                ),
-              ),
-            )
-          : Container(),
+      imageBuilder: (context, imageProvider) => Container(
+        decoration: BoxDecoration(
+          color: Colors.black,
+          image: DecorationImage(
+            image: imageProvider,
+            fit: BoxFit.cover,
+            opacity: 0.6,
+          ),
+        ),
+      ),
     );
   }
 }

@@ -57,6 +57,8 @@ class FilmFluRemoteDataSource
     final mediaData = await _filmFluApi.fetchMediaData(
       mediaType: mediaTypeSelected.name,
       language: await _appLocalDataSourceContract.getLanguage(),
+      languageId: await _appLocalDataSourceContract.getLanguage(),
+      region: await _appLocalDataSourceContract.getLanguage(),
       genres: genreId,
       page: page,
     );
@@ -78,11 +80,11 @@ class FilmFluRemoteDataSource
 
   @override
   Future<MediaItemRemoteEntity> getMediaDetail({
-    required MediaType mediaTypeSelected,
+    required String mediaTypeSelected,
     required String mediaTypeId,
   }) async {
     final mediaData = await _filmFluApi.fetchMediaItem(
-      mediaType: mediaTypeSelected.name,
+      mediaType: mediaTypeSelected,
       mediaTypeId: mediaTypeId,
       language: await _appLocalDataSourceContract.getLanguage(),
     );

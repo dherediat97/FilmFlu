@@ -6,7 +6,7 @@ import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
 
 abstract class MediaRemoteDataSourceContract {
   Future<MediaItemRemoteEntity> getMediaDetail({
-    required MediaType mediaTypeSelected,
+    required String mediaTypeSelected,
     required String mediaTypeId,
   });
 
