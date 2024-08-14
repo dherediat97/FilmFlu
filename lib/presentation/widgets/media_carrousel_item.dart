@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
@@ -28,7 +27,6 @@ class MediaCarrouselItem extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    AppConstants.mediaTypeId = mediaItem!.id.toString();
                     context.pushReplacement(
                         '${AppRoutePaths.mediaDetailsRoute}/${mediaTypeSelected.name}/${mediaItem?.id}');
                   },

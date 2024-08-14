@@ -9,7 +9,6 @@ class AppConstants {
     'Authorization': 'Bearer ${Env.tmdbApiKey}',
     'Content-Type': 'application/json'
   };
-  static String mediaTypeId = '';
   static int personId = 0;
   static const bool debugRequest = false;
   static const String trailer = 'Trailer';
