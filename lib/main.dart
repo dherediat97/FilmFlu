@@ -47,9 +47,10 @@ class FilmFlu extends StatelessWidget {
           ),
         ),
         BlocProvider(
-            create: (context) => HomeBloc(
-                  repositoryContract: getIt<MediaListRepositoryContract>(),
-                )),
+          create: (context) => HomeBloc(
+            repositoryContract: getIt<MediaListRepositoryContract>(),
+          ),
+        ),
         BlocProvider(
           create: (context) => MediaListBloc(
             mediaListRepository: getIt<MediaListRepositoryContract>(),
@@ -57,11 +58,13 @@ class FilmFlu extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => MediaDetailBloc(
-              repositoryContract: getIt<MediaRepositoryContract>()),
+            repositoryContract: getIt<MediaRepositoryContract>(),
+          ),
         ),
         BlocProvider(
           create: (context) => PersonDetailsBloc(
-              repositoryContract: getIt<PersonRepositoryContract>()),
+            repositoryContract: getIt<PersonRepositoryContract>(),
+          ),
         )
       ],
       child: BlocBuilder<AppBloc, AppState>(
