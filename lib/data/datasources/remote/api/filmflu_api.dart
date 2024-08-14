@@ -6,7 +6,6 @@ import 'package:film_flu/data/models/person_remote_entity.dart';
 import 'package:film_flu/data/models/review_remote_entity.dart';
 import 'package:film_flu/domain/models/language_entity.dart';
 import 'package:dio/dio.dart';
-import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'filmflu_api.g.dart';

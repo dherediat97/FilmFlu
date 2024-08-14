@@ -41,7 +41,8 @@ class ProductionCreditsWidget extends StatelessWidget {
 
           return ListTile(
             onTap: () {
-              AppConstants.mediaTypeId = filmPerson.id.toString();
+              AppConstants.personId = filmPerson.id;
+
               context.pushReplacement(
                 '${AppRoutePaths.personDetailsRoute}/${filmPerson.id}',
               );

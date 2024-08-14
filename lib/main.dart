@@ -1,3 +1,4 @@
+import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/di/di.dart';
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
@@ -47,9 +48,10 @@ class FilmFlu extends StatelessWidget {
           ),
         ),
         BlocProvider(
-            create: (context) => HomeBloc(
-                  repositoryContract: getIt<MediaListRepositoryContract>(),
-                )),
+          create: (context) => HomeBloc(
+            repositoryContract: getIt<MediaListRepositoryContract>(),
+          ),
+        ),
         BlocProvider(
           create: (context) => MediaListBloc(
             mediaListRepository: getIt<MediaListRepositoryContract>(),
@@ -57,11 +59,13 @@ class FilmFlu extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => MediaDetailBloc(
-              repositoryContract: getIt<MediaRepositoryContract>()),
+            repositoryContract: getIt<MediaRepositoryContract>(),
+          ),
         ),
         BlocProvider(
           create: (context) => PersonDetailsBloc(
-              repositoryContract: getIt<PersonRepositoryContract>()),
+            repositoryContract: getIt<PersonRepositoryContract>(),
+          )..add(PersonDetailEvent.getPersonData(AppConstants.personId)),
         )
       ],
       child: BlocBuilder<AppBloc, AppState>(

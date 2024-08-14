@@ -1,4 +1,3 @@
-import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
@@ -125,9 +124,6 @@ class BackgroundImageMediaItem extends StatelessWidget {
                                       mediaItem!.title != ''
                                           ? MediaType.movie
                                           : MediaType.tv;
-
-                                  AppConstants.mediaTypeId =
-                                      mediaItem!.id.toString();
 
                                   context.pushReplacement(
                                       '${AppRoutePaths.mediaDetailsRoute}/${mediaTypeSelected.name}/${mediaItem?.id}');

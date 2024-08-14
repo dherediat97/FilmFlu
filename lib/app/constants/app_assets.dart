@@ -18,6 +18,7 @@ class AppAssets {
   static const String animeActressImageIcon = '$iconsFolder/anime_girl.svg';
   static const String andalucianHeartIcon = '$iconsFolder/andalucian_heart.svg';
   static const String fullHeartIcon = '$iconsFolder/full_heart.svg';
+  static const String githubIcon = '$iconsFolder/github_icon.svg';
 
   static const String loadingAnimation =
       '$animationsFolder/splash_animation.json';

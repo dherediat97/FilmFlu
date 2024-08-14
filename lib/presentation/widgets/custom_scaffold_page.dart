@@ -1,4 +1,5 @@
 import 'package:film_flu/app/constants/app_assets.dart';
+import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
@@ -145,6 +146,22 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
             ),
           );
         }).toList()));
+
+    actions.add(
+      IconButton(
+        icon: SvgPicture.asset(
+          AppAssets.githubIcon,
+          width: 24,
+          height: 24,
+          colorFilter: const ColorFilter.mode(
+              AppColors.backgroundColorLight, BlendMode.srcIn),
+        ),
+        onPressed: () {
+          launchUrl(Uri.parse(AppConstants.myGithubPage));
+        },
+      ),
+    );
+
     if (kIsWeb) {
       actions.add(
         IconButton(

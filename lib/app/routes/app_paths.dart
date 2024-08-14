@@ -9,10 +9,7 @@ class AppRoutePaths {
   static String searchRoute = '$homeRoute/search';
 
   static String mediaDetailsRoute = '/mediaItemDetails';
-  static String mediaDetailsControllerRoute = '$mediaDetailsRoute/controller';
-
   static String personDetailsRoute = '/personDetails';
-  static String personDetailsControllerRoute = '$personDetailsRoute/controller';
 
   static String settingsRoute = '/settings';
 }

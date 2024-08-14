@@ -24,7 +24,7 @@ class DefaultImageWidget extends StatelessWidget {
           image: DecorationImage(
             image: imageProvider,
             fit: BoxFit.cover,
-            opacity: 0.6,
+            opacity: 0.4,
           ),
         ),
       ),
