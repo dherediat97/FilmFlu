@@ -1,3 +1,4 @@
+import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/di/di.dart';
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
@@ -64,7 +65,7 @@ class FilmFlu extends StatelessWidget {
         BlocProvider(
           create: (context) => PersonDetailsBloc(
             repositoryContract: getIt<PersonRepositoryContract>(),
-          ),
+          )..add(PersonDetailEvent.getPersonData(AppConstants.personId)),
         )
       ],
       child: BlocBuilder<AppBloc, AppState>(

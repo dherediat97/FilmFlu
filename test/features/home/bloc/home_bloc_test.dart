@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/top_blocs/media_list/media_list_bloc.dart';
 import 'package:mockito/annotations.dart';
 import 'package:test/scaffolding.dart';
@@ -24,13 +25,13 @@ void main() {
         expect: () => [],
       );
 
-      // blocTest(
-      //   'Given HomeScreenBloc when load the bloc then return the expected result',
-      //   build: () => mockBlock,
-      //   act: (bloc) => bloc.add(const MediaListEvent.getMediaDataByGenre(
-      //       MediaType.movie, 0, 'null')),
-      //   expect: () => [],
-      // );
+      blocTest(
+        'Given HomeScreenBloc when load the bloc then return the expected result',
+        build: () => mockBlock,
+        act: (bloc) => bloc.add(const MediaListEvent.getMediaDataByGenre(
+            MediaType.movie, 28, 'es_ES')),
+        expect: () => [],
+      );
     },
   );
 }
