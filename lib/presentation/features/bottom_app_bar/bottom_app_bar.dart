@@ -16,16 +16,6 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   int _selectedIndex = 0;
 
   @override
-  void initState() {
-    super.initState();
-    if (_selectedIndex == 0) {
-      context
-          .read<HomeBloc>()
-          .add(const HomeEvent.switchCategory(MediaType.movie));
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       items: [
@@ -50,28 +40,28 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   void _onOptionSelected(int index) {
     setState(() {
       _selectedIndex = index;
+      switch (index) {
+        case 0:
+          context
+              .read<HomeBloc>()
+              .add(const HomeEvent.switchCategory(MediaType.movie));
+          context.go(AppRoutePaths.moviesRoute);
+          break;
+
+        case 1:
+          context
+              .read<HomeBloc>()
+              .add(const HomeEvent.switchCategory(MediaType.tv));
+          context.go(AppRoutePaths.seriesRoute);
+          break;
+
+        case 2:
+          context
+              .read<HomeBloc>()
+              .add(const HomeEvent.switchCategory(MediaType.search));
+          context.go(AppRoutePaths.searchRoute);
+          break;
+      }
     });
-    switch (_selectedIndex) {
-      case 0:
-        context
-            .read<HomeBloc>()
-            .add(const HomeEvent.switchCategory(MediaType.movie));
-        context.go(AppRoutePaths.moviesRoute);
-        break;
-
-      case 1:
-        context
-            .read<HomeBloc>()
-            .add(const HomeEvent.switchCategory(MediaType.tv));
-        context.go(AppRoutePaths.seriesRoute);
-        break;
-
-      case 2:
-        context
-            .read<HomeBloc>()
-            .add(const HomeEvent.switchCategory(MediaType.search));
-        context.go(AppRoutePaths.searchRoute);
-        break;
-    }
   }
 }

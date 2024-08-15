@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
-        String route;
+        String route = AppRoutePaths.moviesRoute;
         switch (state.mediaTypeSelected) {
           case MediaType.movie:
             route = AppRoutePaths.moviesRoute;

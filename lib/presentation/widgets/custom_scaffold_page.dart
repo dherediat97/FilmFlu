@@ -20,16 +20,10 @@ class ScaffoldPage extends StatefulWidget {
     super.key,
     required this.child,
     this.floatingActionButton,
-    this.fullScreenMode = false,
-    this.isSearchVisible = true,
-    this.fabLocation = FloatingActionButtonLocation.endTop,
   });
 
   final Widget child;
   final Widget? floatingActionButton;
-  final bool fullScreenMode;
-  final bool isSearchVisible;
-  final FloatingActionButtonLocation fabLocation;
 
   @override
   State<ScaffoldPage> createState() => _ScaffoldPageState();
@@ -41,43 +35,40 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
     context.read<AppBloc>().add(const AppEvent.changeStartLang());
 
     return Scaffold(
-      floatingActionButtonLocation: widget.fabLocation,
-      appBar: !widget.fullScreenMode
-          ? AppBar(
-              title: titleScaffold(context),
-              automaticallyImplyLeading: true,
-              centerTitle: true,
-              titleTextStyle: Theme.of(context).textTheme.headlineLarge,
-              leadingWidth: 120,
-              leading: IconButton(
-                  padding: EdgeInsets.zero,
-                  style: ButtonStyle(
-                    overlayColor: WidgetStateProperty.all(Colors.transparent),
-                  ),
-                  icon: Image.asset(
-                    AppAssets.logoIcon,
-                    fit: BoxFit.fitHeight,
-                  ),
-                  onPressed: () {
-                    if (context.canPop()) {
-                      context.pop();
-                    } else {
-                      context.pushReplacement(AppRoutePaths.startRoute);
-                    }
-                  }),
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: _appBarActions(context),
-                  ),
-                )
-              ],
-            )
-          : null,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      appBar: AppBar(
+        title: titleScaffold(context),
+        automaticallyImplyLeading: true,
+        centerTitle: true,
+        titleTextStyle: Theme.of(context).textTheme.headlineLarge,
+        leadingWidth: 120,
+        leading: IconButton(
+            padding: EdgeInsets.zero,
+            style: ButtonStyle(
+              overlayColor: WidgetStateProperty.all(Colors.transparent),
+            ),
+            icon: Image.asset(
+              AppAssets.logoIcon,
+              fit: BoxFit.fitHeight,
+            ),
+            onPressed: () {
+              if (context.canPop()) {
+                context.pop();
+              } else {
+                context.pushReplacement(AppRoutePaths.startRoute);
+              }
+            }),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              children: _appBarActions(context),
+            ),
+          )
+        ],
+      ),
       body: widget.child,
-      bottomNavigationBar:
-          !widget.fullScreenMode ? const MyBottomNavigationBar() : null,
+      bottomNavigationBar: const MyBottomNavigationBar(),
       floatingActionButton: widget.floatingActionButton,
     );
   }

@@ -47,8 +47,6 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
             mediaItem?.title != '' ? MediaType.movie : MediaType.tv;
 
         return ScaffoldPage(
-          isSearchVisible: true,
-          fabLocation: FloatingActionButtonLocation.endFloat,
           floatingActionButton: Padding(
             padding: const EdgeInsets.all(4.0),
             child: state.trailerId.isNotEmpty

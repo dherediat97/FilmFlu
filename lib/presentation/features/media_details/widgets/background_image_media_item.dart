@@ -64,7 +64,7 @@ class BackgroundImageMediaItem extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          '${(mediaItem!.voteAverage!.round() * 10)}% de los usuarios les gusta',
+                          '${(mediaItem!.voteAverage!.round() * 10)}${context.localizations.percentange_vote}',
                           style:
                               Theme.of(context).textTheme.titleMedium?.copyWith(
                                     color: Colors.greenAccent,
