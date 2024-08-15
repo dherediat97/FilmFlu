@@ -22,7 +22,7 @@ class InfoMedia extends StatelessWidget {
           Text(
             mediaItem!.overview!.toString(),
             textAlign: TextAlign.start,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         // if (media != null) ...[
         //   Column(

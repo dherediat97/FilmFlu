@@ -16,16 +16,23 @@ class PersonDetailsController extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<PersonDetailsBloc, PersonDetailsState>(
+    return BlocConsumer<PersonDetailsBloc, PersonDetailsState>(
       listenWhen: (previous, current) {
         return current.uiState.isSuccess();
       },
-      listener: (context, state) {
-        SplashScreen(
-          route: '${AppRoutePaths.personDetailsRoute}/$personId',
-        );
+      buildWhen: (previous, current) {
+        return current.person == previous.person;
       },
-      child: PersonDetailsPage(personId: personId),
+      listener: (context, state) {},
+      builder: (context, state) {
+        if (state.person != null && !state.uiState.isLoading()) {
+          return PersonDetailsPage(personId: personId);
+        } else {
+          return SplashScreen(
+            route: '${AppRoutePaths.personDetailsRoute}/$personId',
+          );
+        }
+      },
     );
   }
 }

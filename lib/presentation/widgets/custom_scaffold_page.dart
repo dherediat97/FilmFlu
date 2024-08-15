@@ -136,7 +136,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                 const SizedBox(height: 40),
                 Text(
                   language.languageCode,
-                  style: Theme.of(context).textTheme.labelMedium,
+                  style: Theme.of(context).textTheme.bodySmall,
                 )
               ],
             ),

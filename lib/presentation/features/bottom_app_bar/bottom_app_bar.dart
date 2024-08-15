@@ -38,30 +38,29 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   }
 
   void _onOptionSelected(int index) {
-    setState(() {
-      _selectedIndex = index;
-      switch (index) {
-        case 0:
-          context
-              .read<HomeBloc>()
-              .add(const HomeEvent.switchCategory(MediaType.movie));
-          context.go(AppRoutePaths.moviesRoute);
-          break;
+    _selectedIndex = index;
 
-        case 1:
-          context
-              .read<HomeBloc>()
-              .add(const HomeEvent.switchCategory(MediaType.tv));
-          context.go(AppRoutePaths.seriesRoute);
-          break;
+    switch (index) {
+      case 0:
+        context
+            .read<HomeBloc>()
+            .add(const HomeEvent.switchCategory(MediaType.movie));
+        context.go(AppRoutePaths.moviesRoute);
+        break;
 
-        case 2:
-          context
-              .read<HomeBloc>()
-              .add(const HomeEvent.switchCategory(MediaType.search));
-          context.go(AppRoutePaths.searchRoute);
-          break;
-      }
-    });
+      case 1:
+        context
+            .read<HomeBloc>()
+            .add(const HomeEvent.switchCategory(MediaType.tv));
+        context.go(AppRoutePaths.seriesRoute);
+        break;
+
+      case 2:
+        context
+            .read<HomeBloc>()
+            .add(const HomeEvent.switchCategory(MediaType.search));
+        context.go(AppRoutePaths.searchRoute);
+        break;
+    }
   }
 }
