@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/features/media_list/bloc/media_list_bloc.dart';
@@ -6,6 +7,7 @@ import 'package:film_flu/presentation/widgets/media_carrousel_item.dart';
 import 'package:film_flu/presentation/widgets/placeholder_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class MediaList extends StatefulWidget {
   const MediaList({
@@ -102,31 +104,43 @@ class _MediaDataList extends State<MediaList> {
                         if (mediaTypeSelected == MediaType.movie)
                           SizedBox(
                             height: 220,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              controller: _scrollController,
-                              itemCount: mediaDataList.length,
-                              itemBuilder: (context, index) {
-                                return MediaCarrouselItem(
-                                  mediaTypeSelected: MediaType.movie,
-                                  mediaItem: mediaDataList[index],
-                                );
+                            child: CarouselView(
+                              padding: const EdgeInsets.all(8.0),
+                              itemExtent: 180,
+                              onTap: (id) {
+                                context.pushReplacement(
+                                    '${AppRoutePaths.mediaDetailsRoute}/${mediaTypeSelected.name}/${mediaDataList[id].id}');
                               },
+                              children: List<Widget>.generate(
+                                mediaDataList.length,
+                                (int index) {
+                                  return MediaCarrouselItem(
+                                    mediaItem: mediaDataList[index],
+                                    mediaTypeSelected: MediaType.movie,
+                                  );
+                                },
+                              ),
                             ),
                           ),
                         if (mediaTypeSelected == MediaType.tv)
                           SizedBox(
                             height: 220,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              controller: _scrollController,
-                              itemCount: mediaDataList.length,
-                              itemBuilder: (context, index) {
-                                return MediaCarrouselItem(
-                                  mediaTypeSelected: MediaType.tv,
-                                  mediaItem: mediaDataList[index],
-                                );
+                            child: CarouselView(
+                              padding: const EdgeInsets.all(8.0),
+                              itemExtent: 180,
+                              onTap: (id) {
+                                context.pushReplacement(
+                                    '${AppRoutePaths.mediaDetailsRoute}/${mediaTypeSelected.name}/${mediaDataList[id].id}');
                               },
+                              children: List<Widget>.generate(
+                                mediaDataList.length,
+                                (int index) {
+                                  return MediaCarrouselItem(
+                                    mediaItem: mediaDataList[index],
+                                    mediaTypeSelected: MediaType.tv,
+                                  );
+                                },
+                              ),
                             ),
                           ),
                       ],
