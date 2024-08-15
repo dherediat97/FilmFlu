@@ -47,11 +47,10 @@
   "made_with_love": "Hecho con mucho",
   "play_trailer": "Ver tráiler",
   "films_worked":"Papeles que ha realizado",
-  "about_movie":"Sobre la Película",
-  "about_serie":"Sobre la Serie",
   "reviews": "Reseñas",
   "information": "Información",
   "add_to_my_list": "Añadir a mi lista",
   "unknown": "Desconocido",
-  "search": "Buscar"
+  "search": "Buscar",
+  "percentange_vote":"% de los usuarios les gusta"
 }

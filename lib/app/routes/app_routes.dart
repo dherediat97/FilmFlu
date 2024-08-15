@@ -1,7 +1,7 @@
 import 'package:film_flu/presentation/features/home/home_screen.dart';
-import 'package:film_flu/presentation/features/movies/movies_list.dart';
+import 'package:film_flu/presentation/media_list/widgets/movies_list.dart';
 import 'package:film_flu/presentation/features/search/search_screen.dart';
-import 'package:film_flu/presentation/features/series/series_list.dart';
+import 'package:film_flu/presentation/media_list/widgets/series_list.dart';
 import 'package:film_flu/presentation/features/media_details/media_detail_controller.dart';
 import 'package:film_flu/presentation/features/person_details/person_details_controller.dart';
 import 'package:film_flu/presentation/features/settings/settings_screen.dart';

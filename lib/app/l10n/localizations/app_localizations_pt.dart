@@ -150,12 +150,6 @@ class AppLocalizationsPt extends AppLocalizations {
   String get films_worked => 'Papéis que interpretou';
 
   @override
-  String get about_movie => 'Sobre la Película';
-
-  @override
-  String get about_serie => 'Sobre la Serie';
-
-  @override
   String get reviews => 'Reseñas';
 
   @override
@@ -169,4 +163,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get search => 'Buscar';
+
+  @override
+  String get percentange_vote => '% de los usuarios les gusta';
 }

@@ -17,7 +17,7 @@ void _uiModulesInit() {
 
   uiModulesDi.registerFactory(
     () => MediaDetailBloc(
-      repositoryContract: uiModulesDi(),
+      mediaRepository: uiModulesDi(),
     ),
   );
   uiModulesDi.registerFactory(

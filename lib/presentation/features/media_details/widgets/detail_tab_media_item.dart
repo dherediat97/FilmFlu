@@ -1,13 +1,13 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
-import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
+import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/background_image_media_item.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/container_tab_media_item.dart';
+import 'package:film_flu/presentation/features/media_details/widgets/info_media.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/media_data_cast.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/media_data_production.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/reviews_widget_item.dart';
-import 'package:film_flu/presentation/widgets/empty_state_widget.dart';
 import 'package:film_flu/presentation/widgets/placeholder_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,6 +38,10 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
       var index = _tabController.index;
       switch (index) {
         case 0:
+          context.read<MediaDetailBloc>().add(MediaDetailEvent.getMedia(
+                widget.mediaTypeSelected,
+                widget.mediaItemId,
+              ));
           break;
         case 1:
           context.read<MediaDetailBloc>().add(MediaDetailEvent.getReviews(
@@ -73,9 +77,6 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
   Widget build(BuildContext context) {
     return BlocBuilder<MediaDetailBloc, MediaDetailState>(
       builder: (context, state) {
-        MediaType mediaTypeSelected =
-            context.read<HomeBloc>().state.mediaTypeSelected;
-
         return SingleChildScrollView(
           child: Column(
             children: [
@@ -97,9 +98,7 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
                         controller: _tabController,
                         tabs: [
                           Tab(
-                            text: mediaTypeSelected == MediaType.movie
-                                ? context.localizations.about_movie
-                                : context.localizations.about_serie,
+                            text: context.localizations.information,
                           ),
                           Tab(text: context.localizations.reviews),
                           Tab(text: context.localizations.character_cast),
@@ -112,17 +111,10 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
                           controller: _tabController,
                           children: [
                             ContainerTabMediaItem(
-                              child: state.mediaItem?.overview != null
-                                  ? Text(
-                                      state.mediaItem!.overview!,
-                                      textAlign: TextAlign.start,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium,
-                                    )
-                                  : const EmptyStateWidget(
-                                      errorMessage:
-                                          'No se ha encontrado descripción'),
+                              child: InfoMedia(
+                                mediaItem: state.mediaItem,
+                                media: state.mediaList,
+                              ),
                             ),
                             ContainerTabMediaItem(
                               child: state.reviews != null

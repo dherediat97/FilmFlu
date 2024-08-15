@@ -47,10 +47,10 @@
   "made_with_love": "Made with much",
   "films_worked":"Characters I have made",
   "play_trailer": "Play trailer",
-  "about_serie":"About Serie",
-  "about_movie":"About Movie",
   "reviews": "Reviews",
   "information": "Info",
   "add_to_my_list": "Add to my list",
-  "unknown": "Unknown"
+  "unknown": "Unknown",
+  "search": "Search",
+  "percentange_vote":"% likes"
 }

@@ -7,11 +7,11 @@ import 'package:film_flu/data/repositories/local/app_local_data_source_contract.
 import 'package:film_flu/domain/repository_contracts/media_list_repository_contract.dart';
 import 'package:film_flu/domain/repository_contracts/media_repository_contract.dart';
 import 'package:film_flu/domain/repository_contracts/person_repository_contract.dart';
-import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
+import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
 import 'package:film_flu/presentation/features/person_details/bloc/person_details_bloc.dart';
+import 'package:film_flu/presentation/media_list/bloc/media_list_bloc.dart';
 import 'package:film_flu/presentation/top_blocs/app/app_bloc.dart';
-import 'package:film_flu/presentation/top_blocs/media_list/media_list_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:film_flu/core/utils/util_scroll.dart';
@@ -59,7 +59,7 @@ class FilmFlu extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => MediaDetailBloc(
-            repositoryContract: getIt<MediaRepositoryContract>(),
+            mediaRepository: getIt<MediaRepositoryContract>(),
           ),
         ),
         BlocProvider(

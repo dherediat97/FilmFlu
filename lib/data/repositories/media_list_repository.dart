@@ -6,7 +6,7 @@ import 'package:film_flu/data/repositories/remote/media_list_remote_data_source_
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/domain/repository_contracts/media_list_repository_contract.dart';
-import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
+import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 
 class MediaListRepository implements MediaListRepositoryContract {
   final MediaListRemoteDataSourceContract _movieRemoteDataSourceContract;

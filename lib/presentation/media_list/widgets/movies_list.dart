@@ -1,6 +1,6 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/presentation/features/home/widgets/media_list.dart';
-import 'package:film_flu/presentation/features/media_day/media_day_widget.dart';
+import 'package:film_flu/presentation/media_list/media_list.dart';
+import 'package:film_flu/presentation/features/home/widgets/media_day_widget.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
 

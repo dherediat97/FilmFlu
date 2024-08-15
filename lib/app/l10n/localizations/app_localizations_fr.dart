@@ -150,12 +150,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get films_worked => 'Personnages que j\'ai créés';
 
   @override
-  String get about_movie => 'Sobre la Película';
-
-  @override
-  String get about_serie => 'Sobre la Serie';
-
-  @override
   String get reviews => 'Reseñas';
 
   @override
@@ -169,4 +163,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get search => 'Buscar';
+
+  @override
+  String get percentange_vote => '% de los usuarios les gusta';
 }

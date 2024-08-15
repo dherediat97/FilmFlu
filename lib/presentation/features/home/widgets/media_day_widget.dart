@@ -1,4 +1,4 @@
-import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
+import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/background_image_media_item.dart';
 import 'package:film_flu/presentation/widgets/placeholder_loader.dart';
 import 'package:flutter/material.dart';

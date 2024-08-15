@@ -400,18 +400,6 @@ abstract class AppLocalizations {
   /// **'Papeles que ha realizado'**
   String get films_worked;
 
-  /// No description provided for @about_movie.
-  ///
-  /// In es, this message translates to:
-  /// **'Sobre la Película'**
-  String get about_movie;
-
-  /// No description provided for @about_serie.
-  ///
-  /// In es, this message translates to:
-  /// **'Sobre la Serie'**
-  String get about_serie;
-
   /// No description provided for @reviews.
   ///
   /// In es, this message translates to:
@@ -441,6 +429,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Buscar'**
   String get search;
+
+  /// No description provided for @percentange_vote.
+  ///
+  /// In es, this message translates to:
+  /// **'% de los usuarios les gusta'**
+  String get percentange_vote;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

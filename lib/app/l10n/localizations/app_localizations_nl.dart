@@ -150,12 +150,6 @@ class AppLocalizationsNl extends AppLocalizations {
   String get films_worked => 'Rollen die hij heeft gespeeld';
 
   @override
-  String get about_movie => 'Sobre la Película';
-
-  @override
-  String get about_serie => 'Sobre la Serie';
-
-  @override
   String get reviews => 'Reseñas';
 
   @override
@@ -169,4 +163,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get search => 'Buscar';
+
+  @override
+  String get percentange_vote => '% de los usuarios les gusta';
 }

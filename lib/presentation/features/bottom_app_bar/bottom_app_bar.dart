@@ -1,6 +1,6 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
-import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
+import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -50,27 +50,28 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   void _onOptionSelected(int index) {
     setState(() {
       _selectedIndex = index;
-      switch (_selectedIndex) {
-        case 0:
-          context.go(AppRoutePaths.moviesRoute);
-          context
-              .read<HomeBloc>()
-              .add(const HomeEvent.switchCategory(MediaType.movie));
-          break;
-
-        case 1:
-          context
-              .read<HomeBloc>()
-              .add(const HomeEvent.switchCategory(MediaType.tv));
-          context.go(AppRoutePaths.seriesRoute);
-          break;
-        case 2:
-          context
-              .read<HomeBloc>()
-              .add(const HomeEvent.switchCategory(MediaType.search));
-          context.go(AppRoutePaths.searchRoute);
-          break;
-      }
     });
+    switch (_selectedIndex) {
+      case 0:
+        context
+            .read<HomeBloc>()
+            .add(const HomeEvent.switchCategory(MediaType.movie));
+        context.go(AppRoutePaths.moviesRoute);
+        break;
+
+      case 1:
+        context
+            .read<HomeBloc>()
+            .add(const HomeEvent.switchCategory(MediaType.tv));
+        context.go(AppRoutePaths.seriesRoute);
+        break;
+
+      case 2:
+        context
+            .read<HomeBloc>()
+            .add(const HomeEvent.switchCategory(MediaType.search));
+        context.go(AppRoutePaths.searchRoute);
+        break;
+    }
   }
 }

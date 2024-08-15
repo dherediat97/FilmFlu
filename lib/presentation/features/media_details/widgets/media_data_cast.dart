@@ -16,8 +16,8 @@ class MediaDataCast extends StatelessWidget {
     return cast != null
         ? GridView.custom(
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 240,
-              mainAxisExtent: 340,
+              maxCrossAxisExtent: 200,
+              mainAxisExtent: 300,
               mainAxisSpacing: 18,
               crossAxisSpacing: 18,
             ),

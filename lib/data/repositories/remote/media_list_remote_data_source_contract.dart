@@ -1,5 +1,5 @@
 import 'package:film_flu/data/models/media_item_remote_entity.dart';
-import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
+import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 
 abstract class MediaListRemoteDataSourceContract {
   Future<List<MediaItemRemoteEntity>> getMediaTypeList({

@@ -3,9 +3,10 @@ import 'package:film_flu/app/types/ui_state.dart';
 import 'package:film_flu/domain/models/actor_entity.dart';
 import 'package:film_flu/domain/models/film_worker_entity.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
+import 'package:film_flu/domain/models/media_response_entity.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:film_flu/domain/repository_contracts/media_repository_contract.dart';
-import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
+import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -14,11 +15,11 @@ part 'media_detail_state.dart';
 part 'media_detail_bloc.freezed.dart';
 
 class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
-  final MediaRepositoryContract _repository;
+  final MediaRepositoryContract _mediaRepository;
 
   MediaDetailBloc({
-    required MediaRepositoryContract repositoryContract,
-  })  : _repository = repositoryContract,
+    required MediaRepositoryContract mediaRepository,
+  })  : _mediaRepository = mediaRepository,
         super(MediaDetailState.initial()) {
     on<MediaDetailEvent>((event, emit) async {
       await event.when(
@@ -28,11 +29,10 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
             _getCredits(event, emit, mediaType, mediaItemId, isCast),
         getReviews: (mediaType, mediaItemId) =>
             _getReviews(event, emit, mediaType, mediaItemId),
-        setCreditsType: (isCastSelected) =>
-            _setCreditsType(event, emit, isCastSelected),
         openTrailer: () => _openTrailer(event, emit),
         closeTrailer: () => _closeTrailer(event, emit),
-        clearState: () => _clearState(event, emit),
+        getMedia: (mediaType, mediaItemId) =>
+            _getMedia(event, emit, mediaType, mediaItemId),
       );
     });
   }
@@ -43,10 +43,9 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
     String mediaTypeSelected,
     String mediaItemId,
   ) async {
-    _clearState(event, emit);
     emit(state.copyWith(uiState: const UiState.loading()));
 
-    final movieData = await _repository.getMediaItem(
+    final movieData = await _mediaRepository.getMediaItem(
       mediaTypeSelected: mediaTypeSelected,
       mediaTypeId: mediaItemId,
     );
@@ -81,7 +80,7 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
     int mediaTypeId,
     bool isCast,
   ) async {
-    final creditsData = await _repository.getCredits(
+    final creditsData = await _mediaRepository.getCredits(
       mediaTypeSelected: mediaTypeSelected,
       mediaTypeId: mediaTypeId,
     );
@@ -120,7 +119,7 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
     MediaType mediaTypeSelected,
     int mediaTypeId,
   ) async {
-    final reviewResponseData = await _repository.getReviews(
+    final reviewResponseData = await _mediaRepository.getReviews(
       mediaTypeSelected: mediaTypeSelected,
       mediaTypeId: mediaTypeId,
     );
@@ -141,14 +140,6 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
         );
       },
     );
-  }
-
-  Future<void> _setCreditsType(
-    MediaDetailEvent event,
-    Emitter<MediaDetailState> emit,
-    bool isCastSelected,
-  ) async {
-    emit(state.copyWith(isCastSelected: isCastSelected));
   }
 
   Future<void> _openTrailer(
@@ -186,10 +177,30 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
     }
   }
 
-  _clearState(
+  _getMedia(
     MediaDetailEvent event,
     Emitter<MediaDetailState> emit,
-  ) async* {
-    yield state;
+    MediaType mediaTypeSelected,
+    int mediaTypeId,
+  ) async {
+    final mediaResponseData = await _mediaRepository.getMedia(
+      mediaTypeSelected: mediaTypeSelected,
+      mediaTypeId: mediaTypeId,
+    );
+    mediaResponseData.when(
+      failure: (errorMessage) {
+        emit(
+          state.copyWith(uiState: const UiState.error()),
+        );
+      },
+      success: (mediaList) {
+        emit(
+          state.copyWith(
+            uiState: const UiState.success(),
+            mediaList: mediaList,
+          ),
+        );
+      },
+    );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
-import 'package:film_flu/presentation/top_blocs/media_list/media_list_bloc.dart';
+import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
+import 'package:film_flu/presentation/media_list/bloc/media_list_bloc.dart';
 import 'package:mockito/annotations.dart';
 import 'package:test/scaffolding.dart';
 
