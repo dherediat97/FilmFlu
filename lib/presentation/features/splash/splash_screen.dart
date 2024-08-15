@@ -35,6 +35,7 @@ class _SplashScreen extends State<SplashScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
+      fullScreenMode: true,
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
