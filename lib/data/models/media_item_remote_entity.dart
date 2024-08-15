@@ -1,5 +1,4 @@
 import 'package:film_flu/core/entities/pagination.dart';
-import 'package:film_flu/data/models/credits_media_remote_entity.dart';
 import 'package:film_flu/data/models/genre_remote_entity.dart';
 import 'package:film_flu/data/models/production_company_remote_entity.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
@@ -33,7 +32,6 @@ class MediaItemRemoteEntity with _$MediaItemRemoteEntity {
     @JsonKey(name: 'vote_count') int? voteCount,
     @JsonKey(name: 'overview') String? overview,
     @JsonKey(name: 'runtime') int? runtime,
-    @JsonKey(name: 'credits') CreditsMediaRemoteEntity? credits,
   }) = _MediaItemRemoteEntity;
 
   factory MediaItemRemoteEntity.fromJson(Map<String, dynamic> json) =>
@@ -51,7 +49,6 @@ extension MediaItemToRemoteEntityExtension on MediaItemRemoteEntity {
         voteAverage: voteAverage ?? 0,
         voteCount: voteCount ?? 0,
         backdropPath: backdropPath ?? '',
-        credits: credits?.toCreditsEntity(),
         genres: genres?.map((e) => e.toGenreEntity()).toList() ?? [],
         productionCompanies: productionCompanies
                 ?.map((e) => e.toProductionCompanyEntity())

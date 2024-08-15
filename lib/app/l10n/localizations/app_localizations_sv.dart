@@ -18,106 +18,64 @@ class AppLocalizationsSv extends AppLocalizations {
   String get series => 'Series';
 
   @override
-  String get action_movies => 'Actionfilmer';
+  String get action_type => 'Acción';
 
   @override
-  String get adventure_movies => 'Aventura';
+  String get adventure_type => 'Aventura';
 
   @override
-  String get animation_movies => 'Animadas';
+  String get animation_type => 'Animadas';
 
   @override
-  String get crime_movies => 'de Crimen';
+  String get crime_type => 'de Crimen';
 
   @override
-  String get family_movies => 'Con la Familia';
+  String get family_type => 'Familiares';
 
   @override
-  String get fantasy_movies => 'De Fantasía';
+  String get fantasy_type => 'Fantásicas';
 
   @override
-  String get history_movies => 'Históricas';
+  String get comedy_type => 'Comedia';
 
   @override
-  String get horror_movies => 'De Miedo';
+  String get history_type => 'Históricas';
 
   @override
-  String get music_movies => 'Musicales';
+  String get horror_type => 'De Miedo';
 
   @override
-  String get tv_movies => 'Televisión';
+  String get fiction_type => 'De ciencia ficción';
 
   @override
-  String get war_movies => 'Guerra';
+  String get music_type => 'Musicales';
 
   @override
-  String get western_movies => 'Del Oeste';
+  String get love_type => 'Románticas';
 
   @override
-  String get drama_movies => 'Dramafilmer';
+  String get western_type => 'Vaqueras';
 
   @override
-  String get comedy_movies => 'Komedifilmer';
+  String get mistery_type => 'Misterio';
 
   @override
-  String get thriller_movies => 'Thrillerfilmer';
+  String get war_type => 'Bélicas';
 
   @override
-  String get fiction_movies => 'Science fiction-filmer';
+  String get documentary_type => 'Documentales';
 
   @override
-  String get love_movies => 'Romanska filmer';
+  String get tv_type => 'Programas de televisión';
 
   @override
-  String get animation_series => 'Animationsserie';
+  String get animation_japanese_series => 'Anime Japonés';
 
   @override
-  String get documental_series => 'Dokumentärer';
+  String get drama_type => 'Drama';
 
   @override
-  String get tv_show_series => 'TV-program';
-
-  @override
-  String get crime_series => 'Series de crimen';
-
-  @override
-  String get family_series => 'Series de familia';
-
-  @override
-  String get mistery_series => 'Series de misterio';
-
-  @override
-  String get history_series => 'Series de historia';
-
-  @override
-  String get horror_series => 'Series de horror';
-
-  @override
-  String get music_series => 'Series de música';
-
-  @override
-  String get tv_series => 'Series de televisión';
-
-  @override
-  String get war_series => 'Series de guerra';
-
-  @override
-  String get western_series => 'Series del oeste';
-
-  @override
-  String get drama_series => 'Series de drama';
-
-  @override
-  String get comedy_series => 'Series de comedia';
-
-  @override
-  String get thriller_series => 'Series de suspense';
-
-  @override
-  String get fiction_series => 'Series de ciencia ficción y fantasía';
-
-  @override
-  String get love_series => 'Series de romance';
+  String get thriller_type => 'Suspense';
 
   @override
   String get synopsis => 'Synopsis';
@@ -150,12 +108,6 @@ class AppLocalizationsSv extends AppLocalizations {
   String get films_worked => 'Roller han har gjort';
 
   @override
-  String get about_movie => 'Sobre la Película';
-
-  @override
-  String get about_serie => 'Sobre la Serie';
-
-  @override
   String get reviews => 'Reseñas';
 
   @override
@@ -169,4 +121,7 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get search => 'Buscar';
+
+  @override
+  String get percentange_vote => '% de los usuarios les gusta';
 }

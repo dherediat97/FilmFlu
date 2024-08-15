@@ -8,10 +8,12 @@ import 'dart:async' as _i4;
 import 'package:film_flu/app/types/result.dart' as _i3;
 import 'package:film_flu/domain/models/credits_media_entity.dart' as _i8;
 import 'package:film_flu/domain/models/media_item_entity.dart' as _i7;
+import 'package:film_flu/domain/models/media_response_entity.dart' as _i11;
 import 'package:film_flu/domain/models/review_entity.dart' as _i10;
 import 'package:film_flu/domain/repository_contracts/media_repository_contract.dart'
     as _i6;
-import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart' as _i9;
+import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart'
+    as _i9;
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart'
     as _i2;
 import 'package:flutter_bloc/flutter_bloc.dart' as _i5;
@@ -314,4 +316,45 @@ class MockMediaRepositoryContract extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i3.Result<List<_i10.ReviewEntity>?>>);
+
+  @override
+  _i4.Future<_i3.Result<_i11.MediaResponseEntity>> getMedia({
+    required _i9.MediaType? mediaTypeSelected,
+    required int? mediaTypeId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getMedia,
+          [],
+          {
+            #mediaTypeSelected: mediaTypeSelected,
+            #mediaTypeId: mediaTypeId,
+          },
+        ),
+        returnValue: _i4.Future<_i3.Result<_i11.MediaResponseEntity>>.value(
+            _FakeResult_1<_i11.MediaResponseEntity>(
+          this,
+          Invocation.method(
+            #getMedia,
+            [],
+            {
+              #mediaTypeSelected: mediaTypeSelected,
+              #mediaTypeId: mediaTypeId,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i3.Result<_i11.MediaResponseEntity>>.value(
+                _FakeResult_1<_i11.MediaResponseEntity>(
+          this,
+          Invocation.method(
+            #getMedia,
+            [],
+            {
+              #mediaTypeSelected: mediaTypeSelected,
+              #mediaTypeId: mediaTypeId,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i3.Result<_i11.MediaResponseEntity>>);
 }

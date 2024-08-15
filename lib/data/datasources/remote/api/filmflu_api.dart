@@ -2,6 +2,7 @@ import 'package:film_flu/core/entities/pagination.dart';
 import 'package:film_flu/data/models/credits_media_remote_entity.dart';
 import 'package:film_flu/data/models/genre_result_remote_entity.dart';
 import 'package:film_flu/data/models/media_item_remote_entity.dart';
+import 'package:film_flu/data/models/media_response_remote_entity.dart';
 import 'package:film_flu/data/models/person_remote_entity.dart';
 import 'package:film_flu/data/models/review_remote_entity.dart';
 import 'package:film_flu/domain/models/language_entity.dart';
@@ -56,6 +57,12 @@ abstract class FilmFluApi {
     @Path('mediaType') required String mediaType,
     @Path('mediaTypeId') required int mediaTypeId,
     @Query('language') String language = 'es-ES',
+  });
+
+  @GET('/{mediaType}/{mediaTypeId}/images')
+  Future<MediaResponseRemoteEntity> fetchMedia({
+    @Path('mediaType') required String mediaType,
+    @Path('mediaTypeId') required int mediaTypeId,
   });
 
   @GET('/search/{mediaType}')

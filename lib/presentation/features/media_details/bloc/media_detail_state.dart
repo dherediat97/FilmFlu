@@ -10,8 +10,8 @@ class MediaDetailState with _$MediaDetailState {
     List<ReviewEntity>? reviews,
     List<ActorEntity>? cast,
     List<FilmWorkerEntity>? crew,
+    MediaResponseEntity? mediaList,
     required UiState uiState,
-    required bool isCastSelected,
     required bool isTrailerOpened,
   }) = _MediaDetailState;
 
@@ -24,8 +24,8 @@ class MediaDetailState with _$MediaDetailState {
       cast: [],
       crew: [],
       reviews: [],
+      mediaList: null,
       uiState: UiState.initial(),
-      isCastSelected: true,
       isTrailerOpened: false,
     );
   }

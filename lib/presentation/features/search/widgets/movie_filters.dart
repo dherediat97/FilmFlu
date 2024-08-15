@@ -19,22 +19,22 @@ class MovieFiltersWidget extends StatelessWidget {
             MediaCategory(
               onItemClick: () => addMovieFilter(context),
               categoryIcon: Symbols.helicopter,
-              categoryName: context.localizations.action_movies,
+              categoryName: context.localizations.action_type,
             ),
             MediaCategory(
               onItemClick: () => addMovieFilter(context),
               categoryIcon: Symbols.compass_calibration,
-              categoryName: context.localizations.adventure_movies,
+              categoryName: context.localizations.adventure_type,
             ),
             MediaCategory(
               onItemClick: () => addMovieFilter(context),
               categoryIcon: Symbols.heat_pump_rounded,
-              categoryName: context.localizations.love_movies,
+              categoryName: context.localizations.love_type,
             ),
             MediaCategory(
               onItemClick: () => addMovieFilter(context),
               categoryIcon: Symbols.animation,
-              categoryName: context.localizations.animation_movies,
+              categoryName: context.localizations.animation_type,
             ),
           ],
         ),
@@ -43,22 +43,22 @@ class MovieFiltersWidget extends StatelessWidget {
             MediaCategory(
               onItemClick: () => addMovieFilter(context),
               categoryIcon: Symbols.science,
-              categoryName: context.localizations.fiction_movies,
+              categoryName: context.localizations.fiction_type,
             ),
             MediaCategory(
               onItemClick: () => addMovieFilter(context),
               categoryIcon: Symbols.castle,
-              categoryName: context.localizations.fantasy_movies,
+              categoryName: context.localizations.fantasy_type,
             ),
             MediaCategory(
               onItemClick: () => addMovieFilter(context),
               categoryIcon: Symbols.comedy_mask,
-              categoryName: context.localizations.thriller_movies,
+              categoryName: context.localizations.thriller_type,
             ),
             MediaCategory(
               onItemClick: () => addMovieFilter(context),
               categoryIcon: Symbols.filter_drama,
-              categoryName: context.localizations.drama_movies,
+              categoryName: context.localizations.drama_type,
             ),
           ],
         )

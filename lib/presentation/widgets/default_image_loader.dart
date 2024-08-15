@@ -15,6 +15,7 @@ class DefaultImageWidget extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: imageUrl!,
       fit: BoxFit.cover,
+      cacheKey: imageUrl,
       errorWidget: (context, url, error) => const Icon(Icons.error),
       progressIndicatorBuilder: (context, url, progress) =>
           const Center(child: PlaceholderLoader()),

@@ -38,18 +38,16 @@ class _MediaDetailControllerState extends State<MediaDetailController> {
       },
       listener: (context, state) {},
       buildWhen: (previous, current) {
-        return current.mediaItem != previous.mediaItem;
+        return current.mediaItem == previous.mediaItem;
       },
       builder: (context, state) {
-        if (state.uiState.isLoading()) {
+        if (state.mediaItem != null && !state.uiState.isLoading()) {
+          return MediaItemScreenDetails(mediaTypeId: widget.mediaTypeId);
+        } else {
           return SplashScreen(
             route:
                 '${AppRoutePaths.mediaDetailsRoute}/${widget.mediaType}/${widget.mediaTypeId}',
           );
-        } else if (state.uiState.isSuccess()) {
-          return MediaItemScreenDetails(mediaTypeId: widget.mediaTypeId);
-        } else {
-          return Container();
         }
       },
     );

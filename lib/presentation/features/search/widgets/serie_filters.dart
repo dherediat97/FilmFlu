@@ -19,22 +19,22 @@ class SerieFiltersWidget extends StatelessWidget {
             MediaCategory(
               onItemClick: () => addSerieFilter(context),
               categoryIcon: Symbols.helicopter,
-              categoryName: context.localizations.action_movies,
+              categoryName: context.localizations.action_type,
             ),
             MediaCategory(
               onItemClick: () => addSerieFilter(context),
               categoryIcon: Symbols.compass_calibration,
-              categoryName: context.localizations.adventure_movies,
+              categoryName: context.localizations.adventure_type,
             ),
             MediaCategory(
               onItemClick: () => addSerieFilter(context),
               categoryIcon: Symbols.heat_pump_rounded,
-              categoryName: context.localizations.love_movies,
+              categoryName: context.localizations.love_type,
             ),
             MediaCategory(
               onItemClick: () => addSerieFilter(context),
               categoryIcon: Symbols.animation,
-              categoryName: context.localizations.animation_series,
+              categoryName: context.localizations.animation_type,
             ),
           ],
         ),
@@ -44,22 +44,22 @@ class SerieFiltersWidget extends StatelessWidget {
             MediaCategory(
               onItemClick: () => addSerieFilter(context),
               categoryIcon: Symbols.science,
-              categoryName: context.localizations.fiction_series,
+              categoryName: context.localizations.fiction_type,
             ),
             MediaCategory(
               onItemClick: () => addSerieFilter(context),
               categoryIcon: Symbols.castle,
-              categoryName: context.localizations.family_series,
+              categoryName: context.localizations.family_type,
             ),
             MediaCategory(
               onItemClick: () => addSerieFilter(context),
               categoryIcon: Symbols.comedy_mask,
-              categoryName: context.localizations.thriller_series,
+              categoryName: context.localizations.thriller_type,
             ),
             MediaCategory(
               onItemClick: () => addSerieFilter(context),
               categoryIcon: Symbols.filter_drama,
-              categoryName: context.localizations.drama_series,
+              categoryName: context.localizations.drama_type,
             ),
           ],
         )

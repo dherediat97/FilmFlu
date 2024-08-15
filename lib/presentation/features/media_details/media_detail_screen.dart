@@ -1,6 +1,6 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
-import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
+import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/detail_tab_media_item.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
@@ -47,8 +47,6 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
             mediaItem?.title != '' ? MediaType.movie : MediaType.tv;
 
         return ScaffoldPage(
-          isSearchVisible: true,
-          fabLocation: FloatingActionButtonLocation.endFloat,
           floatingActionButton: Padding(
             padding: const EdgeInsets.all(4.0),
             child: state.trailerId.isNotEmpty

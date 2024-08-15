@@ -1,5 +1,4 @@
 import 'package:film_flu/core/entities/pagination.dart';
-import 'package:film_flu/domain/models/credits_media_entity.dart';
 import 'package:film_flu/domain/models/genre_entity.dart';
 import 'package:film_flu/domain/models/production_company_entity.dart';
 import 'package:film_flu/domain/models/video_entity.dart';
@@ -29,7 +28,6 @@ class MediaItemEntity with _$MediaItemEntity {
     int? voteCount,
     String? overview,
     int? runtime,
-    CreditsMediaEntity? credits,
     String? name,
   }) = _MediaItemEntity;
 

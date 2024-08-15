@@ -13,18 +13,17 @@ class MediaDetailEvent with _$MediaDetailEvent {
     bool isCast,
   ) = _GetCredits;
 
+  const factory MediaDetailEvent.getMedia(
+    MediaType mediaType,
+    int mediaItemId,
+  ) = _GetMedia;
+
   const factory MediaDetailEvent.getReviews(
     MediaType mediaType,
     int mediaItemId,
   ) = _GetReviews;
 
-  const factory MediaDetailEvent.setCreditsType(
-    bool isCastSelected,
-  ) = _SetCreditsType;
-
   const factory MediaDetailEvent.openTrailer() = _OpenTrailer;
 
   const factory MediaDetailEvent.closeTrailer() = _CloseTrailer;
-
-  const factory MediaDetailEvent.clearState() = _ClearState;
 }

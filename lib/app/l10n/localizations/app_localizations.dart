@@ -136,209 +136,125 @@ abstract class AppLocalizations {
   /// **'Series'**
   String get series;
 
-  /// No description provided for @action_movies.
+  /// No description provided for @action_type.
   ///
   /// In es, this message translates to:
   /// **'Acción'**
-  String get action_movies;
+  String get action_type;
 
-  /// No description provided for @adventure_movies.
+  /// No description provided for @adventure_type.
   ///
   /// In es, this message translates to:
   /// **'Aventura'**
-  String get adventure_movies;
+  String get adventure_type;
 
-  /// No description provided for @animation_movies.
+  /// No description provided for @animation_type.
   ///
   /// In es, this message translates to:
   /// **'Animadas'**
-  String get animation_movies;
+  String get animation_type;
 
-  /// No description provided for @crime_movies.
+  /// No description provided for @crime_type.
   ///
   /// In es, this message translates to:
   /// **'de Crimen'**
-  String get crime_movies;
+  String get crime_type;
 
-  /// No description provided for @family_movies.
+  /// No description provided for @family_type.
   ///
   /// In es, this message translates to:
-  /// **'Con la Familia'**
-  String get family_movies;
+  /// **'Familiares'**
+  String get family_type;
 
-  /// No description provided for @fantasy_movies.
+  /// No description provided for @fantasy_type.
   ///
   /// In es, this message translates to:
-  /// **'De Fantasía'**
-  String get fantasy_movies;
+  /// **'Fantásicas'**
+  String get fantasy_type;
 
-  /// No description provided for @history_movies.
+  /// No description provided for @comedy_type.
+  ///
+  /// In es, this message translates to:
+  /// **'Comedia'**
+  String get comedy_type;
+
+  /// No description provided for @history_type.
   ///
   /// In es, this message translates to:
   /// **'Históricas'**
-  String get history_movies;
+  String get history_type;
 
-  /// No description provided for @horror_movies.
+  /// No description provided for @horror_type.
   ///
   /// In es, this message translates to:
   /// **'De Miedo'**
-  String get horror_movies;
+  String get horror_type;
 
-  /// No description provided for @music_movies.
+  /// No description provided for @fiction_type.
+  ///
+  /// In es, this message translates to:
+  /// **'De ciencia ficción'**
+  String get fiction_type;
+
+  /// No description provided for @music_type.
   ///
   /// In es, this message translates to:
   /// **'Musicales'**
-  String get music_movies;
+  String get music_type;
 
-  /// No description provided for @tv_movies.
+  /// No description provided for @love_type.
   ///
   /// In es, this message translates to:
-  /// **'Televisión'**
-  String get tv_movies;
+  /// **'Románticas'**
+  String get love_type;
 
-  /// No description provided for @war_movies.
+  /// No description provided for @western_type.
   ///
   /// In es, this message translates to:
-  /// **'Guerra'**
-  String get war_movies;
+  /// **'Vaqueras'**
+  String get western_type;
 
-  /// No description provided for @western_movies.
+  /// No description provided for @mistery_type.
   ///
   /// In es, this message translates to:
-  /// **'Del Oeste'**
-  String get western_movies;
+  /// **'Misterio'**
+  String get mistery_type;
 
-  /// No description provided for @drama_movies.
+  /// No description provided for @war_type.
   ///
   /// In es, this message translates to:
-  /// **'Dramáticas'**
-  String get drama_movies;
+  /// **'Bélicas'**
+  String get war_type;
 
-  /// No description provided for @comedy_movies.
-  ///
-  /// In es, this message translates to:
-  /// **'Comedias'**
-  String get comedy_movies;
-
-  /// No description provided for @thriller_movies.
-  ///
-  /// In es, this message translates to:
-  /// **'De Suspense'**
-  String get thriller_movies;
-
-  /// No description provided for @fiction_movies.
-  ///
-  /// In es, this message translates to:
-  /// **'Ciencia ficción'**
-  String get fiction_movies;
-
-  /// No description provided for @love_movies.
-  ///
-  /// In es, this message translates to:
-  /// **'Películas de romance'**
-  String get love_movies;
-
-  /// No description provided for @animation_series.
-  ///
-  /// In es, this message translates to:
-  /// **'Series de animación'**
-  String get animation_series;
-
-  /// No description provided for @documental_series.
+  /// No description provided for @documentary_type.
   ///
   /// In es, this message translates to:
   /// **'Documentales'**
-  String get documental_series;
+  String get documentary_type;
 
-  /// No description provided for @tv_show_series.
+  /// No description provided for @tv_type.
   ///
   /// In es, this message translates to:
-  /// **'Programas de Televisión'**
-  String get tv_show_series;
+  /// **'Programas de televisión'**
+  String get tv_type;
 
-  /// No description provided for @crime_series.
+  /// No description provided for @animation_japanese_series.
   ///
   /// In es, this message translates to:
-  /// **'Series de crimen'**
-  String get crime_series;
+  /// **'Anime Japonés'**
+  String get animation_japanese_series;
 
-  /// No description provided for @family_series.
+  /// No description provided for @drama_type.
   ///
   /// In es, this message translates to:
-  /// **'Series de familia'**
-  String get family_series;
+  /// **'Drama'**
+  String get drama_type;
 
-  /// No description provided for @mistery_series.
+  /// No description provided for @thriller_type.
   ///
   /// In es, this message translates to:
-  /// **'Series de misterio'**
-  String get mistery_series;
-
-  /// No description provided for @history_series.
-  ///
-  /// In es, this message translates to:
-  /// **'Series de historia'**
-  String get history_series;
-
-  /// No description provided for @horror_series.
-  ///
-  /// In es, this message translates to:
-  /// **'Series de horror'**
-  String get horror_series;
-
-  /// No description provided for @music_series.
-  ///
-  /// In es, this message translates to:
-  /// **'Series de música'**
-  String get music_series;
-
-  /// No description provided for @tv_series.
-  ///
-  /// In es, this message translates to:
-  /// **'Series de televisión'**
-  String get tv_series;
-
-  /// No description provided for @war_series.
-  ///
-  /// In es, this message translates to:
-  /// **'Series de guerra'**
-  String get war_series;
-
-  /// No description provided for @western_series.
-  ///
-  /// In es, this message translates to:
-  /// **'Series del oeste'**
-  String get western_series;
-
-  /// No description provided for @drama_series.
-  ///
-  /// In es, this message translates to:
-  /// **'Series de drama'**
-  String get drama_series;
-
-  /// No description provided for @comedy_series.
-  ///
-  /// In es, this message translates to:
-  /// **'Series de comedia'**
-  String get comedy_series;
-
-  /// No description provided for @thriller_series.
-  ///
-  /// In es, this message translates to:
-  /// **'Series de suspense'**
-  String get thriller_series;
-
-  /// No description provided for @fiction_series.
-  ///
-  /// In es, this message translates to:
-  /// **'Series de ciencia ficción y fantasía'**
-  String get fiction_series;
-
-  /// No description provided for @love_series.
-  ///
-  /// In es, this message translates to:
-  /// **'Series de romance'**
-  String get love_series;
+  /// **'Suspense'**
+  String get thriller_type;
 
   /// No description provided for @synopsis.
   ///
@@ -400,18 +316,6 @@ abstract class AppLocalizations {
   /// **'Papeles que ha realizado'**
   String get films_worked;
 
-  /// No description provided for @about_movie.
-  ///
-  /// In es, this message translates to:
-  /// **'Sobre la Película'**
-  String get about_movie;
-
-  /// No description provided for @about_serie.
-  ///
-  /// In es, this message translates to:
-  /// **'Sobre la Serie'**
-  String get about_serie;
-
   /// No description provided for @reviews.
   ///
   /// In es, this message translates to:
@@ -441,6 +345,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Buscar'**
   String get search;
+
+  /// No description provided for @percentange_vote.
+  ///
+  /// In es, this message translates to:
+  /// **'% de los usuarios les gusta'**
+  String get percentange_vote;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

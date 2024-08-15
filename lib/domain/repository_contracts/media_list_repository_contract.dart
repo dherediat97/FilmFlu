@@ -1,7 +1,7 @@
 import 'package:film_flu/app/types/result.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
-import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
+import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 
 abstract class MediaListRepositoryContract {
   Future<Result<List<MediaSimpleItemEntity>>> getMediaDataByGenre(
@@ -31,7 +31,7 @@ abstract class MediaListRepositoryContract {
     required String query,
   });
 
-  Future<Result<MediaItemEntity>> getMediaDataDay({
+  Future<Result<MediaItemEntity?>> getMediaDataDay({
     required MediaType mediaTypeSelected,
   });
 }

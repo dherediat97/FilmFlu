@@ -2,13 +2,14 @@ import 'package:film_flu/core/entities/pagination.dart';
 import 'package:film_flu/data/datasources/remote/api/filmflu_api.dart';
 import 'package:film_flu/data/models/credits_media_remote_entity.dart';
 import 'package:film_flu/data/models/media_item_remote_entity.dart';
+import 'package:film_flu/data/models/media_response_remote_entity.dart';
 import 'package:film_flu/data/models/person_remote_entity.dart';
 import 'package:film_flu/data/models/review_remote_entity.dart';
 import 'package:film_flu/data/repositories/local/app_local_data_source_contract.dart';
 import 'package:film_flu/data/repositories/remote/media_list_remote_data_source_contract.dart';
 import 'package:film_flu/data/repositories/remote/media_remote_data_source_contract.dart';
 import 'package:film_flu/data/repositories/remote/person_remote_data_source_contract.dart';
-import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
+import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 
 class FilmFluRemoteDataSource
     implements
@@ -126,5 +127,17 @@ class FilmFluRemoteDataSource
       language: await _appLocalDataSourceContract.getLanguage(),
     );
     return reviewData;
+  }
+
+  @override
+  Future<MediaResponseRemoteEntity> getMedia({
+    required MediaType mediaTypeSelected,
+    required int mediaTypeId,
+  }) async {
+    final mediaRemotePagination = await _filmFluApi.fetchMedia(
+      mediaType: mediaTypeSelected.name,
+      mediaTypeId: mediaTypeId,
+    );
+    return mediaRemotePagination;
   }
 }

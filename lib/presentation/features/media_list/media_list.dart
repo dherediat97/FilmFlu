@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
-import 'package:film_flu/presentation/features/home/bloc/home_bloc.dart';
-import 'package:film_flu/presentation/top_blocs/media_list/media_list_bloc.dart';
+import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
+import 'package:film_flu/presentation/features/media_list/bloc/media_list_bloc.dart';
 import 'package:film_flu/presentation/widgets/media_carrousel_item.dart';
 import 'package:film_flu/presentation/widgets/placeholder_loader.dart';
 import 'package:flutter/material.dart';
