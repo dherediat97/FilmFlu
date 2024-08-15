@@ -146,7 +146,8 @@ class AppTheme {
         canvasColor: colorScheme.surface,
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: colorScheme.primary,
-          selectedItemColor: colorScheme.onSurface,
+          unselectedItemColor: AppColors.textPrimaryColor.withOpacity(0.6),
+          selectedItemColor: AppColors.textPrimaryColor,
         ),
         tabBarTheme: TabBarTheme(
           indicatorColor: colorScheme.primary,

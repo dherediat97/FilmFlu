@@ -29,12 +29,12 @@ class _MediaDataList extends State<MediaList> {
   int _currentPage = 1;
 
   MediaType mediaTypeSelected = MediaType.movie;
-  final _scrollController = ScrollController();
+  final CarouselController _carouselController = CarouselController();
 
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(_loadMore);
+    _carouselController.addListener(_loadMore);
 
     mediaTypeSelected = context.read<HomeBloc>().state.mediaTypeSelected;
     context.read<MediaListBloc>().add(
@@ -48,15 +48,15 @@ class _MediaDataList extends State<MediaList> {
 
   @override
   void dispose() {
-    _scrollController.removeListener(_loadMore);
-    _scrollController.dispose();
+    _carouselController.removeListener(_loadMore);
+    _carouselController.dispose();
     super.dispose();
   }
 
   void _loadMore() {
-    final offset = _scrollController.offset;
-    final maxOffset = _scrollController.position.maxScrollExtent;
-    final isOutOfRange = _scrollController.position.outOfRange;
+    final offset = _carouselController.offset;
+    final maxOffset = _carouselController.position.maxScrollExtent;
+    final isOutOfRange = _carouselController.position.outOfRange;
     final hasReachedTheEnd = offset >= maxOffset && !isOutOfRange;
 
     if (hasReachedTheEnd) {
@@ -128,6 +128,7 @@ class _MediaDataList extends State<MediaList> {
                             child: CarouselView(
                               padding: const EdgeInsets.all(8.0),
                               itemExtent: 180,
+                              controller: _carouselController,
                               onTap: (id) {
                                 context.pushReplacement(
                                     '${AppRoutePaths.mediaDetailsRoute}/${mediaTypeSelected.name}/${mediaDataList[id].id}');

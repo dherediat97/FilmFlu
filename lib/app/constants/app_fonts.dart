@@ -23,9 +23,7 @@ TextTheme createTextTheme(bool isLightMode) {
     titleLarge: TextStyle(
       fontFamily: AppFonts.primaryFont,
       fontSize: 40,
-      color: isLightMode
-          ? AppColors.textSecondaryColor
-          : AppColors.textPrimaryColor,
+      color: AppColors.textPrimaryColor,
     ),
     titleMedium: TextStyle(
       fontFamily: AppFonts.primaryFont,
