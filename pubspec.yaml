@@ -50,7 +50,7 @@ dependencies:
   lottie: ^3.1.2
   envied: ^0.5.3
   http: ^1.2.2
-  package_info_plus: ^8.0.2
+  package_info_plus: ^4.2.0
   flutter_svg: ^2.0.7
   auto_size_text: ^3.0.0
   material_symbols_icons: ^4.2668.0
