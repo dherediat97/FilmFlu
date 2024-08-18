@@ -2,7 +2,6 @@ class AppRoutePaths {
   static String startRoute = '/';
 
   static String homeRoute = '/main';
-  static String homeControllerRoute = '$homeRoute/homeScreen';
 
   static String moviesRoute = '$homeRoute/movies';
   static String seriesRoute = '$homeRoute/series';

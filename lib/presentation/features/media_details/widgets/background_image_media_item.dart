@@ -22,12 +22,6 @@ class BackgroundImageMediaItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String title;
-    if (mediaItem!.title!.isNotEmpty) {
-      title = mediaItem!.title!;
-    } else {
-      title = mediaItem!.name!;
-    }
     return mediaItem != null
         ? SizedBox(
             height: MediaQuery.of(context).size.height / 2,
@@ -57,7 +51,9 @@ class BackgroundImageMediaItem extends StatelessWidget {
                         ],
                       ),
                     Text(
-                      title,
+                      mediaItem!.title!.isNotEmpty
+                          ? mediaItem!.title!
+                          : mediaItem!.name!,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     Row(

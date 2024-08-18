@@ -8,7 +8,7 @@ import 'package:film_flu/presentation/features/media_details/widgets/info_media.
 import 'package:film_flu/presentation/features/media_details/widgets/media_data_cast.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/media_data_production.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/reviews_widget_item.dart';
-import 'package:film_flu/presentation/widgets/placeholder_loader.dart';
+import 'package:film_flu/presentation/widgets/shimmer_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -80,13 +80,14 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
         return SingleChildScrollView(
           child: Column(
             children: [
-              state.mediaItem != null
-                  ? BackgroundImageMediaItem(
-                      productionCompanyImage: state.productionCompanyImage,
-                      isHomeScreen: false,
-                      mediaItem: state.mediaItem,
-                    )
-                  : const PlaceholderLoader(),
+              ShimmerLoading(
+                isLoading: state.mediaItem == null,
+                child: BackgroundImageMediaItem(
+                  productionCompanyImage: state.productionCompanyImage,
+                  isHomeScreen: false,
+                  mediaItem: state.mediaItem,
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(24),
                 child: DefaultTabController(
@@ -117,19 +118,20 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
                               ),
                             ),
                             ContainerTabMediaItem(
-                              child: state.reviews != null
-                                  ? ListView.builder(
-                                      itemCount: state.reviews?.length,
-                                      itemBuilder: (context, index) {
-                                        ReviewEntity? review =
-                                            state.reviews?[index];
+                              child: ShimmerLoading(
+                                isLoading: state.reviews == null,
+                                child: ListView.builder(
+                                  itemCount: state.reviews?.length,
+                                  itemBuilder: (context, index) {
+                                    ReviewEntity? review =
+                                        state.reviews?[index];
 
-                                        return ReviewsWidgetItem(
-                                          review: review,
-                                        );
-                                      },
-                                    )
-                                  : const PlaceholderLoader(),
+                                    return ReviewsWidgetItem(
+                                      review: review,
+                                    );
+                                  },
+                                ),
+                              ),
                             ),
                             ContainerTabMediaItem(
                               child: MediaDataCast(cast: state.cast),

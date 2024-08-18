@@ -3,6 +3,6 @@ import 'package:film_flu/domain/models/person_entity.dart';
 
 abstract class PersonRepositoryContract {
   Future<Result<PersonEntity>> fetchPersonData(
-    int personId,
+    String personId,
   );
 }

@@ -19,7 +19,7 @@ class PersonDetailsBloc extends Bloc<PersonDetailEvent, PersonDetailsState> {
         super(PersonDetailsState.initial()) {
     on<PersonDetailEvent>((event, emit) async {
       await event.when(
-        getPersonData: (int personId) => _getPersonData(
+        getPersonData: (String personId) => _getPersonData(
           event,
           emit,
           personId,
@@ -31,7 +31,7 @@ class PersonDetailsBloc extends Bloc<PersonDetailEvent, PersonDetailsState> {
   _getPersonData(
     PersonDetailEvent event,
     Emitter<PersonDetailsState> emit,
-    int personId,
+    String personId,
   ) async {
     emit(state.copyWith(uiState: const UiState.loading()));
 

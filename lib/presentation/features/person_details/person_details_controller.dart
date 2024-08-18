@@ -6,13 +6,29 @@ import 'package:film_flu/presentation/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class PersonDetailsController extends StatelessWidget {
+class PersonDetailsController extends StatefulWidget {
   const PersonDetailsController({
     super.key,
     required this.personId,
   });
 
   final String personId;
+
+  @override
+  State<PersonDetailsController> createState() =>
+      _PersonDetailsControllerState();
+}
+
+class _PersonDetailsControllerState extends State<PersonDetailsController> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<PersonDetailsBloc>().add(
+          PersonDetailEvent.getPersonData(
+            widget.personId,
+          ),
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +42,10 @@ class PersonDetailsController extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         if (state.person != null && !state.uiState.isLoading()) {
-          return PersonDetailsPage(personId: personId);
+          return PersonDetailsPage(personId: widget.personId);
         } else {
           return SplashScreen(
-            route: '${AppRoutePaths.personDetailsRoute}/$personId',
+            route: '${AppRoutePaths.personDetailsRoute}/${widget.personId}',
           );
         }
       },

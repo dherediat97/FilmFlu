@@ -107,7 +107,7 @@ class FilmFluRemoteDataSource
 
   @override
   Future<PersonRemoteEntity> fetchPersonData(
-    int personId,
+    String personId,
   ) async {
     final personData = await _filmFluApi.fetchPerson(
       personId: personId,
