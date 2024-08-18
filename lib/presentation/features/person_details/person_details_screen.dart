@@ -57,10 +57,8 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage>
                         SliverAppBar(
                           automaticallyImplyLeading: false,
                           expandedHeight: 300,
-                          pinned: false,
-                          floating: false,
-                          snap: false,
                           toolbarHeight: 0,
+                          forceElevated: innerBoxIsScrolled,
                           backgroundColor:
                               Theme.of(context).colorScheme.surface,
                           flexibleSpace: FlexibleSpaceBar(

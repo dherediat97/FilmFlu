@@ -6,7 +6,6 @@ import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/domain/models/credit_production_entity.dart';
 import 'package:film_flu/domain/models/person_entity.dart';
-import 'package:film_flu/presentation/widgets/placeholder_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -61,8 +60,6 @@ class ProductionCreditsWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                placeholder: (context, url) =>
-                    const Center(child: PlaceholderLoader()),
                 height: 200,
                 width: 120,
                 fit: BoxFit.cover,

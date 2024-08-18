@@ -47,31 +47,27 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
         emit(state.copyWith(uiState: const UiState.error()));
       },
       success: (value) {
-        Map<int, List<MediaSimpleItemEntity>>? movieMap;
-        Map<int, List<MediaSimpleItemEntity>>? serieMap;
+        Map<int, List<MediaSimpleItemEntity>> movieData;
+        Map<int, List<MediaSimpleItemEntity>> serieData;
         if (mediaTypeSelected == MediaType.movie) {
-          movieMap = {
-            ...?state.mediaData?.movieDataByGenre,
+          movieData = {
+            ...state.movieData,
             ...{genreId: value}
           };
-        } else {
-          serieMap = {
-            ...?state.mediaData?.serieDataByGenre,
-            ...{genreId: value}
-          };
-        }
-
-        final mediaData = MediaData(
-          movieDataByGenre: movieMap ?? {},
-          serieDataByGenre: serieMap ?? {},
-        );
-
-        emit(
-          state.copyWith(
+          emit(state.copyWith(
             uiState: const UiState.success(),
-            mediaData: mediaData,
-          ),
-        );
+            movieData: movieData,
+          ));
+        } else {
+          serieData = {
+            ...state.serieData,
+            ...{genreId: value}
+          };
+          emit(state.copyWith(
+            uiState: const UiState.success(),
+            serieData: serieData,
+          ));
+        }
       },
     );
   }
@@ -83,39 +79,37 @@ class MediaListBloc extends Bloc<MediaListEvent, MediaListState> {
     MediaType mediaTypeSelected,
     int genreId,
   ) async {
-    final movieData = await _mediaListRepository.paginateMediaData(
+    final mediaData = await _mediaListRepository.paginateMediaData(
       mediaTypeSelected: mediaTypeSelected,
       page: page,
       genreId: genreId,
     );
-    movieData.when(
+    mediaData.when(
       failure: (errorMessage) {
         emit(state.copyWith(uiState: const UiState.error()));
       },
       success: (value) {
-        Map<int, List<MediaSimpleItemEntity>>? movieMap;
-        Map<int, List<MediaSimpleItemEntity>>? serieMap;
+        Map<int, List<MediaSimpleItemEntity>> movieData;
+        Map<int, List<MediaSimpleItemEntity>> serieData;
         if (mediaTypeSelected == MediaType.movie) {
-          movieMap = {
-            ...?state.mediaData?.movieDataByGenre,
+          movieData = {
+            ...state.movieData,
             ...{genreId: value}
           };
+          emit(state.copyWith(
+            uiState: const UiState.success(),
+            movieData: movieData,
+          ));
         } else {
-          serieMap = {
-            ...?state.mediaData?.serieDataByGenre,
+          serieData = {
+            ...state.serieData,
             ...{genreId: value}
           };
+          emit(state.copyWith(
+            uiState: const UiState.success(),
+            serieData: serieData,
+          ));
         }
-
-        final mediaData = MediaData(
-          movieDataByGenre: movieMap ?? {},
-          serieDataByGenre: serieMap ?? {},
-        );
-
-        emit(state.copyWith(
-          uiState: const UiState.success(),
-          mediaData: mediaData,
-        ));
       },
     );
   }

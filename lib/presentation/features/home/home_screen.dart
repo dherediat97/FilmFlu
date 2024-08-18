@@ -13,7 +13,11 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
-        String route = AppRoutePaths.moviesRoute;
+        context
+            .read<HomeBloc>()
+            .add(HomeEvent.switchCategory(state.mediaTypeSelected));
+
+        String route;
         switch (state.mediaTypeSelected) {
           case MediaType.movie:
             route = AppRoutePaths.moviesRoute;
@@ -23,6 +27,9 @@ class HomeScreen extends StatelessWidget {
             break;
           case MediaType.search:
             route = AppRoutePaths.searchRoute;
+            break;
+          default:
+            route = AppRoutePaths.moviesRoute;
             break;
         }
         return SplashScreen(route: route);

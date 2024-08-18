@@ -1,7 +1,7 @@
 import 'package:film_flu/app/types/ui_state.dart';
 import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/background_image_media_item.dart';
-import 'package:film_flu/presentation/widgets/placeholder_loader.dart';
+import 'package:film_flu/presentation/widgets/shimmer_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,19 +18,17 @@ class MediaDayWidget extends StatelessWidget {
       },
       listener: (context, state) {},
       buildWhen: (previous, current) {
-        return current.mediaItem != previous.mediaItem;
+        return current.mediaItem == previous.mediaItem;
       },
       builder: (context, state) {
-        if (state.mediaItem != null && !state.uiState.isLoading()) {
-          return BackgroundImageMediaItem(
-            key: key,
-            isHomeScreen: true,
-            mediaItem: state.mediaItem,
-            productionCompanyImage: '',
-          );
-        } else {
-          return const PlaceholderLoader();
-        }
+        return state.uiState.isLoading() && state.mediaItem == null
+            ? Shimmer(child: buildTopRowList())
+            : BackgroundImageMediaItem(
+                key: key,
+                isHomeScreen: true,
+                mediaItem: state.mediaItem,
+                productionCompanyImage: '',
+              );
       },
     );
   }

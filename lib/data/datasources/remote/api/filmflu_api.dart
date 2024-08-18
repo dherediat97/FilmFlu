@@ -74,7 +74,7 @@ abstract class FilmFluApi {
 
   @GET('/person/{personId}')
   Future<PersonRemoteEntity> fetchPerson({
-    @Path('personId') required int personId,
+    @Path('personId') required String personId,
     @Query('language') String language = 'es-ES',
     @Query('append_to_response') String moreResponse = 'credits',
   });

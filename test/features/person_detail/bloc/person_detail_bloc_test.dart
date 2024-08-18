@@ -30,7 +30,7 @@ void main() {
       blocTest(
         'Given PersonDetailBloc when load the bloc then return the expected result',
         build: () => mockBlock,
-        act: (bloc) => bloc.add(const PersonDetailEvent.getPersonData(111)),
+        act: (bloc) => bloc.add(const PersonDetailEvent.getPersonData('111')),
         expect: () => [
           PersonDetailsState.initial().copyWith(
             creditsAsActor: [],

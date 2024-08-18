@@ -25,8 +25,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         super(HomeState.initial()) {
     on<HomeEvent>((event, emit) async {
       await event.when(
-          switchCategory: (mediaTypeSelected) =>
-              _switchCategory(event, emit, mediaTypeSelected));
+        switchCategory: (mediaTypeSelected) =>
+            _switchCategory(event, emit, mediaTypeSelected),
+      );
     });
   }
 
@@ -35,8 +36,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
     MediaType mediaTypeSelected,
   ) async {
-    emit(state.copyWith(uiState: const UiState.loading()));
     if (mediaTypeSelected != MediaType.search) {
+      emit(state.copyWith(uiState: const UiState.loading()));
       final movieData = await _repository.getMediaDataDay(
         mediaTypeSelected: mediaTypeSelected,
       );

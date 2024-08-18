@@ -15,7 +15,7 @@ class PersonRepository implements PersonRepositoryContract {
 
   @override
   Future<Result<PersonEntity>> fetchPersonData(
-    int personId,
+    String personId,
   ) async {
     try {
       final personData = await _personRemoteDataSourceContract.fetchPersonData(
