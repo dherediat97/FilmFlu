@@ -12,116 +12,116 @@ class AppLocalizationsFr extends AppLocalizations {
   String get app_name => 'Film Flu';
 
   @override
-  String get movies => 'Películas';
+  String get movies => 'Films';
 
   @override
-  String get series => 'Series';
+  String get series => 'Série';
 
   @override
-  String get action_type => 'Acción';
+  String get action_type => 'Action';
 
   @override
-  String get adventure_type => 'Aventura';
+  String get adventure_type => 'Aventure';
 
   @override
-  String get animation_type => 'Animadas';
+  String get animation_type => 'Animation';
 
   @override
-  String get crime_type => 'de Crimen';
+  String get crime_type => 'Crime';
 
   @override
-  String get family_type => 'Familiares';
+  String get family_type => 'Famille';
 
   @override
-  String get fantasy_type => 'Fantásicas';
+  String get fantasy_type => 'Fantastique';
 
   @override
-  String get comedy_type => 'Comedia';
+  String get comedy_type => 'Comédie';
 
   @override
-  String get history_type => 'Históricas';
+  String get history_type => 'Historique';
 
   @override
-  String get horror_type => 'De Miedo';
+  String get horror_type => 'Peur';
 
   @override
-  String get fiction_type => 'De ciencia ficción';
+  String get fiction_type => 'Science-fiction';
 
   @override
-  String get music_type => 'Musicales';
+  String get music_type => 'Comédies musicales';
 
   @override
-  String get love_type => 'Románticas';
+  String get love_type => 'Romantique';
 
   @override
-  String get western_type => 'Vaqueras';
+  String get western_type => 'Western';
 
   @override
-  String get mistery_type => 'Misterio';
+  String get mistery_type => 'Mystère';
 
   @override
-  String get war_type => 'Bélicas';
+  String get war_type => 'Guerre';
 
   @override
-  String get documentary_type => 'Documentales';
+  String get documentary_type => 'Documentaire';
 
   @override
-  String get tv_type => 'Programas de televisión';
+  String get tv_type => 'Programmes télévisés';
 
   @override
-  String get animation_japanese_series => 'Anime Japonés';
+  String get animation_japanese_series => 'Anime japonais';
 
   @override
-  String get drama_type => 'Drama';
+  String get drama_type => 'Drame';
 
   @override
-  String get thriller_type => 'Suspense';
+  String get thriller_type => 'Thriller';
 
   @override
-  String get synopsis => 'Le sommaire';
+  String get synopsis => 'Synopsis';
 
   @override
-  String get character_cast => 'Casting des personnages';
+  String get character_cast => 'Distribution des personnages';
 
   @override
-  String get production_cast => 'La Réalisation';
+  String get production_cast => 'Production';
 
   @override
-  String get production_job => 'Effectué le travail de';
+  String get production_job => 'A réalisé le travail de';
 
   @override
-  String get actor_job => 'Acte';
+  String get actor_job => 'Jouer';
 
   @override
   String get in_preposition => 'dans';
 
   @override
-  String get loading_title => 'Trois, Deux, Un, Roulant!!!';
+  String get loading_title => 'Trois, Deux, Un... ACTION !!!';
 
   @override
   String get made_with_love => 'Fait avec beaucoup';
 
   @override
-  String get play_trailer => 'Ver tráiler';
+  String get play_trailer => 'Lire la bande-annonce';
 
   @override
   String get films_worked => 'Personnages que j\'ai créés';
 
   @override
-  String get reviews => 'Reseñas';
+  String get reviews => 'Avis';
 
   @override
-  String get information => 'Información';
+  String get information => 'Info';
 
   @override
-  String get add_to_my_list => 'Añadir a mi lista';
+  String get add_to_my_list => 'Ajouter à ma liste';
 
   @override
-  String get unknown => 'Desconocido';
+  String get unknown => 'Inconnu';
 
   @override
-  String get search => 'Buscar';
+  String get search => 'Rechercher';
 
   @override
-  String get percentange_vote => '% de los usuarios les gusta';
+  String get percentange_vote => '% goûts';
 }

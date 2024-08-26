@@ -72,7 +72,6 @@ abstract class FilmFluApi {
     @Query('query') required String query,
   });
 
-  ///
   @GET('/person/{personId}')
   Future<PersonRemoteEntity> fetchPerson({
     @Path('personId') required String personId,

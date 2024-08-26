@@ -12,116 +12,116 @@ class AppLocalizationsIs extends AppLocalizations {
   String get app_name => 'Film Flu';
 
   @override
-  String get movies => 'Películas';
+  String get movies => 'Kvikmyndir';
 
   @override
-  String get series => 'Series';
+  String get series => 'Sería';
 
   @override
-  String get action_type => 'Acción';
+  String get action_type => 'Aðgerð';
 
   @override
-  String get adventure_type => 'Aventura';
+  String get adventure_type => 'Ævintýri';
 
   @override
-  String get animation_type => 'Animadas';
+  String get animation_type => 'Fjör';
 
   @override
-  String get crime_type => 'de Crimen';
+  String get crime_type => 'Glæpur';
 
   @override
-  String get family_type => 'Familiares';
+  String get family_type => 'Fjölskylda';
 
   @override
-  String get fantasy_type => 'Fantásicas';
+  String get fantasy_type => 'Frábært';
 
   @override
-  String get comedy_type => 'Comedia';
+  String get comedy_type => 'Gamesía';
 
   @override
-  String get history_type => 'Históricas';
+  String get history_type => 'Sögulegt';
 
   @override
-  String get horror_type => 'De Miedo';
+  String get horror_type => 'Ótti';
 
   @override
-  String get fiction_type => 'De ciencia ficción';
+  String get fiction_type => 'Sci-Fi';
 
   @override
-  String get music_type => 'Musicales';
+  String get music_type => 'Söngleikur';
 
   @override
-  String get love_type => 'Románticas';
+  String get love_type => 'Rómantískt';
 
   @override
-  String get western_type => 'Vaqueras';
+  String get western_type => 'Vestur';
 
   @override
-  String get mistery_type => 'Misterio';
+  String get mistery_type => 'Mistery';
 
   @override
-  String get war_type => 'Bélicas';
+  String get war_type => 'Stríð';
 
   @override
-  String get documentary_type => 'Documentales';
+  String get documentary_type => 'Heimildamynd';
 
   @override
-  String get tv_type => 'Programas de televisión';
+  String get tv_type => 'Sjónvarpsþættir';
 
   @override
-  String get animation_japanese_series => 'Anime Japonés';
+  String get animation_japanese_series => 'Japanskt anime';
 
   @override
   String get drama_type => 'Drama';
 
   @override
-  String get thriller_type => 'Suspense';
+  String get thriller_type => 'Spennumynd';
 
   @override
-  String get synopsis => 'Samantekt';
+  String get synopsis => 'Yfirlit';
 
   @override
-  String get character_cast => 'Persónuleikari';
+  String get character_cast => 'Persónuleikarar';
 
   @override
   String get production_cast => 'Framleiðsla';
 
   @override
-  String get production_job => 'Sinnti verki';
+  String get production_job => 'Framkvæmdi vinnu';
 
   @override
-  String get actor_job => 'Leika';
+  String get actor_job => 'Spilaðu';
 
   @override
-  String get in_preposition => 'inn';
+  String get in_preposition => 'í';
 
   @override
-  String get loading_title => 'Þrír, tveir, einn... Action!!!';
+  String get loading_title => 'Þrír, Tveir, Einn... AÐGERÐIR!!!';
 
   @override
   String get made_with_love => 'Búið til með miklu';
 
   @override
-  String get play_trailer => 'Ver tráiler';
+  String get play_trailer => 'Spilaðu stiklu';
 
   @override
-  String get films_worked => 'Hlutverk sem hann hefur leikið';
+  String get films_worked => 'Persónur sem ég hef gert';
 
   @override
-  String get reviews => 'Reseñas';
+  String get reviews => 'Umsagnir';
 
   @override
-  String get information => 'Información';
+  String get information => 'Upplýsingar';
 
   @override
-  String get add_to_my_list => 'Añadir a mi lista';
+  String get add_to_my_list => 'Bæta við listann minn';
 
   @override
-  String get unknown => 'Desconocido';
+  String get unknown => 'Óþekkt';
 
   @override
-  String get search => 'Buscar';
+  String get search => 'Leita';
 
   @override
-  String get percentange_vote => '% de los usuarios les gusta';
+  String get percentange_vote => '% líkar við';
 }
