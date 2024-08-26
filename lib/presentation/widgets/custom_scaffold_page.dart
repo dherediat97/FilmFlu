@@ -84,8 +84,8 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                         if (_pageController.hasClients) {
                           _pageController.animateToPage(
                             index,
-                            duration: const Duration(milliseconds: 200),
-                            curve: Curves.easeIn,
+                            duration: const Duration(milliseconds: 1000),
+                            curve: Curves.easeInOut,
                           );
                         }
                       });
@@ -96,8 +96,10 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
               controller: _pageController,
               onPageChanged: (index) {
                 _selectedIndex = index;
-                var category = MediaType.values.elementAt(_selectedIndex);
+
                 setState(() {
+                  var category = MediaType.values.elementAt(_selectedIndex);
+                  print(category);
                   context
                       .read<HomeBloc>()
                       .add(HomeEvent.switchCategory(category));

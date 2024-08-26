@@ -15,9 +15,11 @@ class MediaList extends StatefulWidget {
     super.key,
     required this.genreId,
     required this.title,
+    required this.mediaType,
     this.languageId = 'es',
   });
 
+  final MediaType mediaType;
   final String title;
   final String languageId;
   final int genreId;
@@ -28,7 +30,6 @@ class MediaList extends StatefulWidget {
 
 class _MediaDataList extends State<MediaList> {
   int _currentPage = 1;
-  MediaType mediaTypeSelected = MediaType.movie;
   final CarouselController _carouselController = CarouselController();
 
   @override
@@ -36,10 +37,9 @@ class _MediaDataList extends State<MediaList> {
     super.initState();
     _carouselController.addListener(_loadMore);
 
-    mediaTypeSelected = context.read<HomeBloc>().state.mediaTypeSelected;
     context.read<MediaListBloc>().add(
           MediaListEvent.getMediaDataByGenre(
-            mediaTypeSelected,
+            widget.mediaType,
             widget.genreId,
             widget.languageId,
           ),
@@ -57,12 +57,11 @@ class _MediaDataList extends State<MediaList> {
   Widget build(BuildContext context) {
     return BlocBuilder<MediaListBloc, MediaListState>(
       buildWhen: (previous, current) {
-        return current.uiState.isSuccess() &&
-            (current.movieData.isNotEmpty || current.serieData.isNotEmpty);
+        return !current.uiState.isLoading();
       },
       builder: (context, state) {
         List<MediaSimpleItemEntity>? mediaDataList =
-            mediaTypeSelected == MediaType.movie
+            widget.mediaType == MediaType.movie
                 ? state.movieData[widget.genreId]
                 : state.serieData[widget.genreId];
 
@@ -81,7 +80,7 @@ class _MediaDataList extends State<MediaList> {
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 20),
-              if (mediaTypeSelected == MediaType.movie)
+              if (widget.mediaType == MediaType.movie)
                 mediaDataList == null
                     ? Shimmer(
                         child: buildTopRowList(),
@@ -93,7 +92,7 @@ class _MediaDataList extends State<MediaList> {
                           itemExtent: 180,
                           onTap: (id) {
                             context.pushReplacement(
-                                '${AppRoutePaths.mediaDetailsRoute}/${mediaTypeSelected.name}/${mediaDataList[id].id}');
+                                '${AppRoutePaths.mediaDetailsRoute}/${widget.mediaType.name}/${mediaDataList[id].id}');
                           },
                           children: List<Widget>.generate(
                             mediaDataList.length,
@@ -106,7 +105,7 @@ class _MediaDataList extends State<MediaList> {
                           ),
                         ),
                       ),
-              if (mediaTypeSelected == MediaType.tv)
+              if (widget.mediaType == MediaType.tv)
                 mediaDataList == null
                     ? Shimmer(
                         child: buildTopRowList(),
@@ -119,7 +118,7 @@ class _MediaDataList extends State<MediaList> {
                           controller: _carouselController,
                           onTap: (id) {
                             context.pushReplacement(
-                                '${AppRoutePaths.mediaDetailsRoute}/${mediaTypeSelected.name}/${mediaDataList[id].id}');
+                                '${AppRoutePaths.mediaDetailsRoute}/${widget.mediaType.name}/${mediaDataList[id].id}');
                           },
                           children: List<Widget>.generate(
                             mediaDataList.length,
@@ -150,7 +149,7 @@ class _MediaDataList extends State<MediaList> {
       context.read<MediaListBloc>().add(
             MediaListEvent.nextPage(
               _currentPage,
-              mediaTypeSelected,
+              widget.mediaType,
               widget.genreId,
             ),
           );
