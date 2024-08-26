@@ -12,70 +12,70 @@ class AppLocalizationsSk extends AppLocalizations {
   String get app_name => 'Film Flu';
 
   @override
-  String get movies => 'Películas';
+  String get movies => 'Filmy';
 
   @override
-  String get series => 'Series';
+  String get series => 'séria';
 
   @override
-  String get action_type => 'Acción';
+  String get action_type => 'Akcia';
 
   @override
-  String get adventure_type => 'Aventura';
+  String get adventure_type => 'Dobrodružstvo';
 
   @override
-  String get animation_type => 'Animadas';
+  String get animation_type => 'Animácia';
 
   @override
-  String get crime_type => 'de Crimen';
+  String get crime_type => 'zločin';
 
   @override
-  String get family_type => 'Familiares';
+  String get family_type => 'Rodina';
 
   @override
-  String get fantasy_type => 'Fantásicas';
+  String get fantasy_type => 'Fantastické';
 
   @override
-  String get comedy_type => 'Comedia';
+  String get comedy_type => 'Komédia';
 
   @override
-  String get history_type => 'Históricas';
+  String get history_type => 'Historický';
 
   @override
-  String get horror_type => 'De Miedo';
+  String get horror_type => 'Strach';
 
   @override
-  String get fiction_type => 'De ciencia ficción';
+  String get fiction_type => 'Sci-Fi';
 
   @override
-  String get music_type => 'Musicales';
+  String get music_type => 'Muzikály';
 
   @override
-  String get love_type => 'Románticas';
+  String get love_type => 'Romantický';
 
   @override
-  String get western_type => 'Vaqueras';
+  String get western_type => 'západná';
 
   @override
-  String get mistery_type => 'Misterio';
+  String get mistery_type => 'Záhada';
 
   @override
-  String get war_type => 'Bélicas';
+  String get war_type => 'Vojna';
 
   @override
-  String get documentary_type => 'Documentales';
+  String get documentary_type => 'Dokumentárny';
 
   @override
-  String get tv_type => 'Programas de televisión';
+  String get tv_type => 'TV programy';
 
   @override
-  String get animation_japanese_series => 'Anime Japonés';
+  String get animation_japanese_series => 'Japonské anime';
 
   @override
-  String get drama_type => 'Drama';
+  String get drama_type => 'Dráma';
 
   @override
-  String get thriller_type => 'Suspense';
+  String get thriller_type => 'Thriller';
 
   @override
   String get synopsis => 'Súhrn';
@@ -84,7 +84,7 @@ class AppLocalizationsSk extends AppLocalizations {
   String get character_cast => 'Obsadenie postavy';
 
   @override
-  String get production_cast => 'Výroba';
+  String get production_cast => 'Produkcia';
 
   @override
   String get production_job => 'Vykonal prácu';
@@ -93,35 +93,35 @@ class AppLocalizationsSk extends AppLocalizations {
   String get actor_job => 'Hrať';
 
   @override
-  String get in_preposition => 'v';
+  String get in_preposition => 'in';
 
   @override
-  String get loading_title => 'Tri, Dva, Jedna... Akcia!!!';
+  String get loading_title => 'Tri, dva, jedna... AKCIA!!!';
 
   @override
-  String get made_with_love => 'Vyrobené s veľa';
+  String get made_with_love => 'Vyrobené s veľkým množstvom';
 
   @override
-  String get play_trailer => 'Ver tráiler';
+  String get play_trailer => 'Prehrať upútavku';
 
   @override
-  String get films_worked => 'Úlohy, ktoré stvárnil';
+  String get films_worked => 'Postavy, ktoré som vytvoril';
 
   @override
-  String get reviews => 'Reseñas';
+  String get reviews => 'recenzie';
 
   @override
-  String get information => 'Información';
+  String get information => 'Informácie';
 
   @override
-  String get add_to_my_list => 'Añadir a mi lista';
+  String get add_to_my_list => 'Pridať do môjho zoznamu';
 
   @override
-  String get unknown => 'Desconocido';
+  String get unknown => 'Neznámy';
 
   @override
-  String get search => 'Buscar';
+  String get search => 'Hľadať';
 
   @override
-  String get percentange_vote => '% de los usuarios les gusta';
+  String get percentange_vote => '% páči sa mi';
 }
