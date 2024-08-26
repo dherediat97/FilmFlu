@@ -10,7 +10,7 @@ class SplashController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
-      route: AppRoutePaths.moviesRoute,
+      route: AppRoutePaths.homeRoute,
     );
   }
 }

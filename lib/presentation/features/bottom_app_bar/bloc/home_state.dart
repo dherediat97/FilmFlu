@@ -6,6 +6,7 @@ class HomeState with _$HomeState {
     required MediaType mediaTypeSelected,
     required UiState uiState,
     required MediaItemEntity? mediaItem,
+    required bool isHomeScreen,
   }) = _MediaDayState;
 
   factory HomeState.initial() {
@@ -13,6 +14,7 @@ class HomeState with _$HomeState {
       mediaTypeSelected: MediaType.movie,
       uiState: UiState.initial(),
       mediaItem: null,
+      isHomeScreen: false,
     );
   }
 }
