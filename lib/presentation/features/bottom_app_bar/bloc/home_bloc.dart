@@ -53,6 +53,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             state.copyWith(
               mediaTypeSelected: mediaTypeSelected,
               uiState: const UiState.success(),
+              isHomeScreen: true,
               mediaItem: mediaData,
             ),
           );

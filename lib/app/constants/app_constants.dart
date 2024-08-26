@@ -14,7 +14,7 @@ class AppConstants {
   static const String trailer = 'Trailer';
   static const String teaser = 'Teaser';
 
-  static String myGithubPage = 'https://github.com/dherediat97';
+  static String myGithubPage = 'https://github.com/dherediat97/FilmFlu';
 
   //PREFERENCES KEYS
   static const languageKey = 'languageCode';

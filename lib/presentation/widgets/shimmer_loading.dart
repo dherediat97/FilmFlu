@@ -189,6 +189,24 @@ class ShimmerMediaItem extends StatelessWidget {
   }
 }
 
+class ShimmerMediaDayItem extends StatelessWidget {
+  const ShimmerMediaDayItem({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Container(
+        width: 400,
+        height: 400,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(0),
+          color: Colors.black,
+        ),
+      ),
+    );
+  }
+}
+
 class CardListItem extends StatelessWidget {
   const CardListItem({
     super.key,
@@ -269,6 +287,15 @@ Widget buildTopRowList() {
       ],
     ),
   );
+}
+
+Widget buildMediaDayWidget(BuildContext context) {
+  return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      child: const ShimmerLoading(
+        isLoading: true,
+        child: ShimmerMediaDayItem(),
+      ));
 }
 
 Widget buildTopRowItem() {

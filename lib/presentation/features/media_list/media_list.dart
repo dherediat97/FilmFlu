@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
+import 'package:film_flu/app/types/ui_state.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/features/media_list/bloc/media_list_bloc.dart';
@@ -55,33 +56,37 @@ class _MediaDataList extends State<MediaList> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MediaListBloc, MediaListState>(
+      buildWhen: (previous, current) {
+        return current.uiState.isSuccess() &&
+            (current.movieData.isNotEmpty || current.serieData.isNotEmpty);
+      },
       builder: (context, state) {
         List<MediaSimpleItemEntity>? mediaDataList =
             mediaTypeSelected == MediaType.movie
                 ? state.movieData[widget.genreId]
                 : state.serieData[widget.genreId];
 
-        return mediaDataList == null
-            ? Shimmer(
-                child: buildTopRowList(),
-              )
-            : Padding(
-                key: widget.key,
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 20),
-                    AutoSizeText(
-                      widget.title,
-                      maxFontSize: 30,
-                      minFontSize: 20,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    const SizedBox(height: 20),
-                    if (mediaTypeSelected == MediaType.movie)
-                      SizedBox(
+        return Padding(
+          key: widget.key,
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 20),
+              AutoSizeText(
+                widget.title,
+                maxFontSize: 30,
+                minFontSize: 20,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 20),
+              if (mediaTypeSelected == MediaType.movie)
+                mediaDataList == null
+                    ? Shimmer(
+                        child: buildTopRowList(),
+                      )
+                    : SizedBox(
                         height: 220,
                         child: CarouselView(
                           padding: const EdgeInsets.all(8.0),
@@ -101,8 +106,12 @@ class _MediaDataList extends State<MediaList> {
                           ),
                         ),
                       ),
-                    if (mediaTypeSelected == MediaType.tv)
-                      SizedBox(
+              if (mediaTypeSelected == MediaType.tv)
+                mediaDataList == null
+                    ? Shimmer(
+                        child: buildTopRowList(),
+                      )
+                    : SizedBox(
                         height: 220,
                         child: CarouselView(
                           padding: const EdgeInsets.all(8.0),
@@ -123,9 +132,9 @@ class _MediaDataList extends State<MediaList> {
                           ),
                         ),
                       ),
-                  ],
-                ),
-              );
+            ],
+          ),
+        );
       },
     );
   }

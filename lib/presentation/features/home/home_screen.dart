@@ -1,6 +1,9 @@
-import 'package:film_flu/app/routes/app_paths.dart';
+import 'package:film_flu/app/types/ui_state.dart';
 import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
-import 'package:film_flu/presentation/features/splash/splash_screen.dart';
+import 'package:film_flu/presentation/features/media_list/widgets/movies_list.dart';
+import 'package:film_flu/presentation/features/media_list/widgets/series_list.dart';
+import 'package:film_flu/presentation/features/search/widgets/serie_filters.dart';
+import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,28 +14,32 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context
+        .read<HomeBloc>()
+        .add(const HomeEvent.switchCategory(MediaType.movie));
     return BlocBuilder<HomeBloc, HomeState>(
+      buildWhen: (previous, current) {
+        return current.uiState.isLoading();
+      },
       builder: (context, state) {
-        context
-            .read<HomeBloc>()
-            .add(HomeEvent.switchCategory(state.mediaTypeSelected));
+        Widget child;
 
-        String route;
         switch (state.mediaTypeSelected) {
           case MediaType.movie:
-            route = AppRoutePaths.moviesRoute;
+            child = const MoviesListWidget();
             break;
           case MediaType.tv:
-            route = AppRoutePaths.seriesRoute;
+            child = const SeriesListWidget();
             break;
           case MediaType.search:
-            route = AppRoutePaths.searchRoute;
-            break;
-          default:
-            route = AppRoutePaths.moviesRoute;
+            child = const SerieFiltersWidget();
             break;
         }
-        return SplashScreen(route: route);
+
+        return ScaffoldPage(
+          fullScreenMode: false,
+          child: child,
+        );
       },
     );
   }

@@ -18,11 +18,11 @@ class MediaDayWidget extends StatelessWidget {
       },
       listener: (context, state) {},
       buildWhen: (previous, current) {
-        return current.mediaItem == previous.mediaItem;
+        return current.mediaItem != null;
       },
       builder: (context, state) {
         return state.uiState.isLoading() && state.mediaItem == null
-            ? Shimmer(child: buildTopRowList())
+            ? Shimmer(child: buildMediaDayWidget(context))
             : BackgroundImageMediaItem(
                 key: key,
                 isHomeScreen: true,
