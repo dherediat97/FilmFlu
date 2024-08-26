@@ -1,5 +1,4 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/detail_tab_media_item.dart';
@@ -32,8 +31,8 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
 
   @override
   void dispose() {
-    super.dispose();
     _trailerController = null;
+    super.dispose();
   }
 
   @override
@@ -42,9 +41,8 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
 
     return BlocBuilder<MediaDetailBloc, MediaDetailState>(
       builder: (context, state) {
-        MediaItemEntity? mediaItem = state.mediaItem;
         MediaType mediaTypeSelected =
-            mediaItem?.title != '' ? MediaType.movie : MediaType.tv;
+            context.read<HomeBloc>().state.mediaTypeSelected;
 
         return ScaffoldPage(
           floatingActionButton: Padding(
@@ -99,10 +97,12 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                     : Container()
                 : Container(),
           ),
-          child: DetailTabMediaItem(
-            mediaTypeSelected: mediaTypeSelected,
-            mediaItemId: state.mediaItem?.id ?? 0,
-          ),
+          child: state.mediaItem != null
+              ? DetailTabMediaItem(
+                  mediaTypeSelected: mediaTypeSelected,
+                  mediaItemId: state.mediaItem?.id ?? 0,
+                )
+              : Container(),
         );
       },
     );

@@ -69,8 +69,8 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
 
   @override
   void dispose() {
-    super.dispose();
     _tabController.dispose();
+    super.dispose();
   }
 
   @override
