@@ -3,7 +3,6 @@ name: Test Units FilmFlu
 on:
   pull_request:
     branches: [ "main" ]
-  workflow_dispatch:
 
 jobs:
   build:
@@ -45,3 +44,6 @@ jobs:
       # want to change this to 'flutter test'.
       - name: Run tests
         run: flutter test
+
+      - name: Run coverage
+        run: ./runCoverage.sh
