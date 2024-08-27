@@ -15,14 +15,18 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MyAppBar({super.key});
+  const MyAppBar({
+    super.key,
+    this.mediaTypeSelected = MediaType.movie,
+  });
+
+  final MediaType? mediaTypeSelected;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: titleScaffold(context),
+      title: titleScaffold(context, mediaTypeSelected),
       automaticallyImplyLeading: true,
-      centerTitle: true,
       titleTextStyle: Theme.of(context).textTheme.headlineLarge,
       leadingWidth: 120,
       leading: IconButton(
@@ -152,9 +156,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     return actions;
   }
 
-  Widget titleScaffold(BuildContext context) {
-    MediaType mediaTypeSelected =
-        context.read<HomeBloc>().state.mediaTypeSelected;
+  Widget titleScaffold(BuildContext context, mediaTypeSelected) {
     if (mediaTypeSelected != MediaType.movie &&
         mediaTypeSelected != MediaType.tv) {
       return SearchBar(onChanged: (value) {
@@ -169,5 +171,5 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(80);
+  Size get preferredSize => const Size.fromHeight(kBottomNavigationBarHeight);
 }

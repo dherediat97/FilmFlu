@@ -6,8 +6,6 @@ class AppRoutePaths {
   static String moviesRoute = '$homeRoute/movies';
   static String seriesRoute = '$homeRoute/series';
   static String searchRoute = '$homeRoute/search';
-
-  static String mediaDetailsRoute = '/mediaItemDetails';
   static String personDetailsRoute = '/personDetails';
 
   static String settingsRoute = '/settings';

@@ -81,11 +81,11 @@ class FilmFluRemoteDataSource
 
   @override
   Future<MediaItemRemoteEntity> getMediaDetail({
-    required String mediaTypeSelected,
+    required MediaType mediaTypeSelected,
     required String mediaTypeId,
   }) async {
     final mediaData = await _filmFluApi.fetchMediaItem(
-      mediaType: mediaTypeSelected,
+      mediaType: mediaTypeSelected.name,
       mediaTypeId: mediaTypeId,
       language: await _appLocalDataSourceContract.getLanguage(),
     );
@@ -95,7 +95,7 @@ class FilmFluRemoteDataSource
   @override
   Future<CreditsMediaRemoteEntity> getCredits({
     required MediaType mediaTypeSelected,
-    required int mediaTypeId,
+    required String mediaTypeId,
   }) async {
     final mediaData = await _filmFluApi.fetchCredits(
       mediaType: mediaTypeSelected.name,
@@ -119,7 +119,7 @@ class FilmFluRemoteDataSource
   @override
   Future<Pagination<ReviewRemoteEntity>>? getReviews({
     required MediaType mediaTypeSelected,
-    required int mediaTypeId,
+    required String mediaTypeId,
   }) async {
     final reviewData = await _filmFluApi.fetchReviews(
       mediaType: mediaTypeSelected.name,
@@ -132,7 +132,7 @@ class FilmFluRemoteDataSource
   @override
   Future<MediaResponseRemoteEntity> getMedia({
     required MediaType mediaTypeSelected,
-    required int mediaTypeId,
+    required String mediaTypeId,
   }) async {
     final mediaRemotePagination = await _filmFluApi.fetchMedia(
       mediaType: mediaTypeSelected.name,

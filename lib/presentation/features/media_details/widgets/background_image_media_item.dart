@@ -121,8 +121,10 @@ class BackgroundImageMediaItem extends StatelessWidget {
                                           ? MediaType.movie
                                           : MediaType.tv;
 
-                                  context.pushReplacement(
-                                      '${AppRoutePaths.mediaDetailsRoute}/${mediaTypeSelected.name}/${mediaItem?.id}');
+                                  context.pushReplacement(mediaTypeSelected ==
+                                          MediaType.movie
+                                      ? '${AppRoutePaths.moviesRoute}/${mediaItem?.id}'
+                                      : '${AppRoutePaths.seriesRoute}/${mediaItem?.id}');
                                 },
                                 icon: const Icon(
                                   Icons.info_outline,

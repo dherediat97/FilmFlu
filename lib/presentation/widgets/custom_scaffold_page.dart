@@ -58,8 +58,11 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
       builder: (context, state) {
         return Scaffold(
             appBar: !widget.fullScreenMode
-                ? const PreferredSize(
-                    preferredSize: Size.fromHeight(80), child: MyAppBar())
+                ? PreferredSize(
+                    preferredSize: const Size.fromHeight(70),
+                    child: MyAppBar(
+                      mediaTypeSelected: state.mediaTypeSelected,
+                    ))
                 : null,
             bottomNavigationBar: !widget.fullScreenMode
                 ? BottomNavigationBar(
@@ -78,43 +81,45 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                       ),
                     ],
                     currentIndex: _selectedIndex,
-                    onTap: (int index) => setState(() {
-                      _selectedIndex = index;
+                    onTap: (int index) {
                       setState(() {
-                        if (_pageController.hasClients) {
-                          _pageController.animateToPage(
-                            index,
-                            duration: const Duration(milliseconds: 1000),
-                            curve: Curves.easeInOut,
-                          );
-                        }
+                        _selectedIndex = index;
                       });
-                    }),
+
+                      if (_pageController.hasClients) {
+                        _pageController.animateToPage(
+                          index,
+                          duration: const Duration(milliseconds: 200),
+                          curve: Curves.easeInOut,
+                        );
+                      }
+                    },
                   )
                 : null,
-            body: PageView(
-              controller: _pageController,
-              onPageChanged: (index) {
-                _selectedIndex = index;
+            body: _pageController.hasClients
+                ? PageView(
+                    controller: _pageController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    onPageChanged: (index) {
+                      setState(() {
+                        _selectedIndex = index;
+                      });
 
-                setState(() {
-                  var category = MediaType.values.elementAt(_selectedIndex);
-                  print(category);
-                  context
-                      .read<HomeBloc>()
-                      .add(HomeEvent.switchCategory(category));
-                });
-              },
-              children: [
-                if (_pageController.hasClients) ...[
-                  const MoviesListWidget(),
-                  const SeriesListWidget(),
-                  const SerieFiltersWidget(),
-                ] else ...[
-                  widget.child
-                ]
-              ],
-            ));
+                      setState(() {
+                        var category =
+                            MediaType.values.elementAt(_selectedIndex);
+                        context
+                            .read<HomeBloc>()
+                            .add(HomeEvent.switchCategory(category));
+                      });
+                    },
+                    children: const [
+                      MoviesListWidget(),
+                      SeriesListWidget(),
+                      SerieFiltersWidget(),
+                    ],
+                  )
+                : widget.child);
       },
     );
   }

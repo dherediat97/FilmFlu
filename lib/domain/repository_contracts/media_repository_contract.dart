@@ -7,22 +7,22 @@ import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dar
 
 abstract class MediaRepositoryContract {
   Future<Result<MediaItemEntity>> getMediaItem({
-    required String mediaTypeSelected,
+    required MediaType mediaTypeSelected,
     required String mediaTypeId,
   });
 
   Future<Result<CreditsMediaEntity>> getCredits({
     required MediaType mediaTypeSelected,
-    required int mediaTypeId,
+    required String mediaTypeId,
   });
 
   Future<Result<List<ReviewEntity>?>> getReviews({
     required MediaType mediaTypeSelected,
-    required int mediaTypeId,
+    required String mediaTypeId,
   });
 
   Future<Result<MediaResponseEntity>> getMedia({
     required MediaType mediaTypeSelected,
-    required int mediaTypeId,
+    required String mediaTypeId,
   });
 }

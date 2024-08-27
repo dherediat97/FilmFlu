@@ -7,22 +7,22 @@ import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dar
 
 abstract class MediaRemoteDataSourceContract {
   Future<MediaItemRemoteEntity> getMediaDetail({
-    required String mediaTypeSelected,
+    required MediaType mediaTypeSelected,
     required String mediaTypeId,
   });
 
   Future<CreditsMediaRemoteEntity> getCredits({
     required MediaType mediaTypeSelected,
-    required int mediaTypeId,
+    required String mediaTypeId,
   });
 
   Future<Pagination<ReviewRemoteEntity>>? getReviews({
     required MediaType mediaTypeSelected,
-    required int mediaTypeId,
+    required String mediaTypeId,
   });
 
   Future<MediaResponseRemoteEntity> getMedia({
     required MediaType mediaTypeSelected,
-    required int mediaTypeId,
+    required String mediaTypeId,
   });
 }

@@ -45,65 +45,62 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
             context.read<HomeBloc>().state.mediaTypeSelected;
 
         return ScaffoldPage(
-          floatingActionButton: Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: state.trailerId.isNotEmpty
-                ? !state.isTrailerOpened
-                    ? FloatingActionButton.extended(
-                        icon: const Icon(Icons.play_arrow),
-                        label: Text(context.localizations.play_trailer),
-                        onPressed: () {
-                          showAdaptiveDialog(
-                            context: context,
-                            builder: (context) {
-                              dialogContext = context;
-                              context
-                                  .read<MediaDetailBloc>()
-                                  .add(const MediaDetailEvent.openTrailer());
-                              _trailerController = initTrailerController();
-                              if (state.trailerId.isNotEmpty) {
-                                _trailerController?.loadVideoById(
-                                  videoId: state.trailerId.toString(),
-                                );
-                              }
-                              return AlertDialog.adaptive(
-                                icon: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    IconButton(
-                                      onPressed: () =>
-                                          closeTrailer(dialogContext),
-                                      icon: const Icon(Icons.close),
-                                    ),
-                                  ],
-                                ),
-                                content: SizedBox(
-                                  height: MediaQuery.of(context).size.height,
-                                  width: MediaQuery.of(context).size.width,
-                                  child: YoutubePlayerScaffold(
-                                    controller: _trailerController!,
-                                    builder: (context, player) {
-                                      return player;
-                                    },
+            floatingActionButton: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: state.trailerId.isNotEmpty
+                  ? !state.isTrailerOpened
+                      ? FloatingActionButton.extended(
+                          icon: const Icon(Icons.play_arrow),
+                          label: Text(context.localizations.play_trailer),
+                          onPressed: () {
+                            showAdaptiveDialog(
+                              context: context,
+                              builder: (context) {
+                                dialogContext = context;
+                                context
+                                    .read<MediaDetailBloc>()
+                                    .add(const MediaDetailEvent.openTrailer());
+                                _trailerController = initTrailerController();
+                                if (state.trailerId.isNotEmpty) {
+                                  _trailerController?.loadVideoById(
+                                    videoId: state.trailerId.toString(),
+                                  );
+                                }
+                                return AlertDialog.adaptive(
+                                  icon: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      IconButton(
+                                        onPressed: () =>
+                                            closeTrailer(dialogContext),
+                                        icon: const Icon(Icons.close),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              );
-                            },
-                          );
-                        },
-                      )
-                    : Container()
-                : Container(),
-          ),
-          child: state.mediaItem != null
-              ? DetailTabMediaItem(
-                  mediaTypeSelected: mediaTypeSelected,
-                  mediaItemId: state.mediaItem?.id ?? 0,
-                )
-              : Container(),
-        );
+                                  content: SizedBox(
+                                    height: MediaQuery.of(context).size.height,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: YoutubePlayerScaffold(
+                                      controller: _trailerController!,
+                                      builder: (context, player) {
+                                        return player;
+                                      },
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        )
+                      : Container()
+                  : Container(),
+            ),
+            child: DetailTabMediaItem(
+              mediaTypeSelected: mediaTypeSelected,
+              mediaItemId: state.mediaItem?.id.toString(),
+            ));
       },
     );
   }

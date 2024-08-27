@@ -26,67 +26,69 @@ class FilmActorItem extends StatefulWidget {
 class _FilmActorItemState extends State<FilmActorItem> {
   @override
   Widget build(BuildContext context) {
-    return ShimmerLoading(
-      isLoading: widget.actor == null,
-      child: ListTile(
-        onTap: () {
-          AppConstants.personId = widget.actor!.id;
-          context.pushReplacement(
-              '${AppRoutePaths.personDetailsRoute}/${widget.actor?.id}');
-        },
-        title: ClipRRect(
-          child: CachedNetworkImage(
-            imageUrl: '${AppUrls.personImgBaseUrl}${widget.actor?.profilePath}',
-            imageBuilder: (context, imageProvider) => Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(32),
-                image: DecorationImage(
-                  image: imageProvider,
+    return Shimmer(
+      child: widget.actor == null
+          ? buildTopRowItem()
+          : ListTile(
+              onTap: () {
+                AppConstants.personId = widget.actor!.id;
+                context.pushReplacement(
+                    '${AppRoutePaths.personDetailsRoute}/${widget.actor?.id}');
+              },
+              title: ClipRRect(
+                child: CachedNetworkImage(
+                  imageUrl:
+                      '${AppUrls.personImgBaseUrl}${widget.actor?.profilePath}',
+                  imageBuilder: (context, imageProvider) => Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(32),
+                      image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  height: 200,
+                  width: 120,
                   fit: BoxFit.cover,
+                  errorWidget: (context, error, stackTrace) {
+                    if (widget.actor?.gender == 2) {
+                      return SvgPicture.asset(
+                        AppAssets.actorImageIcon,
+                        height: 200,
+                        width: 120,
+                        fit: BoxFit.cover,
+                      );
+                    } else {
+                      return SvgPicture.asset(
+                        AppAssets.actressImageIcon,
+                        height: 200,
+                        width: 120,
+                        fit: BoxFit.cover,
+                      );
+                    }
+                  },
                 ),
               ),
+              subtitle: Column(
+                children: [
+                  AutoSizeText(
+                    widget.actor!.originalName.toString(),
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.displayLarge,
+                  ),
+                  AutoSizeText(
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    '${context.localizations.actor_job} ${widget.actor?.character}',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  )
+                ],
+              ),
             ),
-            height: 200,
-            width: 120,
-            fit: BoxFit.cover,
-            errorWidget: (context, error, stackTrace) {
-              if (widget.actor?.gender == 2) {
-                return SvgPicture.asset(
-                  AppAssets.actorImageIcon,
-                  height: 200,
-                  width: 120,
-                  fit: BoxFit.cover,
-                );
-              } else {
-                return SvgPicture.asset(
-                  AppAssets.actressImageIcon,
-                  height: 200,
-                  width: 120,
-                  fit: BoxFit.cover,
-                );
-              }
-            },
-          ),
-        ),
-        subtitle: Column(
-          children: [
-            AutoSizeText(
-              widget.actor!.originalName.toString(),
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.displayLarge,
-            ),
-            AutoSizeText(
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              '${context.localizations.actor_job} ${widget.actor?.character}',
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodySmall,
-            )
-          ],
-        ),
-      ),
     );
   }
 }

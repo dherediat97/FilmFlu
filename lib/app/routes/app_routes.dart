@@ -1,3 +1,4 @@
+import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/features/home/home_screen.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/movies_list.dart';
 import 'package:film_flu/presentation/features/search/search_screen.dart';
@@ -19,25 +20,34 @@ List<GoRoute> appRoutes = [
         builder: (context, state) => const HomeScreen(),
         routes: [
           GoRoute(
-            path: 'movies',
-            builder: (context, state) => const MoviesListWidget(),
-          ),
+              path: 'movies',
+              builder: (context, state) => const MoviesListWidget(),
+              routes: [
+                GoRoute(
+                  path: ':mediaTypeId',
+                  builder: (context, state) => MediaDetailController(
+                    mediaType: MediaType.movie,
+                    mediaTypeId: state.pathParameters['mediaTypeId'].toString(),
+                  ),
+                ),
+              ]),
           GoRoute(
-            path: 'series',
-            builder: (context, state) => const SeriesListWidget(),
-          ),
+              path: 'series',
+              builder: (context, state) => const SeriesListWidget(),
+              routes: [
+                GoRoute(
+                  path: ':mediaTypeId',
+                  builder: (context, state) => MediaDetailController(
+                    mediaType: MediaType.tv,
+                    mediaTypeId: state.pathParameters['mediaTypeId'].toString(),
+                  ),
+                ),
+              ]),
           GoRoute(
             path: 'search',
             builder: (context, state) => const SearchScreen(),
           ),
         ],
-      ),
-      GoRoute(
-        path: 'mediaItemDetails/:mediaType/:mediaTypeId',
-        builder: (context, state) => MediaDetailController(
-          mediaType: state.pathParameters['mediaType'].toString(),
-          mediaTypeId: state.pathParameters['mediaTypeId'].toString(),
-        ),
       ),
       GoRoute(
         path: 'personDetails/:personId',

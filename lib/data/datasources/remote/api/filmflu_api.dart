@@ -48,21 +48,21 @@ abstract class FilmFluApi {
   @GET('/{mediaType}/{mediaTypeId}/credits')
   Future<CreditsMediaRemoteEntity> fetchCredits({
     @Path('mediaType') required String mediaType,
-    @Path('mediaTypeId') required int mediaTypeId,
+    @Path('mediaTypeId') required String mediaTypeId,
     @Query('language') String language = 'es-ES',
   });
 
   @GET('/{mediaType}/{mediaTypeId}/reviews')
   Future<Pagination<ReviewRemoteEntity>> fetchReviews({
     @Path('mediaType') required String mediaType,
-    @Path('mediaTypeId') required int mediaTypeId,
+    @Path('mediaTypeId') required String mediaTypeId,
     @Query('language') String language = 'es-ES',
   });
 
   @GET('/{mediaType}/{mediaTypeId}/images')
   Future<MediaResponseRemoteEntity> fetchMedia({
     @Path('mediaType') required String mediaType,
-    @Path('mediaTypeId') required int mediaTypeId,
+    @Path('mediaTypeId') required String mediaTypeId,
   });
 
   @GET('/search/{mediaType}')

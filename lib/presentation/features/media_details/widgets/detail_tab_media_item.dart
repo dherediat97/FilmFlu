@@ -20,7 +20,7 @@ class DetailTabMediaItem extends StatefulWidget {
   });
 
   final MediaType mediaTypeSelected;
-  final int mediaItemId;
+  final String? mediaItemId;
 
   @override
   State<DetailTabMediaItem> createState() => _DetailTabMediaItem();
@@ -38,28 +38,32 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
       var index = _tabController.index;
       switch (index) {
         case 0:
+          context.read<MediaDetailBloc>().add(MediaDetailEvent.getMediaDetails(
+                widget.mediaTypeSelected,
+                widget.mediaItemId ?? '0',
+              ));
           context.read<MediaDetailBloc>().add(MediaDetailEvent.getMedia(
                 widget.mediaTypeSelected,
-                widget.mediaItemId,
+                widget.mediaItemId ?? '0',
               ));
           break;
         case 1:
           context.read<MediaDetailBloc>().add(MediaDetailEvent.getReviews(
                 widget.mediaTypeSelected,
-                widget.mediaItemId,
+                widget.mediaItemId ?? '0',
               ));
           break;
         case 2:
           context.read<MediaDetailBloc>().add(MediaDetailEvent.getCredits(
                 widget.mediaTypeSelected,
-                widget.mediaItemId,
+                widget.mediaItemId ?? '0',
                 true,
               ));
           break;
         case 3:
           context.read<MediaDetailBloc>().add(MediaDetailEvent.getCredits(
                 widget.mediaTypeSelected,
-                widget.mediaItemId,
+                widget.mediaItemId!,
                 false,
               ));
           break;
@@ -80,13 +84,14 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
         return SingleChildScrollView(
           child: Column(
             children: [
-              ShimmerLoading(
-                isLoading: state.mediaItem == null,
-                child: BackgroundImageMediaItem(
-                  productionCompanyImage: state.productionCompanyImage,
-                  isHomeScreen: false,
-                  mediaItem: state.mediaItem,
-                ),
+              Shimmer(
+                child: state.mediaItem == null
+                    ? buildMediaDayWidget(context)
+                    : BackgroundImageMediaItem(
+                        productionCompanyImage: state.productionCompanyImage,
+                        isHomeScreen: false,
+                        mediaItem: state.mediaItem,
+                      ),
               ),
               Padding(
                 padding: const EdgeInsets.all(24),
@@ -117,27 +122,38 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
                                 media: state.mediaList,
                               ),
                             ),
-                            ContainerTabMediaItem(
-                              child: ShimmerLoading(
-                                isLoading: state.reviews == null,
-                                child: ListView.builder(
-                                  itemCount: state.reviews?.length,
-                                  itemBuilder: (context, index) {
-                                    ReviewEntity? review =
-                                        state.reviews?[index];
+                            Shimmer(
+                              child: state.reviews == null
+                                  ? buildMediaDayWidget(context)
+                                  : ContainerTabMediaItem(
+                                      child: ListView.builder(
+                                        itemCount: state.reviews?.length,
+                                        itemBuilder: (context, index) {
+                                          ReviewEntity? review =
+                                              state.reviews?[index];
 
-                                    return ReviewsWidgetItem(
-                                      review: review,
-                                    );
-                                  },
-                                ),
-                              ),
+                                          return ReviewsWidgetItem(
+                                            review: review,
+                                          );
+                                        },
+                                      ),
+                                    ),
                             ),
-                            ContainerTabMediaItem(
-                              child: MediaDataCast(cast: state.cast),
+                            Shimmer(
+                              child: state.cast == null
+                                  ? buildMediaDayWidget(context)
+                                  : ContainerTabMediaItem(
+                                      child:
+                                          MediaDataCast(cast: state.cast ?? []),
+                                    ),
                             ),
-                            ContainerTabMediaItem(
-                              child: MediaDataProduction(crew: state.crew),
+                            Shimmer(
+                              child: state.crew == null
+                                  ? buildMediaDayWidget(context)
+                                  : ContainerTabMediaItem(
+                                      child: MediaDataProduction(
+                                          crew: state.crew ?? []),
+                                    ),
                             )
                           ],
                         ),
