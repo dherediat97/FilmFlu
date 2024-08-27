@@ -51,7 +51,7 @@ class _SplashScreen extends State<SplashScreen> with TickerProviderStateMixin {
                   ..duration = composition.duration
                   ..reverse()
                   ..forward().whenComplete(() {
-                    context.pushReplacement(widget.route);
+                    context.push(widget.route);
                   });
               },
             ),

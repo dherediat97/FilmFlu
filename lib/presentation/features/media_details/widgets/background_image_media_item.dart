@@ -121,7 +121,7 @@ class BackgroundImageMediaItem extends StatelessWidget {
                                           ? MediaType.movie
                                           : MediaType.tv;
 
-                                  context.pushReplacement(mediaTypeSelected ==
+                                  context.push(mediaTypeSelected ==
                                           MediaType.movie
                                       ? '${AppRoutePaths.moviesRoute}/${mediaItem?.id}'
                                       : '${AppRoutePaths.seriesRoute}/${mediaItem?.id}');

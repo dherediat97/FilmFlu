@@ -1,3 +1,4 @@
+import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/app/types/ui_state.dart';
 import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/movies_list.dart';
@@ -38,6 +39,7 @@ class HomeScreen extends StatelessWidget {
 
         return ScaffoldPage(
           fullScreenMode: false,
+          routeName: AppRoutePaths.homeRoute,
           child: child,
         );
       },

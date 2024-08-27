@@ -41,7 +41,7 @@ class ActorCreditsWidget extends StatelessWidget {
           return ListTile(
             onTap: () {
               AppConstants.personId = actor.id;
-              context.pushReplacement(
+              context.push(
                 '${AppRoutePaths.personDetailsRoute}/${actor.id}',
               );
             },

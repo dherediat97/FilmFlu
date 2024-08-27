@@ -43,8 +43,6 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
     MediaType mediaTypeSelected,
     String mediaItemId,
   ) async {
-    emit(state.copyWith(uiState: const UiState.loading()));
-
     final movieData = await _mediaRepository.getMediaItem(
       mediaTypeSelected: mediaTypeSelected,
       mediaTypeId: mediaItemId,
