@@ -3,7 +3,7 @@ import 'package:film_flu/app/types/ui_state.dart';
 import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/movies_list.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/series_list.dart';
-import 'package:film_flu/presentation/features/search/widgets/serie_filters.dart';
+import 'package:film_flu/presentation/features/search/search_screen.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
             child = const SeriesListWidget();
             break;
           case MediaType.search:
-            child = const SerieFiltersWidget();
+            child = const SearchScreen();
             break;
         }
 

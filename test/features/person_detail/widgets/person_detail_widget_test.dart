@@ -7,8 +7,8 @@ import '../../../pump_app.dart';
 void main() {
   testWidgets('Testing Person Detail Screen', (WidgetTester tester) async {
     await pumpApp(
-      tester,
-      const PersonDetails(
+      tester: tester,
+      child: const PersonDetails(
         person: PersonEntity(name: 'name', gender: 0, alias: [], id: 0),
       ),
     );

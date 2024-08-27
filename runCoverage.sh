@@ -1,3 +1,4 @@
+#!/bin/bash
 # Generate `coverage/lcov.info` file
 flutter test --coverage
 # Generate HTML report
