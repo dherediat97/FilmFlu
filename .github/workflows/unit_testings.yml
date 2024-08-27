@@ -15,35 +15,16 @@ jobs:
             channel: 'stable'
       - run: flutter clean
       - run: flutter pub get
-      - name: Write TMDB_KEY to .env
-        run:
-          set -o noclobber
-          echo TMDB_KEY={{ secrets.TMDB_KEY }} >> .env
-      - name: Create .env
-        run: echo "TMDB_KEY=${{ secrets.TMDB_KEY }}" > .env
-      - name: Make envfile
-        uses: SpicyPizza/create-envfile@v2.0
-        with:
-            envkey_DEBUG: false
-            envkey_TMDB_KEY: ${{ secrets.TMDB_KEY }}
-            file_name: .env
       - name: Build & compile classes
         run: flutter pub run build_runner build --delete-conflicting-outputs
       - run: flutter gen-l10n
 
-      # Uncomment this step to verify the use of 'dart format' on each commit.
-      #- name: Verify formatting
-      # run: dart format --output=none --set-exit-if-changed .
+      - name: Analyze project source
+       run: flutter analyze
 
-      # Consider passing '--fatal-infos' for slightly stricter analysis.
-      #- name: Analyze project source
-      #  run: flutter analyze
-
-      # Your project will need to have tests in test/ and a dependency on
-      # package:test for this step to succeed. Note that Flutter projects will
-      # want to change this to 'flutter test'.
       - name: Run tests
         run: flutter test
 
       - name: Run coverage
-        run: ./runCoverage.sh
+        run: ./runCoverage.sh |
+        shell: bash
