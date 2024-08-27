@@ -91,7 +91,7 @@ class _MediaDataList extends State<MediaList> {
                           padding: const EdgeInsets.all(8.0),
                           itemExtent: 180,
                           onTap: (index) {
-                            context.pushReplacement(
+                            context.push(
                               widget.mediaType == MediaType.movie
                                   ? '${AppRoutePaths.moviesRoute}/${mediaDataList[index].id}'
                                   : '${AppRoutePaths.seriesRoute}/${mediaDataList[index].id}',
@@ -120,8 +120,7 @@ class _MediaDataList extends State<MediaList> {
                           itemExtent: 180,
                           controller: _carouselController,
                           onTap: (index) {
-                            context.pushReplacement(widget.mediaType ==
-                                    MediaType.movie
+                            context.push(widget.mediaType == MediaType.movie
                                 ? '${AppRoutePaths.moviesRoute}/${mediaDataList[index].id}'
                                 : '${AppRoutePaths.seriesRoute}/${mediaDataList[index].id}');
                           },

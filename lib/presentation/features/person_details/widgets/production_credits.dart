@@ -42,7 +42,7 @@ class ProductionCreditsWidget extends StatelessWidget {
             onTap: () {
               AppConstants.personId = filmPerson.id;
 
-              context.pushReplacement(
+              context.push(
                 '${AppRoutePaths.personDetailsRoute}/${filmPerson.id}',
               );
             },

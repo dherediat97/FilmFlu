@@ -39,11 +39,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             fit: BoxFit.fitHeight,
           ),
           onPressed: () {
-            if (context.canPop()) {
-              context.pop();
-            } else {
-              context.pushReplacement(AppRoutePaths.startRoute);
-            }
+            if (context.canPop()) context.pop();
           }),
       actions: [
         Padding(
@@ -91,7 +87,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           context
               .read<AppBloc>()
               .add(AppEvent.changeLang(language?.toString() ?? 'es'));
-          context.pushReplacement(AppRoutePaths.startRoute);
+          context.push(AppRoutePaths.startRoute);
         },
         padding: const EdgeInsets.all(8),
         dropdownColor: Theme.of(context).colorScheme.surface,

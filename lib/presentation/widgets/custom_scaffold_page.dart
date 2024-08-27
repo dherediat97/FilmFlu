@@ -1,4 +1,5 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
+import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/app/types/ui_state.dart';
 import 'package:film_flu/presentation/features/app_bar/my_app_bar.dart';
 import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
@@ -17,6 +18,7 @@ class ScaffoldPage extends StatefulWidget {
     this.bottomBar,
     this.floatingActionButton,
     this.fullScreenMode = false,
+    this.routeName = '/',
   });
 
   final Widget child;
@@ -24,6 +26,7 @@ class ScaffoldPage extends StatefulWidget {
   final Widget? bottomBar;
   final Widget? floatingActionButton;
   final bool fullScreenMode;
+  final String? routeName;
 
   @override
   State<ScaffoldPage> createState() => _ScaffoldPageState();
@@ -96,7 +99,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                     },
                   )
                 : null,
-            body: _pageController.hasClients
+            body: widget.routeName == AppRoutePaths.homeRoute
                 ? PageView(
                     controller: _pageController,
                     physics: const NeverScrollableScrollPhysics(),
