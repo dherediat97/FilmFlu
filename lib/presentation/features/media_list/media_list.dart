@@ -90,9 +90,12 @@ class _MediaDataList extends State<MediaList> {
                         child: CarouselView(
                           padding: const EdgeInsets.all(8.0),
                           itemExtent: 180,
-                          onTap: (id) {
+                          onTap: (index) {
                             context.pushReplacement(
-                                '${AppRoutePaths.mediaDetailsRoute}/${widget.mediaType.name}/${mediaDataList[id].id}');
+                              widget.mediaType == MediaType.movie
+                                  ? '${AppRoutePaths.moviesRoute}/${mediaDataList[index].id}'
+                                  : '${AppRoutePaths.seriesRoute}/${mediaDataList[index].id}',
+                            );
                           },
                           children: List<Widget>.generate(
                             mediaDataList.length,
@@ -116,9 +119,11 @@ class _MediaDataList extends State<MediaList> {
                           padding: const EdgeInsets.all(8.0),
                           itemExtent: 180,
                           controller: _carouselController,
-                          onTap: (id) {
-                            context.pushReplacement(
-                                '${AppRoutePaths.mediaDetailsRoute}/${widget.mediaType.name}/${mediaDataList[id].id}');
+                          onTap: (index) {
+                            context.pushReplacement(widget.mediaType ==
+                                    MediaType.movie
+                                ? '${AppRoutePaths.moviesRoute}/${mediaDataList[index].id}'
+                                : '${AppRoutePaths.seriesRoute}/${mediaDataList[index].id}');
                           },
                           children: List<Widget>.generate(
                             mediaDataList.length,

@@ -22,7 +22,7 @@ class MediaRepository implements MediaRepositoryContract {
 
   @override
   Future<Result<MediaItemEntity>> getMediaItem({
-    required String mediaTypeSelected,
+    required MediaType mediaTypeSelected,
     required String mediaTypeId,
   }) async {
     try {
@@ -44,7 +44,7 @@ class MediaRepository implements MediaRepositoryContract {
   @override
   Future<Result<CreditsMediaEntity>> getCredits({
     required MediaType mediaTypeSelected,
-    required int mediaTypeId,
+    required String mediaTypeId,
   }) async {
     try {
       final creditData = await _movieRemoteDataSourceContract.getCredits(
@@ -64,7 +64,7 @@ class MediaRepository implements MediaRepositoryContract {
   @override
   Future<Result<List<ReviewEntity>?>> getReviews({
     required MediaType mediaTypeSelected,
-    required int mediaTypeId,
+    required String mediaTypeId,
   }) async {
     try {
       final reviewData = await _movieRemoteDataSourceContract.getReviews(
@@ -87,7 +87,7 @@ class MediaRepository implements MediaRepositoryContract {
   @override
   Future<Result<MediaResponseEntity>> getMedia({
     required MediaType mediaTypeSelected,
-    required int mediaTypeId,
+    required String mediaTypeId,
   }) async {
     try {
       final mediaData = await _movieRemoteDataSourceContract.getMedia(

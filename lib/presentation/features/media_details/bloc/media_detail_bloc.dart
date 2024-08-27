@@ -40,7 +40,7 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
   Future<void> _getMediaDetails(
     MediaDetailEvent event,
     Emitter<MediaDetailState> emit,
-    String mediaTypeSelected,
+    MediaType mediaTypeSelected,
     String mediaItemId,
   ) async {
     emit(state.copyWith(uiState: const UiState.loading()));
@@ -77,7 +77,7 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
     MediaDetailEvent event,
     Emitter<MediaDetailState> emit,
     MediaType mediaTypeSelected,
-    int mediaTypeId,
+    String mediaTypeId,
     bool isCast,
   ) async {
     final creditsData = await _mediaRepository.getCredits(
@@ -117,7 +117,7 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
     MediaDetailEvent event,
     Emitter<MediaDetailState> emit,
     MediaType mediaTypeSelected,
-    int mediaTypeId,
+    String mediaTypeId,
   ) async {
     final reviewResponseData = await _mediaRepository.getReviews(
       mediaTypeSelected: mediaTypeSelected,
@@ -181,7 +181,7 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
     MediaDetailEvent event,
     Emitter<MediaDetailState> emit,
     MediaType mediaTypeSelected,
-    int mediaTypeId,
+    String mediaTypeId,
   ) async {
     final mediaResponseData = await _mediaRepository.getMedia(
       mediaTypeSelected: mediaTypeSelected,

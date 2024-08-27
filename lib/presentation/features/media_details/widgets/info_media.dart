@@ -18,7 +18,7 @@ class InfoMedia extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (mediaItem!.overview != null)
+        if (mediaItem != null)
           Text(
             mediaItem!.overview!.toString(),
             textAlign: TextAlign.start,

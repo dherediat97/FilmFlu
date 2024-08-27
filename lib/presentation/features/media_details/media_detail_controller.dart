@@ -1,5 +1,6 @@
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/app/types/ui_state.dart';
+import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/media_detail_screen.dart';
 import 'package:film_flu/presentation/features/splash/splash_screen.dart';
@@ -13,7 +14,7 @@ class MediaDetailController extends StatefulWidget {
     required this.mediaTypeId,
   });
 
-  final String mediaType;
+  final MediaType mediaType;
   final String mediaTypeId;
 
   @override
@@ -38,15 +39,16 @@ class _MediaDetailControllerState extends State<MediaDetailController> {
       },
       listener: (context, state) {},
       buildWhen: (previous, current) {
-        return current.mediaItem == previous.mediaItem;
+        return current.mediaItem != null;
       },
       builder: (context, state) {
-        if (state.mediaItem != null && !state.uiState.isLoading()) {
+        if (state.uiState.isSuccess()) {
           return MediaItemScreenDetails(mediaTypeId: widget.mediaTypeId);
         } else {
           return SplashScreen(
-            route:
-                '${AppRoutePaths.mediaDetailsRoute}/${widget.mediaType}/${widget.mediaTypeId}',
+            route: widget.mediaType == MediaType.movie
+                ? '${AppRoutePaths.moviesRoute}/${widget.mediaTypeId}'
+                : '${AppRoutePaths.seriesRoute}/${widget.mediaTypeId}',
           );
         }
       },
