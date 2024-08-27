@@ -26,4 +26,5 @@ jobs:
         run: flutter test
 
       - name: Run coverage
-        run: ./runCoverage.sh
+        run: ./runCoverage.sh |
+        shell: bash
