@@ -1,6 +1,5 @@
 import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/detail_tab_media_item.dart';
@@ -8,10 +7,7 @@ import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-
-import 'package:horusvision/app/di/di.dart' as horus_vision;
 
 class MediaItemScreenDetails extends StatefulWidget {
   const MediaItemScreenDetails({
