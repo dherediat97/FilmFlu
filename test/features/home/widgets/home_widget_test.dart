@@ -1,4 +1,4 @@
-import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
+import 'package:film_flu/app/types/ui_state.dart';
 import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/features/home/home_screen.dart';
 import 'package:film_flu/presentation/features/media_list/bloc/media_list_bloc.dart';
@@ -6,13 +6,12 @@ import 'package:film_flu/presentation/features/media_list/widgets/movies_list.da
 import 'package:film_flu/presentation/features/media_list/widgets/series_list.dart';
 import 'package:film_flu/presentation/features/search/search_screen.dart';
 import 'package:film_flu/presentation/top_blocs/app/app_bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../pump_app.dart';
 import 'home_widget_test.mocks.dart';
 
 @GenerateNiceMocks([
@@ -21,24 +20,34 @@ import 'home_widget_test.mocks.dart';
   MockSpec<MediaListBloc>(),
 ])
 void main() {
+  late MockHomeBloc homeBloc;
+  late MockMediaListBloc mediaListBloc;
+
+  setUpAll(
+    () {
+      homeBloc = MockHomeBloc();
+      mediaListBloc = MockMediaListBloc();
+    },
+  );
+
   testWidgets('HomeBloc adds switchCategory event with MediaType.movie',
       (WidgetTester tester) async {
-    final appBloc = MockAppBloc();
-    final homeBloc = MockHomeBloc();
-    final mediaListBloc = MockMediaListBloc();
-    when(appBloc.state).thenReturn(AppState.initial());
     when(homeBloc.state).thenReturn(
       HomeState.initial().copyWith(
+        uiState: const UiState.success(),
         mediaTypeSelected: MediaType.movie,
       ),
     );
-    when(mediaListBloc.state).thenReturn(MediaListState.initial());
 
-    final widget = MultiBlocProvider(
+    when(mediaListBloc.state).thenReturn(
+      MediaListState.initial().copyWith(
+        uiState: const UiState.success(),
+      ),
+    );
+
+    await pumpApp(
+      tester: tester,
       providers: [
-        BlocProvider<AppBloc>(
-          create: (_) => appBloc,
-        ),
         BlocProvider<HomeBloc>(
           create: (_) => homeBloc,
         ),
@@ -47,18 +56,6 @@ void main() {
         ),
       ],
       child: const HomeScreen(),
-    );
-
-    await tester.pumpWidget(
-      MaterialApp(
-        home: widget,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
-        supportedLocales: AppLocalizations.supportedLocales,
-      ),
     );
 
     homeBloc.add(const HomeEvent.switchCategory(MediaType.movie));
@@ -68,10 +65,6 @@ void main() {
 
   testWidgets('HomeBloc adds switchCategory event with MediaType.tv',
       (WidgetTester tester) async {
-    final appBloc = MockAppBloc();
-    final homeBloc = MockHomeBloc();
-    final mediaListBloc = MockMediaListBloc();
-    when(appBloc.state).thenReturn(AppState.initial());
     when(homeBloc.state).thenReturn(
       HomeState.initial().copyWith(
         mediaTypeSelected: MediaType.tv,
@@ -79,11 +72,9 @@ void main() {
     );
     when(mediaListBloc.state).thenReturn(MediaListState.initial());
 
-    final widget = MultiBlocProvider(
+    await pumpApp(
+      tester: tester,
       providers: [
-        BlocProvider<AppBloc>(
-          create: (_) => appBloc,
-        ),
         BlocProvider<HomeBloc>(
           create: (_) => homeBloc,
         ),
@@ -92,18 +83,6 @@ void main() {
         ),
       ],
       child: const HomeScreen(),
-    );
-
-    await tester.pumpWidget(
-      MaterialApp(
-        home: widget,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
-        supportedLocales: AppLocalizations.supportedLocales,
-      ),
     );
 
     homeBloc.add(const HomeEvent.switchCategory(MediaType.tv));
@@ -113,22 +92,19 @@ void main() {
 
   testWidgets('HomeBloc adds switchCategory event with MediaType.tv',
       (WidgetTester tester) async {
-    final appBloc = MockAppBloc();
-    final homeBloc = MockHomeBloc();
-    final mediaListBloc = MockMediaListBloc();
-    when(appBloc.state).thenReturn(AppState.initial());
     when(homeBloc.state).thenReturn(
       HomeState.initial().copyWith(
-        mediaTypeSelected: MediaType.search,
+        mediaTypeSelected: MediaType.movie,
+        uiState: const UiState.success(),
       ),
     );
-    when(mediaListBloc.state).thenReturn(MediaListState.initial());
+    when(mediaListBloc.state).thenReturn(MediaListState.initial().copyWith(
+      uiState: const UiState.success(),
+    ));
 
-    final widget = MultiBlocProvider(
+    await pumpApp(
+      tester: tester,
       providers: [
-        BlocProvider<AppBloc>(
-          create: (_) => appBloc,
-        ),
         BlocProvider<HomeBloc>(
           create: (_) => homeBloc,
         ),
@@ -137,18 +113,6 @@ void main() {
         ),
       ],
       child: const HomeScreen(),
-    );
-
-    await tester.pumpWidget(
-      MaterialApp(
-        home: widget,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
-        supportedLocales: AppLocalizations.supportedLocales,
-      ),
     );
 
     homeBloc.add(const HomeEvent.switchCategory(MediaType.search));
@@ -158,21 +122,15 @@ void main() {
 
   testWidgets('HomeBloc fails to add switchCategory event',
       (WidgetTester tester) async {
-    final appBloc = MockAppBloc();
-    final homeBloc = MockHomeBloc();
-    final mediaListBloc = MockMediaListBloc();
-    when(appBloc.state).thenReturn(AppState.initial());
     when(homeBloc.state).thenReturn(HomeState.initial());
     when(mediaListBloc.state).thenReturn(MediaListState.initial());
-    when(appBloc.add(any)).thenThrow(Exception('Failed to add event'));
     when(homeBloc.add(any)).thenThrow(Exception('Failed to add event'));
     when(mediaListBloc.add(any)).thenThrow(Exception('Failed to add event'));
 
-    final widget = MultiBlocProvider(
+    await pumpApp(
+      tester: tester,
+      child: const HomeScreen(),
       providers: [
-        BlocProvider<AppBloc>(
-          create: (_) => appBloc,
-        ),
         BlocProvider<HomeBloc>(
           create: (_) => homeBloc,
         ),
@@ -180,18 +138,7 @@ void main() {
           create: (_) => mediaListBloc,
         ),
       ],
-      child: const HomeScreen(),
     );
-
-    await tester.pumpWidget(MaterialApp(
-      home: widget,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: AppLocalizations.supportedLocales,
-    ));
 
     expect(() => homeBloc.add(const HomeEvent.switchCategory(MediaType.movie)),
         throwsException);
