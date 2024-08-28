@@ -11,6 +11,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../instruments/media_list_instruments.dart';
 import '../../../pump_app.dart';
 import 'home_widget_test.mocks.dart';
 
@@ -42,6 +43,7 @@ void main() {
     when(mediaListBloc.state).thenReturn(
       MediaListState.initial().copyWith(
         uiState: const UiState.success(),
+        movieData: MediaListInstruments.movieList,
       ),
     );
 
@@ -70,7 +72,9 @@ void main() {
         mediaTypeSelected: MediaType.tv,
       ),
     );
-    when(mediaListBloc.state).thenReturn(MediaListState.initial());
+    when(mediaListBloc.state).thenReturn(MediaListState.initial().copyWith(
+      serieData: MediaListInstruments.serieList,
+    ));
 
     await pumpApp(
       tester: tester,
@@ -90,11 +94,11 @@ void main() {
     expect(find.byType(SeriesListWidget), findsOneWidget);
   });
 
-  testWidgets('HomeBloc adds switchCategory event with MediaType.tv',
+  testWidgets('HomeBloc adds switchCategory event with MediaType.search',
       (WidgetTester tester) async {
     when(homeBloc.state).thenReturn(
       HomeState.initial().copyWith(
-        mediaTypeSelected: MediaType.movie,
+        mediaTypeSelected: MediaType.search,
         uiState: const UiState.success(),
       ),
     );
