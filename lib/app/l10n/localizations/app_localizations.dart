@@ -351,6 +351,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'% de los usuarios les gusta'**
   String get percentange_vote;
+
+  /// No description provided for @buy_tickets.
+  ///
+  /// In es, this message translates to:
+  /// **'Reserva entradas'**
+  String get buy_tickets;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

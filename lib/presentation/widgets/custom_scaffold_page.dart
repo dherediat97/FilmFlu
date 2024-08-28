@@ -60,6 +60,8 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
       },
       builder: (context, state) {
         return Scaffold(
+            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+            floatingActionButton: widget.floatingActionButton,
             appBar: !widget.fullScreenMode
                 ? PreferredSize(
                     preferredSize: const Size.fromHeight(70),

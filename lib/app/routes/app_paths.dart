@@ -9,4 +9,5 @@ class AppRoutePaths {
   static String personDetailsRoute = '/personDetails';
 
   static String settingsRoute = '/settings';
+  static String horusVisionRoute = '/horusVision';
 }
