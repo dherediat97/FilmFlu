@@ -51,18 +51,19 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
               padding: const EdgeInsets.all(4.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  FloatingActionButton.extended(
-                    foregroundColor: AppColors.primaryColor,
-                    backgroundColor: AppColors.backgroundColorLight,
-                    onPressed: () {
-                      // context.go(AppRoutePaths.horusVisionRoute);
-                    },
-                    icon: const Icon(Icons.local_movies_outlined),
-                    label: Text(context.localizations.buy_tickets),
-                  ),
+                  if (mediaTypeSelected == MediaType.movie)
+                    FloatingActionButton.extended(
+                      foregroundColor: AppColors.primaryColor,
+                      backgroundColor: AppColors.backgroundColorLight,
+                      onPressed: () {
+                        // context.go(AppRoutePaths.horusVisionRoute);
+                      },
+                      icon: const Icon(Icons.local_movies_outlined),
+                      label: Text(context.localizations.buy_tickets),
+                    ),
                   const SizedBox(
                     height: 20,
                   ),
