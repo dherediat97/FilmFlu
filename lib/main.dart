@@ -22,7 +22,6 @@ GetIt getIt = GetIt.instance;
 
 void main() async {
   await initDi();
-  //await horus_vision.initDi();
   WidgetsFlutterBinding.ensureInitialized();
 
   runApp(FilmFlu());

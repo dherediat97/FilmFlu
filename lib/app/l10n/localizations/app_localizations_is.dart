@@ -124,4 +124,7 @@ class AppLocalizationsIs extends AppLocalizations {
 
   @override
   String get percentange_vote => '% líkar við';
+
+  @override
+  String get buy_tickets => 'Reserva entradas';
 }
