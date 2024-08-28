@@ -20,7 +20,7 @@ jobs:
       - run: flutter gen-l10n
 
       - name: Analyze project source
-       run: flutter analyze
+        run: flutter analyze
 
       - name: Run tests
         run: flutter test
