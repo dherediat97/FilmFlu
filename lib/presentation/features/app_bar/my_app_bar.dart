@@ -39,7 +39,11 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             fit: BoxFit.fitHeight,
           ),
           onPressed: () {
-            if (context.canPop()) context.pop();
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go(AppRoutePaths.moviesRoute);
+            }
           }),
       actions: [
         Padding(
