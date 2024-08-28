@@ -13,7 +13,7 @@ class AppFonts {
   );
 }
 
-TextTheme createTextTheme(bool isLightMode) {
+TextTheme createTextTheme({required bool isLightMode}) {
   TextTheme textTheme = TextTheme(
     headlineLarge: TextStyle(
       fontFamily: AppFonts.primaryFont,

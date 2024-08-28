@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/features/media_list/bloc/media_list_bloc.dart';
 import 'package:mockito/annotations.dart';
 import 'package:test/scaffolding.dart';
@@ -11,7 +12,7 @@ import 'media_list_bloc_test.mocks.dart';
 void main() {
   late MockMediaListBloc mockBlock;
 
-  setUp(
+  setUpAll(
     () {
       mockBlock = MockMediaListBloc();
     },
@@ -26,13 +27,18 @@ void main() {
         expect: () => [],
       );
 
-      // blocTest(
-      //   'Given HomeScreenBloc when load the bloc then return the expected result',
-      //   build: () => mockBlock,
-      //   act: (bloc) => bloc.add(const MediaListEvent.getMediaDataByGenre(
-      //       MediaType.movie, 0, 'null')),
-      //   expect: () => [],
-      // );
+      blocTest(
+        'Given HomeScreenBloc when load the bloc then return the expected result',
+        build: () => mockBlock,
+        act: (bloc) => bloc.add(
+          const MediaListEvent.getMediaDataByGenre(
+            MediaType.movie,
+            333,
+            'es-ES',
+          ),
+        ),
+        expect: () => [],
+      );
     },
   );
 }

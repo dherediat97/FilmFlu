@@ -12,7 +12,7 @@ class AppState with _$AppState {
     return AppState(
       locale: const Locale('es'),
       themeMode: ThemeMode.dark,
-      theme: AppTheme(createTextTheme(false)),
+      theme: AppTheme(createTextTheme(isLightMode: false)),
     );
   }
 }

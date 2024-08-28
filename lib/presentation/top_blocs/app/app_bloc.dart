@@ -54,7 +54,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     ThemeMode userThemeModeChosen =
         !isLightMode ? ThemeMode.dark : ThemeMode.light;
 
-    TextTheme textTheme = createTextTheme(isLightMode);
+    TextTheme textTheme = createTextTheme(isLightMode: isLightMode);
 
     AppTheme theme = AppTheme(textTheme);
 

@@ -4,6 +4,7 @@ import 'package:film_flu/presentation/features/person_details/bloc/person_detail
 import 'package:mockito/annotations.dart';
 import 'package:test/scaffolding.dart';
 
+import '../../../instruments/person_instruments.dart';
 import 'person_detail_bloc_test.mocks.dart';
 
 @GenerateNiceMocks([
@@ -12,7 +13,7 @@ import 'person_detail_bloc_test.mocks.dart';
 void main() {
   late MockPersonDetailsBloc mockBlock;
 
-  setUp(
+  setUpAll(
     () {
       mockBlock = MockPersonDetailsBloc();
     },
@@ -30,7 +31,11 @@ void main() {
       blocTest(
         'Given PersonDetailBloc when load the bloc then return the expected result',
         build: () => mockBlock,
-        act: (bloc) => bloc.add(const PersonDetailEvent.getPersonData('111')),
+        act: (bloc) => bloc.add(
+          const PersonDetailEvent.getPersonData(
+            PersonDetailIntruments.personIdMocked,
+          ),
+        ),
         expect: () => [
           PersonDetailsState.initial().copyWith(
             creditsAsActor: [],
