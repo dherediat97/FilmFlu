@@ -21,7 +21,10 @@ class DefaultImageWidget extends StatelessWidget {
           image: DecorationImage(
             image: imageProvider,
             fit: BoxFit.cover,
-            opacity: 0.6,
+            colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.6),
+              BlendMode.dstATop,
+            ),
           ),
         ),
       ),
