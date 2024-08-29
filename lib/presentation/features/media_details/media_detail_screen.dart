@@ -4,6 +4,7 @@ import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dar
 import 'package:film_flu/presentation/features/media_details/bloc/media_detail_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/detail_tab_media_item.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -81,9 +82,25 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                                     .add(const MediaDetailEvent.openTrailer());
                                 _trailerController = initTrailerController();
                                 if (state.trailerId.isNotEmpty) {
-                                  _trailerController?.loadVideoById(
-                                    videoId: state.trailerId.toString(),
-                                  );
+                                  if (state.mediaItem!.videos!.results.length ==
+                                      1) {
+                                    _trailerController?.loadVideoById(
+                                      videoId: state.trailerId,
+                                    );
+                                  } else {
+                                    _trailerController?.loadPlaylist(
+                                      list: state.mediaItem!.videos!.results
+                                          .map(
+                                            (e) => e.key,
+                                          )
+                                          .toList(),
+                                      index: state.mediaItem!.videos!.results
+                                          .indexWhere(
+                                        (element) =>
+                                            element.key == state.trailerId,
+                                      ),
+                                    );
+                                  }
                                 }
                                 return AlertDialog.adaptive(
                                   icon: Row(
@@ -102,18 +119,34 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
                                     height: MediaQuery.of(context).size.height,
                                     width: MediaQuery.of(context).size.width,
                                     child: YoutubePlayerScaffold(
-                                      aspectRatio: 100.0,
                                       controller: _trailerController!,
                                       builder: (context, player) {
-                                        return player;
+                                        return LayoutBuilder(
+                                          builder: (context, constraints) {
+                                            if (kIsWeb &&
+                                                constraints.maxWidth > 750) {
+                                              return Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Expanded(
+                                                    flex: 10,
+                                                    child: player,
+                                                  ),
+                                                ],
+                                              );
+                                            }
+
+                                            return player;
+                                          },
+                                        );
                                       },
                                     ),
                                   ),
                                 );
                               },
                             );
-                          },
-                        )
+                          })
                       : Container(),
                 ],
               ),
@@ -131,15 +164,11 @@ class _MovieDetailsPageState extends State<MediaItemScreenDetails> {
     return YoutubePlayerController(
       params: const YoutubePlayerParams(
         showControls: false,
-        showVideoAnnotations: false,
         captionLanguage: 'es',
         enableKeyboard: false,
         interfaceLanguage: 'es',
-        strictRelatedVideos: true,
         loop: true,
-        pointerEvents: PointerEvents.none,
         playsInline: true,
-        enableCaption: false,
         showFullscreenButton: true,
       ),
     );

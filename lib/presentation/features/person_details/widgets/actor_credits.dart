@@ -42,7 +42,7 @@ class ActorCreditsWidget extends StatelessWidget {
             onTap: () {
               AppConstants.personId = actor.id;
               context.push(
-                '${AppRoutePaths.personDetailsRoute}/${actor.id}',
+                '${AppRoutePaths.moviesRoute}/${actor.id}',
               );
             },
             title: ClipRRect(
