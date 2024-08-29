@@ -4,6 +4,7 @@ import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/core/utils/util_date.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
+import 'package:film_flu/presentation/features/media_details/constants/media_detail_constants.dart';
 import 'package:film_flu/presentation/widgets/default_image_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -24,7 +25,7 @@ class BackgroundImageMediaItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return mediaItem != null
         ? SizedBox(
-            height: 600,
+            height: MediaDetailConstants.mediaBackgroundHeight,
             child: Stack(children: [
               DefaultImageWidget(
                 imageUrl:
@@ -42,8 +43,10 @@ class BackgroundImageMediaItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Image.network(
-                            width: 100,
-                            height: 100,
+                            width: MediaDetailConstants
+                                .mediaProductionCompanySize.width,
+                            height: MediaDetailConstants
+                                .mediaProductionCompanySize.height,
                             fit: BoxFit.contain,
                             alignment: Alignment.topCenter,
                             '${AppUrls.providerImgBaseUrl}$productionCompanyImage',
