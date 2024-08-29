@@ -59,7 +59,7 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
           state.copyWith(
             uiState: const UiState.success(),
             mediaItem: movie,
-            trailerId: _getTrailerId(movie),
+            trailerId: _getFirstTrailerId(movie),
             productionCompanyImage:
                 movie.productionCompanies?.firstOrNull?.logoPath ?? '',
             movieName: movie.title?.isNotEmpty == true
@@ -162,7 +162,7 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
     );
   }
 
-  String _getTrailerId(MediaItemEntity mediaItemEntity) {
+  String _getFirstTrailerId(MediaItemEntity mediaItemEntity) {
     try {
       return mediaItemEntity.videos!.results
           .firstWhere((element) =>

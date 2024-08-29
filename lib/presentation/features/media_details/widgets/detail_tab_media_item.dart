@@ -94,7 +94,7 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
                       ),
               ),
               Padding(
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.all(12),
                 child: DefaultTabController(
                   length: 4,
                   child: Column(

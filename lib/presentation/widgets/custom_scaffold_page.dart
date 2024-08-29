@@ -101,7 +101,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
                     },
                   )
                 : null,
-            body: widget.routeName == AppRoutePaths.homeRoute
+            body: widget.routeName!.contains(AppRoutePaths.homeRoute)
                 ? PageView(
                     controller: _pageController,
                     physics: const NeverScrollableScrollPhysics(),

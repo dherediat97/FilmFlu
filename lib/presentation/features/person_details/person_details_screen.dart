@@ -70,16 +70,21 @@ class _PersonDetailsPagePage extends State<PersonDetailsPage>
                         SliverPersistentHeader(
                           floating: true,
                           delegate: SliverAppBarDelegate(
-                            TabBar(controller: _tabController, tabs: [
-                              Tab(
-                                icon: const Icon(Icons.movie),
-                                text: context.localizations.character_cast,
-                              ),
-                              Tab(
-                                icon: const Icon(Icons.movie),
-                                text: context.localizations.production_cast,
-                              )
-                            ]),
+                            TabBar(
+                              dividerColor: Colors.transparent,
+                              controller: _tabController,
+                              indicatorSize: TabBarIndicatorSize.label,
+                              tabs: [
+                                Tab(
+                                  icon: const Icon(Icons.movie),
+                                  text: context.localizations.character_cast,
+                                ),
+                                Tab(
+                                  icon: const Icon(Icons.movie),
+                                  text: context.localizations.production_cast,
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ];
