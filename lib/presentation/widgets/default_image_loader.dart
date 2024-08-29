@@ -13,7 +13,6 @@ class DefaultImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: imageUrl!,
-      fit: BoxFit.cover,
       cacheKey: imageUrl,
       errorWidget: (context, url, error) => const Icon(Icons.error),
       imageBuilder: (context, imageProvider) => Container(
@@ -22,7 +21,7 @@ class DefaultImageWidget extends StatelessWidget {
           image: DecorationImage(
             image: imageProvider,
             fit: BoxFit.cover,
-            opacity: 0.4,
+            opacity: 0.6,
           ),
         ),
       ),

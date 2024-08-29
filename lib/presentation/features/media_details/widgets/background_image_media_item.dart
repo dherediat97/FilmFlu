@@ -24,7 +24,7 @@ class BackgroundImageMediaItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return mediaItem != null
         ? SizedBox(
-            height: MediaQuery.of(context).size.height / 2,
+            height: 600,
             child: Stack(children: [
               DefaultImageWidget(
                 imageUrl:
