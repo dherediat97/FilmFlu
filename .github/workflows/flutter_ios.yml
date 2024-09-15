@@ -40,7 +40,13 @@ jobs:
           security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
           # import certificate to keychain
-          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          echo $SIGNING_CERTIFICATE_P12_DATA | base64 --decode > signingCertificate.p12
+          security import signingCertificate.p12 \
+            -f pkcs12 \
+            -k build.keychain \
+            -P $SIGNING_CERTIFICATE_PASSWORD \
+            -T /usr/bin/codesign
+          rm signingCertificate.p12
           security list-keychain -d user -s $KEYCHAIN_PATH
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
