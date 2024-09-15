@@ -15,7 +15,10 @@ jobs:
         - uses: actions/setup-java@v4
           with:
             distribution: 'zulu'
-            cache: true
+            cache: 'gradle'
+            cache-dependency-path: | # optional
+              android/*.gradle*
+              android/**/gradle-wrapper.properties
             java-version: '17'
         - uses: subosito/flutter-action@v2
           with:
