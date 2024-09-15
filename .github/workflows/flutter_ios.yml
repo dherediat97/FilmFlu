@@ -9,12 +9,12 @@ permissions:
 
 
 concurrency:
-    group: "pages"
     cancel-in-progress: false
 
 jobs:
   build:
     runs-on: macos-latest
+    environment: stage
 
     steps:
       - name: Checkout repository
@@ -45,8 +45,7 @@ jobs:
             -f pkcs12 \
             -k build.keychain \
             -P $SIGNING_CERTIFICATE_PASSWORD \
-            -T /usr/bin/codesign
-          rm signingCertificate.p12
+            -T /usr/bin/codesig
           security list-keychain -d user -s $KEYCHAIN_PATH
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
