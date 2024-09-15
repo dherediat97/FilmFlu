@@ -84,18 +84,3 @@ jobs:
         run: |
           security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
           rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
-        # Retrieve ipa file from GitHub artifacts
-      - uses: actions/checkout@v4
-      - name: Get release-ipa from artifacts
-        uses: actions/download-artifact@v2
-        with:
-            name: release-ipa
-    
-    # Upload ipa file to Firebase
-    # - name: Upload artifact to Firebase App Distribution
-    # uses: wzieba/Firebase-Distribution-Github-Action@v1
-    # with:
-    #   appId: ${{secrets.FIREBASE_IOS_APP_ID}}
-    #   token: ${{secrets.FIREBASE_TOKEN}}
-    #   groups: ios-developers
-    #   file: {film_flu_app}.ipa
