@@ -1,7 +1,17 @@
 
 name: "[DEV] Build and Publish iOS"
 on: workflow_dispatch
-    
+
+permissions:
+    contents: read
+    pages: write
+    id-token: write
+
+
+concurrency:
+    group: "pages"
+    cancel-in-progress: false
+
 jobs:
   build:
     runs-on: macos-latest
@@ -74,26 +84,18 @@ jobs:
         run: |
           security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
           rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
-release:
-    name: Release ipa to Firebase
-    needs: [ build ]
-    runs-on: ubuntu-latest
-
-    steps:
+        # Retrieve ipa file from GitHub artifacts
+      - uses: actions/checkout@v4
+      - name: Get release-ipa from artifacts
+        uses: actions/download-artifact@v2
+        with:
+            name: release-ipa
     
-    # Retrieve ipa file from GitHub artifacts
-    - uses: actions/checkout@v4
-    - name: Get release-ipa from artifacts
-      uses: actions/download-artifact@v2
-      with:
-        name: release-ipa
-
-    # Upload ipa file to Fiebase
+    # Upload ipa file to Firebase
     # - name: Upload artifact to Firebase App Distribution
-      # uses: wzieba/Firebase-Distribution-Github-Action@v1
-      # with:
-      #   appId: ${{secrets.FIREBASE_IOS_APP_ID}}
-      #   token: ${{secrets.FIREBASE_TOKEN}}
-      #   groups: ios-developers
-      #   file: {film_flu_app}.ipa
-           
+    # uses: wzieba/Firebase-Distribution-Github-Action@v1
+    # with:
+    #   appId: ${{secrets.FIREBASE_IOS_APP_ID}}
+    #   token: ${{secrets.FIREBASE_TOKEN}}
+    #   groups: ios-developers
+    #   file: {film_flu_app}.ipa
