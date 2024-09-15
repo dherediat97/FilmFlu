@@ -48,7 +48,7 @@ jobs:
           
         # Install flutter
       - name: Flutter get
-      - uses: subosito/flutter-action@v2
+        uses: subosito/flutter-action@v2
         with:
             channel: stable
             cache: true
@@ -75,7 +75,7 @@ jobs:
       - run: flutter gen-l10n
 
       - name: Building IPA
-      - run: flutter build ipa --release --export-options-plist=ios/Runner/ExportOptions.plist
+        run: flutter build ipa --release --export-options-plist=ios/Runner/ExportOptions.plist
       
         # Collect the file and upload as artifact         
       - name: collect ipa artifacts
