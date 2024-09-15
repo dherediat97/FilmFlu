@@ -10,6 +10,7 @@ permissions:
 
 concurrency:
     cancel-in-progress: false
+    group: 'ios'
 
 jobs:
   build:
