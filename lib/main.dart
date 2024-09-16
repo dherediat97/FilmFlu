@@ -21,8 +21,8 @@ import 'package:go_router/go_router.dart';
 GetIt getIt = GetIt.instance;
 
 void main() async {
-  await initDi();
   WidgetsFlutterBinding.ensureInitialized();
+  await initDi();
 
   runApp(FilmFlu());
 }
