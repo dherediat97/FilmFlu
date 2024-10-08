@@ -7,13 +7,15 @@ import 'package:film_flu/presentation/features/media_details/media_detail_contro
 import 'package:film_flu/presentation/features/person_details/person_details_controller.dart';
 import 'package:film_flu/presentation/features/settings/settings_screen.dart';
 import 'package:film_flu/presentation/features/splash/splash_controller.dart';
+import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:horusvision/presentation/features/horusvision.dart';
 
 List<GoRoute> appRoutes = [
   GoRoute(
     path: '/',
-    builder: (context, state) => const SplashController(),
+    builder: (context, state) =>
+        kIsWeb ? const HomeScreen() : const SplashController(),
     routes: [
       GoRoute(
         path: 'main',
