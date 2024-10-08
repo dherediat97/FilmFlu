@@ -79,7 +79,7 @@ dev_dependencies:
   # For test all of bloc lifecycle
   # https://pub.dev/packages/bloc_test
   bloc_test: ^9.1.7
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.14.1
   test: ^1.25.2
 
 flutter:
