@@ -1,10 +1,10 @@
     /**
-    * This function creates a delay of 500 milliseconds.
+    * This function creates a delay of 100 milliseconds.
     *
     * @returns {Promise} A Promise that resolves after the delay.
     */
     function addDelay() {
-        return new Promise((resolve) => setTimeout(resolve, 500));
+        return new Promise((resolve) => setTimeout(resolve, 100));
     }
 
     // Get the progress and progressBar elements from the DOM
@@ -16,12 +16,19 @@
 
     {{flutter_js}}
 
-    progress.style.width = `33%`;
-
     {{flutter_build_config}}
+
+    const useCanvasKit = true;
+
+    const config = {
+        renderer: useCanvasKit ? "canvaskit" : "skwasm",
+    };
+
+    progress.style.width = `33%`;
 
     // Load the Flutter engine
     _flutter.loader.load({
+        config: config,
         onEntrypointLoaded: async function(engineInitializer) {
             // Update the progress bar to 66% after the engine is loaded
             progressBar.style.width = `66%`;
@@ -31,9 +38,6 @@
     
             // Set progress to 100% before adding a delay.
             progressBar.style.width = `100%`;
-            
-            // Add a delay before running the app to create a smooth crossfade effect.
-            await addDelay();
             
             // Hide the progress bar by reducing its opacity.
             // This will create the fade out effect by animating the opacity.
