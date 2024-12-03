@@ -4,7 +4,7 @@
     * @returns {Promise} A Promise that resolves after the delay.
     */
     function addDelay() {
-        return new Promise((resolve) => setTimeout(resolve, 100));
+        return new Promise((resolve) => setTimeout(resolve, 500));
     }
 
     // Get the progress and progressBar elements from the DOM
@@ -18,17 +18,9 @@
 
     {{flutter_build_config}}
 
-    const useCanvasKit = true;
-
-    const config = {
-        renderer: useCanvasKit ? "canvaskit" : "skwasm",
-    };
-
-    progress.style.width = `33%`;
 
     // Load the Flutter engine
     _flutter.loader.load({
-        config: config,
         onEntrypointLoaded: async function(engineInitializer) {
             // Update the progress bar to 66% after the engine is loaded
             progressBar.style.width = `66%`;
