@@ -15,10 +15,20 @@ jobs:
         - uses: actions/setup-java@v4
           with:
             distribution: 'zulu'
+            cache: 'gradle'
+            cache-dependency-path: | # optional
+              android/*.gradle*
+              android/**/gradle-wrapper.properties
             java-version: '17'
         - uses: subosito/flutter-action@v2
           with:
-            channel: 'stable'
+            channel: stable
+            cache: true
+            # optional parameters follow
+            cache-key: "flutter-:os:-:channel:-:version:-:arch:-:hash:" # change this to force refresh cache
+            cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # change this to specify the cache path
+            pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:-:hash:" # change this to force refresh cache of dart pub get dependencies
+            pub-cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # change this to specify the cache path
         - run: flutter clean
         - run: flutter pub get
         - name: Write TMDB_KEY to .env
