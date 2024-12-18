@@ -3,15 +3,13 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i4;
 
 import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart'
     as _i2;
-import 'package:film_flu/presentation/features/media_list/bloc/media_list_bloc.dart'
-    as _i3;
 import 'package:film_flu/presentation/features/person_details/bloc/person_details_bloc.dart'
-    as _i4;
-import 'package:flutter_bloc/flutter_bloc.dart' as _i6;
+    as _i3;
+import 'package:flutter_bloc/flutter_bloc.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -37,20 +35,9 @@ class _FakeHomeState_0 extends _i1.SmartFake implements _i2.HomeState {
         );
 }
 
-class _FakeMediaListState_1 extends _i1.SmartFake
-    implements _i3.MediaListState {
-  _FakeMediaListState_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakePersonDetailsState_2 extends _i1.SmartFake
-    implements _i4.PersonDetailsState {
-  _FakePersonDetailsState_2(
+class _FakePersonDetailsState_1 extends _i1.SmartFake
+    implements _i3.PersonDetailsState {
+  _FakePersonDetailsState_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -77,11 +64,11 @@ class MockHomeBloc extends _i1.Mock implements _i2.HomeBloc {
       ) as _i2.HomeState);
 
   @override
-  _i5.Stream<_i2.HomeState> get stream => (super.noSuchMethod(
+  _i4.Stream<_i2.HomeState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i5.Stream<_i2.HomeState>.empty(),
-        returnValueForMissingStub: _i5.Stream<_i2.HomeState>.empty(),
-      ) as _i5.Stream<_i2.HomeState>);
+        returnValue: _i4.Stream<_i2.HomeState>.empty(),
+        returnValueForMissingStub: _i4.Stream<_i2.HomeState>.empty(),
+      ) as _i4.Stream<_i2.HomeState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -119,8 +106,8 @@ class MockHomeBloc extends _i1.Mock implements _i2.HomeBloc {
 
   @override
   void on<E extends _i2.HomeEvent>(
-    _i6.EventHandler<E, _i2.HomeState>? handler, {
-    _i6.EventTransformer<E>? transformer,
+    _i5.EventHandler<E, _i2.HomeState>? handler, {
+    _i5.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -132,7 +119,7 @@ class MockHomeBloc extends _i1.Mock implements _i2.HomeBloc {
       );
 
   @override
-  void onTransition(_i6.Transition<_i2.HomeEvent, _i2.HomeState>? transition) =>
+  void onTransition(_i5.Transition<_i2.HomeEvent, _i2.HomeState>? transition) =>
       super.noSuchMethod(
         Invocation.method(
           #onTransition,
@@ -142,152 +129,17 @@ class MockHomeBloc extends _i1.Mock implements _i2.HomeBloc {
       );
 
   @override
-  _i5.Future<void> close() => (super.noSuchMethod(
+  _i4.Future<void> close() => (super.noSuchMethod(
         Invocation.method(
           #close,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
-  void onChange(_i6.Change<_i2.HomeState>? change) => super.noSuchMethod(
-        Invocation.method(
-          #onChange,
-          [change],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void addError(
-    Object? error, [
-    StackTrace? stackTrace,
-  ]) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #addError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onError(
-    Object? error,
-    StackTrace? stackTrace,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-}
-
-/// A class which mocks [MediaListBloc].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockMediaListBloc extends _i1.Mock implements _i3.MediaListBloc {
-  @override
-  _i3.MediaListState get state => (super.noSuchMethod(
-        Invocation.getter(#state),
-        returnValue: _FakeMediaListState_1(
-          this,
-          Invocation.getter(#state),
-        ),
-        returnValueForMissingStub: _FakeMediaListState_1(
-          this,
-          Invocation.getter(#state),
-        ),
-      ) as _i3.MediaListState);
-
-  @override
-  _i5.Stream<_i3.MediaListState> get stream => (super.noSuchMethod(
-        Invocation.getter(#stream),
-        returnValue: _i5.Stream<_i3.MediaListState>.empty(),
-        returnValueForMissingStub: _i5.Stream<_i3.MediaListState>.empty(),
-      ) as _i5.Stream<_i3.MediaListState>);
-
-  @override
-  bool get isClosed => (super.noSuchMethod(
-        Invocation.getter(#isClosed),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  void add(_i3.MediaListEvent? event) => super.noSuchMethod(
-        Invocation.method(
-          #add,
-          [event],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onEvent(_i3.MediaListEvent? event) => super.noSuchMethod(
-        Invocation.method(
-          #onEvent,
-          [event],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void emit(_i3.MediaListState? state) => super.noSuchMethod(
-        Invocation.method(
-          #emit,
-          [state],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void on<E extends _i3.MediaListEvent>(
-    _i6.EventHandler<E, _i3.MediaListState>? handler, {
-    _i6.EventTransformer<E>? transformer,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #on,
-          [handler],
-          {#transformer: transformer},
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onTransition(
-          _i6.Transition<_i3.MediaListEvent, _i3.MediaListState>? transition) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onTransition,
-          [transition],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  _i5.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
-
-  @override
-  void onChange(_i6.Change<_i3.MediaListState>? change) => super.noSuchMethod(
+  void onChange(_i5.Change<_i2.HomeState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -331,26 +183,26 @@ class MockMediaListBloc extends _i1.Mock implements _i3.MediaListBloc {
 /// A class which mocks [PersonDetailsBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPersonDetailsBloc extends _i1.Mock implements _i4.PersonDetailsBloc {
+class MockPersonDetailsBloc extends _i1.Mock implements _i3.PersonDetailsBloc {
   @override
-  _i4.PersonDetailsState get state => (super.noSuchMethod(
+  _i3.PersonDetailsState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _FakePersonDetailsState_2(
+        returnValue: _FakePersonDetailsState_1(
           this,
           Invocation.getter(#state),
         ),
-        returnValueForMissingStub: _FakePersonDetailsState_2(
+        returnValueForMissingStub: _FakePersonDetailsState_1(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i4.PersonDetailsState);
+      ) as _i3.PersonDetailsState);
 
   @override
-  _i5.Stream<_i4.PersonDetailsState> get stream => (super.noSuchMethod(
+  _i4.Stream<_i3.PersonDetailsState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i5.Stream<_i4.PersonDetailsState>.empty(),
-        returnValueForMissingStub: _i5.Stream<_i4.PersonDetailsState>.empty(),
-      ) as _i5.Stream<_i4.PersonDetailsState>);
+        returnValue: _i4.Stream<_i3.PersonDetailsState>.empty(),
+        returnValueForMissingStub: _i4.Stream<_i3.PersonDetailsState>.empty(),
+      ) as _i4.Stream<_i3.PersonDetailsState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -360,7 +212,7 @@ class MockPersonDetailsBloc extends _i1.Mock implements _i4.PersonDetailsBloc {
       ) as bool);
 
   @override
-  void add(_i4.PersonDetailEvent? event) => super.noSuchMethod(
+  void add(_i3.PersonDetailEvent? event) => super.noSuchMethod(
         Invocation.method(
           #add,
           [event],
@@ -369,7 +221,7 @@ class MockPersonDetailsBloc extends _i1.Mock implements _i4.PersonDetailsBloc {
       );
 
   @override
-  void onEvent(_i4.PersonDetailEvent? event) => super.noSuchMethod(
+  void onEvent(_i3.PersonDetailEvent? event) => super.noSuchMethod(
         Invocation.method(
           #onEvent,
           [event],
@@ -378,7 +230,7 @@ class MockPersonDetailsBloc extends _i1.Mock implements _i4.PersonDetailsBloc {
       );
 
   @override
-  void emit(_i4.PersonDetailsState? state) => super.noSuchMethod(
+  void emit(_i3.PersonDetailsState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -387,9 +239,9 @@ class MockPersonDetailsBloc extends _i1.Mock implements _i4.PersonDetailsBloc {
       );
 
   @override
-  void on<E extends _i4.PersonDetailEvent>(
-    _i6.EventHandler<E, _i4.PersonDetailsState>? handler, {
-    _i6.EventTransformer<E>? transformer,
+  void on<E extends _i3.PersonDetailEvent>(
+    _i5.EventHandler<E, _i3.PersonDetailsState>? handler, {
+    _i5.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -402,7 +254,7 @@ class MockPersonDetailsBloc extends _i1.Mock implements _i4.PersonDetailsBloc {
 
   @override
   void onTransition(
-          _i6.Transition<_i4.PersonDetailEvent, _i4.PersonDetailsState>?
+          _i5.Transition<_i3.PersonDetailEvent, _i3.PersonDetailsState>?
               transition) =>
       super.noSuchMethod(
         Invocation.method(
@@ -413,17 +265,17 @@ class MockPersonDetailsBloc extends _i1.Mock implements _i4.PersonDetailsBloc {
       );
 
   @override
-  _i5.Future<void> close() => (super.noSuchMethod(
+  _i4.Future<void> close() => (super.noSuchMethod(
         Invocation.method(
           #close,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
-  void onChange(_i6.Change<_i4.PersonDetailsState>? change) =>
+  void onChange(_i5.Change<_i3.PersonDetailsState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,

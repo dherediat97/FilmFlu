@@ -1,4 +1,5 @@
 import 'package:film_flu/core/entities/pagination.dart';
+import 'package:film_flu/data/datasources/remote/api/network/dio_client.dart';
 import 'package:film_flu/data/models/credits_media_remote_entity.dart';
 import 'package:film_flu/data/models/genre_result_remote_entity.dart';
 import 'package:film_flu/data/models/media_item_remote_entity.dart';
@@ -7,16 +8,23 @@ import 'package:film_flu/data/models/person_remote_entity.dart';
 import 'package:film_flu/data/models/review_remote_entity.dart';
 import 'package:film_flu/domain/models/language_entity.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'filmflu_api.g.dart';
 
+@riverpod
+FilmFluApi filmfluApiClient(Ref ref) => FilmFluApi(
+      ref.watch(dioProvider),
+    );
+
 @RestApi()
 abstract class FilmFluApi {
-  factory FilmFluApi(Dio dio, {String? baseUrl}) = _FilmFluApi;
+  factory FilmFluApi(Dio dio) = _FilmFluApi;
 
   @GET('/discover/{mediaType}')
-  Future<Pagination<MediaItemRemoteEntity>> fetchMediaData({
+  Future<List<MediaItemRemoteEntity>> fetchMediaData({
     @Path('mediaType') required String mediaType,
     @Query('language') String language = 'es-ES',
     @Query('sort_by') String sortBy = 'popularity.desc',
@@ -40,10 +48,10 @@ abstract class FilmFluApi {
   });
 
   @GET('/movie/now_playing')
-  Future<Pagination<MediaItemRemoteEntity>> fetchMovieDay();
+  Future<MediaItemRemoteEntity> fetchMovieDay();
 
   @GET('/tv/on_the_air')
-  Future<Pagination<MediaItemRemoteEntity>> fetchSerieDay();
+  Future<MediaItemRemoteEntity> fetchSerieDay();
 
   @GET('/{mediaType}/{mediaTypeId}/credits')
   Future<CreditsMediaRemoteEntity> fetchCredits({
@@ -66,7 +74,7 @@ abstract class FilmFluApi {
   });
 
   @GET('/search/{mediaType}')
-  Future<Pagination<MediaItemRemoteEntity>> searchMovie({
+  Future<List<MediaItemRemoteEntity>> searchMovie({
     @Path('mediaType') required String mediaType,
     @Query('language') String language = 'es-ES',
     @Query('query') required String query,

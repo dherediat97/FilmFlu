@@ -35,15 +35,8 @@ class AppLocalDataSource implements AppLocalDataSourceContract {
   }
 
   @override
-  Future<void> setThemeMode(String value) async {
-    if (await getThemeMode() != ThemeMode.system.name) {
-      await sharedPreferencesInstance.setString(
-          AppConstants.themeModeKey, value);
-    } else {
-      await sharedPreferencesInstance.setString(
-          AppConstants.themeModeKey, ThemeMode.system.toString());
-    }
-
+  Future<void> setDarkMode(bool value) async {
+    await sharedPreferencesInstance.setBool(AppConstants.themeModeKey, value);
     return;
   }
 }

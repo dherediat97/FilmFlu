@@ -10,17 +10,6 @@ void _uiModulesInit() {
   );
 
   uiModulesDi.registerFactory(
-    () => MediaListBloc(
-      mediaListRepository: uiModulesDi(),
-    ),
-  );
-
-  uiModulesDi.registerFactory(
-    () => MediaDetailBloc(
-      mediaRepository: uiModulesDi(),
-    ),
-  );
-  uiModulesDi.registerFactory(
     () => PersonDetailsBloc(
       repositoryContract: uiModulesDi(),
     ),

@@ -5,5 +5,5 @@ abstract class AppLocalDataSourceContract {
 
   Future<String> getThemeMode();
 
-  Future<void> setThemeMode(String value);
+  Future<void> setDarkMode(bool value);
 }

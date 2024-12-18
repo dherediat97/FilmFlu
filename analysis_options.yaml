@@ -62,3 +62,4 @@ dart_code_metrics:
     - always-remove-listener
     - avoid-wrapping-in-padding
     - avoid-expanded-as-spacer
+    

@@ -51,18 +51,15 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     Emitter<AppState> emit,
     bool isLightMode,
   ) async {
-    ThemeMode userThemeModeChosen =
-        !isLightMode ? ThemeMode.dark : ThemeMode.light;
-
     TextTheme textTheme = createTextTheme(isLightMode: isLightMode);
 
     AppTheme theme = AppTheme(textTheme);
 
     emit(state.copyWith(
-      themeMode: userThemeModeChosen,
+      isDarkMode: isLightMode,
       theme: theme,
     ));
 
-    await _appLocalDataSourceContract.setThemeMode(userThemeModeChosen.name);
+    await _appLocalDataSourceContract.setDarkMode(isLightMode);
   }
 }

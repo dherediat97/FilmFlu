@@ -24,7 +24,7 @@ Future<void> pumpApp({
   when(appBloc.state).thenReturn(
     AppState.initial().copyWith(
       locale: const Locale('es'),
-      themeMode: ThemeMode.dark,
+      isDarkMode: true,
       theme: AppTheme(createTextTheme(isLightMode: false)),
     ),
   );

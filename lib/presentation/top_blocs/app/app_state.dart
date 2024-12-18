@@ -4,14 +4,14 @@ part of 'app_bloc.dart';
 class AppState with _$AppState {
   const factory AppState({
     required Locale locale,
-    required ThemeMode themeMode,
+    required bool isDarkMode,
     required AppTheme theme,
   }) = _AppState;
 
   factory AppState.initial() {
     return AppState(
       locale: const Locale('es'),
-      themeMode: ThemeMode.dark,
+      isDarkMode: true,
       theme: AppTheme(createTextTheme(isLightMode: false)),
     );
   }

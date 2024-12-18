@@ -4,7 +4,7 @@ import 'package:film_flu/app/types/result.dart';
 import 'package:film_flu/data/models/person_remote_entity.dart';
 import 'package:film_flu/data/repositories/remote/person_remote_data_source_contract.dart';
 import 'package:film_flu/domain/models/person_entity.dart';
-import 'package:film_flu/domain/repository_contracts/person_repository_contract.dart';
+import 'package:film_flu/domain/repository/person_repository_contract.dart';
 
 class PersonRepository implements PersonRepositoryContract {
   final PersonRemoteDataSourceContract _personRemoteDataSourceContract;

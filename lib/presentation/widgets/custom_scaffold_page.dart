@@ -65,7 +65,7 @@ class _ScaffoldPageState extends State<ScaffoldPage> {
             appBar: !widget.fullScreenMode
                 ? PreferredSize(
                     preferredSize: const Size.fromHeight(70),
-                    child: MyAppBar(
+                    child: TopAppBar(
                       mediaTypeSelected: state.mediaTypeSelected,
                     ))
                 : null,

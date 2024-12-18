@@ -5,17 +5,19 @@ import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/features/search/bloc/search_bloc.dart';
+import 'package:film_flu/presentation/notifiers/app_notifier.dart';
 import 'package:film_flu/presentation/top_blocs/app/app_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MyAppBar({
+class TopAppBar extends ConsumerStatefulWidget {
+  const TopAppBar({
     super.key,
     this.mediaTypeSelected = MediaType.movie,
   });
@@ -23,9 +25,16 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final MediaType? mediaTypeSelected;
 
   @override
+  ConsumerState createState() => _TopAppBarState();
+}
+
+class _TopAppBarState extends ConsumerState<TopAppBar> {
+  @override
   Widget build(BuildContext context) {
+    final appState = ref.watch(appProvider);
+
     return AppBar(
-      title: titleScaffold(context, mediaTypeSelected),
+      title: titleScaffold(context, widget.mediaTypeSelected),
       automaticallyImplyLeading: true,
       titleTextStyle: Theme.of(context).textTheme.headlineLarge,
       leadingWidth: 120,
@@ -49,18 +58,17 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(
-            children: _appBarActions(context),
+            children: _appBarActions(appState),
           ),
         )
       ],
     );
   }
 
-  List<Widget> _appBarActions(BuildContext context) {
+  List<Widget> _appBarActions(AppState appState) {
     List<Widget> actions = [];
 
-    bool isLightMode =
-        ThemeMode.dark == context.read<AppBloc>().state.themeMode;
+    bool isLightMode = appState.isDarkMode;
 
     // actions.add(
     //   IconButton(
@@ -80,7 +88,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           isLightMode ? Icons.light_mode : Icons.dark_mode,
         ),
         onPressed: () {
-          context.read<AppBloc>().add(AppEvent.toogleTheme(isLightMode));
+          ref.read(appProvider.notifier).toggle();
         },
       ),
     );
@@ -169,7 +177,4 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       return Container();
     }
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kBottomNavigationBarHeight);
 }

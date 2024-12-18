@@ -2,7 +2,7 @@ import 'package:film_flu/app/types/ui_state.dart';
 import 'package:film_flu/domain/models/credit_actor_entity.dart';
 import 'package:film_flu/domain/models/credit_production_entity.dart';
 import 'package:film_flu/domain/models/person_entity.dart';
-import 'package:film_flu/domain/repository_contracts/person_repository_contract.dart';
+import 'package:film_flu/domain/repository/person_repository_contract.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

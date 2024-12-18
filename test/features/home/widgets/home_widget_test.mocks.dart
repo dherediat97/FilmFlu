@@ -3,14 +3,12 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i4;
 
 import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart'
     as _i3;
-import 'package:film_flu/presentation/features/media_list/bloc/media_list_bloc.dart'
-    as _i4;
 import 'package:film_flu/presentation/top_blocs/app/app_bloc.dart' as _i2;
-import 'package:flutter_bloc/flutter_bloc.dart' as _i6;
+import 'package:flutter_bloc/flutter_bloc.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -46,17 +44,6 @@ class _FakeHomeState_1 extends _i1.SmartFake implements _i3.HomeState {
         );
 }
 
-class _FakeMediaListState_2 extends _i1.SmartFake
-    implements _i4.MediaListState {
-  _FakeMediaListState_2(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
 /// A class which mocks [AppBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -75,11 +62,11 @@ class MockAppBloc extends _i1.Mock implements _i2.AppBloc {
       ) as _i2.AppState);
 
   @override
-  _i5.Stream<_i2.AppState> get stream => (super.noSuchMethod(
+  _i4.Stream<_i2.AppState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i5.Stream<_i2.AppState>.empty(),
-        returnValueForMissingStub: _i5.Stream<_i2.AppState>.empty(),
-      ) as _i5.Stream<_i2.AppState>);
+        returnValue: _i4.Stream<_i2.AppState>.empty(),
+        returnValueForMissingStub: _i4.Stream<_i2.AppState>.empty(),
+      ) as _i4.Stream<_i2.AppState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -117,8 +104,8 @@ class MockAppBloc extends _i1.Mock implements _i2.AppBloc {
 
   @override
   void on<E extends _i2.AppEvent>(
-    _i6.EventHandler<E, _i2.AppState>? handler, {
-    _i6.EventTransformer<E>? transformer,
+    _i5.EventHandler<E, _i2.AppState>? handler, {
+    _i5.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -130,7 +117,7 @@ class MockAppBloc extends _i1.Mock implements _i2.AppBloc {
       );
 
   @override
-  void onTransition(_i6.Transition<_i2.AppEvent, _i2.AppState>? transition) =>
+  void onTransition(_i5.Transition<_i2.AppEvent, _i2.AppState>? transition) =>
       super.noSuchMethod(
         Invocation.method(
           #onTransition,
@@ -140,17 +127,17 @@ class MockAppBloc extends _i1.Mock implements _i2.AppBloc {
       );
 
   @override
-  _i5.Future<void> close() => (super.noSuchMethod(
+  _i4.Future<void> close() => (super.noSuchMethod(
         Invocation.method(
           #close,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
-  void onChange(_i6.Change<_i2.AppState>? change) => super.noSuchMethod(
+  void onChange(_i5.Change<_i2.AppState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -209,11 +196,11 @@ class MockHomeBloc extends _i1.Mock implements _i3.HomeBloc {
       ) as _i3.HomeState);
 
   @override
-  _i5.Stream<_i3.HomeState> get stream => (super.noSuchMethod(
+  _i4.Stream<_i3.HomeState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i5.Stream<_i3.HomeState>.empty(),
-        returnValueForMissingStub: _i5.Stream<_i3.HomeState>.empty(),
-      ) as _i5.Stream<_i3.HomeState>);
+        returnValue: _i4.Stream<_i3.HomeState>.empty(),
+        returnValueForMissingStub: _i4.Stream<_i3.HomeState>.empty(),
+      ) as _i4.Stream<_i3.HomeState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -251,8 +238,8 @@ class MockHomeBloc extends _i1.Mock implements _i3.HomeBloc {
 
   @override
   void on<E extends _i3.HomeEvent>(
-    _i6.EventHandler<E, _i3.HomeState>? handler, {
-    _i6.EventTransformer<E>? transformer,
+    _i5.EventHandler<E, _i3.HomeState>? handler, {
+    _i5.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -264,7 +251,7 @@ class MockHomeBloc extends _i1.Mock implements _i3.HomeBloc {
       );
 
   @override
-  void onTransition(_i6.Transition<_i3.HomeEvent, _i3.HomeState>? transition) =>
+  void onTransition(_i5.Transition<_i3.HomeEvent, _i3.HomeState>? transition) =>
       super.noSuchMethod(
         Invocation.method(
           #onTransition,
@@ -274,152 +261,17 @@ class MockHomeBloc extends _i1.Mock implements _i3.HomeBloc {
       );
 
   @override
-  _i5.Future<void> close() => (super.noSuchMethod(
+  _i4.Future<void> close() => (super.noSuchMethod(
         Invocation.method(
           #close,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
-  void onChange(_i6.Change<_i3.HomeState>? change) => super.noSuchMethod(
-        Invocation.method(
-          #onChange,
-          [change],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void addError(
-    Object? error, [
-    StackTrace? stackTrace,
-  ]) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #addError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onError(
-    Object? error,
-    StackTrace? stackTrace,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-}
-
-/// A class which mocks [MediaListBloc].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockMediaListBloc extends _i1.Mock implements _i4.MediaListBloc {
-  @override
-  _i4.MediaListState get state => (super.noSuchMethod(
-        Invocation.getter(#state),
-        returnValue: _FakeMediaListState_2(
-          this,
-          Invocation.getter(#state),
-        ),
-        returnValueForMissingStub: _FakeMediaListState_2(
-          this,
-          Invocation.getter(#state),
-        ),
-      ) as _i4.MediaListState);
-
-  @override
-  _i5.Stream<_i4.MediaListState> get stream => (super.noSuchMethod(
-        Invocation.getter(#stream),
-        returnValue: _i5.Stream<_i4.MediaListState>.empty(),
-        returnValueForMissingStub: _i5.Stream<_i4.MediaListState>.empty(),
-      ) as _i5.Stream<_i4.MediaListState>);
-
-  @override
-  bool get isClosed => (super.noSuchMethod(
-        Invocation.getter(#isClosed),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  void add(_i4.MediaListEvent? event) => super.noSuchMethod(
-        Invocation.method(
-          #add,
-          [event],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onEvent(_i4.MediaListEvent? event) => super.noSuchMethod(
-        Invocation.method(
-          #onEvent,
-          [event],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void emit(_i4.MediaListState? state) => super.noSuchMethod(
-        Invocation.method(
-          #emit,
-          [state],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void on<E extends _i4.MediaListEvent>(
-    _i6.EventHandler<E, _i4.MediaListState>? handler, {
-    _i6.EventTransformer<E>? transformer,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #on,
-          [handler],
-          {#transformer: transformer},
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onTransition(
-          _i6.Transition<_i4.MediaListEvent, _i4.MediaListState>? transition) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onTransition,
-          [transition],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  _i5.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
-
-  @override
-  void onChange(_i6.Change<_i4.MediaListState>? change) => super.noSuchMethod(
+  void onChange(_i5.Change<_i3.HomeState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],

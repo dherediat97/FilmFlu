@@ -1,6 +1,6 @@
 import 'package:film_flu/app/types/ui_state.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
-import 'package:film_flu/domain/repository_contracts/media_list_repository_contract.dart';
+import 'package:film_flu/domain/repository/media_repository.dart';
 import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -10,10 +10,10 @@ part 'search_state.dart';
 part 'search_bloc.freezed.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
-  final MediaListRepositoryContract _repository;
+  final MediaRepository _repository;
 
   SearchBloc({
-    required MediaListRepositoryContract repositoryContract,
+    required MediaRepository repositoryContract,
   })  : _repository = repositoryContract,
         super(SearchState.initial()) {
     on<SearchEvent>((event, emit) async {
