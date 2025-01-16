@@ -1,9 +1,8 @@
 import 'dart:async';
-
+import 'package:film_flu/data/models/media_type.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/domain/use_case/media_use_case.dart';
 import 'package:film_flu/domain/use_case/provider.dart';
-import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/notifiers/pagination_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -24,17 +23,16 @@ class MediaListViewModel extends AsyncNotifier<List<MediaSimpleItemEntity>>
   int get initialPage => 1;
 
   @override
-  MediaFilter get initialFilter => MediaFilter(MediaType.movie, 18, 'es-ES');
+  MediaFilter get initialFilter => MediaFilter(MediaType.movie, 28, 'es-ES');
 
   @override
   FutureOr<List<MediaSimpleItemEntity>> loadPage(
     int page,
     MediaFilter mediaFilter,
   ) async {
-    final (totalItems, items) = await repository.getMediaDataByGenre(
-      mediaTypeSelected: mediaFilter.mediaTypeSelected,
-      genreId: mediaFilter.genredId,
-      languageId: mediaFilter.languageId,
+    final (totalItems, items) = await repository.getMovies(
+      mediaFilter.genredId,
+      mediaFilter.languageId,
     );
     final previousLength = state.valueOrNull?.length ?? 0;
     _canLoadMore = previousLength + items.length < totalItems;

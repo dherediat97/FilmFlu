@@ -6,10 +6,12 @@ import 'package:film_flu/presentation/features/media_details/widgets/info_media.
 import 'package:film_flu/presentation/features/media_details/widgets/media_data_cast.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/media_data_production.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/reviews_widget_item.dart';
+import 'package:film_flu/presentation/notifiers/media_notifier.dart';
 import 'package:film_flu/presentation/widgets/shimmer_loading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DetailTabMediaItem extends StatefulWidget {
+class DetailTabMediaItem extends ConsumerStatefulWidget {
   const DetailTabMediaItem({
     super.key,
     required this.mediaTypeSelected,
@@ -17,13 +19,13 @@ class DetailTabMediaItem extends StatefulWidget {
   });
 
   final String mediaTypeSelected;
-  final String? mediaItemId;
+  final String mediaItemId;
 
   @override
-  State<DetailTabMediaItem> createState() => _DetailTabMediaItem();
+  ConsumerState<DetailTabMediaItem> createState() => _DetailTabMediaItem();
 }
 
-class _DetailTabMediaItem extends State<DetailTabMediaItem>
+class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -33,38 +35,33 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
     _tabController = TabController(length: 4, vsync: this);
     _tabController.addListener(() {
       var index = _tabController.index;
-      // switch (index) {
-      //   case 0:
-      //     context.read<MediaDetailBloc>().add(MediaDetailEvent.getMediaDetails(
-      //           widget.mediaTypeSelected,
-      //           widget.mediaItemId ?? '0',
-      //         ));
-      //     context.read<MediaDetailBloc>().add(MediaDetailEvent.getMedia(
-      //           widget.mediaTypeSelected,
-      //           widget.mediaItemId ?? '0',
-      //         ));
-      //     break;
-      //   case 1:
-      //     context.read<MediaDetailBloc>().add(MediaDetailEvent.getReviews(
-      //           widget.mediaTypeSelected,
-      //           widget.mediaItemId ?? '0',
-      //         ));
-      //     break;
-      //   case 2:
-      //     context.read<MediaDetailBloc>().add(MediaDetailEvent.getCredits(
-      //           widget.mediaTypeSelected,
-      //           widget.mediaItemId ?? '0',
-      //           true,
-      //         ));
-      //     break;
-      //   case 3:
-      //     context.read<MediaDetailBloc>().add(MediaDetailEvent.getCredits(
-      //           widget.mediaTypeSelected,
-      //           widget.mediaItemId!,
-      //           false,
-      //         ));
-      //     break;
-      // }
+      switch (index) {
+        case 0:
+          ref.watch(fetchMediaItemProvider(MediaItemState(
+              mediaType: widget.mediaTypeSelected, id: widget.mediaItemId)));
+
+          break;
+        case 1:
+          ref.watch(fetchReviewsProvider(MediaItemState(
+            mediaType: widget.mediaTypeSelected,
+            id: widget.mediaItemId,
+          )));
+          break;
+        case 2:
+          ref.watch(fetchCreditsProvider(CreditsMediaState(
+            mediaType: widget.mediaTypeSelected,
+            id: widget.mediaItemId,
+            isCast: true,
+          )));
+          break;
+        case 3:
+          ref.watch(fetchCreditsProvider(CreditsMediaState(
+            mediaType: widget.mediaTypeSelected,
+            id: widget.mediaItemId,
+            isCast: false,
+          )));
+          break;
+      }
     });
   }
 
@@ -76,6 +73,13 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
 
   @override
   Widget build(BuildContext context) {
+    final state = ref
+        .watch(fetchMediaItemProvider(MediaItemState(
+          mediaType: widget.mediaTypeSelected,
+          id: widget.mediaItemId,
+        )))
+        .requireValue;
+
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -83,7 +87,7 @@ class _DetailTabMediaItem extends State<DetailTabMediaItem>
             child: state.mediaItem == null
                 ? buildMediaDayWidget(context)
                 : BackgroundImageMediaItem(
-                    productionCompanyImage: state.productionCompanyImage,
+                    productionCompanyImage: state.productionCompanyImage ?? '',
                     isHomeScreen: false,
                     mediaItem: state.mediaItem,
                   ),

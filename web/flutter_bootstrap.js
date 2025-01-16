@@ -16,6 +16,8 @@
 
     {{flutter_js}}
 
+    progress.style.width = `33%`;
+
     {{flutter_build_config}}
 
 
@@ -30,6 +32,9 @@
     
             // Set progress to 100% before adding a delay.
             progressBar.style.width = `100%`;
+
+            // Add a delay before running the app to create a smooth crossfade effect.
+            await addDelay();
             
             // Hide the progress bar by reducing its opacity.
             // This will create the fade out effect by animating the opacity.

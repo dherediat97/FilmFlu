@@ -3,13 +3,10 @@ import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
-import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
-import 'package:film_flu/presentation/features/search/bloc/search_bloc.dart';
+import 'package:film_flu/data/models/media_type.dart';
 import 'package:film_flu/presentation/notifiers/app_notifier.dart';
-import 'package:film_flu/presentation/top_blocs/app/app_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -94,16 +91,12 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
     );
 
     actions.add(DropdownButton<Locale>(
-        iconEnabledColor: Theme.of(context).colorScheme.onSecondary,
         onChanged: (language) {
-          context
-              .read<AppBloc>()
-              .add(AppEvent.changeLang(language?.toString() ?? 'es'));
+          appState.copyWith(locale: language);
           context.push(AppRoutePaths.startRoute);
         },
         padding: const EdgeInsets.all(8),
-        dropdownColor: Theme.of(context).colorScheme.surface,
-        value: context.read<AppBloc>().state.locale,
+        value: appState.locale,
         underline: const SizedBox(height: 0),
         items: AppLocalizations.supportedLocales
             .map<DropdownMenuItem<Locale>>((Locale language) {
@@ -122,7 +115,10 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
                 const SizedBox(height: 40),
                 Text(
                   language.languageCode,
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall!
+                      .copyWith(color: Theme.of(context).colorScheme.onSurface),
                 )
               ],
             ),
@@ -167,12 +163,7 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
   Widget titleScaffold(BuildContext context, mediaTypeSelected) {
     if (mediaTypeSelected != MediaType.movie &&
         mediaTypeSelected != MediaType.tv) {
-      return SearchBar(onChanged: (value) {
-        context.read<SearchBloc>().add(SearchEvent.searchMovie(
-              query: value,
-              movieFilters: const MovieFilters(),
-            ));
-      });
+      return SearchBar(onChanged: (value) {});
     } else {
       return Container();
     }

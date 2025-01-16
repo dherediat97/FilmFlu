@@ -65,6 +65,7 @@ extension MediaItemToRemoteEntityExtension on MediaItemRemoteEntity {
       );
 
   MediaSimpleItemEntity toSimpleMediaEntity() => MediaSimpleItemEntity(
+        title: title ?? name,
         genreIds: genreIds,
         id: id,
         posterPath: posterPath ?? '',

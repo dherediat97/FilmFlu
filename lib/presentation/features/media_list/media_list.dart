@@ -1,8 +1,9 @@
+import 'dart:math';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
-import 'package:film_flu/domain/models/media_simple_item_entity.dart';
-import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
-import 'package:film_flu/presentation/features/media_list/controllers/media_list_controller.dart';
+import 'package:film_flu/data/models/media_type.dart';
+import 'package:film_flu/presentation/view_models/media_list_view_model.dart';
 import 'package:film_flu/presentation/widgets/media_carrousel_item.dart';
 import 'package:film_flu/presentation/widgets/shimmer_loading.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +16,10 @@ class MediaList extends ConsumerStatefulWidget {
     required this.genreId,
     required this.title,
     required this.mediaType,
-    this.languageId = 'es',
   });
 
   final MediaType mediaType;
   final String title;
-  final String languageId;
   final int genreId;
 
   @override
@@ -46,85 +45,77 @@ class _MediaDataList extends ConsumerState<MediaList> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(mediaListControllerProvider as ProviderListenable);
+    final state = ref.watch(mediaListViewModelProvider);
 
-    List<MediaSimpleItemEntity>? mediaDataList =
-        widget.mediaType == MediaType.movie
-            ? state.movieData[widget.genreId]
-            : state.serieData[widget.genreId];
-
-    return Padding(
-      key: widget.key,
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 20),
-          AutoSizeText(
-            widget.title,
-            maxFontSize: 30,
-            minFontSize: 20,
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-          const SizedBox(height: 20),
-          if (widget.mediaType == MediaType.movie)
-            mediaDataList == null
-                ? Shimmer(
-                    child: buildTopRowList(),
-                  )
-                : SizedBox(
-                    height: 220,
-                    child: CarouselView(
-                      padding: const EdgeInsets.all(8.0),
-                      itemExtent: 180,
-                      onTap: (index) {
-                        context.push(
-                          widget.mediaType == MediaType.movie
-                              ? '${AppRoutePaths.moviesRoute}/${mediaDataList[index].id}'
-                              : '${AppRoutePaths.seriesRoute}/${mediaDataList[index].id}',
+    return state.map(
+      error: (error) => Text(error.toString()),
+      data: (data) {
+        return Padding(
+          key: widget.key,
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 20),
+              AutoSizeText(
+                widget.title,
+                maxFontSize: 30,
+                minFontSize: 20,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 20),
+              if (widget.mediaType == MediaType.movie)
+                SizedBox(
+                  height: 220,
+                  child: CarouselView(
+                    controller: _carouselController,
+                    padding: const EdgeInsets.all(8.0),
+                    itemExtent: 180,
+                    onTap: (index) {
+                      context.push(
+                        '${AppRoutePaths.moviesRoute}/${data.value[index].id}',
+                      );
+                    },
+                    children: List<Widget>.generate(
+                      data.value.length,
+                      (int index) {
+                        return MediaCarrouselItem(
+                          mediaItem: data.value[index],
+                          mediaTypeSelected: MediaType.movie,
                         );
                       },
-                      children: List<Widget>.generate(
-                        mediaDataList.length,
-                        (int index) {
-                          return MediaCarrouselItem(
-                            mediaItem: mediaDataList[index],
-                            mediaTypeSelected: MediaType.movie,
-                          );
-                        },
-                      ),
                     ),
                   ),
-          if (widget.mediaType == MediaType.tv)
-            mediaDataList == null
-                ? Shimmer(
-                    child: buildTopRowList(),
-                  )
-                : SizedBox(
-                    height: 220,
-                    child: CarouselView(
-                      padding: const EdgeInsets.all(8.0),
-                      itemExtent: 180,
-                      controller: _carouselController,
-                      onTap: (index) {
-                        context.push(widget.mediaType == MediaType.movie
-                            ? '${AppRoutePaths.moviesRoute}/${mediaDataList[index].id}'
-                            : '${AppRoutePaths.seriesRoute}/${mediaDataList[index].id}');
-                      },
-                      children: List<Widget>.generate(
-                        mediaDataList.length,
-                        (int index) {
-                          return MediaCarrouselItem(
-                            mediaItem: mediaDataList[index],
-                            mediaTypeSelected: MediaType.tv,
-                          );
-                        },
-                      ),
-                    ),
+                ),
+              if (widget.mediaType == MediaType.tv)
+                CarouselView(
+                  padding: const EdgeInsets.all(8.0),
+                  itemExtent: 360,
+                  controller: _carouselController,
+                  onTap: (index) {
+                    context.push(
+                        '${AppRoutePaths.seriesRoute}/${data.value[index].id}');
+                  },
+                  children: List<Widget>.generate(
+                    data.value.length,
+                    (int index) {
+                      return MediaCarrouselItem(
+                        mediaItem: data.value[index],
+                        mediaTypeSelected: MediaType.tv,
+                      );
+                    },
                   ),
-        ],
-      ),
+                ),
+            ],
+          ),
+        );
+      },
+      loading: (loading) {
+        return Shimmer(
+          child: buildTopRowList(),
+        );
+      },
     );
   }
 
@@ -136,13 +127,7 @@ class _MediaDataList extends ConsumerState<MediaList> {
 
     if (hasReachedTheEnd) {
       _currentPage++;
-      // context.read<MediaListBloc>().add(
-      //       MediaListEvent.nextPage(
-      //         _currentPage,
-      //         widget.mediaType,
-      //         widget.genreId,
-      //       ),
-      //     );
+      log(_currentPage);
     }
   }
 }

@@ -13,7 +13,7 @@ class AppFonts {
   );
 }
 
-TextTheme createTextTheme({required bool isLightMode}) {
+TextTheme createTextTheme({required bool isDarkMode}) {
   TextTheme textTheme = TextTheme(
     headlineLarge: TextStyle(
       fontFamily: AppFonts.primaryFont,
@@ -23,7 +23,6 @@ TextTheme createTextTheme({required bool isLightMode}) {
     titleLarge: TextStyle(
       fontFamily: AppFonts.primaryFont,
       fontSize: 40,
-      color: AppColors.textPrimaryColor,
     ),
     titleMedium: TextStyle(
       fontFamily: AppFonts.primaryFont,
@@ -33,9 +32,6 @@ TextTheme createTextTheme({required bool isLightMode}) {
     titleSmall: TextStyle(
       fontFamily: AppFonts.primaryFont,
       fontSize: 16,
-      color: isLightMode
-          ? AppColors.textSecondaryColor
-          : AppColors.textPrimaryColor,
     ),
     displayLarge: TextStyle(
       fontFamily: AppFonts.tertiaryFont,
@@ -46,23 +42,20 @@ TextTheme createTextTheme({required bool isLightMode}) {
     displayMedium: TextStyle(
       fontFamily: AppFonts.primaryFont,
       fontSize: 15,
-      color: isLightMode
+      color: !isDarkMode
           ? AppColors.textSecondaryColor
           : AppColors.textPrimaryColor,
     ),
     displaySmall: TextStyle(
       fontFamily: AppFonts.primaryFont,
       fontSize: 12,
-      color: isLightMode
+      color: !isDarkMode
           ? AppColors.textSecondaryColor
           : AppColors.textPrimaryColor,
     ),
     bodyLarge: TextStyle(
       fontFamily: AppFonts.primaryFont,
       fontSize: 24,
-      color: isLightMode
-          ? AppColors.textSecondaryColor
-          : AppColors.textPrimaryColor,
     ),
     bodyMedium: TextStyle(
       fontFamily: AppFonts.primaryFont,
@@ -72,13 +65,10 @@ TextTheme createTextTheme({required bool isLightMode}) {
     bodySmall: TextStyle(
       fontFamily: AppFonts.primaryFont,
       fontSize: 15,
-      color: isLightMode
-          ? AppColors.textSecondaryColor
-          : AppColors.textPrimaryColor,
     ),
     labelLarge: TextStyle(
       fontSize: 12,
-      color: isLightMode
+      color: !isDarkMode
           ? AppColors.textSecondaryColor
           : AppColors.textPrimaryColor,
     ),
@@ -90,7 +80,7 @@ TextTheme createTextTheme({required bool isLightMode}) {
     labelSmall: TextStyle(
       fontFamily: AppFonts.primaryFont,
       fontSize: 14,
-      color: isLightMode
+      color: !isDarkMode
           ? AppColors.textSecondaryColor
           : AppColors.textPrimaryColor,
     ),

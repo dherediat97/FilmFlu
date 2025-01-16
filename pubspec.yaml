@@ -17,12 +17,6 @@ dependencies:
   
   go_router: ^14.4.1
 
-  # Bussines Logic Component
-  #
-  # Controller class to management the bloc state in the package
-  # https://pub.dev/packages/flutter_bloc
-  flutter_bloc: ^8.1.4
-
 
   # Freezed - Model Smart Generation
   #
@@ -53,7 +47,6 @@ dependencies:
   shared_preferences: ^2.0.13
   youtube_player_iframe: ^5.1.3
   url_launcher: ^6.1.11
-  flutter_widget_from_html: ^0.15.1
   cached_network_image: ^3.3.1
   flutter_riverpod: ^2.6.1
   riverpod_annotation: ^2.6.1
@@ -66,7 +59,6 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   build_runner: ^2.4.11
   json_serializable: ^6.8.0
-  retrofit_generator: ^8.1.0
 
   # Testing
   #
@@ -74,20 +66,12 @@ dev_dependencies:
   # https://pub.dev/packages/mockito
   mockito: ^5.4.4
 
-  # Utility Test library for Bloc 
-  #
-  # For test all of bloc lifecycle
-  # https://pub.dev/packages/bloc_test
-  bloc_test: ^9.1.7
   flutter_launcher_icons: ^0.14.1
   test: ^1.25.2
-  flutter_lints: ^4.0.0
   riverpod_generator: ^2.6.2
-  build_runner: ^2.4.13
   custom_lint: ^0.7.0
   riverpod_lint: ^2.6.2
   freezed: ^2.5.7
-  json_serializable: ^6.8.0
 
 flutter:
   generate: true

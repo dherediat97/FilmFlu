@@ -1,5 +1,4 @@
 import 'package:film_flu/core/entities/pagination.dart';
-import 'package:film_flu/data/datasources/remote/api/network/dio_client.dart';
 import 'package:film_flu/data/models/credits_media_remote_entity.dart';
 import 'package:film_flu/data/models/genre_result_remote_entity.dart';
 import 'package:film_flu/data/models/media_item_remote_entity.dart';
@@ -7,22 +6,10 @@ import 'package:film_flu/data/models/media_response_remote_entity.dart';
 import 'package:film_flu/data/models/person_remote_entity.dart';
 import 'package:film_flu/data/models/review_remote_entity.dart';
 import 'package:film_flu/domain/models/language_entity.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'filmflu_api.g.dart';
-
-@riverpod
-FilmFluApi filmfluApiClient(Ref ref) => FilmFluApi(
-      ref.watch(dioProvider),
-    );
 
 @RestApi()
 abstract class FilmFluApi {
-  factory FilmFluApi(Dio dio) = _FilmFluApi;
-
   @GET('/discover/{mediaType}')
   Future<List<MediaItemRemoteEntity>> fetchMediaData({
     @Path('mediaType') required String mediaType,
