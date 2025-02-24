@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:film_flu/app/constants/app_fonts.dart';
 import 'package:film_flu/app/constants/app_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,7 +11,6 @@ class AppProvider extends StateNotifier<AppState> {
     var darkMode = prefs.getBool('isDarkMode');
     state = state.copyWith(
       isDarkMode: darkMode ?? false,
-      locale: const Locale('es'),
       theme: AppTheme(createTextTheme(isDarkMode: darkMode ?? false)),
     );
   }
@@ -35,24 +32,20 @@ final appProvider = StateNotifierProvider<AppProvider, AppState>(
 
 class AppState {
   final bool isDarkMode;
-  final Locale locale;
   final AppTheme theme;
 
-  AppState(
-      {required this.isDarkMode, required this.locale, required this.theme});
+  AppState({required this.isDarkMode, required this.theme});
 
   factory AppState.initial() {
     return AppState(
       isDarkMode: false,
-      locale: const Locale('en'),
       theme: AppTheme(createTextTheme(isDarkMode: true)),
     );
   }
 
-  AppState copyWith({bool? isDarkMode, Locale? locale, AppTheme? theme}) {
+  AppState copyWith({bool? isDarkMode, AppTheme? theme}) {
     return AppState(
       isDarkMode: isDarkMode ?? this.isDarkMode,
-      locale: locale ?? this.locale,
       theme: theme ?? this.theme,
     );
   }

@@ -1,18 +1,22 @@
 import 'dart:async';
-import 'package:film_flu/data/models/media_type.dart';
+
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/domain/use_case/media_use_case.dart';
 import 'package:film_flu/domain/use_case/provider.dart';
+import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
 import 'package:film_flu/presentation/notifiers/pagination_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final mediaListViewModelProvider =
-    AsyncNotifierProvider<MediaListViewModel, List<MediaSimpleItemEntity>>(
-  () => MediaListViewModel(),
+final mediaListViewModelProvider = AsyncNotifierProvider.autoDispose
+    .family<MediaListViewModel, List<MediaSimpleItemEntity>, MediaFilter>(
+  MediaListViewModel.new,
 );
 
-class MediaListViewModel extends AsyncNotifier<List<MediaSimpleItemEntity>>
-    with AsyncPaginationController<MediaSimpleItemEntity, int, MediaFilter> {
+class MediaListViewModel extends AutoDisposeFamilyAsyncNotifier<
+        List<MediaSimpleItemEntity>, MediaFilter>
+    with
+        AsyncPaginationController<MediaSimpleItemEntity, int, MediaFilter>,
+        AsyncPaginationFilter<MediaFilter, MediaSimpleItemEntity, int> {
   MediaUseCase get repository => ref.read(mediaProvider);
 
   var _canLoadMore = true;
@@ -23,16 +27,13 @@ class MediaListViewModel extends AsyncNotifier<List<MediaSimpleItemEntity>>
   int get initialPage => 1;
 
   @override
-  MediaFilter get initialFilter => MediaFilter(MediaType.movie, 28, 'es-ES');
-
-  @override
   FutureOr<List<MediaSimpleItemEntity>> loadPage(
-    int page,
-    MediaFilter mediaFilter,
-  ) async {
-    final (totalItems, items) = await repository.getMovies(
-      mediaFilter.genredId,
-      mediaFilter.languageId,
+      int page, MediaFilter currentFilter) async {
+    final (totalItems, items) = await repository.getMediaDataByGenre(
+      currentFilter.mediaTypeSelected,
+      currentFilter.genredId,
+      currentFilter.languageId,
+      page,
     );
     final previousLength = state.valueOrNull?.length ?? 0;
     _canLoadMore = previousLength + items.length < totalItems;
@@ -41,16 +42,8 @@ class MediaListViewModel extends AsyncNotifier<List<MediaSimpleItemEntity>>
 
   @override
   int nextPage(int currentPage) => currentPage + 1;
-}
 
-class MediaFilter {
-  MediaType mediaTypeSelected;
-  int genredId;
-  String languageId;
-
-  MediaFilter(
-    this.mediaTypeSelected,
-    this.genredId,
-    this.languageId,
-  );
+  void refresh() {
+    currentPage = initialPage;
+  }
 }

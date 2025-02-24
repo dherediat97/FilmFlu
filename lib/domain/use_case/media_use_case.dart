@@ -5,6 +5,7 @@ import 'package:film_flu/domain/models/media_response_entity.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:film_flu/domain/repository/media_repository.dart';
+import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
 
 abstract class MediaUseCase {
   Future<MediaItemEntity> getMediaItem(
@@ -31,6 +32,7 @@ abstract class MediaUseCase {
     MediaType mediaTypeSelected,
     int genreId,
     String languageId,
+    int page,
   );
 
   // Future<Result<List<MediaSimpleItemEntity>>> paginateMediaData({
@@ -42,11 +44,13 @@ abstract class MediaUseCase {
   Future<(int page, List<MediaSimpleItemEntity> items)> getMovies(
     int genreId,
     String languageId,
+    int page,
   );
 
   Future<(int page, List<MediaSimpleItemEntity> items)> getTVSeries(
     int genreId,
     String languageId,
+    int page,
   );
 
   Future<List<MediaItemEntity>?> searchMediaData(
@@ -54,7 +58,7 @@ abstract class MediaUseCase {
     String query,
   );
 
-  Future<MediaItemEntity> getMediaDataDay(MediaType mediaTypeSelected);
+  Future<MediaItemEntity> getMediaDataDay(MediaFilter mediaFilter);
 }
 
 class MediaUseCaseImpl extends MediaUseCase {
@@ -87,29 +91,36 @@ class MediaUseCaseImpl extends MediaUseCase {
   }
 
   @override
-  Future<(int page, List<MediaSimpleItemEntity> items)> getMediaDataByGenre(
-      MediaType mediaTypeSelected, int genreId, String languageId) async {
+  Future<(int totalItems, List<MediaSimpleItemEntity> items)>
+      getMediaDataByGenre(
+    MediaType mediaTypeSelected,
+    int genreId,
+    String languageId,
+    int page,
+  ) async {
     return mediaTypeSelected == MediaType.movie
-        ? getMovies(genreId, languageId)
-        : getTVSeries(genreId, languageId);
+        ? getMovies(genreId, languageId, page)
+        : getTVSeries(genreId, languageId, page);
   }
 
   @override
-  Future<(int page, List<MediaSimpleItemEntity> items)> getMovies(
+  Future<(int totalItems, List<MediaSimpleItemEntity> items)> getMovies(
     int genreId,
     String languageId,
+    int page,
   ) async {
-    final movieList = await mediaRepository.getMovies(
+    final (page, movieList) = await mediaRepository.getMovies(
       genreId,
       languageId,
     );
-    return movieList;
+    return (page, movieList);
   }
 
   @override
   Future<(int page, List<MediaSimpleItemEntity> items)> getTVSeries(
     int genreId,
     String languageId,
+    int page,
   ) async {
     final serieList = await mediaRepository.getTVSeries(
       genreId,
@@ -140,7 +151,7 @@ class MediaUseCaseImpl extends MediaUseCase {
   }
 
   @override
-  Future<MediaItemEntity> getMediaDataDay(MediaType mediaTypeSelected) async {
-    return mediaRepository.getMediaDataDay(mediaTypeSelected);
+  Future<MediaItemEntity> getMediaDataDay(MediaFilter mediaFilter) async {
+    return mediaRepository.getMediaDataDay(mediaFilter);
   }
 }

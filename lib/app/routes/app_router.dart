@@ -9,7 +9,7 @@ import 'package:film_flu/presentation/features/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:horusvision/presentation/features/horusvision.dart';
+// import 'package:horusvision/presentation/features/horusvision.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_router.g.dart';
@@ -71,10 +71,10 @@ GoRouter goRouter(Ref ref) {
             path: 'settings',
             builder: (context, state) => const SettingsScreen(),
           ),
-          GoRoute(
-            path: 'horusVision',
-            builder: (context, state) => const HorusVision(),
-          ),
+          // GoRoute(
+          //   path: 'horusVision',
+          //   builder: (context, state) => const HorusVision(),
+          // ),
         ],
       ),
     ],

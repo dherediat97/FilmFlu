@@ -2,8 +2,10 @@ import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/data/models/media_type.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/detail_tab_media_item.dart';
+import 'package:film_flu/presentation/notifiers/media_detail_notifier.dart';
 import 'package:film_flu/presentation/notifiers/media_notifier.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
+import 'package:film_flu/presentation/widgets/shimmer_loading.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -166,13 +168,14 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
         return Text(error.toString());
       },
       loading: (loading) {
-        return CircularProgressIndicator();
+        return Shimmer(
+          child: buildMediaDayWidget(context),
+        );
       },
     );
   }
 
   initTrailerController() {
-    // await horus_vision.initDi();
     return YoutubePlayerController(
       params: const YoutubePlayerParams(
         showControls: false,
@@ -187,7 +190,6 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
   }
 
   closeTrailer(dialogContext) {
-    // context.read<MediaDetailBloc>().add(const MediaDetailEvent.closeTrailer());
     _trailerController = null;
     SystemChrome.setEnabledSystemUIMode(
       SystemUiMode.edgeToEdge,

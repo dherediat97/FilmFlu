@@ -11,6 +11,7 @@ import 'package:film_flu/domain/models/media_response_entity.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:film_flu/domain/repository/media_repository.dart';
+import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
 
 class MediaRepositoryImpl implements MediaRepository {
   @override
@@ -185,12 +186,18 @@ class MediaRepositoryImpl implements MediaRepository {
   }
 
   @override
-  Future<MediaItemEntity> getMediaDataDay(MediaType mediaTypeSelected) async {
-    final response =
-        await DioClient.instance.get('/${mediaTypeSelected.name}/now_playing');
+  Future<MediaItemEntity> getMediaDataDay(MediaFilter mediaFilter) async {
+    final response = mediaFilter.mediaTypeSelected == MediaType.movie
+        ? await DioClient.instance
+            .get('/${mediaFilter.mediaTypeSelected.name}/now_playing')
+        : await DioClient.instance
+            .get('/${mediaFilter.mediaTypeSelected.name}/on_the_air');
 
-    final mediaData = MediaItemRemoteEntity.fromJson(response);
+    List<MediaItemRemoteEntity> mediaData = response['results']
+        .map<MediaItemRemoteEntity>(
+            (e) => MediaItemRemoteEntity.fromJson(e as Map<String, dynamic>))
+        .toList();
 
-    return mediaData.toMediaDayEntity();
+    return mediaData.map((e) => e.toMediaEntity()).first;
   }
 }

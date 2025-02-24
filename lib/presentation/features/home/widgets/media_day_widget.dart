@@ -1,33 +1,51 @@
-import 'package:film_flu/app/types/ui_state.dart';
+import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/data/models/media_type.dart';
+import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/background_image_media_item.dart';
-import 'package:film_flu/presentation/notifiers/media_notifier.dart';
+import 'package:film_flu/presentation/notifiers/media_day_notifier.dart';
+import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
 import 'package:film_flu/presentation/widgets/shimmer_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MediaDayWidget extends ConsumerWidget {
+class MediaDayWidget extends ConsumerStatefulWidget {
   const MediaDayWidget({
     super.key,
+    required this.mediaTypeSelected,
   });
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final mediaDayDataState = ref.read(fetchMediaDayProvider(MediaType.movie));
+  final MediaType mediaTypeSelected;
 
-    return mediaDayDataState.when(
-      error: (error, stackTrace) => const SizedBox(),
-      loading: () => Shimmer(child: buildMediaDayWidget(context)),
-      data: (state) {
-        return state.uiState.isLoading() && state.mediaItem == null
-            ? Shimmer(child: buildMediaDayWidget(context))
+  @override
+  ConsumerState<MediaDayWidget> createState() => _MediaDayWidgetState();
+}
+
+class _MediaDayWidgetState extends ConsumerState<MediaDayWidget> {
+  @override
+  Widget build(BuildContext context) {
+    final state = ref.watch(mediaDayProvider(MediaFilter(
+      mediaTypeSelected: widget.mediaTypeSelected,
+      genredId: 0,
+      languageId: context.localizations.localeName,
+    )));
+
+    return mediaDayWidget(state);
+  }
+
+  mediaDayWidget(AsyncValue<MediaItemEntity?> state) {
+    MediaItemEntity? item = state.value;
+    final initialLoading = state.isLoading && item == null;
+    final loadingMore = state.isLoading && item != null;
+
+    return initialLoading
+        ? Shimmer(child: buildMediaDayWidget(context))
+        : loadingMore
+            ? const CircularProgressIndicator()
             : BackgroundImageMediaItem(
-                key: key,
+                key: widget.key,
                 isHomeScreen: true,
-                mediaItem: state.mediaItem,
+                mediaItem: item,
                 productionCompanyImage: '',
               );
-      },
-    );
   }
 }

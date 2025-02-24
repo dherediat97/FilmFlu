@@ -1,5 +1,6 @@
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
 import 'package:film_flu/app/routes/app_router.dart';
+import 'package:film_flu/presentation/features/app_bar/provider/app_language_provider.dart';
 import 'package:film_flu/presentation/notifiers/app_notifier.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class FilmFlu extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final app = ref.watch(appProvider);
+    final locale = ref.watch(appLanguageProvider);
     final router = ref.watch(goRouterProvider);
 
     return MaterialApp.router(
@@ -24,7 +26,7 @@ class FilmFlu extends ConsumerWidget {
       scrollBehavior:
           kIsWeb ? WebScrollBehavior() : const MaterialScrollBehavior(),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
-      locale: app.locale,
+      locale: locale,
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: router,
       themeMode: app.isDarkMode ? ThemeMode.dark : ThemeMode.light,

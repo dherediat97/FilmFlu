@@ -7,10 +7,10 @@ part 'data_media_list.g.dart';
 @freezed
 class DataMediaList with _$DataMediaList {
   const factory DataMediaList({
-    required int page,
+    @JsonKey(name: 'page') required int page,
     @JsonKey(name: 'total_pages') required int totalPages,
     @JsonKey(name: 'total_results') required int totalResults,
-    required List<MediaSimpleItemEntity> results,
+    @JsonKey(name: 'results') required List<MediaSimpleItemEntity> results,
   }) = _DataMediaList;
 
   factory DataMediaList.fromJson(Map<String, dynamic> json) =>

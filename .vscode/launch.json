@@ -9,7 +9,7 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug",
-            "args": ["--web-port", "5050", "--web-renderer", "html"]
+            "args": ["--web-port", "5050"]
         },
         {
             "name": "FilmFlu (profile mode)",

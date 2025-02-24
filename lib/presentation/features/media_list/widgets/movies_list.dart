@@ -1,5 +1,6 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/data/models/media_type.dart';
+import 'package:film_flu/presentation/features/home/widgets/media_day_widget.dart';
 import 'package:film_flu/presentation/features/media_list/media_list.dart';
 import 'package:flutter/material.dart';
 
@@ -10,26 +11,30 @@ class MoviesListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // const MediaDayWidget(),
+          MediaDayWidget(
+            mediaTypeSelected: MediaType.movie,
+          ),
           MediaList(
             mediaType: MediaType.movie,
             genreId: 28,
             key: const Key('28'),
             title: context.localizations.action_type,
           ),
-          // MediaList(
-          //   mediaType: MediaType.movie,
-          //   genreId: 12,
-          //   key: const Key('12'),
-          //   title: context.localizations.adventure_type,
-          // ),
-          // MediaList(
-          //   mediaType: MediaType.movie,
-          //   genreId: 35,
-          //   key: const Key('35'),
-          //   title: context.localizations.comedy_type,
-          // ),
+          MediaList(
+            mediaType: MediaType.movie,
+            genreId: 12,
+            key: const Key('12'),
+            title: context.localizations.adventure_type,
+          ),
+          MediaList(
+            mediaType: MediaType.movie,
+            genreId: 35,
+            key: const Key('35'),
+            title: context.localizations.comedy_type,
+          ),
           // MediaList(
           //   mediaType: MediaType.movie,
           //   genreId: 80,

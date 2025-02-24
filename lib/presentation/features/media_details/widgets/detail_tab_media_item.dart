@@ -6,6 +6,8 @@ import 'package:film_flu/presentation/features/media_details/widgets/info_media.
 import 'package:film_flu/presentation/features/media_details/widgets/media_data_cast.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/media_data_production.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/reviews_widget_item.dart';
+import 'package:film_flu/presentation/notifiers/media_credits_notifier.dart';
+import 'package:film_flu/presentation/notifiers/media_detail_notifier.dart';
 import 'package:film_flu/presentation/notifiers/media_notifier.dart';
 import 'package:film_flu/presentation/widgets/shimmer_loading.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +40,9 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
       switch (index) {
         case 0:
           ref.watch(fetchMediaItemProvider(MediaItemState(
-              mediaType: widget.mediaTypeSelected, id: widget.mediaItemId)));
+            mediaType: widget.mediaTypeSelected,
+            id: widget.mediaItemId,
+          )));
 
           break;
         case 1:
@@ -48,14 +52,14 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
           )));
           break;
         case 2:
-          ref.watch(fetchCreditsProvider(CreditsMediaState(
+          ref.watch(mediaCreditsProvider(CreditsMediaState(
             mediaType: widget.mediaTypeSelected,
             id: widget.mediaItemId,
             isCast: true,
           )));
           break;
         case 3:
-          ref.watch(fetchCreditsProvider(CreditsMediaState(
+          ref.watch(mediaCreditsProvider(CreditsMediaState(
             mediaType: widget.mediaTypeSelected,
             id: widget.mediaItemId,
             isCast: false,

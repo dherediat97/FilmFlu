@@ -14,7 +14,7 @@ class MediaItemEntity with _$MediaItemEntity {
     List<GenreEntity>? genres,
     List<ProductionCompanyEntity>? productionCompanies,
     List<int>? genreIds,
-    required int id,
+    int? id,
     String? originalLanguage,
     String? originalTitle,
     double? popularity,

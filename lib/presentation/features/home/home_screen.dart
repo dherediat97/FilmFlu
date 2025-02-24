@@ -1,8 +1,10 @@
+import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/movies_list.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/series_list.dart';
 import 'package:film_flu/presentation/features/search/search_screen.dart';
 import 'package:film_flu/presentation/notifiers/home_notifier.dart';
+import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
 import 'package:film_flu/data/models/media_type.dart';
@@ -16,11 +18,15 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Widget child = const MoviesListWidget();
-    final state = ref.watch(switchCategoryProvider(MediaType.movie));
+    final state = ref.watch(homeProvider(MediaFilter(
+      genredId: 0,
+      languageId: context.localizations.localeName,
+      mediaTypeSelected: MediaType.movie,
+    )));
 
     return state.when(
       data: (data) {
-        switch (data.mediaTypeSelected) {
+        switch (data.mediaFilter?.mediaTypeSelected) {
           case MediaType.movie:
             child = const MoviesListWidget();
             break;

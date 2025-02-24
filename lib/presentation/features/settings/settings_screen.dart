@@ -1,16 +1,12 @@
 import 'package:film_flu/presentation/features/settings/widgets/settings_item.dart';
-import 'package:film_flu/presentation/notifiers/app_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appState = ref.watch(appProvider);
-
     return DefaultTabController(
       initialIndex: 1,
       length: 3,
@@ -56,16 +52,7 @@ class SettingsScreen extends ConsumerWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/flags/${appState.locale.languageCode}_flag.svg',
-                      height: 20,
-                      width: 20,
-                    ),
-                    Text(
-                      appState.locale.languageCode,
-                    )
-                  ],
+                  children: [],
                 ),
               ],
             ),

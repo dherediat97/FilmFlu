@@ -8,8 +8,10 @@ class SerieFiltersWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
+    return GridView.count(
+      crossAxisCount: 2,
+      mainAxisSpacing: 20,
+      crossAxisSpacing: 44,
       children: [
         Column(
           mainAxisSize: MainAxisSize.max,

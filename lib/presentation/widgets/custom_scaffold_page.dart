@@ -6,6 +6,7 @@ import 'package:film_flu/presentation/features/media_list/widgets/movies_list.da
 import 'package:film_flu/presentation/features/media_list/widgets/series_list.dart';
 import 'package:film_flu/presentation/features/search/widgets/serie_filters.dart';
 import 'package:film_flu/presentation/notifiers/home_notifier.dart';
+import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -25,7 +26,7 @@ class ScaffoldPage extends ConsumerStatefulWidget {
   final Widget? bottomBar;
   final Widget? floatingActionButton;
   final bool fullScreenMode;
-  final String? routeName;
+  final String routeName;
 
   @override
   ConsumerState<ScaffoldPage> createState() => _ScaffoldPageState();
@@ -51,7 +52,7 @@ class _ScaffoldPageState extends ConsumerState<ScaffoldPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final homeState = ref.read(switchCategoryProvider(MediaType.movie));
+    // final homeState = ref.read(homeProvider(MediaType.movie));
 
     return Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
@@ -60,6 +61,7 @@ class _ScaffoldPageState extends ConsumerState<ScaffoldPage> {
             ? PreferredSize(
                 preferredSize: const Size.fromHeight(70),
                 child: TopAppBar(
+                  mainMenu: true,
                   mediaTypeSelected: MediaType.movie,
                 ))
             : null,
@@ -95,7 +97,7 @@ class _ScaffoldPageState extends ConsumerState<ScaffoldPage> {
                 },
               )
             : null,
-        body: widget.routeName!.contains(AppRoutePaths.homeRoute)
+        body: widget.routeName.contains(AppRoutePaths.homeRoute)
             ? PageView(
                 controller: _pageController,
                 physics: const NeverScrollableScrollPhysics(),
@@ -104,7 +106,10 @@ class _ScaffoldPageState extends ConsumerState<ScaffoldPage> {
                     _selectedIndex = index;
 
                     var category = MediaType.values.elementAt(_selectedIndex);
-                    ref.read(switchCategoryProvider(category));
+                    ref.read(homeProvider(MediaFilter(
+                        mediaTypeSelected: category,
+                        genredId: 0,
+                        languageId: context.localizations.localeName)));
                   });
                 },
                 children: const [
