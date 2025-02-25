@@ -181,7 +181,7 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
               height: 400,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
-                return Image.asset(AppAssets.emptyStateImage);
+                return Icon(Icons.error);
               },
             ),
             title: Text(searchResults[index].mediaType == MediaType.movie.name

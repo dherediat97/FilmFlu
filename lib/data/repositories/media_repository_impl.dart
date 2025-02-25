@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:film_flu/data/datasources/remote/api/network/dio_client.dart';
 import 'package:film_flu/data/datasources/remote/api/network/http_exception.dart';
+import 'package:film_flu/data/models/credits_media_remote_entity.dart';
 import 'package:film_flu/data/models/media_item_remote_entity.dart';
 import 'package:film_flu/data/models/media_type.dart';
 import 'package:film_flu/data/models/review_remote_entity.dart';
@@ -18,27 +19,39 @@ class MediaRepositoryImpl implements MediaRepository {
   Future<MediaItemEntity> getMediaItem(
     MediaType mediaTypeSelected,
     String mediaTypeId,
+    String languageName,
   ) async {
-    final response =
-        await DioClient.instance.get('/${mediaTypeSelected.name}/$mediaTypeId');
+    try {
+      final response = await DioClient.instance
+          .get('/${mediaTypeSelected.name}/$mediaTypeId', queryParameters: {
+        'append_to_response': 'videos',
+        'language': languageName,
+      });
 
-    final mediaItem = MediaItemEntity.fromJson(response);
-
-    return mediaItem;
+      MediaItemRemoteEntity mediaData =
+          MediaItemRemoteEntity.fromJson(response);
+      return mediaData.toMediaEntity();
+    } on DioException catch (e) {
+      throw e.errorMessage;
+    }
   }
 
   @override
   Future<CreditsMediaEntity> getCredits(
     MediaType mediaTypeSelected,
     String mediaTypeId,
+    String languageName,
   ) async {
     try {
-      final response = await DioClient.instance
-          .get('/${mediaTypeSelected.name}/$mediaTypeId/credits');
+      final response = await DioClient.instance.get(
+          '/${mediaTypeSelected.name}/$mediaTypeId/credits',
+          queryParameters: {
+            'language': languageName,
+          });
 
-      final credits = CreditsMediaEntity.fromJson(response);
-
-      return credits;
+      CreditsMediaRemoteEntity creditsMediaEntity =
+          CreditsMediaRemoteEntity.fromJson(response);
+      return creditsMediaEntity.toCreditsEntity();
     } on DioException catch (e) {
       throw e.errorMessage;
     }
@@ -48,10 +61,14 @@ class MediaRepositoryImpl implements MediaRepository {
   Future<List<ReviewEntity>?> getReviews(
     MediaType mediaTypeSelected,
     String mediaTypeId,
+    String languageName,
   ) async {
     try {
-      final reviewData = await DioClient.instance
-          .get('/${mediaTypeSelected.name}/$mediaTypeId/reviews');
+      final reviewData = await DioClient.instance.get(
+          '/${mediaTypeSelected.name}/$mediaTypeId/reviews',
+          queryParameters: {
+            'language': languageName,
+          });
 
       List<ReviewRemoteEntity> reviewList = reviewData['results']
           .map<ReviewRemoteEntity>(
@@ -68,6 +85,7 @@ class MediaRepositoryImpl implements MediaRepository {
   Future<MediaResponseEntity> getMedia(
     MediaType mediaTypeSelected,
     String mediaTypeId,
+    String languageName,
   ) async {
     try {
       final response = await DioClient.instance

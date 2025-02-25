@@ -39,22 +39,24 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
       var index = _tabController.index;
       switch (index) {
         case 0:
-          ref.read(fetchMediaItemProvider(MediaItemState(
+          ref.read(mediaItemDetailProvider(MediaItemState(
             mediaType: widget.mediaTypeSelected,
             id: widget.mediaItemId,
+            languageName: context.localizations.localeName,
           )));
-
           break;
         case 1:
           ref.read(fetchReviewsProvider(MediaItemState(
             mediaType: widget.mediaTypeSelected,
             id: widget.mediaItemId,
+            languageName: context.localizations.localeName,
           )));
           break;
         case 2:
           ref.read(mediaCreditsProvider(CreditsMediaState(
             mediaType: widget.mediaTypeSelected,
             id: widget.mediaItemId,
+            languageName: context.localizations.localeName,
             isCast: true,
           )));
           break;
@@ -62,6 +64,7 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
           ref.read(mediaCreditsProvider(CreditsMediaState(
             mediaType: widget.mediaTypeSelected,
             id: widget.mediaItemId,
+            languageName: context.localizations.localeName,
             isCast: false,
           )));
           break;
@@ -77,26 +80,29 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
 
   @override
   Widget build(BuildContext context) {
-    final state = ref
-        .read(fetchMediaItemProvider(MediaItemState(
-          mediaType: widget.mediaTypeSelected,
-          id: widget.mediaItemId,
-        )))
-        .requireValue;
+    final state = ref.read(mediaItemDetailProvider(MediaItemState(
+      mediaType: widget.mediaTypeSelected,
+      id: widget.mediaItemId,
+      languageName: context.localizations.localeName,
+    )));
+
+    return mediaDetailWidget(state);
+  }
+
+  mediaDetailWidget(AsyncValue<MediaItemDetailState?> state) {
+    final item = state.value;
 
     return SingleChildScrollView(
       child: Column(
         children: [
-          Shimmer(
-            child: state.mediaItem == null
-                ? buildMediaDayWidget(context)
-                : BackgroundImageMediaItem(
-                    title: state.mediaItem?.title ?? '',
-                    productionCompanyImage: state.productionCompanyImage ?? '',
-                    isHomeScreen: false,
-                    mediaItem: state.mediaItem,
-                  ),
-          ),
+          item?.mediaItem == null
+              ? Shimmer(child: buildMediaDayWidget(context))
+              : BackgroundImageMediaItem(
+                  title: item?.mediaItem.title ?? '',
+                  productionCompanyImage: item?.productionCompanyImage ?? '',
+                  isHomeScreen: false,
+                  mediaItem: item?.mediaItem,
+                ),
           Padding(
             padding: const EdgeInsets.all(12),
             child: DefaultTabController(
@@ -122,19 +128,19 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                       children: [
                         ContainerTabMediaItem(
                           child: InfoMedia(
-                            mediaItem: state.mediaItem,
-                            media: state.mediaList,
+                            mediaItem: item?.mediaItem,
+                            media: item?.mediaList,
                           ),
                         ),
                         Shimmer(
-                          child: state.reviews == null
+                          child: item?.reviews == null
                               ? buildMediaDayWidget(context)
                               : ContainerTabMediaItem(
                                   child: ListView.builder(
-                                    itemCount: state.reviews?.length,
+                                    itemCount: item?.reviews?.length,
                                     itemBuilder: (context, index) {
                                       ReviewEntity? review =
-                                          state.reviews?[index];
+                                          item?.reviews![index];
 
                                       return ReviewsWidgetItem(
                                         review: review,
@@ -144,18 +150,18 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                                 ),
                         ),
                         Shimmer(
-                          child: state.cast == null
+                          child: item?.cast == null
                               ? buildMediaDayWidget(context)
                               : ContainerTabMediaItem(
-                                  child: MediaDataCast(cast: state.cast ?? []),
+                                  child: MediaDataCast(cast: item?.cast ?? []),
                                 ),
                         ),
                         Shimmer(
-                          child: state.crew == null
+                          child: item?.crew == null
                               ? buildMediaDayWidget(context)
                               : ContainerTabMediaItem(
                                   child: MediaDataProduction(
-                                      crew: state.crew ?? []),
+                                      crew: item?.crew ?? []),
                                 ),
                         )
                       ],

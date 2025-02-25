@@ -10,10 +10,11 @@ final fetchReviewsProvider =
   ref,
   mediaItemState,
 ) {
-  return ref.watch(mediaRepositoryProvider).getReviews(
+  return ref.read(mediaRepositoryProvider).getReviews(
         MediaType.values.firstWhere(
             (mediaType) => mediaType.name == mediaItemState.mediaType),
         mediaItemState.id,
+        mediaItemState.languageName,
       );
 });
 
@@ -22,20 +23,23 @@ final fetchMediaProvider =
   ref,
   mediaItemState,
 ) {
-  return ref.watch(mediaRepositoryProvider).getMedia(
+  return ref.read(mediaRepositoryProvider).getMedia(
         MediaType.values.firstWhere(
             (mediaType) => mediaType.name == mediaItemState.mediaType),
         mediaItemState.id,
+        mediaItemState.languageName,
       );
 });
 
 class MediaItemState {
   final String mediaType;
   final String id;
+  final String languageName;
 
   const MediaItemState({
     required this.mediaType,
     required this.id,
+    required this.languageName,
   });
 }
 

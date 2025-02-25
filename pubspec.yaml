@@ -12,7 +12,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-
+  # horusvision: ^1.0.0
   go_router: ^14.4.1
   
   # Freezed - Model Smart Generation

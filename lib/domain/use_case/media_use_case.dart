@@ -11,21 +11,25 @@ abstract class MediaUseCase {
   Future<MediaItemEntity> getMediaItem(
     MediaType mediaTypeSelected,
     String mediaTypeId,
+    String languageName,
   );
 
   Future<CreditsMediaEntity?> getCredits(
     MediaType mediaTypeSelected,
     String mediaTypeId,
+    String languageName,
   );
 
   Future<List<ReviewEntity>?> getReviews(
     MediaType mediaTypeSelected,
     String mediaTypeId,
+    String languageName,
   );
 
   Future<MediaResponseEntity> getMedia(
     MediaType mediaTypeSelected,
     String mediaTypeId,
+    String languageName,
   );
 
   Future<(int page, List<MediaSimpleItemEntity> items)> getMediaDataByGenre(
@@ -62,26 +66,54 @@ class MediaUseCaseImpl extends MediaUseCase {
 
   @override
   Future<MediaItemEntity> getMediaItem(
-      MediaType mediaTypeSelected, String mediaTypeId) async {
-    return mediaRepository.getMediaItem(mediaTypeSelected, mediaTypeId);
+    MediaType mediaTypeSelected,
+    String mediaTypeId,
+    String languageName,
+  ) async {
+    return mediaRepository.getMediaItem(
+      mediaTypeSelected,
+      mediaTypeId,
+      languageName,
+    );
   }
 
   @override
   Future<CreditsMediaEntity?> getCredits(
-      MediaType mediaTypeSelected, String mediaTypeId) async {
-    return await mediaRepository.getCredits(mediaTypeSelected, mediaTypeId);
+    MediaType mediaTypeSelected,
+    String mediaTypeId,
+    String languageName,
+  ) async {
+    return await mediaRepository.getCredits(
+      mediaTypeSelected,
+      mediaTypeId,
+      languageName,
+    );
   }
 
   @override
   Future<List<ReviewEntity>?> getReviews(
-      MediaType mediaTypeSelected, String mediaTypeId) async {
-    return await mediaRepository.getReviews(mediaTypeSelected, mediaTypeId);
+    MediaType mediaTypeSelected,
+    String mediaTypeId,
+    String languageName,
+  ) async {
+    return await mediaRepository.getReviews(
+      mediaTypeSelected,
+      mediaTypeId,
+      languageName,
+    );
   }
 
   @override
   Future<MediaResponseEntity> getMedia(
-      MediaType mediaTypeSelected, String mediaTypeId) async {
-    return await mediaRepository.getMedia(mediaTypeSelected, mediaTypeId);
+    MediaType mediaTypeSelected,
+    String mediaTypeId,
+    String languageName,
+  ) async {
+    return await mediaRepository.getMedia(
+      mediaTypeSelected,
+      mediaTypeId,
+      languageName,
+    );
   }
 
   @override

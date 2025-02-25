@@ -7,53 +7,58 @@ import 'package:film_flu/domain/models/media_response_entity.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:film_flu/domain/repository/media_repository.dart';
 import 'package:film_flu/presentation/notifiers/media_notifier.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'media_detail_notifier.g.dart';
 
 @riverpod
-Future<MediaItemDetailState> fetchMediaItem(
-  Ref ref,
-  MediaItemState mediaItemState,
-) async {
-  final mediaItemResponse =
-      await ref.watch(mediaRepositoryProvider).getMediaItem(
-            MediaType.values.firstWhere(
-                (mediaType) => mediaType.name == mediaItemState.mediaType),
-            mediaItemState.id,
-          );
+class MediaItemDetail extends _$MediaItemDetail {
+  @override
+  Future<MediaItemDetailState?> build(MediaItemState mediaItemState) async {
+    return await getMediaItemDetail(mediaItemState);
+  }
 
-  return MediaItemDetailState(
-    trailerId: _getFirstTrailerId(mediaItemResponse),
-    isTrailerOpened: false,
-    title: mediaItemState.mediaType == MediaType.movie.name
-        ? mediaItemResponse.title
-        : mediaItemResponse.name,
-    mediaItem: mediaItemResponse,
-    productionCompanyImage: mediaItemResponse.productionCompanies!.isNotEmpty
-        ? mediaItemResponse.productionCompanies!.first.logoPath
-        : '',
-  );
-}
+  Future<MediaItemDetailState?> getMediaItemDetail(
+    MediaItemState mediaItemState,
+  ) async {
+    final mediaItemResponse =
+        await ref.read(mediaRepositoryProvider).getMediaItem(
+              MediaType.values.firstWhere(
+                  (element) => element.name == mediaItemState.mediaType),
+              mediaItemState.id,
+              mediaItemState.languageName,
+            );
+    return MediaItemDetailState(
+      trailerId: _getFirstTrailerId(mediaItemResponse),
+      isTrailerOpened: false,
+      // title: mediaItemState.mediaType == MediaType.movie.name
+      //     ? mediaItemResponse.title
+      //     : mediaItemResponse.name,
+      mediaItem: mediaItemResponse,
+      // productionCompanyImage: mediaItemResponse.productionCompanies!.isNotEmpty
+      //     ? mediaItemResponse.productionCompanies!.first.logoPath
+      //     : '',
+    );
+  }
 
-String _getFirstTrailerId(MediaItemEntity mediaItemEntity) {
-  try {
-    return mediaItemEntity.videos!.results
-        .firstWhere((element) =>
-            element.type == AppConstants.trailer ||
-            element.type == AppConstants.teaser)
-        .key
-        .toString();
-  } catch (ex) {
-    return '';
+  String _getFirstTrailerId(MediaItemEntity mediaItemEntity) {
+    try {
+      return mediaItemEntity.videos!.results
+          .firstWhere((element) =>
+              element.type == AppConstants.trailer ||
+              element.type == AppConstants.teaser)
+          .key
+          .toString();
+    } catch (ex) {
+      return '';
+    }
   }
 }
 
 class MediaItemDetailState {
-  final MediaItemEntity? mediaItem;
+  final MediaItemEntity mediaItem;
   final String? title;
-  final String trailerId;
+  final String? trailerId;
   final String? productionCompanyImage;
   final List<ReviewEntity>? reviews;
   final List<ActorEntity>? cast;
@@ -86,9 +91,9 @@ class MediaItemDetailState {
   }
 
   const MediaItemDetailState({
-    this.mediaItem,
+    required this.mediaItem,
     this.title,
-    required this.trailerId,
+    this.trailerId,
     this.productionCompanyImage,
     this.reviews,
     this.cast,

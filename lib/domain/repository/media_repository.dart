@@ -17,21 +17,25 @@ abstract interface class MediaRepository {
   Future<MediaItemEntity> getMediaItem(
     MediaType mediaTypeSelected,
     String mediaTypeId,
+    String languageName,
   );
 
   Future<CreditsMediaEntity?> getCredits(
     MediaType mediaTypeSelected,
     String mediaTypeId,
+    String languageName,
   );
 
   Future<List<ReviewEntity>?> getReviews(
     MediaType mediaTypeSelected,
     String mediaTypeId,
+    String languageName,
   );
 
   Future<MediaResponseEntity> getMedia(
     MediaType mediaTypeSelected,
     String mediaTypeId,
+    String languageName,
   );
 
   Future<(int page, List<MediaSimpleItemEntity> items)> getMediaDataByGenre(

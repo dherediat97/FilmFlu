@@ -15,11 +15,12 @@ class MediaCredits extends _$MediaCredits {
   Future<CreditsMediaEntity?> getCreditsByMediaItem(
     CreditsMediaState creditsMediaState,
   ) async {
-    return ref.watch(mediaRepositoryProvider).getCredits(
+    return ref.read(mediaRepositoryProvider).getCredits(
           MediaType.values.firstWhere(
             (element) => element.name == creditsMediaState.mediaType,
           ),
           creditsMediaState.id,
+          creditsMediaState.languageName,
         );
   }
 }
@@ -27,11 +28,13 @@ class MediaCredits extends _$MediaCredits {
 class CreditsMediaState {
   final String mediaType;
   final String id;
+  final String languageName;
   final bool isCast;
 
   const CreditsMediaState({
     required this.mediaType,
     required this.id,
+    required this.languageName,
     required this.isCast,
   });
 }
