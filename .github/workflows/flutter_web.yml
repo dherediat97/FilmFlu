@@ -41,4 +41,3 @@ jobs:
           with:
             baseHref: /FilmFlu/
             targetBranch: gh-pages
-            webRenderer: html
