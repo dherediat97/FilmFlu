@@ -1,8 +1,10 @@
 import 'package:film_flu/app/constants/app_assets.dart';
+import 'package:film_flu/presentation/notifiers/app_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
-class LanguagePicker extends StatefulWidget {
+class LanguagePicker extends ConsumerStatefulWidget {
   const LanguagePicker({
     super.key,
     required this.language,
@@ -15,29 +17,43 @@ class LanguagePicker extends StatefulWidget {
   final bool isMainMenu;
 
   @override
-  State<LanguagePicker> createState() => _LanguagePickerState();
+  ConsumerState<LanguagePicker> createState() => _LanguagePickerState();
 }
 
-class _LanguagePickerState extends State<LanguagePicker> {
+class _LanguagePickerState extends ConsumerState<LanguagePicker> {
   @override
   Widget build(BuildContext context) {
+    final app = ref.watch(appProvider);
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        SvgPicture.asset(
-          '${AppAssets.flagsFolder}/${widget.language.languageCode}_flag.svg',
-          height: 40,
+        Container(
+          height: 20,
           width: 20,
-          fit: BoxFit.scaleDown,
+          alignment: Alignment.center,
+          child: SvgPicture.asset(
+            '${AppAssets.flagsFolder}/${widget.language.languageCode}_flag.svg',
+            height: 20,
+            width: 20,
+            alignment: Alignment.center,
+            fit: BoxFit.scaleDown,
+          ),
         ),
-        const SizedBox(width: 30),
+        const SizedBox(width: 12),
         widget.isMainMenu
             ? Text(
                 widget.language.languageCode,
                 style: TextStyle(
                   fontSize: 16,
-                  color: widget.isDropdown ? Colors.black : Colors.white,
+                  color: !app.isDarkMode
+                      ? widget.isDropdown
+                          ? Colors.black
+                          : Colors.black
+                      : widget.isDropdown
+                          ? Colors.black
+                          : Colors.white,
                 ),
               )
             : Text(

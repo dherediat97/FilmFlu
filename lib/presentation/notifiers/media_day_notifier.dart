@@ -1,3 +1,4 @@
+import 'package:film_flu/data/models/media_type.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/domain/repository/media_repository.dart';
 import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
@@ -8,27 +9,26 @@ part 'media_day_notifier.g.dart';
 @riverpod
 class MediaDay extends _$MediaDay {
   @override
-  Future<MediaItemEntity?> build(MediaFilter mediaFilter) async {
+  Future<MediaDayItemState?> build(MediaFilter mediaFilter) async {
     return await getMediaListByMediaType(mediaFilter);
   }
 
-  Future<MediaItemEntity?> getMediaListByMediaType(
+  Future<MediaDayItemState?> getMediaListByMediaType(
     MediaFilter mediaFilter,
   ) async {
     final mediaDataItemResponse =
         await ref.read(mediaRepositoryProvider).getMediaDataDay(mediaFilter);
 
-    return mediaDataItemResponse;
-    // return MediaDayItemState(
-    //   mediaItem: mediaDataItemResponse,
-    //   title: mediaFilter.mediaTypeSelected == MediaType.movie
-    //       ? mediaDataItemResponse.title
-    //       : mediaDataItemResponse.name,
-    //   productionCompanyImage:
-    //       mediaDataItemResponse.productionCompanies!.isNotEmpty
-    //           ? mediaDataItemResponse.productionCompanies!.first.logoPath
-    //           : '',
-    // );
+    return MediaDayItemState(
+      mediaItem: mediaDataItemResponse,
+      title: mediaFilter.mediaTypeSelected == MediaType.movie
+          ? mediaDataItemResponse.title
+          : mediaDataItemResponse.name,
+      productionCompanyImage:
+          mediaDataItemResponse.productionCompanies!.isNotEmpty
+              ? mediaDataItemResponse.productionCompanies!.first.logoPath
+              : '',
+    );
   }
 }
 

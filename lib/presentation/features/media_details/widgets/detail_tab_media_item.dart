@@ -39,27 +39,27 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
       var index = _tabController.index;
       switch (index) {
         case 0:
-          ref.watch(fetchMediaItemProvider(MediaItemState(
+          ref.read(fetchMediaItemProvider(MediaItemState(
             mediaType: widget.mediaTypeSelected,
             id: widget.mediaItemId,
           )));
 
           break;
         case 1:
-          ref.watch(fetchReviewsProvider(MediaItemState(
+          ref.read(fetchReviewsProvider(MediaItemState(
             mediaType: widget.mediaTypeSelected,
             id: widget.mediaItemId,
           )));
           break;
         case 2:
-          ref.watch(mediaCreditsProvider(CreditsMediaState(
+          ref.read(mediaCreditsProvider(CreditsMediaState(
             mediaType: widget.mediaTypeSelected,
             id: widget.mediaItemId,
             isCast: true,
           )));
           break;
         case 3:
-          ref.watch(mediaCreditsProvider(CreditsMediaState(
+          ref.read(mediaCreditsProvider(CreditsMediaState(
             mediaType: widget.mediaTypeSelected,
             id: widget.mediaItemId,
             isCast: false,
@@ -78,7 +78,7 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
   @override
   Widget build(BuildContext context) {
     final state = ref
-        .watch(fetchMediaItemProvider(MediaItemState(
+        .read(fetchMediaItemProvider(MediaItemState(
           mediaType: widget.mediaTypeSelected,
           id: widget.mediaItemId,
         )))
@@ -91,6 +91,7 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
             child: state.mediaItem == null
                 ? buildMediaDayWidget(context)
                 : BackgroundImageMediaItem(
+                    title: state.mediaItem?.title ?? '',
                     productionCompanyImage: state.productionCompanyImage ?? '',
                     isHomeScreen: false,
                     mediaItem: state.mediaItem,

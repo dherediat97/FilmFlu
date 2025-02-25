@@ -50,14 +50,8 @@ abstract interface class MediaRepository {
     String languageId,
   );
 
-  // Future<List<MediaSimpleItemEntity>> paginateMediaData({
-  //   required MediaType mediaTypeSelected,
-  //   required int page,
-  //   required int genreId,
-  // });
-
-  Future<List<MediaItemEntity>?> searchMediaData(
-    MediaType mediaTypeSelected,
+  Future<List<MediaItemEntity>> searchMediaData(
+    String languageName,
     String query,
   );
 

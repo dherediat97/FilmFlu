@@ -35,12 +35,6 @@ abstract class MediaUseCase {
     int page,
   );
 
-  // Future<Result<List<MediaSimpleItemEntity>>> paginateMediaData({
-  //   required MediaType mediaTypeSelected,
-  //   required int genreId,
-  //   required int page,
-  // });
-
   Future<(int page, List<MediaSimpleItemEntity> items)> getMovies(
     int genreId,
     String languageId,
@@ -53,8 +47,8 @@ abstract class MediaUseCase {
     int page,
   );
 
-  Future<List<MediaItemEntity>?> searchMediaData(
-    MediaType mediaTypeSelected,
+  Future<List<MediaItemEntity>> searchMediaData(
+    String languageName,
     String query,
   );
 
@@ -129,25 +123,12 @@ class MediaUseCaseImpl extends MediaUseCase {
     return serieList;
   }
 
-  // @override
-  // Future<Result<List<MediaSimpleItemEntity>>> paginateMediaData({
-  //   required MediaType mediaTypeSelected,
-  //   required int genreId,
-  //   required int page,
-  // }) async {
-  //   return await mediaListRepository.paginateMediaData(
-  //     mediaTypeSelected: mediaTypeSelected,
-  //     genreId: genreId,
-  //     page: page,
-  //   );
-  // }
-
   @override
-  Future<List<MediaItemEntity>?> searchMediaData(
-    MediaType mediaTypeSelected,
+  Future<List<MediaItemEntity>> searchMediaData(
+    String languageName,
     String query,
   ) async {
-    return await mediaRepository.searchMediaData(mediaTypeSelected, query);
+    return await mediaRepository.searchMediaData(languageName, query);
   }
 
   @override

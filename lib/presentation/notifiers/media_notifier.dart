@@ -29,28 +29,6 @@ final fetchMediaProvider =
       );
 });
 
-// final fetchPaginateMediaProvider =
-//     Provider.family<MediaListResponse, MediaListPaginateState>((
-//   ref,
-//   mediaListState,
-// ) {
-//   final paginateResponseMediaData =
-//       ref.watch(mediaRepositoryProvider).paginateMediaData(
-//             genreId: mediaListState.genreId,
-//             mediaTypeSelected: MediaType.values.firstWhere(
-//                 (mediaType) => mediaType.name == mediaListState.mediaType),
-//             page: mediaListState.page,
-//           );
-
-//   return MediaListPaginateState(
-//     movieData: paginateResponseMediaData.where((element) {
-//       return element.mediaType == MediaType.movie;
-//     }).toList(),
-//     serieData: serieData,
-//     page: mediaListState.page,
-//   );
-// });
-
 class MediaItemState {
   final String mediaType;
   final String id;

@@ -46,7 +46,6 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
   @override
   Widget build(BuildContext context) {
     BuildContext dialogContext;
-
     var state = ref.read(fetchMediaItemProvider(
       MediaItemState(mediaType: widget.mediaType, id: widget.mediaId),
     ));
@@ -173,6 +172,10 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
         );
       },
     );
+  }
+
+  mediaItemState() {
+    return;
   }
 
   initTrailerController() {

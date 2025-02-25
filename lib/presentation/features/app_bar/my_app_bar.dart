@@ -1,12 +1,15 @@
 import 'package:film_flu/app/constants/app_assets.dart';
-import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:film_flu/app/constants/app_constants.dart';
+import 'package:film_flu/app/constants/app_urls.dart';
+import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
+import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/presentation/features/app_bar/provider/app_language_provider.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/data/models/media_type.dart';
 import 'package:film_flu/presentation/features/app_bar/widgets/language_picker.dart';
 import 'package:film_flu/presentation/notifiers/app_notifier.dart';
+import 'package:film_flu/presentation/view_models/searched_media_list_view_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -35,12 +38,10 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
     final languageProvider = ref.watch(appLanguageProvider.notifier);
 
     return AppBar(
-      title: titleScaffold(context, widget.mediaTypeSelected),
+      title: searchBar(),
       automaticallyImplyLeading: true,
       titleTextStyle: Theme.of(context).textTheme.headlineLarge,
-      backgroundColor: widget.mainMenu
-          ? Theme.of(context).colorScheme.onPrimary
-          : Theme.of(context).colorScheme.primary,
+      backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
       leadingWidth: 120,
       leading: IconButton(
           padding: EdgeInsets.zero,
@@ -55,7 +56,7 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
             if (!widget.mainMenu) {
               context.pop();
             } else {
-              context.go(AppRoutePaths.moviesRoute);
+              context.go(AppRoutePaths.homeRoute);
             }
           }),
       actions: [
@@ -88,6 +89,7 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
       IconButton(
         icon: Icon(
           widget.mainMenu ? Icons.light_mode : Icons.dark_mode,
+          color: Theme.of(context).colorScheme.onSurface,
         ),
         onPressed: () {
           ref.read(appProvider.notifier).toggle();
@@ -95,34 +97,35 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
       ),
     );
 
-    actions.add(DropdownButton<Locale>(
-        dropdownColor: widget.mainMenu ? Colors.white : Colors.white,
-        onChanged: (language) {
-          languageProvider.changeLanguage(language!);
-        },
-        selectedItemBuilder: (context) =>
-            AppLocalizations.supportedLocales.map<Widget>((Locale language) {
-              return LanguagePicker(
-                language: language,
-                isDropdown: false,
-                isMainMenu: widget.mainMenu,
-              );
-            }).toList(),
-        padding: const EdgeInsets.all(8),
-        elevation: 4,
-        value: ref.watch(appLanguageProvider),
-        underline: const SizedBox(height: 0),
-        items: AppLocalizations.supportedLocales
-            .map<DropdownMenuItem<Locale>>((Locale language) {
-          return DropdownMenuItem<Locale>(
-            value: language,
-            child: LanguagePicker(
-              language: language,
-              isDropdown: true,
-              isMainMenu: widget.mainMenu,
-            ),
-          );
-        }).toList()));
+    actions.add(
+      DropdownButton<Locale>(
+          dropdownColor: Colors.white,
+          onChanged: (language) => languageProvider.changeLanguage(language!),
+          selectedItemBuilder: (context) =>
+              AppLocalizations.supportedLocales.map<Widget>((Locale language) {
+                return LanguagePicker(
+                  language: language,
+                  isDropdown: false,
+                  isMainMenu: widget.mainMenu,
+                );
+              }).toList(),
+          padding: const EdgeInsets.all(8),
+          elevation: 4,
+          value: ref.watch(appLanguageProvider),
+          underline: const SizedBox(height: 0),
+          items: AppLocalizations.supportedLocales
+              .map<DropdownMenuItem<Locale>>(
+                (Locale language) => DropdownMenuItem<Locale>(
+                  value: language,
+                  child: LanguagePicker(
+                    language: language,
+                    isDropdown: true,
+                    isMainMenu: widget.mainMenu,
+                  ),
+                ),
+              )
+              .toList()),
+    );
 
     actions.add(
       IconButton(
@@ -130,8 +133,10 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
           AppAssets.githubIcon,
           width: 24,
           height: 24,
-          colorFilter: const ColorFilter.mode(
-              AppColors.backgroundColorLight, BlendMode.srcIn),
+          colorFilter: ColorFilter.mode(
+            Theme.of(context).colorScheme.onSurface,
+            BlendMode.srcIn,
+          ),
         ),
         onPressed: () {
           launchUrl(Uri.parse(AppConstants.myGithubPage));
@@ -150,8 +155,9 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
             //Lanzar url que descarga la app para android
             await launchUrl(url);
           },
-          icon: const Icon(
+          icon: Icon(
             Icons.android,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
       );
@@ -159,12 +165,63 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
     return actions;
   }
 
-  Widget titleScaffold(BuildContext context, mediaTypeSelected) {
-    if (mediaTypeSelected != MediaType.movie &&
-        mediaTypeSelected != MediaType.tv) {
-      return SearchBar(onChanged: (value) {});
-    } else {
-      return Container();
-    }
+  Widget searchBar() {
+    List<MediaItemEntity> searchResults = [];
+    String languageName = context.localizations.localeName;
+    return SearchAnchor(
+      suggestionsBuilder: (BuildContext context, SearchController controller) {
+        return List<ListTile>.generate(searchResults.length, (index) {
+          return ListTile(
+            titleTextStyle: Theme.of(context).textTheme.titleSmall,
+            leading: Image.network(
+              searchResults[index].mediaType == MediaType.movie.name
+                  ? AppUrls.movieImgBaseURL + searchResults[index].backdropPath!
+                  : AppUrls.movieLandscapeBaseUrl +
+                      searchResults[index].backdropPath!,
+              height: 400,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Image.asset(AppAssets.emptyStateImage);
+              },
+            ),
+            title: Text(searchResults[index].mediaType == MediaType.movie.name
+                ? searchResults[index].title!
+                : searchResults[index].name!),
+            subtitle: Text(
+              searchResults[index].mediaType == MediaType.movie.name
+                  ? searchResults[index].releaseDate!
+                  : searchResults[index].firstAirDate!,
+            ),
+          );
+        });
+      },
+      builder: (context, controller) {
+        return SearchBar(
+          autoFocus: true,
+          textInputAction: TextInputAction.search,
+          controller: controller,
+          padding: const WidgetStatePropertyAll<EdgeInsets>(
+            EdgeInsets.symmetric(horizontal: 16.0),
+          ),
+          // onTapOutside: (event) => controller.closeView(''),
+          // onSubmitted: (value) => controller.closeView(value),
+          leading: Icon(Icons.search),
+          onChanged: (value) {
+            if (value.length > 3) {
+              Future.delayed(Duration(milliseconds: 2500), () async {
+                searchResults = await ref
+                    .read(searchMediaListProvider.notifier)
+                    .search(languageName, value);
+
+                searchResults.isNotEmpty && !controller.isOpen
+                    ? controller.openView()
+                    : null;
+              });
+            }
+          },
+          hintText: context.localizations.search,
+        );
+      },
+    );
   }
 }

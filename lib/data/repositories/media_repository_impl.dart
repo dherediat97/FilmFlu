@@ -95,30 +95,6 @@ class MediaRepositoryImpl implements MediaRepository {
     }
   }
 
-  // @override
-  // Future<Result<List<MediaSimpleItemEntity>>> paginateMediaData({
-  //   required MediaType mediaTypeSelected,
-  //   required int genreId,
-  //   required int page,
-  // }) async {
-  //   try {
-  //     List<MediaItemRemoteEntity> movieList = await filmFluApi.fetchMediaData(
-  //       mediaTypeSelected: mediaTypeSelected,
-  //       genreId: genreId,
-  //       page: page,
-  //     );
-
-  //     return Result.success(
-  //         movieList.map((e) => e.toSimpleMediaEntity()).toList());
-  //   } catch (error) {
-  //     return Result.failure(
-  //       error: RepositoryError.fromDataSourceError(
-  //         NetworkError.fromException(error),
-  //       ),
-  //     );
-  //   }
-  // }
-
   @override
   Future<(int page, List<MediaSimpleItemEntity> items)> getMovies(
     int genreId,
@@ -166,32 +142,43 @@ class MediaRepositoryImpl implements MediaRepository {
   }
 
   @override
-  Future<List<MediaItemEntity>?> searchMediaData(
-    MediaType mediaTypeSelected,
+  Future<List<MediaItemEntity>> searchMediaData(
+    String languageName,
     String query,
   ) async {
     try {
-      final response = await DioClient.instance
-          .get('/search/${mediaTypeSelected.name}', queryParameters: {
+      final response =
+          await DioClient.instance.get('/search/multi', queryParameters: {
         'query': query,
+        'language': languageName,
       });
-      final mediaDataSearched = response['results']
+
+      List<MediaItemRemoteEntity> mediaData = response['results']
           .map<MediaItemRemoteEntity>(
               (e) => MediaItemRemoteEntity.fromJson(e as Map<String, dynamic>))
           .toList();
-      return mediaDataSearched;
-    } catch (error) {
-      return null;
+
+      return mediaData.map((e) => e.toMediaEntity()).toList();
+    } on DioException catch (e) {
+      throw e.errorMessage;
     }
   }
 
   @override
   Future<MediaItemEntity> getMediaDataDay(MediaFilter mediaFilter) async {
     final response = mediaFilter.mediaTypeSelected == MediaType.movie
-        ? await DioClient.instance
-            .get('/${mediaFilter.mediaTypeSelected.name}/now_playing')
-        : await DioClient.instance
-            .get('/${mediaFilter.mediaTypeSelected.name}/on_the_air');
+        ? await DioClient.instance.get(
+            '/${mediaFilter.mediaTypeSelected.name}/now_playing',
+            queryParameters: {
+              'language': mediaFilter.languageId,
+            },
+          )
+        : await DioClient.instance.get(
+            '/${mediaFilter.mediaTypeSelected.name}/on_the_air',
+            queryParameters: {
+              'language': mediaFilter.languageId,
+            },
+          );
 
     List<MediaItemRemoteEntity> mediaData = response['results']
         .map<MediaItemRemoteEntity>(
