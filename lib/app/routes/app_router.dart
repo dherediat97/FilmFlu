@@ -6,6 +6,7 @@ import 'package:film_flu/presentation/features/search/search_screen.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/series_list.dart';
 import 'package:film_flu/presentation/features/person_details/person_details_controller.dart';
 import 'package:film_flu/presentation/features/settings/settings_screen.dart';
+import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -71,10 +72,12 @@ GoRouter goRouter(Ref ref) {
             path: 'settings',
             builder: (context, state) => const SettingsScreen(),
           ),
-          // GoRoute(
-          //   path: 'horusVision',
-          //   builder: (context, state) => const HorusVision(),
-          // ),
+          GoRoute(
+            path: 'horusVision',
+            builder: (context, state) => ScaffoldPage(
+              child: Container(),
+            ),
+          ),
         ],
       ),
     ],
