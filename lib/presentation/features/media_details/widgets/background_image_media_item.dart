@@ -2,8 +2,8 @@ import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/core/utils/util_date.dart';
+import 'package:film_flu/data/models/media_type.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
-import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:film_flu/presentation/features/media_details/constants/media_detail_constants.dart';
 import 'package:film_flu/presentation/widgets/default_image_loader.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +15,11 @@ class BackgroundImageMediaItem extends StatelessWidget {
     required this.mediaItem,
     required this.isHomeScreen,
     required this.productionCompanyImage,
+    required this.title,
   });
 
   final String productionCompanyImage;
+  final String title;
   final MediaItemEntity? mediaItem;
   final bool isHomeScreen;
 
@@ -32,7 +34,7 @@ class BackgroundImageMediaItem extends StatelessWidget {
                     '${AppUrls.movieLandscapeBaseUrl}${mediaItem?.backdropPath}',
               ),
               Padding(
-                padding: const EdgeInsets.all(32.0),
+                padding: const EdgeInsets.all(24),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -53,11 +55,23 @@ class BackgroundImageMediaItem extends StatelessWidget {
                           ),
                         ],
                       ),
-                    Text(
-                      mediaItem!.title!.isNotEmpty
-                          ? mediaItem!.title!
-                          : mediaItem!.name!,
-                      style: Theme.of(context).textTheme.titleLarge,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          softWrap: true,
+                          style:
+                              Theme.of(context).textTheme.titleMedium!.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                      ],
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.min,
@@ -76,48 +90,26 @@ class BackgroundImageMediaItem extends StatelessWidget {
                           const SizedBox(
                             width: 20,
                           ),
-                          const Icon(
-                            Icons.date_range_outlined,
-                            size: 24,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
                           Text(
                             getYear(mediaItem!) ?? '',
+                            textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
-                        ]
+                        ],
                       ],
                     ),
                     if (isHomeScreen) ...[
                       const Spacer(),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.add,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Text(
-                                context.localizations.add_to_my_list,
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            ],
-                          ),
-                          Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               IconButton(
+                                tooltip: mediaItem?.overview ?? '',
                                 onPressed: () {
                                   MediaType mediaTypeSelected =
                                       mediaItem!.title != ''

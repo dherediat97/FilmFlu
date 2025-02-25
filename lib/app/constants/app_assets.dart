@@ -7,6 +7,7 @@ class AppAssets {
   static const String imagesFolder = '$assetsFolder/images';
   static const String iconsFolder = '$assetsFolder/icons';
   static const String animationsFolder = '$assetsFolder/animations';
+  static const String flagsFolder = '$assetsFolder/flags';
 
   static const String logoSvgIcon = '$imagesFolder/logo.svg';
   static const String logoIcon = '$imagesFolder/logo.png';

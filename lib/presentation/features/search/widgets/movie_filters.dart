@@ -1,8 +1,6 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/presentation/features/search/bloc/search_bloc.dart';
 import 'package:film_flu/presentation/features/search/widgets/media_category.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 class MovieFiltersWidget extends StatelessWidget {
@@ -67,10 +65,10 @@ class MovieFiltersWidget extends StatelessWidget {
   }
 
   addMovieFilter(BuildContext context) {
-    context
-        .read<SearchBloc>()
-        .add(const SearchEvent.addMovieFilters(MovieFilters(
-          isActionMovieFiltered: true,
-        )));
+    // context
+    //     .read<SearchBloc>()
+    //     .add(const SearchEvent.addMovieFilters(MovieFilters(
+    //       isActionMovieFiltered: true,
+    //     )));
   }
 }

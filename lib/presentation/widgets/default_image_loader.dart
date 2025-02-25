@@ -14,6 +14,8 @@ class DefaultImageWidget extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: imageUrl!,
       cacheKey: imageUrl,
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
       errorWidget: (context, url, error) => const Icon(Icons.error),
       imageBuilder: (context, imageProvider) => Container(
         decoration: BoxDecoration(
@@ -21,10 +23,6 @@ class DefaultImageWidget extends StatelessWidget {
           image: DecorationImage(
             image: imageProvider,
             fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.6),
-              BlendMode.dstATop,
-            ),
           ),
         ),
       ),

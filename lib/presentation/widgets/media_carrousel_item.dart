@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
+import 'package:film_flu/data/models/media_type.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
-import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
 
 class MediaCarrouselItem extends StatelessWidget {
@@ -20,8 +20,8 @@ class MediaCarrouselItem extends StatelessWidget {
       children: [
         SizedBox(
           key: key,
-          width: 140,
-          height: 200,
+          width: 150,
+          height: 204,
           child: CachedNetworkImage(
             imageUrl: '${AppUrls.movieImgBaseURL}${mediaItem?.posterPath}',
             imageBuilder: (context, imageProvider) => Container(

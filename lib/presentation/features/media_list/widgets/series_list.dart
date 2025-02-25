@@ -1,5 +1,5 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
+import 'package:film_flu/data/models/media_type.dart';
 import 'package:film_flu/presentation/features/home/widgets/media_day_widget.dart';
 import 'package:film_flu/presentation/features/media_list/media_list.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,9 @@ class SeriesListWidget extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const MediaDayWidget(),
+          MediaDayWidget(
+            mediaTypeSelected: MediaType.tv,
+          ),
           MediaList(
             mediaType: MediaType.tv,
             genreId: 16,
@@ -31,12 +33,12 @@ class SeriesListWidget extends StatelessWidget {
             key: const Key('80'),
             title: context.localizations.horror_type,
           ),
-          MediaList(
-            mediaType: MediaType.tv,
-            genreId: 99,
-            key: const Key('99'),
-            title: context.localizations.crime_type,
-          ),
+          // MediaList(
+          //   mediaType: MediaType.tv,
+          //   genreId: 99,
+          //   key: const Key('99'),
+          //   title: context.localizations.crime_type,
+          // ),
           // MediaList(
           //   mediaType: MediaType.tv,
           //   genreId: 18,

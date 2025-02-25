@@ -1,49 +1,54 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
-import 'package:film_flu/app/types/ui_state.dart';
+import 'package:film_flu/data/models/media_type.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
-import 'package:film_flu/presentation/features/bottom_app_bar/bloc/home_bloc.dart';
-import 'package:film_flu/presentation/features/media_list/bloc/media_list_bloc.dart';
+import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
+import 'package:film_flu/presentation/view_models/media_list_view_model.dart';
 import 'package:film_flu/presentation/widgets/media_carrousel_item.dart';
 import 'package:film_flu/presentation/widgets/shimmer_loading.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class MediaList extends StatefulWidget {
+class MediaList extends ConsumerStatefulWidget {
   const MediaList({
     super.key,
     required this.genreId,
     required this.title,
     required this.mediaType,
-    this.languageId = 'es',
   });
 
   final MediaType mediaType;
   final String title;
-  final String languageId;
   final int genreId;
 
   @override
-  State<MediaList> createState() => _MediaDataList();
+  ConsumerState<MediaList> createState() => _MediaDataList();
 }
 
-class _MediaDataList extends State<MediaList> {
-  int _currentPage = 1;
+class _MediaDataList extends ConsumerState<MediaList> {
   final CarouselController _carouselController = CarouselController();
+
+  MediaListViewModel get viewModel =>
+      ref.read(mediaListViewModelProvider(MediaFilter(
+        mediaTypeSelected: widget.mediaType,
+        genredId: widget.genreId,
+        languageId: context.localizations.localeName,
+      )).notifier);
+
+  MediaFilterNotifier get mediaFilterController => ref.read(mediaFilterProvider(
+        MediaFilter(
+          mediaTypeSelected: widget.mediaType,
+          genredId: widget.genreId,
+          languageId: context.localizations.localeName,
+        ),
+      ).notifier);
 
   @override
   void initState() {
     super.initState();
     _carouselController.addListener(_loadMore);
-
-    context.read<MediaListBloc>().add(
-          MediaListEvent.getMediaDataByGenre(
-            widget.mediaType,
-            widget.genreId,
-            widget.languageId,
-          ),
-        );
   }
 
   @override
@@ -55,91 +60,107 @@ class _MediaDataList extends State<MediaList> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MediaListBloc, MediaListState>(
-      buildWhen: (previous, current) {
-        return !current.uiState.isLoading();
-      },
-      builder: (context, state) {
-        List<MediaSimpleItemEntity>? mediaDataList =
-            widget.mediaType == MediaType.movie
-                ? state.movieData[widget.genreId]
-                : state.serieData[widget.genreId];
+    final mediaFilter = ref.watch(mediaFilterProvider(MediaFilter(
+      mediaTypeSelected: widget.mediaType,
+      genredId: widget.genreId,
+      languageId: context.localizations.localeName,
+    )));
+    final state = ref.watch(mediaListViewModelProvider(mediaFilter));
 
-        return Padding(
-          key: widget.key,
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
-              AutoSizeText(
-                widget.title,
-                maxFontSize: 30,
-                minFontSize: 20,
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(height: 20),
-              if (widget.mediaType == MediaType.movie)
-                mediaDataList == null
-                    ? Shimmer(
-                        child: buildTopRowList(),
-                      )
-                    : SizedBox(
-                        height: 220,
-                        child: CarouselView(
-                          padding: const EdgeInsets.all(8.0),
-                          itemExtent: 180,
-                          onTap: (index) {
-                            context.push(
-                              widget.mediaType == MediaType.movie
-                                  ? '${AppRoutePaths.moviesRoute}/${mediaDataList[index].id}'
-                                  : '${AppRoutePaths.seriesRoute}/${mediaDataList[index].id}',
+    return NotificationListener(
+      onNotification: (ScrollNotification scrollInfo) {
+        if (scrollInfo is ScrollEndNotification &&
+            scrollInfo.metrics.axisDirection == AxisDirection.down &&
+            scrollInfo.metrics.pixels >= scrollInfo.metrics.maxScrollExtent) {
+          if (viewModel.canLoadMore) {
+            viewModel.loadNextPage(mediaFilter);
+          }
+        }
+        return true;
+      },
+      child: Padding(
+        padding: EdgeInsets.all(16),
+        child: mediaWidgetList(state),
+      ),
+    );
+  }
+
+  mediaWidgetList(AsyncValue<List<MediaSimpleItemEntity>> state) {
+    final items = state.valueOrNull ?? [];
+    final initialLoading = state.isLoading && items.isEmpty;
+    final loadingMore = state.isLoading && items.isNotEmpty;
+
+    return initialLoading
+        ? Shimmer(child: buildListItem(initialLoading))
+        : loadingMore
+            ? const CircularProgressIndicator()
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 20),
+                  AutoSizeText(
+                    widget.title,
+                    maxFontSize: 30,
+                    minFontSize: 20,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const SizedBox(height: 20),
+                  if (widget.mediaType == MediaType.movie)
+                    SizedBox(
+                      height: 220,
+                      child: CarouselView(
+                        controller: _carouselController,
+                        padding: const EdgeInsets.all(8.0),
+                        itemExtent: 180,
+                        onTap: (index) {
+                          context.push(
+                            '${AppRoutePaths.moviesRoute}/${items[index].id}',
+                          );
+                        },
+                        children: List.generate(
+                          items.length,
+                          (int index) {
+                            return MediaCarrouselItem(
+                              mediaItem: items[index],
+                              mediaTypeSelected: MediaType.movie,
                             );
                           },
-                          children: List<Widget>.generate(
-                            mediaDataList.length,
-                            (int index) {
-                              return MediaCarrouselItem(
-                                mediaItem: mediaDataList[index],
-                                mediaTypeSelected: MediaType.movie,
-                              );
-                            },
-                          ),
                         ),
                       ),
-              if (widget.mediaType == MediaType.tv)
-                mediaDataList == null
-                    ? Shimmer(
-                        child: buildTopRowList(),
-                      )
-                    : SizedBox(
-                        height: 220,
-                        child: CarouselView(
-                          padding: const EdgeInsets.all(8.0),
-                          itemExtent: 180,
-                          controller: _carouselController,
-                          onTap: (index) {
-                            context.push(widget.mediaType == MediaType.movie
-                                ? '${AppRoutePaths.moviesRoute}/${mediaDataList[index].id}'
-                                : '${AppRoutePaths.seriesRoute}/${mediaDataList[index].id}');
+                    ),
+                  if (widget.mediaType == MediaType.tv)
+                    SizedBox(
+                      height: 220,
+                      child: CarouselView(
+                        padding: const EdgeInsets.all(8.0),
+                        itemExtent: 180,
+                        controller: _carouselController,
+                        onTap: (index) {
+                          context.push(
+                              '${AppRoutePaths.seriesRoute}/${items[index].id}');
+                        },
+                        children: List.generate(
+                          items.length,
+                          (int index) {
+                            return MediaCarrouselItem(
+                              mediaItem: items[index],
+                              mediaTypeSelected: MediaType.tv,
+                            );
                           },
-                          children: List<Widget>.generate(
-                            mediaDataList.length,
-                            (int index) {
-                              return MediaCarrouselItem(
-                                mediaItem: mediaDataList[index],
-                                mediaTypeSelected: MediaType.tv,
-                              );
-                            },
-                          ),
                         ),
                       ),
-            ],
-          ),
-        );
-      },
-    );
+                    ),
+                ],
+              );
+  }
+
+  void applyFilter() {
+    viewModel.applyFilter(ref.read(mediaFilterProvider(MediaFilter(
+      mediaTypeSelected: widget.mediaType,
+      genredId: widget.genreId,
+      languageId: context.localizations.localeName,
+    ))));
   }
 
   void _loadMore() {
@@ -149,14 +170,11 @@ class _MediaDataList extends State<MediaList> {
     final hasReachedTheEnd = offset >= maxOffset && !isOutOfRange;
 
     if (hasReachedTheEnd) {
-      _currentPage++;
-      context.read<MediaListBloc>().add(
-            MediaListEvent.nextPage(
-              _currentPage,
-              widget.mediaType,
-              widget.genreId,
-            ),
-          );
+      viewModel.loadNextPage(ref.read(mediaFilterProvider(MediaFilter(
+        mediaTypeSelected: widget.mediaType,
+        genredId: widget.genreId,
+        languageId: context.localizations.localeName,
+      ))));
     }
   }
 }

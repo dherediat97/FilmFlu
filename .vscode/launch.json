@@ -7,11 +7,9 @@
         {
             "name": "FilmFlu",
             "request": "launch",
-            "args": [
-                "--web-renderer",
-                "auto",
-            ],
-            "type": "dart"
+            "type": "dart",
+            "flutterMode": "debug",
+            "args": ["--web-port", "5050"]
         },
         {
             "name": "FilmFlu (profile mode)",

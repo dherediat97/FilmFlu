@@ -19,7 +19,7 @@ class MediaItemRemoteEntity with _$MediaItemRemoteEntity {
     @JsonKey(name: 'genre_ids') List<int>? genreIds,
     @JsonKey(name: 'production_companies')
     List<ProductionCompanyRemoteEntity>? productionCompanies,
-    @JsonKey(name: 'id') required int id,
+    @JsonKey(name: 'id') int? id,
     @JsonKey(name: 'original_language') String? originalLanguage,
     @JsonKey(name: 'original_title') String? originalTitle,
     @JsonKey(name: 'popularity') double? popularity,
@@ -42,7 +42,7 @@ extension MediaItemToRemoteEntityExtension on MediaItemRemoteEntity {
   MediaItemEntity toMediaEntity() => MediaItemEntity(
         title: title ?? '',
         name: name ?? '',
-        id: id,
+        id: id ?? 0,
         genreIds: genreIds,
         popularity: popularity ?? 0.0,
         posterPath: posterPath ?? '',
@@ -65,15 +65,16 @@ extension MediaItemToRemoteEntityExtension on MediaItemRemoteEntity {
       );
 
   MediaSimpleItemEntity toSimpleMediaEntity() => MediaSimpleItemEntity(
+        title: title ?? name,
         genreIds: genreIds,
-        id: id,
+        id: id ?? 0,
         posterPath: posterPath ?? '',
       );
 
   MediaItemEntity toMediaDayEntity() => MediaItemEntity(
         title: title ?? '',
         name: name ?? '',
-        id: id,
+        id: id ?? 0,
         backdropPath: backdropPath ?? '',
         voteAverage: voteAverage ?? 0,
         firstAirDate: firstAirDate ?? '',
