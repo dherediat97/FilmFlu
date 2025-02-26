@@ -168,10 +168,14 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
   Widget searchBar() {
     List<MediaItemEntity> searchResults = [];
     String languageName = context.localizations.localeName;
+
     return SearchAnchor(
       suggestionsBuilder: (BuildContext context, SearchController controller) {
         return List<ListTile>.generate(searchResults.length, (index) {
           return ListTile(
+            onTap: () => context.push(
+              '/main/${searchResults[index].mediaType}/${searchResults[index].id}',
+            ),
             titleTextStyle: Theme.of(context).textTheme.titleSmall,
             leading: Image.network(
               searchResults[index].mediaType == MediaType.movie.name

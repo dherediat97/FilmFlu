@@ -12,18 +12,17 @@ import 'package:film_flu/domain/models/media_response_entity.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:film_flu/domain/repository/media_repository.dart';
-import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
 
 class MediaRepositoryImpl implements MediaRepository {
   @override
   Future<MediaItemEntity> getMediaItem(
-    MediaType mediaTypeSelected,
+    String mediaTypeSelected,
     String mediaTypeId,
     String languageName,
   ) async {
     try {
       final response = await DioClient.instance
-          .get('/${mediaTypeSelected.name}/$mediaTypeId', queryParameters: {
+          .get('/$mediaTypeSelected/$mediaTypeId', queryParameters: {
         'append_to_response': 'videos',
         'language': languageName,
       });
@@ -38,19 +37,19 @@ class MediaRepositoryImpl implements MediaRepository {
 
   @override
   Future<CreditsMediaEntity> getCredits(
-    MediaType mediaTypeSelected,
+    String mediaTypeSelected,
     String mediaTypeId,
     String languageName,
   ) async {
     try {
-      final response = await DioClient.instance.get(
-          '/${mediaTypeSelected.name}/$mediaTypeId/credits',
-          queryParameters: {
-            'language': languageName,
-          });
+      final response = await DioClient.instance
+          .get('/$mediaTypeSelected/$mediaTypeId/credits', queryParameters: {
+        'language': languageName,
+      });
 
       CreditsMediaRemoteEntity creditsMediaEntity =
           CreditsMediaRemoteEntity.fromJson(response);
+
       return creditsMediaEntity.toCreditsEntity();
     } on DioException catch (e) {
       throw e.errorMessage;
@@ -59,16 +58,15 @@ class MediaRepositoryImpl implements MediaRepository {
 
   @override
   Future<List<ReviewEntity>?> getReviews(
-    MediaType mediaTypeSelected,
+    String mediaTypeSelected,
     String mediaTypeId,
     String languageName,
   ) async {
     try {
-      final reviewData = await DioClient.instance.get(
-          '/${mediaTypeSelected.name}/$mediaTypeId/reviews',
-          queryParameters: {
-            'language': languageName,
-          });
+      final reviewData = await DioClient.instance
+          .get('/$mediaTypeSelected/$mediaTypeId/reviews', queryParameters: {
+        'language': languageName,
+      });
 
       List<ReviewRemoteEntity> reviewList = reviewData['results']
           .map<ReviewRemoteEntity>(
@@ -83,13 +81,13 @@ class MediaRepositoryImpl implements MediaRepository {
 
   @override
   Future<MediaResponseEntity> getMedia(
-    MediaType mediaTypeSelected,
+    String mediaTypeSelected,
     String mediaTypeId,
     String languageName,
   ) async {
     try {
-      final response = await DioClient.instance
-          .get('/${mediaTypeSelected.name}/$mediaTypeId');
+      final response =
+          await DioClient.instance.get('/$mediaTypeSelected/$mediaTypeId');
       final mediaData = MediaResponseEntity.fromJson(response);
 
       return mediaData;
@@ -183,18 +181,18 @@ class MediaRepositoryImpl implements MediaRepository {
   }
 
   @override
-  Future<MediaItemEntity> getMediaDataDay(MediaFilter mediaFilter) async {
-    final response = mediaFilter.mediaTypeSelected == MediaType.movie
+  Future<MediaItemEntity> getMediaDataDay(MediaType mediaTypeSelected) async {
+    final response = mediaTypeSelected == MediaType.movie
         ? await DioClient.instance.get(
-            '/${mediaFilter.mediaTypeSelected.name}/now_playing',
+            '/${mediaTypeSelected.name}/now_playing',
             queryParameters: {
-              'language': mediaFilter.languageId,
+              'language': 'es',
             },
           )
         : await DioClient.instance.get(
-            '/${mediaFilter.mediaTypeSelected.name}/on_the_air',
+            '/${mediaTypeSelected.name}/on_the_air',
             queryParameters: {
-              'language': mediaFilter.languageId,
+              'language': 'es',
             },
           );
 

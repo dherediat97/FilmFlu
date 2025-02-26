@@ -5,29 +5,28 @@ import 'package:film_flu/domain/models/media_response_entity.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:film_flu/domain/repository/media_repository.dart';
-import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
 
 abstract class MediaUseCase {
   Future<MediaItemEntity> getMediaItem(
-    MediaType mediaTypeSelected,
+    String mediaTypeSelected,
     String mediaTypeId,
     String languageName,
   );
 
   Future<CreditsMediaEntity?> getCredits(
-    MediaType mediaTypeSelected,
+    String mediaTypeSelected,
     String mediaTypeId,
     String languageName,
   );
 
   Future<List<ReviewEntity>?> getReviews(
-    MediaType mediaTypeSelected,
+    String mediaTypeSelected,
     String mediaTypeId,
     String languageName,
   );
 
   Future<MediaResponseEntity> getMedia(
-    MediaType mediaTypeSelected,
+    String mediaTypeSelected,
     String mediaTypeId,
     String languageName,
   );
@@ -56,7 +55,7 @@ abstract class MediaUseCase {
     String query,
   );
 
-  Future<MediaItemEntity> getMediaDataDay(MediaFilter mediaFilter);
+  Future<MediaItemEntity> getMediaDataDay(MediaType mediaTypeSelected);
 }
 
 class MediaUseCaseImpl extends MediaUseCase {
@@ -66,7 +65,7 @@ class MediaUseCaseImpl extends MediaUseCase {
 
   @override
   Future<MediaItemEntity> getMediaItem(
-    MediaType mediaTypeSelected,
+    String mediaTypeSelected,
     String mediaTypeId,
     String languageName,
   ) async {
@@ -79,7 +78,7 @@ class MediaUseCaseImpl extends MediaUseCase {
 
   @override
   Future<CreditsMediaEntity?> getCredits(
-    MediaType mediaTypeSelected,
+    String mediaTypeSelected,
     String mediaTypeId,
     String languageName,
   ) async {
@@ -92,7 +91,7 @@ class MediaUseCaseImpl extends MediaUseCase {
 
   @override
   Future<List<ReviewEntity>?> getReviews(
-    MediaType mediaTypeSelected,
+    String mediaTypeSelected,
     String mediaTypeId,
     String languageName,
   ) async {
@@ -105,7 +104,7 @@ class MediaUseCaseImpl extends MediaUseCase {
 
   @override
   Future<MediaResponseEntity> getMedia(
-    MediaType mediaTypeSelected,
+    String mediaTypeSelected,
     String mediaTypeId,
     String languageName,
   ) async {
@@ -164,7 +163,7 @@ class MediaUseCaseImpl extends MediaUseCase {
   }
 
   @override
-  Future<MediaItemEntity> getMediaDataDay(MediaFilter mediaFilter) async {
-    return mediaRepository.getMediaDataDay(mediaFilter);
+  Future<MediaItemEntity> getMediaDataDay(MediaType mediaTypeSelected) async {
+    return mediaRepository.getMediaDataDay(mediaTypeSelected);
   }
 }

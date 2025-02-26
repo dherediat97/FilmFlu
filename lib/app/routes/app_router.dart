@@ -45,7 +45,7 @@ GoRouter goRouter(Ref ref) {
                     ),
                   ]),
               GoRoute(
-                  path: 'series',
+                  path: 'tv',
                   builder: (context, state) => const SeriesListWidget(),
                   routes: [
                     GoRoute(
