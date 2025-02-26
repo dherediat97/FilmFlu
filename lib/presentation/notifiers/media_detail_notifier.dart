@@ -15,15 +15,15 @@ part 'media_detail_notifier.freezed.dart';
 final getHomeMediaDetailProvider =
     FutureProvider.family<MediaItemDetailState, MediaItemState>(
         (ref, mediaItemState) async {
-  final mediaItemResponse = await ref.read(mediaProvider).getMediaItem(
-        mediaItemState.mediaType,
-        mediaItemState.id,
-        mediaItemState.languageName,
-      );
-  print(_getFirstTrailerId(mediaItemResponse));
+  final mediaItemResponse = await ref
+      .read(mediaProvider)
+      .getMediaItem(mediaItemState.mediaType, mediaItemState.id, '');
   return MediaItemDetailState(
     mediaItem: mediaItemResponse,
     trailerId: _getFirstTrailerId(mediaItemResponse),
+    title: mediaItemState.mediaType == MediaType.movie.name
+        ? mediaItemResponse.title
+        : mediaItemResponse.name,
     isTrailerOpened: false,
   );
 });
@@ -39,8 +39,6 @@ final getMediaItemDetailProvider =
       );
 
   return MediaItemDetailState(
-    trailerId: _getFirstTrailerId(mediaItemResponse),
-    isTrailerOpened: false,
     title: mediaItemState.mediaType == MediaType.movie.name
         ? mediaItemResponse.title
         : mediaItemResponse.name,
