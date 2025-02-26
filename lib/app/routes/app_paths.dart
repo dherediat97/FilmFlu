@@ -4,7 +4,7 @@ class AppRoutePaths {
   static String homeRoute = '/main';
 
   static String moviesRoute = '$homeRoute/movies';
-  static String seriesRoute = '$homeRoute/series';
+  static String seriesRoute = '$homeRoute/tv';
   static String searchRoute = '$homeRoute/search';
   static String personDetailsRoute = '/personDetails';
 

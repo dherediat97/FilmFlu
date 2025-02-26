@@ -5,68 +5,97 @@ import 'package:film_flu/domain/models/film_worker_entity.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/domain/models/media_response_entity.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
-import 'package:film_flu/domain/repository/media_repository.dart';
-import 'package:film_flu/presentation/notifiers/media_notifier.dart';
+import 'package:film_flu/domain/use_case/provider.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'media_detail_notifier.g.dart';
+part 'media_detail_notifier.freezed.dart';
 
 @riverpod
-class MediaItemDetail extends _$MediaItemDetail {
-  @override
-  Future<MediaItemDetailState?> build(MediaItemState mediaItemState) async {
-    return await getMediaItemDetail(mediaItemState);
-  }
+final getHomeMediaDetailProvider =
+    FutureProvider.family<MediaItemDetailState, MediaItemState>(
+        (ref, mediaItemState) async {
+  final mediaItemResponse = await ref.read(mediaProvider).getMediaItem(
+        mediaItemState.mediaType,
+        mediaItemState.id,
+        mediaItemState.languageName,
+      );
+  print(_getFirstTrailerId(mediaItemResponse));
+  return MediaItemDetailState(
+    mediaItem: mediaItemResponse,
+    trailerId: _getFirstTrailerId(mediaItemResponse),
+    isTrailerOpened: false,
+  );
+});
 
-  Future<MediaItemDetailState?> getMediaItemDetail(
-    MediaItemState mediaItemState,
-  ) async {
-    final mediaItemResponse =
-        await ref.read(mediaRepositoryProvider).getMediaItem(
-              MediaType.values.firstWhere(
-                  (element) => element.name == mediaItemState.mediaType),
-              mediaItemState.id,
-              mediaItemState.languageName,
-            );
-    return MediaItemDetailState(
-      trailerId: _getFirstTrailerId(mediaItemResponse),
-      isTrailerOpened: false,
-      // title: mediaItemState.mediaType == MediaType.movie.name
-      //     ? mediaItemResponse.title
-      //     : mediaItemResponse.name,
-      mediaItem: mediaItemResponse,
-      // productionCompanyImage: mediaItemResponse.productionCompanies!.isNotEmpty
-      //     ? mediaItemResponse.productionCompanies!.first.logoPath
-      //     : '',
-    );
-  }
+@riverpod
+final getMediaItemDetailProvider =
+    FutureProvider.family<MediaItemDetailState, MediaItemState>(
+        (ref, mediaItemState) async {
+  final mediaItemResponse = await ref.read(mediaProvider).getMediaItem(
+        mediaItemState.mediaType,
+        mediaItemState.id,
+        mediaItemState.languageName,
+      );
 
-  String _getFirstTrailerId(MediaItemEntity mediaItemEntity) {
-    try {
-      return mediaItemEntity.videos!.results
-          .firstWhere((element) =>
-              element.type == AppConstants.trailer ||
-              element.type == AppConstants.teaser)
-          .key
-          .toString();
-    } catch (ex) {
-      return '';
-    }
+  return MediaItemDetailState(
+    trailerId: _getFirstTrailerId(mediaItemResponse),
+    isTrailerOpened: false,
+    title: mediaItemState.mediaType == MediaType.movie.name
+        ? mediaItemResponse.title
+        : mediaItemResponse.name,
+    mediaItem: mediaItemResponse,
+    productionCompanyImage: mediaItemResponse.productionCompanies!.isNotEmpty
+        ? mediaItemResponse.productionCompanies!.first.logoPath
+        : '',
+  );
+});
+
+@riverpod
+final getReviewsProvider =
+    FutureProvider.family<MediaItemDetailState, MediaItemState>(
+        (ref, mediaItemState) async {
+  final mediaItemReviews = await ref.read(mediaProvider).getReviews(
+        mediaItemState.mediaType,
+        mediaItemState.id,
+        mediaItemState.languageName,
+      );
+  return MediaItemDetailState(
+    reviews: mediaItemReviews,
+  );
+});
+
+@riverpod
+final getMediaCastProvider =
+    FutureProvider.family<MediaItemDetailState, CreditsMediaState>(
+        (ref, creditsMediaState) async {
+  final mediaItemCast = await ref.read(mediaProvider).getCredits(
+        creditsMediaState.mediaType,
+        creditsMediaState.id,
+        creditsMediaState.languageName,
+      );
+  return MediaItemDetailState(
+    cast: creditsMediaState.isCast ? mediaItemCast?.cast : [],
+    crew: !creditsMediaState.isCast ? mediaItemCast?.crew : [],
+  );
+});
+
+String _getFirstTrailerId(MediaItemEntity mediaItemEntity) {
+  try {
+    return mediaItemEntity.videos!.results
+        .firstWhere((element) =>
+            element.type == AppConstants.trailer ||
+            element.type == AppConstants.teaser)
+        .key
+        .toString();
+  } catch (ex) {
+    return '';
   }
 }
 
-class MediaItemDetailState {
-  final MediaItemEntity mediaItem;
-  final String? title;
-  final String? trailerId;
-  final String? productionCompanyImage;
-  final List<ReviewEntity>? reviews;
-  final List<ActorEntity>? cast;
-  final List<FilmWorkerEntity>? crew;
-  final MediaResponseEntity? mediaList;
-  final bool isTrailerOpened;
-
-  MediaItemDetailState copyWith({
+@freezed
+class MediaItemDetailState with _$MediaItemDetailState {
+  const factory MediaItemDetailState({
     MediaItemEntity? mediaItem,
     String? title,
     String? trailerId,
@@ -76,29 +105,24 @@ class MediaItemDetailState {
     List<FilmWorkerEntity>? crew,
     MediaResponseEntity? mediaList,
     bool? isTrailerOpened,
-  }) {
-    return MediaItemDetailState(
-      mediaItem: mediaItem ?? this.mediaItem,
-      title: title ?? this.title,
-      trailerId: trailerId ?? this.trailerId,
-      productionCompanyImage: productionCompanyImage,
-      reviews: reviews ?? this.reviews,
-      cast: cast ?? this.cast,
-      crew: crew ?? this.crew,
-      mediaList: mediaList ?? this.mediaList,
-      isTrailerOpened: isTrailerOpened ?? this.isTrailerOpened,
-    );
-  }
+  }) = _MediaItemDetailState;
+}
 
-  const MediaItemDetailState({
-    required this.mediaItem,
-    this.title,
-    this.trailerId,
-    this.productionCompanyImage,
-    this.reviews,
-    this.cast,
-    this.crew,
-    this.mediaList,
-    required this.isTrailerOpened,
-  });
+@freezed
+class CreditsMediaState with _$CreditsMediaState {
+  const factory CreditsMediaState({
+    required String mediaType,
+    required String id,
+    required String languageName,
+    required bool isCast,
+  }) = _CreditsMediaState;
+}
+
+@freezed
+class MediaItemState with _$MediaItemState {
+  const factory MediaItemState({
+    required String mediaType,
+    required String id,
+    required String languageName,
+  }) = _MediaItemState;
 }

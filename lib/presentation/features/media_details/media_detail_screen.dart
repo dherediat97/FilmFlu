@@ -4,7 +4,6 @@ import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/data/models/media_type.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/detail_tab_media_item.dart';
 import 'package:film_flu/presentation/notifiers/media_detail_notifier.dart';
-import 'package:film_flu/presentation/notifiers/media_notifier.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -47,13 +46,11 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
   @override
   Widget build(BuildContext context) {
     BuildContext dialogContext;
-    var state = ref.read(mediaItemDetailProvider(
-      MediaItemState(
-        mediaType: widget.mediaType,
-        id: widget.mediaId,
-        languageName: context.localizations.localeName,
-      ),
-    ));
+    var state = ref.watch(getHomeMediaDetailProvider(MediaItemState(
+      mediaType: widget.mediaType,
+      id: widget.mediaId,
+      languageName: 'es',
+    )));
 
     return ScaffoldPage(
         floatingActionButton: Padding(
@@ -76,86 +73,84 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
               const SizedBox(
                 height: 20,
               ),
-              state.value?.trailerId != null
-                  ? FloatingActionButton.extended(
-                      icon: const Icon(Icons.play_arrow),
-                      label: Text(context.localizations.play_trailer),
-                      onPressed: () {
-                        showAdaptiveDialog(
-                          context: context,
-                          builder: (context) {
-                            dialogContext = context;
-                            state.value?.copyWith(isTrailerOpened: true);
+              if (state.value?.trailerId != null)
+                FloatingActionButton.extended(
+                    icon: const Icon(Icons.play_arrow),
+                    label: Text(context.localizations.play_trailer),
+                    onPressed: () {
+                      showAdaptiveDialog(
+                        context: context,
+                        builder: (context) {
+                          dialogContext = context;
 
-                            _trailerController = initTrailerController();
-                            if (state.value!.trailerId!.isNotEmpty) {
-                              if (state.value?.mediaItem.videos!.results
-                                      .length ==
-                                  1) {
-                                _trailerController?.loadVideoById(
-                                  videoId: state.value!.trailerId!,
-                                );
-                              } else {
-                                _trailerController?.loadPlaylist(
-                                  list: state.value!.mediaItem.videos!.results
-                                      .map(
-                                        (e) => e.key,
-                                      )
-                                      .toList(),
-                                  index: state.value?.mediaItem.videos!.results
-                                      .indexWhere(
-                                    (element) =>
-                                        element.key == state.value?.trailerId,
-                                  ),
-                                );
-                              }
-                            }
-                            return AlertDialog.adaptive(
-                              icon: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  IconButton(
-                                    onPressed: () =>
-                                        closeTrailer(dialogContext),
-                                    icon: const Icon(Icons.close),
-                                  ),
-                                ],
-                              ),
-                              content: SizedBox(
-                                height: MediaQuery.of(context).size.height,
-                                width: MediaQuery.of(context).size.width,
-                                child: YoutubePlayerScaffold(
-                                  controller: _trailerController!,
-                                  builder: (context, player) {
-                                    return LayoutBuilder(
-                                      builder: (context, constraints) {
-                                        if (kIsWeb &&
-                                            constraints.maxWidth > 750) {
-                                          return Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Expanded(
-                                                flex: 10,
-                                                child: player,
-                                              ),
-                                            ],
-                                          );
-                                        }
+                          _trailerController = initTrailerController();
 
-                                        return player;
-                                      },
-                                    );
-                                  },
-                                ),
+                          if (state.value?.mediaItem?.videos!.results.length !=
+                              1) {
+                            _trailerController?.loadPlaylist(
+                              list: state.value!.mediaItem!.videos!.results
+                                  .map(
+                                    (e) => e.key,
+                                  )
+                                  .toList(),
+                              index: state.value?.mediaItem?.videos!.results
+                                  .indexWhere(
+                                (element) =>
+                                    element.key == state.value?.trailerId,
                               ),
                             );
-                          },
-                        );
-                      })
-                  : Container(),
+                          } else {
+                            _trailerController?.loadVideoById(
+                              videoId: state.value!.trailerId!,
+                            );
+                          }
+
+                          return AlertDialog.adaptive(
+                            icon: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  onPressed: () => closeTrailer(dialogContext),
+                                  icon: const Icon(Icons.close),
+                                ),
+                              ],
+                            ),
+                            content: SizedBox(
+                              height: MediaQuery.of(context).size.height,
+                              width: MediaQuery.of(context).size.width,
+                              child: YoutubePlayerScaffold(
+                                controller: _trailerController!,
+                                builder: (context, player) {
+                                  return LayoutBuilder(
+                                    builder: (context, constraints) {
+                                      if (kIsWeb &&
+                                          constraints.maxWidth > 750) {
+                                        return Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Expanded(
+                                              flex: 10,
+                                              child: player,
+                                            ),
+                                          ],
+                                        );
+                                      }
+
+                                      return player;
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    })
+              else
+                Container(),
             ],
           ),
         ),

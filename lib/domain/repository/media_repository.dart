@@ -5,7 +5,6 @@ import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/domain/models/media_response_entity.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
-import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'media_repository.g.dart';
@@ -15,25 +14,25 @@ MediaRepository mediaRepository(ref) => MediaRepositoryImpl();
 
 abstract interface class MediaRepository {
   Future<MediaItemEntity> getMediaItem(
-    MediaType mediaTypeSelected,
+    String mediaTypeSelected,
     String mediaTypeId,
     String languageName,
   );
 
   Future<CreditsMediaEntity?> getCredits(
-    MediaType mediaTypeSelected,
+    String mediaTypeSelected,
     String mediaTypeId,
     String languageName,
   );
 
   Future<List<ReviewEntity>?> getReviews(
-    MediaType mediaTypeSelected,
+    String mediaTypeSelected,
     String mediaTypeId,
     String languageName,
   );
 
   Future<MediaResponseEntity> getMedia(
-    MediaType mediaTypeSelected,
+    String mediaTypeSelected,
     String mediaTypeId,
     String languageName,
   );
@@ -60,6 +59,6 @@ abstract interface class MediaRepository {
   );
 
   Future<MediaItemEntity> getMediaDataDay(
-    MediaFilter mediaFilter,
+    MediaType mediaTypeSelected,
   );
 }

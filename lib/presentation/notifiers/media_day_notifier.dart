@@ -16,8 +16,9 @@ class MediaDay extends _$MediaDay {
   Future<MediaDayItemState?> getMediaListByMediaType(
     MediaFilter mediaFilter,
   ) async {
-    final mediaDataItemResponse =
-        await ref.read(mediaRepositoryProvider).getMediaDataDay(mediaFilter);
+    final mediaDataItemResponse = await ref
+        .read(mediaRepositoryProvider)
+        .getMediaDataDay(mediaFilter.mediaTypeSelected);
 
     return MediaDayItemState(
       mediaItem: mediaDataItemResponse,

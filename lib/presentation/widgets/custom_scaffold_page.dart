@@ -6,7 +6,6 @@ import 'package:film_flu/presentation/features/media_list/widgets/movies_list.da
 import 'package:film_flu/presentation/features/media_list/widgets/series_list.dart';
 import 'package:film_flu/presentation/features/search/widgets/serie_filters.dart';
 import 'package:film_flu/presentation/notifiers/home_notifier.dart';
-import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -111,10 +110,7 @@ class _ScaffoldPageState extends ConsumerState<ScaffoldPage> {
                     _selectedIndex = index;
 
                     var category = MediaType.values.elementAt(_selectedIndex);
-                    ref.read(homeProvider(MediaFilter(
-                        mediaTypeSelected: category,
-                        genredId: 0,
-                        languageId: context.localizations.localeName)));
+                    ref.read(homeProvider(category));
                   });
                 },
                 children: const [
