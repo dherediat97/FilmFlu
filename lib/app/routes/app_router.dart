@@ -33,7 +33,7 @@ GoRouter goRouter(Ref ref) {
             builder: (context, state) => const HomeScreen(),
             routes: [
               GoRoute(
-                  path: 'movies',
+                  path: 'movie',
                   builder: (context, state) => const MoviesListWidget(),
                   routes: [
                     GoRoute(

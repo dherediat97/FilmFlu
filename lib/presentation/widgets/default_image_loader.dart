@@ -20,6 +20,14 @@ class DefaultImageWidget extends StatelessWidget {
       imageBuilder: (context, imageProvider) => Container(
         decoration: BoxDecoration(
           color: Colors.black,
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [
+              Colors.black,
+              Colors.transparent,
+            ],
+          ),
           image: DecorationImage(
             image: imageProvider,
             fit: BoxFit.cover,

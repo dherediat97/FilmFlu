@@ -10,7 +10,7 @@ abstract class MediaUseCase {
   Future<MediaItemEntity> getMediaItem(
     String mediaTypeSelected,
     String mediaTypeId,
-    String languageName,
+    String? languageName,
   );
 
   Future<CreditsMediaEntity?> getCredits(
@@ -67,12 +67,12 @@ class MediaUseCaseImpl extends MediaUseCase {
   Future<MediaItemEntity> getMediaItem(
     String mediaTypeSelected,
     String mediaTypeId,
-    String languageName,
+    String? languageName,
   ) async {
     return mediaRepository.getMediaItem(
       mediaTypeSelected,
       mediaTypeId,
-      languageName,
+      languageName ?? 'en',
     );
   }
 

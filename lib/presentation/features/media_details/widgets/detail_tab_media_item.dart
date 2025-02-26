@@ -43,6 +43,7 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
             mediaType: widget.mediaTypeSelected,
             languageName: context.localizations.localeName,
           )));
+          setState(() {});
           break;
         case 1:
           ref.watch(getReviewsProvider(MediaItemState(
