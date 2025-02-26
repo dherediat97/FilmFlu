@@ -201,14 +201,13 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
       },
       builder: (context, controller) {
         return SearchBar(
-          autoFocus: true,
           textInputAction: TextInputAction.search,
           controller: controller,
           padding: const WidgetStatePropertyAll<EdgeInsets>(
             EdgeInsets.symmetric(horizontal: 16.0),
           ),
-          // onTapOutside: (event) => controller.closeView(''),
-          // onSubmitted: (value) => controller.closeView(value),
+          onTapOutside: (event) => controller.closeView(''),
+          onSubmitted: (value) => controller.closeView(value),
           leading: Icon(Icons.search),
           onChanged: (value) {
             if (value.length > 3) {
