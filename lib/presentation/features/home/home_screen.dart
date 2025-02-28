@@ -38,7 +38,7 @@ class HomeScreen extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) => Text(error.toString()),
-      loading: () => CircularProgressIndicator(),
+      loading: () => Text('cargando'),
     );
   }
 }

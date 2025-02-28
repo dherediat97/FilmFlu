@@ -1,15 +1,10 @@
 import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/data/models/media_type.dart';
-import 'package:film_flu/domain/models/actor_entity.dart';
-import 'package:film_flu/domain/models/film_worker_entity.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
-import 'package:film_flu/domain/models/media_response_entity.dart';
-import 'package:film_flu/domain/models/review_entity.dart';
+import 'package:film_flu/domain/repository/media_repository.dart';
 import 'package:film_flu/domain/use_case/provider.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:film_flu/presentation/notifiers/models/media_item_states.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'media_detail_notifier.freezed.dart';
 
 @riverpod
 final getHomeMediaDetailProvider =
@@ -37,16 +32,21 @@ final getMediaItemDetailProvider =
         mediaItemState.id,
         mediaItemState.languageName,
       );
+  final mediaData = await ref.read(mediaRepositoryProvider).getMedia(
+        mediaItemState.mediaType,
+        mediaItemState.id,
+        mediaItemState.languageName,
+      );
 
   return MediaItemDetailState(
-    title: mediaItemState.mediaType == MediaType.movie.name
-        ? mediaItemResponse.title
-        : mediaItemResponse.name,
-    mediaItem: mediaItemResponse,
-    productionCompanyImage: mediaItemResponse.productionCompanies!.isNotEmpty
-        ? mediaItemResponse.productionCompanies!.first.logoPath
-        : '',
-  );
+      mediaList: mediaData,
+      title: mediaItemState.mediaType == MediaType.movie.name
+          ? mediaItemResponse.title
+          : mediaItemResponse.name,
+      mediaItem: mediaItemResponse,
+      productionCompanyImages: mediaItemResponse.productionCompanies!
+          .map((e) => e.logoPath)
+          .toList());
 });
 
 @riverpod
@@ -59,6 +59,7 @@ final getReviewsProvider =
         mediaItemState.languageName,
       );
   return MediaItemDetailState(
+    mediaItem: MediaItemEntity(),
     reviews: mediaItemReviews,
   );
 });
@@ -73,8 +74,9 @@ final getMediaCastProvider =
         creditsMediaState.languageName,
       );
   return MediaItemDetailState(
-    cast: creditsMediaState.isCast ? mediaItemCast?.cast : [],
-    crew: !creditsMediaState.isCast ? mediaItemCast?.crew : [],
+    mediaItem: MediaItemEntity(),
+    cast: mediaItemCast?.cast,
+    crew: mediaItemCast?.crew,
   );
 });
 
@@ -84,43 +86,8 @@ String _getFirstTrailerId(MediaItemEntity mediaItemEntity) {
         .firstWhere((element) =>
             element.type == AppConstants.trailer ||
             element.type == AppConstants.teaser)
-        .key
-        .toString();
+        .key;
   } catch (ex) {
     return '';
   }
-}
-
-@freezed
-class MediaItemDetailState with _$MediaItemDetailState {
-  const factory MediaItemDetailState({
-    MediaItemEntity? mediaItem,
-    String? title,
-    String? trailerId,
-    String? productionCompanyImage,
-    List<ReviewEntity>? reviews,
-    List<ActorEntity>? cast,
-    List<FilmWorkerEntity>? crew,
-    MediaResponseEntity? mediaList,
-    bool? isTrailerOpened,
-  }) = _MediaItemDetailState;
-}
-
-@freezed
-class CreditsMediaState with _$CreditsMediaState {
-  const factory CreditsMediaState({
-    required String mediaType,
-    required String id,
-    required String languageName,
-    required bool isCast,
-  }) = _CreditsMediaState;
-}
-
-@freezed
-class MediaItemState with _$MediaItemState {
-  const factory MediaItemState({
-    required String mediaType,
-    required String id,
-    required String languageName,
-  }) = _MediaItemState;
 }

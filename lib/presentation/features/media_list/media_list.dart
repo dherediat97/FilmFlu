@@ -88,71 +88,68 @@ class _MediaDataList extends ConsumerState<MediaList> {
   mediaWidgetList(AsyncValue<List<MediaSimpleItemEntity>> state) {
     final items = state.valueOrNull ?? [];
     final initialLoading = state.isLoading && items.isEmpty;
-    final loadingMore = state.isLoading && items.isNotEmpty;
 
     return initialLoading
         ? Shimmer(child: buildListItem(initialLoading))
-        : loadingMore
-            ? const CircularProgressIndicator()
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 20),
-                  AutoSizeText(
-                    widget.title,
-                    maxFontSize: 30,
-                    minFontSize: 20,
-                    style: Theme.of(context).textTheme.titleLarge,
+        : Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 20),
+              AutoSizeText(
+                widget.title,
+                maxFontSize: 30,
+                minFontSize: 20,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 20),
+              if (widget.mediaType == MediaType.movie)
+                SizedBox(
+                  height: 220,
+                  child: CarouselView(
+                    controller: _carouselController,
+                    padding: const EdgeInsets.all(8.0),
+                    itemExtent: 180,
+                    onTap: (index) {
+                      context.push(
+                        '${AppRoutePaths.moviesRoute}/${items[index].id}',
+                      );
+                    },
+                    children: List.generate(
+                      items.length,
+                      (int index) {
+                        return MediaCarrouselItem(
+                          mediaItem: items[index],
+                          mediaTypeSelected: MediaType.movie,
+                        );
+                      },
+                    ),
                   ),
-                  const SizedBox(height: 20),
-                  if (widget.mediaType == MediaType.movie)
-                    SizedBox(
-                      height: 220,
-                      child: CarouselView(
-                        controller: _carouselController,
-                        padding: const EdgeInsets.all(8.0),
-                        itemExtent: 180,
-                        onTap: (index) {
-                          context.push(
-                            '${AppRoutePaths.moviesRoute}/${items[index].id}',
-                          );
-                        },
-                        children: List.generate(
-                          items.length,
-                          (int index) {
-                            return MediaCarrouselItem(
-                              mediaItem: items[index],
-                              mediaTypeSelected: MediaType.movie,
-                            );
-                          },
-                        ),
-                      ),
+                ),
+              if (widget.mediaType == MediaType.tv)
+                SizedBox(
+                  height: 220,
+                  child: CarouselView(
+                    padding: const EdgeInsets.all(8.0),
+                    itemExtent: 180,
+                    controller: _carouselController,
+                    onTap: (index) {
+                      context.push(
+                          '${AppRoutePaths.seriesRoute}/${items[index].id}');
+                    },
+                    children: List.generate(
+                      items.length,
+                      (int index) {
+                        return MediaCarrouselItem(
+                          mediaItem: items[index],
+                          mediaTypeSelected: MediaType.tv,
+                        );
+                      },
                     ),
-                  if (widget.mediaType == MediaType.tv)
-                    SizedBox(
-                      height: 220,
-                      child: CarouselView(
-                        padding: const EdgeInsets.all(8.0),
-                        itemExtent: 180,
-                        controller: _carouselController,
-                        onTap: (index) {
-                          context.push(
-                              '${AppRoutePaths.seriesRoute}/${items[index].id}');
-                        },
-                        children: List.generate(
-                          items.length,
-                          (int index) {
-                            return MediaCarrouselItem(
-                              mediaItem: items[index],
-                              mediaTypeSelected: MediaType.tv,
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                ],
-              );
+                  ),
+                ),
+            ],
+          );
   }
 
   void applyFilter() {

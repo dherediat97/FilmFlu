@@ -10,8 +10,8 @@ class AppProvider extends StateNotifier<AppState> {
     prefs = await SharedPreferences.getInstance();
     var darkMode = prefs.getBool('isDarkMode');
     state = state.copyWith(
-      isDarkMode: darkMode ?? false,
-      theme: AppTheme(createTextTheme(isDarkMode: darkMode ?? false)),
+      isDarkMode: darkMode,
+      theme: AppTheme(createTextTheme(isDarkMode: darkMode!)),
     );
   }
 

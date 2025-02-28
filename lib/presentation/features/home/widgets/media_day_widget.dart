@@ -39,13 +39,13 @@ class _MediaDayWidgetState extends ConsumerState<MediaDayWidget> {
     return initialLoading
         ? Shimmer(child: buildMediaDayWidget(context))
         : loadingMore
-            ? const CircularProgressIndicator()
+            ? Shimmer(child: buildMediaDayWidget(context))
             : BackgroundImageMediaItem(
                 key: widget.key,
                 isHomeScreen: true,
-                mediaItem: item!.mediaItem,
+                mediaItem: item!.mediaItem!,
                 title: item.title ?? '',
-                productionCompanyImage: '',
+                productionCompanyImage: [],
               );
   }
 }

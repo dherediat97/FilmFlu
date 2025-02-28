@@ -3,6 +3,7 @@ import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/data/models/media_type.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/detail_tab_media_item.dart';
+import 'package:film_flu/presentation/notifiers/models/media_item_states.dart';
 import 'package:film_flu/presentation/notifiers/media_detail_notifier.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/foundation.dart';
@@ -62,6 +63,7 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
             children: [
               if (widget.mediaType == MediaType.movie.name)
                 FloatingActionButton.extended(
+                  heroTag: 'buyTickets',
                   foregroundColor: AppColors.primaryColor,
                   backgroundColor: AppColors.backgroundColorLight,
                   onPressed: () {
@@ -75,6 +77,7 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
               ),
               if (state.value?.trailerId != null)
                 FloatingActionButton.extended(
+                    heroTag: 'playTrailer',
                     icon: const Icon(Icons.play_arrow),
                     label: Text(context.localizations.play_trailer),
                     onPressed: () {
@@ -85,15 +88,15 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
 
                           _trailerController = initTrailerController();
 
-                          if (state.value?.mediaItem?.videos!.results.length !=
+                          if (state.value?.mediaItem.videos!.results.length !=
                               1) {
                             _trailerController?.loadPlaylist(
-                              list: state.value!.mediaItem!.videos!.results
+                              list: state.value!.mediaItem.videos!.results
                                   .map(
                                     (e) => e.key,
                                   )
                                   .toList(),
-                              index: state.value?.mediaItem?.videos!.results
+                              index: state.value?.mediaItem.videos!.results
                                   .indexWhere(
                                 (element) =>
                                     element.key == state.value?.trailerId,

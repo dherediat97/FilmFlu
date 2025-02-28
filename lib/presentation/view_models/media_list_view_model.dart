@@ -4,7 +4,7 @@ import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/domain/use_case/media_use_case.dart';
 import 'package:film_flu/domain/use_case/provider.dart';
 import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
-import 'package:film_flu/presentation/notifiers/pagination_notifier.dart';
+import 'package:film_flu/presentation/notifiers/base/pagination_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final mediaListViewModelProvider = AsyncNotifierProvider.autoDispose

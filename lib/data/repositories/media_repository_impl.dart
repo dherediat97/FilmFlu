@@ -101,11 +101,12 @@ class MediaRepositoryImpl implements MediaRepository {
     MediaType mediaTypeSelected,
     int genreId,
     String languageId,
+    int page,
   ) async {
     try {
       return mediaTypeSelected == MediaType.movie
-          ? getMovies(genreId, languageId)
-          : getTVSeries(genreId, languageId);
+          ? getMovies(genreId, languageId, page)
+          : getTVSeries(genreId, languageId, page);
     } on DioException catch (e) {
       throw e.errorMessage;
     }
@@ -115,12 +116,14 @@ class MediaRepositoryImpl implements MediaRepository {
   Future<(int page, List<MediaSimpleItemEntity> items)> getMovies(
     int genreId,
     String? languageId,
+    int page,
   ) async {
     try {
       final response = await DioClient.instance
           .get('/discover/${MediaType.movie.name}', queryParameters: {
         'with_genres': genreId,
         'language': languageId,
+        'page': page,
       });
 
       if (response.isEmpty) {
@@ -138,12 +141,14 @@ class MediaRepositoryImpl implements MediaRepository {
   Future<(int page, List<MediaSimpleItemEntity> items)> getTVSeries(
     int genreId,
     String languageId,
+    int page,
   ) async {
     try {
       final response = await DioClient.instance
           .get('/discover/${MediaType.tv.name}', queryParameters: {
         'with_genres': genreId,
         'language': languageId,
+        'page': page,
       });
 
       if (response.isEmpty) {

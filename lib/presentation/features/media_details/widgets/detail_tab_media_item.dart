@@ -8,6 +8,7 @@ import 'package:film_flu/presentation/features/media_details/widgets/media_data_
 import 'package:film_flu/presentation/features/media_details/widgets/media_data_production.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/reviews_widget_item.dart';
 import 'package:film_flu/presentation/notifiers/media_detail_notifier.dart';
+import 'package:film_flu/presentation/notifiers/models/media_item_states.dart';
 import 'package:film_flu/presentation/widgets/shimmer_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -43,7 +44,6 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
             mediaType: widget.mediaTypeSelected,
             languageName: context.localizations.localeName,
           )));
-          setState(() {});
           break;
         case 1:
           ref.watch(getReviewsProvider(MediaItemState(
@@ -53,22 +53,16 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
           )));
           break;
         case 2:
-          ref.watch(getMediaCastProvider(CreditsMediaState(
-            mediaType: widget.mediaTypeSelected,
-            id: widget.mediaItemId,
-            languageName: context.localizations.localeName,
-            isCast: true,
-          )));
-          break;
         case 3:
           ref.watch(getMediaCastProvider(CreditsMediaState(
             mediaType: widget.mediaTypeSelected,
             id: widget.mediaItemId,
             languageName: context.localizations.localeName,
-            isCast: false,
           )));
           break;
       }
+
+      setState(() {});
     });
   }
 
@@ -95,10 +89,10 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
           item?.mediaItem == null
               ? Shimmer(child: buildMediaDayWidget(context))
               : BackgroundImageMediaItem(
-                  title: item?.mediaItem?.title ?? '',
-                  productionCompanyImage: item?.productionCompanyImage ?? '',
+                  title: item?.title ?? '',
+                  productionCompanyImage: item?.productionCompanyImages ?? [],
                   isHomeScreen: false,
-                  mediaItem: item?.mediaItem,
+                  mediaItem: item!.mediaItem,
                 ),
           Padding(
             padding: const EdgeInsets.all(12),
