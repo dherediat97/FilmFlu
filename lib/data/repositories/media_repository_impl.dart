@@ -57,7 +57,7 @@ class MediaRepositoryImpl implements MediaRepository {
   }
 
   @override
-  Future<List<ReviewEntity>?> getReviews(
+  Future<List<ReviewEntity>> getReviews(
     String mediaTypeSelected,
     String mediaTypeId,
     String languageName,

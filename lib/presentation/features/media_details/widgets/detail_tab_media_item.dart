@@ -61,8 +61,6 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
           )));
           break;
       }
-
-      setState(() {});
     });
   }
 
@@ -81,18 +79,33 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
           languageName: context.localizations.localeName),
     ));
 
+    final creditsMediaItemResponse = ref.read(getMediaCastProvider(
+      CreditsMediaState(
+          mediaType: widget.mediaTypeSelected,
+          id: widget.mediaItemId,
+          languageName: context.localizations.localeName),
+    ));
+
+    final reviewsMediaItemResponse = ref.read(getReviewsProvider(
+      MediaItemState(
+          mediaType: widget.mediaTypeSelected,
+          id: widget.mediaItemId,
+          languageName: context.localizations.localeName),
+    ));
+
     final item = mediaItemResponse.value;
+    final credits = creditsMediaItemResponse.value;
+    final reviews = reviewsMediaItemResponse.value;
 
     return SingleChildScrollView(
       child: Column(
         children: [
-          item?.mediaItem == null
+          mediaItemResponse.isLoading
               ? Shimmer(child: buildMediaDayWidget(context))
               : BackgroundImageMediaItem(
                   title: item?.title ?? '',
-                  productionCompanyImage: item?.productionCompanyImages ?? [],
                   isHomeScreen: false,
-                  mediaItem: item!.mediaItem,
+                  mediaItem: item!.mediaItem!,
                 ),
           Padding(
             padding: const EdgeInsets.all(12),
@@ -123,7 +136,7 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                             media: item?.mediaList,
                           ),
                         ),
-                        item?.reviews == null
+                        reviews != null
                             ? Column(
                                 children: [
                                   Image.asset(
@@ -139,10 +152,9 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                               )
                             : ContainerTabMediaItem(
                                 child: ListView.builder(
-                                  itemCount: item?.reviews?.length,
+                                  itemCount: reviews?.length,
                                   itemBuilder: (context, index) {
-                                    ReviewEntity? review =
-                                        item?.reviews![index];
+                                    ReviewEntity review = reviews![index];
 
                                     return ReviewsWidgetItem(
                                       review: review,
@@ -151,17 +163,17 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                                 ),
                               ),
                         ContainerTabMediaItem(
-                          child: item?.cast == null
+                          child: credits?.cast == null
                               ? Shimmer(child: buildMediaDayWidget(context))
                               : MediaDataCast(
-                                  cast: item?.cast ?? [],
+                                  cast: credits?.cast ?? [],
                                 ),
                         ),
                         ContainerTabMediaItem(
-                          child: item?.crew == null
+                          child: credits?.crew == null
                               ? Shimmer(child: buildMediaDayWidget(context))
                               : MediaDataProduction(
-                                  crew: item?.crew ?? [],
+                                  crew: credits?.crew ?? [],
                                 ),
                         ),
                       ],

@@ -22,11 +22,11 @@ class TopAppBar extends ConsumerStatefulWidget {
   const TopAppBar({
     super.key,
     this.mediaTypeSelected = MediaType.movie,
-    this.mainMenu = false,
+    this.isMainMenu = false,
   });
 
   final MediaType? mediaTypeSelected;
-  final bool mainMenu;
+  final bool isMainMenu;
 
   @override
   ConsumerState createState() => _TopAppBarState();
@@ -43,22 +43,24 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
       titleTextStyle: Theme.of(context).textTheme.headlineLarge,
       backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
       leadingWidth: 120,
-      leading: IconButton(
-          padding: EdgeInsets.zero,
-          style: ButtonStyle(
-            overlayColor: WidgetStateProperty.all(Colors.transparent),
-          ),
-          icon: Image.asset(
-            AppAssets.logoIcon,
-            fit: BoxFit.fitHeight,
-          ),
-          onPressed: () {
-            if (!widget.mainMenu) {
-              context.pop();
-            } else {
-              context.go(AppRoutePaths.homeRoute);
-            }
-          }),
+      leading: widget.isMainMenu
+          ? IconButton(
+              padding: EdgeInsets.zero,
+              style: ButtonStyle(
+                overlayColor: WidgetStateProperty.all(Colors.transparent),
+              ),
+              icon: Image.asset(
+                AppAssets.logoIcon,
+                fit: BoxFit.fitHeight,
+              ),
+              onPressed: () {
+                if (!widget.isMainMenu) {
+                  context.pop();
+                } else {
+                  context.go(AppRoutePaths.homeRoute);
+                }
+              })
+          : null,
       actions: [
         Padding(
           padding: const EdgeInsets.all(16.0),
@@ -88,7 +90,7 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
     actions.add(
       IconButton(
         icon: Icon(
-          widget.mainMenu ? Icons.light_mode : Icons.dark_mode,
+          widget.isMainMenu ? Icons.light_mode : Icons.dark_mode,
           color: Theme.of(context).colorScheme.onSurface,
         ),
         onPressed: () {
@@ -106,7 +108,7 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
                 return LanguagePicker(
                   language: language,
                   isDropdown: false,
-                  isMainMenu: widget.mainMenu,
+                  isMainMenu: widget.isMainMenu,
                 );
               }).toList(),
           padding: const EdgeInsets.all(8),
@@ -120,7 +122,7 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
                   child: LanguagePicker(
                     language: language,
                     isDropdown: true,
-                    isMainMenu: widget.mainMenu,
+                    isMainMenu: widget.isMainMenu,
                   ),
                 ),
               )

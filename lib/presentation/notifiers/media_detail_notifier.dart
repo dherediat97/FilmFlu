@@ -1,7 +1,7 @@
 import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/data/models/media_type.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
-import 'package:film_flu/domain/repository/media_repository.dart';
+import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:film_flu/domain/use_case/provider.dart';
 import 'package:film_flu/presentation/notifiers/models/media_item_states.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -32,36 +32,25 @@ final getMediaItemDetailProvider =
         mediaItemState.id,
         mediaItemState.languageName,
       );
-  final mediaData = await ref.read(mediaRepositoryProvider).getMedia(
-        mediaItemState.mediaType,
-        mediaItemState.id,
-        mediaItemState.languageName,
-      );
 
   return MediaItemDetailState(
-      mediaList: mediaData,
-      title: mediaItemState.mediaType == MediaType.movie.name
-          ? mediaItemResponse.title
-          : mediaItemResponse.name,
-      mediaItem: mediaItemResponse,
-      productionCompanyImages: mediaItemResponse.productionCompanies!
-          .map((e) => e.logoPath)
-          .toList());
+    title: mediaItemState.mediaType == MediaType.movie.name
+        ? mediaItemResponse.title
+        : mediaItemResponse.name,
+    mediaItem: mediaItemResponse,
+  );
 });
 
 @riverpod
 final getReviewsProvider =
-    FutureProvider.family<MediaItemDetailState, MediaItemState>(
+    FutureProvider.family<List<ReviewEntity>, MediaItemState>(
         (ref, mediaItemState) async {
   final mediaItemReviews = await ref.read(mediaProvider).getReviews(
         mediaItemState.mediaType,
         mediaItemState.id,
         mediaItemState.languageName,
       );
-  return MediaItemDetailState(
-    mediaItem: MediaItemEntity(),
-    reviews: mediaItemReviews,
-  );
+  return mediaItemReviews;
 });
 
 @riverpod
@@ -74,9 +63,8 @@ final getMediaCastProvider =
         creditsMediaState.languageName,
       );
   return MediaItemDetailState(
-    mediaItem: MediaItemEntity(),
-    cast: mediaItemCast?.cast,
-    crew: mediaItemCast?.crew,
+    cast: mediaItemCast?.cast ?? [],
+    crew: mediaItemCast?.crew ?? [],
   );
 });
 

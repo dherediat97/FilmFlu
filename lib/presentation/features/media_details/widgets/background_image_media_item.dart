@@ -13,11 +13,9 @@ class BackgroundImageMediaItem extends StatelessWidget {
     super.key,
     required this.mediaItem,
     required this.isHomeScreen,
-    required this.productionCompanyImage,
     required this.title,
   });
 
-  final List<String?> productionCompanyImage;
   final String title;
   final MediaItemEntity mediaItem;
   final bool isHomeScreen;

@@ -88,15 +88,15 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
 
                           _trailerController = initTrailerController();
 
-                          if (state.value?.mediaItem.videos!.results.length !=
+                          if (state.value?.mediaItem?.videos!.results.length !=
                               1) {
                             _trailerController?.loadPlaylist(
-                              list: state.value!.mediaItem.videos!.results
+                              list: state.value!.mediaItem!.videos!.results
                                   .map(
                                     (e) => e.key,
                                   )
                                   .toList(),
-                              index: state.value?.mediaItem.videos!.results
+                              index: state.value?.mediaItem!.videos!.results
                                   .indexWhere(
                                 (element) =>
                                     element.key == state.value?.trailerId,

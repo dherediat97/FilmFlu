@@ -18,27 +18,21 @@ class HomeScreen extends ConsumerWidget {
     Widget child = const MoviesListWidget();
     final state = ref.watch(homeProvider(MediaType.movie));
 
-    return state.when(
-      data: (data) {
-        switch (data.mediaTypeSelected) {
-          case MediaType.movie:
-            child = const MoviesListWidget();
-            break;
-          case MediaType.tv:
-            child = const SeriesListWidget();
-            break;
-          default:
-            child = const SearchScreen();
-            break;
-        }
-        return ScaffoldPage(
-          fullScreenMode: false,
-          routeName: AppRoutePaths.homeRoute,
-          child: child,
-        );
-      },
-      error: (error, stackTrace) => Text(error.toString()),
-      loading: () => Text('cargando'),
+    switch (state.mediaTypeSelected) {
+      case MediaType.movie:
+        child = const MoviesListWidget();
+        break;
+      case MediaType.tv:
+        child = const SeriesListWidget();
+        break;
+      default:
+        child = const SearchScreen();
+        break;
+    }
+    return ScaffoldPage(
+      fullScreenMode: false,
+      routeName: AppRoutePaths.homeRoute,
+      child: child,
     );
   }
 }
