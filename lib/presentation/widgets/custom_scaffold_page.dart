@@ -51,8 +51,6 @@ class _ScaffoldPageState extends ConsumerState<ScaffoldPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final homeState = ref.read(homeProvider(MediaType.movie));
-
     return Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: widget.floatingActionButton,
@@ -60,7 +58,7 @@ class _ScaffoldPageState extends ConsumerState<ScaffoldPage> {
             ? PreferredSize(
                 preferredSize: const Size.fromHeight(70),
                 child: TopAppBar(
-                  mainMenu: true,
+                  isMainMenu: true,
                   mediaTypeSelected: MediaType.movie,
                 ))
             : null,

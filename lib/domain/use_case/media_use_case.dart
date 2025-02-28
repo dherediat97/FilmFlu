@@ -19,7 +19,7 @@ abstract class MediaUseCase {
     String languageName,
   );
 
-  Future<List<ReviewEntity>?> getReviews(
+  Future<List<ReviewEntity>> getReviews(
     String mediaTypeSelected,
     String mediaTypeId,
     String languageName,
@@ -90,7 +90,7 @@ class MediaUseCaseImpl extends MediaUseCase {
   }
 
   @override
-  Future<List<ReviewEntity>?> getReviews(
+  Future<List<ReviewEntity>> getReviews(
     String mediaTypeSelected,
     String mediaTypeId,
     String languageName,

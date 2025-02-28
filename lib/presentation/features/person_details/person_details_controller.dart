@@ -16,34 +16,7 @@ class PersonDetailsController extends StatefulWidget {
 
 class _PersonDetailsControllerState extends State<PersonDetailsController> {
   @override
-  void initState() {
-    super.initState();
-    // context.read<PersonDetailsBloc>().add(
-    //       PersonDetailEvent.getPersonData(
-    //         widget.personId,
-    //       ),
-    //     );
-  }
-
-  @override
   Widget build(BuildContext context) {
-    // return BlocConsumer<PersonDetailsBloc, PersonDetailsState>(
-    //   listenWhen: (previous, current) {
-    //     return current.uiState.isSuccess();
-    //   },
-    //   buildWhen: (previous, current) {
-    //     return current.person == previous.person;
-    //   },
-    //   listener: (context, state) {},
-    //   builder: (context, state) {
-    //     if (state.person != null && !state.uiState.isLoading()) {
     return PersonDetailsPage(personId: widget.personId);
-    //   } else {
-    //     return SplashScreen(
-    //       route: '${AppRoutePaths.personDetailsRoute}/${widget.personId}',
-    //     );
-    //   }
-    // },
-    // );
   }
 }

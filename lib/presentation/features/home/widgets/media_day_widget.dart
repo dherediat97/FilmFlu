@@ -45,7 +45,6 @@ class _MediaDayWidgetState extends ConsumerState<MediaDayWidget> {
                 isHomeScreen: true,
                 mediaItem: item!.mediaItem!,
                 title: item.title ?? '',
-                productionCompanyImage: [],
               );
   }
 }

@@ -10,13 +10,13 @@ part 'media_item_states.freezed.dart';
 @freezed
 class MediaItemDetailState with _$MediaItemDetailState {
   const factory MediaItemDetailState({
-    required MediaItemEntity mediaItem,
+    @Default(null) MediaItemEntity? mediaItem,
     String? title,
     String? trailerId,
     @Default([]) List<String?> productionCompanyImages,
-    List<ReviewEntity>? reviews,
-    List<ActorEntity>? cast,
-    List<FilmWorkerEntity>? crew,
+    @Default([]) List<ReviewEntity> reviews,
+    @Default([]) List<ActorEntity> cast,
+    @Default([]) List<FilmWorkerEntity> crew,
     MediaResponseEntity? mediaList,
     bool? isTrailerOpened,
   }) = _MediaItemDetailState;
