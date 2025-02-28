@@ -134,11 +134,12 @@ class MediaUseCaseImpl extends MediaUseCase {
     String languageId,
     int page,
   ) async {
-    final (page, movieList) = await mediaRepository.getMovies(
+    final (currentPage, movieList) = await mediaRepository.getMovies(
       genreId,
       languageId,
+      page,
     );
-    return (page, movieList);
+    return (currentPage, movieList);
   }
 
   @override
@@ -150,6 +151,7 @@ class MediaUseCaseImpl extends MediaUseCase {
     final serieList = await mediaRepository.getTVSeries(
       genreId,
       languageId,
+      page,
     );
     return serieList;
   }

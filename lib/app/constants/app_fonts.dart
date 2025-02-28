@@ -23,6 +23,9 @@ TextTheme createTextTheme({required bool isDarkMode}) {
     titleLarge: TextStyle(
       fontFamily: AppFonts.primaryFont,
       fontSize: 40,
+      color: isDarkMode
+          ? AppColors.textPrimaryColor
+          : AppColors.textSecondaryColor,
     ),
     titleMedium: TextStyle(
       fontFamily: AppFonts.primaryFont,

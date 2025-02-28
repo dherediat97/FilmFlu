@@ -41,16 +41,19 @@ abstract interface class MediaRepository {
     MediaType mediaTypeSelected,
     int genreId,
     String languageId,
+    int page,
   );
 
   Future<(int page, List<MediaSimpleItemEntity> items)> getMovies(
     int genreId,
     String languageId,
+    int page,
   );
 
   Future<(int page, List<MediaSimpleItemEntity> items)> getTVSeries(
     int genreId,
     String languageId,
+    int page,
   );
 
   Future<List<MediaItemEntity>> searchMediaData(

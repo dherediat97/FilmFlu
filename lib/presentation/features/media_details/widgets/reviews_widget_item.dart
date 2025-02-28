@@ -1,7 +1,7 @@
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class ReviewsWidgetItem extends StatelessWidget {
   const ReviewsWidgetItem({
@@ -32,13 +32,13 @@ class ReviewsWidgetItem extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(review!.author),
               ),
-              // subtitle: Padding(
-              //   padding: const EdgeInsets.all(8.0),
-              //   child: HtmlWidget(
-              //     review!.content,
-              //     renderMode: RenderMode.column,
-              //   ),
-              // ),
+              subtitle: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: HtmlWidget(
+                  review!.content,
+                  renderMode: RenderMode.column,
+                ),
+              ),
             ),
           ],
         ),

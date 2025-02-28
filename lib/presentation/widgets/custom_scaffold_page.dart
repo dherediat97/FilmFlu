@@ -83,7 +83,6 @@ class _ScaffoldPageState extends ConsumerState<ScaffoldPage> {
                 backgroundColor:
                     Theme.of(context).colorScheme.surfaceContainerLowest,
                 selectedItemColor: Theme.of(context).colorScheme.primary,
-                unselectedItemColor: Theme.of(context).colorScheme.onSurface,
                 currentIndex: _selectedIndex,
                 elevation: 20,
                 onTap: (int index) {
