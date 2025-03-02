@@ -9,7 +9,7 @@ class PersonEntity with _$PersonEntity {
   const factory PersonEntity({
     required String name,
     required int gender,
-    required List<String> alias,
+    List<String>? alias,
     required int id,
     String? birthday,
     String? deathday,

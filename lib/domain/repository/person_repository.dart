@@ -10,5 +10,6 @@ PersonRepository personRepository(ref) => PersonRepositoryImpl();
 abstract interface class PersonRepository {
   Future<PersonEntity> fetchPersonData(
     String personId,
+    String languageCode,
   );
 }

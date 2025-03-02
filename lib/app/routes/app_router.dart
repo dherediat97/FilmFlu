@@ -3,9 +3,9 @@ import 'package:film_flu/data/enums/media_type.dart';
 import 'package:film_flu/presentation/features/home/home_screen.dart';
 import 'package:film_flu/presentation/features/media_details/media_detail_screen.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/movies_list.dart';
+import 'package:film_flu/presentation/features/person_details/person_details_screen.dart';
 import 'package:film_flu/presentation/features/search/search_screen.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/series_list.dart';
-import 'package:film_flu/presentation/features/person_details/person_details_controller.dart';
 import 'package:film_flu/presentation/features/settings/settings_screen.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +67,7 @@ GoRouter goRouter(Ref ref) {
           ),
           GoRoute(
             path: 'personDetails/:personId',
-            builder: (context, state) => PersonDetailsController(
+            builder: (context, state) => PersonDetailsPage(
               personId: state.pathParameters['personId'].toString(),
             ),
           ),
