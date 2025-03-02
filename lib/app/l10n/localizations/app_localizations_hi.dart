@@ -128,5 +128,5 @@ class AppLocalizationsHi extends AppLocalizations {
   String get percentange_vote => '% पसंद';
 
   @override
-  String get buy_tickets => 'Reserva entradas';
+  String get buy_tickets => 'टिकट बनाओ';
 }

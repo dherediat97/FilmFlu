@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
-import 'package:film_flu/data/models/media_type.dart';
+import 'package:film_flu/data/enums/media_type.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:flutter/material.dart';
 

@@ -1,7 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
-import 'package:film_flu/data/models/media_type.dart';
+import 'package:film_flu/data/enums/genres_id.dart';
+import 'package:film_flu/data/enums/media_type.dart';
+import 'package:film_flu/data/enums/sort_options.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
 import 'package:film_flu/presentation/view_models/media_list_view_model.dart';
@@ -17,11 +19,13 @@ class MediaList extends ConsumerStatefulWidget {
     required this.genreId,
     required this.title,
     required this.mediaType,
+    this.sortOption = SortOptions.popularity,
   });
 
   final MediaType mediaType;
   final String title;
-  final int genreId;
+  final GenresId genreId;
+  final SortOptions sortOption;
 
   @override
   ConsumerState<MediaList> createState() => _MediaDataList();
@@ -35,6 +39,7 @@ class _MediaDataList extends ConsumerState<MediaList> {
         mediaTypeSelected: widget.mediaType,
         genredId: widget.genreId,
         languageId: context.localizations.localeName,
+        sortBy: widget.sortOption,
       )).notifier);
 
   MediaFilterNotifier get mediaFilterController => ref.read(mediaFilterProvider(
@@ -42,6 +47,7 @@ class _MediaDataList extends ConsumerState<MediaList> {
           mediaTypeSelected: widget.mediaType,
           genredId: widget.genreId,
           languageId: context.localizations.localeName,
+          sortBy: widget.sortOption,
         ),
       ).notifier);
 
@@ -64,6 +70,7 @@ class _MediaDataList extends ConsumerState<MediaList> {
       mediaTypeSelected: widget.mediaType,
       genredId: widget.genreId,
       languageId: context.localizations.localeName,
+      sortBy: widget.sortOption,
     )));
     final state = ref.watch(mediaListViewModelProvider(mediaFilter));
 
@@ -96,11 +103,24 @@ class _MediaDataList extends ConsumerState<MediaList> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 20),
-              AutoSizeText(
-                widget.title,
-                maxFontSize: 30,
-                minFontSize: 20,
-                style: Theme.of(context).textTheme.titleLarge,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  AutoSizeText(
+                    widget.title,
+                    maxFontSize: 30,
+                    minFontSize: 20,
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                  ),
+                  IconButton(
+                    tooltip: widget.sortOption.name,
+                    onPressed: () => _changeSort(),
+                    icon: Icon(Icons.sort),
+                  )
+                ],
               ),
               const SizedBox(height: 20),
               if (widget.mediaType == MediaType.movie)
@@ -152,11 +172,14 @@ class _MediaDataList extends ConsumerState<MediaList> {
           );
   }
 
-  void applyFilter() {
+  _changeSort() {
+    var sortOption = SortOptions.movieDate;
+    mediaFilterController.updateOrder(sortOption);
     viewModel.applyFilter(ref.read(mediaFilterProvider(MediaFilter(
       mediaTypeSelected: widget.mediaType,
       genredId: widget.genreId,
       languageId: context.localizations.localeName,
+      sortBy: widget.sortOption,
     ))));
   }
 
@@ -171,6 +194,7 @@ class _MediaDataList extends ConsumerState<MediaList> {
         mediaTypeSelected: widget.mediaType,
         genredId: widget.genreId,
         languageId: context.localizations.localeName,
+        sortBy: widget.sortOption,
       ))));
     }
   }

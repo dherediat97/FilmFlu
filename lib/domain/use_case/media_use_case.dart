@@ -1,4 +1,5 @@
-import 'package:film_flu/data/models/media_type.dart';
+import 'package:film_flu/data/enums/genres_id.dart';
+import 'package:film_flu/data/enums/media_type.dart';
 import 'package:film_flu/domain/models/credits_media_entity.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/domain/models/media_response_entity.dart';
@@ -10,7 +11,7 @@ abstract class MediaUseCase {
   Future<MediaItemEntity> getMediaItem(
     String mediaTypeSelected,
     String mediaTypeId,
-    String? languageName,
+    String languageName,
   );
 
   Future<CreditsMediaEntity?> getCredits(
@@ -33,21 +34,24 @@ abstract class MediaUseCase {
 
   Future<(int page, List<MediaSimpleItemEntity> items)> getMediaDataByGenre(
     MediaType mediaTypeSelected,
-    int genreId,
+    GenresId genreId,
     String languageId,
     int page,
+    String sortBy,
   );
 
   Future<(int page, List<MediaSimpleItemEntity> items)> getMovies(
-    int genreId,
+    GenresId genreId,
     String languageId,
     int page,
+    String sortBy,
   );
 
   Future<(int page, List<MediaSimpleItemEntity> items)> getTVSeries(
-    int genreId,
+    GenresId genreId,
     String languageId,
     int page,
+    String sortBy,
   );
 
   Future<List<MediaItemEntity>> searchMediaData(
@@ -55,7 +59,10 @@ abstract class MediaUseCase {
     String query,
   );
 
-  Future<MediaItemEntity> getMediaDataDay(MediaType mediaTypeSelected);
+  Future<MediaItemEntity> getMediaDataDay(
+    MediaType mediaTypeSelected,
+    String languageCode,
+  );
 }
 
 class MediaUseCaseImpl extends MediaUseCase {
@@ -67,12 +74,12 @@ class MediaUseCaseImpl extends MediaUseCase {
   Future<MediaItemEntity> getMediaItem(
     String mediaTypeSelected,
     String mediaTypeId,
-    String? languageName,
+    String languageName,
   ) async {
     return mediaRepository.getMediaItem(
       mediaTypeSelected,
       mediaTypeId,
-      languageName ?? 'en',
+      languageName,
     );
   }
 
@@ -119,39 +126,44 @@ class MediaUseCaseImpl extends MediaUseCase {
   Future<(int totalItems, List<MediaSimpleItemEntity> items)>
       getMediaDataByGenre(
     MediaType mediaTypeSelected,
-    int genreId,
+    GenresId genreId,
     String languageId,
     int page,
+    String sortBy,
   ) async {
     return mediaTypeSelected == MediaType.movie
-        ? getMovies(genreId, languageId, page)
-        : getTVSeries(genreId, languageId, page);
+        ? getMovies(genreId, languageId, page, sortBy)
+        : getTVSeries(genreId, languageId, page, sortBy);
   }
 
   @override
   Future<(int totalItems, List<MediaSimpleItemEntity> items)> getMovies(
-    int genreId,
+    GenresId genreId,
     String languageId,
     int page,
+    String sortBy,
   ) async {
     final (currentPage, movieList) = await mediaRepository.getMovies(
       genreId,
       languageId,
       page,
+      sortBy,
     );
     return (currentPage, movieList);
   }
 
   @override
   Future<(int page, List<MediaSimpleItemEntity> items)> getTVSeries(
-    int genreId,
+    GenresId genreId,
     String languageId,
     int page,
+    String sortBy,
   ) async {
     final serieList = await mediaRepository.getTVSeries(
       genreId,
       languageId,
       page,
+      sortBy,
     );
     return serieList;
   }
@@ -165,7 +177,10 @@ class MediaUseCaseImpl extends MediaUseCase {
   }
 
   @override
-  Future<MediaItemEntity> getMediaDataDay(MediaType mediaTypeSelected) async {
-    return mediaRepository.getMediaDataDay(mediaTypeSelected);
+  Future<MediaItemEntity> getMediaDataDay(
+    MediaType mediaTypeSelected,
+    String languageCode,
+  ) async {
+    return mediaRepository.getMediaDataDay(mediaTypeSelected, languageCode);
   }
 }

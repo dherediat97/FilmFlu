@@ -1,7 +1,7 @@
 import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
-import 'package:film_flu/data/models/media_type.dart';
+import 'package:film_flu/data/enums/media_type.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/detail_tab_media_item.dart';
 import 'package:film_flu/presentation/notifiers/models/media_item_states.dart';
 import 'package:film_flu/presentation/notifiers/media_detail_notifier.dart';
@@ -18,10 +18,12 @@ class MediaItemScreenDetails extends ConsumerStatefulWidget {
     super.key,
     required this.mediaId,
     required this.mediaType,
+    required this.languageCode,
   });
 
   final String mediaId;
   final String mediaType;
+  final String languageCode;
 
   @override
   ConsumerState<MediaItemScreenDetails> createState() =>
@@ -50,7 +52,7 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
     var state = ref.watch(getHomeMediaDetailProvider(MediaItemState(
       mediaType: widget.mediaType,
       id: widget.mediaId,
-      languageName: 'es',
+      languageName: widget.languageCode,
     )));
 
     return ScaffoldPage(

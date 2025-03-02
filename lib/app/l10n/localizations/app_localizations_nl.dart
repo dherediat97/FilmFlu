@@ -128,5 +128,5 @@ class AppLocalizationsNl extends AppLocalizations {
   String get percentange_vote => '% vind-ik-leuks';
 
   @override
-  String get buy_tickets => 'Reserva entradas';
+  String get buy_tickets => 'Boek tickets';
 }

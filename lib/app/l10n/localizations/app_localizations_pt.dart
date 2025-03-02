@@ -128,5 +128,5 @@ class AppLocalizationsPt extends AppLocalizations {
   String get percentange_vote => '% curtidas';
 
   @override
-  String get buy_tickets => 'Reserva entradas';
+  String get buy_tickets => 'Reservar bilhetes';
 }

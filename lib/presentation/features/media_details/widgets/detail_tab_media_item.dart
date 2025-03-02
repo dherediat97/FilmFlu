@@ -35,33 +35,6 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
   void initState() {
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
-    _tabController.addListener(() {
-      var index = _tabController.index;
-      switch (index) {
-        case 0:
-          ref.watch(getMediaItemDetailProvider(MediaItemState(
-            id: widget.mediaItemId,
-            mediaType: widget.mediaTypeSelected,
-            languageName: context.localizations.localeName,
-          )));
-          break;
-        case 1:
-          ref.watch(getReviewsProvider(MediaItemState(
-            mediaType: widget.mediaTypeSelected,
-            id: widget.mediaItemId,
-            languageName: context.localizations.localeName,
-          )));
-          break;
-        case 2:
-        case 3:
-          ref.watch(getMediaCastProvider(CreditsMediaState(
-            mediaType: widget.mediaTypeSelected,
-            id: widget.mediaItemId,
-            languageName: context.localizations.localeName,
-          )));
-          break;
-      }
-    });
   }
 
   @override
@@ -93,20 +66,21 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
           languageName: context.localizations.localeName),
     ));
 
-    final item = mediaItemResponse.value;
-    final credits = creditsMediaItemResponse.value;
-    final reviews = reviewsMediaItemResponse.value;
+    final item = mediaItemResponse;
+    final credits = creditsMediaItemResponse;
+    final reviews = reviewsMediaItemResponse;
 
     return SingleChildScrollView(
       child: Column(
         children: [
-          mediaItemResponse.isLoading
-              ? Shimmer(child: buildMediaDayWidget(context))
-              : BackgroundImageMediaItem(
-                  title: item?.title ?? '',
-                  isHomeScreen: false,
-                  mediaItem: item!.mediaItem!,
-                ),
+          item.when(
+              data: (mediaItem) => BackgroundImageMediaItem(
+                    title: mediaItem.title ?? '',
+                    isHomeScreen: false,
+                    mediaItem: mediaItem.mediaItem!,
+                  ),
+              error: (error, stackTrace) => Text(error.toString()),
+              loading: () => Shimmer(child: buildMediaDayWidget(context))),
           Padding(
             padding: const EdgeInsets.all(12),
             child: DefaultTabController(
@@ -130,52 +104,77 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                     child: TabBarView(
                       controller: _tabController,
                       children: [
-                        ContainerTabMediaItem(
-                          child: InfoMedia(
-                            mediaItem: item?.mediaItem,
-                            media: item?.mediaList,
-                          ),
-                        ),
-                        reviews != null
-                            ? Column(
-                                children: [
-                                  Image.asset(
-                                    AppAssets.emptyStateImage,
-                                    height: 450,
-                                    width:
-                                        MediaQuery.of(context).size.width / 2,
-                                    fit: BoxFit.fitWidth,
+                        item.when(
+                            data: (mediaItem) => ContainerTabMediaItem(
+                                  child: InfoMedia(
+                                    mediaItem: mediaItem.mediaItem,
+                                    media: mediaItem.mediaList,
                                   ),
-                                  SizedBox(height: 20),
-                                  Text('No hay reseñas'),
-                                ],
-                              )
-                            : ContainerTabMediaItem(
-                                child: ListView.builder(
-                                  itemCount: reviews?.length,
-                                  itemBuilder: (context, index) {
-                                    ReviewEntity review = reviews![index];
+                                ),
+                            error: (error, stackTrace) =>
+                                Text(error.toString()),
+                            loading: () =>
+                                Shimmer(child: buildMediaDayWidget(context))),
+                        reviews.when(
+                            data: (reviews) {
+                              return reviews.isEmpty
+                                  ? Column(
+                                      children: [
+                                        Image.asset(
+                                          AppAssets.emptyStateImage,
+                                          fit: BoxFit.contain,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 200,
+                                        ),
+                                        SizedBox(height: 20),
+                                        Text('No hay reseñas'),
+                                      ],
+                                    )
+                                  : ContainerTabMediaItem(
+                                      child: ListView.builder(
+                                          itemCount: reviews.length,
+                                          itemBuilder: (context, index) {
+                                            ReviewEntity review =
+                                                reviews[index];
 
-                                    return ReviewsWidgetItem(
-                                      review: review,
-                                    );
-                                  },
+                                            return ReviewsWidgetItem(
+                                              review: review,
+                                            );
+                                          }));
+                            },
+                            error: (error, stackTrace) => Column(
+                                  children: [
+                                    Image.asset(
+                                      AppAssets.emptyStateImage,
+                                      fit: BoxFit.contain,
+                                      width: MediaQuery.of(context).size.width,
+                                      height: 200,
+                                    ),
+                                    SizedBox(height: 20),
+                                    Text('No hay reseñas'),
+                                  ],
                                 ),
-                              ),
-                        ContainerTabMediaItem(
-                          child: credits?.cast == null
-                              ? Shimmer(child: buildMediaDayWidget(context))
-                              : MediaDataCast(
-                                  cast: credits?.cast ?? [],
-                                ),
-                        ),
-                        ContainerTabMediaItem(
-                          child: credits?.crew == null
-                              ? Shimmer(child: buildMediaDayWidget(context))
-                              : MediaDataProduction(
-                                  crew: credits?.crew ?? [],
-                                ),
-                        ),
+                            loading: () =>
+                                Shimmer(child: buildMediaDayWidget(context))),
+                        credits.when(
+                            data: (data) => ContainerTabMediaItem(
+                                    child: MediaDataCast(
+                                  cast: data.cast,
+                                )),
+                            error: (error, stackTrace) =>
+                                Text(error.toString()),
+                            loading: () =>
+                                Shimmer(child: buildMediaDayWidget(context))),
+                        credits.when(
+                            data: (data) => ContainerTabMediaItem(
+                                    child: MediaDataProduction(
+                                  crew: data.crew,
+                                )),
+                            error: (error, stackTrace) =>
+                                Text(error.toString()),
+                            loading: () =>
+                                Shimmer(child: buildMediaDayWidget(context)))
                       ],
                     ),
                   )

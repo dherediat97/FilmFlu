@@ -37,5 +37,6 @@
   "add_to_my_list": "Ajouter à ma liste",
   "unknown": "Inconnu",
   "search": "Rechercher",
-  "percentange_vote": "% goûts"
+  "percentange_vote": "% goûts",
+  "buy_tickets":"Réserver des billets"
 }

@@ -1,5 +1,5 @@
 import 'package:film_flu/app/constants/app_constants.dart';
-import 'package:film_flu/data/models/media_type.dart';
+import 'package:film_flu/data/enums/media_type.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:film_flu/domain/use_case/provider.dart';
@@ -14,11 +14,7 @@ final getHomeMediaDetailProvider =
       .read(mediaProvider)
       .getMediaItem(mediaItemState.mediaType, mediaItemState.id, '');
   return MediaItemDetailState(
-    mediaItem: mediaItemResponse,
     trailerId: _getFirstTrailerId(mediaItemResponse),
-    title: mediaItemState.mediaType == MediaType.movie.name
-        ? mediaItemResponse.title
-        : mediaItemResponse.name,
     isTrailerOpened: false,
   );
 });

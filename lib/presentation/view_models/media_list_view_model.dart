@@ -34,6 +34,7 @@ class MediaListViewModel extends AutoDisposeFamilyAsyncNotifier<
       currentFilter.genredId,
       currentFilter.languageId,
       page,
+      currentFilter.sortBy.name,
     );
     final previousLength = state.valueOrNull?.length ?? 0;
     _canLoadMore = previousLength + items.length < totalItems;

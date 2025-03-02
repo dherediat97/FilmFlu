@@ -1,4 +1,5 @@
 import 'package:film_flu/app/constants/app_assets.dart';
+import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
@@ -6,7 +7,7 @@ import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/presentation/features/app_bar/provider/app_language_provider.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
-import 'package:film_flu/data/models/media_type.dart';
+import 'package:film_flu/data/enums/media_type.dart';
 import 'package:film_flu/presentation/features/app_bar/widgets/language_picker.dart';
 import 'package:film_flu/presentation/notifiers/app_notifier.dart';
 import 'package:film_flu/presentation/view_models/searched_media_list_view_model.dart';
@@ -91,7 +92,7 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
       IconButton(
         icon: Icon(
           widget.isMainMenu ? Icons.light_mode : Icons.dark_mode,
-          color: Theme.of(context).colorScheme.onSurface,
+          color: AppColors.backgroundColorLight,
         ),
         onPressed: () {
           ref.read(appProvider.notifier).toggle();
@@ -101,7 +102,7 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
 
     actions.add(
       DropdownButton<Locale>(
-          dropdownColor: Colors.white,
+          dropdownColor: widget.isMainMenu ? Colors.white : Colors.black,
           onChanged: (language) => languageProvider.changeLanguage(language!),
           selectedItemBuilder: (context) =>
               AppLocalizations.supportedLocales.map<Widget>((Locale language) {
@@ -136,7 +137,7 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
           width: 24,
           height: 24,
           colorFilter: ColorFilter.mode(
-            Theme.of(context).colorScheme.onSurface,
+            AppColors.backgroundColorLight,
             BlendMode.srcIn,
           ),
         ),
@@ -159,7 +160,7 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
           },
           icon: Icon(
             Icons.android,
-            color: Theme.of(context).colorScheme.onSurface,
+            color: AppColors.backgroundColorLight,
           ),
         ),
       );

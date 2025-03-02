@@ -1,4 +1,7 @@
-import 'package:film_flu/data/models/media_type.dart';
+import 'package:film_flu/data/enums/genres_id.dart';
+import 'package:film_flu/data/enums/media_type.dart';
+import 'package:film_flu/data/enums/order_options.dart';
+import 'package:film_flu/data/enums/sort_options.dart';
 import 'package:film_flu/data/repositories/media_repository_impl.dart';
 import 'package:film_flu/domain/models/credits_media_entity.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
@@ -39,21 +42,25 @@ abstract interface class MediaRepository {
 
   Future<(int page, List<MediaSimpleItemEntity> items)> getMediaDataByGenre(
     MediaType mediaTypeSelected,
-    int genreId,
+    GenresId genreId,
     String languageId,
     int page,
+    SortOptions? sortBy,
+    OrderOptions? orderBy,
   );
 
   Future<(int page, List<MediaSimpleItemEntity> items)> getMovies(
-    int genreId,
+    GenresId genreId,
     String languageId,
     int page,
+    String sortBy,
   );
 
   Future<(int page, List<MediaSimpleItemEntity> items)> getTVSeries(
-    int genreId,
+    GenresId genreId,
     String languageId,
     int page,
+    String sortBy,
   );
 
   Future<List<MediaItemEntity>> searchMediaData(
@@ -63,5 +70,6 @@ abstract interface class MediaRepository {
 
   Future<MediaItemEntity> getMediaDataDay(
     MediaType mediaTypeSelected,
+    String languageCode,
   );
 }

@@ -128,5 +128,5 @@ class AppLocalizationsSv extends AppLocalizations {
   String get percentange_vote => '% gillar';
 
   @override
-  String get buy_tickets => 'Reserva entradas';
+  String get buy_tickets => 'Boka biljetter';
 }
