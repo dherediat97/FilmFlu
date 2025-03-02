@@ -1,4 +1,5 @@
-import 'package:film_flu/data/models/media_type.dart';
+import 'package:film_flu/app/extensions/localizations_extensions.dart';
+import 'package:film_flu/data/enums/media_type.dart';
 import 'package:film_flu/presentation/features/home/home_screen.dart';
 import 'package:film_flu/presentation/features/media_details/media_detail_screen.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/movies_list.dart';
@@ -39,6 +40,7 @@ GoRouter goRouter(Ref ref) {
                     GoRoute(
                       path: ':mediaId',
                       builder: (context, state) => MediaItemScreenDetails(
+                        languageCode: context.localizations.localeName,
                         mediaType: MediaType.movie.name,
                         mediaId: state.pathParameters['mediaId'].toString(),
                       ),
@@ -51,6 +53,7 @@ GoRouter goRouter(Ref ref) {
                     GoRoute(
                       path: ':mediaTypeId',
                       builder: (context, state) => MediaItemScreenDetails(
+                        languageCode: context.localizations.localeName,
                         mediaType: MediaType.tv.name,
                         mediaId: state.pathParameters['mediaTypeId'].toString(),
                       ),

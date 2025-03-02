@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" id="poland-flag">
+  <path d="M0 0h30v20H0z"></path>
+  <path fill="#fff" d="M1 1h28v9H1z"></path>
+  <path fill="#dc143c" d="M1 10h28v9H1z"></path>
+</svg>

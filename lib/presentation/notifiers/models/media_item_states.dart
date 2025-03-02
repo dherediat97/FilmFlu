@@ -18,7 +18,7 @@ class MediaItemDetailState with _$MediaItemDetailState {
     @Default([]) List<ActorEntity> cast,
     @Default([]) List<FilmWorkerEntity> crew,
     MediaResponseEntity? mediaList,
-    bool? isTrailerOpened,
+    @Default(false) bool isTrailerOpened,
   }) = _MediaItemDetailState;
 }
 

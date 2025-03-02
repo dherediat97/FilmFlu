@@ -1,5 +1,6 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/data/models/media_type.dart';
+import 'package:film_flu/data/enums/media_type.dart';
+import 'package:film_flu/data/enums/sort_options.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/background_image_media_item.dart';
 import 'package:film_flu/presentation/notifiers/media_day_notifier.dart';
 import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
@@ -22,10 +23,10 @@ class MediaDayWidget extends ConsumerStatefulWidget {
 class _MediaDayWidgetState extends ConsumerState<MediaDayWidget> {
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(mediaDayProvider(MediaFilter(
+    final state = ref.watch(mediaDayProvider(MediaDayFilter(
       mediaTypeSelected: widget.mediaTypeSelected,
-      genredId: 0,
       languageId: context.localizations.localeName,
+      sortBy: SortOptions.popularity,
     )));
 
     return mediaDayWidget(state);

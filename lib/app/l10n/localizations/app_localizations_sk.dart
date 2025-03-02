@@ -128,5 +128,5 @@ class AppLocalizationsSk extends AppLocalizations {
   String get percentange_vote => '% páči sa mi';
 
   @override
-  String get buy_tickets => 'Reserva entradas';
+  String get buy_tickets => 'Zarezervujte si lístky';
 }

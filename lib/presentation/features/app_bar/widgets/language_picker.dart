@@ -50,7 +50,7 @@ class _LanguagePickerState extends ConsumerState<LanguagePicker> {
                   color: !app.isDarkMode
                       ? widget.isDropdown
                           ? Colors.black
-                          : Colors.black
+                          : Colors.white
                       : widget.isDropdown
                           ? Colors.black
                           : Colors.white,

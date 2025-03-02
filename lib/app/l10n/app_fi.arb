@@ -37,5 +37,6 @@
   "add_to_my_list": "Lisää listalleni",
   "unknown": "Tuntematon",
   "search": "Hae",
-  "percentange_vote":"% tykkäyksiä"
+  "percentange_vote":"% tykkäyksiä",
+  "buy_tickets":"Varaa liput"
 }
