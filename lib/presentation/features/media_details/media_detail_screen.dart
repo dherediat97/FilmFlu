@@ -49,11 +49,13 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
   @override
   Widget build(BuildContext context) {
     BuildContext dialogContext;
-    var state = ref.watch(getHomeMediaDetailProvider(MediaItemState(
+    final state = ref.watch(getHomeMediaDetailProvider(MediaItemState(
       mediaType: widget.mediaType,
       id: widget.mediaId,
       languageName: widget.languageCode,
     )));
+
+    final trailerDetails = state;
 
     return ScaffoldPage(
         floatingActionButton: Padding(
@@ -77,85 +79,82 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
               const SizedBox(
                 height: 20,
               ),
-              if (state.value?.trailerId != null)
-                FloatingActionButton.extended(
-                    heroTag: 'playTrailer',
-                    icon: const Icon(Icons.play_arrow),
-                    label: Text(context.localizations.play_trailer),
-                    onPressed: () {
-                      showAdaptiveDialog(
-                        context: context,
-                        builder: (context) {
-                          dialogContext = context;
+              trailerDetails.when(
+                data: (data) {
+                  if (data.trailerIds.isEmpty) return Container();
 
-                          _trailerController = initTrailerController();
+                  return FloatingActionButton.extended(
+                      heroTag: 'playTrailer',
+                      icon: const Icon(Icons.play_arrow),
+                      label: Text(context.localizations.play_trailer),
+                      onPressed: () {
+                        showAdaptiveDialog(
+                          context: context,
+                          builder: (context) {
+                            dialogContext = context;
 
-                          if (state.value?.mediaItem?.videos!.results.length !=
-                              1) {
-                            _trailerController?.loadPlaylist(
-                              list: state.value!.mediaItem!.videos!.results
-                                  .map(
-                                    (e) => e.key,
-                                  )
-                                  .toList(),
-                              index: state.value?.mediaItem!.videos!.results
-                                  .indexWhere(
-                                (element) =>
-                                    element.key == state.value?.trailerId,
+                            _trailerController = initTrailerController();
+                            if (data.trailerIds.length == 1) {
+                              _trailerController?.loadVideoById(
+                                videoId: data.trailerIds.first,
+                              );
+                            } else {
+                              _trailerController?.loadPlaylist(
+                                list: data.trailerIds,
+                                index:
+                                    data.trailerIds.indexOf(data.trailerIds[0]),
+                              );
+                            }
+
+                            return AlertDialog.adaptive(
+                              icon: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                    onPressed: () =>
+                                        closeTrailer(dialogContext),
+                                    icon: const Icon(Icons.close),
+                                  ),
+                                ],
                               ),
-                            );
-                          } else {
-                            _trailerController?.loadVideoById(
-                              videoId: state.value!.trailerId!,
-                            );
-                          }
+                              content: SizedBox(
+                                height: MediaQuery.of(context).size.height,
+                                width: MediaQuery.of(context).size.width,
+                                child: YoutubePlayerScaffold(
+                                  controller: _trailerController!,
+                                  builder: (context, player) {
+                                    return LayoutBuilder(
+                                      builder: (context, constraints) {
+                                        if (kIsWeb &&
+                                            constraints.maxWidth > 750) {
+                                          return Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Expanded(
+                                                flex: 10,
+                                                child: player,
+                                              ),
+                                            ],
+                                          );
+                                        }
 
-                          return AlertDialog.adaptive(
-                            icon: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                  onPressed: () => closeTrailer(dialogContext),
-                                  icon: const Icon(Icons.close),
+                                        return player;
+                                      },
+                                    );
+                                  },
                                 ),
-                              ],
-                            ),
-                            content: SizedBox(
-                              height: MediaQuery.of(context).size.height,
-                              width: MediaQuery.of(context).size.width,
-                              child: YoutubePlayerScaffold(
-                                controller: _trailerController!,
-                                builder: (context, player) {
-                                  return LayoutBuilder(
-                                    builder: (context, constraints) {
-                                      if (kIsWeb &&
-                                          constraints.maxWidth > 750) {
-                                        return Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Expanded(
-                                              flex: 10,
-                                              child: player,
-                                            ),
-                                          ],
-                                        );
-                                      }
-
-                                      return player;
-                                    },
-                                  );
-                                },
                               ),
-                            ),
-                          );
-                        },
-                      );
-                    })
-              else
-                Container(),
+                            );
+                          },
+                        );
+                      });
+                },
+                error: (error, stackTrace) => Container(),
+                loading: () => Container(),
+              )
             ],
           ),
         ),

@@ -12,7 +12,7 @@ class MediaItemDetailState with _$MediaItemDetailState {
   const factory MediaItemDetailState({
     @Default(null) MediaItemEntity? mediaItem,
     String? title,
-    String? trailerId,
+    @Default([]) List<String> trailerIds,
     @Default([]) List<String?> productionCompanyImages,
     @Default([]) List<ReviewEntity> reviews,
     @Default([]) List<ActorEntity> cast,
