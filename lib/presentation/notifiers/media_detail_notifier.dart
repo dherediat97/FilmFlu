@@ -10,11 +10,14 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 final getHomeMediaDetailProvider =
     FutureProvider.family<MediaItemDetailState, MediaItemState>(
         (ref, mediaItemState) async {
-  final mediaItemResponse = await ref
-      .read(mediaProvider)
-      .getMediaItem(mediaItemState.mediaType, mediaItemState.id, '');
+  final mediaItemResponse = await ref.read(mediaProvider).getMediaItem(
+        mediaItemState.mediaType,
+        mediaItemState.id,
+        '${mediaItemState.languageName}_${mediaItemState.languageName.toUpperCase()}',
+      );
+
   return MediaItemDetailState(
-    trailerId: _getFirstTrailerId(mediaItemResponse),
+    trailerIds: _getTrailers(mediaItemResponse),
     isTrailerOpened: false,
   );
 });
@@ -64,14 +67,15 @@ final getMediaCastProvider =
   );
 });
 
-String _getFirstTrailerId(MediaItemEntity mediaItemEntity) {
+List<String> _getTrailers(MediaItemEntity mediaItemEntity) {
   try {
     return mediaItemEntity.videos!.results
-        .firstWhere((element) =>
+        .where((element) =>
             element.type == AppConstants.trailer ||
             element.type == AppConstants.teaser)
-        .key;
+        .map((e) => e.key)
+        .toList();
   } catch (ex) {
-    return '';
+    return [];
   }
 }
