@@ -1,0 +1,2 @@
+C:/Proyectos Programacion/FilmFlu/android/app/.cxx/Debug/523d48n3/x86/CMakeFiles/edit_cache.dir
+C:/Proyectos Programacion/FilmFlu/android/app/.cxx/Debug/523d48n3/x86/CMakeFiles/rebuild_cache.dir
