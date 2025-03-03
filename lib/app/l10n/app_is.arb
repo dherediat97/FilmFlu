@@ -38,5 +38,6 @@
   "unknown": "Óþekkt",
   "search": "Leita",
   "percentange_vote":"% líkar við",
-  "buy_tickets":"Bókaðu miða"
+  "buy_tickets":"Bókaðu miða",
+  "not_found_reviews": "Engar umsagnir"
 }

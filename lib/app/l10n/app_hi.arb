@@ -38,5 +38,6 @@
   "unknown": "अज्ञात",
   "search": "खोज",
   "percentange_vote":"% पसंद",
-  "buy_tickets":"टिकट बनाओ"
+  "buy_tickets":"टिकट बनाओ",
+  "not_found_reviews": "कोई समीक्षा नहीं"
 }

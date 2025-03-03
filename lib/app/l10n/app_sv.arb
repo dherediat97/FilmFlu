@@ -38,5 +38,6 @@
   "unknown": "Okänd",
   "search": "Sök",
   "percentange_vote":"% gillar",
-  "buy_tickets":"Boka biljetter"
+  "buy_tickets":"Boka biljetter",
+  "not_found_reviews": "Inga recensioner"
 }

@@ -363,6 +363,36 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Reserva entradas'**
   String get buy_tickets;
+
+  /// No description provided for @not_found_reviews.
+  ///
+  /// In es, this message translates to:
+  /// **'No hay reseñas'**
+  String get not_found_reviews;
+
+  /// No description provided for @settings.
+  ///
+  /// In es, this message translates to:
+  /// **'Ajustes'**
+  String get settings;
+
+  /// No description provided for @about_us.
+  ///
+  /// In es, this message translates to:
+  /// **'Acerca de'**
+  String get about_us;
+
+  /// No description provided for @general.
+  ///
+  /// In es, this message translates to:
+  /// **'General'**
+  String get general;
+
+  /// No description provided for @advanced.
+  ///
+  /// In es, this message translates to:
+  /// **'Avanzado'**
+  String get advanced;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

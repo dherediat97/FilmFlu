@@ -1,6 +1,5 @@
 import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/constants/app_colors.dart';
-import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
@@ -11,13 +10,9 @@ import 'package:film_flu/data/enums/media_type.dart';
 import 'package:film_flu/presentation/features/app_bar/widgets/language_picker.dart';
 import 'package:film_flu/presentation/notifiers/app_notifier.dart';
 import 'package:film_flu/presentation/view_models/searched_media_list_view_model.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class TopAppBar extends ConsumerStatefulWidget {
   const TopAppBar({
@@ -76,17 +71,12 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
   List<Widget> _appBarActions(AppLanguageNotifier languageProvider) {
     List<Widget> actions = [];
 
-    // actions.add(
-    //   IconButton(
-    //     icon: Icon(
-    //       Icons.settings,
-    //       color: Theme.of(context).colorScheme.onSecondary,
-    //     ),
-    //     onPressed: () {
-    //       context.go(AppRoutePaths.settingsRoute);
-    //     },
-    //   ),
-    // );
+    actions.add(
+      IconButton(
+        icon: Icon(Icons.settings, color: AppColors.backgroundColorLight),
+        onPressed: () => context.go(AppRoutePaths.settingsRoute),
+      ),
+    );
 
     actions.add(
       IconButton(
@@ -94,9 +84,7 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
           widget.isMainMenu ? Icons.light_mode : Icons.dark_mode,
           color: AppColors.backgroundColorLight,
         ),
-        onPressed: () {
-          ref.read(appProvider.notifier).toggle();
-        },
+        onPressed: () => ref.read(appProvider.notifier).toggle(),
       ),
     );
 
@@ -104,67 +92,64 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
       DropdownButton<Locale>(
           dropdownColor: widget.isMainMenu ? Colors.white : Colors.black,
           onChanged: (language) => languageProvider.changeLanguage(language!),
-          selectedItemBuilder: (context) =>
-              AppLocalizations.supportedLocales.map<Widget>((Locale language) {
-                return LanguagePicker(
-                  language: language,
-                  isDropdown: false,
-                  isMainMenu: widget.isMainMenu,
-                );
-              }).toList(),
+          selectedItemBuilder: (context) => AppLocalizations.supportedLocales
+              .map((language) => LanguagePicker(
+                    language: language,
+                    isDropdown: false,
+                    isMainMenu: widget.isMainMenu,
+                  ))
+              .toList(),
           padding: const EdgeInsets.all(8),
           elevation: 4,
           value: ref.watch(appLanguageProvider),
           underline: const SizedBox(height: 0),
           items: AppLocalizations.supportedLocales
-              .map<DropdownMenuItem<Locale>>(
-                (Locale language) => DropdownMenuItem<Locale>(
-                  value: language,
-                  child: LanguagePicker(
-                    language: language,
-                    isDropdown: true,
-                    isMainMenu: widget.isMainMenu,
-                  ),
-                ),
-              )
+              .map((language) => DropdownMenuItem<Locale>(
+                    value: language,
+                    child: LanguagePicker(
+                      language: language,
+                      isDropdown: true,
+                      isMainMenu: widget.isMainMenu,
+                    ),
+                  ))
               .toList()),
     );
 
-    actions.add(
-      IconButton(
-        icon: SvgPicture.asset(
-          AppAssets.githubIcon,
-          width: 24,
-          height: 24,
-          colorFilter: ColorFilter.mode(
-            AppColors.backgroundColorLight,
-            BlendMode.srcIn,
-          ),
-        ),
-        onPressed: () {
-          launchUrl(Uri.parse(AppConstants.myGithubPage));
-        },
-      ),
-    );
+    // actions.add(
+    //   IconButton(
+    //     icon: SvgPicture.asset(
+    //       AppAssets.githubIcon,
+    //       width: 24,
+    //       height: 24,
+    //       colorFilter: ColorFilter.mode(
+    //         AppColors.backgroundColorLight,
+    //         BlendMode.srcIn,
+    //       ),
+    //     ),
+    //     onPressed: () {
+    //       launchUrl(Uri.parse(AppConstants.myGithubPage));
+    //     },
+    //   ),
+    // );
 
-    if (kIsWeb) {
-      actions.add(
-        IconButton(
-          onPressed: () async {
-            PackageInfo packageInfo = await PackageInfo.fromPlatform();
-            AppConstants.version = packageInfo.version;
+    // if (kIsWeb) {
+    //   actions.add(
+    //     IconButton(
+    //       onPressed: () async {
+    //         PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    //         AppConstants.version = packageInfo.version;
 
-            final Uri url = Uri.parse(AppConstants.appDownloadBaseUrl);
-            //Lanzar url que descarga la app para android
-            await launchUrl(url);
-          },
-          icon: Icon(
-            Icons.android,
-            color: AppColors.backgroundColorLight,
-          ),
-        ),
-      );
-    }
+    //         final Uri url = Uri.parse(AppConstants.appDownloadBaseUrl);
+    //         //Lanzar url que descarga la app para android
+    //         await launchUrl(url);
+    //       },
+    //       icon: Icon(
+    //         Icons.android,
+    //         color: AppColors.backgroundColorLight,
+    //       ),
+    //     ),
+    //   );
+    // }
     return actions;
   }
 
@@ -214,7 +199,7 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
           leading: Icon(Icons.search),
           onChanged: (value) {
             if (value.length > 3) {
-              Future.delayed(Duration(milliseconds: 2500), () async {
+              Future.delayed(Duration(milliseconds: 2000), () async {
                 searchResults = await ref
                     .read(searchMediaListProvider.notifier)
                     .search(languageName, value);

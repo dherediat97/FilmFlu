@@ -129,4 +129,19 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get buy_tickets => 'Zarezervujte si lístky';
+
+  @override
+  String get not_found_reviews => 'Žiadne recenzie';
+
+  @override
+  String get settings => 'Ajustes';
+
+  @override
+  String get about_us => 'Acerca de';
+
+  @override
+  String get general => 'General';
+
+  @override
+  String get advanced => 'Avanzado';
 }

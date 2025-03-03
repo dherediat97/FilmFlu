@@ -175,12 +175,7 @@ class _MediaDataList extends ConsumerState<MediaList> {
   _changeSort() {
     var sortOption = SortOptions.movieDate;
     mediaFilterController.updateOrder(sortOption);
-    viewModel.applyFilter(ref.read(mediaFilterProvider(MediaFilter(
-      mediaTypeSelected: widget.mediaType,
-      genredId: widget.genreId,
-      languageId: context.localizations.localeName,
-      sortBy: widget.sortOption,
-    ))));
+    viewModel.loadPage(1, mediaFilterController.arg);
   }
 
   void _loadMore() {

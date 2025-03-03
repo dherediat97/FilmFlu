@@ -38,5 +38,6 @@
  "unknown":"未知",
  "search": "搜索",
  "percentange_vote":"% 的用户喜欢它",
- "buy_tickets":"预订门票"
+ "buy_tickets":"预订门票",
+  "not_found_reviews": "沒有評論"
 }

@@ -103,12 +103,10 @@ class _ScaffoldPageState extends ConsumerState<ScaffoldPage> {
                 controller: _pageController,
                 physics: const NeverScrollableScrollPhysics(),
                 onPageChanged: (index) {
-                  setState(() {
-                    _selectedIndex = index;
+                  _selectedIndex = index;
 
-                    var category = MediaType.values.elementAt(_selectedIndex);
-                    ref.read(homeProvider(category));
-                  });
+                  var category = MediaType.values.elementAt(_selectedIndex);
+                  ref.read(homeProvider(category));
                 },
                 children: const [
                   MoviesListWidget(),

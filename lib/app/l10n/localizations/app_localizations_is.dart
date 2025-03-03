@@ -129,4 +129,19 @@ class AppLocalizationsIs extends AppLocalizations {
 
   @override
   String get buy_tickets => 'Bókaðu miða';
+
+  @override
+  String get not_found_reviews => 'Engar umsagnir';
+
+  @override
+  String get settings => 'Ajustes';
+
+  @override
+  String get about_us => 'Acerca de';
+
+  @override
+  String get general => 'General';
+
+  @override
+  String get advanced => 'Avanzado';
 }

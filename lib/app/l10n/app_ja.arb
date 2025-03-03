@@ -38,5 +38,6 @@
   "unknown":"不明",
   "search":"検索",
   "percentange_vote":"% いいね！",
-  "buy_tickets":"チケットを予約する"
+  "buy_tickets":"チケットを予約する",
+  "not_found_reviews": "レビューはありません"
 }

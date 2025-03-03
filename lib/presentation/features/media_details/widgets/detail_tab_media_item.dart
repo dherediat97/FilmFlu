@@ -91,9 +91,7 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                   TabBar(
                     controller: _tabController,
                     tabs: [
-                      Tab(
-                        text: context.localizations.information,
-                      ),
+                      Tab(text: context.localizations.information),
                       Tab(text: context.localizations.reviews),
                       Tab(text: context.localizations.character_cast),
                       Tab(text: context.localizations.production_cast),
@@ -128,20 +126,22 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                                           height: 200,
                                         ),
                                         SizedBox(height: 20),
-                                        Text('No hay reseñas'),
+                                        Text(context
+                                            .localizations.not_found_reviews),
                                       ],
                                     )
                                   : ContainerTabMediaItem(
                                       child: ListView.builder(
-                                          itemCount: reviews.length,
-                                          itemBuilder: (context, index) {
-                                            ReviewEntity review =
-                                                reviews[index];
+                                        itemCount: reviews.length,
+                                        itemBuilder: (context, index) {
+                                          ReviewEntity review = reviews[index];
 
-                                            return ReviewsWidgetItem(
-                                              review: review,
-                                            );
-                                          }));
+                                          return ReviewsWidgetItem(
+                                            review: review,
+                                          );
+                                        },
+                                      ),
+                                    );
                             },
                             error: (error, stackTrace) => Column(
                                   children: [
@@ -152,7 +152,8 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                                       height: 200,
                                     ),
                                     SizedBox(height: 20),
-                                    Text('No hay reseñas'),
+                                    Text(context
+                                        .localizations.not_found_reviews),
                                   ],
                                 ),
                             loading: () =>

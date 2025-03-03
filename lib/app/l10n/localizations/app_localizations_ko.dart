@@ -129,4 +129,19 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get buy_tickets => '티켓 예약';
+
+  @override
+  String get not_found_reviews => '리뷰 없음';
+
+  @override
+  String get settings => 'Ajustes';
+
+  @override
+  String get about_us => 'Acerca de';
+
+  @override
+  String get general => 'General';
+
+  @override
+  String get advanced => 'Avanzado';
 }
