@@ -38,5 +38,6 @@
   "unknown": "Neznámy",
   "search": "Hľadať",
   "percentange_vote":"% páči sa mi",
-  "buy_tickets":"Zarezervujte si lístky"
+  "buy_tickets":"Zarezervujte si lístky",
+  "not_found_reviews": "Žiadne recenzie"
 }

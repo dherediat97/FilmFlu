@@ -38,5 +38,6 @@
   "unknown": "Tuntematon",
   "search": "Hae",
   "percentange_vote":"% tykkäyksiä",
-  "buy_tickets":"Varaa liput"
+  "buy_tickets":"Varaa liput",
+  "not_found_reviews": "Ei arvosteluja"
 }

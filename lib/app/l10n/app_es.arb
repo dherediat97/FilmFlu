@@ -38,5 +38,10 @@
   "unknown": "Desconocido",
   "search": "Buscar",
   "percentange_vote":"% de los usuarios les gusta",
-  "buy_tickets":"Reserva entradas"
+  "buy_tickets":"Reserva entradas",
+  "not_found_reviews": "No hay reseñas",
+  "settings": "Ajustes",
+  "about_us": "Acerca de",
+  "general": "General",
+  "advanced": "Avanzado"
 }

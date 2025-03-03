@@ -129,4 +129,19 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get buy_tickets => 'Reserva entradas';
+
+  @override
+  String get not_found_reviews => 'No hay reseñas';
+
+  @override
+  String get settings => 'Ajustes';
+
+  @override
+  String get about_us => 'Acerca de';
+
+  @override
+  String get general => 'General';
+
+  @override
+  String get advanced => 'Avanzado';
 }

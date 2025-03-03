@@ -129,4 +129,19 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get buy_tickets => '预订门票';
+
+  @override
+  String get not_found_reviews => '沒有評論';
+
+  @override
+  String get settings => 'Ajustes';
+
+  @override
+  String get about_us => 'Acerca de';
+
+  @override
+  String get general => 'General';
+
+  @override
+  String get advanced => 'Avanzado';
 }

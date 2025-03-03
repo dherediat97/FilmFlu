@@ -38,5 +38,6 @@
  "unknown": "알 수 없음",
  "search":"검색",
  "percentange_vote": "%의 사용자가 좋아합니다",
- "buy_tickets":"티켓 예약"
+ "buy_tickets":"티켓 예약",
+  "not_found_reviews": "리뷰 없음"
 }

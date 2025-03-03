@@ -38,5 +38,6 @@
   "unknown": "Sconosciuto",
   "search": "Cerca",
   "percentange_vote":"% Mi piace",
-  "buy_tickets":"Prenota i biglietti"
+  "buy_tickets":"Prenota i biglietti",
+  "not_found_reviews": "Nessuna recensione"
 }

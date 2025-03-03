@@ -38,5 +38,6 @@
   "unknown": "Unknown",
   "search": "Search",
   "percentange_vote":"% likes",
-  "buy_tickets":"Book tickets"
+  "buy_tickets":"Book tickets",
+  "not_found_reviews": "No reviews"
 }

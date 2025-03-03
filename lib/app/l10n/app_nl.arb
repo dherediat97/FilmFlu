@@ -38,5 +38,6 @@
   "unknown": "Onbekend",
   "search": "Zoeken",
   "percentange_vote":"% vind-ik-leuks",
-  "buy_tickets":"Boek tickets"
+  "buy_tickets":"Boek tickets",
+  "not_found_reviews": "Geen beoordelingen"
 }

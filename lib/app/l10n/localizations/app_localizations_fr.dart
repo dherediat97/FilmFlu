@@ -129,4 +129,19 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get buy_tickets => 'Réserver des billets';
+
+  @override
+  String get not_found_reviews => 'Aucun avis';
+
+  @override
+  String get settings => 'Ajustes';
+
+  @override
+  String get about_us => 'Acerca de';
+
+  @override
+  String get general => 'General';
+
+  @override
+  String get advanced => 'Avanzado';
 }
