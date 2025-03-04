@@ -129,16 +129,22 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
         const LicenseEntryWithLineBreaks(
           <String>['iconscout'],
           '''
-        *<a href="https://iconscout.com/icons/spain" class="text-underline font-size-sm" target="_blank">Spain</a> by <a href="https://iconscout.com/contributors/uipixi" class="text-underline font-size-sm" target="_blank">Uipixi</a>
-        *<a href="https://iconscout.com/icons/england" class="text-underline font-size-sm" target="_blank">England</a> by <a href="https://iconscout.com/contributors/uipixi" class="text-underline font-size-sm" target="_blank">Uipixi</a>
-        *<a href="https://iconscout.com/icons/china" class="text-underline font-size-sm" target="_blank">China</a> by <a href="https://iconscout.com/contributors/uipixi" class="text-underline font-size-sm" target="_blank">Uipixi</a>
-        *<a href="https://iconscout.com/icons/poland" class="text-underline font-size-sm" target="_blank">Poland</a> by <a href="https://iconscout.com/contributors/uipixi" class="text-underline font-size-sm" target="_blank">Uipixi</a>
-        *<a href="https://iconscout.com/icons/portugal" class="text-underline font-size-sm" target="_blank">Portugal</a> by <a href="https://iconscout.com/contributors/uipixi" class="text-underline font-size-sm" target="_blank">Uipixi</a>
-        *<a href="https://iconscout.com/icons/france" class="text-underline font-size-sm" target="_blank">France</a> by <a href="https://iconscout.com/contributors/uipixi" class="text-underline font-size-sm" target="_blank">Uipixi</a>
-        *<a href="https://iconscout.com/icons/japan" class="text-underline font-size-sm" target="_blank">Japan</a> by <a href="https://iconscout.com/contributors/uipixi" class="text-underline font-size-sm" target="_blank">Uipixi</a>
-        *<a href="https://iconscout.com/icons/south_korea" class="text-underline font-size-sm" target="_blank">South Korea</a> by <a href="https://iconscout.com/contributors/uipixi" class="text-underline font-size-sm" target="_blank">Uipixi</a>'
-        *<a href="https://iconscout.com/icons/germany" class="text-underline font-size-sm" target="_blank">Germany</a> by <a href="https://iconscout.com/contributors/uipixi" class="text-underline font-size-sm" target="_blank">Uipixi</a>
-        *<a href="https://iconscout.com/icons/italy" class="text-underline font-size-sm" target="_blank">Italy</a> by <a href="https://iconscout.com/contributors/uipixi" class="text-underline font-size-sm" target="_blank">Uipixi</a>
+        *Spain Flag by Uipixi
+        *England Flag by Uipixi
+        *China Flag by Uipixi
+        *Poland Flag by Uipixi
+        *Portugal Flag by Uipixi
+        *France Flag by Uipixi
+        *Japan Flag by Uipixi
+        *South Korea Flag by Uipixi'
+        *Germany Flag by Uipixi
+        *Italy Flag by Uipixi
+        *Finland Flag by Uipixi
+        *India Flag by Uipixi
+        *Iceland Flag by Uipixi
+        *Netherlands Flag by Uipixi
+        *Sweden Flag by Uipixi
+        *Slovakia Flag by Uipixi
             ''',
         ),
       ),
@@ -148,7 +154,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
       () => Stream<LicenseEntry>.value(
         const LicenseEntryWithLineBreaks(<String>[
           'freepik',
-        ], 'Images designed by Freepik from www.freepik.com'),
+        ], 'Images designed by  Freepik from www.freepik.com'),
       ),
     );
   }
