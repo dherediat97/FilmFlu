@@ -4,7 +4,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 2.0.0+15
 
 environment:
-  sdk: '^3.5.4'
+  sdk: ^3.7.0
 
 dependencies:
   flutter:
@@ -19,7 +19,7 @@ dependencies:
   #
   # Annotations of Freezed package
   # https://pub.dev/packages/freezed_annotation
-  freezed_annotation: ^3.0.0
+  freezed_annotation: ^2.4.1
 
   # Json - Json Model Smart Generation
   #
@@ -27,23 +27,22 @@ dependencies:
   # https://pub.dev/packages/json_annotation
   json_annotation: ^4.9.0
 
-  dio: ^5.0.0
+  dio: ^5.8.0+1
   envied_generator: ^1.1.1
   
   intl: ^0.19.0
-  get_it: ^8.0.3
-  lottie: ^3.1.2
+  lottie: ^3.3.1
   envied: ^1.1.1
-  http: ^1.2.2
-  package_info_plus: ^8.1.2
-  flutter_svg: ^2.0.7
+  http: ^1.3.0
+  package_info_plus: ^8.3.0
+  flutter_svg: ^2.0.17
   auto_size_text: ^3.0.0
-  material_symbols_icons: ^4.2668.0
-  shared_preferences: ^2.0.13
-  youtube_player_iframe: ^5.1.3
+  material_symbols_icons: ^4.2805.1
+  shared_preferences: ^2.5.2
+  youtube_player_iframe: ^5.2.1
   url_launcher: ^6.1.11
-  cached_network_image: ^3.3.1
-  flutter_riverpod: ^2.6.1
+  cached_network_image: ^3.4.1
+  flutter_riverpod: ^2.5.1
   riverpod_annotation: ^2.6.1
   pretty_dio_logger: ^1.4.0
   flutter_widget_from_html: ^0.16.0
@@ -53,21 +52,21 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^5.0.0
-  build_runner: ^2.4.11
+  build_runner: ^2.4.15
   json_serializable: ^6.9.4
 
   # Testing
   #
   # A mock framework inspired by Mockito
   # https://pub.dev/packages/mockito
-  mockito: ^5.4.4
+  mockito: ^5.4.5
 
   flutter_launcher_icons: ^0.14.1
-  test: ^1.25.2
-  riverpod_generator: ^2.6.5
-  custom_lint: ^0.7.5
-  riverpod_lint: ^2.6.5
-  freezed: ^3.0.3
+  test: ^1.25.15
+  riverpod_generator: ^2.6.4
+  custom_lint: ^0.7.3
+  riverpod_lint: ^2.6.4
+  freezed: ^2.5.8
 
 flutter:
   generate: true
