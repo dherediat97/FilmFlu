@@ -154,7 +154,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
       () => Stream<LicenseEntry>.value(
         const LicenseEntryWithLineBreaks(<String>[
           'freepik',
-        ], 'Images designed by  Freepik from www.freepik.com'),
+        ], 'Images designed by Freepik from www.freepik.com'),
       ),
     );
   }
