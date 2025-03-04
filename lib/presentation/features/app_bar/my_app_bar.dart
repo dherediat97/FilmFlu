@@ -8,7 +8,6 @@ import 'package:film_flu/presentation/features/app_bar/provider/app_language_pro
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/data/enums/media_type.dart';
 import 'package:film_flu/presentation/features/app_bar/widgets/language_picker.dart';
-import 'package:film_flu/presentation/notifiers/app_notifier.dart';
 import 'package:film_flu/presentation/view_models/searched_media_list_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,31 +38,28 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
       titleTextStyle: Theme.of(context).textTheme.headlineLarge,
       backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
       leadingWidth: 120,
-      leading: widget.isMainMenu
-          ? IconButton(
-              padding: EdgeInsets.zero,
-              style: ButtonStyle(
-                overlayColor: WidgetStateProperty.all(Colors.transparent),
-              ),
-              icon: Image.asset(
-                AppAssets.logoIcon,
-                fit: BoxFit.fitHeight,
-              ),
-              onPressed: () {
-                if (!widget.isMainMenu) {
-                  context.pop();
-                } else {
-                  context.go(AppRoutePaths.homeRoute);
-                }
-              })
-          : null,
+      leading:
+          widget.isMainMenu
+              ? IconButton(
+                padding: EdgeInsets.zero,
+                style: ButtonStyle(
+                  overlayColor: WidgetStateProperty.all(Colors.transparent),
+                ),
+                icon: Image.asset(AppAssets.logoIcon, fit: BoxFit.fitHeight),
+                onPressed: () {
+                  if (!widget.isMainMenu) {
+                    context.pop();
+                  } else {
+                    context.go(AppRoutePaths.homeRoute);
+                  }
+                },
+              )
+              : null,
       actions: [
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Row(
-            children: _appBarActions(languageProvider),
-          ),
-        )
+          child: Row(children: _appBarActions(languageProvider)),
+        ),
       ],
     );
   }
@@ -78,41 +74,49 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
       ),
     );
 
-    actions.add(
-      IconButton(
-        icon: Icon(
-          widget.isMainMenu ? Icons.light_mode : Icons.dark_mode,
-          color: AppColors.backgroundColorLight,
-        ),
-        onPressed: () => ref.read(appProvider.notifier).toggle(),
-      ),
-    );
+    // actions.add(
+    //   IconButton(
+    //     icon: Icon(
+    //       widget.isMainMenu ? Icons.light_mode : Icons.dark_mode,
+    //       color: AppColors.backgroundColorLight,
+    //     ),
+    //     onPressed: () => ref.read(appProvider.notifier).toggle(),
+    //   ),
+    // );
 
     actions.add(
       DropdownButton<Locale>(
-          dropdownColor: widget.isMainMenu ? Colors.white : Colors.black,
-          onChanged: (language) => languageProvider.changeLanguage(language!),
-          selectedItemBuilder: (context) => AppLocalizations.supportedLocales
-              .map((language) => LanguagePicker(
-                    language: language,
-                    isDropdown: false,
-                    isMainMenu: widget.isMainMenu,
-                  ))
-              .toList(),
-          padding: const EdgeInsets.all(8),
-          elevation: 4,
-          value: ref.watch(appLanguageProvider),
-          underline: const SizedBox(height: 0),
-          items: AppLocalizations.supportedLocales
-              .map((language) => DropdownMenuItem<Locale>(
+        dropdownColor: widget.isMainMenu ? Colors.white : Colors.black,
+        onChanged: (language) => languageProvider.changeLanguage(language!),
+        selectedItemBuilder:
+            (context) =>
+                AppLocalizations.supportedLocales
+                    .map(
+                      (language) => LanguagePicker(
+                        language: language,
+                        isDropdown: false,
+                        isMainMenu: widget.isMainMenu,
+                      ),
+                    )
+                    .toList(),
+        padding: const EdgeInsets.all(8),
+        elevation: 4,
+        value: ref.watch(appLanguageProvider),
+        underline: const SizedBox(height: 0),
+        items:
+            AppLocalizations.supportedLocales
+                .map(
+                  (language) => DropdownMenuItem<Locale>(
                     value: language,
                     child: LanguagePicker(
                       language: language,
                       isDropdown: true,
                       isMainMenu: widget.isMainMenu,
                     ),
-                  ))
-              .toList()),
+                  ),
+                )
+                .toList(),
+      ),
     );
 
     // actions.add(
@@ -161,9 +165,10 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
       suggestionsBuilder: (BuildContext context, SearchController controller) {
         return List<ListTile>.generate(searchResults.length, (index) {
           return ListTile(
-            onTap: () => context.push(
-              '/main/${searchResults[index].mediaType}/${searchResults[index].id}',
-            ),
+            onTap:
+                () => context.push(
+                  '/main/${searchResults[index].mediaType}/${searchResults[index].id}',
+                ),
             titleTextStyle: Theme.of(context).textTheme.titleSmall,
             leading: Image.network(
               searchResults[index].mediaType == MediaType.movie.name
@@ -176,9 +181,11 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
                 return Icon(Icons.error);
               },
             ),
-            title: Text(searchResults[index].mediaType == MediaType.movie.name
-                ? searchResults[index].title!
-                : searchResults[index].name!),
+            title: Text(
+              searchResults[index].mediaType == MediaType.movie.name
+                  ? searchResults[index].title!
+                  : searchResults[index].name!,
+            ),
             subtitle: Text(
               searchResults[index].mediaType == MediaType.movie.name
                   ? searchResults[index].releaseDate!
