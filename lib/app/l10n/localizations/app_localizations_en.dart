@@ -134,14 +134,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get not_found_reviews => 'No reviews';
 
   @override
-  String get settings => 'Ajustes';
+  String get settings => 'Settings';
 
   @override
-  String get about_us => 'Acerca de';
+  String get about_us => 'About us';
 
   @override
   String get general => 'General';
 
   @override
-  String get advanced => 'Avanzado';
+  String get advanced => 'Advanced';
 }
