@@ -47,9 +47,9 @@ class BackgroundImageMediaItem extends StatelessWidget {
                       textAlign: TextAlign.center,
                       softWrap: true,
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            color: Theme.of(context).colorScheme.onSurface,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        color: Theme.of(context).colorScheme.onSurface,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
@@ -59,16 +59,14 @@ class BackgroundImageMediaItem extends StatelessWidget {
                     Text(
                       '${(mediaItem.voteAverage!.round() * 10)}${context.localizations.percentange_vote}',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: Colors.greenAccent,
-                            fontSize: 26,
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
-                    if (mediaItem.releaseDate != null &&
-                        mediaItem.firstAirDate != null) ...[
-                      const SizedBox(
-                        width: 20,
+                        color: Colors.greenAccent,
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
                       ),
+                    ),
+                    if (mediaItem.releaseDate.isNotEmpty &&
+                        mediaItem.firstAirDate.isNotEmpty) ...[
+                      const SizedBox(width: 20),
                       Text(
                         getYear(mediaItem) ?? '',
                         textAlign: TextAlign.center,
@@ -94,9 +92,11 @@ class BackgroundImageMediaItem extends StatelessWidget {
                                       ? MediaType.movie
                                       : MediaType.tv;
 
-                              context.push(mediaTypeSelected == MediaType.movie
-                                  ? '${AppRoutePaths.moviesRoute}/${mediaItem.id}'
-                                  : '${AppRoutePaths.seriesRoute}/${mediaItem.id}');
+                              context.push(
+                                mediaTypeSelected == MediaType.movie
+                                    ? '${AppRoutePaths.moviesRoute}/${mediaItem.id}'
+                                    : '${AppRoutePaths.seriesRoute}/${mediaItem.id}',
+                              );
                             },
                             icon: const Icon(
                               Icons.info_outline,
@@ -114,7 +114,7 @@ class BackgroundImageMediaItem extends StatelessWidget {
                 ],
               ],
             ),
-          )
+          ),
         ],
       ),
     );

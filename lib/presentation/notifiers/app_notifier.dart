@@ -13,21 +13,19 @@ class AppProvider extends StateNotifier<AppState> {
   Future _init() async {
     prefs = await SharedPreferences.getInstance();
     var darkMode = prefs.getBool(AppConstants.themeModeKey) ?? true;
-    var languageCode = prefs.getString(AppConstants.languageKey) ?? 'es';
+    var appLanguage = prefs.getString(AppConstants.languageKey) ?? 'es';
     state = state.copyWith(
       isDarkMode: darkMode,
       appTheme: AppTheme(createTextTheme(isDarkMode: darkMode)),
-      appLocale: Locale('es'),
+      appLocale: Locale(appLanguage),
     );
-
-    state = state.copyWith(appLocale: Locale(languageCode));
   }
 
   Future changeLanguage(Locale language) async {
     var prefs = await SharedPreferences.getInstance();
     if (state.appLocale != language) {
       state = state.copyWith(appLocale: language);
-      await prefs.setString('language_code', language.languageCode);
+      await prefs.setString(AppConstants.languageKey, language.languageCode);
     }
   }
 
@@ -38,7 +36,7 @@ class AppProvider extends StateNotifier<AppState> {
   void toggle() async {
     final newDarkMode = !state.isDarkMode;
     state = state.copyWith(isDarkMode: newDarkMode);
-    prefs.setBool('isDarkMode', newDarkMode);
+    prefs.setBool(AppConstants.themeModeKey, newDarkMode);
   }
 }
 

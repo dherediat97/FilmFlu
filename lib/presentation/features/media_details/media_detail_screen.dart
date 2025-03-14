@@ -1,7 +1,4 @@
-import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/app/routes/app_paths.dart';
-import 'package:film_flu/data/enums/media_type.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/detail_tab_media_item.dart';
 import 'package:film_flu/presentation/notifiers/models/media_item_states.dart';
 import 'package:film_flu/presentation/notifiers/media_detail_notifier.dart';
@@ -10,7 +7,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class MediaItemScreenDetails extends ConsumerStatefulWidget {
@@ -31,137 +27,137 @@ class MediaItemScreenDetails extends ConsumerStatefulWidget {
 }
 
 class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
-  YoutubePlayerController? _trailerController;
+  late YoutubePlayerController _trailerController;
 
   @override
   void initState() {
     super.initState();
     _trailerController = initTrailerController();
-    _trailerController?.toggleFullScreen(lock: false);
+    _trailerController.toggleFullScreen(lock: false);
   }
 
   @override
   void dispose() {
-    _trailerController = null;
+    closeTrailer();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     BuildContext dialogContext;
-    final state = ref.watch(getHomeMediaDetailProvider(MediaItemState(
-      mediaType: widget.mediaType,
-      id: widget.mediaId,
-      languageName: widget.languageCode,
-    )));
+    final state = ref.watch(
+      getHomeMediaDetailProvider(
+        MediaItemState(
+          mediaType: widget.mediaType,
+          id: widget.mediaId,
+          languageName: widget.languageCode,
+        ),
+      ),
+    );
 
     final trailerDetails = state;
 
     return ScaffoldPage(
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              if (widget.mediaType == MediaType.movie.name)
-                FloatingActionButton.extended(
-                  heroTag: 'buyTickets',
-                  foregroundColor: AppColors.primaryColor,
-                  backgroundColor: AppColors.backgroundColorLight,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            // if (widget.mediaType == MediaType.movie.name)
+            //   FloatingActionButton.extended(
+            //     heroTag: 'buyTickets',
+            //     foregroundColor: AppColors.primaryColor,
+            //     backgroundColor: AppColors.backgroundColorLight,
+            //     onPressed: () {
+            //       context.go(AppRoutePaths.horusVisionRoute);
+            //     },
+            //     icon: const Icon(Icons.local_movies_outlined),
+            //     label: Text(context.localizations.buy_tickets),
+            //   ),
+            const SizedBox(height: 20),
+            trailerDetails.when(
+              data: (data) {
+                if (data.trailerIds.isEmpty) return Container();
+
+                return FloatingActionButton.extended(
+                  heroTag: 'playTrailer',
+                  icon: const Icon(Icons.play_arrow),
+                  label: Text(context.localizations.play_trailer),
                   onPressed: () {
-                    context.go(AppRoutePaths.horusVisionRoute);
-                  },
-                  icon: const Icon(Icons.local_movies_outlined),
-                  label: Text(context.localizations.buy_tickets),
-                ),
-              const SizedBox(
-                height: 20,
-              ),
-              trailerDetails.when(
-                data: (data) {
-                  if (data.trailerIds.isEmpty) return Container();
+                    showAdaptiveDialog(
+                      context: context,
+                      builder: (context) {
+                        dialogContext = context;
 
-                  return FloatingActionButton.extended(
-                      heroTag: 'playTrailer',
-                      icon: const Icon(Icons.play_arrow),
-                      label: Text(context.localizations.play_trailer),
-                      onPressed: () {
-                        showAdaptiveDialog(
-                          context: context,
-                          builder: (context) {
-                            dialogContext = context;
+                        _trailerController = initTrailerController();
+                        if (data.trailerIds.length == 1) {
+                          _trailerController.loadVideoById(
+                            videoId: data.trailerIds.first,
+                          );
+                        } else {
+                          _trailerController.loadPlaylist(
+                            list: data.trailerIds,
+                            index: data.trailerIds.indexOf(data.trailerIds[0]),
+                          );
+                        }
 
-                            _trailerController = initTrailerController();
-                            if (data.trailerIds.length == 1) {
-                              _trailerController?.loadVideoById(
-                                videoId: data.trailerIds.first,
-                              );
-                            } else {
-                              _trailerController?.loadPlaylist(
-                                list: data.trailerIds,
-                                index:
-                                    data.trailerIds.indexOf(data.trailerIds[0]),
-                              );
-                            }
-
-                            return AlertDialog.adaptive(
-                              icon: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  IconButton(
-                                    onPressed: () =>
-                                        closeTrailer(dialogContext),
-                                    icon: const Icon(Icons.close),
-                                  ),
-                                ],
+                        return AlertDialog.adaptive(
+                          icon: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  closeTrailer();
+                                  Navigator.pop(dialogContext);
+                                },
+                                icon: const Icon(Icons.close),
                               ),
-                              content: SizedBox(
-                                height: MediaQuery.of(context).size.height,
-                                width: MediaQuery.of(context).size.width,
-                                child: YoutubePlayerScaffold(
-                                  controller: _trailerController!,
-                                  builder: (context, player) {
-                                    return LayoutBuilder(
-                                      builder: (context, constraints) {
-                                        if (kIsWeb &&
-                                            constraints.maxWidth > 750) {
-                                          return Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Expanded(
-                                                flex: 10,
-                                                child: player,
-                                              ),
-                                            ],
-                                          );
-                                        }
+                            ],
+                          ),
+                          content: SizedBox(
+                            height: MediaQuery.of(context).size.height,
+                            width: MediaQuery.of(context).size.width,
+                            child: YoutubePlayerScaffold(
+                              controller: _trailerController,
+                              builder: (context, player) {
+                                return LayoutBuilder(
+                                  builder: (context, constraints) {
+                                    if (kIsWeb && constraints.maxWidth > 750) {
+                                      return Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Expanded(flex: 10, child: player),
+                                        ],
+                                      );
+                                    }
 
-                                        return player;
-                                      },
-                                    );
+                                    return player;
                                   },
-                                ),
-                              ),
-                            );
-                          },
+                                );
+                              },
+                            ),
+                          ),
                         );
-                      });
-                },
-                error: (error, stackTrace) => Container(),
-                loading: () => Container(),
-              )
-            ],
-          ),
+                      },
+                    );
+                  },
+                );
+              },
+              error: (error, stackTrace) => Container(),
+              loading: () => Container(),
+            ),
+          ],
         ),
-        child: DetailTabMediaItem(
-          mediaTypeSelected: widget.mediaType,
-          mediaItemId: widget.mediaId,
-        ));
+      ),
+      child: DetailTabMediaItem(
+        mediaTypeSelected: widget.mediaType,
+        mediaItemId: widget.mediaId,
+      ),
+    );
   }
 
   initTrailerController() {
@@ -178,11 +174,9 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
     );
   }
 
-  closeTrailer(BuildContext dialogContext) {
-    _trailerController = null;
-    SystemChrome.setEnabledSystemUIMode(
-      SystemUiMode.edgeToEdge,
-    );
-    Navigator.pop(dialogContext);
+  closeTrailer() {
+    _trailerController.close();
+    _trailerController.stopVideo();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   }
 }

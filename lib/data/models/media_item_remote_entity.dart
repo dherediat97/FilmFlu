@@ -40,44 +40,45 @@ class MediaItemRemoteEntity with _$MediaItemRemoteEntity {
 
 extension MediaItemToRemoteEntityExtension on MediaItemRemoteEntity {
   MediaItemEntity toMediaEntity() => MediaItemEntity(
-        title: title ?? '',
-        name: name ?? '',
-        id: id ?? 0,
-        genreIds: genreIds,
-        popularity: popularity ?? 0.0,
-        posterPath: posterPath ?? '',
-        voteAverage: voteAverage ?? 0,
-        voteCount: voteCount ?? 0,
-        backdropPath: backdropPath ?? '',
-        genres: genres?.map((e) => e.toGenreEntity()).toList() ?? [],
-        productionCompanies: productionCompanies
-                ?.map((e) => e.toProductionCompanyEntity())
-                .toList() ??
-            [],
-        mediaType: mediaType ?? '',
-        firstAirDate: firstAirDate ?? '',
-        originalLanguage: originalLanguage ?? '',
-        originalTitle: originalTitle ?? '',
-        overview: overview ?? '',
-        releaseDate: releaseDate ?? '',
-        runtime: runtime ?? 0,
-        videos: videos,
-      );
+    title: title ?? '',
+    name: name ?? '',
+    id: id ?? 0,
+    genreIds: genreIds,
+    popularity: popularity ?? 0.0,
+    posterPath: posterPath ?? '',
+    voteAverage: voteAverage ?? 0,
+    voteCount: voteCount ?? 0,
+    backdropPath: backdropPath ?? '',
+    genres: genres?.map((e) => e.toGenreEntity()).toList() ?? [],
+    productionCompanies:
+        productionCompanies
+            ?.map((e) => e.toProductionCompanyEntity())
+            .toList() ??
+        [],
+    mediaType: mediaType ?? '',
+    firstAirDate: firstAirDate ?? '',
+    originalLanguage: originalLanguage ?? '',
+    originalTitle: originalTitle ?? '',
+    overview: overview ?? '',
+    releaseDate: releaseDate ?? '',
+    runtime: runtime ?? 0,
+    videos: videos ?? Pagination(results: []),
+  );
 
   MediaSimpleItemEntity toSimpleMediaEntity() => MediaSimpleItemEntity(
-        title: title ?? name,
-        genreIds: genreIds,
-        id: id ?? 0,
-        posterPath: posterPath ?? '',
-      );
+    title: title ?? name,
+    genreIds: genreIds,
+    id: id ?? 0,
+    posterPath: posterPath ?? '',
+  );
 
   MediaItemEntity toMediaDayEntity() => MediaItemEntity(
-        title: title ?? '',
-        name: name ?? '',
-        id: id ?? 0,
-        backdropPath: backdropPath ?? '',
-        voteAverage: voteAverage ?? 0,
-        firstAirDate: firstAirDate ?? '',
-        releaseDate: releaseDate ?? '',
-      );
+    title: title ?? '',
+    name: name ?? '',
+    id: id ?? 0,
+    backdropPath: backdropPath ?? '',
+    voteAverage: voteAverage ?? 0,
+    firstAirDate: firstAirDate ?? '',
+    releaseDate: releaseDate ?? '',
+  );
 }
