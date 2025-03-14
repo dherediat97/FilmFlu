@@ -45,42 +45,54 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
 
   @override
   Widget build(BuildContext context) {
-    final mediaItemResponse = ref.read(getMediaItemDetailProvider(
-      MediaItemState(
+    final mediaItemResponse = ref.watch(
+      getMediaItemDetailProvider(
+        MediaItemState(
           mediaType: widget.mediaTypeSelected,
           id: widget.mediaItemId,
-          languageName: context.localizations.localeName),
-    ));
+          languageName: context.localizations.localeName,
+        ),
+      ),
+    );
 
-    final creditsMediaItemResponse = ref.read(getMediaCastProvider(
-      CreditsMediaState(
+    final creditsMediaItemResponse = ref.watch(
+      getMediaCastProvider(
+        CreditsMediaState(
           mediaType: widget.mediaTypeSelected,
           id: widget.mediaItemId,
-          languageName: context.localizations.localeName),
-    ));
+          languageName: context.localizations.localeName,
+        ),
+      ),
+    );
 
-    final reviewsMediaItemResponse = ref.read(getReviewsProvider(
-      MediaItemState(
+    final reviewsMediaItemResponse = ref.watch(
+      getReviewsProvider(
+        MediaItemState(
           mediaType: widget.mediaTypeSelected,
           id: widget.mediaItemId,
-          languageName: context.localizations.localeName),
-    ));
+          languageName: context.localizations.localeName,
+        ),
+      ),
+    );
 
     final item = mediaItemResponse;
     final credits = creditsMediaItemResponse;
     final reviews = reviewsMediaItemResponse;
 
     return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
       child: Column(
         children: [
           item.when(
-              data: (mediaItem) => BackgroundImageMediaItem(
-                    title: mediaItem.title ?? '',
-                    isHomeScreen: false,
-                    mediaItem: mediaItem.mediaItem!,
-                  ),
-              error: (error, stackTrace) => Text(error.toString()),
-              loading: () => Shimmer(child: buildMediaDayWidget(context))),
+            data:
+                (mediaItem) => BackgroundImageMediaItem(
+                  title: mediaItem.title ?? '',
+                  isHomeScreen: false,
+                  mediaItem: mediaItem.mediaItem!,
+                ),
+            error: (error, stackTrace) => Text(error.toString()),
+            loading: () => Shimmer(child: buildMediaDayWidget(context)),
+          ),
           Padding(
             padding: const EdgeInsets.all(12),
             child: DefaultTabController(
@@ -103,47 +115,22 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                       controller: _tabController,
                       children: [
                         item.when(
-                            data: (mediaItem) => ContainerTabMediaItem(
-                                  child: InfoMedia(
-                                    mediaItem: mediaItem.mediaItem,
-                                    media: mediaItem.mediaList,
-                                  ),
+                          data:
+                              (mediaItem) => ContainerTabMediaItem(
+                                child: InfoMedia(
+                                  mediaItem: mediaItem.mediaItem,
+                                  media: mediaItem.mediaList,
                                 ),
-                            error: (error, stackTrace) =>
-                                Text(error.toString()),
-                            loading: () =>
-                                Shimmer(child: buildMediaDayWidget(context))),
+                              ),
+                          error: (error, stackTrace) => Text(error.toString()),
+                          loading:
+                              () =>
+                                  Shimmer(child: buildMediaDayWidget(context)),
+                        ),
                         reviews.when(
-                            data: (reviews) {
-                              return reviews.isEmpty
-                                  ? Column(
-                                      children: [
-                                        Image.asset(
-                                          AppAssets.emptyStateImage,
-                                          fit: BoxFit.contain,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          height: 200,
-                                        ),
-                                        SizedBox(height: 20),
-                                        Text(context
-                                            .localizations.not_found_reviews),
-                                      ],
-                                    )
-                                  : ContainerTabMediaItem(
-                                      child: ListView.builder(
-                                        itemCount: reviews.length,
-                                        itemBuilder: (context, index) {
-                                          ReviewEntity review = reviews[index];
-
-                                          return ReviewsWidgetItem(
-                                            review: review,
-                                          );
-                                        },
-                                      ),
-                                    );
-                            },
-                            error: (error, stackTrace) => Column(
+                          data: (reviews) {
+                            return reviews.isEmpty
+                                ? Column(
                                   children: [
                                     Image.asset(
                                       AppAssets.emptyStateImage,
@@ -152,37 +139,66 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                                       height: 200,
                                     ),
                                     SizedBox(height: 20),
-                                    Text(context
-                                        .localizations.not_found_reviews),
+                                    Text(
+                                      context.localizations.not_found_reviews,
+                                    ),
                                   ],
-                                ),
-                            loading: () =>
-                                Shimmer(child: buildMediaDayWidget(context))),
+                                )
+                                : ContainerTabMediaItem(
+                                  child: ListView.builder(
+                                    itemCount: reviews.length,
+                                    itemBuilder: (context, index) {
+                                      ReviewEntity review = reviews[index];
+
+                                      return ReviewsWidgetItem(review: review);
+                                    },
+                                  ),
+                                );
+                          },
+                          error:
+                              (error, stackTrace) => Column(
+                                children: [
+                                  Image.asset(
+                                    AppAssets.emptyStateImage,
+                                    fit: BoxFit.contain,
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 200,
+                                  ),
+                                  SizedBox(height: 20),
+                                  Text(context.localizations.not_found_reviews),
+                                ],
+                              ),
+                          loading:
+                              () =>
+                                  Shimmer(child: buildMediaDayWidget(context)),
+                        ),
                         credits.when(
-                            data: (data) => ContainerTabMediaItem(
-                                    child: MediaDataCast(
-                                  cast: data.cast,
-                                )),
-                            error: (error, stackTrace) =>
-                                Text(error.toString()),
-                            loading: () =>
-                                Shimmer(child: buildMediaDayWidget(context))),
+                          data:
+                              (data) => ContainerTabMediaItem(
+                                child: MediaDataCast(cast: data.cast),
+                              ),
+                          error: (error, stackTrace) => Text(error.toString()),
+                          loading:
+                              () =>
+                                  Shimmer(child: buildMediaDayWidget(context)),
+                        ),
                         credits.when(
-                            data: (data) => ContainerTabMediaItem(
-                                    child: MediaDataProduction(
-                                  crew: data.crew,
-                                )),
-                            error: (error, stackTrace) =>
-                                Text(error.toString()),
-                            loading: () =>
-                                Shimmer(child: buildMediaDayWidget(context)))
+                          data:
+                              (data) => ContainerTabMediaItem(
+                                child: MediaDataProduction(crew: data.crew),
+                              ),
+                          error: (error, stackTrace) => Text(error.toString()),
+                          loading:
+                              () =>
+                                  Shimmer(child: buildMediaDayWidget(context)),
+                        ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
