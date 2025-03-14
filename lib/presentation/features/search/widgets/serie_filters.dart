@@ -8,13 +8,10 @@ class SerieFiltersWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 2,
-      mainAxisSpacing: 20,
-      crossAxisSpacing: 44,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Column(
-          mainAxisSize: MainAxisSize.max,
           children: [
             MediaCategory(
               onItemClick: () => addSerieFilter(context),
@@ -39,7 +36,6 @@ class SerieFiltersWidget extends StatelessWidget {
           ],
         ),
         Column(
-          mainAxisSize: MainAxisSize.min,
           children: [
             MediaCategory(
               onItemClick: () => addSerieFilter(context),
@@ -62,7 +58,7 @@ class SerieFiltersWidget extends StatelessWidget {
               categoryName: context.localizations.drama_type,
             ),
           ],
-        )
+        ),
       ],
     );
   }

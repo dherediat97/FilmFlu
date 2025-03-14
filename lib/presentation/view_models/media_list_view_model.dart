@@ -9,11 +9,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final mediaListViewModelProvider = AsyncNotifierProvider.autoDispose
     .family<MediaListViewModel, List<MediaSimpleItemEntity>, MediaFilter>(
-  MediaListViewModel.new,
-);
+      MediaListViewModel.new,
+    );
 
-class MediaListViewModel extends AutoDisposeFamilyAsyncNotifier<
-        List<MediaSimpleItemEntity>, MediaFilter>
+class MediaListViewModel
+    extends
+        AutoDisposeFamilyAsyncNotifier<List<MediaSimpleItemEntity>, MediaFilter>
     with
         AsyncPaginationController<MediaSimpleItemEntity, int, MediaFilter>,
         AsyncPaginationFilter<MediaFilter, MediaSimpleItemEntity, int> {
@@ -28,7 +29,9 @@ class MediaListViewModel extends AutoDisposeFamilyAsyncNotifier<
 
   @override
   FutureOr<List<MediaSimpleItemEntity>> loadPage(
-      int page, MediaFilter currentFilter) async {
+    int page,
+    MediaFilter currentFilter,
+  ) async {
     final (totalItems, items) = await repository.getMediaDataByGenre(
       currentFilter.mediaTypeSelected,
       currentFilter.genredId,

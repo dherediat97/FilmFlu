@@ -1,21 +1,20 @@
-import 'package:film_flu/app/types/ui_state.dart';
 import 'package:film_flu/data/enums/media_type.dart';
-import 'package:film_flu/presentation/notifiers/models/home_state.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-part 'home_notifier.g.dart';
-
-@riverpod
-class Home extends _$Home {
-  @override
-  HomeState build(MediaType mediaFilter) {
-    return getHomeData(mediaFilter);
+class HomeProvider extends StateNotifier<MediaType> {
+  _init() {
+    state = MediaType.movie;
   }
 
-  HomeState getHomeData(MediaType mediaTypeSelected) {
-    return HomeState(
-      uiState: UiState.success(),
-      mediaTypeSelected: mediaTypeSelected,
-    );
+  HomeProvider() : super(MediaType.movie) {
+    _init();
+  }
+
+  void setMediaTypeSelected(MediaType mediaTypeSelected) {
+    state = mediaTypeSelected;
   }
 }
+
+final homeProvider = StateNotifierProvider<HomeProvider, MediaType>(
+  (ref) => HomeProvider(),
+);

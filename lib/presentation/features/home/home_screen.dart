@@ -9,16 +9,14 @@ import 'package:film_flu/data/enums/media_type.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeScreen extends ConsumerWidget {
-  const HomeScreen({
-    super.key,
-  });
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Widget child = const MoviesListWidget();
-    final state = ref.watch(homeProvider(MediaType.movie));
+    final state = ref.watch(homeProvider);
 
-    switch (state.mediaTypeSelected) {
+    switch (state) {
       case MediaType.movie:
         child = const MoviesListWidget();
         break;
@@ -29,10 +27,6 @@ class HomeScreen extends ConsumerWidget {
         child = const SearchScreen();
         break;
     }
-    return ScaffoldPage(
-      fullScreenMode: false,
-      routeName: AppRoutePaths.homeRoute,
-      child: child,
-    );
+    return ScaffoldPage(routeName: AppRoutePaths.homeRoute, child: child);
   }
 }

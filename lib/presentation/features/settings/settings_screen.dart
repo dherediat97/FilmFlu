@@ -1,6 +1,5 @@
 import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/presentation/notifiers/app_notifier.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -81,21 +80,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
-                              children: [
-                                Text('Dark mode'),
-                                Switch(
-                                  value: ref.watch(appProvider).isDarkMode,
-                                  onChanged:
-                                      (value) =>
-                                          ref
-                                              .watch(appProvider.notifier)
-                                              .toggle(),
-                                ),
-                              ],
-                            ),
-                          ],
+                          children: [],
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
