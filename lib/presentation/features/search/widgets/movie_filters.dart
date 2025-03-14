@@ -12,25 +12,24 @@ class MovieFiltersWidget extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Column(
-          mainAxisSize: MainAxisSize.max,
           children: [
             MediaCategory(
-              onItemClick: () => addMovieFilter(context),
+              onItemClick: () => addMovieFilter(),
               categoryIcon: Symbols.helicopter,
               categoryName: context.localizations.action_type,
             ),
             MediaCategory(
-              onItemClick: () => addMovieFilter(context),
+              onItemClick: () => addMovieFilter(),
               categoryIcon: Symbols.compass_calibration,
               categoryName: context.localizations.adventure_type,
             ),
             MediaCategory(
-              onItemClick: () => addMovieFilter(context),
+              onItemClick: () => addMovieFilter(),
               categoryIcon: Symbols.heat_pump_rounded,
               categoryName: context.localizations.love_type,
             ),
             MediaCategory(
-              onItemClick: () => addMovieFilter(context),
+              onItemClick: () => addMovieFilter(),
               categoryIcon: Symbols.animation,
               categoryName: context.localizations.animation_type,
             ),
@@ -39,36 +38,30 @@ class MovieFiltersWidget extends StatelessWidget {
         Column(
           children: [
             MediaCategory(
-              onItemClick: () => addMovieFilter(context),
+              onItemClick: () => addMovieFilter(),
               categoryIcon: Symbols.science,
               categoryName: context.localizations.fiction_type,
             ),
             MediaCategory(
-              onItemClick: () => addMovieFilter(context),
+              onItemClick: () => addMovieFilter(),
               categoryIcon: Symbols.castle,
               categoryName: context.localizations.fantasy_type,
             ),
             MediaCategory(
-              onItemClick: () => addMovieFilter(context),
+              onItemClick: () => addMovieFilter(),
               categoryIcon: Symbols.comedy_mask,
               categoryName: context.localizations.thriller_type,
             ),
             MediaCategory(
-              onItemClick: () => addMovieFilter(context),
+              onItemClick: () => addMovieFilter(),
               categoryIcon: Symbols.filter_drama,
               categoryName: context.localizations.drama_type,
             ),
           ],
-        )
+        ),
       ],
     );
   }
 
-  addMovieFilter(BuildContext context) {
-    // context
-    //     .read<SearchBloc>()
-    //     .add(const SearchEvent.addMovieFilters(MovieFilters(
-    //       isActionMovieFiltered: true,
-    //     )));
-  }
+  addMovieFilter() {}
 }

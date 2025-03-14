@@ -21,17 +21,20 @@ class MediaRepositoryImpl implements MediaRepository {
   Future<MediaItemEntity> getMediaItem(
     String mediaTypeSelected,
     String mediaTypeId,
-    String languageName,
+    String languageCode,
   ) async {
     try {
-      final response = await DioClient.instance
-          .get('/$mediaTypeSelected/$mediaTypeId', queryParameters: {
-        'append_to_response': 'videos',
-        'language': languageName,
-      });
+      final response = await DioClient.instance.get(
+        '/$mediaTypeSelected/$mediaTypeId',
+        queryParameters: {
+          'append_to_response': 'videos',
+          'language': languageCode,
+        },
+      );
 
-      MediaItemRemoteEntity mediaData =
-          MediaItemRemoteEntity.fromJson(response);
+      MediaItemRemoteEntity mediaData = MediaItemRemoteEntity.fromJson(
+        response,
+      );
       return mediaData.toMediaEntity();
     } on DioException catch (e) {
       throw e.errorMessage;
@@ -45,10 +48,10 @@ class MediaRepositoryImpl implements MediaRepository {
     String languageName,
   ) async {
     try {
-      final response = await DioClient.instance
-          .get('/$mediaTypeSelected/$mediaTypeId/credits', queryParameters: {
-        'language': languageName,
-      });
+      final response = await DioClient.instance.get(
+        '/$mediaTypeSelected/$mediaTypeId/credits',
+        queryParameters: {'language': languageName},
+      );
 
       CreditsMediaRemoteEntity creditsMediaEntity =
           CreditsMediaRemoteEntity.fromJson(response);
@@ -66,15 +69,17 @@ class MediaRepositoryImpl implements MediaRepository {
     String languageName,
   ) async {
     try {
-      final reviewData = await DioClient.instance
-          .get('/$mediaTypeSelected/$mediaTypeId/reviews', queryParameters: {
-        'language': languageName,
-      });
+      final reviewData = await DioClient.instance.get(
+        '/$mediaTypeSelected/$mediaTypeId/reviews',
+        queryParameters: {'language': languageName},
+      );
 
-      List<ReviewRemoteEntity> reviewList = reviewData['results']
-          .map<ReviewRemoteEntity>(
-              (e) => ReviewRemoteEntity.fromJson(e as Map<String, dynamic>))
-          .toList();
+      List<ReviewRemoteEntity> reviewList =
+          reviewData['results']
+              .map<ReviewRemoteEntity>(
+                (e) => ReviewRemoteEntity.fromJson(e as Map<String, dynamic>),
+              )
+              .toList();
 
       return reviewList.map((e) => e.toReviewEntity()).toList();
     } on DioException catch (e) {
@@ -89,8 +94,9 @@ class MediaRepositoryImpl implements MediaRepository {
     String languageName,
   ) async {
     try {
-      final response =
-          await DioClient.instance.get('/$mediaTypeSelected/$mediaTypeId');
+      final response = await DioClient.instance.get(
+        '/$mediaTypeSelected/$mediaTypeId',
+      );
       final mediaData = MediaResponseEntity.fromJson(response);
 
       return mediaData;
@@ -111,21 +117,21 @@ class MediaRepositoryImpl implements MediaRepository {
     try {
       return mediaTypeSelected == MediaType.movie
           ? getMovies(
-              genreId,
-              languageId,
-              page,
-              sortBy != null && orderBy != null
-                  ? '${sortBy.name}.${orderBy.name}'
-                  : '${SortOptions.movieDate}.${OrderOptions.desc}',
-            )
+            genreId,
+            languageId,
+            page,
+            sortBy != null && orderBy != null
+                ? '${sortBy.name}.${orderBy.name}'
+                : '${SortOptions.movieDate}.${OrderOptions.desc}',
+          )
           : getTVSeries(
-              genreId,
-              languageId,
-              page,
-              sortBy != null && orderBy != null
-                  ? '${sortBy.name}.${orderBy.name}'
-                  : '${SortOptions.tvSeriesDate}.${OrderOptions.desc}',
-            );
+            genreId,
+            languageId,
+            page,
+            sortBy != null && orderBy != null
+                ? '${sortBy.name}.${orderBy.name}'
+                : '${SortOptions.tvSeriesDate}.${OrderOptions.desc}',
+          );
     } on DioException catch (e) {
       throw e.errorMessage;
     }
@@ -134,19 +140,21 @@ class MediaRepositoryImpl implements MediaRepository {
   @override
   Future<(int page, List<MediaSimpleItemEntity> items)> getMovies(
     GenresId genreId,
-    String? languageId,
+    String? languageCode,
     int page,
     String sortBy,
   ) async {
     try {
-      final response = await DioClient.instance
-          .get('/discover/${MediaType.movie.name}', queryParameters: {
-        'with_genres': genreId.id,
-        'sort_by': sortBy,
-        'language': languageId,
-        'primary_release_year': DateTime.now().year,
-        'page': page,
-      });
+      final response = await DioClient.instance.get(
+        '/discover/${MediaType.movie.name}',
+        queryParameters: {
+          'with_genres': genreId.id,
+          'sort_by': sortBy,
+          'language': languageCode,
+          'primary_release_year': DateTime.now().year,
+          'page': page,
+        },
+      );
 
       if (response.isEmpty) {
         return (0, <MediaSimpleItemEntity>[]);
@@ -162,19 +170,21 @@ class MediaRepositoryImpl implements MediaRepository {
   @override
   Future<(int page, List<MediaSimpleItemEntity> items)> getTVSeries(
     GenresId genreId,
-    String languageId,
+    String languageCode,
     int page,
     String sortBy,
   ) async {
     try {
-      final response = await DioClient.instance
-          .get('/discover/${MediaType.tv.name}', queryParameters: {
-        'with_genres': genreId.id,
-        'sort_by': sortBy,
-        'language': languageId,
-        'first_air_date_year': DateTime.now().year,
-        'page': page,
-      });
+      final response = await DioClient.instance.get(
+        '/discover/${MediaType.tv.name}',
+        queryParameters: {
+          'with_genres': genreId.id,
+          'sort_by': sortBy,
+          'language': languageCode,
+          'first_air_date_year': DateTime.now().year,
+          'page': page,
+        },
+      );
 
       if (response.isEmpty) {
         return (0, <MediaSimpleItemEntity>[]);
@@ -193,16 +203,18 @@ class MediaRepositoryImpl implements MediaRepository {
     String query,
   ) async {
     try {
-      final response =
-          await DioClient.instance.get('/search/multi', queryParameters: {
-        'query': query,
-        'language': languageName,
-      });
+      final response = await DioClient.instance.get(
+        '/search/multi',
+        queryParameters: {'query': query, 'language': languageName},
+      );
 
-      List<MediaItemRemoteEntity> mediaData = response['results']
-          .map<MediaItemRemoteEntity>(
-              (e) => MediaItemRemoteEntity.fromJson(e as Map<String, dynamic>))
-          .toList();
+      List<MediaItemRemoteEntity> mediaData =
+          response['results']
+              .map<MediaItemRemoteEntity>(
+                (e) =>
+                    MediaItemRemoteEntity.fromJson(e as Map<String, dynamic>),
+              )
+              .toList();
 
       return mediaData.map((e) => e.toMediaEntity()).toList();
     } on DioException catch (e) {
@@ -215,24 +227,23 @@ class MediaRepositoryImpl implements MediaRepository {
     MediaType mediaTypeSelected,
     String languageCode,
   ) async {
-    final response = mediaTypeSelected == MediaType.movie
-        ? await DioClient.instance.get(
-            '/${mediaTypeSelected.name}/now_playing',
-            queryParameters: {
-              'language': languageCode,
-            },
-          )
-        : await DioClient.instance.get(
-            '/${mediaTypeSelected.name}/on_the_air',
-            queryParameters: {
-              'language': languageCode,
-            },
-          );
+    final response =
+        mediaTypeSelected == MediaType.movie
+            ? await DioClient.instance.get(
+              '/${mediaTypeSelected.name}/now_playing',
+              queryParameters: {'language': languageCode},
+            )
+            : await DioClient.instance.get(
+              '/${mediaTypeSelected.name}/on_the_air',
+              queryParameters: {'language': languageCode},
+            );
 
-    List<MediaItemRemoteEntity> mediaData = response['results']
-        .map<MediaItemRemoteEntity>(
-            (e) => MediaItemRemoteEntity.fromJson(e as Map<String, dynamic>))
-        .toList();
+    List<MediaItemRemoteEntity> mediaData =
+        response['results']
+            .map<MediaItemRemoteEntity>(
+              (e) => MediaItemRemoteEntity.fromJson(e as Map<String, dynamic>),
+            )
+            .toList();
 
     return mediaData.map((e) => e.toMediaEntity()).first;
   }

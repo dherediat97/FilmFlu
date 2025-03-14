@@ -10,25 +10,25 @@ part 'media_item_entity.g.dart';
 @freezed
 class MediaItemEntity with _$MediaItemEntity {
   const factory MediaItemEntity({
-    String? backdropPath,
+    required String backdropPath,
     List<GenreEntity>? genres,
     List<ProductionCompanyEntity>? productionCompanies,
     List<int>? genreIds,
-    int? id,
+    required int id,
     String? originalLanguage,
     String? originalTitle,
     double? popularity,
-    String? posterPath,
+    @Default('') String posterPath,
     String? mediaType,
-    String? releaseDate,
-    String? firstAirDate,
-    String? title,
-    Pagination<VideoEntity>? videos,
+    required String releaseDate,
+    required String firstAirDate,
+    required String title,
+    @Default(Pagination(results: [])) Pagination<VideoEntity> videos,
     double? voteAverage,
     int? voteCount,
     String? overview,
     int? runtime,
-    String? name,
+    required String name,
   }) = _MediaItemEntity;
 
   factory MediaItemEntity.fromJson(Map<String, dynamic> json) =>

@@ -1,4 +1,3 @@
-import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/movies_list.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/series_list.dart';
 import 'package:film_flu/presentation/features/search/search_screen.dart';
@@ -27,6 +26,6 @@ class HomeScreen extends ConsumerWidget {
         child = const SearchScreen();
         break;
     }
-    return ScaffoldPage(routeName: AppRoutePaths.homeRoute, child: child);
+    return ScaffoldPage(child: child);
   }
 }

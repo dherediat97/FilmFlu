@@ -7,6 +7,8 @@ import 'package:film_flu/domain/models/video_entity.dart';
 class MediaDetailInstruments {
   static const String movieIdMocked = '533535';
   static const MediaItemEntity mediaDetailMocked = MediaItemEntity(
+    firstAirDate: '',
+    name: '',
     backdropPath: '/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg',
     genres: [
       GenreEntity(id: 28, name: 'Acción'),

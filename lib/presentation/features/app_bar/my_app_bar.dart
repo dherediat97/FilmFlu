@@ -13,12 +13,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class TopAppBar extends ConsumerStatefulWidget {
+class TopAppBar extends ConsumerStatefulWidget implements PreferredSizeWidget {
   const TopAppBar({
     super.key,
     this.mediaTypeSelected = MediaType.movie,
     this.isMainMenu = false,
   });
+
+  @override
+  Size get preferredSize => Size.fromHeight(70);
 
   final MediaType? mediaTypeSelected;
   final bool isMainMenu;
@@ -164,32 +167,30 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
     return SearchAnchor(
       suggestionsBuilder: (BuildContext context, SearchController controller) {
         return List<ListTile>.generate(searchResults.length, (index) {
+          final mediaType = searchResults[index];
           return ListTile(
             onTap:
                 () => context.push(
-                  '/main/${searchResults[index].mediaType}/${searchResults[index].id}',
+                  '/main/${mediaType.mediaType}/${mediaType.id}',
                 ),
             titleTextStyle: Theme.of(context).textTheme.titleSmall,
             leading: Image.network(
-              searchResults[index].mediaType == MediaType.movie.name
-                  ? AppUrls.movieImgBaseURL + searchResults[index].backdropPath!
-                  : AppUrls.movieLandscapeBaseUrl +
-                      searchResults[index].backdropPath!,
+              mediaType.mediaType == MediaType.movie.name
+                  ? AppUrls.movieImgBaseURL + mediaType.posterPath
+                  : AppUrls.movieLandscapeBaseUrl + mediaType.posterPath,
               height: 400,
               fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Icon(Icons.error);
-              },
+              errorBuilder: (context, error, stackTrace) => Icon(Icons.error),
             ),
             title: Text(
-              searchResults[index].mediaType == MediaType.movie.name
-                  ? searchResults[index].title!
-                  : searchResults[index].name!,
+              mediaType.mediaType == MediaType.movie.name
+                  ? mediaType.title
+                  : mediaType.name,
             ),
             subtitle: Text(
-              searchResults[index].mediaType == MediaType.movie.name
-                  ? searchResults[index].releaseDate!
-                  : searchResults[index].firstAirDate!,
+              mediaType.mediaType == MediaType.movie.name
+                  ? mediaType.releaseDate
+                  : mediaType.firstAirDate,
             ),
           );
         });

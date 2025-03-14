@@ -14,22 +14,22 @@ class SerieFiltersWidget extends StatelessWidget {
         Column(
           children: [
             MediaCategory(
-              onItemClick: () => addSerieFilter(context),
+              onItemClick: () => addSerieFilter(),
               categoryIcon: Symbols.helicopter,
               categoryName: context.localizations.action_type,
             ),
             MediaCategory(
-              onItemClick: () => addSerieFilter(context),
+              onItemClick: () => addSerieFilter(),
               categoryIcon: Symbols.compass_calibration,
               categoryName: context.localizations.adventure_type,
             ),
             MediaCategory(
-              onItemClick: () => addSerieFilter(context),
+              onItemClick: () => addSerieFilter(),
               categoryIcon: Symbols.heat_pump_rounded,
               categoryName: context.localizations.love_type,
             ),
             MediaCategory(
-              onItemClick: () => addSerieFilter(context),
+              onItemClick: () => addSerieFilter(),
               categoryIcon: Symbols.animation,
               categoryName: context.localizations.animation_type,
             ),
@@ -38,22 +38,22 @@ class SerieFiltersWidget extends StatelessWidget {
         Column(
           children: [
             MediaCategory(
-              onItemClick: () => addSerieFilter(context),
+              onItemClick: () => addSerieFilter(),
               categoryIcon: Symbols.science,
               categoryName: context.localizations.fiction_type,
             ),
             MediaCategory(
-              onItemClick: () => addSerieFilter(context),
+              onItemClick: () => addSerieFilter(),
               categoryIcon: Symbols.castle,
               categoryName: context.localizations.family_type,
             ),
             MediaCategory(
-              onItemClick: () => addSerieFilter(context),
+              onItemClick: () => addSerieFilter(),
               categoryIcon: Symbols.comedy_mask,
               categoryName: context.localizations.thriller_type,
             ),
             MediaCategory(
-              onItemClick: () => addSerieFilter(context),
+              onItemClick: () => addSerieFilter(),
               categoryIcon: Symbols.filter_drama,
               categoryName: context.localizations.drama_type,
             ),
@@ -63,11 +63,5 @@ class SerieFiltersWidget extends StatelessWidget {
     );
   }
 
-  addSerieFilter(BuildContext context) {
-    // context
-    //     .read<SearchBloc>()
-    //     .add(const SearchEvent.addSerieFilters(SerieFilters(
-    //       isActionSeriesFiltered: true,
-    //     )));
-  }
+  addSerieFilter() {}
 }

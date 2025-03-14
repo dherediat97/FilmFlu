@@ -14,9 +14,9 @@ String? parseDate(String date) {
 
 String? getYear(MediaItemEntity? mediaItem) {
   String? date;
-  if (mediaItem!.releaseDate!.isNotEmpty) {
+  if (mediaItem!.releaseDate.isNotEmpty) {
     date = mediaItem.releaseDate;
-  } else if (mediaItem.firstAirDate!.isNotEmpty) {
+  } else if (mediaItem.firstAirDate.isNotEmpty) {
     date = mediaItem.firstAirDate;
   }
 
