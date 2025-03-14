@@ -34,22 +34,27 @@ class MediaList extends ConsumerStatefulWidget {
 class _MediaDataList extends ConsumerState<MediaList> {
   final CarouselController _carouselController = CarouselController();
 
-  MediaListViewModel get viewModel =>
-      ref.read(mediaListViewModelProvider(MediaFilter(
+  MediaListViewModel get viewModel => ref.read(
+    mediaListViewModelProvider(
+      MediaFilter(
         mediaTypeSelected: widget.mediaType,
         genredId: widget.genreId,
         languageId: context.localizations.localeName,
         sortBy: widget.sortOption,
-      )).notifier);
+      ),
+    ).notifier,
+  );
 
-  MediaFilterNotifier get mediaFilterController => ref.read(mediaFilterProvider(
-        MediaFilter(
-          mediaTypeSelected: widget.mediaType,
-          genredId: widget.genreId,
-          languageId: context.localizations.localeName,
-          sortBy: widget.sortOption,
-        ),
-      ).notifier);
+  MediaFilterNotifier get mediaFilterController => ref.read(
+    mediaFilterProvider(
+      MediaFilter(
+        mediaTypeSelected: widget.mediaType,
+        genredId: widget.genreId,
+        languageId: context.localizations.localeName,
+        sortBy: widget.sortOption,
+      ),
+    ).notifier,
+  );
 
   @override
   void initState() {
@@ -66,12 +71,16 @@ class _MediaDataList extends ConsumerState<MediaList> {
 
   @override
   Widget build(BuildContext context) {
-    final mediaFilter = ref.watch(mediaFilterProvider(MediaFilter(
-      mediaTypeSelected: widget.mediaType,
-      genredId: widget.genreId,
-      languageId: context.localizations.localeName,
-      sortBy: widget.sortOption,
-    )));
+    final mediaFilter = ref.watch(
+      mediaFilterProvider(
+        MediaFilter(
+          mediaTypeSelected: widget.mediaType,
+          genredId: widget.genreId,
+          languageId: context.localizations.localeName,
+          sortBy: widget.sortOption,
+        ),
+      ),
+    );
     final state = ref.watch(mediaListViewModelProvider(mediaFilter));
 
     return NotificationListener(
@@ -99,77 +108,72 @@ class _MediaDataList extends ConsumerState<MediaList> {
     return initialLoading
         ? Shimmer(child: buildListItem(initialLoading))
         : Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  AutoSizeText(
-                    widget.title,
-                    maxFontSize: 30,
-                    minFontSize: 20,
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AutoSizeText(
+                  widget.title,
+                  maxFontSize: 30,
+                  minFontSize: 20,
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
-                  IconButton(
-                    tooltip: widget.sortOption.name,
-                    onPressed: () => _changeSort(),
-                    icon: Icon(Icons.sort),
-                  )
-                ],
+                ),
+                IconButton(
+                  tooltip: widget.sortOption.name,
+                  onPressed: () => _changeSort(),
+                  icon: Icon(Icons.sort),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            if (widget.mediaType == MediaType.movie)
+              SizedBox(
+                height: 220,
+                child: CarouselView(
+                  itemSnapping: true,
+                  controller: _carouselController,
+                  padding: const EdgeInsets.all(8.0),
+                  itemExtent: 180,
+                  onTap: (index) {
+                    context.push(
+                      '${AppRoutePaths.moviesRoute}/${items[index].id}',
+                    );
+                  },
+                  children: List.generate(items.length, (int index) {
+                    return MediaCarrouselItem(
+                      mediaItem: items[index],
+                      mediaTypeSelected: MediaType.movie,
+                    );
+                  }),
+                ),
               ),
-              const SizedBox(height: 20),
-              if (widget.mediaType == MediaType.movie)
-                SizedBox(
-                  height: 220,
-                  child: CarouselView(
-                    controller: _carouselController,
-                    padding: const EdgeInsets.all(8.0),
-                    itemExtent: 180,
-                    onTap: (index) {
-                      context.push(
-                        '${AppRoutePaths.moviesRoute}/${items[index].id}',
-                      );
-                    },
-                    children: List.generate(
-                      items.length,
-                      (int index) {
-                        return MediaCarrouselItem(
-                          mediaItem: items[index],
-                          mediaTypeSelected: MediaType.movie,
-                        );
-                      },
-                    ),
-                  ),
+            if (widget.mediaType == MediaType.tv)
+              SizedBox(
+                height: 220,
+                child: CarouselView(
+                  padding: const EdgeInsets.all(8.0),
+                  itemExtent: 180,
+                  controller: _carouselController,
+                  onTap: (index) {
+                    context.push(
+                      '${AppRoutePaths.seriesRoute}/${items[index].id}',
+                    );
+                  },
+                  children: List.generate(items.length, (int index) {
+                    return MediaCarrouselItem(
+                      mediaItem: items[index],
+                      mediaTypeSelected: MediaType.tv,
+                    );
+                  }),
                 ),
-              if (widget.mediaType == MediaType.tv)
-                SizedBox(
-                  height: 220,
-                  child: CarouselView(
-                    padding: const EdgeInsets.all(8.0),
-                    itemExtent: 180,
-                    controller: _carouselController,
-                    onTap: (index) {
-                      context.push(
-                          '${AppRoutePaths.seriesRoute}/${items[index].id}');
-                    },
-                    children: List.generate(
-                      items.length,
-                      (int index) {
-                        return MediaCarrouselItem(
-                          mediaItem: items[index],
-                          mediaTypeSelected: MediaType.tv,
-                        );
-                      },
-                    ),
-                  ),
-                ),
-            ],
-          );
+              ),
+          ],
+        );
   }
 
   _changeSort() {
@@ -185,12 +189,18 @@ class _MediaDataList extends ConsumerState<MediaList> {
     final hasReachedTheEnd = offset >= maxOffset && !isOutOfRange;
 
     if (hasReachedTheEnd) {
-      viewModel.loadNextPage(ref.read(mediaFilterProvider(MediaFilter(
-        mediaTypeSelected: widget.mediaType,
-        genredId: widget.genreId,
-        languageId: context.localizations.localeName,
-        sortBy: widget.sortOption,
-      ))));
+      viewModel.loadNextPage(
+        ref.read(
+          mediaFilterProvider(
+            MediaFilter(
+              mediaTypeSelected: widget.mediaType,
+              genredId: widget.genreId,
+              languageId: context.localizations.localeName,
+              sortBy: widget.sortOption,
+            ),
+          ),
+        ),
+      );
     }
   }
 }

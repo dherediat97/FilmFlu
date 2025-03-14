@@ -7,7 +7,7 @@ class AppConstants {
       'https://github.com/dherediat97/Filmflu/releases/download/$version/app-release.apk';
   static const Map<String, String> baseHeaders = <String, String>{
     'Authorization': 'Bearer ${Env.tmdbApiKey}',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   };
   static int personId = 0;
   static const bool debugRequest = false;

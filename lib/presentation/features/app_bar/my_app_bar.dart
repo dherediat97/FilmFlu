@@ -4,10 +4,10 @@ import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
-import 'package:film_flu/presentation/features/app_bar/provider/app_language_provider.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/data/enums/media_type.dart';
 import 'package:film_flu/presentation/features/app_bar/widgets/language_picker.dart';
+import 'package:film_flu/presentation/notifiers/app_notifier.dart';
 import 'package:film_flu/presentation/view_models/searched_media_list_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -30,7 +30,7 @@ class TopAppBar extends ConsumerStatefulWidget {
 class _TopAppBarState extends ConsumerState<TopAppBar> {
   @override
   Widget build(BuildContext context) {
-    final languageProvider = ref.watch(appLanguageProvider.notifier);
+    final languageProvider = ref.watch(appProvider.notifier);
 
     return AppBar(
       title: searchBar(),
@@ -64,7 +64,7 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
     );
   }
 
-  List<Widget> _appBarActions(AppLanguageNotifier languageProvider) {
+  List<Widget> _appBarActions(AppProvider languageProvider) {
     List<Widget> actions = [];
 
     actions.add(
@@ -74,15 +74,15 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
       ),
     );
 
-    // actions.add(
-    //   IconButton(
-    //     icon: Icon(
-    //       widget.isMainMenu ? Icons.light_mode : Icons.dark_mode,
-    //       color: AppColors.backgroundColorLight,
-    //     ),
-    //     onPressed: () => ref.read(appProvider.notifier).toggle(),
-    //   ),
-    // );
+    actions.add(
+      IconButton(
+        icon: Icon(
+          widget.isMainMenu ? Icons.light_mode : Icons.dark_mode,
+          color: AppColors.backgroundColorLight,
+        ),
+        onPressed: () => ref.read(appProvider.notifier).toggle(),
+      ),
+    );
 
     actions.add(
       DropdownButton<Locale>(
@@ -101,7 +101,7 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
                     .toList(),
         padding: const EdgeInsets.all(8),
         elevation: 4,
-        value: ref.watch(appLanguageProvider),
+        value: ref.watch(appProvider).appLocale,
         underline: const SizedBox(height: 0),
         items:
             AppLocalizations.supportedLocales

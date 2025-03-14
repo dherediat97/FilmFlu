@@ -2,12 +2,10 @@ import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/data/enums/media_type.dart';
 import 'package:film_flu/presentation/features/app_bar/my_app_bar.dart';
-import 'package:film_flu/presentation/features/media_list/widgets/movies_list.dart';
-import 'package:film_flu/presentation/features/media_list/widgets/series_list.dart';
-import 'package:film_flu/presentation/features/search/widgets/serie_filters.dart';
 import 'package:film_flu/presentation/notifiers/home_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class ScaffoldPage extends ConsumerStatefulWidget {
   const ScaffoldPage({
@@ -16,7 +14,6 @@ class ScaffoldPage extends ConsumerStatefulWidget {
     this.appBar,
     this.bottomBar,
     this.floatingActionButton,
-    this.fullScreenMode = false,
     this.routeName = '/',
   });
 
@@ -24,7 +21,6 @@ class ScaffoldPage extends ConsumerStatefulWidget {
   final PreferredSize? appBar;
   final Widget? bottomBar;
   final Widget? floatingActionButton;
-  final bool fullScreenMode;
   final String routeName;
 
   @override
@@ -32,15 +28,12 @@ class ScaffoldPage extends ConsumerStatefulWidget {
 }
 
 class _ScaffoldPageState extends ConsumerState<ScaffoldPage> {
-  int _selectedIndex = 0;
   PageController _pageController = PageController();
 
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(
-      initialPage: _selectedIndex,
-    );
+    _pageController = PageController();
   }
 
   @override
@@ -52,68 +45,50 @@ class _ScaffoldPageState extends ConsumerState<ScaffoldPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-        floatingActionButton: widget.floatingActionButton,
-        appBar: !widget.fullScreenMode
-            ? PreferredSize(
-                preferredSize: const Size.fromHeight(70),
-                child: TopAppBar(
-                  isMainMenu: true,
-                  mediaTypeSelected: MediaType.movie,
-                ))
-            : null,
-        bottomNavigationBar: !widget.fullScreenMode
-            ? BottomNavigationBar(
-                items: [
-                  BottomNavigationBarItem(
-                    icon: const Icon(Icons.local_movies),
-                    label: context.localizations.movies,
-                  ),
-                  BottomNavigationBarItem(
-                    icon: const Icon(Icons.live_tv),
-                    label: context.localizations.series,
-                  ),
-                  BottomNavigationBarItem(
-                    icon: const Icon(Icons.search),
-                    label: context.localizations.search,
-                  ),
-                ],
-                backgroundColor:
-                    Theme.of(context).colorScheme.surfaceContainerLowest,
-                selectedItemColor: Theme.of(context).colorScheme.primary,
-                currentIndex: _selectedIndex,
-                elevation: 20,
-                onTap: (int index) {
-                  setState(() {
-                    _selectedIndex = index;
-                  });
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: widget.floatingActionButton,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(70),
+        child: TopAppBar(isMainMenu: true, mediaTypeSelected: MediaType.movie),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.local_movies),
+            label: context.localizations.movies,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.live_tv),
+            label: context.localizations.series,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.search),
+            label: context.localizations.search,
+          ),
+        ],
+        backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
+        selectedItemColor: Theme.of(context).colorScheme.primary,
+        currentIndex: ref.watch(homeProvider).index,
+        elevation: 20,
+        onTap: (int index) {
+          if (_pageController.hasClients) {
+            _pageController.animateToPage(
+              index,
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+            );
+          }
 
-                  if (_pageController.hasClients) {
-                    _pageController.animateToPage(
-                      index,
-                      duration: const Duration(milliseconds: 200),
-                      curve: Curves.easeInOut,
-                    );
-                  }
-                },
-              )
-            : null,
-        body: widget.routeName.contains(AppRoutePaths.homeRoute)
-            ? PageView(
-                controller: _pageController,
-                physics: const NeverScrollableScrollPhysics(),
-                onPageChanged: (index) {
-                  _selectedIndex = index;
+          ref.watch(homeProvider.notifier).setMediaTypeSelected(switch (index) {
+            0 => MediaType.movie,
+            1 => MediaType.tv,
+            _ => MediaType.search,
+          });
 
-                  var category = MediaType.values.elementAt(_selectedIndex);
-                  ref.read(homeProvider(category));
-                },
-                children: const [
-                  MoviesListWidget(),
-                  SeriesListWidget(),
-                  SerieFiltersWidget(),
-                ],
-              )
-            : widget.child);
+          context.pushReplacement(AppRoutePaths.homeRoute);
+        },
+      ),
+      body: widget.child,
+    );
   }
 }

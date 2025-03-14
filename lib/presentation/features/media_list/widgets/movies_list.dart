@@ -11,13 +11,10 @@ class MoviesListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          MediaDayWidget(
-            mediaTypeSelected: MediaType.movie,
-          ),
+          MediaDayWidget(mediaTypeSelected: MediaType.movie),
           MediaList(
             mediaType: MediaType.movie,
             genreId: GenresId.actionMovies,

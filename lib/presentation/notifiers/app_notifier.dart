@@ -1,5 +1,9 @@
+import 'dart:ui';
+
+import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/constants/app_fonts.dart';
 import 'package:film_flu/app/constants/app_theme.dart';
+import 'package:film_flu/presentation/notifiers/models/app_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,11 +12,23 @@ class AppProvider extends StateNotifier<AppState> {
 
   Future _init() async {
     prefs = await SharedPreferences.getInstance();
-    var darkMode = prefs.getBool('isDarkMode');
+    var darkMode = prefs.getBool(AppConstants.themeModeKey) ?? true;
+    var languageCode = prefs.getString(AppConstants.languageKey) ?? 'es';
     state = state.copyWith(
       isDarkMode: darkMode,
-      theme: AppTheme(createTextTheme(isDarkMode: darkMode!)),
+      appTheme: AppTheme(createTextTheme(isDarkMode: darkMode)),
+      appLocale: Locale('es'),
     );
+
+    state = state.copyWith(appLocale: Locale(languageCode));
+  }
+
+  Future changeLanguage(Locale language) async {
+    var prefs = await SharedPreferences.getInstance();
+    if (state.appLocale != language) {
+      state = state.copyWith(appLocale: language);
+      await prefs.setString('language_code', language.languageCode);
+    }
   }
 
   AppProvider() : super(AppState.initial()) {
@@ -29,24 +45,3 @@ class AppProvider extends StateNotifier<AppState> {
 final appProvider = StateNotifierProvider<AppProvider, AppState>(
   (ref) => AppProvider(),
 );
-
-class AppState {
-  final bool isDarkMode;
-  final AppTheme theme;
-
-  AppState({required this.isDarkMode, required this.theme});
-
-  factory AppState.initial() {
-    return AppState(
-      isDarkMode: false,
-      theme: AppTheme(createTextTheme(isDarkMode: true)),
-    );
-  }
-
-  AppState copyWith({bool? isDarkMode, AppTheme? theme}) {
-    return AppState(
-      isDarkMode: isDarkMode ?? this.isDarkMode,
-      theme: theme ?? this.theme,
-    );
-  }
-}
