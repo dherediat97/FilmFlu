@@ -8,10 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 class PersonDetails extends StatelessWidget {
-  const PersonDetails({
-    super.key,
-    required this.person,
-  });
+  const PersonDetails({super.key, required this.person});
 
   final PersonEntity person;
 
@@ -20,6 +17,7 @@ class PersonDetails extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             Row(
@@ -76,9 +74,7 @@ class PersonDetails extends StatelessWidget {
                                 color: Theme.of(context).colorScheme.onSurface,
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 8.0,
-                                ),
+                                padding: const EdgeInsets.only(left: 8.0),
                                 child: Text(
                                   parseDate(person.birthday!).toString(),
                                   textAlign: TextAlign.start,
@@ -86,16 +82,14 @@ class PersonDetails extends StatelessWidget {
                                       Theme.of(context).textTheme.displayMedium,
                                 ),
                               ),
-                            ]
+                            ],
                           ],
                         ),
                       ),
                       if (person.deathday != null &&
                           person.deathday?.isNotEmpty == true) ...[
                         Padding(
-                          padding: const EdgeInsets.only(
-                            top: 16.0,
-                          ),
+                          padding: const EdgeInsets.only(top: 16.0),
                           child: Row(
                             children: [
                               Icon(
@@ -103,9 +97,7 @@ class PersonDetails extends StatelessWidget {
                                 color: Theme.of(context).colorScheme.onSurface,
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 8.0,
-                                ),
+                                padding: const EdgeInsets.only(left: 8.0),
                                 child: Text(
                                   parseDate(person.deathday!).toString(),
                                   textAlign: TextAlign.start,
@@ -115,7 +107,7 @@ class PersonDetails extends StatelessWidget {
                               ),
                             ],
                           ),
-                        )
+                        ),
                       ],
                       const SizedBox(height: 10),
                       if (person.placeOfBirth != null &&
@@ -153,15 +145,16 @@ class PersonDetails extends StatelessWidget {
               Column(
                 children: [
                   Padding(
-                      padding: const EdgeInsets.only(top: 24.0),
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
-                        child: Text(
-                          person.biography.toString(),
-                          textAlign: TextAlign.start,
-                          style: Theme.of(context).textTheme.displayMedium,
-                        ),
-                      )),
+                    padding: const EdgeInsets.only(top: 24.0),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 16.0),
+                      child: Text(
+                        person.biography.toString(),
+                        textAlign: TextAlign.start,
+                        style: Theme.of(context).textTheme.displayMedium,
+                      ),
+                    ),
+                  ),
                 ],
               ),
           ],

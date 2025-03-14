@@ -11,11 +11,10 @@ class SeriesListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
       child: Column(
         children: [
-          MediaDayWidget(
-            mediaTypeSelected: MediaType.tv,
-          ),
+          MediaDayWidget(mediaTypeSelected: MediaType.tv),
           MediaList(
             mediaType: MediaType.tv,
             genreId: GenresId.animationSeries,
