@@ -94,10 +94,14 @@ class BackgroundImageMediaItem extends StatelessWidget {
                                       : MediaType.tv;
 
                               FirebaseAnalytics.instance.logScreenView(
-                                screenName: 'detailsMediaItem',
+                                screenName: 'details_media_item',
                               );
+
                               FirebaseAnalytics.instance.logEvent(
-                                name: 'View details movie/tv serie',
+                                name: 'view_details',
+                                parameters: {
+                                  'mediaType': mediaTypeSelected.name,
+                                },
                               );
 
                               context.push(
