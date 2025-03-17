@@ -7,7 +7,7 @@ import 'package:film_flu/data/enums/sort_options.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
 import 'package:film_flu/presentation/view_models/media_list_view_model.dart';
-import 'package:film_flu/presentation/widgets/media_carrousel_item.dart';
+import 'package:film_flu/presentation/features/media_list/widgets/media_carrousel_item.dart';
 import 'package:film_flu/presentation/widgets/shimmer_loading.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
@@ -172,6 +172,13 @@ class _MediaDataList extends ConsumerState<MediaList> {
                   onTap: (index) {
                     context.push(
                       '${AppRoutePaths.seriesRoute}/${items[index].id}',
+                    );
+                    FirebaseAnalytics.instance.logScreenView(
+                      screenName: 'details_media_item',
+                    );
+                    FirebaseAnalytics.instance.logEvent(
+                      name: 'view_details',
+                      parameters: {'mediaType': widget.mediaType.name},
                     );
                   },
                   children: List.generate(items.length, (int index) {

@@ -47,6 +47,7 @@ dependencies:
   pretty_dio_logger: ^1.4.0
   flutter_widget_from_html: ^0.16.0
   firebase_analytics: ^11.4.4
+  firebase_core: ^3.3.0
 
 dev_dependencies:
   flutter_test:

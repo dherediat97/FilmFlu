@@ -1,13 +1,14 @@
-import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:flutter/material.dart';
 
 class EmptyStateWidget extends StatelessWidget {
   const EmptyStateWidget({
     super.key,
     required this.errorMessage,
+    required this.urlImage,
   });
 
   final String errorMessage;
+  final String urlImage;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class EmptyStateWidget extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.fitHeight,
-              image: Image.asset(AppAssets.emptyStateImage).image,
+              image: Image.asset(urlImage).image,
             ),
           ),
         ),

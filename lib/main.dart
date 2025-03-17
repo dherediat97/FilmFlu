@@ -1,7 +1,6 @@
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
 import 'package:film_flu/app/routes/app_router.dart';
 import 'package:film_flu/firebase_options.dart';
-// ignore: depend_on_referenced_packages
 import 'package:firebase_core/firebase_core.dart';
 import 'package:film_flu/presentation/notifiers/app_notifier.dart';
 import 'package:flutter/foundation.dart';
