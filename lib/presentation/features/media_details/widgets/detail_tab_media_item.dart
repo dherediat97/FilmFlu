@@ -9,6 +9,7 @@ import 'package:film_flu/presentation/features/media_details/widgets/media_data_
 import 'package:film_flu/presentation/features/media_details/widgets/reviews_widget_item.dart';
 import 'package:film_flu/presentation/notifiers/media_detail_notifier.dart';
 import 'package:film_flu/presentation/notifiers/models/media_item_states.dart';
+import 'package:film_flu/presentation/widgets/empty_state_widget.dart';
 import 'package:film_flu/presentation/widgets/shimmer_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -130,19 +131,10 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                         reviews.when(
                           data: (reviews) {
                             return reviews.isEmpty
-                                ? Column(
-                                  children: [
-                                    Image.asset(
-                                      AppAssets.emptyStateImage,
-                                      fit: BoxFit.contain,
-                                      width: MediaQuery.of(context).size.width,
-                                      height: 200,
-                                    ),
-                                    SizedBox(height: 20),
-                                    Text(
+                                ? EmptyStateWidget(
+                                  errorMessage:
                                       context.localizations.not_found_reviews,
-                                    ),
-                                  ],
+                                  urlImage: AppAssets.emptyStateImage,
                                 )
                                 : ContainerTabMediaItem(
                                   child: ListView.builder(
@@ -156,17 +148,10 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                                 );
                           },
                           error:
-                              (error, stackTrace) => Column(
-                                children: [
-                                  Image.asset(
-                                    AppAssets.emptyStateImage,
-                                    fit: BoxFit.contain,
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 200,
-                                  ),
-                                  SizedBox(height: 20),
-                                  Text(context.localizations.not_found_reviews),
-                                ],
+                              (error, stackTrace) => EmptyStateWidget(
+                                errorMessage:
+                                    context.localizations.not_found_reviews,
+                                urlImage: AppAssets.emptyStateImage,
                               ),
                           loading:
                               () =>
