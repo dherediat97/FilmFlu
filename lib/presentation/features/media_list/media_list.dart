@@ -142,8 +142,14 @@ class _MediaDataList extends ConsumerState<MediaList> {
                   itemExtent: 180,
                   onTap: (index) {
                     FirebaseAnalytics.instance.logScreenView(
-                      screenName: 'detailsMediaItem',
+                      screenName: 'details_media_item',
                     );
+
+                    FirebaseAnalytics.instance.logEvent(
+                      name: 'view_details',
+                      parameters: {'mediaType': widget.mediaType.name},
+                    );
+
                     context.push(
                       '${AppRoutePaths.moviesRoute}/${items[index].id}',
                     );
