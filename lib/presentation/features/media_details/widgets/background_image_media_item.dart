@@ -5,6 +5,7 @@ import 'package:film_flu/core/utils/util_date.dart';
 import 'package:film_flu/data/enums/media_type.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/presentation/widgets/default_image_loader.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -91,6 +92,13 @@ class BackgroundImageMediaItem extends StatelessWidget {
                                   mediaItem.title != ''
                                       ? MediaType.movie
                                       : MediaType.tv;
+
+                              FirebaseAnalytics.instance.logScreenView(
+                                screenName: 'detailsMediaItem',
+                              );
+                              FirebaseAnalytics.instance.logEvent(
+                                name: 'View details movie/tv serie',
+                              );
 
                               context.push(
                                 mediaTypeSelected == MediaType.movie

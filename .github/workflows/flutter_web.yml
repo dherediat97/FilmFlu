@@ -35,6 +35,10 @@ jobs:
           with:
             envkey_DEBUG: false
             envkey_TMDB_KEY: ${{ secrets.TMDB_KEY }}
+            envkey_FIREBASE_API_KEY_WEB: ${{ secrets.FIREBASE_API_KEY_WEB }}
+            envkey_FIREBASE_API_KEY_ANDROID: ${{ secrets.FIREBASE_API_KEY_ANDROID }}
+            envkey_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
+            envkey_FIREBASE_APP_ID_WEB: ${{ secrets.FIREBASE_APP_ID_WEB}}
             file_name: .env
         - run: flutter pub run build_runner build --delete-conflicting-outputs
         - uses: bluefireteam/flutter-gh-pages@v9
