@@ -9,6 +9,7 @@ import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
 import 'package:film_flu/presentation/view_models/media_list_view_model.dart';
 import 'package:film_flu/presentation/widgets/media_carrousel_item.dart';
 import 'package:film_flu/presentation/widgets/shimmer_loading.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -140,6 +141,9 @@ class _MediaDataList extends ConsumerState<MediaList> {
                   padding: const EdgeInsets.all(8.0),
                   itemExtent: 180,
                   onTap: (index) {
+                    FirebaseAnalytics.instance.logScreenView(
+                      screenName: 'detailsMediaItem',
+                    );
                     context.push(
                       '${AppRoutePaths.moviesRoute}/${items[index].id}',
                     );
