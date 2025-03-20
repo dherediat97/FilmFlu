@@ -117,44 +117,37 @@ class AppTheme {
   }
 
   ThemeData theme(ColorScheme colorScheme) => ThemeData(
-        brightness: colorScheme.brightness,
-        colorScheme: colorScheme,
-        appBarTheme: AppBarTheme(
-          color: colorScheme.primary,
-          toolbarHeight: 75,
-        ),
-        bottomAppBarTheme: BottomAppBarTheme(
-          color: colorScheme.primary,
-          height: 50,
-        ),
-        textTheme: textTheme,
-        iconTheme: const IconThemeData(
-          color: AppColors.backgroundColorLight,
-        ),
-        iconButtonTheme: const IconButtonThemeData(
-          style: ButtonStyle(
-            iconColor: WidgetStatePropertyAll(
-              AppColors.backgroundColorLight,
-            ),
-          ),
-        ),
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: colorScheme.primary,
-          foregroundColor: AppColors.backgroundColorLight,
-        ),
-        scaffoldBackgroundColor: colorScheme.surface,
-        canvasColor: colorScheme.surface,
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: colorScheme.primary,
-          selectedItemColor: AppColors.textPrimaryColor,
-        ),
-        tabBarTheme: TabBarTheme(
-          indicatorColor: colorScheme.primary,
-          labelColor: colorScheme.secondary,
-          splashFactory: NoSplash.splashFactory,
-          labelPadding: EdgeInsets.zero,
-          unselectedLabelColor: colorScheme.secondary,
-          indicatorSize: TabBarIndicatorSize.label,
-        ),
-      );
+    brightness: colorScheme.brightness,
+    colorScheme: colorScheme,
+    appBarTheme: AppBarTheme(color: colorScheme.primary, toolbarHeight: 75),
+    bottomAppBarTheme: BottomAppBarTheme(
+      color: colorScheme.primary,
+      height: 50,
+    ),
+    textTheme: textTheme,
+    iconTheme: const IconThemeData(color: AppColors.backgroundColorLight),
+    iconButtonTheme: const IconButtonThemeData(
+      style: ButtonStyle(
+        iconColor: WidgetStatePropertyAll(AppColors.backgroundColorLight),
+      ),
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: colorScheme.primary,
+      foregroundColor: AppColors.backgroundColorLight,
+    ),
+    scaffoldBackgroundColor: colorScheme.surface,
+    canvasColor: colorScheme.surface,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: colorScheme.primary,
+      selectedItemColor: AppColors.textPrimaryColor,
+    ),
+    tabBarTheme: TabBarTheme(
+      indicatorColor: colorScheme.primary,
+      labelColor: colorScheme.secondary,
+      splashFactory: NoSplash.splashFactory,
+      labelPadding: EdgeInsets.zero,
+      unselectedLabelColor: colorScheme.secondary,
+      indicatorSize: TabBarIndicatorSize.label,
+    ),
+  );
 }

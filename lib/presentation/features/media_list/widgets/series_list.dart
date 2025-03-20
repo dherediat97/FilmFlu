@@ -1,6 +1,6 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/data/enums/genres_id.dart';
-import 'package:film_flu/data/enums/media_type.dart';
+import 'package:film_flu/domain/enums/genres_id.dart';
+import 'package:film_flu/domain/enums/media_type.dart';
 import 'package:film_flu/presentation/features/home/widgets/media_day_widget.dart';
 import 'package:film_flu/presentation/features/media_list/media_list.dart';
 import 'package:flutter/material.dart';

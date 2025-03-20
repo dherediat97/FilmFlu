@@ -1,10 +1,10 @@
 import 'package:film_flu/presentation/features/media_list/widgets/movies_list.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/series_list.dart';
-import 'package:film_flu/presentation/features/search/search_screen.dart';
+import 'package:film_flu/presentation/features/search_filters/search_screen.dart';
 import 'package:film_flu/presentation/notifiers/home_notifier.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
-import 'package:film_flu/data/enums/media_type.dart';
+import 'package:film_flu/domain/enums/media_type.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeScreen extends ConsumerWidget {

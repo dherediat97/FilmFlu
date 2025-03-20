@@ -1,4 +1,4 @@
-import 'package:film_flu/data/enums/media_type.dart';
+import 'package:film_flu/domain/enums/media_type.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/domain/repository/media_repository.dart';
 import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
@@ -22,9 +22,10 @@ class MediaDay extends _$MediaDay {
 
     return MediaDayItemState(
       mediaItem: mediaDataItemResponse,
-      title: mediaFilter.mediaTypeSelected == MediaType.movie
-          ? mediaDataItemResponse.title
-          : mediaDataItemResponse.name,
+      title:
+          mediaFilter.mediaTypeSelected == MediaType.movie
+              ? mediaDataItemResponse.title
+              : mediaDataItemResponse.name,
       productionCompanyImage:
           mediaDataItemResponse.productionCompanies!.isNotEmpty
               ? mediaDataItemResponse.productionCompanies!.first.logoPath

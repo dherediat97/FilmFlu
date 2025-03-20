@@ -1,5 +1,5 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/data/enums/media_type.dart';
+import 'package:film_flu/domain/enums/media_type.dart';
 import 'package:film_flu/presentation/features/app_bar/my_app_bar.dart';
 import 'package:film_flu/presentation/notifiers/home_notifier.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +49,7 @@ class _ScaffoldPageState extends ConsumerState<ScaffoldPage> {
           ref.watch(homeProvider.notifier).setMediaTypeSelected(switch (index) {
             0 => MediaType.movie,
             1 => MediaType.tv,
-            _ => MediaType.search,
+            _ => MediaType.movie,
           });
         },
       ),

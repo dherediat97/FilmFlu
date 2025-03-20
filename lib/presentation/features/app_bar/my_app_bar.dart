@@ -1,14 +1,11 @@
 import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/constants/app_colors.dart';
-import 'package:film_flu/app/constants/app_urls.dart';
-import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
-import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
-import 'package:film_flu/data/enums/media_type.dart';
+import 'package:film_flu/domain/enums/media_type.dart';
 import 'package:film_flu/presentation/features/app_bar/widgets/language_picker.dart';
+import 'package:film_flu/presentation/features/search/search_view.dart';
 import 'package:film_flu/presentation/notifiers/app_notifier.dart';
-import 'package:film_flu/presentation/view_models/searched_media_list_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -33,14 +30,12 @@ class TopAppBar extends ConsumerStatefulWidget implements PreferredSizeWidget {
 class _TopAppBarState extends ConsumerState<TopAppBar> {
   @override
   Widget build(BuildContext context) {
-    final languageProvider = ref.watch(appProvider.notifier);
-
     return AppBar(
-      title: searchBar(),
+      title: SearchView(),
       automaticallyImplyLeading: true,
       titleTextStyle: Theme.of(context).textTheme.headlineLarge,
       backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
-      leadingWidth: 120,
+      leadingWidth: 80,
       leading:
           widget.isMainMenu
               ? IconButton(
@@ -60,14 +55,15 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
               : null,
       actions: [
         Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(children: _appBarActions(languageProvider)),
+          padding: const EdgeInsets.all(4.0),
+          child: Row(children: _appBarActions()),
         ),
       ],
     );
   }
 
-  List<Widget> _appBarActions(AppProvider languageProvider) {
+  List<Widget> _appBarActions() {
+    final languageProvider = ref.watch(appProvider.notifier);
     List<Widget> actions = [];
 
     actions.add(
@@ -158,69 +154,5 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
     //   );
     // }
     return actions;
-  }
-
-  Widget searchBar() {
-    List<MediaItemEntity> searchResults = [];
-    String languageName = context.localizations.localeName;
-
-    return SearchAnchor(
-      suggestionsBuilder: (BuildContext context, SearchController controller) {
-        return List<ListTile>.generate(searchResults.length, (index) {
-          final mediaType = searchResults[index];
-          return ListTile(
-            onTap:
-                () => context.push(
-                  '/main/${mediaType.mediaType}/${mediaType.id}',
-                ),
-            titleTextStyle: Theme.of(context).textTheme.titleSmall,
-            leading: Image.network(
-              mediaType.mediaType == MediaType.movie.name
-                  ? AppUrls.movieImgBaseURL + mediaType.posterPath
-                  : AppUrls.movieLandscapeBaseUrl + mediaType.posterPath,
-              height: 400,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) => Icon(Icons.error),
-            ),
-            title: Text(
-              mediaType.mediaType == MediaType.movie.name
-                  ? mediaType.title
-                  : mediaType.name,
-            ),
-            subtitle: Text(
-              mediaType.mediaType == MediaType.movie.name
-                  ? mediaType.releaseDate
-                  : mediaType.firstAirDate,
-            ),
-          );
-        });
-      },
-      builder: (context, controller) {
-        return SearchBar(
-          textInputAction: TextInputAction.search,
-          controller: controller,
-          padding: const WidgetStatePropertyAll<EdgeInsets>(
-            EdgeInsets.symmetric(horizontal: 16.0),
-          ),
-          onTapOutside: (event) => controller.closeView(''),
-          onSubmitted: (value) => controller.closeView(value),
-          leading: Icon(Icons.search),
-          onChanged: (value) {
-            if (value.length > 3) {
-              Future.delayed(Duration(milliseconds: 2000), () async {
-                searchResults = await ref
-                    .read(searchMediaListProvider.notifier)
-                    .search(languageName, value);
-
-                searchResults.isNotEmpty && !controller.isOpen
-                    ? controller.openView()
-                    : null;
-              });
-            }
-          },
-          hintText: context.localizations.search,
-        );
-      },
-    );
   }
 }

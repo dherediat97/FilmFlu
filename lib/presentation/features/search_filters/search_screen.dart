@@ -1,6 +1,6 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/presentation/features/search/widgets/movie_filters.dart';
-import 'package:film_flu/presentation/features/search/widgets/serie_filters.dart';
+import 'package:film_flu/presentation/features/search_filters/widgets/movie_filters.dart';
+import 'package:film_flu/presentation/features/search_filters/widgets/serie_filters.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatelessWidget {

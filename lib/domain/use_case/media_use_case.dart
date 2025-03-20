@@ -1,10 +1,12 @@
-import 'package:film_flu/data/enums/genres_id.dart';
-import 'package:film_flu/data/enums/media_type.dart';
+import 'package:film_flu/core/entities/pagination.dart';
+import 'package:film_flu/domain/enums/genres_id.dart';
+import 'package:film_flu/domain/enums/media_type.dart';
 import 'package:film_flu/domain/models/credits_media_entity.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/domain/models/media_response_entity.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
+import 'package:film_flu/domain/models/search_result_entity.dart';
 import 'package:film_flu/domain/repository/media_repository.dart';
 
 abstract class MediaUseCase {
@@ -54,7 +56,7 @@ abstract class MediaUseCase {
     String sortBy,
   );
 
-  Future<List<MediaItemEntity>> searchMediaData(
+  Future<Pagination<SearchResultEntity>> searchMediaData(
     String languageName,
     String query,
   );
@@ -124,7 +126,7 @@ class MediaUseCaseImpl extends MediaUseCase {
 
   @override
   Future<(int totalItems, List<MediaSimpleItemEntity> items)>
-      getMediaDataByGenre(
+  getMediaDataByGenre(
     MediaType mediaTypeSelected,
     GenresId genreId,
     String languageId,
@@ -169,7 +171,7 @@ class MediaUseCaseImpl extends MediaUseCase {
   }
 
   @override
-  Future<List<MediaItemEntity>> searchMediaData(
+  Future<Pagination<SearchResultEntity>> searchMediaData(
     String languageName,
     String query,
   ) async {
