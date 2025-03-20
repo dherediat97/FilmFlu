@@ -134,6 +134,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get not_found_reviews => 'Aucun avis';
 
   @override
+  String get artists => 'Artistas';
+
+  @override
   String get settings => 'Ajustes';
 
   @override

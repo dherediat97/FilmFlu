@@ -10,19 +10,17 @@ import 'package:film_flu/presentation/widgets/shimmer_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PersonDetailsPage extends ConsumerStatefulWidget {
-  const PersonDetailsPage({
-    super.key,
-    required this.personId,
-  });
+class PersonItemScreenDetails extends ConsumerStatefulWidget {
+  const PersonItemScreenDetails({super.key, required this.personId});
 
   final String personId;
 
   @override
-  ConsumerState<PersonDetailsPage> createState() => _PersonDetailsPagePage();
+  ConsumerState<PersonItemScreenDetails> createState() =>
+      _PersonDetailsPagePage();
 }
 
-class _PersonDetailsPagePage extends ConsumerState<PersonDetailsPage>
+class _PersonDetailsPagePage extends ConsumerState<PersonItemScreenDetails>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -40,12 +38,14 @@ class _PersonDetailsPagePage extends ConsumerState<PersonDetailsPage>
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(getPersonDetailsProvider(
-      PersonState(
-        personId: widget.personId,
-        languageName: context.localizations.localeName,
+    final state = ref.watch(
+      getPersonDetailsProvider(
+        PersonState(
+          personId: widget.personId,
+          languageName: context.localizations.localeName,
+        ),
       ),
-    ));
+    );
 
     final person = state.value;
 
@@ -65,9 +65,10 @@ class _PersonDetailsPagePage extends ConsumerState<PersonDetailsPage>
                 forceElevated: innerBoxIsScrolled,
                 backgroundColor: Theme.of(context).colorScheme.surface,
                 flexibleSpace: FlexibleSpaceBar(
-                  background: person == null
-                      ? Shimmer(child: buildMediaDayWidget(context))
-                      : PersonDetails(person: person),
+                  background:
+                      person == null
+                          ? Shimmer(child: buildMediaDayWidget(context))
+                          : PersonDetails(person: person),
                 ),
               ),
               SliverPersistentHeader(
@@ -85,32 +86,33 @@ class _PersonDetailsPagePage extends ConsumerState<PersonDetailsPage>
                       Tab(
                         icon: const Icon(Icons.movie),
                         text: context.localizations.production_cast,
-                      )
+                      ),
                     ],
                   ),
                 ),
               ),
             ];
           },
-          body: person?.credits != null
-              ? TabBarView(
-                  controller: _tabController,
-                  children: [
-                    person?.credits?.cast == null
-                        ? Shimmer(child: buildMediaDayWidget(context))
-                        : ActorCreditsWidget(
+          body:
+              person?.credits != null
+                  ? TabBarView(
+                    controller: _tabController,
+                    children: [
+                      person?.credits?.cast == null
+                          ? Shimmer(child: buildMediaDayWidget(context))
+                          : ActorCreditsWidget(
                             person: person!,
                             credits: person.credits!.cast,
                           ),
-                    person?.credits?.crew == null
-                        ? Shimmer(child: buildMediaDayWidget(context))
-                        : ProductionCreditsWidget(
+                      person?.credits?.crew == null
+                          ? Shimmer(child: buildMediaDayWidget(context))
+                          : ProductionCreditsWidget(
                             person: person!,
                             credits: person.credits!.crew,
                           ),
-                  ],
-                )
-              : Container(),
+                    ],
+                  )
+                  : Container(),
         ),
       ),
     );

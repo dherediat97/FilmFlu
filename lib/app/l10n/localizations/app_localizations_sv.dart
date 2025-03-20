@@ -134,6 +134,9 @@ class AppLocalizationsSv extends AppLocalizations {
   String get not_found_reviews => 'Inga recensioner';
 
   @override
+  String get artists => 'Artistas';
+
+  @override
   String get settings => 'Ajustes';
 
   @override

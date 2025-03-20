@@ -134,6 +134,9 @@ class AppLocalizationsFi extends AppLocalizations {
   String get not_found_reviews => 'Ei arvosteluja';
 
   @override
+  String get artists => 'Artistas';
+
+  @override
   String get settings => 'Ajustes';
 
   @override

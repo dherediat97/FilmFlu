@@ -155,10 +155,7 @@ class _MediaDataList extends ConsumerState<MediaList> {
                     );
                   },
                   children: List.generate(items.length, (int index) {
-                    return MediaCarrouselItem(
-                      mediaItem: items[index],
-                      mediaTypeSelected: MediaType.movie,
-                    );
+                    return MediaCarrouselItem(mediaItem: items[index]);
                   }),
                 ),
               ),
@@ -182,10 +179,7 @@ class _MediaDataList extends ConsumerState<MediaList> {
                     );
                   },
                   children: List.generate(items.length, (int index) {
-                    return MediaCarrouselItem(
-                      mediaItem: items[index],
-                      mediaTypeSelected: MediaType.tv,
-                    );
+                    return MediaCarrouselItem(mediaItem: items[index]);
                   }),
                 ),
               ),
@@ -199,7 +193,7 @@ class _MediaDataList extends ConsumerState<MediaList> {
     viewModel.loadPage(1, mediaFilterController.arg);
   }
 
-  void _loadMore() {
+  _loadMore() {
     final offset = _carouselController.offset;
     final maxOffset = _carouselController.position.maxScrollExtent;
     final isOutOfRange = _carouselController.position.outOfRange;

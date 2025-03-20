@@ -8,10 +8,9 @@ final dioProvider = Provider((ref) {
   final options = BaseOptions(baseUrl: AppUrls.baseUrl);
   final dio = Dio(options);
   if (!kReleaseMode) {
-    dio.interceptors.add(PrettyDioLogger(
-      requestHeader: true,
-      requestBody: true,
-    ));
+    dio.interceptors.add(
+      PrettyDioLogger(requestHeader: true, requestBody: true),
+    );
   }
   return dio;
 });
