@@ -1,19 +1,21 @@
 import 'package:dio/dio.dart';
+import 'package:film_flu/core/entities/pagination.dart';
 import 'package:film_flu/data/datasources/remote/api/network/dio_client.dart';
 import 'package:film_flu/data/datasources/remote/api/network/http_exception.dart';
-import 'package:film_flu/data/enums/genres_id.dart';
-import 'package:film_flu/data/enums/order_options.dart';
-import 'package:film_flu/data/enums/sort_options.dart';
 import 'package:film_flu/data/models/credits_media_remote_entity.dart';
 import 'package:film_flu/data/models/media_item_remote_entity.dart';
-import 'package:film_flu/data/enums/media_type.dart';
 import 'package:film_flu/data/models/review_remote_entity.dart';
+import 'package:film_flu/domain/enums/genres_id.dart';
+import 'package:film_flu/domain/enums/media_type.dart';
+import 'package:film_flu/domain/enums/order_options.dart';
+import 'package:film_flu/domain/enums/sort_options.dart';
 import 'package:film_flu/domain/models/credits_media_entity.dart';
 import 'package:film_flu/domain/models/data_media_list.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/domain/models/media_response_entity.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
+import 'package:film_flu/domain/models/search_result_entity.dart';
 import 'package:film_flu/domain/repository/media_repository.dart';
 
 class MediaRepositoryImpl implements MediaRepository {
@@ -198,7 +200,7 @@ class MediaRepositoryImpl implements MediaRepository {
   }
 
   @override
-  Future<List<MediaItemEntity>> searchMediaData(
+  Future<Pagination<SearchResultEntity>> searchMediaData(
     String languageName,
     String query,
   ) async {
@@ -208,15 +210,12 @@ class MediaRepositoryImpl implements MediaRepository {
         queryParameters: {'query': query, 'language': languageName},
       );
 
-      List<MediaItemRemoteEntity> mediaData =
-          response['results']
-              .map<MediaItemRemoteEntity>(
-                (e) =>
-                    MediaItemRemoteEntity.fromJson(e as Map<String, dynamic>),
-              )
-              .toList();
+      final responseSearch = Pagination.fromJson(
+        response,
+        (value) => SearchResultEntity.fromJson(value as Map<String, dynamic>),
+      );
 
-      return mediaData.map((e) => e.toMediaEntity()).toList();
+      return responseSearch;
     } on DioException catch (e) {
       throw e.errorMessage;
     }

@@ -1,4 +1,4 @@
-import 'package:film_flu/data/enums/media_type.dart';
+import 'package:film_flu/domain/enums/media_type.dart';
 
 enum GenresId {
   //MOVIES GENRES
@@ -23,7 +23,10 @@ enum GenresId {
   westernMovies(id: 37, name: 'Western', mediaType: MediaType.movie),
   //TV SERIES
   actionAdventureSeries(
-      id: 10759, name: 'Action & Adventure', mediaType: MediaType.tv),
+    id: 10759,
+    name: 'Action & Adventure',
+    mediaType: MediaType.tv,
+  ),
   animationSeries(id: 16, name: 'Adventure', mediaType: MediaType.tv),
   comedySeries(id: 35, name: 'Comedy', mediaType: MediaType.tv),
   crimeSeries(id: 80, name: 'Crime', mediaType: MediaType.tv),
@@ -35,7 +38,10 @@ enum GenresId {
   newsSeries(id: 10763, name: 'News', mediaType: MediaType.tv),
   realitySeries(id: 10764, name: 'Reality', mediaType: MediaType.tv),
   sciFiFantasySeries(
-      id: 10765, name: 'Sci-Fi & Fantasy', mediaType: MediaType.tv),
+    id: 10765,
+    name: 'Sci-Fi & Fantasy',
+    mediaType: MediaType.tv,
+  ),
   soapSeries(id: 10766, name: 'Soap', mediaType: MediaType.tv),
   talkSeries(id: 10767, name: 'Talk', mediaType: MediaType.tv),
   warSeries(id: 10768, name: 'War & Politics', mediaType: MediaType.tv),

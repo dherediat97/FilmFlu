@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
-import 'package:film_flu/data/enums/genres_id.dart';
-import 'package:film_flu/data/enums/media_type.dart';
-import 'package:film_flu/data/enums/sort_options.dart';
+import 'package:film_flu/domain/enums/genres_id.dart';
+import 'package:film_flu/domain/enums/media_type.dart';
+import 'package:film_flu/domain/enums/sort_options.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
 import 'package:film_flu/presentation/view_models/media_list_view_model.dart';

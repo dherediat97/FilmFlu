@@ -1,7 +1,7 @@
-import 'package:film_flu/data/enums/genres_id.dart';
-import 'package:film_flu/data/enums/media_type.dart';
-import 'package:film_flu/data/enums/order_options.dart';
-import 'package:film_flu/data/enums/sort_options.dart';
+import 'package:film_flu/domain/enums/genres_id.dart';
+import 'package:film_flu/domain/enums/media_type.dart';
+import 'package:film_flu/domain/enums/order_options.dart';
+import 'package:film_flu/domain/enums/sort_options.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -9,13 +9,13 @@ part 'media_filter_notifier.freezed.dart';
 
 final mediaFilterProvider = NotifierProvider.family
     .autoDispose<MediaFilterNotifier, MediaFilter, MediaFilter>(
-  MediaFilterNotifier.new,
-);
+      MediaFilterNotifier.new,
+    );
 
 final mediaDayFilterProvider = NotifierProvider.family
     .autoDispose<MediaDayFilterNotifier, MediaDayFilter, MediaDayFilter>(
-  MediaDayFilterNotifier.new,
-);
+      MediaDayFilterNotifier.new,
+    );
 
 @freezed
 class MediaFilter with _$MediaFilter {

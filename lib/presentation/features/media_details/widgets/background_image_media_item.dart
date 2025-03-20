@@ -2,7 +2,7 @@ import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/core/utils/util_date.dart';
-import 'package:film_flu/data/enums/media_type.dart';
+import 'package:film_flu/domain/enums/media_type.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/presentation/widgets/default_image_loader.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
