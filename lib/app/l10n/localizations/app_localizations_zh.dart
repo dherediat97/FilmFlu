@@ -134,6 +134,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get not_found_reviews => '沒有評論';
 
   @override
+  String get artists => 'Artistas';
+
+  @override
   String get settings => 'Ajustes';
 
   @override

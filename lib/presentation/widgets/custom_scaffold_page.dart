@@ -37,8 +37,12 @@ class _ScaffoldPageState extends ConsumerState<ScaffoldPage> {
             label: context.localizations.series,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.search),
-            label: context.localizations.search,
+            icon: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [const Icon(Icons.person), const Icon(Icons.movie)],
+            ),
+            label: context.localizations.artists,
           ),
         ],
         backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
@@ -49,7 +53,7 @@ class _ScaffoldPageState extends ConsumerState<ScaffoldPage> {
           ref.watch(homeProvider.notifier).setMediaTypeSelected(switch (index) {
             0 => MediaType.movie,
             1 => MediaType.tv,
-            _ => MediaType.movie,
+            _ => MediaType.person,
           });
         },
       ),

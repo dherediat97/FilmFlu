@@ -1,6 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
@@ -34,32 +33,31 @@ class ActorCreditsWidget extends StatelessWidget {
         itemBuilder: (context, index) {
           CreditActorEntity actor = credits[index];
 
-          String? movieTitle = actor.title != null
-              ? '${actor.character} ${context.localizations.in_preposition} ${actor.title}'
-              : '${actor.character}';
+          String? movieTitle =
+              actor.title != null
+                  ? '${actor.character} ${context.localizations.in_preposition} ${actor.title}'
+                  : '${actor.character}';
 
           return ListTile(
-            onTap: () {
-              AppConstants.personId = actor.id;
-              context.push(
-                '${AppRoutePaths.moviesRoute}/${actor.id}',
-              );
-            },
+            onTap:
+                () => context.push('${AppRoutePaths.moviesRoute}/${actor.id}'),
             title: ClipRRect(
               borderRadius: BorderRadius.circular(32.0),
               child: CachedNetworkImage(
-                imageUrl: actor.backdropPath != null
-                    ? '${AppUrls.personImgBaseUrl}${actor.backdropPath}'
-                    : '${AppUrls.personImgBaseUrl}${person.profilePath}',
-                imageBuilder: (context, imageProvider) => Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(32),
-                    image: DecorationImage(
-                      image: imageProvider,
-                      fit: BoxFit.cover,
+                imageUrl:
+                    actor.backdropPath != null
+                        ? '${AppUrls.personImgBaseUrl}${actor.backdropPath}'
+                        : '${AppUrls.personImgBaseUrl}${person.profilePath}',
+                imageBuilder:
+                    (context, imageProvider) => Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(32),
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
                 height: 200,
                 width: 120,
                 fit: BoxFit.cover,

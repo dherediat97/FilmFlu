@@ -22,10 +22,11 @@ class SearchedMediaListViewModel extends AsyncNotifier<List<MediaItemEntity>> {
     String languageName,
     String query,
   ) async {
-    final items = await repository.searchMediaData(languageName, query);
+    var items = await repository.searchMediaData(languageName, query);
     if (items.results.isEmpty) {
       return [];
     }
+
     return items.results;
   }
 }

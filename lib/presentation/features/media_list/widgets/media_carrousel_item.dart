@@ -1,18 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
-import 'package:film_flu/domain/enums/media_type.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:flutter/material.dart';
 
 class MediaCarrouselItem extends StatelessWidget {
-  const MediaCarrouselItem({
-    super.key,
-    required this.mediaItem,
-    required this.mediaTypeSelected,
-  });
+  const MediaCarrouselItem({super.key, required this.mediaItem});
 
   final MediaSimpleItemEntity? mediaItem;
-  final MediaType mediaTypeSelected;
 
   @override
   Widget build(BuildContext context) {

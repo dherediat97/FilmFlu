@@ -370,6 +370,12 @@ abstract class AppLocalizations {
   /// **'No hay reseñas'**
   String get not_found_reviews;
 
+  /// No description provided for @artists.
+  ///
+  /// In es, this message translates to:
+  /// **'Artistas'**
+  String get artists;
+
   /// No description provided for @settings.
   ///
   /// In es, this message translates to:

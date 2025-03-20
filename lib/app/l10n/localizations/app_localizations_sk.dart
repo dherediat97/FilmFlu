@@ -134,6 +134,9 @@ class AppLocalizationsSk extends AppLocalizations {
   String get not_found_reviews => 'Žiadne recenzie';
 
   @override
+  String get artists => 'Artistas';
+
+  @override
   String get settings => 'Ajustes';
 
   @override

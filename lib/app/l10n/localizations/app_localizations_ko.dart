@@ -134,6 +134,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get not_found_reviews => '리뷰 없음';
 
   @override
+  String get artists => 'Artistas';
+
+  @override
   String get settings => 'Ajustes';
 
   @override

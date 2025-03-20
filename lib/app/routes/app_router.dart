@@ -3,8 +3,8 @@ import 'package:film_flu/domain/enums/media_type.dart';
 import 'package:film_flu/presentation/features/home/home_screen.dart';
 import 'package:film_flu/presentation/features/media_details/media_detail_screen.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/movies_list.dart';
+import 'package:film_flu/presentation/features/media_list/widgets/person_list.dart';
 import 'package:film_flu/presentation/features/person_details/person_details_screen.dart';
-import 'package:film_flu/presentation/features/search_filters/search_screen.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/series_list.dart';
 import 'package:film_flu/presentation/features/settings/settings_screen.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
@@ -38,12 +38,12 @@ GoRouter goRouter(Ref ref) {
                 builder: (context, state) => const MoviesListWidget(),
                 routes: [
                   GoRoute(
-                    path: ':mediaId',
+                    path: ':id',
                     builder:
                         (context, state) => MediaItemScreenDetails(
                           languageCode: context.localizations.localeName,
                           mediaType: MediaType.movie.name,
-                          mediaId: state.pathParameters['mediaId'].toString(),
+                          mediaId: state.pathParameters['id'].toString(),
                         ),
                   ),
                 ],
@@ -53,27 +53,28 @@ GoRouter goRouter(Ref ref) {
                 builder: (context, state) => const SeriesListWidget(),
                 routes: [
                   GoRoute(
-                    path: ':mediaTypeId',
+                    path: ':id',
                     builder:
                         (context, state) => MediaItemScreenDetails(
                           languageCode: context.localizations.localeName,
                           mediaType: MediaType.tv.name,
-                          mediaId:
-                              state.pathParameters['mediaTypeId'].toString(),
+                          mediaId: state.pathParameters['id'].toString(),
                         ),
                   ),
                 ],
               ),
               GoRoute(
-                path: 'search',
-                builder: (context, state) => const SearchScreen(),
-              ),
-              GoRoute(
-                path: 'person/:personId',
-                builder:
-                    (context, state) => PersonDetailsPage(
-                      personId: state.pathParameters['personId'].toString(),
-                    ),
+                path: 'person',
+                builder: (context, state) => const PersonListWidget(),
+                routes: [
+                  GoRoute(
+                    path: ':id',
+                    builder:
+                        (context, state) => PersonItemScreenDetails(
+                          personId: state.pathParameters['id'].toString(),
+                        ),
+                  ),
+                ],
               ),
             ],
           ),

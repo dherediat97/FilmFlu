@@ -1,6 +1,6 @@
 import 'package:film_flu/presentation/features/media_list/widgets/movies_list.dart';
+import 'package:film_flu/presentation/features/media_list/widgets/person_list.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/series_list.dart';
-import 'package:film_flu/presentation/features/search_filters/search_screen.dart';
 import 'package:film_flu/presentation/notifiers/home_notifier.dart';
 import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,7 @@ class HomeScreen extends ConsumerWidget {
         child = const SeriesListWidget();
         break;
       default:
-        child = const SearchScreen();
+        child = const PersonListWidget();
         break;
     }
     return ScaffoldPage(child: child);
