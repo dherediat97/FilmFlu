@@ -1,9 +1,10 @@
-name: Film Flu Android App
+name: Film Flu Linux App
 
 on:
   push:
-    branches: [ "main" ]
+   branches: [ "main" ]
   workflow_dispatch:
+
 
 jobs:
   build:
@@ -12,10 +13,6 @@ jobs:
 
     steps:
         - uses: actions/checkout@v4
-        - uses: actions/setup-java@v4
-          with:
-            distribution: 'oracle'
-            java-version: '17'
         - uses: subosito/flutter-action@v2
           with:
             channel: stable
@@ -49,32 +46,4 @@ jobs:
             envkey_FIREBASE_PROJECT_NAME: ${{ secrets.FIREBASE_PROJECT_NAME}}
             file_name: .env
         - run: flutter pub run build_runner build --delete-conflicting-outputs
-        - run: flutter gen-l10n
-        - run: flutter build apk
-        - uses: actions/upload-artifact@v4
-          with:
-            name: release-apk
-            path:  build/app/outputs/apk/release/app-release.apk
-            overwrite: true
-            
-        - name: Create Release
-          id: create_release
-          uses: actions/create-release@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
-          with:
-            tag_name: 2.0.0
-            release_name: Release v2.0.0
-            draft: false
-            prerelease: false
-
-        - name: Upload APK to Release
-          id: upload-release-asset 
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: build/app/outputs/apk/release/app-release.apk
-            asset_name: app-release.apk
-            asset_content_type: application/zip
+        - run: flutter build linux
