@@ -6,7 +6,7 @@ on:
 
 
 jobs:
-  build-and-release-linux:
+  linux:
     runs-on: ubuntu-latest
 
     steps:
@@ -66,7 +66,7 @@ jobs:
        with:
           files: build/linux/x64/release/bundle/FilmFlu-${{github.ref_name}}-linux.zip
 
-  build-and-release-windows:
+  windows:
     runs-on: windows-latest
 
     steps:
@@ -124,8 +124,7 @@ jobs:
        with:
           files: build/windows/runner/Release/FilmFlu-${{github.ref_name}}-windows.zip
 
-  build-and-release-android:
-    if: github.actor == 'dherediat97'
+  android:
     runs-on: ubuntu-latest
 
     steps:
