@@ -61,7 +61,7 @@ jobs:
      - uses: actions/upload-artifact@v4
        with:
           name: Releases
-          path: build/linux/x64/release/FilmFlu-linux.zip
+          path: build/linux/x64/release/bundle/FilmFlu-linux.zip
           overwrite: true
 
   windows:
