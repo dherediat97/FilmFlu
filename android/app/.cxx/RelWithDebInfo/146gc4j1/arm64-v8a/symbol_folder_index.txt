@@ -1,0 +1,1 @@
+C:\Proyectos Programacion\FilmFlu\build\app\intermediates\cxx\RelWithDebInfo\146gc4j1\obj\arm64-v8a
