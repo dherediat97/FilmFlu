@@ -1,4 +1,4 @@
-name: Film Flu Web App
+name: Film Flu Windows App
 
 on:
   push:
