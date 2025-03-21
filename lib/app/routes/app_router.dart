@@ -3,7 +3,7 @@ import 'package:film_flu/domain/enums/media_type.dart';
 import 'package:film_flu/presentation/features/home/home_screen.dart';
 import 'package:film_flu/presentation/features/media_details/media_detail_screen.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/movies_list.dart';
-import 'package:film_flu/presentation/features/media_list/widgets/person_list.dart';
+import 'package:film_flu/presentation/features/person_list/trending_person_list.dart';
 import 'package:film_flu/presentation/features/person_details/person_details_screen.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/series_list.dart';
 import 'package:film_flu/presentation/features/settings/settings_screen.dart';
@@ -65,7 +65,7 @@ GoRouter goRouter(Ref ref) {
               ),
               GoRoute(
                 path: 'person',
-                builder: (context, state) => const PersonListWidget(),
+                builder: (context, state) => const TrendingPersonListWidget(),
                 routes: [
                   GoRoute(
                     path: ':id',

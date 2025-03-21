@@ -37,11 +37,7 @@ class _ScaffoldPageState extends ConsumerState<ScaffoldPage> {
             label: context.localizations.series,
           ),
           BottomNavigationBarItem(
-            icon: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [const Icon(Icons.person), const Icon(Icons.movie)],
-            ),
+            icon: const Icon(Icons.person),
             label: context.localizations.artists,
           ),
         ],

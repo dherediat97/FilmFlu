@@ -147,4 +147,10 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get advanced => 'Avanzado';
+
+  @override
+  String get trending_person_day => 'Personas influyentes hoy';
+
+  @override
+  String get trending_person_week => 'Personas influyentes esta semana';
 }

@@ -3,7 +3,7 @@ import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/domain/enums/time_window.dart';
 import 'package:film_flu/domain/models/person_entity.dart';
-import 'package:film_flu/presentation/features/media_list/widgets/person_carrousel_item.dart';
+import 'package:film_flu/presentation/features/person_list/widgets/person_carrousel_item.dart';
 import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
 import 'package:film_flu/presentation/view_models/person_list_view_model.dart';
 import 'package:film_flu/presentation/widgets/shimmer_loading.dart';
@@ -12,7 +12,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class PersonListWidget extends ConsumerStatefulWidget {
-  const PersonListWidget({super.key});
+  const PersonListWidget({
+    super.key,
+    required this.title,
+    required this.timeWindow,
+  });
+
+  final String title;
+  final TimeWindow timeWindow;
 
   @override
   ConsumerState<PersonListWidget> createState() => _PersonListWidgetState();
@@ -23,7 +30,7 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
   PersonListViewModel get viewModel => ref.read(
     personListViewModelProvider(
       TrendingPersonFilter(
-        timeWindow: TimeWindow.day,
+        timeWindow: widget.timeWindow,
         languageId: context.localizations.localeName,
       ),
     ).notifier,
@@ -31,7 +38,7 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
   TrendingPersonFilterNotifier get trendingPersonFilterController => ref.read(
     trendingPersonFilterProvider(
       TrendingPersonFilter(
-        timeWindow: TimeWindow.day,
+        timeWindow: widget.timeWindow,
         languageId: context.localizations.localeName,
       ),
     ).notifier,
@@ -55,7 +62,7 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
     final trendingPersonFilter = ref.watch(
       trendingPersonFilterProvider(
         TrendingPersonFilter(
-          timeWindow: TimeWindow.day,
+          timeWindow: widget.timeWindow,
           languageId: context.localizations.localeName,
         ),
       ),
@@ -90,39 +97,64 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                AutoSizeText(
-                  'Trending People',
-                  maxFontSize: 30,
-                  minFontSize: 20,
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
+            if (widget.timeWindow == TimeWindow.day) ...[
+              AutoSizeText(
+                widget.title,
+                maxFontSize: 30,
+                minFontSize: 20,
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
-              ],
-            ),
-            const SizedBox(height: 20),
-
-            SizedBox(
-              height: 300,
-              child: CarouselView(
-                itemSnapping: true,
-                controller: _carouselController,
-                padding: const EdgeInsets.all(8.0),
-                itemExtent: 200,
-                onTap: (index) {
-                  context.push(
-                    '${AppRoutePaths.personDetailsRoute}/${items[index].id}',
-                  );
-                },
-                children: List.generate(items.length, (int index) {
-                  return PersonCarrouselItem(personEntity: items[index]);
-                }),
               ),
-            ),
+              const SizedBox(height: 20),
+
+              SizedBox(
+                height: 300,
+                child: CarouselView(
+                  itemSnapping: true,
+                  controller: _carouselController,
+                  padding: const EdgeInsets.all(8.0),
+                  itemExtent: 200,
+                  onTap: (index) {
+                    context.push(
+                      '${AppRoutePaths.personDetailsRoute}/${items[index].id}',
+                    );
+                  },
+                  children: List.generate(items.length, (int index) {
+                    return PersonCarrouselItem(personEntity: items[index]);
+                  }),
+                ),
+              ),
+            ],
+
+            if (widget.timeWindow == TimeWindow.week) ...[
+              AutoSizeText(
+                widget.title,
+                maxFontSize: 30,
+                minFontSize: 20,
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                height: 300,
+                child: CarouselView(
+                  itemSnapping: true,
+                  controller: _carouselController,
+                  padding: const EdgeInsets.all(8.0),
+                  itemExtent: 200,
+                  onTap: (index) {
+                    context.push(
+                      '${AppRoutePaths.personDetailsRoute}/${items[index].id}',
+                    );
+                  },
+                  children: List.generate(items.length, (int index) {
+                    return PersonCarrouselItem(personEntity: items[index]);
+                  }),
+                ),
+              ),
+            ],
           ],
         );
   }
@@ -138,7 +170,7 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
         ref.read(
           trendingPersonFilterProvider(
             TrendingPersonFilter(
-              timeWindow: TimeWindow.day,
+              timeWindow: widget.timeWindow,
               languageId: context.localizations.localeName,
             ),
           ),
