@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "393799159513",
+    "project_id": "film-flu",
+    "storage_bucket": "film-flu.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:393799159513:android:e813db40db9d1fc20d38c8",
+        "android_client_info": {
+          "package_name": "com.dherediat97.filmflu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVgg6W2mNnEewHyiagAJDBSnSGlyaNMS4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
