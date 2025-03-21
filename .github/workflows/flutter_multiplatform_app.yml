@@ -64,7 +64,7 @@ jobs:
        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
        with:
-          files: build/linux/x64/release/bundle/FilmFlu-${{github.ref_name}}-linux.zip
+          files: build/linux/x64/release/bundle/FilmFlu-linux.zip
 
   windows:
     runs-on: windows-latest
@@ -118,7 +118,8 @@ jobs:
        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
        with:
-          files: build/windows/x64/runner/Release/FilmFlu-${{github.ref_name}}-windows.zip
+          files: build/windows/x64/runner/Release/FilmFlu-windows.zip
+     
 
   android:
     runs-on: ubuntu-latest
@@ -166,9 +167,12 @@ jobs:
         - run: flutter build apk
         - uses: actions/upload-artifact@v4
           with:
-            name: release-apk
-            path:  build/app/outputs/apk/release/app-release.apk
-            overwrite: true
+              name: Releases
+              path: |
+                  build/app/outputs/apk/release/app-release.apk
+                  build/windows/x64/runner/Release/FilmFlu-windows.zip
+                  build/linux/x64/release/bundle/FilmFlu-linux.zip
+              overwrite: true
             
         - name: Create Release
           id: create_release
