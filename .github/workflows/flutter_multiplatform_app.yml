@@ -1,4 +1,4 @@
-name: Build and upload app in each platform
+name: FilmFlu Multiplatform App
 on:
   push:
    branches: [ "main" ]
