@@ -399,6 +399,18 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Avanzado'**
   String get advanced;
+
+  /// No description provided for @trending_person_day.
+  ///
+  /// In es, this message translates to:
+  /// **'Personas influyentes hoy'**
+  String get trending_person_day;
+
+  /// No description provided for @trending_person_week.
+  ///
+  /// In es, this message translates to:
+  /// **'Personas influyentes esta semana'**
+  String get trending_person_week;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

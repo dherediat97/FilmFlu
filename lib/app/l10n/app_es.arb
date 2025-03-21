@@ -44,5 +44,7 @@
   "settings": "Ajustes",
   "about_us": "Acerca de",
   "general": "General",
-  "advanced": "Avanzado"
+  "advanced": "Avanzado",
+  "trending_person_day": "Personas influyentes hoy",
+  "trending_person_week": "Personas influyentes esta semana"
 }
