@@ -7,11 +7,8 @@
   <a>
     <img src="assets/images/logo.png" alt="Logo" width="200" height="200">
   </a>
-
-  <h3 align="center">Film Flu</h3>
-
   <p align="center">
-   Film Flu is a project that show the capacity of Flutter and flutter_bloc in different enviroment using BLoc Architecture Pattern and Clean Architecture design.
+    Is a project that show the capacity of Flutter and RiverPod in different enviroments using Provider Pattern and Clean Architecture design.
     <br />
   </p>
 </div>
