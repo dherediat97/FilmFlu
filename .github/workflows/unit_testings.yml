@@ -6,7 +6,6 @@ on:
 
 jobs:
   build:
-    if: github.actor == 'dherediat97'
     runs-on: ubuntu-latest
 
     steps:

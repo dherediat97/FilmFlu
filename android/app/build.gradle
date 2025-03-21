@@ -28,7 +28,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.dherediat97.filmflu"
-    compileSdk 34
+    compileSdk 35
     ndkVersion "27.0.12077973"
     resourcePrefix "filmflu"
 
