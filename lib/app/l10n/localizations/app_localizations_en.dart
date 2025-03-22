@@ -149,8 +149,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get advanced => 'Advanced';
 
   @override
-  String get trending_person_day => 'Personas influyentes hoy';
+  String get trending_person_day => 'Trending persons today';
 
   @override
-  String get trending_person_week => 'Personas influyentes esta semana';
+  String get trending_person_week => 'Trending persons this week';
 }

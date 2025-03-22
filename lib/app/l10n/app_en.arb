@@ -44,5 +44,7 @@
   "artists": "Artists",
   "about_us": "About us",
   "general": "General",
-  "advanced": "Advanced"
+  "advanced": "Advanced",
+  "trending_person_day": "Trending persons today",
+  "trending_person_week": "Trending persons this week"
 }

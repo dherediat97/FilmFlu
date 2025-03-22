@@ -58,6 +58,17 @@ jobs:
           type: 'zip'
           filename: FilmFlu-linux.zip
           directory: build/linux/x64/release/bundle
+     - name: Create Release
+       id: create_release
+       uses: actions/create-release@v2
+       env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       with:
+          tag_name: v2.0.0
+          release_name: Release v2.0.0
+          draft: false
+          prerelease: false
+            
      - uses: actions/upload-artifact@v4
        with:
           name: Releases
@@ -110,6 +121,16 @@ jobs:
           type: 'zip'
           filename: FilmFlu-windows.zip
           directory: build/windows/x64/runner/Release
+     - name: Create Release
+       id: create_release
+       uses: actions/create-release@v2
+       env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       with:
+          tag_name: v2.0.0
+          release_name: Release v2.0.0
+          draft: false
+          prerelease: false
      - uses: actions/upload-artifact@v4
        with:
           name: Releases
@@ -166,8 +187,16 @@ jobs:
               name: Releases
               path: build/app/outputs/apk/release/app-release.apk
               overwrite: true
-            
-
+        - name: Create Release
+          id: create_release
+          uses: actions/create-release@v2
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            tag_name: v2.0.0
+            release_name: Release v2.0.0
+            draft: false
+            prerelease: false
         - name: Upload APK to Release
           id: upload-release-asset 
           uses: actions/upload-release-asset@v1

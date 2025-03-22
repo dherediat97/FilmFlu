@@ -6,13 +6,13 @@ class AppAssets {
 
   static const String imagesFolder = '$assetsFolder/images';
   static const String iconsFolder = '$assetsFolder/icons';
-  static const String animationsFolder = '$assetsFolder/animations';
   static const String flagsFolder = '$assetsFolder/flags';
 
   static const String logoSvgIcon = '$imagesFolder/logo.svg';
   static const String logoIcon = '$imagesFolder/logo.png';
   static const String emptyStateImage = '$imagesFolder/empty_state.jpg';
-  static const String noImageMovie = '$imagesFolder/no_image_movie.svg';
+  static const String noImageMovie = '$imagesFolder/movie_not_found.svg';
+  static const String noImagePerson = '$imagesFolder/profile_not_found.svg';
 
   static const String actorImageIcon = '$iconsFolder/actor_icon.svg';
   static const String actressImageIcon = '$iconsFolder/actress_icon.svg';
@@ -21,9 +21,6 @@ class AppAssets {
   static const String andalucianHeartIcon = '$iconsFolder/andalucian_heart.svg';
   static const String fullHeartIcon = '$iconsFolder/full_heart.svg';
   static const String githubIcon = '$iconsFolder/github_icon.svg';
-
-  static const String loadingAnimation =
-      '$animationsFolder/splash_animation.json';
 
   AppAssets._();
 }
