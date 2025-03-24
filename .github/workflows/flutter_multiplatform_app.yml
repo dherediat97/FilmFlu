@@ -156,25 +156,11 @@ jobs:
         - run: flutter pub run build_runner build --delete-conflicting-outputs
         - run: flutter gen-l10n
         - run: flutter build apk
-        - uses: actions/upload-artifact@v4
-          with:
-              name: Releases
-              path: build/app/outputs/apk/release/app-release.apk
-              overwrite: true
-        - name: Create Release
-          uses: actions/create-release@v2
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            tag_name: v2.0.0
-            release_name: Release v2.0.0
-            draft: false
-            prerelease: false
         - name: Upload APK to Release
           uses: softprops/action-gh-release@v2
           if: startsWith(github.ref, 'refs/tags/')
           with:
             upload_url: ${{ steps.create_release.outputs.upload_url }}
             files: build/app/outputs/apk/release/app-release.apk
-            generate_release_notes: 
+            generate_release_notes: true
             token: ${{ secrets.GITHUB_TOKEN }}
