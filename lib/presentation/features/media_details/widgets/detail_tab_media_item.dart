@@ -129,6 +129,7 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: TabBarView(
+                        physics: const NeverScrollableScrollPhysics(),
                         controller: _tabController,
                         children: [
                           Column(

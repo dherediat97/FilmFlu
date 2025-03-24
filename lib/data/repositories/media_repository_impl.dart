@@ -97,7 +97,7 @@ class MediaRepositoryImpl implements MediaRepository {
   ) async {
     try {
       final response = await DioClient.instance.get(
-        '/$mediaTypeSelected/$mediaTypeId/similar',
+        '/$mediaTypeSelected/$mediaTypeId/recommendations',
         queryParameters: {'language': languageName, 'page': page},
       );
 

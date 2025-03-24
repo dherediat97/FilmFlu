@@ -187,11 +187,11 @@ class _MediaDataList extends ConsumerState<MediaList> {
         );
   }
 
-  _changeSort() {
-    var sortOption = SortOptions.movieDate;
-    mediaFilterController.updateOrder(sortOption);
-    viewModel.loadPage(1, mediaFilterController.arg);
-  }
+  // _changeSort() {
+  //   var sortOption = SortOptions.movieDate;
+  //   mediaFilterController.updateOrder(sortOption);
+  //   viewModel.loadPage(1, mediaFilterController.arg);
+  // }
 
   _loadMore() {
     final offset = _carouselController.offset;
