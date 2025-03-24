@@ -1,44 +1,48 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
-import 'package:film_flu/domain/enums/time_windows.dart';
-import 'package:film_flu/domain/models/person_entity.dart';
-import 'package:film_flu/presentation/features/person_list/widgets/person_carrousel_item.dart';
+import 'package:film_flu/domain/enums/media_types.dart';
+import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
-import 'package:film_flu/presentation/view_models/person_list_view_model.dart';
+import 'package:film_flu/presentation/features/media_list/widgets/media_carrousel_item.dart';
+import 'package:film_flu/presentation/view_models/similar_list_view_model.dart';
 import 'package:film_flu/presentation/widgets/shimmer_loading.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class PersonListWidget extends ConsumerStatefulWidget {
-  const PersonListWidget({
+class SimilarsList extends ConsumerStatefulWidget {
+  const SimilarsList({
     super.key,
-    required this.title,
-    required this.timeWindow,
+    required this.mediaType,
+    required this.mediaTypeId,
   });
 
-  final String title;
-  final TimeWindow timeWindow;
+  final String mediaType;
+  final String mediaTypeId;
 
   @override
-  ConsumerState<PersonListWidget> createState() => _PersonListWidgetState();
+  ConsumerState<SimilarsList> createState() => _MediaDataList();
 }
 
-class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
+class _MediaDataList extends ConsumerState<SimilarsList> {
   final CarouselController _carouselController = CarouselController();
-  PersonListViewModel get viewModel => ref.read(
-    personListViewModelProvider(
-      TrendingPersonFilter(
-        timeWindow: widget.timeWindow,
+
+  SimilarListViewModel get viewModel => ref.read(
+    similarListViewModelProvider(
+      SimilarMediaFilter(
+        mediaTypeSelected: widget.mediaType,
+        mediaTypeId: widget.mediaTypeId,
         languageId: context.localizations.localeName,
       ),
     ).notifier,
   );
-  TrendingPersonFilterNotifier get trendingPersonFilterController => ref.read(
-    trendingPersonFilterProvider(
-      TrendingPersonFilter(
-        timeWindow: widget.timeWindow,
+
+  SimilarMediaFilterNotifier get similarMediaFilterController => ref.read(
+    similarMediaFilterProvider(
+      SimilarMediaFilter(
+        mediaTypeSelected: widget.mediaType,
+        mediaTypeId: widget.mediaTypeId,
         languageId: context.localizations.localeName,
       ),
     ).notifier,
@@ -59,15 +63,17 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final trendingPersonFilter = ref.watch(
-      trendingPersonFilterProvider(
-        TrendingPersonFilter(
-          timeWindow: widget.timeWindow,
+    final similarMediaFilter = ref.watch(
+      similarMediaFilterProvider(
+        SimilarMediaFilter(
+          mediaTypeSelected: widget.mediaType,
           languageId: context.localizations.localeName,
+          mediaTypeId: widget.mediaTypeId,
         ),
       ),
     );
-    final state = ref.watch(personListViewModelProvider(trendingPersonFilter));
+
+    final state = ref.watch(similarListViewModelProvider(similarMediaFilter));
 
     return NotificationListener(
       onNotification: (ScrollNotification scrollInfo) {
@@ -75,7 +81,7 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
             scrollInfo.metrics.axisDirection == AxisDirection.down &&
             scrollInfo.metrics.pixels >= scrollInfo.metrics.maxScrollExtent) {
           if (viewModel.canLoadMore) {
-            viewModel.loadNextPage(trendingPersonFilter);
+            viewModel.loadNextPage(similarMediaFilter);
           }
         }
         return true;
@@ -87,7 +93,7 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
     );
   }
 
-  mediaWidgetList(AsyncValue<List<PersonEntity>> state) {
+  mediaWidgetList(AsyncValue<List<MediaSimpleItemEntity>> state) {
     final items = state.valueOrNull ?? [];
     final initialLoading = state.isLoading && items.isEmpty;
 
@@ -97,64 +103,57 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (widget.timeWindow == TimeWindow.day) ...[
-              AutoSizeText(
-                widget.title,
-                maxFontSize: 30,
-                minFontSize: 20,
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
-              ),
-              const SizedBox(height: 20),
-
+            if (widget.mediaType == MediaType.movie.name)
               SizedBox(
-                height: 300,
+                height: 220,
                 child: CarouselView(
                   itemSnapping: true,
                   controller: _carouselController,
                   padding: const EdgeInsets.all(8.0),
-                  itemExtent: 200,
+                  itemExtent: 180,
                   onTap: (index) {
-                    context.push(
-                      '${AppRoutePaths.personDetailsRoute}/${items[index].id}',
+                    FirebaseAnalytics.instance.logScreenView(
+                      screenName: 'details_media_item',
                     );
-                  },
-                  children: List.generate(items.length, (int index) {
-                    return PersonCarrouselItem(personEntity: items[index]);
-                  }),
-                ),
-              ),
-            ],
 
-            if (widget.timeWindow == TimeWindow.week) ...[
-              AutoSizeText(
-                widget.title,
-                maxFontSize: 30,
-                minFontSize: 20,
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
-              ),
-              const SizedBox(height: 20),
-              SizedBox(
-                height: 300,
-                child: CarouselView(
-                  itemSnapping: true,
-                  controller: _carouselController,
-                  padding: const EdgeInsets.all(8.0),
-                  itemExtent: 200,
-                  onTap: (index) {
+                    FirebaseAnalytics.instance.logEvent(
+                      name: 'view_details',
+                      parameters: {'mediaType': widget.mediaType},
+                    );
+
                     context.push(
-                      '${AppRoutePaths.personDetailsRoute}/${items[index].id}',
+                      '${AppRoutePaths.moviesRoute}/${items[index].id}',
                     );
                   },
                   children: List.generate(items.length, (int index) {
-                    return PersonCarrouselItem(personEntity: items[index]);
+                    return MediaCarrouselItem(mediaItem: items[index]);
                   }),
                 ),
               ),
-            ],
+            if (widget.mediaType == MediaType.tv.name)
+              SizedBox(
+                height: 220,
+                child: CarouselView(
+                  padding: const EdgeInsets.all(8.0),
+                  itemExtent: 180,
+                  controller: _carouselController,
+                  onTap: (index) {
+                    context.push(
+                      '${AppRoutePaths.seriesRoute}/${items[index].id}',
+                    );
+                    FirebaseAnalytics.instance.logScreenView(
+                      screenName: 'details_media_item',
+                    );
+                    FirebaseAnalytics.instance.logEvent(
+                      name: 'view_details',
+                      parameters: {'mediaType': widget.mediaType},
+                    );
+                  },
+                  children: List.generate(items.length, (int index) {
+                    return MediaCarrouselItem(mediaItem: items[index]);
+                  }),
+                ),
+              ),
           ],
         );
   }
@@ -168,9 +167,10 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
     if (hasReachedTheEnd) {
       viewModel.loadNextPage(
         ref.read(
-          trendingPersonFilterProvider(
-            TrendingPersonFilter(
-              timeWindow: widget.timeWindow,
+          similarMediaFilterProvider(
+            SimilarMediaFilter(
+              mediaTypeSelected: widget.mediaType,
+              mediaTypeId: widget.mediaTypeId,
               languageId: context.localizations.localeName,
             ),
           ),

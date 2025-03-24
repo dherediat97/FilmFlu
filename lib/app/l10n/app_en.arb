@@ -46,5 +46,6 @@
   "general": "General",
   "advanced": "Advanced",
   "trending_person_day": "Trending persons today",
-  "trending_person_week": "Trending persons this week"
+  "trending_person_week": "Trending persons this week",
+  "similars": "Similars"
 }

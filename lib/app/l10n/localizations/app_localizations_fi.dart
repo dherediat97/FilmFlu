@@ -153,4 +153,7 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get trending_person_week => 'Vaikutusvoimaisia ​​ihmisiä tällä viikolla';
+
+  @override
+  String get similars => 'Similares';
 }

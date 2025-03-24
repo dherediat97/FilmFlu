@@ -46,5 +46,6 @@
   "general": "General",
   "advanced": "Avanzado",
   "trending_person_day": "Personas influyentes hoy",
-  "trending_person_week": "Personas influyentes esta semana"
+  "trending_person_week": "Personas influyentes esta semana",
+  "similars": "Similares"
 }

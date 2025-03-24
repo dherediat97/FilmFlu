@@ -1,4 +1,4 @@
-import 'package:film_flu/domain/enums/media_type.dart';
+import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'search_result_entity.freezed.dart';

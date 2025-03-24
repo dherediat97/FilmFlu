@@ -1,5 +1,5 @@
 import 'package:film_flu/app/constants/app_constants.dart';
-import 'package:film_flu/domain/enums/media_type.dart';
+import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:film_flu/domain/use_case/provider.dart';

@@ -1,6 +1,6 @@
 import 'package:film_flu/core/entities/pagination.dart';
-import 'package:film_flu/domain/enums/genres_id.dart';
-import 'package:film_flu/domain/enums/media_type.dart';
+import 'package:film_flu/domain/enums/genre_ids.dart';
+import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:film_flu/domain/models/credits_media_entity.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
@@ -27,23 +27,30 @@ abstract class MediaUseCase {
     String languageName,
   );
 
+  Future<(int page, List<MediaSimpleItemEntity> items)> getSimilars(
+    String mediaTypeSelected,
+    String mediaTypeId,
+    String languageName,
+    int page,
+  );
+
   Future<(int page, List<MediaSimpleItemEntity> items)> getMediaDataByGenre(
     MediaType mediaTypeSelected,
-    GenresId genreId,
+    GenreIds genreId,
     String languageId,
     int page,
     String sortBy,
   );
 
   Future<(int page, List<MediaSimpleItemEntity> items)> getMovies(
-    GenresId genreId,
+    GenreIds genreId,
     String languageId,
     int page,
     String sortBy,
   );
 
   Future<(int page, List<MediaSimpleItemEntity> items)> getTVSeries(
-    GenresId genreId,
+    GenreIds genreId,
     String languageId,
     int page,
     String sortBy,
@@ -92,6 +99,21 @@ class MediaUseCaseImpl extends MediaUseCase {
   }
 
   @override
+  Future<(int page, List<MediaSimpleItemEntity> items)> getSimilars(
+    String mediaTypeSelected,
+    String mediaTypeId,
+    String languageName,
+    int page,
+  ) async {
+    return await mediaRepository.getSimilars(
+      mediaTypeSelected,
+      mediaTypeId,
+      languageName,
+      page,
+    );
+  }
+
+  @override
   Future<List<ReviewEntity>> getReviews(
     String mediaTypeSelected,
     String mediaTypeId,
@@ -108,7 +130,7 @@ class MediaUseCaseImpl extends MediaUseCase {
   Future<(int totalItems, List<MediaSimpleItemEntity> items)>
   getMediaDataByGenre(
     MediaType mediaTypeSelected,
-    GenresId genreId,
+    GenreIds genreId,
     String languageId,
     int page,
     String sortBy,
@@ -120,7 +142,7 @@ class MediaUseCaseImpl extends MediaUseCase {
 
   @override
   Future<(int totalItems, List<MediaSimpleItemEntity> items)> getMovies(
-    GenresId genreId,
+    GenreIds genreId,
     String languageId,
     int page,
     String sortBy,
@@ -136,7 +158,7 @@ class MediaUseCaseImpl extends MediaUseCase {
 
   @override
   Future<(int page, List<MediaSimpleItemEntity> items)> getTVSeries(
-    GenresId genreId,
+    GenreIds genreId,
     String languageId,
     int page,
     String sortBy,

@@ -153,4 +153,7 @@ class AppLocalizationsIs extends AppLocalizations {
 
   @override
   String get trending_person_week => 'Áhrifamikið fólk þessa vikuna';
+
+  @override
+  String get similars => 'Similares';
 }

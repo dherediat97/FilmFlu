@@ -1,4 +1,4 @@
-import 'package:film_flu/domain/enums/time_window.dart';
+import 'package:film_flu/domain/enums/time_windows.dart';
 import 'package:film_flu/domain/models/person_entity.dart';
 import 'package:film_flu/domain/repository/person_repository.dart';
 

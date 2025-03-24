@@ -1,5 +1,5 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/domain/enums/time_window.dart';
+import 'package:film_flu/domain/enums/time_windows.dart';
 import 'package:film_flu/presentation/features/person_list/widgets/person_list.dart';
 import 'package:flutter/material.dart';
 

@@ -1,18 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/core/utils/util_date.dart';
-import 'package:film_flu/domain/enums/genres_id.dart';
-import 'package:film_flu/domain/enums/media_type.dart';
+import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
+import 'package:film_flu/presentation/features/media_details/widgets/genres_list_widget.dart';
 import 'package:film_flu/presentation/widgets/default_image_loader.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class BackgroundMediaItem extends StatelessWidget {
+class BackgroundMediaItem extends StatefulWidget {
   const BackgroundMediaItem({
     super.key,
     required this.mediaItem,
@@ -25,6 +24,11 @@ class BackgroundMediaItem extends StatelessWidget {
   final bool isHomeScreen;
 
   @override
+  State<BackgroundMediaItem> createState() => _BackgroundMediaItemState();
+}
+
+class _BackgroundMediaItemState extends State<BackgroundMediaItem> {
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.8,
@@ -32,7 +36,7 @@ class BackgroundMediaItem extends StatelessWidget {
         children: [
           BackgroundImageMediaItem(
             imageUrl:
-                '${AppUrls.movieLandscapeBaseUrl}${mediaItem.backdropPath}',
+                '${AppUrls.movieLandscapeBaseUrl}${widget.mediaItem.backdropPath}',
           ),
           Padding(
             padding: const EdgeInsets.all(32),
@@ -42,7 +46,7 @@ class BackgroundMediaItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 AutoSizeText(
-                  title,
+                  widget.title,
                   style: Theme.of(context).textTheme.titleLarge,
                   minFontSize: 10,
                   stepGranularity: 10,
@@ -50,7 +54,7 @@ class BackgroundMediaItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  '${(mediaItem.voteAverage!.round() * 10)}${context.localizations.percentange_vote}',
+                  '${(widget.mediaItem.voteAverage!.round() * 10)}${context.localizations.percentange_vote}',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color: Colors.greenAccent,
                     fontSize: 26,
@@ -58,61 +62,20 @@ class BackgroundMediaItem extends StatelessWidget {
                   ),
                 ),
 
-                if (mediaItem.genres.isNotEmpty) ...[
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children:
-                        List<Widget>.generate(mediaItem.genres.length, (
-                          int index,
-                        ) {
-                          final firstGenre = index == 0;
-                          final genre = mediaItem.genres[index];
-                          final icon =
-                              GenresId.values
-                                  .firstWhere(
-                                    (element) => element.id == genre.id,
-                                  )
-                                  .icon;
-                          return Chip(
-                            backgroundColor:
-                                firstGenre
-                                    ? Theme.of(context).colorScheme.primary
-                                    : Theme.of(context).colorScheme.surface,
-                            label: Text(
-                              genre.name,
-                              style: TextStyle(
-                                color:
-                                    firstGenre
-                                        ? AppColors.backgroundColorLight
-                                        : Theme.of(
-                                          context,
-                                        ).colorScheme.inverseSurface,
-                                fontSize: 16,
-                              ),
-                            ),
-                            avatar: Icon(
-                              icon,
-                              size: 24,
-                              color:
-                                  firstGenre
-                                      ? AppColors.backgroundColorLight
-                                      : Theme.of(context).colorScheme.primary,
-                            ),
-                          );
-                        }).toList(),
-                  ),
+                if (widget.mediaItem.genres.isNotEmpty) ...[
+                  GenresListWidget(genres: widget.mediaItem.genres),
                 ],
-                if (mediaItem.releaseDate.isNotEmpty &&
-                    mediaItem.firstAirDate.isNotEmpty) ...[
+
+                if (widget.mediaItem.releaseDate.isNotEmpty &&
+                    widget.mediaItem.firstAirDate.isNotEmpty) ...[
                   const SizedBox(width: 20),
                   Text(
-                    getYear(mediaItem) ?? '',
+                    getYear(widget.mediaItem) ?? '',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ],
-                if (isHomeScreen) ...[
+                if (widget.isHomeScreen) ...[
                   const Spacer(),
                   Row(
                     spacing: 8,
@@ -127,7 +90,7 @@ class BackgroundMediaItem extends StatelessWidget {
                           IconButton(
                             onPressed: () {
                               MediaType mediaTypeSelected =
-                                  mediaItem.title != ''
+                                  widget.mediaItem.title != ''
                                       ? MediaType.movie
                                       : MediaType.tv;
 
@@ -144,8 +107,8 @@ class BackgroundMediaItem extends StatelessWidget {
 
                               context.push(
                                 mediaTypeSelected == MediaType.movie
-                                    ? '${AppRoutePaths.moviesRoute}/${mediaItem.id}'
-                                    : '${AppRoutePaths.seriesRoute}/${mediaItem.id}',
+                                    ? '${AppRoutePaths.moviesRoute}/${widget.mediaItem.id}'
+                                    : '${AppRoutePaths.seriesRoute}/${widget.mediaItem.id}',
                               );
                             },
                             icon: const Icon(

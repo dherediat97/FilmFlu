@@ -1,8 +1,8 @@
-import 'package:film_flu/domain/enums/media_type.dart';
+import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:flutter/widgets.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-enum GenresId {
+enum GenreIds {
   //MOVIES GENRES
   actionMovies(
     id: 28,
@@ -216,7 +216,7 @@ enum GenresId {
     icon: Symbols.question_mark,
   );
 
-  const GenresId({
+  const GenreIds({
     required this.name,
     required this.id,
     required this.mediaType,
