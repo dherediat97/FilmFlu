@@ -153,4 +153,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get trending_person_week => 'Trending persons this week';
+
+  @override
+  String get similars => 'Similars';
 }

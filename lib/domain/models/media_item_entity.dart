@@ -12,6 +12,7 @@ class MediaItemEntity with _$MediaItemEntity {
   const factory MediaItemEntity({
     required String backdropPath,
     @Default([]) List<GenreEntity> genres,
+    @Default([]) List<int> genreIds,
     List<ProductionCompanyEntity>? productionCompanies,
     required int id,
     String? originalLanguage,

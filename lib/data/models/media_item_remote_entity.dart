@@ -48,6 +48,7 @@ extension MediaItemToRemoteEntityExtension on MediaItemRemoteEntity {
     voteAverage: voteAverage ?? 0,
     voteCount: voteCount ?? 0,
     backdropPath: backdropPath ?? '',
+    genreIds: genreIds ?? [],
     genres: genres?.map((e) => e.toGenreEntity()).toList() ?? [],
     productionCompanies:
         productionCompanies

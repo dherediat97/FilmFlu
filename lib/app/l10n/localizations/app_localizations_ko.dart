@@ -153,4 +153,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get trending_person_week => '이번 주 영향력 있는 사람들';
+
+  @override
+  String get similars => 'Similares';
 }

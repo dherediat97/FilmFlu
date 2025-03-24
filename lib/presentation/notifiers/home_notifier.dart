@@ -1,4 +1,4 @@
-import 'package:film_flu/domain/enums/media_type.dart';
+import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeProvider extends StateNotifier<MediaType> {

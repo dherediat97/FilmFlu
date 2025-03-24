@@ -153,4 +153,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get trending_person_week => '本周有影响力的人物';
+
+  @override
+  String get similars => 'Similares';
 }

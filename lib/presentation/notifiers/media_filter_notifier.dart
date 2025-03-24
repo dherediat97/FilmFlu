@@ -1,8 +1,8 @@
-import 'package:film_flu/domain/enums/genres_id.dart';
-import 'package:film_flu/domain/enums/media_type.dart';
+import 'package:film_flu/domain/enums/genre_ids.dart';
+import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:film_flu/domain/enums/order_options.dart';
 import 'package:film_flu/domain/enums/sort_options.dart';
-import 'package:film_flu/domain/enums/time_window.dart';
+import 'package:film_flu/domain/enums/time_windows.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -12,6 +12,11 @@ final mediaFilterProvider = NotifierProvider.family
     .autoDispose<MediaFilterNotifier, MediaFilter, MediaFilter>(
       MediaFilterNotifier.new,
     );
+final similarMediaFilterProvider = NotifierProvider.family.autoDispose<
+  SimilarMediaFilterNotifier,
+  SimilarMediaFilter,
+  SimilarMediaFilter
+>(SimilarMediaFilterNotifier.new);
 
 final mediaDayFilterProvider = NotifierProvider.family
     .autoDispose<MediaDayFilterNotifier, MediaDayFilter, MediaDayFilter>(
@@ -28,11 +33,30 @@ final trendingPersonFilterProvider = NotifierProvider.family.autoDispose<
 class MediaFilter with _$MediaFilter {
   const factory MediaFilter({
     required MediaType mediaTypeSelected,
-    required GenresId genredId,
+    required GenreIds genredId,
     required String languageId,
     @Default(SortOptions.popularity) SortOptions sortBy,
     @Default(OrderOptions.desc) OrderOptions orderBy,
   }) = _MediaFilter;
+}
+
+@freezed
+class SimilarMediaFilter with _$SimilarMediaFilter {
+  const factory SimilarMediaFilter({
+    required String mediaTypeSelected,
+    required String languageId,
+    required String mediaTypeId,
+  }) = _SimilarMediaFilter;
+}
+
+class SimilarMediaFilterNotifier
+    extends AutoDisposeFamilyNotifier<SimilarMediaFilter, SimilarMediaFilter> {
+  @override
+  SimilarMediaFilter build(SimilarMediaFilter filter) => filter;
+
+  void update(SimilarMediaFilter filter) {
+    state = filter;
+  }
 }
 
 class MediaFilterNotifier

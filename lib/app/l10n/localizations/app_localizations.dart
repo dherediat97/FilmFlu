@@ -411,6 +411,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Personas influyentes esta semana'**
   String get trending_person_week;
+
+  /// No description provided for @similars.
+  ///
+  /// In es, this message translates to:
+  /// **'Similares'**
+  String get similars;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

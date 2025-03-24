@@ -153,4 +153,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get trending_person_week => 'Tento týždeň vplyvní ľudia';
+
+  @override
+  String get similars => 'Similares';
 }

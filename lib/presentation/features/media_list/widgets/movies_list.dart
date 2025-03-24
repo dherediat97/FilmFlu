@@ -1,6 +1,6 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/domain/enums/genres_id.dart';
-import 'package:film_flu/domain/enums/media_type.dart';
+import 'package:film_flu/domain/enums/genre_ids.dart';
+import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:film_flu/presentation/features/home/widgets/media_day_widget.dart';
 import 'package:film_flu/presentation/features/media_list/media_list.dart';
 import 'package:flutter/material.dart';
@@ -17,19 +17,19 @@ class MoviesListWidget extends StatelessWidget {
           MediaDayWidget(mediaTypeSelected: MediaType.movie),
           MediaList(
             mediaType: MediaType.movie,
-            genreId: GenresId.actionMovies,
+            genreId: GenreIds.actionMovies,
             key: const Key('28'),
             title: context.localizations.action_type,
           ),
           MediaList(
             mediaType: MediaType.movie,
-            genreId: GenresId.adventure,
+            genreId: GenreIds.adventure,
             key: const Key('12'),
             title: context.localizations.adventure_type,
           ),
           MediaList(
             mediaType: MediaType.movie,
-            genreId: GenresId.comedyMovies,
+            genreId: GenreIds.comedyMovies,
             key: const Key('35'),
             title: context.localizations.comedy_type,
           ),

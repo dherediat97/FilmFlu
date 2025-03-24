@@ -153,4 +153,7 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get trending_person_week => 'Inflytelserika personer den här veckan';
+
+  @override
+  String get similars => 'Similares';
 }
