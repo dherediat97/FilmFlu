@@ -85,7 +85,7 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
         children: [
           item.when(
             data:
-                (data) => BackgroundImageMediaItem(
+                (data) => BackgroundMediaItem(
                   title: data.title ?? '',
                   isHomeScreen: false,
                   mediaItem: data.mediaItem!,

@@ -12,8 +12,8 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class BackgroundImageMediaItem extends StatelessWidget {
-  const BackgroundImageMediaItem({
+class BackgroundMediaItem extends StatelessWidget {
+  const BackgroundMediaItem({
     super.key,
     required this.mediaItem,
     required this.isHomeScreen,
@@ -30,7 +30,7 @@ class BackgroundImageMediaItem extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.8,
       child: Stack(
         children: [
-          DefaultImageWidget(
+          BackgroundImageMediaItem(
             imageUrl:
                 '${AppUrls.movieLandscapeBaseUrl}${mediaItem.backdropPath}',
           ),
