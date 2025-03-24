@@ -42,7 +42,7 @@ class _MediaDayWidgetState extends ConsumerState<MediaDayWidget> {
         ? Shimmer(child: buildMediaDayWidget(context))
         : loadingMore
         ? Shimmer(child: buildMediaDayWidget(context))
-        : BackgroundImageMediaItem(
+        : BackgroundMediaItem(
           key: widget.key,
           isHomeScreen: true,
           mediaItem: item!.mediaItem!,

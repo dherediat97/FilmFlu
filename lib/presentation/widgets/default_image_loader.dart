@@ -6,16 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class DefaultImageWidget extends ConsumerStatefulWidget {
-  const DefaultImageWidget({super.key, required this.imageUrl});
+class BackgroundImageMediaItem extends ConsumerStatefulWidget {
+  const BackgroundImageMediaItem({super.key, required this.imageUrl});
 
   final String? imageUrl;
 
   @override
-  ConsumerState<DefaultImageWidget> createState() => _DefaultImageWidgetState();
+  ConsumerState<BackgroundImageMediaItem> createState() =>
+      _BackgroundImageMediaItemState();
 }
 
-class _DefaultImageWidgetState extends ConsumerState<DefaultImageWidget> {
+class _BackgroundImageMediaItemState
+    extends ConsumerState<BackgroundImageMediaItem> {
   @override
   Widget build(BuildContext context) {
     final appState = ref.watch(appProvider);
@@ -31,9 +33,9 @@ class _DefaultImageWidgetState extends ConsumerState<DefaultImageWidget> {
                     AppColors.backgroundColorLight.withValues(alpha: 0.2),
                   ]
                   : [
-                    AppColors.backgroundColorDark.withValues(alpha: 0.2),
+                    AppColors.backgroundColorDark.withValues(alpha: 0.4),
                     AppColors.backgroundColorDark.withValues(alpha: 0.8),
-                    AppColors.backgroundColorDark.withValues(alpha: 0.2),
+                    AppColors.backgroundColorDark.withValues(alpha: 0.4),
                   ],
           stops: [0.1, 0.6, 1.0],
           begin: Alignment.centerLeft,
