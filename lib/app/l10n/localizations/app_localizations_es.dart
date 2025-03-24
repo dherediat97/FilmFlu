@@ -125,7 +125,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get search => 'Buscar';
 
   @override
-  String get percentange_vote => '% de los usuarios les gusta';
+  String get percentange_vote => '% Puntuación de los usuarios';
 
   @override
   String get buy_tickets => 'Reserva entradas';

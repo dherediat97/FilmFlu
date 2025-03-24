@@ -134,23 +134,23 @@ class AppLocalizationsFi extends AppLocalizations {
   String get not_found_reviews => 'Ei arvosteluja';
 
   @override
-  String get artists => 'Artistas';
+  String get artists => 'Taiteilijat';
 
   @override
-  String get settings => 'Ajustes';
+  String get settings => 'Asetukset';
 
   @override
-  String get about_us => 'Acerca de';
+  String get about_us => 'Tietoja';
 
   @override
-  String get general => 'General';
+  String get general => 'Yleinen';
 
   @override
-  String get advanced => 'Avanzado';
+  String get advanced => 'Advanced';
 
   @override
-  String get trending_person_day => 'Personas influyentes hoy';
+  String get trending_person_day => 'Vaikutusvaltaiset ihmiset tänään';
 
   @override
-  String get trending_person_week => 'Personas influyentes esta semana';
+  String get trending_person_week => 'Vaikutusvoimaisia ​​ihmisiä tällä viikolla';
 }

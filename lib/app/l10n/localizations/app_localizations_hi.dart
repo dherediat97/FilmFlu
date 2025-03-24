@@ -134,23 +134,23 @@ class AppLocalizationsHi extends AppLocalizations {
   String get not_found_reviews => 'कोई समीक्षा नहीं';
 
   @override
-  String get artists => 'Artistas';
+  String get artists => 'कलाकार';
 
   @override
-  String get settings => 'Ajustes';
+  String get settings => 'सेटिंग्स';
 
   @override
-  String get about_us => 'Acerca de';
+  String get about_us => 'हमारे बारे में';
 
   @override
-  String get general => 'General';
+  String get general => 'सामान्य';
 
   @override
-  String get advanced => 'Avanzado';
+  String get advanced => 'उन्नत';
 
   @override
-  String get trending_person_day => 'Personas influyentes hoy';
+  String get trending_person_day => 'आज के प्रभावशाली लोग';
 
   @override
-  String get trending_person_week => 'Personas influyentes esta semana';
+  String get trending_person_week => 'इस सप्ताह के प्रभावशाली लोग';
 }

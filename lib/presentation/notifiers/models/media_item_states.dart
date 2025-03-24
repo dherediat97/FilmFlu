@@ -1,7 +1,6 @@
 import 'package:film_flu/domain/models/actor_entity.dart';
 import 'package:film_flu/domain/models/film_worker_entity.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
-import 'package:film_flu/domain/models/media_response_entity.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -17,7 +16,6 @@ class MediaItemDetailState with _$MediaItemDetailState {
     @Default([]) List<ReviewEntity> reviews,
     @Default([]) List<ActorEntity> cast,
     @Default([]) List<FilmWorkerEntity> crew,
-    MediaResponseEntity? mediaList,
     @Default(false) bool isTrailerOpened,
   }) = _MediaItemDetailState;
 }

@@ -8,27 +8,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SettingsAppBarActions extends ConsumerStatefulWidget {
-  const SettingsAppBarActions({super.key, required this.isMainMenu});
-
-  final bool isMainMenu;
+class SettingsAppBarActions extends ConsumerWidget {
+  const SettingsAppBarActions({super.key});
 
   @override
-  ConsumerState<SettingsAppBarActions> createState() =>
-      _SettingsAppBarActionsState();
-}
-
-class _SettingsAppBarActionsState extends ConsumerState<SettingsAppBarActions> {
-  @override
-  Widget build(BuildContext context) {
-    final languageProvider = ref.watch(appProvider.notifier);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final appState = ref.watch(appProvider);
+    final appNotifier = ref.watch(appProvider.notifier);
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Row(
         children: [
           IconButton(
             icon: Icon(
-              widget.isMainMenu ? Icons.light_mode : Icons.dark_mode,
+              appState.isDarkMode ? Icons.light_mode : Icons.dark_mode,
               color: Theme.of(context).colorScheme.onSurface,
             ),
             onPressed: () => ref.read(appProvider.notifier).toggle(),
@@ -49,7 +42,7 @@ class _SettingsAppBarActionsState extends ConsumerState<SettingsAppBarActions> {
           ),
           DropdownButton<Locale>(
             dropdownColor: Theme.of(context).colorScheme.surface,
-            onChanged: (language) => languageProvider.changeLanguage(language!),
+            onChanged: (language) => appNotifier.changeLanguage(language!),
             selectedItemBuilder:
                 (context) =>
                     AppLocalizations.supportedLocales

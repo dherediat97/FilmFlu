@@ -39,5 +39,12 @@
   "search": "खोज",
   "percentange_vote":"% पसंद",
   "buy_tickets":"टिकट बनाओ",
-  "not_found_reviews": "कोई समीक्षा नहीं"
+  "not_found_reviews": "कोई समीक्षा नहीं",
+  "artists": "कलाकार",
+  "settings": "सेटिंग्स",
+  "about_us": "हमारे बारे में",
+  "general": "सामान्य",
+  "advanced": "उन्नत",
+  "trending_person_day": "आज के प्रभावशाली लोग",
+  "trending_person_week": "इस सप्ताह के प्रभावशाली लोग"
 }

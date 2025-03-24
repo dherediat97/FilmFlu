@@ -134,23 +134,23 @@ class AppLocalizationsIs extends AppLocalizations {
   String get not_found_reviews => 'Engar umsagnir';
 
   @override
-  String get artists => 'Artistas';
+  String get artists => 'Listamenn';
 
   @override
-  String get settings => 'Ajustes';
+  String get settings => 'Stillingar';
 
   @override
-  String get about_us => 'Acerca de';
+  String get about_us => 'Um';
 
   @override
-  String get general => 'General';
+  String get general => 'Almennt';
 
   @override
-  String get advanced => 'Avanzado';
+  String get advanced => 'Ítarlega';
 
   @override
-  String get trending_person_day => 'Personas influyentes hoy';
+  String get trending_person_day => 'Áhrifamikið fólk í dag';
 
   @override
-  String get trending_person_week => 'Personas influyentes esta semana';
+  String get trending_person_week => 'Áhrifamikið fólk þessa vikuna';
 }

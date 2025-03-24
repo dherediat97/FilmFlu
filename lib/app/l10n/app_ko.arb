@@ -39,5 +39,12 @@
  "search":"검색",
  "percentange_vote": "%의 사용자가 좋아합니다",
  "buy_tickets":"티켓 예약",
-  "not_found_reviews": "리뷰 없음"
+ "not_found_reviews": "리뷰 없음",
+ "artists": "아티스트",
+ "settings": "설정",
+ "about_us": "정보",
+ "general": "일반",
+ "advanced": "고급",
+ "trending_person_day": "오늘날 영향력 있는 사람들",
+ "trending_person_week": "이번 주 영향력 있는 사람들"
 }

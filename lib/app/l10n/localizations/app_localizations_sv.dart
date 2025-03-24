@@ -134,23 +134,23 @@ class AppLocalizationsSv extends AppLocalizations {
   String get not_found_reviews => 'Inga recensioner';
 
   @override
-  String get artists => 'Artistas';
+  String get artists => 'Artister';
 
   @override
-  String get settings => 'Ajustes';
+  String get settings => 'Inställningar';
 
   @override
-  String get about_us => 'Acerca de';
+  String get about_us => 'Om';
 
   @override
-  String get general => 'General';
+  String get general => 'Allmänt';
 
   @override
-  String get advanced => 'Avanzado';
+  String get advanced => 'Avancerat';
 
   @override
-  String get trending_person_day => 'Personas influyentes hoy';
+  String get trending_person_day => 'Inflytelserika människor idag';
 
   @override
-  String get trending_person_week => 'Personas influyentes esta semana';
+  String get trending_person_week => 'Inflytelserika personer den här veckan';
 }

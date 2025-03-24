@@ -3,7 +3,6 @@ import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/background_image_media_item.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/container_tab_media_item.dart';
-import 'package:film_flu/presentation/features/media_details/widgets/info_media.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/media_data_cast.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/media_data_production.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/reviews_widget_item.dart';
@@ -86,10 +85,10 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
         children: [
           item.when(
             data:
-                (mediaItem) => BackgroundImageMediaItem(
-                  title: mediaItem.title ?? '',
+                (data) => BackgroundImageMediaItem(
+                  title: data.title ?? '',
                   isHomeScreen: false,
-                  mediaItem: mediaItem.mediaItem!,
+                  mediaItem: data.mediaItem!,
                 ),
             error: (error, stackTrace) => Text(error.toString()),
             loading: () => Shimmer(child: buildMediaDayWidget(context)),
@@ -111,22 +110,29 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                     ],
                   ),
                   SizedBox(
-                    height: 500,
+                    height: MediaQuery.of(context).size.height / 2,
                     child: TabBarView(
                       controller: _tabController,
                       children: [
-                        item.when(
-                          data:
-                              (mediaItem) => ContainerTabMediaItem(
-                                child: InfoMedia(
-                                  mediaItem: mediaItem.mediaItem,
-                                  media: mediaItem.mediaList,
-                                ),
-                              ),
-                          error: (error, stackTrace) => Text(error.toString()),
-                          loading:
-                              () =>
-                                  Shimmer(child: buildMediaDayWidget(context)),
+                        Column(
+                          spacing: 24,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            item.when(
+                              data:
+                                  (data) =>
+                                      data.mediaItem?.overview != null
+                                          ? Text(
+                                            data.mediaItem!.overview!,
+                                            textAlign: TextAlign.start,
+                                          )
+                                          : Container(),
+                              error:
+                                  (error, stackTrace) => Text(error.toString()),
+                              loading: () => Shimmer(child: buildText(true)),
+                            ),
+                          ],
                         ),
                         reviews.when(
                           data: (reviews) {

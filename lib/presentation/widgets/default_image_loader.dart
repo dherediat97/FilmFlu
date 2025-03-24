@@ -1,26 +1,40 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:film_flu/app/constants/app_assets.dart';
+import 'package:film_flu/app/constants/app_colors.dart';
+import 'package:film_flu/presentation/notifiers/app_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class DefaultImageWidget extends StatelessWidget {
-  const DefaultImageWidget({
-    super.key,
-    required this.imageUrl,
-  });
+class DefaultImageWidget extends ConsumerStatefulWidget {
+  const DefaultImageWidget({super.key, required this.imageUrl});
 
   final String? imageUrl;
 
   @override
+  ConsumerState<DefaultImageWidget> createState() => _DefaultImageWidgetState();
+}
+
+class _DefaultImageWidgetState extends ConsumerState<DefaultImageWidget> {
+  @override
   Widget build(BuildContext context) {
+    final appState = ref.watch(appProvider);
+
     return ShaderMask(
       shaderCallback: (Rect bounds) {
         return LinearGradient(
-          colors: <Color>[
-            Colors.transparent,
-            Colors.black.withOpacity(0.8),
-            Colors.transparent,
-          ],
+          colors:
+              !appState.isDarkMode
+                  ? [
+                    AppColors.backgroundColorLight.withOpacity(0.2),
+                    AppColors.backgroundColorLight.withOpacity(0.8),
+                    AppColors.backgroundColorLight.withOpacity(0.2),
+                  ]
+                  : [
+                    AppColors.backgroundColorDark.withOpacity(0.2),
+                    AppColors.backgroundColorDark.withOpacity(0.8),
+                    AppColors.backgroundColorDark.withOpacity(0.2),
+                  ],
           stops: [0.1, 0.6, 1.0],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
@@ -30,21 +44,22 @@ class DefaultImageWidget extends StatelessWidget {
       child: Align(
         alignment: Alignment.topRight,
         child: CachedNetworkImage(
-          imageUrl: imageUrl!,
-          cacheKey: imageUrl,
+          imageUrl: widget.imageUrl!,
+          cacheKey: widget.imageUrl,
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           color: Colors.black,
-          errorWidget: (context, url, error) =>
-              SvgPicture.asset(AppAssets.noImageMovie),
-          imageBuilder: (context, imageProvider) => Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: imageProvider,
-                fit: BoxFit.cover,
+          errorWidget:
+              (context, url, error) => SvgPicture.asset(AppAssets.noImageMovie),
+          imageBuilder:
+              (context, imageProvider) => Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
-            ),
-          ),
         ),
       ),
     );

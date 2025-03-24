@@ -37,7 +37,7 @@ dependencies:
   package_info_plus: ^8.3.0
   flutter_svg: ^2.0.17
   auto_size_text: ^3.0.0
-  material_symbols_icons: ^4.2805.1
+  material_symbols_icons: ^4.2811.0
   shared_preferences: ^2.5.2
   youtube_player_iframe: ^5.2.1
   url_launcher: ^6.1.11
@@ -69,6 +69,7 @@ dev_dependencies:
   custom_lint: ^0.7.3
   riverpod_lint: ^2.6.4
   freezed: ^2.5.8
+  google_sign_in: ^6.3.0
 
 flutter:
   generate: true
@@ -91,7 +92,7 @@ flutter:
         - asset: fonts/ShadowsIntoLight-Regular.ttf
 
 flutter_launcher_icons:
-  android: "launcher_icon"
+  android: "film_flu_launcher_icon"
   ios: false
   image_path: "assets/images/logo.png"
   min_sdk_android: 21

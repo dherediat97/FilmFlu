@@ -39,5 +39,12 @@
   "search": "Zoeken",
   "percentange_vote":"% vind-ik-leuks",
   "buy_tickets":"Boek tickets",
-  "not_found_reviews": "Geen beoordelingen"
+  "not_found_reviews": "Geen beoordelingen",
+  "artists": "Kunstenaars",
+  "settings": "Instellingen",
+  "about_us": "Over",
+  "general": "Algemeen",
+  "advanced": "Geavanceerd",
+  "trending_person_day": "Invloedrijke mensen vandaag",
+  "trending_person_week": "Invloedrijke mensen deze week"
 }

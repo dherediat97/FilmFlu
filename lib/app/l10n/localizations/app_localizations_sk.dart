@@ -134,23 +134,23 @@ class AppLocalizationsSk extends AppLocalizations {
   String get not_found_reviews => 'Žiadne recenzie';
 
   @override
-  String get artists => 'Artistas';
+  String get artists => 'Umelci';
 
   @override
-  String get settings => 'Ajustes';
+  String get settings => 'Nastavenia';
 
   @override
-  String get about_us => 'Acerca de';
+  String get about_us => 'O';
 
   @override
   String get general => 'General';
 
   @override
-  String get advanced => 'Avanzado';
+  String get advanced => 'Advanced';
 
   @override
-  String get trending_person_day => 'Personas influyentes hoy';
+  String get trending_person_day => 'Dnes vplyvní ľudia';
 
   @override
-  String get trending_person_week => 'Personas influyentes esta semana';
+  String get trending_person_week => 'Tento týždeň vplyvní ľudia';
 }

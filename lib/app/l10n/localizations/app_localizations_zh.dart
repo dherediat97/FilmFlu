@@ -134,23 +134,23 @@ class AppLocalizationsZh extends AppLocalizations {
   String get not_found_reviews => '沒有評論';
 
   @override
-  String get artists => 'Artistas';
+  String get artists => '艺术家';
 
   @override
-  String get settings => 'Ajustes';
+  String get settings => '设置';
 
   @override
-  String get about_us => 'Acerca de';
+  String get about_us => '关于';
 
   @override
-  String get general => 'General';
+  String get general => '一般';
 
   @override
-  String get advanced => 'Avanzado';
+  String get advanced => '高级';
 
   @override
-  String get trending_person_day => 'Personas influyentes hoy';
+  String get trending_person_day => '当今有影响力的人物';
 
   @override
-  String get trending_person_week => 'Personas influyentes esta semana';
+  String get trending_person_week => '本周有影响力的人物';
 }
