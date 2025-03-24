@@ -355,7 +355,7 @@ abstract class AppLocalizations {
   /// No description provided for @percentange_vote.
   ///
   /// In es, this message translates to:
-  /// **'% de los usuarios les gusta'**
+  /// **'% Puntuación de los usuarios'**
   String get percentange_vote;
 
   /// No description provided for @buy_tickets.

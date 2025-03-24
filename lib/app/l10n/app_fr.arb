@@ -39,5 +39,12 @@
   "search": "Rechercher",
   "percentange_vote": "% goûts",
   "buy_tickets":"Réserver des billets",
-  "not_found_reviews": "Aucun avis"
+  "not_found_reviews": "Aucun avis",
+  "artists": "Artistes",
+  "settings": "Ajuste",
+  "about_us": "Accès à",
+  "general": "Général",
+  "advanced": "Avancé",
+  "trending_person_day": "Personnes influencées aujourd'hui",
+  "trending_person_week": "Personnes influençant cette semaine"
 }

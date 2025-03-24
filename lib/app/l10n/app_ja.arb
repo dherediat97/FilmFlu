@@ -39,5 +39,12 @@
   "search":"検索",
   "percentange_vote":"% いいね！",
   "buy_tickets":"チケットを予約する",
-  "not_found_reviews": "レビューはありません"
+  "not_found_reviews": "レビューはありません",
+  "artists": "アーティスト",
+  "settings": "設定",
+  "about_us": "について",
+  "general": "一般",
+  "advanced": "高度",
+  "trending_person_day": "今日の影響力のある人々",
+  "trending_person_week": "今週の影響力のある人々"
 }

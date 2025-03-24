@@ -12,7 +12,6 @@ import 'package:film_flu/domain/enums/sort_options.dart';
 import 'package:film_flu/domain/models/credits_media_entity.dart';
 import 'package:film_flu/domain/models/data_media_list.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
-import 'package:film_flu/domain/models/media_response_entity.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:film_flu/domain/models/search_result_entity.dart';
@@ -84,24 +83,6 @@ class MediaRepositoryImpl implements MediaRepository {
               .toList();
 
       return reviewList.map((e) => e.toReviewEntity()).toList();
-    } on DioException catch (e) {
-      throw e.errorMessage;
-    }
-  }
-
-  @override
-  Future<MediaResponseEntity> getMedia(
-    String mediaTypeSelected,
-    String mediaTypeId,
-    String languageName,
-  ) async {
-    try {
-      final response = await DioClient.instance.get(
-        '/$mediaTypeSelected/$mediaTypeId',
-      );
-      final mediaData = MediaResponseEntity.fromJson(response);
-
-      return mediaData;
     } on DioException catch (e) {
       throw e.errorMessage;
     }

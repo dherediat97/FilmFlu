@@ -134,23 +134,23 @@ class AppLocalizationsKo extends AppLocalizations {
   String get not_found_reviews => '리뷰 없음';
 
   @override
-  String get artists => 'Artistas';
+  String get artists => '아티스트';
 
   @override
-  String get settings => 'Ajustes';
+  String get settings => '설정';
 
   @override
-  String get about_us => 'Acerca de';
+  String get about_us => '정보';
 
   @override
-  String get general => 'General';
+  String get general => '일반';
 
   @override
-  String get advanced => 'Avanzado';
+  String get advanced => '고급';
 
   @override
-  String get trending_person_day => 'Personas influyentes hoy';
+  String get trending_person_day => '오늘날 영향력 있는 사람들';
 
   @override
-  String get trending_person_week => 'Personas influyentes esta semana';
+  String get trending_person_week => '이번 주 영향력 있는 사람들';
 }

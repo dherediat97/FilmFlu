@@ -137,20 +137,20 @@ class AppLocalizationsPt extends AppLocalizations {
   String get artists => 'Artistas';
 
   @override
-  String get settings => 'Ajustes';
+  String get settings => 'Definições';
 
   @override
-  String get about_us => 'Acerca de';
+  String get about_us => 'Sobre';
 
   @override
-  String get general => 'General';
+  String get general => 'Geral';
 
   @override
-  String get advanced => 'Avanzado';
+  String get advanced => 'Avançado';
 
   @override
-  String get trending_person_day => 'Personas influyentes hoy';
+  String get trending_person_day => 'Pessoas influentes hoje';
 
   @override
-  String get trending_person_week => 'Personas influyentes esta semana';
+  String get trending_person_week => 'Pessoas influentes desta semana';
 }

@@ -39,5 +39,12 @@
   "search": "Hae",
   "percentange_vote":"% tykkäyksiä",
   "buy_tickets":"Varaa liput",
-  "not_found_reviews": "Ei arvosteluja"
+  "not_found_reviews": "Ei arvosteluja",
+  "artists": "Taiteilijat",
+  "settings": "Asetukset",
+  "about_us": "Tietoja",
+  "general": "Yleinen",
+  "advanced": "Advanced",
+  "trending_person_day": "Vaikutusvaltaiset ihmiset tänään",
+  "trending_person_week": "Vaikutusvoimaisia ​​ihmisiä tällä viikolla"
 }

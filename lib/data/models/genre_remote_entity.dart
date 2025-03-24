@@ -16,8 +16,5 @@ class GenreRemoteEntity with _$GenreRemoteEntity {
 }
 
 extension GenreRemoteEntityToRemoteEntityExtension on GenreRemoteEntity {
-  GenreEntity toGenreEntity() => GenreEntity(
-        id: id,
-        name: name,
-      );
+  GenreEntity toGenreEntity() => GenreEntity(id: id, name: name);
 }

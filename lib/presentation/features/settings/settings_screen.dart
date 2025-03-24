@@ -43,7 +43,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
     return _index != 2
         ? Scaffold(
           appBar: AppBar(
-            actions: [SettingsAppBarActions(isMainMenu: false)],
+            actions: [SettingsAppBarActions()],
             backgroundColor: Theme.of(context).colorScheme.surface,
             title: Text(
               context.localizations.settings,

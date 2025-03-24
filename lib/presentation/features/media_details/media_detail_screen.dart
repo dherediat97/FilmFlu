@@ -83,7 +83,13 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
                 return FloatingActionButton.extended(
                   heroTag: 'playTrailer',
                   icon: const Icon(Icons.play_arrow),
-                  label: Text(context.localizations.play_trailer),
+                  label: Text(
+                    context.localizations.play_trailer,
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   onPressed: () {
                     showAdaptiveDialog(
                       context: context,

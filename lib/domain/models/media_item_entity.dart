@@ -11,9 +11,8 @@ part 'media_item_entity.g.dart';
 class MediaItemEntity with _$MediaItemEntity {
   const factory MediaItemEntity({
     required String backdropPath,
-    List<GenreEntity>? genres,
+    @Default([]) List<GenreEntity> genres,
     List<ProductionCompanyEntity>? productionCompanies,
-    List<int>? genreIds,
     required int id,
     String? originalLanguage,
     String? originalTitle,

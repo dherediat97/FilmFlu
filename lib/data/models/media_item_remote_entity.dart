@@ -43,7 +43,6 @@ extension MediaItemToRemoteEntityExtension on MediaItemRemoteEntity {
     title: title ?? '',
     name: name ?? '',
     id: id ?? 0,
-    genreIds: genreIds,
     popularity: popularity ?? 0.0,
     posterPath: posterPath ?? '',
     voteAverage: voteAverage ?? 0,

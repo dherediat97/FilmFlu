@@ -134,23 +134,23 @@ class AppLocalizationsNl extends AppLocalizations {
   String get not_found_reviews => 'Geen beoordelingen';
 
   @override
-  String get artists => 'Artistas';
+  String get artists => 'Kunstenaars';
 
   @override
-  String get settings => 'Ajustes';
+  String get settings => 'Instellingen';
 
   @override
-  String get about_us => 'Acerca de';
+  String get about_us => 'Over';
 
   @override
-  String get general => 'General';
+  String get general => 'Algemeen';
 
   @override
-  String get advanced => 'Avanzado';
+  String get advanced => 'Geavanceerd';
 
   @override
-  String get trending_person_day => 'Personas influyentes hoy';
+  String get trending_person_day => 'Invloedrijke mensen vandaag';
 
   @override
-  String get trending_person_week => 'Personas influyentes esta semana';
+  String get trending_person_week => 'Invloedrijke mensen deze week';
 }
