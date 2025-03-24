@@ -26,14 +26,14 @@ class _DefaultImageWidgetState extends ConsumerState<DefaultImageWidget> {
           colors:
               !appState.isDarkMode
                   ? [
-                    AppColors.backgroundColorLight.withOpacity(0.2),
-                    AppColors.backgroundColorLight.withOpacity(0.8),
-                    AppColors.backgroundColorLight.withOpacity(0.2),
+                    AppColors.backgroundColorLight.withValues(alpha: 0.2),
+                    AppColors.backgroundColorLight.withValues(alpha: 0.8),
+                    AppColors.backgroundColorLight.withValues(alpha: 0.2),
                   ]
                   : [
-                    AppColors.backgroundColorDark.withOpacity(0.2),
-                    AppColors.backgroundColorDark.withOpacity(0.8),
-                    AppColors.backgroundColorDark.withOpacity(0.2),
+                    AppColors.backgroundColorDark.withValues(alpha: 0.2),
+                    AppColors.backgroundColorDark.withValues(alpha: 0.8),
+                    AppColors.backgroundColorDark.withValues(alpha: 0.2),
                   ],
           stops: [0.1, 0.6, 1.0],
           begin: Alignment.centerLeft,

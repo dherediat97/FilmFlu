@@ -61,6 +61,7 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         files: build/linux/x64/release/bundle/FilmFlu-linux.zip
         generate_release_notes: true
+        token: ${{ secrets.GITHUB_TOKEN }}
 
   windows:
     runs-on: windows-latest
@@ -109,6 +110,7 @@ jobs:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         files: build/windows/x64/runner/FilmFlu-windows.zip
         generate_release_notes: true
+        token: ${{ secrets.GITHUB_TOKEN }}
 
   android:
     runs-on: ubuntu-latest
@@ -160,7 +162,6 @@ jobs:
               path: build/app/outputs/apk/release/app-release.apk
               overwrite: true
         - name: Create Release
-          id: create_release
           uses: actions/create-release@v2
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -175,4 +176,5 @@ jobs:
           with:
             upload_url: ${{ steps.create_release.outputs.upload_url }}
             files: build/app/outputs/apk/release/app-release.apk
-            generate_release_notes: true
+            generate_release_notes: 
+            token: ${{ secrets.GITHUB_TOKEN }}
