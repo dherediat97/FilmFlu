@@ -4,6 +4,8 @@ on:
    branches: [ "main" ]
   workflow_dispatch:
 
+permissions:
+  contents: write
 
 jobs:
   linux:
@@ -53,27 +55,12 @@ jobs:
      - name: Build artifacts
        run: flutter build linux --release
      - name: Archive Release
-       uses: thedoctor0/zip-release@master
+     - name: Upload APK to Release
+       uses: softprops/action-gh-release@v2
+       if: startsWith(github.ref, 'refs/tags/')
        with:
-          type: 'zip'
-          filename: FilmFlu-linux.zip
-          directory: build/linux/x64/release/bundle
-     - name: Create Release
-       id: create_release
-       uses: actions/create-release@v2
-       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-       with:
-          tag_name: v2.0.0
-          release_name: Release v2.0.0
-          draft: false
-          prerelease: false
-            
-     - uses: actions/upload-artifact@v4
-       with:
-          name: Releases
-          path: build/linux/x64/release/bundle/FilmFlu-linux.zip
-          overwrite: true
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        files: build/linux/x64/release/bundle/FilmFlu-linux.zip
 
   windows:
     runs-on: windows-latest
@@ -115,12 +102,13 @@ jobs:
      - run: flutter pub run build_runner build --delete-conflicting-outputs
      - name: Build artifacts
        run: flutter build windows --release
-     - name: Archive Release
-       uses: thedoctor0/zip-release@master
+     - name: Upload APK to Release
+       uses: softprops/action-gh-release@v2
+       if: startsWith(github.ref, 'refs/tags/')
        with:
-          type: 'zip'
-          filename: FilmFlu-windows.zip
-          directory: build/windows/x64/runner/Release
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        files: build/windows/x64/runner/FilmFlu-windows.zip
+
      - name: Create Release
        id: create_release
        uses: actions/create-release@v2
@@ -136,7 +124,6 @@ jobs:
           name: Releases
           path: build/windows/x64/runner/Release/FilmFlu-windows.zip
           overwrite: true
-     
 
   android:
     runs-on: ubuntu-latest
@@ -198,12 +185,8 @@ jobs:
             draft: false
             prerelease: false
         - name: Upload APK to Release
-          id: upload-release-asset 
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          uses: softprops/action-gh-release@v2
+          if: startsWith(github.ref, 'refs/tags/')
           with:
             upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: build/app/outputs/apk/release/app-release.apk
-            asset_name: app-release.apk
-            asset_content_type: application/zip
+            files: build/app/outputs/apk/release/app-release.apk
