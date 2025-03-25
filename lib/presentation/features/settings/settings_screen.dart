@@ -79,6 +79,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                   SizedBox(
                     height: 500,
                     child: TabBarView(
+                      physics: NeverScrollableScrollPhysics(),
                       controller: _tabController,
                       children: [GeneralTab(), AdvancedTab(), Container()],
                     ),
