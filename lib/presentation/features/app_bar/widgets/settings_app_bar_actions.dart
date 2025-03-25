@@ -65,24 +65,5 @@ class SettingsAppBarActions extends ConsumerWidget {
         ],
       ),
     );
-
-    // if (kIsWeb) {
-    //   actions.add(
-    //     IconButton(
-    //       onPressed: () async {
-    //         PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    //         AppConstants.version = packageInfo.version;
-
-    //         final Uri url = Uri.parse(AppConstants.appDownloadBaseUrl);
-    //         //Lanzar url que descarga la app para android
-    //         await launchUrl(url);
-    //       },
-    //       icon: Icon(
-    //         Icons.android,
-    //         color: AppColors.backgroundColorLight,
-    //       ),
-    //     ),
-    //   );
-    // }();
   }
 }

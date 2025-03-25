@@ -46,6 +46,7 @@ class _AdvancedTabState extends ConsumerState<AdvancedTab> {
             'Daltonism Types',
             style: Theme.of(context).textTheme.titleLarge,
           ),
+          SizedBox(height: 20),
           SwitchListTile(
             value: isAchromatopsiaOn,
             onChanged: (bool isSelected) {
