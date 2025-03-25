@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
-import 'package:film_flu/presentation/features/media_details/widgets/background_image_media_item.dart';
+import 'package:film_flu/presentation/features/media_details/widgets/background_media_item.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/container_tab_media_item.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/media_data_cast.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/media_data_production.dart';

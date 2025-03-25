@@ -17,6 +17,7 @@ class AppConstants {
   static String myGithubPage = 'https://github.com/dherediat97/FilmFlu';
 
   //PREFERENCES KEYS
+  static const colorBlindessType = 'colorBlindessType';
   static const languageKey = 'languageCode';
-  static const themeModeKey = 'themeMode';
+  static const themeModeKey = 'isDarkMode';
 }
