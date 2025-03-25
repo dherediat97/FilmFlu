@@ -1,6 +1,8 @@
 import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/presentation/features/app_bar/widgets/settings_app_bar_actions.dart';
+import 'package:film_flu/presentation/features/settings/widgets/advanced_tab.dart';
+import 'package:film_flu/presentation/features/settings/widgets/general_tab.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -78,19 +80,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                     height: 500,
                     child: TabBarView(
                       controller: _tabController,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [],
-                        ),
-                        Container(),
-                      ],
+                      children: [GeneralTab(), AdvancedTab(), Container()],
                     ),
                   ),
                 ],

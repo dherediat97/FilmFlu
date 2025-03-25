@@ -1,10 +1,12 @@
+import 'package:color_blindness/color_blindness.dart';
 import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
   final TextTheme textTheme;
+  final ColorBlindnessType colorBlindnessType;
 
-  const AppTheme(this.textTheme);
+  const AppTheme(this.textTheme, this.colorBlindnessType);
 
   static ColorScheme lightScheme() {
     return const ColorScheme(
@@ -66,7 +68,7 @@ class AppTheme {
       brightness: Brightness.dark,
       primary: Color(0xFFB10112),
       surfaceTint: Color(0xffffb3ad),
-      onPrimary: Color(0xFFB10112),
+      onPrimary: Color.fromARGB(255, 255, 255, 255),
       primaryContainer: Color(0xff79000d),
       onPrimaryContainer: Color(0xffffbab4),
       secondary: Color(0xffe8e9e9),
@@ -118,7 +120,7 @@ class AppTheme {
 
   ThemeData theme(ColorScheme colorScheme) => ThemeData(
     brightness: colorScheme.brightness,
-    colorScheme: colorScheme,
+    colorScheme: colorBlindnessColorScheme(colorScheme, colorBlindnessType),
     appBarTheme: AppBarTheme(color: colorScheme.primary, toolbarHeight: 75),
     bottomAppBarTheme: BottomAppBarTheme(
       color: colorScheme.primary,

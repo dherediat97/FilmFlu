@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:color_blindness/color_blindness.dart';
 import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/constants/app_fonts.dart';
 import 'package:film_flu/app/constants/app_theme.dart';
@@ -16,9 +17,26 @@ class AppProvider extends StateNotifier<AppState> {
     var appLanguage = prefs.getString(AppConstants.languageKey) ?? 'es';
     state = state.copyWith(
       isDarkMode: darkMode,
-      appTheme: AppTheme(createTextTheme(isDarkMode: darkMode)),
+      appTheme: AppTheme(
+        createTextTheme(isDarkMode: darkMode),
+        ColorBlindnessType.none,
+      ),
       appLocale: Locale(appLanguage),
     );
+  }
+
+  Future changeBlindessTheme(ColorBlindnessType colorBlindess) async {
+    var prefs = await SharedPreferences.getInstance();
+    if (state.appColorBlindessType != colorBlindess) {
+      state = state.copyWith(
+        appColorBlindessType: colorBlindess,
+        appTheme: AppTheme(
+          createTextTheme(isDarkMode: state.isDarkMode),
+          colorBlindess,
+        ),
+      );
+      await prefs.setString(AppConstants.colorBlindessType, colorBlindess.name);
+    }
   }
 
   Future changeLanguage(Locale language) async {
