@@ -42,9 +42,13 @@
   "not_found_reviews": "No reviews",
   "settings": "Settings",
   "artists": "Artists",
-  "about_us": "About us",
   "general": "General",
-  "advanced": "Advanced",
+  "general_sl": "General tab is the place where the user can change the data according to him profile",
+  "accessibility": "Accessibility",
+  "accessibility_sl": "Accessibility tab is the place where the user can adjust the application according to him",
+  "about_us": "About us",
+  "about_us_sl": "About us tab is the place where the user can see all licenses of the application",
   "trending_person_day": "Trending persons today",
-  "trending_person_week": "Trending persons this week"
+  "trending_person_week": "Trending persons this week",
+  "similars": "Similars"
 }

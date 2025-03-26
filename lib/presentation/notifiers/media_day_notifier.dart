@@ -1,4 +1,4 @@
-import 'package:film_flu/domain/enums/media_type.dart';
+import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
 import 'package:film_flu/domain/repository/media_repository.dart';
 import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';

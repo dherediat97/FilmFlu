@@ -1,5 +1,5 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/domain/enums/media_type.dart';
+import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:film_flu/presentation/features/app_bar/my_app_bar.dart';
 import 'package:film_flu/presentation/notifiers/home_notifier.dart';
 import 'package:flutter/material.dart';

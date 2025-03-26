@@ -39,5 +39,12 @@
   "search": "Sök",
   "percentange_vote":"% gillar",
   "buy_tickets":"Boka biljetter",
-  "not_found_reviews": "Inga recensioner"
+  "not_found_reviews": "Inga recensioner",
+  "artists": "Artister",
+  "settings": "Inställningar",
+  "about_us": "Om",
+  "general": "Allmänt",
+  "advanced": "Avancerat",
+  "trending_person_day": "Inflytelserika människor idag",
+  "trending_person_week": "Inflytelserika personer den här veckan"
 }

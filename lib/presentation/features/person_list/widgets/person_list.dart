@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
-import 'package:film_flu/domain/enums/time_window.dart';
+import 'package:film_flu/domain/enums/time_windows.dart';
 import 'package:film_flu/domain/models/person_entity.dart';
 import 'package:film_flu/presentation/features/person_list/widgets/person_carrousel_item.dart';
 import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';

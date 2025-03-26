@@ -43,12 +43,12 @@ extension MediaItemToRemoteEntityExtension on MediaItemRemoteEntity {
     title: title ?? '',
     name: name ?? '',
     id: id ?? 0,
-    genreIds: genreIds,
     popularity: popularity ?? 0.0,
     posterPath: posterPath ?? '',
     voteAverage: voteAverage ?? 0,
     voteCount: voteCount ?? 0,
     backdropPath: backdropPath ?? '',
+    genreIds: genreIds ?? [],
     genres: genres?.map((e) => e.toGenreEntity()).toList() ?? [],
     productionCompanies:
         productionCompanies

@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:film_flu/data/datasources/remote/api/network/dio_client.dart';
 import 'package:film_flu/data/datasources/remote/api/network/http_exception.dart';
 import 'package:film_flu/data/models/person_remote_entity.dart';
-import 'package:film_flu/domain/enums/time_window.dart';
+import 'package:film_flu/domain/enums/time_windows.dart';
 import 'package:film_flu/domain/models/data_person_list.dart';
 import 'package:film_flu/domain/models/person_entity.dart';
 import 'package:film_flu/domain/repository/person_repository.dart';

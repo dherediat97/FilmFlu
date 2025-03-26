@@ -134,23 +134,35 @@ class AppLocalizationsFi extends AppLocalizations {
   String get not_found_reviews => 'Ei arvosteluja';
 
   @override
-  String get artists => 'Artistas';
+  String get artists => 'Taiteilijat';
 
   @override
-  String get settings => 'Ajustes';
+  String get settings => 'Asetukset';
 
   @override
-  String get about_us => 'Acerca de';
+  String get general => 'Yleinen';
 
   @override
-  String get general => 'General';
+  String get general_sl => 'La pestaña \'General\' es el lugar donde el usuario puede modificar datos de su perfil';
 
   @override
-  String get advanced => 'Avanzado';
+  String get accessibility => 'Accesibilidad';
 
   @override
-  String get trending_person_day => 'Personas influyentes hoy';
+  String get accessibility_sl => 'La pestaña \'Accesibilidad\' es el lugar donde el usuario puede ajustar la aplicación según sus necesidades';
 
   @override
-  String get trending_person_week => 'Personas influyentes esta semana';
+  String get about_us => 'Tietoja';
+
+  @override
+  String get about_us_sl => 'La pestaña \'Acerca de\' es el lugar donde el usuario puede ver todas las licencias de la aplicación';
+
+  @override
+  String get trending_person_day => 'Vaikutusvaltaiset ihmiset tänään';
+
+  @override
+  String get trending_person_week => 'Vaikutusvoimaisia ​​ihmisiä tällä viikolla';
+
+  @override
+  String get similars => 'Similares';
 }

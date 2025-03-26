@@ -125,7 +125,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get search => 'Buscar';
 
   @override
-  String get percentange_vote => '% de los usuarios les gusta';
+  String get percentange_vote => '% Puntuación de los usuarios';
 
   @override
   String get buy_tickets => 'Reserva entradas';
@@ -140,17 +140,29 @@ class AppLocalizationsEs extends AppLocalizations {
   String get settings => 'Ajustes';
 
   @override
-  String get about_us => 'Acerca de';
-
-  @override
   String get general => 'General';
 
   @override
-  String get advanced => 'Avanzado';
+  String get general_sl => 'La pestaña \'General\' es el lugar donde el usuario puede modificar datos de su perfil';
+
+  @override
+  String get accessibility => 'Accesibilidad';
+
+  @override
+  String get accessibility_sl => 'La pestaña \'Accesibilidad\' es el lugar donde el usuario puede ajustar la aplicación según sus necesidades';
+
+  @override
+  String get about_us => 'Acerca de';
+
+  @override
+  String get about_us_sl => 'La pestaña \'Acerca de\' es el lugar donde el usuario puede ver todas las licencias de la aplicación';
 
   @override
   String get trending_person_day => 'Personas influyentes hoy';
 
   @override
   String get trending_person_week => 'Personas influyentes esta semana';
+
+  @override
+  String get similars => 'Similares';
 }

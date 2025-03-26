@@ -1,12 +1,11 @@
 import 'package:film_flu/core/entities/pagination.dart';
 import 'package:film_flu/data/repositories/media_repository_impl.dart';
-import 'package:film_flu/domain/enums/genres_id.dart';
-import 'package:film_flu/domain/enums/media_type.dart';
+import 'package:film_flu/domain/enums/genre_ids.dart';
+import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:film_flu/domain/enums/order_options.dart';
 import 'package:film_flu/domain/enums/sort_options.dart';
 import 'package:film_flu/domain/models/credits_media_entity.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
-import 'package:film_flu/domain/models/media_response_entity.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:film_flu/domain/models/search_result_entity.dart';
@@ -36,15 +35,16 @@ abstract interface class MediaRepository {
     String languageName,
   );
 
-  Future<MediaResponseEntity> getMedia(
+  Future<(int page, List<MediaSimpleItemEntity> items)> getSimilars(
     String mediaTypeSelected,
     String mediaTypeId,
     String languageName,
+    int page,
   );
 
   Future<(int page, List<MediaSimpleItemEntity> items)> getMediaDataByGenre(
     MediaType mediaTypeSelected,
-    GenresId genreId,
+    GenreIds genreId,
     String languageId,
     int page,
     SortOptions? sortBy,
@@ -52,14 +52,14 @@ abstract interface class MediaRepository {
   );
 
   Future<(int page, List<MediaSimpleItemEntity> items)> getMovies(
-    GenresId genreId,
+    GenreIds genreId,
     String languageId,
     int page,
     String sortBy,
   );
 
   Future<(int page, List<MediaSimpleItemEntity> items)> getTVSeries(
-    GenresId genreId,
+    GenreIds genreId,
     String languageId,
     int page,
     String sortBy,

@@ -1,7 +1,7 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/domain/enums/media_type.dart';
+import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:film_flu/domain/enums/sort_options.dart';
-import 'package:film_flu/presentation/features/media_details/widgets/background_image_media_item.dart';
+import 'package:film_flu/presentation/features/media_details/widgets/background_media_item.dart';
 import 'package:film_flu/presentation/notifiers/media_day_notifier.dart';
 import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
 import 'package:film_flu/presentation/widgets/shimmer_loading.dart';
@@ -42,7 +42,7 @@ class _MediaDayWidgetState extends ConsumerState<MediaDayWidget> {
         ? Shimmer(child: buildMediaDayWidget(context))
         : loadingMore
         ? Shimmer(child: buildMediaDayWidget(context))
-        : BackgroundImageMediaItem(
+        : BackgroundMediaItem(
           key: widget.key,
           isHomeScreen: true,
           mediaItem: item!.mediaItem!,

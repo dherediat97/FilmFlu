@@ -1,10 +1,10 @@
-import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/presentation/features/app_bar/widgets/settings_app_bar_actions.dart';
-import 'package:flutter/foundation.dart';
+import 'package:film_flu/presentation/features/settings/widgets/about_us_tab.dart';
+import 'package:film_flu/presentation/features/settings/widgets/accessibility_tab.dart';
+import 'package:film_flu/presentation/features/settings/widgets/general_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -15,15 +15,12 @@ class SettingsScreen extends ConsumerStatefulWidget {
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen>
     with SingleTickerProviderStateMixin {
-  PackageInfo? _packageInfo;
   late TabController _tabController;
   var _index = 0;
 
   @override
   void initState() {
     super.initState();
-    _setPackageInfo();
-    _addLicenses();
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(() {
       setState(() {
@@ -43,7 +40,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
     return _index != 2
         ? Scaffold(
           appBar: AppBar(
-            actions: [SettingsAppBarActions(isMainMenu: false)],
+            actions: [SettingsAppBarActions()],
             backgroundColor: Theme.of(context).colorScheme.surface,
             title: Text(
               context.localizations.settings,
@@ -61,15 +58,24 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                     controller: _tabController,
                     tabs: [
                       Tab(
-                        icon: Icon(Icons.verified_user),
+                        icon: Icon(
+                          Icons.verified_user,
+                          semanticLabel: context.localizations.general_sl,
+                        ),
                         text: context.localizations.general,
                       ),
                       Tab(
-                        icon: Icon(Icons.settings_accessibility),
-                        text: context.localizations.advanced,
+                        icon: Icon(
+                          Icons.settings_accessibility,
+                          semanticLabel: context.localizations.accessibility_sl,
+                        ),
+                        text: context.localizations.accessibility,
                       ),
                       Tab(
-                        icon: Icon(Icons.help),
+                        icon: Icon(
+                          Icons.help,
+                          semanticLabel: context.localizations.about_us_sl,
+                        ),
                         text: context.localizations.about_us,
                       ),
                     ],
@@ -77,20 +83,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                   SizedBox(
                     height: 500,
                     child: TabBarView(
+                      physics: NeverScrollableScrollPhysics(),
                       controller: _tabController,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [],
-                        ),
-                        Container(),
-                      ],
+                      children: [GeneralTab(), AccessibilityTab(), Container()],
                     ),
                   ),
                 ],
@@ -98,55 +93,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
             ),
           ),
         )
-        : Padding(
-          padding: const EdgeInsets.only(bottom: 24),
-          child: LicensePage(
-            applicationIcon: Image.asset(AppAssets.logoIcon),
-            applicationLegalese:
-                '© ${DateTime.now().year} ${context.localizations.app_name}',
-            applicationName: '',
-            applicationVersion: _packageInfo?.version ?? '',
-          ),
-        );
+        : AboutUsTab();
   }
-
-  _addLicenses() {
-    LicenseRegistry.addLicense(
-      () => Stream<LicenseEntry>.value(
-        const LicenseEntryWithLineBreaks(
-          <String>['iconscout'],
-          '''
-        *Spain Flag by Uipixi
-        *England Flag by Uipixi
-        *China Flag by Uipixi
-        *Poland Flag by Uipixi
-        *Portugal Flag by Uipixi
-        *France Flag by Uipixi
-        *Japan Flag by Uipixi
-        *South Korea Flag by Uipixi'
-        *Germany Flag by Uipixi
-        *Italy Flag by Uipixi
-        *Finland Flag by Uipixi
-        *India Flag by Uipixi
-        *Iceland Flag by Uipixi
-        *Netherlands Flag by Uipixi
-        *Sweden Flag by Uipixi
-        *Slovakia Flag by Uipixi
-            ''',
-        ),
-      ),
-    );
-
-    LicenseRegistry.addLicense(
-      () => Stream<LicenseEntry>.value(
-        const LicenseEntryWithLineBreaks(<String>[
-          'freepik',
-        ], 'Images designed by Freepik from www.freepik.com'),
-      ),
-    );
-  }
-
-  Future<void> _setPackageInfo() async => PackageInfo.fromPlatform().then(
-    (PackageInfo packageInfo) => setState(() => _packageInfo = packageInfo),
-  );
 }

@@ -134,23 +134,35 @@ class AppLocalizationsSv extends AppLocalizations {
   String get not_found_reviews => 'Inga recensioner';
 
   @override
-  String get artists => 'Artistas';
+  String get artists => 'Artister';
 
   @override
-  String get settings => 'Ajustes';
+  String get settings => 'Inställningar';
 
   @override
-  String get about_us => 'Acerca de';
+  String get general => 'Allmänt';
 
   @override
-  String get general => 'General';
+  String get general_sl => 'La pestaña \'General\' es el lugar donde el usuario puede modificar datos de su perfil';
 
   @override
-  String get advanced => 'Avanzado';
+  String get accessibility => 'Accesibilidad';
 
   @override
-  String get trending_person_day => 'Personas influyentes hoy';
+  String get accessibility_sl => 'La pestaña \'Accesibilidad\' es el lugar donde el usuario puede ajustar la aplicación según sus necesidades';
 
   @override
-  String get trending_person_week => 'Personas influyentes esta semana';
+  String get about_us => 'Om';
+
+  @override
+  String get about_us_sl => 'La pestaña \'Acerca de\' es el lugar donde el usuario puede ver todas las licencias de la aplicación';
+
+  @override
+  String get trending_person_day => 'Inflytelserika människor idag';
+
+  @override
+  String get trending_person_week => 'Inflytelserika personer den här veckan';
+
+  @override
+  String get similars => 'Similares';
 }

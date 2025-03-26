@@ -5,14 +5,13 @@ import 'package:film_flu/data/datasources/remote/api/network/http_exception.dart
 import 'package:film_flu/data/models/credits_media_remote_entity.dart';
 import 'package:film_flu/data/models/media_item_remote_entity.dart';
 import 'package:film_flu/data/models/review_remote_entity.dart';
-import 'package:film_flu/domain/enums/genres_id.dart';
-import 'package:film_flu/domain/enums/media_type.dart';
+import 'package:film_flu/domain/enums/genre_ids.dart';
+import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:film_flu/domain/enums/order_options.dart';
 import 'package:film_flu/domain/enums/sort_options.dart';
 import 'package:film_flu/domain/models/credits_media_entity.dart';
 import 'package:film_flu/domain/models/data_media_list.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
-import 'package:film_flu/domain/models/media_response_entity.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:film_flu/domain/models/search_result_entity.dart';
@@ -90,18 +89,24 @@ class MediaRepositoryImpl implements MediaRepository {
   }
 
   @override
-  Future<MediaResponseEntity> getMedia(
+  Future<(int page, List<MediaSimpleItemEntity> items)> getSimilars(
     String mediaTypeSelected,
     String mediaTypeId,
     String languageName,
+    int page,
   ) async {
     try {
       final response = await DioClient.instance.get(
-        '/$mediaTypeSelected/$mediaTypeId',
+        '/$mediaTypeSelected/$mediaTypeId/recommendations',
+        queryParameters: {'language': languageName, 'page': page},
       );
-      final mediaData = MediaResponseEntity.fromJson(response);
 
-      return mediaData;
+      if (response.isEmpty) {
+        return (0, <MediaSimpleItemEntity>[]);
+      }
+      final movieResponse = DataMediaList.fromJson(response);
+
+      return (movieResponse.page, movieResponse.results.toList());
     } on DioException catch (e) {
       throw e.errorMessage;
     }
@@ -110,7 +115,7 @@ class MediaRepositoryImpl implements MediaRepository {
   @override
   Future<(int page, List<MediaSimpleItemEntity> items)> getMediaDataByGenre(
     MediaType mediaTypeSelected,
-    GenresId genreId,
+    GenreIds genreId,
     String languageId,
     int page,
     SortOptions? sortBy,
@@ -141,7 +146,7 @@ class MediaRepositoryImpl implements MediaRepository {
 
   @override
   Future<(int page, List<MediaSimpleItemEntity> items)> getMovies(
-    GenresId genreId,
+    GenreIds genreId,
     String? languageCode,
     int page,
     String sortBy,
@@ -171,7 +176,7 @@ class MediaRepositoryImpl implements MediaRepository {
 
   @override
   Future<(int page, List<MediaSimpleItemEntity> items)> getTVSeries(
-    GenresId genreId,
+    GenreIds genreId,
     String languageCode,
     int page,
     String sortBy,
@@ -226,16 +231,10 @@ class MediaRepositoryImpl implements MediaRepository {
     MediaType mediaTypeSelected,
     String languageCode,
   ) async {
-    final response =
-        mediaTypeSelected == MediaType.movie
-            ? await DioClient.instance.get(
-              '/${mediaTypeSelected.name}/now_playing',
-              queryParameters: {'language': languageCode},
-            )
-            : await DioClient.instance.get(
-              '/${mediaTypeSelected.name}/on_the_air',
-              queryParameters: {'language': languageCode},
-            );
+    final response = await DioClient.instance.get(
+      '/trending/${mediaTypeSelected.name}/day',
+      queryParameters: {'language': languageCode},
+    );
 
     List<MediaItemRemoteEntity> mediaData =
         response['results']

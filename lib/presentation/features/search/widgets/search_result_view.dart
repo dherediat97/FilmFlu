@@ -1,6 +1,6 @@
 import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
-import 'package:film_flu/domain/enums/media_type.dart';
+import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:film_flu/domain/models/search_result_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

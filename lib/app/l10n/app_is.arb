@@ -39,5 +39,12 @@
   "search": "Leita",
   "percentange_vote":"% líkar við",
   "buy_tickets":"Bókaðu miða",
-  "not_found_reviews": "Engar umsagnir"
+  "not_found_reviews": "Engar umsagnir",
+  "artists": "Listamenn",
+  "settings": "Stillingar",
+  "about_us": "Um",
+  "general": "Almennt",
+  "advanced": "Ítarlega",
+  "trending_person_day": "Áhrifamikið fólk í dag",
+  "trending_person_week": "Áhrifamikið fólk þessa vikuna"
 }

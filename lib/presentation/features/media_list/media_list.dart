@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_paths.dart';
-import 'package:film_flu/domain/enums/genres_id.dart';
-import 'package:film_flu/domain/enums/media_type.dart';
+import 'package:film_flu/domain/enums/genre_ids.dart';
+import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:film_flu/domain/enums/sort_options.dart';
 import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
@@ -25,7 +25,7 @@ class MediaList extends ConsumerStatefulWidget {
 
   final MediaType mediaType;
   final String title;
-  final GenresId genreId;
+  final GenreIds genreId;
   final SortOptions sortOption;
 
   @override
@@ -124,11 +124,11 @@ class _MediaDataList extends ConsumerState<MediaList> {
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
-                IconButton(
-                  tooltip: widget.sortOption.name,
-                  onPressed: () => _changeSort(),
-                  icon: Icon(Icons.sort),
-                ),
+                // IconButton(
+                //   tooltip: widget.sortOption.name,
+                //   onPressed: () => _changeSort(),
+                //   icon: Icon(Icons.sort),
+                // ),
               ],
             ),
             const SizedBox(height: 20),
@@ -187,11 +187,11 @@ class _MediaDataList extends ConsumerState<MediaList> {
         );
   }
 
-  _changeSort() {
-    var sortOption = SortOptions.movieDate;
-    mediaFilterController.updateOrder(sortOption);
-    viewModel.loadPage(1, mediaFilterController.arg);
-  }
+  // _changeSort() {
+  //   var sortOption = SortOptions.movieDate;
+  //   mediaFilterController.updateOrder(sortOption);
+  //   viewModel.loadPage(1, mediaFilterController.arg);
+  // }
 
   _loadMore() {
     final offset = _carouselController.offset;

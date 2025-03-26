@@ -39,5 +39,12 @@
   "search": "Pesquisar",
   "percentange_vote":"% curtidas",
   "buy_tickets":"Reservar bilhetes",
-  "not_found_reviews": "Nenhuma avaliação"
+  "not_found_reviews": "Nenhuma avaliação",
+  "artists": "Artistas",
+  "settings": "Definições",
+  "about_us": "Sobre",
+  "general": "Geral",
+  "advanced": "Avançado",
+  "trending_person_day": "Pessoas influentes hoje",
+  "trending_person_week": "Pessoas influentes desta semana"
 }

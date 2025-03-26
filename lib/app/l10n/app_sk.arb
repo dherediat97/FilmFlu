@@ -39,5 +39,12 @@
   "search": "Hľadať",
   "percentange_vote":"% páči sa mi",
   "buy_tickets":"Zarezervujte si lístky",
-  "not_found_reviews": "Žiadne recenzie"
+  "not_found_reviews": "Žiadne recenzie",
+  "artists": "Umelci",
+  "settings": "Nastavenia",
+  "about_us": "O",
+  "general": "General",
+  "advanced": "Advanced",
+  "trending_person_day": "Dnes vplyvní ľudia",
+  "trending_person_week": "Tento týždeň vplyvní ľudia"
 }
