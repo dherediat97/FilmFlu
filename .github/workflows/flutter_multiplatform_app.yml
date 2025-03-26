@@ -60,7 +60,7 @@ jobs:
           directory: build/linux/x64/release/bundle
      - name: Create Release
        id: create_release
-       uses: actions/create-release@v2
+       uses: actions/create-release@v1
        env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
        with:
@@ -123,7 +123,7 @@ jobs:
           directory: build/windows/x64/runner/Release
      - name: Create Release
        id: create_release
-       uses: actions/create-release@v2
+       uses: actions/create-release@v1
        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
        with:
