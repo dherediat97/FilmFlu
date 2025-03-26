@@ -140,13 +140,22 @@ class AppLocalizationsSk extends AppLocalizations {
   String get settings => 'Nastavenia';
 
   @override
-  String get about_us => 'O';
-
-  @override
   String get general => 'General';
 
   @override
-  String get advanced => 'Advanced';
+  String get general_sl => 'La pestaña \'General\' es el lugar donde el usuario puede modificar datos de su perfil';
+
+  @override
+  String get accessibility => 'Accesibilidad';
+
+  @override
+  String get accessibility_sl => 'La pestaña \'Accesibilidad\' es el lugar donde el usuario puede ajustar la aplicación según sus necesidades';
+
+  @override
+  String get about_us => 'O';
+
+  @override
+  String get about_us_sl => 'La pestaña \'Acerca de\' es el lugar donde el usuario puede ver todas las licencias de la aplicación';
 
   @override
   String get trending_person_day => 'Dnes vplyvní ľudia';

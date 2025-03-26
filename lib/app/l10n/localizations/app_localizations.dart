@@ -382,23 +382,41 @@ abstract class AppLocalizations {
   /// **'Ajustes'**
   String get settings;
 
-  /// No description provided for @about_us.
-  ///
-  /// In es, this message translates to:
-  /// **'Acerca de'**
-  String get about_us;
-
   /// No description provided for @general.
   ///
   /// In es, this message translates to:
   /// **'General'**
   String get general;
 
-  /// No description provided for @advanced.
+  /// No description provided for @general_sl.
   ///
   /// In es, this message translates to:
-  /// **'Avanzado'**
-  String get advanced;
+  /// **'La pestaña \'General\' es el lugar donde el usuario puede modificar datos de su perfil'**
+  String get general_sl;
+
+  /// No description provided for @accessibility.
+  ///
+  /// In es, this message translates to:
+  /// **'Accesibilidad'**
+  String get accessibility;
+
+  /// No description provided for @accessibility_sl.
+  ///
+  /// In es, this message translates to:
+  /// **'La pestaña \'Accesibilidad\' es el lugar donde el usuario puede ajustar la aplicación según sus necesidades'**
+  String get accessibility_sl;
+
+  /// No description provided for @about_us.
+  ///
+  /// In es, this message translates to:
+  /// **'Acerca de'**
+  String get about_us;
+
+  /// No description provided for @about_us_sl.
+  ///
+  /// In es, this message translates to:
+  /// **'La pestaña \'Acerca de\' es el lugar donde el usuario puede ver todas las licencias de la aplicación'**
+  String get about_us_sl;
 
   /// No description provided for @trending_person_day.
   ///
