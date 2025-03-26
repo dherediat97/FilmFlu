@@ -140,13 +140,22 @@ class AppLocalizationsKo extends AppLocalizations {
   String get settings => '설정';
 
   @override
-  String get about_us => '정보';
-
-  @override
   String get general => '일반';
 
   @override
-  String get advanced => '고급';
+  String get general_sl => 'La pestaña \'General\' es el lugar donde el usuario puede modificar datos de su perfil';
+
+  @override
+  String get accessibility => 'Accesibilidad';
+
+  @override
+  String get accessibility_sl => 'La pestaña \'Accesibilidad\' es el lugar donde el usuario puede ajustar la aplicación según sus necesidades';
+
+  @override
+  String get about_us => '정보';
+
+  @override
+  String get about_us_sl => 'La pestaña \'Acerca de\' es el lugar donde el usuario puede ver todas las licencias de la aplicación';
 
   @override
   String get trending_person_day => '오늘날 영향력 있는 사람들';

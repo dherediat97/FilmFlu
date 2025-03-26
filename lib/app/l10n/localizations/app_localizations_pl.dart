@@ -140,13 +140,22 @@ class AppLocalizationsPl extends AppLocalizations {
   String get settings => 'Ustawienia';
 
   @override
-  String get about_us => 'O nas';
-
-  @override
   String get general => 'Ogólne';
 
   @override
-  String get advanced => 'Zaawansowany';
+  String get general_sl => 'La pestaña \'General\' es el lugar donde el usuario puede modificar datos de su perfil';
+
+  @override
+  String get accessibility => 'Accesibilidad';
+
+  @override
+  String get accessibility_sl => 'La pestaña \'Accesibilidad\' es el lugar donde el usuario puede ajustar la aplicación según sus necesidades';
+
+  @override
+  String get about_us => 'O nas';
+
+  @override
+  String get about_us_sl => 'La pestaña \'Acerca de\' es el lugar donde el usuario puede ver todas las licencias de la aplicación';
 
   @override
   String get trending_person_day => 'Wpływowi ludzie dzisiaj';
