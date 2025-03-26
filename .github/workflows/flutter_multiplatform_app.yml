@@ -4,8 +4,6 @@ on:
    branches: [ "main" ]
   workflow_dispatch:
 
-permissions:
-  contents: write
 
 jobs:
   linux:
@@ -54,14 +52,28 @@ jobs:
        run: flutter config --enable-linux-desktop
      - name: Build artifacts
        run: flutter build linux --release
-     - name: Upload Linux App to Release
-       uses: softprops/action-gh-release@v2
-       if: startsWith(github.ref, 'refs/tags/')
+     - name: Archive Release
+       uses: thedoctor0/zip-release@master
        with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        files: build/linux/x64/release/bundle/FilmFlu-linux.zip
-        generate_release_notes: true
-        token: ${{ secrets.GITHUB_TOKEN }}
+          type: 'zip'
+          filename: FilmFlu-linux.zip
+          directory: build/linux/x64/release/bundle
+     - name: Create Release
+       id: create_release
+       uses: actions/create-release@v2
+       env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       with:
+          tag_name: v2.0.0
+          release_name: Release v2.0.0
+          draft: false
+          prerelease: false
+            
+     - uses: actions/upload-artifact@v4
+       with:
+          name: Releases
+          path: build/linux/x64/release/bundle/FilmFlu-linux.zip
+          overwrite: true
 
   windows:
     runs-on: windows-latest
@@ -103,14 +115,28 @@ jobs:
      - run: flutter pub run build_runner build --delete-conflicting-outputs
      - name: Build artifacts
        run: flutter build windows --release
-     - name: Upload Windows App to Release
-       uses: softprops/action-gh-release@v2
-       if: startsWith(github.ref, 'refs/tags/')
+     - name: Archive Release
+       uses: thedoctor0/zip-release@master
        with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        files: build/windows/x64/runner/FilmFlu-windows.zip
-        generate_release_notes: true
-        token: ${{ secrets.GITHUB_TOKEN }}
+          type: 'zip'
+          filename: FilmFlu-windows.zip
+          directory: build/windows/x64/runner/Release
+     - name: Create Release
+       id: create_release
+       uses: actions/create-release@v2
+       env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       with:
+          tag_name: v2.0.0
+          release_name: Release v2.0.0
+          draft: false
+          prerelease: false
+     - uses: actions/upload-artifact@v4
+       with:
+          name: Releases
+          path: build/windows/x64/runner/Release/FilmFlu-windows.zip
+          overwrite: true
+     
 
   android:
     runs-on: ubuntu-latest
@@ -156,11 +182,23 @@ jobs:
         - run: flutter pub run build_runner build --delete-conflicting-outputs
         - run: flutter gen-l10n
         - run: flutter build apk --release
-        - name: Upload APK to Release
-          uses: softprops/action-gh-release@v2
-          if: startsWith(github.ref, 'refs/tags/')
+        - name: Create Release
+          id: create_release
+          uses: actions/create-release@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GH_TOKEN_RELEASE }}
           with:
-            upload_url: ${{ steps.create_release.outputs.upload_url }}
-            files: build/app/outputs/apk/release/app-release.apk
-            generate_release_notes: true
-            token: ${{ secrets.GITHUB_TOKEN }}
+            tag_name: v2.0.0 - Android
+            release_name: Version 2.0.0
+            draft: false
+            prerelease: false
+        - name: Upload APK to Release
+          id: upload-release-asset 
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GH_TOKEN_RELEASE }}
+          with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+            asset_path: build/app/outputs/apk/release/app-release.apk
+            asset_name: app-release.apk
+            asset_content_type: application/zip
