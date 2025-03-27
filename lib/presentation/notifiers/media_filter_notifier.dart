@@ -23,12 +23,6 @@ final mediaDayFilterProvider = NotifierProvider.family
       MediaDayFilterNotifier.new,
     );
 
-final trendingPersonFilterProvider = NotifierProvider.family.autoDispose<
-  TrendingPersonFilterNotifier,
-  TrendingPersonFilter,
-  TrendingPersonFilter
->(TrendingPersonFilterNotifier.new);
-
 @freezed
 class MediaFilter with _$MediaFilter {
   const factory MediaFilter({
@@ -99,19 +93,4 @@ class TrendingPersonFilter with _$TrendingPersonFilter {
     required String languageId,
     required TimeWindow timeWindow,
   }) = _TrendingPersonFilter;
-}
-
-class TrendingPersonFilterNotifier
-    extends
-        AutoDisposeFamilyNotifier<TrendingPersonFilter, TrendingPersonFilter> {
-  @override
-  TrendingPersonFilter build(TrendingPersonFilter filter) => filter;
-
-  void updateOrder(TimeWindow timeWindow) {
-    state = state.copyWith(timeWindow: timeWindow);
-  }
-
-  void update(TrendingPersonFilter filter) {
-    state = filter;
-  }
 }

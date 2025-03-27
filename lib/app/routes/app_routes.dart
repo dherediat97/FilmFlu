@@ -4,7 +4,7 @@ import 'package:film_flu/presentation/features/home/home_screen.dart';
 import 'package:film_flu/presentation/features/media_details/media_detail_screen.dart';
 import 'package:film_flu/presentation/features/person_details/person_details_screen.dart';
 import 'package:film_flu/presentation/features/settings/settings_screen.dart';
-import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
+import 'package:film_flu/presentation/features/common/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -21,9 +21,15 @@ part 'app_routes.g.dart';
 )
 @immutable
 class HomeScreenRoute extends GoRouteData {
+  const HomeScreenRoute({this.mediaTypeSelected = MediaType.movie});
+
+  final MediaType mediaTypeSelected;
+
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return ScaffoldPage(child: const HomeScreen());
+    return ScaffoldPage(
+      child: HomeScreen(mediaTypeSelected: mediaTypeSelected),
+    );
   }
 }
 
@@ -31,7 +37,7 @@ class RedirectRoute extends GoRouteData {
   // There is no need to implement [build] when this [redirect] is unconditional.
   @override
   String? redirect(BuildContext context, GoRouterState state) {
-    return HomeScreenRoute().location;
+    return HomeScreenRoute(mediaTypeSelected: MediaType.movie).location;
   }
 }
 

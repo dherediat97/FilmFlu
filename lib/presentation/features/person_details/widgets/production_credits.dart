@@ -38,7 +38,7 @@ class ProductionCreditsWidget extends StatelessWidget {
                   : '${filmPerson.job}';
 
           return ListTile(
-            onTap: () => PersonRoute(id: filmPerson.id).go(context),
+            onTap: () => MovieRoute(id: filmPerson.id).push(context),
             title: ClipRRect(
               child: CachedNetworkImage(
                 imageUrl:

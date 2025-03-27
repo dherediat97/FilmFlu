@@ -1,15 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/app/routes/app_paths.dart';
+import 'package:film_flu/app/routes/app_routes.dart';
 import 'package:film_flu/domain/enums/time_windows.dart';
 import 'package:film_flu/domain/models/person_entity.dart';
 import 'package:film_flu/presentation/features/person_list/widgets/person_carrousel_item.dart';
 import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
 import 'package:film_flu/presentation/view_models/person_list_view_model.dart';
-import 'package:film_flu/presentation/widgets/shimmer_loading.dart';
+import 'package:film_flu/presentation/features/common/shimmer_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 class PersonListWidget extends ConsumerStatefulWidget {
   const PersonListWidget({
@@ -35,14 +34,6 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
       ),
     ).notifier,
   );
-  TrendingPersonFilterNotifier get trendingPersonFilterController => ref.read(
-    trendingPersonFilterProvider(
-      TrendingPersonFilter(
-        timeWindow: widget.timeWindow,
-        languageId: context.localizations.localeName,
-      ),
-    ).notifier,
-  );
 
   @override
   void initState() {
@@ -59,13 +50,9 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final trendingPersonFilter = ref.watch(
-      trendingPersonFilterProvider(
-        TrendingPersonFilter(
-          timeWindow: widget.timeWindow,
-          languageId: context.localizations.localeName,
-        ),
-      ),
+    final trendingPersonFilter = TrendingPersonFilter(
+      timeWindow: widget.timeWindow,
+      languageId: context.localizations.localeName,
     );
     final state = ref.watch(personListViewModelProvider(trendingPersonFilter));
 
@@ -82,12 +69,12 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
       },
       child: Padding(
         padding: EdgeInsets.all(16),
-        child: mediaWidgetList(state),
+        child: trendingPersonList(state),
       ),
     );
   }
 
-  mediaWidgetList(AsyncValue<List<PersonEntity>> state) {
+  trendingPersonList(AsyncValue<List<PersonEntity>> state) {
     final items = state.valueOrNull ?? [];
     final initialLoading = state.isLoading && items.isEmpty;
 
@@ -116,9 +103,8 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
                   padding: const EdgeInsets.all(8.0),
                   itemExtent: 200,
                   onTap: (index) {
-                    context.push(
-                      '${AppRoutePaths.personRoute}/${items[index].id}',
-                    );
+                    final person = items[index];
+                    PersonRoute(id: person.id).push(context);
                   },
                   children: List.generate(items.length, (int index) {
                     return PersonCarrouselItem(personEntity: items[index]);
@@ -145,9 +131,8 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
                   padding: const EdgeInsets.all(8.0),
                   itemExtent: 200,
                   onTap: (index) {
-                    context.push(
-                      '${AppRoutePaths.personRoute}/${items[index].id}',
-                    );
+                    final person = items[index];
+                    PersonRoute(id: person.id).push(context);
                   },
                   children: List.generate(items.length, (int index) {
                     return PersonCarrouselItem(personEntity: items[index]);
@@ -167,13 +152,9 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
 
     if (hasReachedTheEnd) {
       viewModel.loadNextPage(
-        ref.read(
-          trendingPersonFilterProvider(
-            TrendingPersonFilter(
-              timeWindow: widget.timeWindow,
-              languageId: context.localizations.localeName,
-            ),
-          ),
+        TrendingPersonFilter(
+          timeWindow: widget.timeWindow,
+          languageId: context.localizations.localeName,
         ),
       );
     }

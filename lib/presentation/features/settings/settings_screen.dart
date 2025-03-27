@@ -69,7 +69,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     .setTabSelected(switch (index) {
                       0 => SettingsTab.general,
                       1 => SettingsTab.accessibility,
-                      _ => SettingsTab.general,
+                      _ => SettingsTab.aboutus,
                     }),
           ),
           appBar: AppBar(

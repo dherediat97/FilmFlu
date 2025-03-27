@@ -8,7 +8,7 @@ import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
 import 'package:film_flu/presentation/view_models/media_list_view_model.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/media_carrousel_item.dart';
-import 'package:film_flu/presentation/widgets/shimmer_loading.dart';
+import 'package:film_flu/presentation/features/common/shimmer_loading.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -95,7 +95,7 @@ class _MediaDataList extends ConsumerState<MediaList> {
         return true;
       },
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(12),
         child: mediaWidgetList(state),
       ),
     );
@@ -108,11 +108,9 @@ class _MediaDataList extends ConsumerState<MediaList> {
     return initialLoading
         ? Shimmer(child: buildListItem(initialLoading))
         : Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AutoSizeText(
@@ -133,12 +131,12 @@ class _MediaDataList extends ConsumerState<MediaList> {
             const SizedBox(height: 20),
             if (widget.mediaType == MediaType.movie)
               SizedBox(
-                height: 220,
+                height: 230,
                 child: CarouselView(
                   itemSnapping: true,
                   controller: _carouselController,
-                  padding: const EdgeInsets.all(8.0),
-                  itemExtent: 180,
+                  padding: const EdgeInsets.all(12),
+                  itemExtent: 150,
                   onTap: (index) {
                     final movie = items[index];
                     FirebaseAnalytics.instance.logScreenView(
@@ -150,7 +148,7 @@ class _MediaDataList extends ConsumerState<MediaList> {
                       parameters: {'mediaType': widget.mediaType.name},
                     );
 
-                    MovieRoute(id: movie.id).go(context);
+                    MovieRoute(id: movie.id).push(context);
                   },
                   children: List.generate(items.length, (int index) {
                     return MediaCarrouselItem(mediaItem: items[index]);
@@ -159,10 +157,11 @@ class _MediaDataList extends ConsumerState<MediaList> {
               ),
             if (widget.mediaType == MediaType.tv)
               SizedBox(
-                height: 220,
+                height: 230,
                 child: CarouselView(
-                  padding: const EdgeInsets.all(8.0),
-                  itemExtent: 180,
+                  itemSnapping: true,
+                  padding: const EdgeInsets.all(12),
+                  itemExtent: 150,
                   controller: _carouselController,
                   onTap: (index) {
                     final tvSerie = items[index];
@@ -173,7 +172,7 @@ class _MediaDataList extends ConsumerState<MediaList> {
                       name: 'view_details',
                       parameters: {'mediaType': widget.mediaType.name},
                     );
-                    SerieRoute(id: tvSerie.id).go(context);
+                    SerieRoute(id: tvSerie.id).push(context);
                   },
                   children: List.generate(items.length, (int index) {
                     return MediaCarrouselItem(mediaItem: items[index]);

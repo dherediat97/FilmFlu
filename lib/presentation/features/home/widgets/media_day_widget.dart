@@ -4,7 +4,7 @@ import 'package:film_flu/domain/enums/sort_options.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/background_media_item.dart';
 import 'package:film_flu/presentation/notifiers/media_day_notifier.dart';
 import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
-import 'package:film_flu/presentation/widgets/shimmer_loading.dart';
+import 'package:film_flu/presentation/features/common/shimmer_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

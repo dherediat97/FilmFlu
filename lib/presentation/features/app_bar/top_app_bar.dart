@@ -1,5 +1,4 @@
 import 'package:film_flu/app/constants/app_assets.dart';
-import 'package:film_flu/app/routes/app_routes.dart';
 import 'package:film_flu/presentation/features/app_bar/widgets/app_bar_actions.dart';
 import 'package:film_flu/presentation/features/search/search_view.dart';
 import 'package:flutter/material.dart';
@@ -36,8 +35,6 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
                 onPressed: () {
                   if (context.canPop()) {
                     context.pop();
-                  } else {
-                    HomeScreenRoute().go(context);
                   }
                 },
               )

@@ -107,10 +107,10 @@ class _BackgroundMediaItemState extends State<BackgroundMediaItem> {
                               mediaTypeSelected == MediaType.movie
                                   ? MovieRoute(
                                     id: widget.mediaItem.id,
-                                  ).go(context)
+                                  ).push(context)
                                   : SerieRoute(
                                     id: widget.mediaItem.id,
-                                  ).go(context);
+                                  ).push(context);
                             },
                             icon: const Icon(
                               Icons.info_outline,

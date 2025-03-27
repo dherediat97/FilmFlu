@@ -2,7 +2,7 @@ import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/detail_tab_media_item.dart';
 import 'package:film_flu/presentation/notifiers/models/media_item_states.dart';
 import 'package:film_flu/presentation/notifiers/media_detail_notifier.dart';
-import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
+import 'package:film_flu/presentation/features/common/custom_scaffold_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -33,7 +33,7 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
   void initState() {
     super.initState();
     _trailerController = initTrailerController();
-    _trailerController.toggleFullScreen(lock: false);
+    _trailerController.enterFullScreen(lock: true);
   }
 
   @override
@@ -44,7 +44,6 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
 
   @override
   Widget build(BuildContext context) {
-    BuildContext dialogContext;
     final state = ref.watch(
       getHomeMediaDetailProvider(
         MediaItemState(
@@ -94,9 +93,8 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
                     showAdaptiveDialog(
                       context: context,
                       builder: (context) {
-                        dialogContext = context;
-
                         _trailerController = initTrailerController();
+                        _trailerController.enterFullScreen(lock: true);
                         if (data.trailerIds.length == 1) {
                           _trailerController.loadVideoById(
                             videoId: data.trailerIds.first,
@@ -104,20 +102,25 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
                         } else {
                           _trailerController.loadPlaylist(
                             list: data.trailerIds,
-                            index: data.trailerIds.indexOf(data.trailerIds[0]),
+                            index: 0,
+                            listType: ListType.playlist,
                           );
                         }
 
                         return AlertDialog.adaptive(
+                          insetPadding: EdgeInsets.zero,
+                          iconPadding: EdgeInsets.zero,
+                          contentPadding: EdgeInsets.zero,
+                          actionsPadding: EdgeInsets.zero,
                           icon: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisSize: MainAxisSize.min,
+                            mainAxisSize: MainAxisSize.max,
                             children: [
                               IconButton(
                                 onPressed: () {
                                   closeTrailer();
-                                  Navigator.pop(dialogContext);
+                                  Navigator.pop(context);
                                 },
                                 icon: const Icon(Icons.close),
                               ),
@@ -170,9 +173,9 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
     return YoutubePlayerController(
       params: YoutubePlayerParams(
         showControls: false,
-        captionLanguage: 'es',
+        captionLanguage: widget.languageCode,
         enableKeyboard: false,
-        interfaceLanguage: 'es',
+        interfaceLanguage: widget.languageCode,
         loop: true,
         playsInline: true,
         showFullscreenButton: true,

@@ -12,8 +12,8 @@ import 'package:film_flu/presentation/notifiers/media_detail_notifier.dart';
 import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
 import 'package:film_flu/presentation/notifiers/models/media_item_states.dart';
 import 'package:film_flu/presentation/view_models/similar_list_view_model.dart';
-import 'package:film_flu/presentation/widgets/empty_state_widget.dart';
-import 'package:film_flu/presentation/widgets/shimmer_loading.dart';
+import 'package:film_flu/presentation/features/common/empty_state_widget.dart';
+import 'package:film_flu/presentation/features/common/shimmer_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -153,6 +153,8 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                               ),
                               similars.when(
                                 data: (data) {
+                                  if (data.isEmpty) return Container();
+
                                   return Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,

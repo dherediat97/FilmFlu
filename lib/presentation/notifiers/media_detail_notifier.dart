@@ -7,23 +7,30 @@ import 'package:film_flu/presentation/notifiers/models/media_item_states.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 @riverpod
-final getHomeMediaDetailProvider = FutureProvider.family<
-  MediaItemDetailState,
-  MediaItemState
->((ref, mediaItemState) async {
-  final mediaItemResponse = await ref
-      .read(mediaProvider)
-      .getMediaItem(
-        mediaItemState.mediaType,
-        mediaItemState.id,
-        '${mediaItemState.languageName}_${mediaItemState.languageName.toUpperCase()}',
-      );
+final getHomeMediaDetailProvider =
+    FutureProvider.family<MediaItemDetailState, MediaItemState>((
+      ref,
+      mediaItemState,
+    ) async {
+      var mediaItemResponse = await ref
+          .read(mediaProvider)
+          .getMediaItem(
+            mediaItemState.mediaType,
+            mediaItemState.id,
+            mediaItemState.languageName,
+          );
 
-  return MediaItemDetailState(
-    trailerIds: _getTrailers(mediaItemResponse),
-    isTrailerOpened: false,
-  );
-});
+      if (mediaItemResponse.videos.results.isEmpty) {
+        mediaItemResponse = await ref
+            .read(mediaProvider)
+            .getMediaItem(mediaItemState.mediaType, mediaItemState.id, 'en');
+      }
+
+      return MediaItemDetailState(
+        trailerIds: _getTrailers(mediaItemResponse),
+        isTrailerOpened: false,
+      );
+    });
 
 @riverpod
 final getMediaItemDetailProvider =

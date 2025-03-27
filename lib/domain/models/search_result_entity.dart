@@ -7,7 +7,7 @@ part 'search_result_entity.g.dart';
 @freezed
 class SearchResultEntity with _$SearchResultEntity {
   const factory SearchResultEntity({
-    @JsonKey(name: 'id') int? id,
+    @JsonKey(name: 'id') required int id,
     @JsonKey(name: 'name') String? name,
     @JsonKey(name: 'original_name') String? originalName,
     @JsonKey(name: 'media_type') required MediaType mediaType,
@@ -16,7 +16,6 @@ class SearchResultEntity with _$SearchResultEntity {
     @JsonKey(name: 'gender') int? gender,
     @JsonKey(name: 'known_for_department') String? knownForDepartment,
     @JsonKey(name: 'profile_path') String? profilePath,
-    // @JsonKey(name: 'known_for') List<MediaItemEntity>? knownFor,
     @JsonKey(name: 'backdrop_path') String? backdropPath,
     @JsonKey(name: 'title') String? title,
     @JsonKey(name: 'original_title') String? originalTitle,
