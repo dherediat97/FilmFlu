@@ -45,7 +45,7 @@ class SimilarMediaFilter with _$SimilarMediaFilter {
   const factory SimilarMediaFilter({
     required String mediaTypeSelected,
     required String languageId,
-    required String mediaTypeId,
+    required int mediaTypeId,
   }) = _SimilarMediaFilter;
 }
 

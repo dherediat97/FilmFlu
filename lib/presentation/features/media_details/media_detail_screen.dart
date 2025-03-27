@@ -17,7 +17,7 @@ class MediaItemScreenDetails extends ConsumerStatefulWidget {
     required this.languageCode,
   });
 
-  final String mediaId;
+  final int mediaId;
   final String mediaType;
   final String languageCode;
 

@@ -2,11 +2,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/app/routes/app_paths.dart';
+import 'package:film_flu/app/routes/app_routes.dart';
 import 'package:film_flu/domain/models/credit_actor_entity.dart';
 import 'package:film_flu/domain/models/person_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class ActorCreditsWidget extends StatelessWidget {
   const ActorCreditsWidget({
@@ -39,8 +38,7 @@ class ActorCreditsWidget extends StatelessWidget {
                   : '${actor.character}';
 
           return ListTile(
-            onTap:
-                () => context.push('${AppRoutePaths.moviesRoute}/${actor.id}'),
+            onTap: () => PersonRoute(id: actor.id).go(context),
             title: ClipRRect(
               borderRadius: BorderRadius.circular(32.0),
               child: CachedNetworkImage(

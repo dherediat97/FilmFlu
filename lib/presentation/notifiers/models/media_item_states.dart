@@ -24,7 +24,7 @@ class MediaItemDetailState with _$MediaItemDetailState {
 class CreditsMediaState with _$CreditsMediaState {
   const factory CreditsMediaState({
     required String mediaType,
-    required String id,
+    required int id,
     required String languageName,
   }) = _CreditsMediaState;
 }
@@ -33,7 +33,7 @@ class CreditsMediaState with _$CreditsMediaState {
 class MediaItemState with _$MediaItemState {
   const factory MediaItemState({
     required String mediaType,
-    required String id,
+    required int id,
     required String languageName,
   }) = _MediaItemState;
 }
