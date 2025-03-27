@@ -25,8 +25,8 @@ class _AppBarActionsState extends ConsumerState<AppBarActions> {
           IconButton(
             icon: Icon(Icons.settings, color: AppColors.backgroundColorLight),
             onPressed: () {
-              SettingsRoute().go(context);
               settingsNotifier.setTabSelected(SettingsTab.general);
+              SettingsRoute().push(context);
             },
           ),
         ],

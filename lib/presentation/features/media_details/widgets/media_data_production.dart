@@ -26,10 +26,10 @@ class MediaDataProduction extends StatelessWidget {
         _,
         index,
       ) {
-        FilmWorkerEntity? filmWorker = crew[index];
+        FilmWorkerEntity filmWorker = crew[index];
 
         return ListTile(
-          onTap: () => PersonRoute(id: filmWorker.id).go(context),
+          onTap: () => PersonRoute(id: filmWorker.id).push(context),
           title: ClipRRect(
             child: CachedNetworkImage(
               imageUrl: '${AppUrls.personImgBaseUrl}${filmWorker.profilePath}',

@@ -26,15 +26,15 @@ class PersonRemoteEntity with _$PersonRemoteEntity {
 
 extension MediaItemToRemoteEntityExtension on PersonRemoteEntity {
   PersonEntity toPersonEntity() => PersonEntity(
-        id: id,
-        name: name,
-        gender: gender,
-        alias: alias ?? [],
-        biography: biography ?? '',
-        birthday: birthday ?? '',
-        placeOfBirth: placeOfBirth ?? '',
-        deathday: deathday ?? '',
-        profilePath: profilePath ?? '',
-        credits: credits?.toCreditsPersonEntity(),
-      );
+    id: id,
+    name: name,
+    gender: gender,
+    alias: alias ?? [],
+    biography: biography ?? '',
+    birthday: birthday ?? '',
+    placeOfBirth: placeOfBirth ?? '',
+    deathday: deathday ?? '',
+    profilePath: profilePath ?? '',
+    credits: credits?.toCreditsPersonEntity(),
+  );
 }

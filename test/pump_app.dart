@@ -1,4 +1,5 @@
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
+import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:film_flu/presentation/features/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -13,7 +14,7 @@ Future<void> pumpApp({
   required var providers,
 }) async {
   final widget = ProviderScope(
-    child: HomeScreen(),
+    child: HomeScreen(mediaTypeSelected: MediaType.movie),
   );
 
   await tester.pumpWidget(

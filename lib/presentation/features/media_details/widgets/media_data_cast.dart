@@ -3,11 +3,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/app/routes/app_paths.dart';
+import 'package:film_flu/app/routes/app_routes.dart';
 import 'package:film_flu/domain/models/actor_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 
 class MediaDataCast extends StatefulWidget {
   const MediaDataCast({super.key, required this.cast});
@@ -34,9 +33,7 @@ class _MediaDataCastState extends State<MediaDataCast> {
           ActorEntity actor = widget.cast[index];
 
           return ListTile(
-            onTap: () {
-              context.push('${AppRoutePaths.personRoute}/${actor.id}');
-            },
+            onTap: () => PersonRoute(id: actor.id).push(context),
             title: ClipRRect(
               child: CachedNetworkImage(
                 imageUrl: '${AppUrls.personImgBaseUrl}${actor.profilePath}',

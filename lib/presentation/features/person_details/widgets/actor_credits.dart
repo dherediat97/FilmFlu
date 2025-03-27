@@ -32,13 +32,13 @@ class ActorCreditsWidget extends StatelessWidget {
         itemBuilder: (context, index) {
           CreditActorEntity actor = credits[index];
 
-          String? movieTitle =
+          String movieTitle =
               actor.title != null
                   ? '${actor.character} ${context.localizations.in_preposition} ${actor.title}'
                   : '${actor.character}';
 
           return ListTile(
-            onTap: () => PersonRoute(id: actor.id).go(context),
+            onTap: () => MovieRoute(id: actor.id).push(context),
             title: ClipRRect(
               borderRadius: BorderRadius.circular(32.0),
               child: CachedNetworkImage(

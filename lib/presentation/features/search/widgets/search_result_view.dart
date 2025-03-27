@@ -1,9 +1,9 @@
 import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
+import 'package:film_flu/app/routes/app_routes.dart';
 import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:film_flu/domain/models/search_result_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class SearchResultView extends ListTile {
   const SearchResultView({
@@ -32,7 +32,7 @@ class SearchResultView extends ListTile {
       onTap: () {
         controller.closeView(null);
         controller.clear();
-        context.push('/main/${searchResult.mediaType.name}/${searchResult.id}');
+        PersonRoute(id: searchResult.id).push(context);
       },
       titleTextStyle: Theme.of(context).textTheme.titleSmall,
       leading: Image.network(
@@ -53,7 +53,7 @@ class SearchResultView extends ListTile {
       onTap: () {
         controller.closeView(null);
         controller.clear();
-        context.push('/main/${searchResult.mediaType.name}/${searchResult.id}');
+        SerieRoute(id: searchResult.id).push(context);
       },
       titleTextStyle: Theme.of(context).textTheme.titleSmall,
       leading: Image.network(
@@ -74,7 +74,7 @@ class SearchResultView extends ListTile {
       onTap: () {
         controller.closeView(null);
         controller.clear();
-        context.push('/main/${searchResult.mediaType.name}/${searchResult.id}');
+        MovieRoute(id: searchResult.id).push(context);
       },
       titleTextStyle: Theme.of(context).textTheme.titleSmall,
       leading: Image.network(

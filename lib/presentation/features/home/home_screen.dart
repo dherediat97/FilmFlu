@@ -1,20 +1,24 @@
 import 'package:film_flu/presentation/features/media_list/widgets/movies_list.dart';
 import 'package:film_flu/presentation/features/person_list/trending_person_list.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/series_list.dart';
-import 'package:film_flu/presentation/notifiers/home_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:film_flu/domain/enums/media_types.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeScreen extends ConsumerWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key, required this.mediaTypeSelected});
+
+  final MediaType mediaTypeSelected;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    Widget child = const MoviesListWidget();
-    final state = ref.watch(homeProvider);
+  State<HomeScreen> createState() => _HomeScreenState();
+}
 
-    switch (state) {
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  Widget build(BuildContext context) {
+    Widget child = const MoviesListWidget();
+
+    switch (widget.mediaTypeSelected) {
       case MediaType.movie:
         child = const MoviesListWidget();
         break;
