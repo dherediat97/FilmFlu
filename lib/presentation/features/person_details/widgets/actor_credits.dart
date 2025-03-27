@@ -1,11 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_routes.dart';
 import 'package:film_flu/domain/models/credit_actor_entity.dart';
 import 'package:film_flu/domain/models/person_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ActorCreditsWidget extends StatelessWidget {
   const ActorCreditsWidget({
@@ -60,12 +62,21 @@ class ActorCreditsWidget extends StatelessWidget {
                 width: 120,
                 fit: BoxFit.cover,
                 errorWidget: (context, error, stackTrace) {
-                  return Image.network(
-                    '${AppUrls.personImgBaseUrl}${person.profilePath}',
-                    height: 200,
-                    width: 120,
-                    fit: BoxFit.cover,
-                  );
+                  if (person.gender == 2) {
+                    return SvgPicture.asset(
+                      AppAssets.actorImageIcon,
+                      height: 160,
+                      width: 150,
+                      fit: BoxFit.cover,
+                    );
+                  } else {
+                    return SvgPicture.asset(
+                      AppAssets.actressImageIcon,
+                      height: 160,
+                      width: 150,
+                      fit: BoxFit.cover,
+                    );
+                  }
                 },
               ),
             ),
