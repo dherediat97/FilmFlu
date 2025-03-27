@@ -11,25 +11,25 @@ import 'package:film_flu/domain/repository/media_repository.dart';
 abstract class MediaUseCase {
   Future<MediaItemEntity> getMediaItem(
     String mediaTypeSelected,
-    String mediaTypeId,
+    int mediaTypeId,
     String languageName,
   );
 
   Future<CreditsMediaEntity?> getCredits(
     String mediaTypeSelected,
-    String mediaTypeId,
+    int mediaTypeId,
     String languageName,
   );
 
   Future<List<ReviewEntity>> getReviews(
     String mediaTypeSelected,
-    String mediaTypeId,
+    int mediaTypeId,
     String languageName,
   );
 
   Future<(int page, List<MediaSimpleItemEntity> items)> getSimilars(
     String mediaTypeSelected,
-    String mediaTypeId,
+    int mediaTypeId,
     String languageName,
     int page,
   );
@@ -75,7 +75,7 @@ class MediaUseCaseImpl extends MediaUseCase {
   @override
   Future<MediaItemEntity> getMediaItem(
     String mediaTypeSelected,
-    String mediaTypeId,
+    int mediaTypeId,
     String languageName,
   ) async {
     return mediaRepository.getMediaItem(
@@ -88,7 +88,7 @@ class MediaUseCaseImpl extends MediaUseCase {
   @override
   Future<CreditsMediaEntity?> getCredits(
     String mediaTypeSelected,
-    String mediaTypeId,
+    int mediaTypeId,
     String languageName,
   ) async {
     return await mediaRepository.getCredits(
@@ -101,7 +101,7 @@ class MediaUseCaseImpl extends MediaUseCase {
   @override
   Future<(int page, List<MediaSimpleItemEntity> items)> getSimilars(
     String mediaTypeSelected,
-    String mediaTypeId,
+    int mediaTypeId,
     String languageName,
     int page,
   ) async {
@@ -116,7 +116,7 @@ class MediaUseCaseImpl extends MediaUseCase {
   @override
   Future<List<ReviewEntity>> getReviews(
     String mediaTypeSelected,
-    String mediaTypeId,
+    int mediaTypeId,
     String languageName,
   ) async {
     return await mediaRepository.getReviews(

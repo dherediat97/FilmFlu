@@ -7,7 +7,7 @@ part 'media_simple_item_entity.g.dart';
 class MediaSimpleItemEntity with _$MediaSimpleItemEntity {
   const factory MediaSimpleItemEntity({
     @JsonKey(name: 'genre_ids') List<int>? genreIds,
-    int? id,
+    @JsonKey(name: 'id') required int id,
     @JsonKey(name: 'poster_path') String? posterPath,
     @JsonKey(name: 'title') String? title,
   }) = _MediaSimpleItemEntity;

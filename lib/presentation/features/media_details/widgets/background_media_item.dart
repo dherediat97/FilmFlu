@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/app/routes/app_paths.dart';
+import 'package:film_flu/app/routes/app_routes.dart';
 import 'package:film_flu/core/utils/util_date.dart';
 import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:film_flu/domain/models/media_item_entity.dart';
@@ -9,7 +9,6 @@ import 'package:film_flu/presentation/features/media_details/widgets/background_
 import 'package:film_flu/presentation/features/media_details/widgets/genres_list_widget.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class BackgroundMediaItem extends StatefulWidget {
   const BackgroundMediaItem({
@@ -105,11 +104,13 @@ class _BackgroundMediaItemState extends State<BackgroundMediaItem> {
                                 },
                               );
 
-                              context.push(
-                                mediaTypeSelected == MediaType.movie
-                                    ? '${AppRoutePaths.moviesRoute}/${widget.mediaItem.id}'
-                                    : '${AppRoutePaths.seriesRoute}/${widget.mediaItem.id}',
-                              );
+                              mediaTypeSelected == MediaType.movie
+                                  ? MovieRoute(
+                                    id: widget.mediaItem.id,
+                                  ).go(context)
+                                  : SerieRoute(
+                                    id: widget.mediaItem.id,
+                                  ).go(context);
                             },
                             icon: const Icon(
                               Icons.info_outline,

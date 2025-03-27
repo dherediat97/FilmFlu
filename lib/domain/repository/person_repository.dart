@@ -15,5 +15,5 @@ abstract interface class PersonRepository {
     int page,
   );
 
-  Future<PersonEntity> fetchPersonData(String personId, String languageCode);
+  Future<PersonEntity> fetchPersonData(int personId, String languageCode);
 }

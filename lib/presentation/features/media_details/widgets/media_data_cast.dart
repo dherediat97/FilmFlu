@@ -35,7 +35,7 @@ class _MediaDataCastState extends State<MediaDataCast> {
 
           return ListTile(
             onTap: () {
-              context.push('${AppRoutePaths.personDetailsRoute}/${actor.id}');
+              context.push('${AppRoutePaths.personRoute}/${actor.id}');
             },
             title: ClipRRect(
               child: CachedNetworkImage(

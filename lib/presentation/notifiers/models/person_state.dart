@@ -5,7 +5,7 @@ part 'person_state.freezed.dart';
 @freezed
 class PersonState with _$PersonState {
   const factory PersonState({
-    required String personId,
+    required int personId,
     required String languageName,
   }) = _PersonState;
 }

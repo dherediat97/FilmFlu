@@ -2,7 +2,6 @@ import 'package:film_flu/presentation/features/media_list/widgets/movies_list.da
 import 'package:film_flu/presentation/features/person_list/trending_person_list.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/series_list.dart';
 import 'package:film_flu/presentation/notifiers/home_notifier.dart';
-import 'package:film_flu/presentation/widgets/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
 import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,6 +25,6 @@ class HomeScreen extends ConsumerWidget {
         child = const TrendingPersonListWidget();
         break;
     }
-    return ScaffoldPage(child: child);
+    return child;
   }
 }

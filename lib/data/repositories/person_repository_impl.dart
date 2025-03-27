@@ -10,7 +10,7 @@ import 'package:film_flu/domain/repository/person_repository.dart';
 class PersonRepositoryImpl implements PersonRepository {
   @override
   Future<PersonEntity> fetchPersonData(
-    String personId,
+    int personId,
     String languageCode,
   ) async {
     try {

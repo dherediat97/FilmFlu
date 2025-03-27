@@ -19,25 +19,25 @@ MediaRepository mediaRepository(ref) => MediaRepositoryImpl();
 abstract interface class MediaRepository {
   Future<MediaItemEntity> getMediaItem(
     String mediaTypeSelected,
-    String mediaTypeId,
+    int mediaTypeId,
     String languageName,
   );
 
   Future<CreditsMediaEntity?> getCredits(
     String mediaTypeSelected,
-    String mediaTypeId,
+    int mediaTypeId,
     String languageName,
   );
 
   Future<List<ReviewEntity>> getReviews(
     String mediaTypeSelected,
-    String mediaTypeId,
+    int mediaTypeId,
     String languageName,
   );
 
   Future<(int page, List<MediaSimpleItemEntity> items)> getSimilars(
     String mediaTypeSelected,
-    String mediaTypeId,
+    int mediaTypeId,
     String languageName,
     int page,
   );

@@ -117,7 +117,7 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
                   itemExtent: 200,
                   onTap: (index) {
                     context.push(
-                      '${AppRoutePaths.personDetailsRoute}/${items[index].id}',
+                      '${AppRoutePaths.personRoute}/${items[index].id}',
                     );
                   },
                   children: List.generate(items.length, (int index) {
@@ -146,7 +146,7 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
                   itemExtent: 200,
                   onTap: (index) {
                     context.push(
-                      '${AppRoutePaths.personDetailsRoute}/${items[index].id}',
+                      '${AppRoutePaths.personRoute}/${items[index].id}',
                     );
                   },
                   children: List.generate(items.length, (int index) {

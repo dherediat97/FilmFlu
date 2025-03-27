@@ -3,11 +3,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/constants/app_urls.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/app/routes/app_paths.dart';
+import 'package:film_flu/app/routes/app_routes.dart';
 import 'package:film_flu/domain/models/film_worker_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 
 class MediaDataProduction extends StatelessWidget {
   const MediaDataProduction({super.key, required this.crew});
@@ -30,10 +29,7 @@ class MediaDataProduction extends StatelessWidget {
         FilmWorkerEntity? filmWorker = crew[index];
 
         return ListTile(
-          onTap:
-              () => context.push(
-                '${AppRoutePaths.personDetailsRoute}/${filmWorker.id}',
-              ),
+          onTap: () => PersonRoute(id: filmWorker.id).go(context),
           title: ClipRRect(
             child: CachedNetworkImage(
               imageUrl: '${AppUrls.personImgBaseUrl}${filmWorker.profilePath}',

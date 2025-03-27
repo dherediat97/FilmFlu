@@ -21,7 +21,7 @@ class MediaRepositoryImpl implements MediaRepository {
   @override
   Future<MediaItemEntity> getMediaItem(
     String mediaTypeSelected,
-    String mediaTypeId,
+    int mediaTypeId,
     String languageCode,
   ) async {
     try {
@@ -45,7 +45,7 @@ class MediaRepositoryImpl implements MediaRepository {
   @override
   Future<CreditsMediaEntity> getCredits(
     String mediaTypeSelected,
-    String mediaTypeId,
+    int mediaTypeId,
     String languageName,
   ) async {
     try {
@@ -66,7 +66,7 @@ class MediaRepositoryImpl implements MediaRepository {
   @override
   Future<List<ReviewEntity>> getReviews(
     String mediaTypeSelected,
-    String mediaTypeId,
+    int mediaTypeId,
     String languageName,
   ) async {
     try {
@@ -91,7 +91,7 @@ class MediaRepositoryImpl implements MediaRepository {
   @override
   Future<(int page, List<MediaSimpleItemEntity> items)> getSimilars(
     String mediaTypeSelected,
-    String mediaTypeId,
+    int mediaTypeId,
     String languageName,
     int page,
   ) async {

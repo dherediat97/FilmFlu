@@ -23,9 +23,8 @@ class _ScaffoldPageState extends ConsumerState<ScaffoldPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: widget.floatingActionButton,
-      appBar: TopAppBar(isMainMenu: true, mediaTypeSelected: MediaType.movie),
+      appBar: TopAppBar(),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
@@ -49,7 +48,8 @@ class _ScaffoldPageState extends ConsumerState<ScaffoldPage> {
           ref.watch(homeProvider.notifier).setMediaTypeSelected(switch (index) {
             0 => MediaType.movie,
             1 => MediaType.tv,
-            _ => MediaType.person,
+            2 => MediaType.person,
+            _ => MediaType.movie,
           });
         },
       ),

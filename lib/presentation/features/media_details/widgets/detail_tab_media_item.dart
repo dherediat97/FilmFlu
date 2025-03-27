@@ -25,7 +25,7 @@ class DetailTabMediaItem extends ConsumerStatefulWidget {
   });
 
   final String mediaTypeSelected;
-  final String mediaItemId;
+  final int mediaItemId;
 
   @override
   ConsumerState<DetailTabMediaItem> createState() => _DetailTabMediaItem();

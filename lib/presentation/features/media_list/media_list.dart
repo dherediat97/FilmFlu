@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/app/routes/app_paths.dart';
+import 'package:film_flu/app/routes/app_routes.dart';
 import 'package:film_flu/domain/enums/genre_ids.dart';
 import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:film_flu/domain/enums/sort_options.dart';
@@ -12,7 +12,6 @@ import 'package:film_flu/presentation/widgets/shimmer_loading.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 class MediaList extends ConsumerStatefulWidget {
   const MediaList({
@@ -141,6 +140,7 @@ class _MediaDataList extends ConsumerState<MediaList> {
                   padding: const EdgeInsets.all(8.0),
                   itemExtent: 180,
                   onTap: (index) {
+                    final movie = items[index];
                     FirebaseAnalytics.instance.logScreenView(
                       screenName: 'details_media_item',
                     );
@@ -150,9 +150,7 @@ class _MediaDataList extends ConsumerState<MediaList> {
                       parameters: {'mediaType': widget.mediaType.name},
                     );
 
-                    context.push(
-                      '${AppRoutePaths.moviesRoute}/${items[index].id}',
-                    );
+                    MovieRoute(id: movie.id).go(context);
                   },
                   children: List.generate(items.length, (int index) {
                     return MediaCarrouselItem(mediaItem: items[index]);
@@ -167,9 +165,7 @@ class _MediaDataList extends ConsumerState<MediaList> {
                   itemExtent: 180,
                   controller: _carouselController,
                   onTap: (index) {
-                    context.push(
-                      '${AppRoutePaths.seriesRoute}/${items[index].id}',
-                    );
+                    final tvSerie = items[index];
                     FirebaseAnalytics.instance.logScreenView(
                       screenName: 'details_media_item',
                     );
@@ -177,6 +173,7 @@ class _MediaDataList extends ConsumerState<MediaList> {
                       name: 'view_details',
                       parameters: {'mediaType': widget.mediaType.name},
                     );
+                    SerieRoute(id: tvSerie.id).go(context);
                   },
                   children: List.generate(items.length, (int index) {
                     return MediaCarrouselItem(mediaItem: items[index]);
