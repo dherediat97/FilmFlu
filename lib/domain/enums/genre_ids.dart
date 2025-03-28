@@ -8,13 +8,13 @@ enum GenreIds {
     id: 28,
     name: 'Action',
     mediaType: MediaType.movie,
-    icon: Symbols.question_mark,
+    icon: Symbols.swords,
   ),
   adventure(
     id: 12,
     name: 'Adventure',
     mediaType: MediaType.movie,
-    icon: Symbols.explore,
+    icon: Symbols.travel_explore,
   ),
   animationMovies(
     id: 16,
@@ -26,25 +26,25 @@ enum GenreIds {
     id: 35,
     name: 'Comedy',
     mediaType: MediaType.movie,
-    icon: Symbols.mood,
+    icon: Symbols.sentiment_very_satisfied,
   ),
   crimeMovies(
     id: 80,
     name: 'Crime',
     mediaType: MediaType.movie,
-    icon: Symbols.question_mark,
+    icon: Symbols.gavel,
   ),
   documentaryMovies(
     id: 99,
     name: 'Documentary',
     mediaType: MediaType.movie,
-    icon: Symbols.question_mark,
+    icon: Symbols.library_books,
   ),
   dramaMovies(
     id: 18,
     name: 'Drama',
     mediaType: MediaType.movie,
-    icon: Symbols.theater_comedy,
+    icon: Symbols.theaters,
   ),
   familyMovies(
     id: 10751,
@@ -62,13 +62,13 @@ enum GenreIds {
     id: 36,
     name: 'History',
     mediaType: MediaType.movie,
-    icon: Symbols.account_balance_rounded,
+    icon: Symbols.history_edu,
   ),
   horrorMovies(
     id: 27,
     name: 'Horror',
     mediaType: MediaType.movie,
-    icon: Symbols.question_mark,
+    icon: Symbols.masks,
   ),
   musicMovies(
     id: 10402,
@@ -80,74 +80,74 @@ enum GenreIds {
     id: 9648,
     name: 'Mystery',
     mediaType: MediaType.movie,
-    icon: Symbols.toys_and_games,
+    icon: Symbols.search,
   ),
   romanceMovies(
     id: 10749,
     name: 'Romance',
     mediaType: MediaType.movie,
-    icon: Symbols.favorite_rounded,
+    icon: Symbols.heart_broken,
   ),
   scifiMovies(
     id: 878,
     name: 'Science Fiction',
     mediaType: MediaType.movie,
-    icon: Symbols.science,
+    icon: Symbols.rocket_launch,
   ),
   tvMovies(
     id: 10770,
     name: 'TV Movie',
     mediaType: MediaType.movie,
-    icon: Symbols.question_mark,
+    icon: Symbols.live_tv,
   ),
   thrillerMovies(
     id: 53,
     name: 'Thriller',
     mediaType: MediaType.movie,
-    icon: Symbols.question_mark,
+    icon: Symbols.psychology,
   ),
   warMovies(
     id: 10752,
     name: 'War',
     mediaType: MediaType.movie,
-    icon: Symbols.question_mark,
+    icon: Symbols.military_tech,
   ),
   westernMovies(
     id: 37,
     name: 'Western',
     mediaType: MediaType.movie,
-    icon: Symbols.question_mark,
+    icon: Symbols.smoking_rooms,
   ),
   //TV SERIES
   actionAdventureSeries(
     id: 10759,
     name: 'Action & Adventure',
     mediaType: MediaType.tv,
-    icon: Symbols.question_mark,
+    icon: Symbols.explore_nearby,
   ),
   animationSeries(
     id: 16,
-    name: 'Adventure',
+    name: 'Animation',
     mediaType: MediaType.tv,
-    icon: Symbols.question_mark,
+    icon: Symbols.animation,
   ),
   comedySeries(
     id: 35,
     name: 'Comedy',
     mediaType: MediaType.tv,
-    icon: Symbols.mood,
+    icon: Symbols.theater_comedy,
   ),
   crimeSeries(
     id: 80,
     name: 'Crime',
     mediaType: MediaType.tv,
-    icon: Symbols.question_mark,
+    icon: Symbols.gavel,
   ),
   documentarySeries(
     id: 99,
     name: 'Documentary',
     mediaType: MediaType.tv,
-    icon: Symbols.question_mark,
+    icon: Symbols.library_books,
   ),
   dramaSeries(
     id: 18,
@@ -189,31 +189,31 @@ enum GenreIds {
     id: 10765,
     name: 'Sci-Fi & Fantasy',
     mediaType: MediaType.tv,
-    icon: Symbols.castle,
+    icon: Symbols.magic_exchange,
   ),
   soapSeries(
     id: 10766,
     name: 'Soap',
     mediaType: MediaType.tv,
-    icon: Symbols.question_mark,
+    icon: Symbols.heart_broken,
   ),
   talkSeries(
     id: 10767,
     name: 'Talk',
     mediaType: MediaType.tv,
-    icon: Symbols.question_mark,
+    icon: Symbols.record_voice_over,
   ),
   warSeries(
     id: 10768,
     name: 'War & Politics',
     mediaType: MediaType.tv,
-    icon: Symbols.question_mark,
+    icon: Symbols.flag_circle,
   ),
   westernSeries(
     id: 37,
     name: 'Western',
     mediaType: MediaType.tv,
-    icon: Symbols.question_mark,
+    icon: Symbols.smoking_rooms,
   );
 
   const GenreIds({
@@ -226,5 +226,5 @@ enum GenreIds {
   final String name;
   final int id;
   final MediaType mediaType;
-  final IconData? icon;
+  final IconData icon;
 }
