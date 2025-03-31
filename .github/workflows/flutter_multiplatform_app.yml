@@ -74,6 +74,7 @@ jobs:
   android:
     runs-on: ubuntu-latest
     steps:
+        - uses: actions/checkout@v4
         - uses: ./.github/workflows/build_app.yml
         - run: flutter build apk --release
         - name: Create Release
