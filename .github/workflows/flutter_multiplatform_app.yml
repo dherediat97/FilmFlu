@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/workflows/build_app.yml
+      - uses: ./.github/actions/build_app.yml
         with:
           branch_name: ${{ env.NAME }}
       - name: Install dependencies
@@ -49,7 +49,7 @@ jobs:
 
     steps:
      - uses: actions/checkout@v4
-     - uses: ./.github/workflows/build_app.yml
+     - uses: ./.github/actions/build_app.yml
        with:
          branch_name: ${{ env.NAME }}
      - name: Build artifacts
@@ -81,7 +81,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@v4
-        - uses: ./.github/workflows/build_app.yml
+        - uses: ./.github/actions/build_app.yml
           with:
             branch_name: ${{ env.NAME }}
         - run: flutter build apk --release
