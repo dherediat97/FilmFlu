@@ -44,15 +44,15 @@ class _BottomBarState extends ConsumerState<BottomBar> {
 
         switch (index) {
           case 0:
-            HomeScreenRoute(mediaTypeSelected: MediaType.movie).go(context);
+            HomeScreenRoute(mediaTypeSelected: MediaType.movie).push(context);
             break;
           case 1:
-            HomeScreenRoute(mediaTypeSelected: MediaType.tv).go(context);
+            HomeScreenRoute(mediaTypeSelected: MediaType.tv).push(context);
             break;
           case 2:
-            HomeScreenRoute(mediaTypeSelected: MediaType.person).go(context);
+            HomeScreenRoute(mediaTypeSelected: MediaType.person).push(context);
           default:
-            HomeScreenRoute(mediaTypeSelected: MediaType.movie).go(context);
+            HomeScreenRoute(mediaTypeSelected: MediaType.movie).push(context);
             break;
         }
       },

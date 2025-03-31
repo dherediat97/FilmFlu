@@ -1,31 +1,41 @@
 import 'package:envied/envied.dart';
-
 part 'env.g.dart';
 
-@Envied()
-abstract class Env {
-  @EnviedField(varName: 'TMDB_KEY')
-  static const String tmdbApiKey = _Env.tmdbApiKey;
+@Envied(path: '.env', useConstantCase: true, obfuscate: false)
+final class Env {
+  @EnviedField()
+  static String tmdbApiKey = _Env.tmdbApiKey;
 
-  @EnviedField(varName: 'FIREBASE_API_KEY_WEB')
-  static const String firebaseApiKeyWeb = _Env.firebaseApiKeyWeb;
+  @EnviedField()
+  static String firebaseApiKeyWeb = _Env.firebaseApiKeyWeb;
 
-  @EnviedField(varName: 'FIREBASE_API_KEY_ANDROID')
-  static const String firebaseApiKeyAndroid = _Env.firebaseApiKeyAndroid;
+  @EnviedField()
+  static String firebaseApiKeyAndroid = _Env.firebaseApiKeyWeb;
 
-  @EnviedField(varName: 'FIREBASE_MESSAGING_SENDER_ID')
-  static const String firebaseMessagingSenderId =
-      _Env.firebaseMessagingSenderId;
+  @EnviedField()
+  static String firebaseApiKeyApple = _Env.firebaseApiKeyApple;
 
-  @EnviedField(varName: 'FIREBASE_APP_ID_WEB')
-  static const String firebaseAppIdWeb = _Env.firebaseAppIdWeb;
+  @EnviedField()
+  static String firebaseMessagingSenderId = _Env.firebaseMessagingSenderId;
 
-  @EnviedField(varName: 'FIREBASE_APP_ID_ANDROID')
-  static const String firebaseAppIdAndroid = _Env.firebaseAppIdAndroid;
+  @EnviedField()
+  static String firebaseAppIdWeb = _Env.firebaseAppIdWeb;
 
-  @EnviedField(varName: 'FIREBASE_PROJECT_NAME')
-  static const String firebaseProjectName = _Env.firebaseProjectName;
+  @EnviedField()
+  static String firebaseAppIdAndroid = _Env.firebaseAppIdAndroid;
 
-  @EnviedField(varName: 'FIREBASE_MEASUREMENT_ID_WEB')
-  static const String firebaseMeasurementIdWeb = _Env.firebaseMeasurementIdWeb;
+  @EnviedField()
+  static String firebaseAppIdApple = _Env.firebaseAppIdApple;
+
+  @EnviedField()
+  static String firebaseProjectName = _Env.firebaseProjectName;
+
+  @EnviedField()
+  static String firebaseClientIdApple = _Env.firebaseClientIdApple;
+
+  @EnviedField()
+  static String firebaseMeasurementId = _Env.firebaseMeasurementId;
+
+  @EnviedField()
+  static String googleClientId = _Env.googleClientId;
 }

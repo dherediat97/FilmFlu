@@ -1,7 +1,7 @@
 import 'package:film_flu/env/env.dart';
 
 class AppConstants {
-  static const Map<String, String> baseHeaders = <String, String>{
+  static Map<String, String> baseHeaders = <String, String>{
     'Authorization': 'Bearer ${Env.tmdbApiKey}',
     'Content-Type': 'application/json',
   };

@@ -24,7 +24,7 @@ class SettingsAppBarActions extends ConsumerWidget {
               appState.isDarkMode ? Icons.light_mode : Icons.dark_mode,
               color: Theme.of(context).colorScheme.onSurface,
             ),
-            onPressed: () => ref.read(appProvider.notifier).toggle(),
+            onPressed: () => appNotifier.toggle(),
           ),
           IconButton(
             icon: SvgPicture.asset(
@@ -40,7 +40,7 @@ class SettingsAppBarActions extends ConsumerWidget {
               launchUrl(Uri.parse(AppConstants.myGithubPage));
             },
           ),
-          DropdownButton<Locale>(
+          DropdownButton(
             dropdownColor: Theme.of(context).colorScheme.surface,
             onChanged: (language) => appNotifier.changeLanguage(language!),
             selectedItemBuilder:
@@ -49,7 +49,7 @@ class SettingsAppBarActions extends ConsumerWidget {
                         .map((language) => LanguagePicker(language: language))
                         .toList(),
             padding: const EdgeInsets.all(8),
-            elevation: 4,
+            autofocus: false,
             value: ref.watch(appProvider).appLocale,
             underline: const SizedBox(height: 0),
             items:

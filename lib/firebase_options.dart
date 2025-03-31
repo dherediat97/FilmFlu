@@ -24,25 +24,13 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for linux - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       default:
         throw UnsupportedError(
           'DefaultFirebaseOptions are not supported for this platform.',
@@ -50,21 +38,51 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
+  static FirebaseOptions web = FirebaseOptions(
     apiKey: Env.firebaseApiKeyWeb,
     appId: Env.firebaseAppIdWeb,
     messagingSenderId: Env.firebaseMessagingSenderId,
     projectId: Env.firebaseProjectName,
     authDomain: '${Env.firebaseProjectName}.firebaseapp.com',
     storageBucket: '${Env.firebaseProjectName}.firebasestorage.app',
-    measurementId: Env.firebaseMeasurementIdWeb,
+    measurementId: Env.firebaseMeasurementId,
   );
 
-  static const FirebaseOptions android = FirebaseOptions(
+  static FirebaseOptions android = FirebaseOptions(
     apiKey: Env.firebaseApiKeyAndroid,
     appId: Env.firebaseAppIdAndroid,
     messagingSenderId: Env.firebaseMessagingSenderId,
     projectId: Env.firebaseProjectName,
     storageBucket: '${Env.firebaseProjectName}.firebasestorage.app',
+  );
+
+  static FirebaseOptions windows = FirebaseOptions(
+    apiKey: Env.firebaseApiKeyWeb,
+    appId: Env.firebaseAppIdWeb,
+    messagingSenderId: Env.firebaseMessagingSenderId,
+    projectId: Env.firebaseProjectName,
+    authDomain: '${Env.firebaseProjectName}.firebaseapp.com',
+    storageBucket: '${Env.firebaseProjectName}.firebasestorage.app',
+    measurementId: Env.firebaseMeasurementId,
+  );
+
+  static FirebaseOptions macos = FirebaseOptions(
+    apiKey: Env.firebaseApiKeyApple,
+    appId: Env.firebaseAppIdApple,
+    messagingSenderId: Env.firebaseMessagingSenderId,
+    projectId: Env.firebaseProjectName,
+    storageBucket: '${Env.firebaseProjectName}.firebasestorage.app',
+    iosClientId: Env.firebaseClientIdApple,
+    iosBundleId: 'com.dherediat97.filmflu',
+  );
+
+  static FirebaseOptions ios = FirebaseOptions(
+    apiKey: Env.firebaseApiKeyApple,
+    appId: Env.firebaseAppIdApple,
+    messagingSenderId: Env.firebaseMessagingSenderId,
+    projectId: Env.firebaseProjectName,
+    storageBucket: '${Env.firebaseProjectName}.firebasestorage.app',
+    iosClientId: Env.firebaseClientIdApple,
+    iosBundleId: 'com.dherediat97.filmflu',
   );
 }

@@ -12,7 +12,12 @@
           "package_name": "com.dherediat97.filmflu"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "393799159513-0vmi5c2gp9b64j0rt2vod0ol0vjerlco.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBVgg6W2mNnEewHyiagAJDBSnSGlyaNMS4"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "393799159513-0vmi5c2gp9b64j0rt2vod0ol0vjerlco.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
