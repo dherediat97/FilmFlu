@@ -5,6 +5,10 @@ on:
         reusable_output:
           description: 'Output from the reusable workflow'
           value: ${{ jobs.reusable-workflow-job.outputs.job_output }}
+  workflow_run:
+      workflows: [Build]
+      types: [requested]
+      branches: [main]
 defaults:
   run:
     shell: bash
