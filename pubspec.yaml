@@ -51,6 +51,9 @@ dependencies:
   firebase_analytics: ^11.4.4
   firebase_core: ^3.3.0
   color_blindness: ^0.2.0
+  firebase_auth: ^5.5.1
+  google_sign_in: ^6.3.0
+  sign_button: ^2.0.6
 
 dev_dependencies:
   flutter_test:
@@ -72,7 +75,6 @@ dev_dependencies:
   custom_lint: ^0.7.3
   riverpod_lint: ^2.6.4
   freezed: ^2.5.8
-  google_sign_in: ^6.3.0
   go_router_builder: ^2.8.2
   build_verify: ^3.1.0
 

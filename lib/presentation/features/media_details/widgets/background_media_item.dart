@@ -52,13 +52,18 @@ class _BackgroundMediaItemState extends State<BackgroundMediaItem> {
                   maxLines: 4,
                   overflow: TextOverflow.ellipsis,
                 ),
-                Text(
-                  '${(widget.mediaItem.voteAverage!.round() * 10)}${context.localizations.percentange_vote}',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Colors.greenAccent,
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
+                Chip(
+                  backgroundColor: Colors.yellowAccent,
+                  padding: EdgeInsets.all(8.0),
+                  label: Text(
+                    '${(widget.mediaItem.voteAverage?.floorToDouble())}/10',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Colors.black,
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
+                  avatar: Icon(Icons.star, color: Colors.black, size: 24),
                 ),
 
                 if (widget.mediaItem.genres.isNotEmpty) ...[

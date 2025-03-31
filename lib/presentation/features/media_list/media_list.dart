@@ -104,6 +104,10 @@ class _MediaDataList extends ConsumerState<MediaList> {
   mediaWidgetList(AsyncValue<List<MediaSimpleItemEntity>> state) {
     final items = state.valueOrNull ?? [];
     final initialLoading = state.isLoading && items.isEmpty;
+    final icon =
+        GenreIds.values
+            .firstWhere((element) => element.id == widget.genreId.id)
+            .icon;
 
     return initialLoading
         ? Shimmer(child: buildListItem(initialLoading))
@@ -111,12 +115,15 @@ class _MediaDataList extends ConsumerState<MediaList> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                Icon(icon, color: Theme.of(context).colorScheme.primary),
+                SizedBox(width: 20),
                 AutoSizeText(
                   widget.title,
                   maxFontSize: 30,
                   minFontSize: 20,
+                  textAlign: TextAlign.start,
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
                     color: Theme.of(context).colorScheme.onSurface,
                   ),

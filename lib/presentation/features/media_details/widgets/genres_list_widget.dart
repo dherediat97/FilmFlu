@@ -1,6 +1,5 @@
-import 'package:film_flu/app/constants/app_colors.dart';
-import 'package:film_flu/domain/enums/genre_ids.dart';
 import 'package:film_flu/domain/models/genre_entity.dart';
+import 'package:film_flu/presentation/features/media_details/widgets/genre_chip.dart';
 import 'package:flutter/material.dart';
 
 class GenresListWidget extends StatefulWidget {
@@ -21,34 +20,7 @@ class _GenresListWidgetState extends State<GenresListWidget> {
           List<Widget>.generate(widget.genres.length, (int index) {
             final firstGenre = index == 0;
             final genre = widget.genres[index];
-            final icon =
-                GenreIds.values
-                    .firstWhere((element) => element.id == genre.id)
-                    .icon;
-            return Chip(
-              backgroundColor:
-                  firstGenre
-                      ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context).colorScheme.surface,
-              label: Text(
-                genre.name,
-                style: TextStyle(
-                  color:
-                      firstGenre
-                          ? AppColors.backgroundColorLight
-                          : Theme.of(context).colorScheme.inverseSurface,
-                  fontSize: 16,
-                ),
-              ),
-              avatar: Icon(
-                icon,
-                size: 24,
-                color:
-                    firstGenre
-                        ? AppColors.backgroundColorLight
-                        : Theme.of(context).colorScheme.primary,
-              ),
-            );
+            return GenreChip(genre: genre, firstGenre: firstGenre);
           }).toList(),
     );
   }
