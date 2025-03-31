@@ -36,7 +36,7 @@ jobs:
         uses: SpicyPizza/create-envfile@v2.0
         with:
           envkey_DEBUG: false
-          envkey_TMDB_API_KEY: ${{ secrets.TMDB_KEY }}
+          envkey_TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
           envkey_FIREBASE_API_KEY_WEB: ${{ secrets.FIREBASE_API_KEY_WEB }}
           envkey_FIREBASE_API_KEY_ANDROID: ${{ secrets.FIREBASE_API_KEY_ANDROID }}
           envkey_FIREBASE_API_KEY_APPLE: ${{ secrets.FIREBASE_API_KEY_APPLE }}
