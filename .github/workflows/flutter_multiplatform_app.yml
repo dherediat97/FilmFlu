@@ -11,6 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/workflows/build_app.yml
+        with:
+          branch_name: ${{ env.NAME }}
       - name: Install dependencies
         run: sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
       - name: Install project dependencies
@@ -48,6 +50,8 @@ jobs:
     steps:
      - uses: actions/checkout@v4
      - uses: ./.github/workflows/build_app.yml
+       with:
+         branch_name: ${{ env.NAME }}
      - name: Build artifacts
        run: flutter build windows --release
      - name: Archive Release
@@ -78,6 +82,8 @@ jobs:
     steps:
         - uses: actions/checkout@v4
         - uses: ./.github/workflows/build_app.yml
+          with:
+            branch_name: ${{ env.NAME }}
         - run: flutter build apk --release
         - name: Create Release
           id: create_release
