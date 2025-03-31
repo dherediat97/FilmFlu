@@ -1,10 +1,10 @@
 name: Build App
 on:
-    workflow_call:       
-        outputs:
-         reusable_output:
-            description: 'Output from the reusable workflow'
-            value: ${{ jobs.reusable-workflow-job.outputs.job_output }}
+  workflow_call:       
+      outputs:
+        reusable_output:
+          description: 'Output from the reusable workflow'
+          value: ${{ jobs.reusable-workflow-job.outputs.job_output }}
 defaults:
   run:
     shell: bash
