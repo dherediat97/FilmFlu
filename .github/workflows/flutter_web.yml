@@ -33,7 +33,7 @@ jobs:
         - run: echo "FIREBASE_APP_ID_APPLE=${{ secrets.FIREBASE_APP_ID_APPLE }}" > .env
         - run: echo "FIREBASE_CLIENT_ID_APPLE=${{ secrets.FIREBASE_CLIENT_ID_APPLE }}" > .env
         - run: echo "FIREBASE_PROJECT_NAME=${{ secrets.FIREBASE_PROJECT_NAME }}" > .env
-        - run: echo "FIREBASE_MEASUREMENT_ID_WEB=${{ secrets.FIREBASE_MEASUREMENT_ID_WEB }}" > .env
+        - run: echo "FIREBASE_MEASUREMENT_ID=${{ secrets.FIREBASE_MEASUREMENT_ID}}" > .env
         - run: echo "GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}" > .env
         - name: Make envfile
           uses: SpicyPizza/create-envfile@v2.0
@@ -48,7 +48,7 @@ jobs:
             envkey_FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID}}
             envkey_FIREBASE_APP_ID_APPLE: ${{ secrets.FIREBASE_APP_ID_APPLE}}
             envkey_FIREBASE_CLIENT_ID_APPLE: ${{ secrets.FIREBASE_CLIENT_ID_APPLE}}
-            envkey_FIREBASE_MEASUREMENT_ID_WEB: ${{ secrets.FIREBASE_MEASUREMENT_ID_WEB}}
+            envkey_FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID}}
             envkey_FIREBASE_PROJECT_NAME: ${{ secrets.FIREBASE_PROJECT_NAME}}
             envkey_GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID}}
             file_name: .env
