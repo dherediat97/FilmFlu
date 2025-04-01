@@ -9,14 +9,14 @@ class PersonEntity with _$PersonEntity {
   const factory PersonEntity({
     required String name,
     required int gender,
-    List<String>? alias,
+    @Default([]) List<String> alias,
     required int id,
-    String? birthday,
-    String? deathday,
-    String? placeOfBirth,
-    String? biography,
-    String? profilePath,
-    CreditsPersonEntity? credits,
+    required String birthday,
+    @Default('') String deathday,
+    @Default('') String placeOfBirth,
+    @Default('') String biography,
+    @Default('') String profilePath,
+    required CreditsPersonEntity credits,
   }) = _PersonEntity;
 
   factory PersonEntity.fromJson(Map<String, dynamic> json) =>

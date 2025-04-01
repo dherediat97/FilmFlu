@@ -1,7 +1,7 @@
 import 'package:envied/envied.dart';
 part 'env.g.dart';
 
-@Envied(path: '.env', useConstantCase: true, obfuscate: false)
+@Envied(path: '.env', useConstantCase: true, obfuscate: true)
 final class Env {
   @EnviedField()
   static String tmdbApiKey = _Env.tmdbApiKey;

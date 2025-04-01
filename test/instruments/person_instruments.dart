@@ -9,7 +9,7 @@ class PersonDetailIntruments {
     biography:
         'Ryan Rodney Reynolds (23 de octubre de 1976) es un actor canadiense.\n\nEl éxito y el reconocimiento le llegaron con su participación en la comedia titulada Two Guys and a Girl (1998-2001), antes de que iniciara su carrera de comediante y actor dramático para la industria de cine de Hollywood. Es reconocido por sus intervenciones en producciones como Blade: Trinity (2004), The Amityville Horror (2005), Definitely, Maybe (2008), X-Men Origins: Wolverine (2009), The Proposal (2009), Buried (2010), Linterna Verde (2011) y en la adaptación cinematográfica del cómic Deadpool (2016) y su secuela, Deadpool 2.  En 2010 la revista estadounidense People lo eligió como el hombre más sexy del año.',
     birthday: '1976-10-23',
-    deathday: null,
+    deathday: '',
     gender: 2,
     alias: ['Ryan Reynolds'],
     id: 10859,
@@ -19,42 +19,30 @@ class PersonDetailIntruments {
     credits: CreditsPersonEntity(
       cast: [
         CreditActorEntity(
-          genreIds: [
-            35,
-            10749,
-          ],
+          genreIds: [35, 10749],
           id: 10065,
           originalTitle: 'Just Friends',
           title: 'Sólo amigos',
           popularity: 23.845,
         ),
         CreditActorEntity(
-          genreIds: [
-            27,
-            53,
-          ],
+          genreIds: [27, 53],
           id: 10033,
           originalTitle: 'The Amityville Horror',
           title: 'La morada del miedo',
           popularity: 23.845,
-        )
+        ),
       ],
       crew: [
         CreditProductionEntity(
-          genreIds: [
-            99,
-          ],
+          genreIds: [99],
           id: 10033,
           originalTitle: 'The Whale',
           title: 'The Whale',
           popularity: 6.71,
         ),
         CreditProductionEntity(
-          genreIds: [
-            28,
-            12,
-            35,
-          ],
+          genreIds: [28, 12, 35],
           id: 77880,
           originalTitle: 'Deadpool',
           title: 'Deadpool',

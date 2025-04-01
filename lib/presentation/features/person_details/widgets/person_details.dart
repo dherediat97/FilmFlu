@@ -67,8 +67,7 @@ class PersonDetails extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 16.0),
                         child: Row(
                           children: [
-                            if (person.birthday != null &&
-                                person.birthday?.isNotEmpty == true) ...[
+                            if (person.birthday.isNotEmpty) ...[
                               Icon(
                                 Icons.celebration,
                                 color: Theme.of(context).colorScheme.onSurface,
@@ -76,7 +75,7 @@ class PersonDetails extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
                                 child: Text(
-                                  parseDate(person.birthday!).toString(),
+                                  parseDate(person.birthday).toString(),
                                   textAlign: TextAlign.start,
                                   style:
                                       Theme.of(context).textTheme.displayMedium,
@@ -86,8 +85,7 @@ class PersonDetails extends StatelessWidget {
                           ],
                         ),
                       ),
-                      if (person.deathday != null &&
-                          person.deathday?.isNotEmpty == true) ...[
+                      if (person.deathday.isNotEmpty) ...[
                         Padding(
                           padding: const EdgeInsets.only(top: 16.0),
                           child: Row(
@@ -99,7 +97,7 @@ class PersonDetails extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
                                 child: Text(
-                                  parseDate(person.deathday!).toString(),
+                                  parseDate(person.deathday).toString(),
                                   textAlign: TextAlign.start,
                                   style:
                                       Theme.of(context).textTheme.displayMedium,
@@ -110,8 +108,7 @@ class PersonDetails extends StatelessWidget {
                         ),
                       ],
                       const SizedBox(height: 10),
-                      if (person.placeOfBirth != null &&
-                          person.placeOfBirth!.isNotEmpty) ...[
+                      if (person.placeOfBirth.isNotEmpty) ...[
                         Row(
                           children: [
                             Icon(
@@ -141,7 +138,7 @@ class PersonDetails extends StatelessWidget {
                 ),
               ],
             ),
-            if (person.biography != null && person.biography!.isNotEmpty)
+            if (person.biography.isNotEmpty)
               Column(
                 children: [
                   Padding(

@@ -2,10 +2,10 @@ import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:film_flu/app/routes/app_routes.dart';
 import 'package:film_flu/domain/enums/settings_tab.dart';
 import 'package:film_flu/env/env.dart';
+import 'package:film_flu/main.dart';
 import 'package:film_flu/presentation/features/auth/auth_screen.dart';
 import 'package:film_flu/presentation/notifiers/settings_notifier.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -22,6 +22,14 @@ class AppBarActions extends ConsumerStatefulWidget {
 
 class _AppBarActionsState extends ConsumerState<AppBarActions> {
   @override
+  void initState() {
+    super.initState();
+    if (auth.currentUser != null) {
+      _signInFlow(auth.currentUser!);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final settingsNotifier = ref.read(settingsProvider.notifier);
     return Padding(
@@ -29,16 +37,18 @@ class _AppBarActionsState extends ConsumerState<AppBarActions> {
       child: Row(
         spacing: 16,
         children: [
-          if (kDebugMode) ...[
-            IconButton(
-              onPressed: () => _openSignInDialogBox(),
-              icon: CircleAvatar(
-                backgroundColor: Color(0xffE6E6E6),
-                radius: 20,
-                child: Icon(Icons.person, color: Color(0xffCCCCCC)),
-              ),
+          IconButton(
+            onPressed: () => {},
+            // () => auth.currentUser == null ? _openSignInDialogBox() : {},
+            icon: CircleAvatar(
+              backgroundColor: Color(0xffE6E6E6),
+              radius: 20,
+              child:
+                  auth.currentUser == null
+                      ? Icon(Icons.person, color: Color(0xffCCCCCC))
+                      : Image.network(auth.currentUser!.photoURL!),
             ),
-          ],
+          ),
           IconButton(
             icon: Icon(Icons.settings, color: AppColors.backgroundColorLight),
             onPressed: () {
@@ -59,15 +69,14 @@ class _AppBarActionsState extends ConsumerState<AppBarActions> {
             title: Text('Join to FilmFlu'),
             content: AuthScreen(),
             actions: [
-              FilledButton(
-                onPressed: () => _signIn(),
-                child: Text('Continue with Google'),
-              ),
+              FilledButton(onPressed: () => _signIn(), child: Text('Sign in')),
               SignInButton(
                 buttonType: ButtonType.google,
                 onPressed: () async {
-                  final result = await _googleSignIn();
-                  if (result?.user != null) print(result);
+                  await _googleSignIn();
+                  // if (result?.user != null) {
+                  //   Navigator.pop(context, result);
+                  // }
                 },
               ),
             ],
@@ -97,8 +106,13 @@ class _AppBarActionsState extends ConsumerState<AppBarActions> {
     UserCredential result = await FirebaseAuth.instance.signInWithCredential(
       authCredential,
     );
+    _signInFlow(result.user!);
     return result;
   }
 
   _signIn() {}
+
+  _signInFlow(User user) {
+    // final profileNotifier = ref.read(profileProvider);
+  }
 }
