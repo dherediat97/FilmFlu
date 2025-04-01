@@ -4,6 +4,7 @@ import 'package:film_flu/domain/enums/settings_tab.dart';
 import 'package:film_flu/env/env.dart';
 import 'package:film_flu/main.dart';
 import 'package:film_flu/presentation/features/auth/auth_screen.dart';
+import 'package:film_flu/presentation/notifiers/profile_notifier.dart';
 import 'package:film_flu/presentation/notifiers/settings_notifier.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -38,8 +39,8 @@ class _AppBarActionsState extends ConsumerState<AppBarActions> {
         spacing: 16,
         children: [
           IconButton(
-            onPressed: () => {},
-            // () => auth.currentUser == null ? _openSignInDialogBox() : {},
+            onPressed:
+                () => auth.currentUser == null ? _openSignInDialogBox() : {},
             icon: CircleAvatar(
               backgroundColor: Color(0xffE6E6E6),
               radius: 20,
@@ -73,10 +74,10 @@ class _AppBarActionsState extends ConsumerState<AppBarActions> {
               SignInButton(
                 buttonType: ButtonType.google,
                 onPressed: () async {
-                  await _googleSignIn();
-                  // if (result?.user != null) {
-                  //   Navigator.pop(context, result);
-                  // }
+                  final result = await _googleSignIn();
+                  if (result?.user != null) {
+                    Navigator.pop(context, result);
+                  }
                 },
               ),
             ],
@@ -113,6 +114,6 @@ class _AppBarActionsState extends ConsumerState<AppBarActions> {
   _signIn() {}
 
   _signInFlow(User user) {
-    // final profileNotifier = ref.read(profileProvider);
+    final profileNotifier = ref.read(profileProvider);
   }
 }
