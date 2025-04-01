@@ -10,9 +10,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/setup-composite
+      - uses: ./.github/actions/build-app
         with:
           environment: "production"
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          FIREBASE_API_KEY_WEB: ${{ secrets.FIREBASE_API_KEY_WEB }}
+          FIREBASE_API_KEY_ANDROID: ${{ secrets.FIREBASE_API_KEY_ANDROID }}
+          FIREBASE_API_KEY_APPLE: ${{ secrets.FIREBASE_API_KEY_APPLE }}
+          FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
+          FIREBASE_APP_ID_WEB: ${{ secrets.FIREBASE_APP_ID_WEB}}
+          FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID}}
+          FIREBASE_APP_ID_APPLE: ${{ secrets.FIREBASE_APP_ID_APPLE}}
+          FIREBASE_CLIENT_ID_APPLE: ${{ secrets.FIREBASE_CLIENT_ID_APPLE}}
+          FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID}}
+          FIREBASE_PROJECT_NAME: ${{ secrets.FIREBASE_PROJECT_NAME}}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID}}
       - name: Install dependencies
         run: sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
       - name: Install project dependencies
@@ -49,9 +61,21 @@ jobs:
 
     steps:
      - uses: actions/checkout@v4
-     - uses: ./.github/actions/setup-composite
+     - uses: ./.github/actions/build-app
        with:
-         environment: "production"
+        environment: "production"
+        TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+        FIREBASE_API_KEY_WEB: ${{ secrets.FIREBASE_API_KEY_WEB }}
+        FIREBASE_API_KEY_ANDROID: ${{ secrets.FIREBASE_API_KEY_ANDROID }}
+        FIREBASE_API_KEY_APPLE: ${{ secrets.FIREBASE_API_KEY_APPLE }}
+        FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
+        FIREBASE_APP_ID_WEB: ${{ secrets.FIREBASE_APP_ID_WEB}}
+        FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID}}
+        FIREBASE_APP_ID_APPLE: ${{ secrets.FIREBASE_APP_ID_APPLE}}
+        FIREBASE_CLIENT_ID_APPLE: ${{ secrets.FIREBASE_CLIENT_ID_APPLE}}
+        FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID}}
+        FIREBASE_PROJECT_NAME: ${{ secrets.FIREBASE_PROJECT_NAME}}
+        GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID}}
      - name: Build artifacts
        run: flutter build windows --release
      - name: Archive Release
@@ -81,9 +105,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@v4      
-        - uses: ./.github/actions/setup-composite
+        - uses: ./.github/actions/build-app
           with:
             environment: "production"
+            TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+            FIREBASE_API_KEY_WEB: ${{ secrets.FIREBASE_API_KEY_WEB }}
+            FIREBASE_API_KEY_ANDROID: ${{ secrets.FIREBASE_API_KEY_ANDROID }}
+            FIREBASE_API_KEY_APPLE: ${{ secrets.FIREBASE_API_KEY_APPLE }}
+            FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
+            FIREBASE_APP_ID_WEB: ${{ secrets.FIREBASE_APP_ID_WEB}}
+            FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID}}
+            FIREBASE_APP_ID_APPLE: ${{ secrets.FIREBASE_APP_ID_APPLE}}
+            FIREBASE_CLIENT_ID_APPLE: ${{ secrets.FIREBASE_CLIENT_ID_APPLE}}
+            FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID}}
+            FIREBASE_PROJECT_NAME: ${{ secrets.FIREBASE_PROJECT_NAME}}
+            GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID}}
         - run: flutter build apk --release
         - name: Create Release
           id: create_release
