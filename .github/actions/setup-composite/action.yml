@@ -61,6 +61,7 @@ runs:
     - run: echo "${{inputs.TMDB_API_KEY}}" > .env
       shell: bash
     - run: echo "${{inputs.FIREBASE_API_KEY_WEB}}" > .env
+      shell: bash
     - run: echo "${{inputs.FIREBASE_API_KEY_ANDROID}}" > .env
       shell: bash
     - run: echo "${{inputs.FIREBASE_API_KEY_APPLE}}" > .env
@@ -98,5 +99,8 @@ runs:
         envkey_FIREBASE_PROJECT_NAME: "${{inputs.FIREBASE_PROJECT_NAME}}"
         envkey_GOOGLE_CLIENT_ID: "${{inputs.GOOGLE_CLIENT_ID}}"
         file_name: .env
+      shell: bash
     - run: flutter pub run build_runner build --delete-conflicting-outputs
+      shell: bash
     - run: flutter gen-l10n
+      shell: bash
