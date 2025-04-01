@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/workflows/build_app.yml
+      - uses: ./.github/actions/setup-composite
         with:
           environment: "production"
       - name: Install dependencies
@@ -49,7 +49,7 @@ jobs:
 
     steps:
      - uses: actions/checkout@v4
-     - uses: ./.github/workflows/build_app.yml
+     - uses: ./.github/actions/setup-composite
        with:
          environment: "production"
      - name: Build artifacts
@@ -80,8 +80,8 @@ jobs:
   android:
     runs-on: ubuntu-latest
     steps:
-        - uses: actions/checkout@v4
-        - uses: ./.github/workflows/build_app.yml
+        - uses: actions/checkout@v4      
+        - uses: ./.github/actions/setup-composite
           with:
             environment: "production"
         - run: flutter build apk --release
