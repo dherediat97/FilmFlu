@@ -9,7 +9,7 @@ jobs:
   linux:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
       - uses: ./.github/actions/setup-composite
         with:
           environment: "production"
@@ -60,7 +60,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-     - uses: actions/checkout@v4
+     - uses: actions/checkout@v3
      - uses: ./.github/actions/setup-composite
        with:
         environment: "production"
@@ -104,7 +104,7 @@ jobs:
   android:
     runs-on: ubuntu-latest
     steps:
-        - uses: actions/checkout@v4      
+        - uses: actions/checkout@v3  
         - uses: ./.github/actions/setup-composite
           with:
             environment: "production"
