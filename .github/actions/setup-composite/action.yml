@@ -41,10 +41,12 @@ on:
         GOOGLE_CLIENT_ID:
           required: true
           type: string
+defaults:
+  run:
+    shell: bash
 
 runs:
   using: composite
-  runs-on: ubuntu-latest
   steps:
     - uses: actions/checkout@v3
     - uses: subosito/flutter-action@v2
