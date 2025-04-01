@@ -18,8 +18,8 @@ class MediaDataProduction extends StatelessWidget {
     return GridView.custom(
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 200,
-        mainAxisExtent: 300,
-        mainAxisSpacing: 18,
+        mainAxisExtent: 360,
+        mainAxisSpacing: 3,
         crossAxisSpacing: 18,
       ),
       childrenDelegate: SliverChildBuilderDelegate(childCount: crew.length, (
