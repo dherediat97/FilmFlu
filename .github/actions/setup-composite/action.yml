@@ -84,7 +84,6 @@ runs:
       shell: bash
     - name: Make envfile
       uses: SpicyPizza/create-envfile@v2.0
-      shell: bash
       with:
         envkey_DEBUG: false
         envkey_TMDB_API_KEY: "${{inputs.TMDB_API_KEY}}"
