@@ -5,6 +5,42 @@ on:
         environment:
           required: true
           type: string
+        TMDB_API_KEY:
+          required: true
+          type: string
+        FIREBASE_API_KEY_WEB:
+          required: true
+          type: string
+        FIREBASE_API_KEY_ANDROID:
+          required: true
+          type: string
+        FIREBASE_API_KEY_APPLE:
+          required: true
+          type: string
+        FIREBASE_MESSAGING_SENDER_ID:
+          required: true
+          type: string
+        FIREBASE_APP_ID_WEB:
+          required: true
+          type: string
+        FIREBASE_APP_ID_ANDROID:
+          required: true
+          type: string
+        FIREBASE_APP_ID_APPLE:
+          required: true
+          type: string
+        FIREBASE_CLIENT_ID_APPLE:
+          required: true
+          type: string
+        FIREBASE_PROJECT_NAME:
+          required: true
+          type: string
+        FIREBASE_MEASUREMENT_ID:
+          required: true
+          type: string
+        GOOGLE_CLIENT_ID:
+          required: true
+          type: string
 defaults:
   run:
     shell: bash
