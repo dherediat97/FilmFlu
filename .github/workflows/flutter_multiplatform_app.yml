@@ -45,7 +45,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-            tag_name: v2.0.0
+            tag_name: v2.0.0@linux
             release_name: Versión v2.0.0 - Linux
             draft: false
             prerelease: false
@@ -90,7 +90,7 @@ jobs:
        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
        with:
-          tag_name: v2.0.0
+          tag_name: v2.0.0@windows
           release_name: Version 2.0.0 - Windows
           draft: false
           prerelease: false
@@ -127,7 +127,7 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
-            tag_name: v2.0.0
+            tag_name: v2.0.0@android
             release_name: Version 2.0.0 - Android
             draft: false
             prerelease: false
