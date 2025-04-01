@@ -55,19 +55,32 @@ runs:
           channel: stable
           cache: true
     - run: flutter clean
+      shell: bash
     - run: flutter pub get
+      shell: bash
     - run: echo "${{inputs.TMDB_API_KEY}}" > .env
+      shell: bash
     - run: echo "${{inputs.FIREBASE_API_KEY_WEB}}" > .env
     - run: echo "${{inputs.FIREBASE_API_KEY_ANDROID}}" > .env
+      shell: bash
     - run: echo "${{inputs.FIREBASE_API_KEY_APPLE}}" > .env
+      shell: bash
     - run: echo "${{inputs.FIREBASE_MESSAGING_SENDER_ID}}" > .env
+      shell: bash
     - run: echo "${{inputs.FIREBASE_APP_ID_WEB}}" > .env
+      shell: bash
     - run: echo "${{inputs.FIREBASE_APP_ID_ANDROID}}" > .env
+      shell: bash
     - run: echo "${{inputs.FIREBASE_APP_ID_APPLE}}" > .env
+      shell: bash
     - run: echo "${{inputs.FIREBASE_CLIENT_ID_APPLE}}" > .env
+      shell: bash
     - run: echo "${{inputs.FIREBASE_PROJECT_NAME}}" > .env
+      shell: bash
     - run: echo "${{inputs.FIREBASE_MEASUREMENT_ID}}" > .env
+      shell: bash
     - run: echo "${{inputs.GOOGLE_CLIENT_ID}}" > .env
+      shell: bash
     - name: Make envfile
       uses: SpicyPizza/create-envfile@v2.0
       with:
