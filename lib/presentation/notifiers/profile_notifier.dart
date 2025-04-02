@@ -12,10 +12,10 @@ class Profile extends _$Profile {
     final repository = ref.read(authRepositoryProvider);
 
     final requestNewTokenResponse = await repository.requestNewToken();
-    launchUrl(
-      Uri.parse(
-        '${AppUrls.authUrl}/authenticate/${requestNewTokenResponse.requestToken}?redirect_to=${Uri.base.origin}',
-      ),
-    );
+    // launchUrl(
+    //   Uri.parse(
+    //     '${AppUrls.authUrl}/authenticate/${requestNewTokenResponse.requestToken}?redirect_to=${Uri.base.origin}',
+    //   ),
+    // );
   }
 }
