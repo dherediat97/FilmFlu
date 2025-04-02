@@ -1,7 +1,7 @@
 name: film_flu
 description: A project of movies and something more
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 2.0.0+15
+version: 2.0.1+16
 
 environment:
   sdk: ^3.7.0
@@ -97,18 +97,6 @@ flutter:
     - family: ShadowsIntoLight
       fonts:
         - asset: fonts/ShadowsIntoLight-Regular.ttf
-
-flutter_launcher_icons:
-  android: "film_flu_launcher_icon"
-  ios: false
-  image_path: "assets/images/logo.png"
-  min_sdk_android: 21
-  adaptive_icon_background: "#000"
-  web:
-    generate: true
-    image_path: "assets/images/logo.png"
-    background_color: "#000"
-    theme_color: "#D42029"
 
 flutter_intl:
   enabled: true

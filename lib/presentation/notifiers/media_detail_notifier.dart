@@ -47,6 +47,8 @@ final getMediaItemDetailProvider =
           );
 
       return MediaItemDetailState(
+        trailerIds: _getTrailers(mediaItemResponse),
+        isTrailerOpened: false,
         title:
             mediaItemState.mediaType == MediaType.movie.name
                 ? mediaItemResponse.title

@@ -25,9 +25,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   project.set_dart_entrypoint_arguments(std::move(command_line_arguments));
 
   FlutterWindow window(project);
-  Win32Window::Point origin(10, 10);
-  Win32Window::Size size(1280, 720);
-  if (!window.Create(L"film_flu", origin, size)) {
+  // Win32Window::Point origin(10, 10);
+  // Win32Window::Size size(1280, 720);
+  HWND hwnd = window.GetHandle(); 
+  auto windowHDC = GetDC(hwnd);
+  int fullscreenWidth  = GetDeviceCaps(windowHDC, DESKTOPHORZRES);
+  int fullscreenHeight = GetDeviceCaps(windowHDC, DESKTOPVERTRES);
+  // Win32Window::Point origin(10, 10);
+  // Win32Window::Size size(1280, 720);
+  Win32Window::Point origin(0, 0);
+  Win32Window::Size size(fullscreenWidth, fullscreenHeight);
+  if (!window.Create(L"Film Flu", origin, size)) {
     return EXIT_FAILURE;
   }
   window.SetQuitOnClose(true);

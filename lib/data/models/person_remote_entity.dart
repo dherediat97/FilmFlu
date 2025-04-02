@@ -17,7 +17,7 @@ class PersonRemoteEntity with _$PersonRemoteEntity {
     @JsonKey(name: 'gender') required int gender,
     @JsonKey(name: 'biography') String? biography,
     @JsonKey(name: 'profile_path') String? profilePath,
-    @JsonKey(name: 'credits') CreditsPersonRemoteEntity? credits,
+    @JsonKey(name: 'credits') required CreditsPersonRemoteEntity credits,
   }) = _PersonRemoteEntity;
 
   factory PersonRemoteEntity.fromJson(Map<String, dynamic> json) =>
@@ -35,6 +35,6 @@ extension MediaItemToRemoteEntityExtension on PersonRemoteEntity {
     placeOfBirth: placeOfBirth ?? '',
     deathday: deathday ?? '',
     profilePath: profilePath ?? '',
-    credits: credits?.toCreditsPersonEntity(),
+    credits: credits.toCreditsPersonEntity(),
   );
 }
