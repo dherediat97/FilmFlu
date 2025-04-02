@@ -7,16 +7,25 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Center(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          child: Column(
-            spacing: 8,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(keyboardType: TextInputType.emailAddress),
-              TextField(obscureText: true),
-            ],
-          ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                labelText: 'Email',
+                hintText: 'Email',
+              ),
+            ),
+            SizedBox(height: 20),
+            TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                hintText: 'Password',
+              ),
+            ),
+          ],
         ),
       ),
     );

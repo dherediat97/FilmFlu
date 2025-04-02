@@ -49,12 +49,16 @@ jobs:
             release_name: Versión v2.0.1 - Linux
             draft: false
             prerelease: false
-              
-      - uses: actions/upload-artifact@v4
+      - name: Upload Linux Zip to Release
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-            name: Releases
-            path: build/linux/x64/release/bundle/FilmFlu-linux.zip
-            overwrite: true
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: build/linux/x64/release/bundle/FilmFlu-linux.zip
+          asset_name: FilmFlu-linux.zip
+          asset_content_type: application/zip
 
   windows:
     runs-on: windows-latest
@@ -72,10 +76,10 @@ jobs:
         FIREBASE_APP_ID_WEB: ${{ secrets.FIREBASE_APP_ID_WEB}}
         FIREBASE_APP_ID_ANDROID: ${{ secrets.FIREBASE_APP_ID_ANDROID}}
         FIREBASE_APP_ID_APPLE: ${{ secrets.FIREBASE_APP_ID_APPLE}}
-        FIREBASE_CLIENT_ID_APPLE: ${{ secrets.FIREBASE_CLIENT_ID_APPLE}}
-        FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID}}
-        FIREBASE_PROJECT_NAME: ${{ secrets.FIREBASE_PROJECT_NAME}}
-        GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID}}
+        FIREBASE_CLIENT_ID_APPLE: ${{ secrets.FIREBASE_CLIENT_ID_APPLE }}
+        FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
+        FIREBASE_PROJECT_NAME: ${{ secrets.FIREBASE_PROJECT_NAME }}
+        GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
      - name: Build artifacts
        run: flutter build windows --release
      - name: Archive Release
@@ -94,11 +98,16 @@ jobs:
           release_name: Version 2.0.1 - Windows
           draft: false
           prerelease: false
-     - uses: actions/upload-artifact@v4
+     - name: Upload Zip to Release
+       id: upload-release-asset 
+       uses: actions/upload-release-asset@v1
+       env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
        with:
-          name: Releases
-          path: build/windows/x64/runner/Release/FilmFlu-windows.zip
-          overwrite: true
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: build/windows/x64/runner/Release/FilmFlu-windows.zip
+          asset_name: FilmFlu-windows.zip
+          asset_content_type: application/zip
      
 
   android:
