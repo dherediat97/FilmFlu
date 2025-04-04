@@ -61,12 +61,14 @@ runs:
       id: yq
       uses: mikefarah/yq@master
       with:
-        cmd: yq -r '.version' 'pubspec.yaml'
+        cmd: yq '.version' < pubspec.yaml
+    - run: set /p VERSION=<version.file
+      shell: bash
+    - run: echo VERSION=%VERSION% >> %VERSION_CODE%
+      shell: bash
     - run: flutter clean
       shell: bash
     - run: flutter pub get
-      shell: bash
-    - run: echo "${{steps.yq.outputs.result}}" > .env
       shell: bash
     - run: echo "${{inputs.TMDB_API_KEY}}" > .env
       shell: bash
