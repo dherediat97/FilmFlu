@@ -54,7 +54,6 @@ dependencies:
   firebase_auth: ^5.5.1
   google_sign_in: ^6.3.0
   sign_button: ^2.0.6
-  flutter_inappwebview: ^6.1.5
 
 dev_dependencies:
   flutter_test:
