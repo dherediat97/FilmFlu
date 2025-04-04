@@ -17,7 +17,6 @@ class _AccessibilityTabState extends ConsumerState<AccessibilityTab> {
     final colorBlindnessType = ref.watch(appProvider).appColorBlindessType;
     return SingleChildScrollView(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
