@@ -41,6 +41,9 @@ on:
         GOOGLE_CLIENT_ID:
           required: true
           type: string
+        VERSION_CODE:
+          required: true
+          type: string
 defaults:
   run:
     shell: bash
@@ -54,9 +57,16 @@ runs:
       with:
           channel: stable
           cache: true
+    - name: Get version
+      id: yq
+      uses: mikefarah/yq@master
+      with:
+        cmd: yq -r '.version' 'pubspec.yaml'
     - run: flutter clean
       shell: bash
     - run: flutter pub get
+      shell: bash
+    - run: echo "${{steps.yq.outputs.result}}" > .env
       shell: bash
     - run: echo "${{inputs.TMDB_API_KEY}}" > .env
       shell: bash
