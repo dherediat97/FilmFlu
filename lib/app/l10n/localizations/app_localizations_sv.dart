@@ -71,7 +71,10 @@ class AppLocalizationsSv extends AppLocalizations {
   String get tv_type => 'TV-program';
 
   @override
-  String get animation_japanese_series => 'Japansk anime';
+  String get child_animation_type => 'Anime';
+
+  @override
+  String get reality_type => 'Realities';
 
   @override
   String get drama_type => 'Drama';

@@ -1,8 +1,10 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/domain/enums/media_types.dart';
-import 'package:film_flu/presentation/features/home/home_screen.dart';
 import 'package:film_flu/presentation/features/media_details/media_detail_screen.dart';
+import 'package:film_flu/presentation/features/media_list/widgets/movies_list.dart';
+import 'package:film_flu/presentation/features/media_list/widgets/series_list.dart';
 import 'package:film_flu/presentation/features/person_details/person_details_screen.dart';
+import 'package:film_flu/presentation/features/person_list/trending_person_list.dart';
 import 'package:film_flu/presentation/features/settings/settings_screen.dart';
 import 'package:film_flu/presentation/features/common/custom_scaffold_page.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +15,9 @@ part 'app_routes.g.dart';
 @TypedGoRoute<HomeScreenRoute>(
   path: '/',
   routes: [
+    TypedGoRoute<MovieScreenRoute>(path: 'movie'),
+    TypedGoRoute<TVSeriesScreenRoute>(path: 'tv'),
+    TypedGoRoute<TrendingPersonScreenRoute>(path: 'trendingPerson'),
     TypedGoRoute<MovieRoute>(path: 'movie/:id'),
     TypedGoRoute<SerieRoute>(path: 'tv/:id'),
     TypedGoRoute<PersonRoute>(path: 'person/:id'),
@@ -21,15 +26,40 @@ part 'app_routes.g.dart';
 )
 @immutable
 class HomeScreenRoute extends GoRouteData {
-  const HomeScreenRoute({this.mediaTypeSelected = MediaType.movie});
-
-  final MediaType mediaTypeSelected;
+  const HomeScreenRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return ScaffoldPage(
-      child: HomeScreen(mediaTypeSelected: mediaTypeSelected),
-    );
+    return ScaffoldPage(child: MoviesListWidget());
+  }
+}
+
+@immutable
+class MovieScreenRoute extends GoRouteData {
+  const MovieScreenRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return ScaffoldPage(child: MoviesListWidget());
+  }
+}
+
+@immutable
+class TVSeriesScreenRoute extends GoRouteData {
+  const TVSeriesScreenRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return ScaffoldPage(child: SeriesListWidget());
+  }
+}
+
+class TrendingPersonScreenRoute extends GoRouteData {
+  const TrendingPersonScreenRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return ScaffoldPage(child: TrendingPersonListWidget());
   }
 }
 
@@ -37,7 +67,7 @@ class RedirectRoute extends GoRouteData {
   // There is no need to implement [build] when this [redirect] is unconditional.
   @override
   String? redirect(BuildContext context, GoRouterState state) {
-    return HomeScreenRoute(mediaTypeSelected: MediaType.movie).location;
+    return HomeScreenRoute().location;
   }
 }
 

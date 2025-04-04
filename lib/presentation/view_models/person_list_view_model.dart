@@ -39,6 +39,7 @@ class PersonListViewModel
     );
     final previousLength = state.valueOrNull?.length ?? 0;
     _canLoadMore = previousLength + items.length < totalItems;
+
     return items;
   }
 

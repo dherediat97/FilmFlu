@@ -1,20 +1,19 @@
-import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeProvider extends StateNotifier<MediaType> {
+class HomeProvider extends StateNotifier<int> {
   _init() {
-    state = MediaType.movie;
+    state = 0;
   }
 
-  HomeProvider() : super(MediaType.movie) {
+  HomeProvider() : super(0) {
     _init();
   }
 
-  void setMediaTypeSelected(MediaType mediaTypeSelected) {
+  void setMediaTypeSelected(int mediaTypeSelected) {
     state = mediaTypeSelected;
   }
 }
 
-final homeProvider = StateNotifierProvider<HomeProvider, MediaType>(
+final homeProvider = StateNotifierProvider<HomeProvider, int>(
   (ref) => HomeProvider(),
 );

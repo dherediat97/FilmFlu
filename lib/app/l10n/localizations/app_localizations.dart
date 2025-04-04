@@ -244,11 +244,17 @@ abstract class AppLocalizations {
   /// **'Programas de televisión'**
   String get tv_type;
 
-  /// No description provided for @animation_japanese_series.
+  /// No description provided for @child_animation_type.
   ///
   /// In es, this message translates to:
-  /// **'Anime Japonés'**
-  String get animation_japanese_series;
+  /// **'Dibujos Infantiles'**
+  String get child_animation_type;
+
+  /// No description provided for @reality_type.
+  ///
+  /// In es, this message translates to:
+  /// **'Realities'**
+  String get reality_type;
 
   /// No description provided for @drama_type.
   ///

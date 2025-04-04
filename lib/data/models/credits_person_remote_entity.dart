@@ -9,8 +9,8 @@ part 'credits_person_remote_entity.g.dart';
 @freezed
 class CreditsPersonRemoteEntity with _$CreditsPersonRemoteEntity {
   const factory CreditsPersonRemoteEntity({
-    @JsonKey(name: 'cast') required List<CreditActorRemoteEntity> cast,
-    @JsonKey(name: 'crew') required List<CreditProductionRemoteEntity> crew,
+    @JsonKey(name: 'cast') List<CreditActorRemoteEntity>? cast,
+    @JsonKey(name: 'crew') List<CreditProductionRemoteEntity>? crew,
   }) = _CreditsPersonRemoteEntity;
 
   factory CreditsPersonRemoteEntity.fromJson(Map<String, dynamic> json) =>
@@ -19,7 +19,7 @@ class CreditsPersonRemoteEntity with _$CreditsPersonRemoteEntity {
 
 extension CreditsPersonToRemoteEntityExtension on CreditsPersonRemoteEntity {
   CreditsPersonEntity toCreditsPersonEntity() => CreditsPersonEntity(
-        cast: cast.map((e) => e.toCreditActorEntity()).toList(),
-        crew: crew.map((e) => e.toCreditProduction()).toList(),
-      );
+    cast: cast?.map((e) => e.toCreditActorEntity()).toList(),
+    crew: crew?.map((e) => e.toCreditProduction()).toList(),
+  );
 }

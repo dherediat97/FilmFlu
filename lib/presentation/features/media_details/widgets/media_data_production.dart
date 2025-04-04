@@ -6,7 +6,6 @@ import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_routes.dart';
 import 'package:film_flu/domain/models/film_worker_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class MediaDataProduction extends StatelessWidget {
   const MediaDataProduction({super.key, required this.crew});
@@ -17,8 +16,8 @@ class MediaDataProduction extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.custom(
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 200,
-        mainAxisExtent: 360,
+        maxCrossAxisExtent: 150,
+        mainAxisExtent: 300,
         mainAxisSpacing: 3,
         crossAxisSpacing: 18,
       ),
@@ -43,41 +42,45 @@ class MediaDataProduction extends StatelessWidget {
                       ),
                     ),
                   ),
-              height: 200,
-              width: 120,
-              fit: BoxFit.cover,
+              height: 150,
+              width: 100,
+              fit: BoxFit.contain,
               errorWidget:
                   (context, error, stackTrace) =>
                       filmWorker.gender == 2
-                          ? SvgPicture.asset(
-                            AppAssets.actorImageIcon,
-                            height: 200,
-                            width: 120,
-                            fit: BoxFit.cover,
+                          ? Image.asset(
+                            AppAssets.productionPersonMale,
+                            height: 150,
+                            width: 100,
+                            fit: BoxFit.contain,
                           )
-                          : SvgPicture.asset(
-                            AppAssets.actressImageIcon,
-                            height: 200,
-                            width: 120,
-                            fit: BoxFit.cover,
+                          : Image.asset(
+                            AppAssets.productionPersonFemale,
+                            height: 150,
+                            width: 100,
+                            fit: BoxFit.contain,
                           ),
             ),
           ),
           subtitle: Column(
             children: [
+              SizedBox(height: 8),
               AutoSizeText(
-                filmWorker.originalName.toString(),
+                filmWorker.originalName!,
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.displayLarge,
               ),
+              SizedBox(height: 8),
               AutoSizeText(
                 '${context.localizations.production_job} ${filmWorker.job} ${context.localizations.in_preposition} ${filmWorker.knownForDepartment}',
                 textAlign: TextAlign.center,
                 maxLines: 4,
                 overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodySmall,
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall!.copyWith(fontSize: 15),
               ),
             ],
           ),

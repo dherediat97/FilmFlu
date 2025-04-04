@@ -26,7 +26,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get adventure_type => 'Adventure';
 
   @override
-  String get animation_type => 'Animation';
+  String get animation_type => 'Anime/Animation';
 
   @override
   String get crime_type => 'Crime';
@@ -71,7 +71,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tv_type => 'TV Programs';
 
   @override
-  String get animation_japanese_series => 'Japanese Anime';
+  String get child_animation_type => 'Child Animation';
+
+  @override
+  String get reality_type => 'Realities';
 
   @override
   String get drama_type => 'Drama';

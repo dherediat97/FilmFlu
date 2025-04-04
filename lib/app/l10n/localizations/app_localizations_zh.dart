@@ -71,7 +71,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tv_type => '电视节目';
 
   @override
-  String get animation_japanese_series => '日本动漫';
+  String get child_animation_type => '日本动漫';
+
+  @override
+  String get reality_type => 'Realities';
 
   @override
   String get drama_type => '戏剧';

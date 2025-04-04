@@ -32,11 +32,11 @@ class MediaItemScreenDetails extends ConsumerStatefulWidget {
 }
 
 class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
-  late YoutubePlayerController _trailerController;
+  YoutubePlayerController? _trailerController;
 
   @override
   void dispose() {
-    if (kIsWeb) closeTrailer();
+    closeTrailer();
     super.dispose();
   }
 
@@ -92,13 +92,13 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
                         context: context,
                         builder: (context) {
                           _trailerController = initTrailerController();
-                          _trailerController.enterFullScreen(lock: true);
+                          _trailerController!.enterFullScreen(lock: true);
                           if (data.trailerIds.length == 1) {
-                            _trailerController.loadVideoById(
+                            _trailerController!.loadVideoById(
                               videoId: data.trailerIds.first,
                             );
                           } else {
-                            _trailerController.loadPlaylist(
+                            _trailerController!.loadPlaylist(
                               list: data.trailerIds,
                               index: 0,
                               listType: ListType.playlist,
@@ -128,7 +128,7 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
                               height: MediaQuery.of(context).size.height,
                               width: MediaQuery.of(context).size.width,
                               child: YoutubePlayerScaffold(
-                                controller: _trailerController,
+                                controller: _trailerController!,
                                 builder: (context, player) {
                                   return LayoutBuilder(
                                     builder: (context, constraints) {
@@ -184,8 +184,10 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
   }
 
   closeTrailer() {
-    _trailerController.close();
-    _trailerController.stopVideo();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    if (_trailerController != null) {
+      _trailerController?.close();
+      _trailerController?.stopVideo();
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    }
   }
 }

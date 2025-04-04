@@ -78,24 +78,22 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
     final items = state.valueOrNull ?? [];
     final initialLoading = state.isLoading && items.isEmpty;
 
-    return initialLoading
-        ? Shimmer(child: buildListItem(initialLoading))
-        : Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (widget.timeWindow == TimeWindow.day) ...[
-              AutoSizeText(
-                widget.title,
-                maxFontSize: 30,
-                minFontSize: 20,
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
-              ),
-              const SizedBox(height: 20),
-
-              SizedBox(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (widget.timeWindow == TimeWindow.day) ...[
+          AutoSizeText(
+            widget.title,
+            maxFontSize: 30,
+            minFontSize: 20,
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+          ),
+          const SizedBox(height: 20),
+          initialLoading || items.isEmpty
+              ? Shimmer(child: buildTopRowList())
+              : SizedBox(
                 height: 300,
                 child: CarouselView(
                   itemSnapping: true,
@@ -111,19 +109,21 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
                   }),
                 ),
               ),
-            ],
+        ],
 
-            if (widget.timeWindow == TimeWindow.week) ...[
-              AutoSizeText(
-                widget.title,
-                maxFontSize: 30,
-                minFontSize: 20,
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
-              ),
-              const SizedBox(height: 20),
-              SizedBox(
+        if (widget.timeWindow == TimeWindow.week) ...[
+          AutoSizeText(
+            widget.title,
+            maxFontSize: 30,
+            minFontSize: 20,
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+          ),
+          const SizedBox(height: 20),
+          initialLoading || items.isEmpty
+              ? Shimmer(child: buildTopRowList())
+              : SizedBox(
                 height: 300,
                 child: CarouselView(
                   itemSnapping: true,
@@ -139,9 +139,9 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
                   }),
                 ),
               ),
-            ],
-          ],
-        );
+        ],
+      ],
+    );
   }
 
   _loadMore() {

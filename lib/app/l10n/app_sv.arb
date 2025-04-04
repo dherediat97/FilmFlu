@@ -21,7 +21,7 @@
   "drama_type": "Drama",
   "mistery_type": "Mistery",
   "thriller_type": "Thriller",
-  "animation_japanese_series": "Japansk anime",
+  "child_animation_type": "Anime",
   "synopsis": "Synopsis",
   "character_cast": "Character Cast",
   "production_cast": "Produktion",

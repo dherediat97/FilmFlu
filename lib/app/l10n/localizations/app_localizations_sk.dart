@@ -71,7 +71,10 @@ class AppLocalizationsSk extends AppLocalizations {
   String get tv_type => 'TV programy';
 
   @override
-  String get animation_japanese_series => 'Japonské anime';
+  String get child_animation_type => 'Anime';
+
+  @override
+  String get reality_type => 'Realities';
 
   @override
   String get drama_type => 'Dráma';

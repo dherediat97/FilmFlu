@@ -44,7 +44,6 @@ class PersonRepositoryImpl implements PersonRepository {
         return (0, <PersonEntity>[]);
       }
       final personResponse = DataPersonList.fromJson(response);
-
       return (
         personResponse.page,
         personResponse.results.map((e) => e.toPersonEntity()).toList(),

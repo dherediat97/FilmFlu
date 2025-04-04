@@ -45,8 +45,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-            tag_name: v2.0.1@linux
-            release_name: Versión v2.0.1 - Linux
+            tag_name: v2.0.2@linux
+            release_name: Versión v2.0.2 - Linux
             draft: false
             prerelease: false
       - name: Upload Linux Zip to Release
@@ -94,8 +94,8 @@ jobs:
        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
        with:
-          tag_name: v2.0.1@windows
-          release_name: Version 2.0.1 - Windows
+          tag_name: v2.0.2@windows
+          release_name: Version 2.0.2 - Windows
           draft: false
           prerelease: false
      - name: Upload Zip to Release
@@ -136,8 +136,8 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
-            tag_name: v2.0.1@android
-            release_name: Version 2.0.1 - Android
+            tag_name: v2.0.2@android
+            release_name: Version 2.0.2 - Android
             draft: false
             prerelease: false
         - name: Upload APK to Release

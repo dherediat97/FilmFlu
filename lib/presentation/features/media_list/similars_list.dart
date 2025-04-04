@@ -85,10 +85,7 @@ class _MediaDataList extends ConsumerState<SimilarsList> {
         }
         return true;
       },
-      child: Padding(
-        padding: EdgeInsets.all(12),
-        child: mediaWidgetList(state),
-      ),
+      child: Padding(padding: EdgeInsets.all(2), child: mediaWidgetList(state)),
     );
   }
 
@@ -97,7 +94,7 @@ class _MediaDataList extends ConsumerState<SimilarsList> {
     final initialLoading = state.isLoading && items.isEmpty;
 
     return initialLoading
-        ? Shimmer(child: buildListItem(initialLoading))
+        ? Shimmer(child: buildTopRowItem())
         : Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -16,7 +16,7 @@ class PersonEntity with _$PersonEntity {
     @Default('') String placeOfBirth,
     @Default('') String biography,
     @Default('') String profilePath,
-    required CreditsPersonEntity credits,
+    CreditsPersonEntity? credits,
   }) = _PersonEntity;
 
   factory PersonEntity.fromJson(Map<String, dynamic> json) =>

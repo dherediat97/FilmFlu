@@ -7,6 +7,7 @@ import 'package:film_flu/presentation/features/auth/auth_screen.dart';
 import 'package:film_flu/presentation/notifiers/profile_notifier.dart';
 import 'package:film_flu/presentation/notifiers/settings_notifier.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -33,32 +34,35 @@ class _AppBarActionsState extends ConsumerState<AppBarActions> {
   @override
   Widget build(BuildContext context) {
     final settingsNotifier = ref.read(settingsProvider.notifier);
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 18.0),
-      child: Row(
-        spacing: 16,
-        children: [
+    return Row(
+      spacing: 16,
+      children: [
+        if (kDebugMode) ...[
           IconButton(
             onPressed:
-                () => auth.currentUser == null ? _openSignInDialogBox() : {},
+                () =>
+                    auth.currentUser == null
+                        ? _openSignInDialogBox()
+                        : _signOut(),
             icon: CircleAvatar(
               backgroundColor: Color(0xffE6E6E6),
               radius: 20,
-              child:
-                  auth.currentUser == null
-                      ? Icon(Icons.person, color: Color(0xffCCCCCC))
-                      : Image.network(auth.currentUser!.photoURL!),
+              child: Image.network(
+                auth.currentUser != null
+                    ? auth.currentUser!.photoURL!
+                    : 'https://avatar.iran.liara.run/username?username=Film+Flu',
+              ),
             ),
           ),
-          IconButton(
-            icon: Icon(Icons.settings, color: AppColors.backgroundColorLight),
-            onPressed: () {
-              settingsNotifier.setTabSelected(SettingsTab.general);
-              SettingsRoute().push(context);
-            },
-          ),
         ],
-      ),
+        IconButton(
+          icon: Icon(Icons.settings, color: AppColors.backgroundColorLight),
+          onPressed: () {
+            settingsNotifier.setTabSelected(SettingsTab.general);
+            SettingsRoute().push(context);
+          },
+        ),
+      ],
     );
   }
 
@@ -114,6 +118,12 @@ class _AppBarActionsState extends ConsumerState<AppBarActions> {
   _signIn() {}
 
   _signInFlow(User user) {
-    final profileNotifier = ref.read(profileProvider);
+    final profileNotifier = ref.read(profileProvider.notifier);
+    return profileNotifier.requestToken();
+  }
+
+  _signOut() {
+    final profileNotifier = ref.read(profileProvider.notifier);
+    profileNotifier.signOut();
   }
 }

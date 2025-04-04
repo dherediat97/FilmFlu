@@ -9,4 +9,5 @@ AuthRepository authRepository(ref) => AuthRepositoryImpl();
 
 abstract interface class AuthRepository {
   Future<AuthEntity> requestNewToken();
+  Future<AuthEntity> signOut();
 }
