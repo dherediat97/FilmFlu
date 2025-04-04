@@ -29,6 +29,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         child = const AccessibilityTab();
         break;
       case SettingsTab.aboutus:
+        child = const AboutUsTab();
         break;
     }
 

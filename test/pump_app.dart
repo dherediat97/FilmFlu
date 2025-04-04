@@ -1,6 +1,5 @@
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
-import 'package:film_flu/domain/enums/media_types.dart';
-import 'package:film_flu/presentation/features/home/home_screen.dart';
+import 'package:film_flu/presentation/features/media_list/widgets/movies_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,9 +12,7 @@ Future<void> pumpApp({
   required Widget child,
   required var providers,
 }) async {
-  final widget = ProviderScope(
-    child: HomeScreen(mediaTypeSelected: MediaType.movie),
-  );
+  final widget = ProviderScope(child: MoviesListWidget());
 
   await tester.pumpWidget(
     MaterialApp(

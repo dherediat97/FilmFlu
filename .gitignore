@@ -35,4 +35,4 @@ firebase.json
 
 .idea/
 coverage/
-android/build/.cxx
+android/app/.cxx

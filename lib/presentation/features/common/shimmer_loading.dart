@@ -6,10 +6,7 @@ class Shimmer extends StatefulWidget {
     return context.findAncestorStateOfType<ShimmerState>();
   }
 
-  const Shimmer({
-    super.key,
-    this.child,
-  });
+  const Shimmer({super.key, this.child});
 
   final Widget? child;
 
@@ -25,11 +22,7 @@ class ShimmerState extends State<Shimmer> with SingleTickerProviderStateMixin {
       Color(0xFFF4F4F4),
       AppColors.secondaryColor,
     ],
-    stops: [
-      0.1,
-      0.3,
-      0.4,
-    ],
+    stops: [0.1, 0.3, 0.4],
     begin: Alignment(-1.0, -0.3),
     end: Alignment(1.0, 0.3),
     tileMode: TileMode.clamp,
@@ -50,13 +43,14 @@ class ShimmerState extends State<Shimmer> with SingleTickerProviderStateMixin {
   }
 
   LinearGradient get gradient => LinearGradient(
-        colors: _shimmerGradient.colors,
-        stops: _shimmerGradient.stops,
-        begin: _shimmerGradient.begin,
-        end: _shimmerGradient.end,
-        transform:
-            _SlidingGradientTransform(slidePercent: _shimmerController.value),
-      );
+    colors: _shimmerGradient.colors,
+    stops: _shimmerGradient.stops,
+    begin: _shimmerGradient.begin,
+    end: _shimmerGradient.end,
+    transform: _SlidingGradientTransform(
+      slidePercent: _shimmerController.value,
+    ),
+  );
 
   bool get isSized =>
       (context.findRenderObject() as RenderBox?)?.hasSize ?? false;
@@ -80,9 +74,7 @@ class ShimmerState extends State<Shimmer> with SingleTickerProviderStateMixin {
 }
 
 class _SlidingGradientTransform extends GradientTransform {
-  const _SlidingGradientTransform({
-    required this.slidePercent,
-  });
+  const _SlidingGradientTransform({required this.slidePercent});
 
   final double slidePercent;
 
@@ -207,64 +199,6 @@ class ShimmerMediaDayItem extends StatelessWidget {
   }
 }
 
-class CardListItem extends StatelessWidget {
-  const CardListItem({
-    super.key,
-    required this.isLoading,
-  });
-
-  final bool isLoading;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 16),
-          buildText(isLoading),
-        ],
-      ),
-    );
-  }
-}
-
-Widget buildText(isLoading) {
-  if (isLoading) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          width: double.infinity,
-          height: 24,
-          decoration: BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.circular(16),
-          ),
-        ),
-        const SizedBox(height: 16),
-        Container(
-          width: 250,
-          height: 24,
-          decoration: BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.circular(16),
-          ),
-        ),
-      ],
-    );
-  } else {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8),
-      child: Text(
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do '
-        'eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      ),
-    );
-  }
-}
-
 Widget buildTopRowList() {
   return SizedBox(
     height: 240,
@@ -291,25 +225,11 @@ Widget buildTopRowList() {
 
 Widget buildMediaDayWidget(BuildContext context) {
   return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      child: const ShimmerLoading(
-        isLoading: true,
-        child: ShimmerMediaDayItem(),
-      ));
+    width: MediaQuery.of(context).size.width,
+    child: const ShimmerLoading(isLoading: true, child: ShimmerMediaDayItem()),
+  );
 }
 
 Widget buildTopRowItem() {
-  return const ShimmerLoading(
-    isLoading: true,
-    child: ShimmerMediaItem(),
-  );
-}
-
-Widget buildListItem(isLoading) {
-  return ShimmerLoading(
-    isLoading: isLoading,
-    child: CardListItem(
-      isLoading: isLoading,
-    ),
-  );
+  return const ShimmerLoading(isLoading: true, child: ShimmerMediaItem());
 }

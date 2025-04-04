@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
 import 'package:film_flu/app/routes/app_router.dart';
 import 'package:film_flu/firebase_options.dart';

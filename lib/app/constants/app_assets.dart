@@ -16,6 +16,10 @@ class AppAssets {
 
   static const String actorImageIcon = '$iconsFolder/actor_icon.svg';
   static const String actressImageIcon = '$iconsFolder/actress_icon.svg';
+  static const String productionPersonMale =
+      '$iconsFolder/production_person_male.png';
+  static const String productionPersonFemale =
+      '$iconsFolder/production_person_female.png';
   static const String animeActorImageIcon = '$iconsFolder/anime_boy.svg';
   static const String animeActressImageIcon = '$iconsFolder/anime_girl.svg';
   static const String andalucianHeartIcon = '$iconsFolder/andalucian_heart.svg';

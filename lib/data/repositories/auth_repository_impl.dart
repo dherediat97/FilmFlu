@@ -19,4 +19,16 @@ class AuthRepositoryImpl implements AuthRepository {
       throw e.errorMessage;
     }
   }
+
+  @override
+  Future<AuthEntity> signOut() async {
+    try {
+      final response = await DioClient.instance.get('/authentication/signOut');
+
+      AuthRemoteEntity authRemoteEntity = AuthRemoteEntity.fromJson(response);
+      return authRemoteEntity.toAuthEntity();
+    } on DioException catch (e) {
+      throw e.errorMessage;
+    }
+  }
 }

@@ -19,7 +19,7 @@
   "war_type": "战争",
   "documentary_type":"纪录片",
   "tv_type": "电视节目",
-  "animation_japanese_series": "日本动漫",
+  "child_animation_type": "日本动漫",
   "drama_type": "戏剧",
   "thriller_type": "悬疑",
   "synopsis": "概要",

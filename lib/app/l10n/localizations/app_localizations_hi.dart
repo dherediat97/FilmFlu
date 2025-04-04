@@ -71,7 +71,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get tv_type => 'टीवी कार्यक्रम';
 
   @override
-  String get animation_japanese_series => 'जापानी एनीमे';
+  String get child_animation_type => 'जापानी एनीमे';
+
+  @override
+  String get reality_type => 'Realities';
 
   @override
   String get drama_type => 'ड्रामा';

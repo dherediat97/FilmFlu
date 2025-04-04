@@ -1,9 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
-import 'package:film_flu/domain/models/review_entity.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/background_media_item.dart';
-import 'package:film_flu/presentation/features/media_details/widgets/container_tab_media_item.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/media_data_cast.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/media_data_production.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/reviews_widget_item.dart';
@@ -125,7 +123,8 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                     ],
                   ),
                   SizedBox(
-                    height: 600,
+                    height: MediaQuery.of(context).size.height * 0.5,
+                    width: double.infinity,
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: TabBarView(
@@ -133,9 +132,7 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                         controller: _tabController,
                         children: [
                           Column(
-                            spacing: 24,
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               item.when(
                                 data:
@@ -149,7 +146,8 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                                 error:
                                     (error, stackTrace) =>
                                         Text(error.toString()),
-                                loading: () => Shimmer(child: buildText(true)),
+                                loading:
+                                    () => Shimmer(child: buildTopRowList()),
                               ),
                               similars.when(
                                 data: (data) {
@@ -197,53 +195,30 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                                         context.localizations.not_found_reviews,
                                     urlImage: AppAssets.emptyStateImage,
                                   )
-                                  : ContainerTabMediaItem(
-                                    child: ListView.builder(
-                                      itemCount: reviews.length,
-                                      itemBuilder: (context, index) {
-                                        ReviewEntity review = reviews[index];
-
-                                        return ReviewsWidgetItem(
-                                          review: review,
-                                        );
-                                      },
-                                    ),
+                                  : ListView.builder(
+                                    itemCount: reviews.length,
+                                    itemBuilder: (context, index) {
+                                      return ReviewsWidgetItem(
+                                        review: reviews[index],
+                                      );
+                                    },
                                   );
                             },
-                            error:
-                                (error, stackTrace) => EmptyStateWidget(
-                                  errorMessage:
-                                      context.localizations.not_found_reviews,
-                                  urlImage: AppAssets.emptyStateImage,
-                                ),
+                            error: (error, _) => Container(),
                             loading:
                                 () => Shimmer(
                                   child: buildMediaDayWidget(context),
                                 ),
                           ),
                           credits.when(
-                            data:
-                                (data) => ContainerTabMediaItem(
-                                  child: MediaDataCast(cast: data.cast),
-                                ),
-                            error:
-                                (error, stackTrace) => Text(error.toString()),
-                            loading:
-                                () => Shimmer(
-                                  child: buildMediaDayWidget(context),
-                                ),
+                            data: (e) => MediaDataCast(cast: e.cast),
+                            error: (err, _) => Text(err.toString()),
+                            loading: () => Shimmer(child: buildTopRowList()),
                           ),
                           credits.when(
-                            data:
-                                (data) => ContainerTabMediaItem(
-                                  child: MediaDataProduction(crew: data.crew),
-                                ),
-                            error:
-                                (error, stackTrace) => Text(error.toString()),
-                            loading:
-                                () => Shimmer(
-                                  child: buildMediaDayWidget(context),
-                                ),
+                            data: (e) => MediaDataProduction(crew: e.crew),
+                            error: (err, _) => Text(err.toString()),
+                            loading: () => Shimmer(child: buildTopRowList()),
                           ),
                         ],
                       ),

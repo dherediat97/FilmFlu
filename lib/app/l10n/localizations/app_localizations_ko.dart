@@ -71,7 +71,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get tv_type => '텔레비전 쇼';
 
   @override
-  String get animation_japanese_series => '일본 애니메이션';
+  String get child_animation_type => '일본 애니메이션';
+
+  @override
+  String get reality_type => 'Realities';
 
   @override
   String get drama_type => '드라마';

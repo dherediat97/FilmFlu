@@ -98,7 +98,7 @@ class _PersonDetailsPagePage extends ConsumerState<PersonItemScreenDetails>
           children: [
             person.when(
               data: (data) {
-                if (data.credits.cast.isEmpty == true) {
+                if (data.credits!.cast != null) {
                   return SvgPicture.asset(
                     AppAssets.noImagePerson,
                     height: 160,
@@ -108,7 +108,7 @@ class _PersonDetailsPagePage extends ConsumerState<PersonItemScreenDetails>
                 }
                 return ActorCreditsWidget(
                   person: data,
-                  credits: data.credits.cast,
+                  credits: data.credits!.cast!,
                 );
               },
               error: (error, stackTrace) => Container(),
@@ -116,7 +116,7 @@ class _PersonDetailsPagePage extends ConsumerState<PersonItemScreenDetails>
             ),
             person.when(
               data: (data) {
-                if (data.credits.crew.isEmpty == true) {
+                if (data.credits!.crew != null) {
                   return SvgPicture.asset(
                     AppAssets.noImagePerson,
                     height: 160,
@@ -126,7 +126,7 @@ class _PersonDetailsPagePage extends ConsumerState<PersonItemScreenDetails>
                 }
                 return ProductionCreditsWidget(
                   person: data,
-                  credits: data.credits.crew,
+                  credits: data.credits!.crew!,
                 );
               },
               error: (error, stackTrace) => Container(),

@@ -15,7 +15,7 @@ class EmptyStateWidget extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: 400,
+          height: 300,
           padding: const EdgeInsets.all(8),
           margin: const EdgeInsets.all(8),
           decoration: BoxDecoration(
@@ -25,7 +25,7 @@ class EmptyStateWidget extends StatelessWidget {
             ),
           ),
         ),
-        Text(errorMessage, style: Theme.of(context).textTheme.titleMedium),
+        Text(errorMessage, style: Theme.of(context).textTheme.titleSmall),
       ],
     );
   }

@@ -23,7 +23,7 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
       automaticallyImplyLeading: true,
       titleTextStyle: Theme.of(context).textTheme.headlineLarge,
       backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
-      leadingWidth: 80,
+      leadingWidth: 64,
       leading:
           !context.canPop()
               ? IconButton(

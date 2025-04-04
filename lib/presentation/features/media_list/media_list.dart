@@ -110,7 +110,7 @@ class _MediaDataList extends ConsumerState<MediaList> {
             .icon;
 
     return initialLoading
-        ? Shimmer(child: buildListItem(initialLoading))
+        ? Shimmer(child: buildTopRowList())
         : Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -140,6 +140,7 @@ class _MediaDataList extends ConsumerState<MediaList> {
               SizedBox(
                 height: 230,
                 child: CarouselView(
+                  shrinkExtent: 10,
                   itemSnapping: true,
                   controller: _carouselController,
                   padding: const EdgeInsets.all(12),
