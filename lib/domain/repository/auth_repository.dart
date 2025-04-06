@@ -13,6 +13,7 @@ AuthRepository authRepository(ref) => AuthRepositoryImpl();
 abstract interface class AuthRepository {
   Future<AuthEntity> requestNewToken();
   Future<ProfileEntity> getProfile(String accountId);
+  Future<ProfileEntity> addFavorite(String accountId);
   Future<bool> signOut(AuthEntity authEntity);
   Future<ResponseTokenEntity> newSession(RequestTokenEntity requestTokenEntity);
 }

@@ -73,4 +73,9 @@ class AuthRepositoryImpl implements AuthRepository {
       throw e.errorMessage;
     }
   }
+
+  @override
+  Future<ProfileEntity> addFavorite(String accountId) {
+    throw UnimplementedError();
+  }
 }
