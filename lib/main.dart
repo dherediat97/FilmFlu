@@ -3,7 +3,6 @@ import 'package:feedback/feedback.dart';
 import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
 import 'package:film_flu/app/routes/app_router.dart';
-import 'package:film_flu/env/env.dart';
 import 'package:film_flu/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -15,16 +14,13 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
 
-late FirebaseAuth auth;
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (kIsWeb) usePathUrlStrategy();
   FirebaseApp app = await Firebase.initializeApp(
-    name: !kIsWeb ? Env.firebaseProjectName : null,
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  auth = FirebaseAuth.instanceFor(app: app);
+  FirebaseAuth.instanceFor(app: app);
   runApp(
     ProviderScope(
       child: BetterFeedback(

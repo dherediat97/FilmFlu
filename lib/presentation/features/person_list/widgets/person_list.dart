@@ -92,7 +92,7 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
           ),
           const SizedBox(height: 20),
           initialLoading || items.isEmpty
-              ? Shimmer(child: buildTopRowList())
+              ? Shimmer(child: buildTopRowList(size: 8))
               : SizedBox(
                 height: 300,
                 child: CarouselView(
@@ -122,7 +122,7 @@ class _PersonListWidgetState extends ConsumerState<PersonListWidget> {
           ),
           const SizedBox(height: 20),
           initialLoading || items.isEmpty
-              ? Shimmer(child: buildTopRowList())
+              ? Shimmer(child: buildTopRowList(size: 8))
               : SizedBox(
                 height: 300,
                 child: CarouselView(

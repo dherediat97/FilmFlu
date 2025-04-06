@@ -15,15 +15,9 @@ class SeriesListWidget extends ConsumerStatefulWidget {
 }
 
 class _SeriesListWidgetState extends ConsumerState<SeriesListWidget> {
-  int get pageLoaded => ref.watch(mediaListProvider);
-  MediaListNotifier get mediaListNotifier =>
-      ref.watch(mediaListProvider.notifier);
-
-  @override
-  void dispose() {
-    mediaListNotifier.reset();
-    super.dispose();
-  }
+  MediaListPage get mediaListNotifier =>
+      ref.watch(mediaListPageProvider.notifier);
+  int get pageLoaded => ref.watch(mediaListPageProvider);
 
   @override
   Widget build(BuildContext context) {

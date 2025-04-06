@@ -15,4 +15,5 @@ class AppConstants {
   static const colorBlindessType = 'colorBlindessType';
   static const languageKey = 'languageCode';
   static const themeModeKey = 'isDarkMode';
+  static const userTokenKey = 'userToken';
 }

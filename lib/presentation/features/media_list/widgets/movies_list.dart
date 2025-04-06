@@ -8,21 +8,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MoviesListWidget extends ConsumerStatefulWidget {
-  const MoviesListWidget({super.key});
+  const MoviesListWidget({super.key, this.userToken = ''});
+  final String userToken;
 
   @override
   ConsumerState<MoviesListWidget> createState() => _MoviesListWidgetState();
 }
 
 class _MoviesListWidgetState extends ConsumerState<MoviesListWidget> {
-  int get pageLoaded => ref.watch(mediaListProvider);
-  MediaListNotifier get mediaListNotifier =>
-      ref.watch(mediaListProvider.notifier);
+  MediaListPage get mediaListNotifier =>
+      ref.read(mediaListPageProvider.notifier);
+  int get pageLoaded => ref.watch(mediaListPageProvider);
 
   @override
-  void dispose() {
-    mediaListNotifier.reset();
-    super.dispose();
+  void initState() {
+    if (widget.userToken.isNotEmpty) {
+      mediaListNotifier.createSession(widget.userToken);
+    }
+    super.initState();
   }
 
   @override

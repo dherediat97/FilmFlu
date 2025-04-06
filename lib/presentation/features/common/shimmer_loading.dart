@@ -199,26 +199,14 @@ class ShimmerMediaDayItem extends StatelessWidget {
   }
 }
 
-Widget buildTopRowList() {
+Widget buildTopRowList({int? size = 6}) {
   return SizedBox(
     height: 240,
     child: ListView(
       physics: null,
       scrollDirection: Axis.horizontal,
       shrinkWrap: true,
-      children: [
-        const SizedBox(width: 16),
-        buildTopRowItem(),
-        buildTopRowItem(),
-        buildTopRowItem(),
-        buildTopRowItem(),
-        buildTopRowItem(),
-        buildTopRowItem(),
-        buildTopRowItem(),
-        buildTopRowItem(),
-        buildTopRowItem(),
-        buildTopRowItem(),
-      ],
+      children: List<Widget>.generate(size!, (index) => buildTopRowItem()),
     ),
   );
 }

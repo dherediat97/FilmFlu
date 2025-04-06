@@ -1,5 +1,7 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
+import 'package:film_flu/app/routes/app_paths.dart';
 import 'package:film_flu/domain/enums/media_types.dart';
+import 'package:film_flu/domain/models/request_token_entity.dart';
 import 'package:film_flu/presentation/features/media_details/media_detail_screen.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/movies_list.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/series_list.dart';
@@ -13,15 +15,16 @@ import 'package:go_router/go_router.dart';
 part 'app_routes.g.dart';
 
 @TypedGoRoute<HomeScreenRoute>(
-  path: '/',
+  path: AppPaths.startRoute,
   routes: [
-    TypedGoRoute<MovieScreenRoute>(path: 'movie'),
-    TypedGoRoute<TVSeriesScreenRoute>(path: 'tv'),
-    TypedGoRoute<TrendingPersonScreenRoute>(path: 'trendingPerson'),
-    TypedGoRoute<MovieRoute>(path: 'movie/:id'),
-    TypedGoRoute<SerieRoute>(path: 'tv/:id'),
-    TypedGoRoute<PersonRoute>(path: 'person/:id'),
-    TypedGoRoute<SettingsRoute>(path: 'settings'),
+    TypedGoRoute<AuthRoute>(path: AppPaths.authenticateRoute),
+    TypedGoRoute<MovieScreenRoute>(path: AppPaths.movieRoute),
+    TypedGoRoute<TVSeriesScreenRoute>(path: AppPaths.serieRoute),
+    TypedGoRoute<TrendingPersonScreenRoute>(path: AppPaths.trendingPersonRoute),
+    TypedGoRoute<MovieRoute>(path: '${AppPaths.movieRoute}/:id'),
+    TypedGoRoute<SerieRoute>(path: '${AppPaths.serieRoute}/:id'),
+    TypedGoRoute<PersonRoute>(path: '${AppPaths.personRoute}/:id'),
+    TypedGoRoute<SettingsRoute>(path: AppPaths.settingsRoute),
   ],
 )
 @immutable
@@ -30,6 +33,25 @@ class HomeScreenRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
+    return ScaffoldPage(child: MoviesListWidget());
+  }
+}
+
+@immutable
+class AuthRoute extends GoRouteData {
+  const AuthRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    final authJson = RequestTokenEntity(
+      requestToken: state.uri.queryParameters['request_token'] ?? '',
+      approved: state.uri.queryParameters['approved'] == 'true',
+    );
+    if (authJson.approved) {
+      return ScaffoldPage(
+        child: MoviesListWidget(userToken: authJson.requestToken),
+      );
+    }
     return ScaffoldPage(child: MoviesListWidget());
   }
 }
