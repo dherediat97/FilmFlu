@@ -1,9 +1,10 @@
-class AppRoutePaths {
-  static String startRoute = '/';
-
-  static String movieRoute = '/movie';
-  static String serieRoute = '/tv';
-  static String personRoute = '/person';
-  static String settingsRoute = '/settings';
-  static String horusVisionRoute = '/horusVision';
+class AppPaths {
+  static const String startRoute = '/';
+  static const String movieRoute = 'movie';
+  static const String serieRoute = 'tv';
+  static const String trendingPersonRoute = 'trendingPerson';
+  static const String personRoute = 'person';
+  static const String settingsRoute = 'settings';
+  static const String horusVisionRoute = 'horusVision';
+  static const String authenticateRoute = 'authenticate';
 }

@@ -29,113 +29,124 @@ class BackgroundMediaItem extends StatefulWidget {
 class _BackgroundMediaItemState extends State<BackgroundMediaItem> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.8,
-      child: Stack(
-        children: [
-          BackgroundImageMediaItem(
-            imageUrl:
-                '${AppUrls.movieLandscapeBaseUrl}${widget.mediaItem.backdropPath}',
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight:
+                constraints.maxWidth >= 1280
+                    ? MediaQuery.of(context).size.height * 0.70
+                    : MediaQuery.of(context).size.height * 0.35,
           ),
-          Padding(
-            padding: const EdgeInsets.all(32),
-            child: Column(
-              spacing: 8,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                AutoSizeText(
-                  widget.title,
-                  style: Theme.of(context).textTheme.titleLarge,
-                  minFontSize: 10,
-                  stepGranularity: 10,
-                  maxLines: 4,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Chip(
-                  backgroundColor: Colors.yellowAccent,
-                  padding: EdgeInsets.all(8.0),
-                  label: Text(
-                    '${(widget.mediaItem.voteAverage?.floorToDouble())}/10',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Colors.black,
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
+          child: Stack(
+            children: [
+              BackgroundImageMediaItem(
+                imageUrl:
+                    '${AppUrls.movieLandscapeBaseUrl}${widget.mediaItem.backdropPath}',
+              ),
+              Padding(
+                padding: const EdgeInsets.all(32),
+                child: Column(
+                  spacing: 8,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    AutoSizeText(
+                      widget.title,
+                      style: Theme.of(context).textTheme.titleLarge,
+                      minFontSize: 10,
+                      stepGranularity: 10,
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                  avatar: Icon(Icons.star, color: Colors.black, size: 24),
-                ),
+                    Chip(
+                      backgroundColor: Colors.yellowAccent,
+                      padding: EdgeInsets.all(8.0),
+                      label: Text(
+                        '${(widget.mediaItem.voteAverage?.floorToDouble())}/10',
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
+                          color: Colors.black,
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      avatar: Icon(Icons.star, color: Colors.black, size: 24),
+                    ),
 
-                if (widget.mediaItem.genres.isNotEmpty) ...[
-                  GenresListWidget(genres: widget.mediaItem.genres),
-                ],
+                    if (widget.mediaItem.genres.isNotEmpty) ...[
+                      GenresListWidget(genres: widget.mediaItem.genres),
+                    ],
 
-                if (widget.mediaItem.releaseDate.isNotEmpty &&
-                    widget.mediaItem.firstAirDate.isNotEmpty) ...[
-                  const SizedBox(width: 20),
-                  Text(
-                    getYear(widget.mediaItem) ?? '',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                ],
-                if (widget.isHomeScreen) ...[
-                  const Spacer(),
-                  Row(
-                    spacing: 8,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Column(
+                    if (widget.mediaItem.releaseDate.isNotEmpty &&
+                        widget.mediaItem.firstAirDate.isNotEmpty) ...[
+                      const SizedBox(width: 20),
+                      Text(
+                        getYear(widget.mediaItem) ?? '',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                    ],
+                    if (widget.isHomeScreen) ...[
+                      const Spacer(),
+                      Row(
                         spacing: 8,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          IconButton(
-                            onPressed: () {
-                              MediaType mediaTypeSelected =
-                                  widget.mediaItem.title != ''
-                                      ? MediaType.movie
-                                      : MediaType.tv;
+                          Column(
+                            spacing: 8,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  MediaType mediaTypeSelected =
+                                      widget.mediaItem.title != ''
+                                          ? MediaType.movie
+                                          : MediaType.tv;
 
-                              FirebaseAnalytics.instance.logScreenView(
-                                screenName: 'details_media_item',
-                              );
+                                  FirebaseAnalytics.instance.logScreenView(
+                                    screenName: 'details_media_item',
+                                  );
 
-                              FirebaseAnalytics.instance.logEvent(
-                                name: 'view_details',
-                                parameters: {
-                                  'mediaType': mediaTypeSelected.name,
+                                  FirebaseAnalytics.instance.logEvent(
+                                    name: 'view_details',
+                                    parameters: {
+                                      'mediaType': mediaTypeSelected.name,
+                                    },
+                                  );
+
+                                  mediaTypeSelected == MediaType.movie
+                                      ? MovieRoute(
+                                        id: widget.mediaItem.id,
+                                      ).push(context)
+                                      : SerieRoute(
+                                        id: widget.mediaItem.id,
+                                      ).push(context);
                                 },
-                              );
-
-                              mediaTypeSelected == MediaType.movie
-                                  ? MovieRoute(
-                                    id: widget.mediaItem.id,
-                                  ).push(context)
-                                  : SerieRoute(
-                                    id: widget.mediaItem.id,
-                                  ).push(context);
-                            },
-                            icon: const Icon(
-                              Icons.info_outline,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            context.localizations.information,
-                            style: const TextStyle(color: Colors.white),
+                                icon: const Icon(
+                                  Icons.info_outline,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Text(
+                                context.localizations.information,
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            ],
                           ),
                         ],
                       ),
                     ],
-                  ),
-                ],
-              ],
-            ),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

@@ -122,11 +122,13 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                       Tab(text: context.localizations.production_cast),
                     ],
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.5,
-                    width: double.infinity,
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxHeight: MediaQuery.of(context).size.height,
+                      maxWidth: MediaQuery.of(context).size.width,
+                    ),
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(4.0),
                       child: TabBarView(
                         physics: const NeverScrollableScrollPhysics(),
                         controller: _tabController,
@@ -134,6 +136,10 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Text(
+                                context.localizations.synopsis,
+                                style: Theme.of(context).textTheme.bodyLarge,
+                              ),
                               item.when(
                                 data:
                                     (data) =>

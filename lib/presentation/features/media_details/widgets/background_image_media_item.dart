@@ -55,6 +55,7 @@ class _BackgroundImageMediaItemState
               (context, url, error) => SvgPicture.asset(AppAssets.noImageMovie),
           imageBuilder:
               (context, imageProvider) => Container(
+                clipBehavior: Clip.antiAliasWithSaveLayer,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: imageProvider,

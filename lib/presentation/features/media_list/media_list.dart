@@ -110,7 +110,7 @@ class _MediaDataList extends ConsumerState<MediaList> {
             .icon;
 
     return initialLoading
-        ? Shimmer(child: buildTopRowList())
+        ? Shimmer(child: buildTopRowList(size: 10))
         : Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -137,8 +137,8 @@ class _MediaDataList extends ConsumerState<MediaList> {
             ),
             const SizedBox(height: 20),
             if (widget.mediaType == MediaType.movie)
-              SizedBox(
-                height: 230,
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxHeight: 230),
                 child: CarouselView(
                   shrinkExtent: 10,
                   itemSnapping: true,
@@ -164,8 +164,8 @@ class _MediaDataList extends ConsumerState<MediaList> {
                 ),
               ),
             if (widget.mediaType == MediaType.tv)
-              SizedBox(
-                height: 230,
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxHeight: 230),
                 child: CarouselView(
                   itemSnapping: true,
                   padding: const EdgeInsets.all(12),
