@@ -26,9 +26,9 @@ class ProductionCreditsWidget extends StatelessWidget {
       child: GridView.builder(
         itemCount: credits.length,
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 240,
-          mainAxisExtent: 340,
-          mainAxisSpacing: 18,
+          maxCrossAxisExtent: 150,
+          mainAxisExtent: 300,
+          mainAxisSpacing: 3,
           crossAxisSpacing: 18,
         ),
         itemBuilder: (context, index) {

@@ -136,19 +136,32 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                context.localizations.synopsis,
-                                style: Theme.of(context).textTheme.bodyLarge,
-                              ),
                               item.when(
-                                data:
-                                    (data) =>
-                                        data.mediaItem?.overview != null
-                                            ? Text(
-                                              data.mediaItem!.overview!,
-                                              textAlign: TextAlign.start,
-                                            )
-                                            : Container(),
+                                data: (data) {
+                                  if (data.mediaItem?.overview == null) {
+                                    return Container();
+                                  } else {
+                                    return Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          context.localizations.synopsis,
+                                          style:
+                                              Theme.of(
+                                                context,
+                                              ).textTheme.bodyLarge,
+                                        ),
+                                        const SizedBox(height: 20),
+                                        Text(
+                                          data.mediaItem!.overview!,
+                                          textAlign: TextAlign.start,
+                                        ),
+                                        const SizedBox(height: 20),
+                                      ],
+                                    );
+                                  }
+                                },
                                 error:
                                     (error, stackTrace) =>
                                         Text(error.toString()),
@@ -219,12 +232,14 @@ class _DetailTabMediaItem extends ConsumerState<DetailTabMediaItem>
                           credits.when(
                             data: (e) => MediaDataCast(cast: e.cast),
                             error: (err, _) => Text(err.toString()),
-                            loading: () => Shimmer(child: buildTopRowList()),
+                            loading:
+                                () => Shimmer(child: buildTopRowList(size: 7)),
                           ),
                           credits.when(
                             data: (e) => MediaDataProduction(crew: e.crew),
                             error: (err, _) => Text(err.toString()),
-                            loading: () => Shimmer(child: buildTopRowList()),
+                            loading:
+                                () => Shimmer(child: buildTopRowList(size: 7)),
                           ),
                         ],
                       ),

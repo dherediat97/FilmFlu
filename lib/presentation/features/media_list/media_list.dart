@@ -8,7 +8,6 @@ import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
 import 'package:film_flu/presentation/view_models/media_list_view_model.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/media_carrousel_item.dart';
-import 'package:film_flu/presentation/features/common/shimmer_loading.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -103,92 +102,88 @@ class _MediaDataList extends ConsumerState<MediaList> {
 
   mediaWidgetList(AsyncValue<List<MediaSimpleItemEntity>> state) {
     final items = state.valueOrNull ?? [];
-    final initialLoading = state.isLoading && items.isEmpty;
     final icon =
         GenreIds.values
             .firstWhere((element) => element.id == widget.genreId.id)
             .icon;
 
-    return initialLoading
-        ? Shimmer(child: buildTopRowList(size: 10))
-        : Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Icon(icon, color: Theme.of(context).colorScheme.primary),
-                SizedBox(width: 20),
-                AutoSizeText(
-                  widget.title,
-                  maxFontSize: 30,
-                  minFontSize: 20,
-                  textAlign: TextAlign.start,
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
-                ),
-                // IconButton(
-                //   tooltip: widget.sortOption.name,
-                //   onPressed: () => _changeSort(),
-                //   icon: Icon(Icons.sort),
-                // ),
-              ],
+            Icon(icon, color: Theme.of(context).colorScheme.primary),
+            SizedBox(width: 20),
+            AutoSizeText(
+              widget.title,
+              maxFontSize: 30,
+              minFontSize: 20,
+              textAlign: TextAlign.start,
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
             ),
-            const SizedBox(height: 20),
-            if (widget.mediaType == MediaType.movie)
-              ConstrainedBox(
-                constraints: const BoxConstraints(maxHeight: 230),
-                child: CarouselView(
-                  shrinkExtent: 10,
-                  itemSnapping: true,
-                  controller: _carouselController,
-                  padding: const EdgeInsets.all(12),
-                  itemExtent: 150,
-                  onTap: (index) {
-                    final movie = items[index];
-                    FirebaseAnalytics.instance.logScreenView(
-                      screenName: 'details_media_item',
-                    );
-
-                    FirebaseAnalytics.instance.logEvent(
-                      name: 'view_details',
-                      parameters: {'mediaType': widget.mediaType.name},
-                    );
-
-                    MovieRoute(id: movie.id).push(context);
-                  },
-                  children: List.generate(items.length, (int index) {
-                    return MediaCarrouselItem(mediaItem: items[index]);
-                  }),
-                ),
-              ),
-            if (widget.mediaType == MediaType.tv)
-              ConstrainedBox(
-                constraints: const BoxConstraints(maxHeight: 230),
-                child: CarouselView(
-                  itemSnapping: true,
-                  padding: const EdgeInsets.all(12),
-                  itemExtent: 150,
-                  controller: _carouselController,
-                  onTap: (index) {
-                    final tvSerie = items[index];
-                    FirebaseAnalytics.instance.logScreenView(
-                      screenName: 'details_media_item',
-                    );
-                    FirebaseAnalytics.instance.logEvent(
-                      name: 'view_details',
-                      parameters: {'mediaType': widget.mediaType.name},
-                    );
-                    SerieRoute(id: tvSerie.id).push(context);
-                  },
-                  children: List.generate(items.length, (int index) {
-                    return MediaCarrouselItem(mediaItem: items[index]);
-                  }),
-                ),
-              ),
+            // IconButton(
+            //   tooltip: widget.sortOption.name,
+            //   onPressed: () => _changeSort(),
+            //   icon: Icon(Icons.sort),
+            // ),
           ],
-        );
+        ),
+        const SizedBox(height: 20),
+        if (widget.mediaType == MediaType.movie)
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxHeight: 230),
+            child: CarouselView(
+              shrinkExtent: 10,
+              itemSnapping: true,
+              controller: _carouselController,
+              padding: const EdgeInsets.all(12),
+              itemExtent: 150,
+              onTap: (index) {
+                final movie = items[index];
+                FirebaseAnalytics.instance.logScreenView(
+                  screenName: 'details_media_item',
+                );
+
+                FirebaseAnalytics.instance.logEvent(
+                  name: 'view_details',
+                  parameters: {'mediaType': widget.mediaType.name},
+                );
+
+                MovieRoute(id: movie.id).push(context);
+              },
+              children: List.generate(items.length, (int index) {
+                return MediaCarrouselItem(mediaItem: items[index]);
+              }),
+            ),
+          ),
+        if (widget.mediaType == MediaType.tv)
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxHeight: 230),
+            child: CarouselView(
+              itemSnapping: true,
+              padding: const EdgeInsets.all(12),
+              itemExtent: 150,
+              controller: _carouselController,
+              onTap: (index) {
+                final tvSerie = items[index];
+                FirebaseAnalytics.instance.logScreenView(
+                  screenName: 'details_media_item',
+                );
+                FirebaseAnalytics.instance.logEvent(
+                  name: 'view_details',
+                  parameters: {'mediaType': widget.mediaType.name},
+                );
+                SerieRoute(id: tvSerie.id).push(context);
+              },
+              children: List.generate(items.length, (int index) {
+                return MediaCarrouselItem(mediaItem: items[index]);
+              }),
+            ),
+          ),
+      ],
+    );
   }
 
   // _changeSort() {

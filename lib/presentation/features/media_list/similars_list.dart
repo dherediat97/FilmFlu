@@ -5,7 +5,6 @@ import 'package:film_flu/domain/models/media_simple_item_entity.dart';
 import 'package:film_flu/presentation/notifiers/media_filter_notifier.dart';
 import 'package:film_flu/presentation/features/media_list/widgets/media_carrousel_item.dart';
 import 'package:film_flu/presentation/view_models/similar_list_view_model.dart';
-import 'package:film_flu/presentation/features/common/shimmer_loading.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -91,67 +90,64 @@ class _MediaDataList extends ConsumerState<SimilarsList> {
 
   mediaWidgetList(AsyncValue<List<MediaSimpleItemEntity>> state) {
     final items = state.valueOrNull ?? [];
-    final initialLoading = state.isLoading && items.isEmpty;
 
-    return initialLoading
-        ? Shimmer(child: buildTopRowItem())
-        : Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (widget.mediaType == MediaType.movie.name)
-              SizedBox(
-                height: 230,
-                child: CarouselView(
-                  controller: _carouselController,
-                  itemSnapping: true,
-                  padding: const EdgeInsets.all(12),
-                  itemExtent: 150,
-                  onTap: (index) {
-                    final movie = items[index];
-                    FirebaseAnalytics.instance.logScreenView(
-                      screenName: 'details_media_item',
-                    );
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (widget.mediaType == MediaType.movie.name)
+          SizedBox(
+            height: 230,
+            child: CarouselView(
+              controller: _carouselController,
+              itemSnapping: true,
+              padding: const EdgeInsets.all(12),
+              itemExtent: 150,
+              onTap: (index) {
+                final movie = items[index];
+                FirebaseAnalytics.instance.logScreenView(
+                  screenName: 'details_media_item',
+                );
 
-                    FirebaseAnalytics.instance.logEvent(
-                      name: 'view_details',
-                      parameters: {'mediaType': widget.mediaType},
-                    );
+                FirebaseAnalytics.instance.logEvent(
+                  name: 'view_details',
+                  parameters: {'mediaType': widget.mediaType},
+                );
 
-                    MovieRoute(id: movie.id).push(context);
-                  },
-                  children: List.generate(items.length, (int index) {
-                    return MediaCarrouselItem(mediaItem: items[index]);
-                  }),
-                ),
-              ),
-            if (widget.mediaType == MediaType.tv.name)
-              SizedBox(
-                height: 230,
-                child: CarouselView(
-                  controller: _carouselController,
-                  itemSnapping: true,
-                  padding: const EdgeInsets.all(12),
-                  itemExtent: 150,
-                  onTap: (index) {
-                    final tvSerie = items[index];
+                MovieRoute(id: movie.id).push(context);
+              },
+              children: List.generate(items.length, (int index) {
+                return MediaCarrouselItem(mediaItem: items[index]);
+              }),
+            ),
+          ),
+        if (widget.mediaType == MediaType.tv.name)
+          SizedBox(
+            height: 230,
+            child: CarouselView(
+              controller: _carouselController,
+              itemSnapping: true,
+              padding: const EdgeInsets.all(12),
+              itemExtent: 150,
+              onTap: (index) {
+                final tvSerie = items[index];
 
-                    FirebaseAnalytics.instance.logScreenView(
-                      screenName: 'details_media_item',
-                    );
-                    FirebaseAnalytics.instance.logEvent(
-                      name: 'view_details',
-                      parameters: {'mediaType': widget.mediaType},
-                    );
-                    SerieRoute(id: tvSerie.id).go(context);
-                  },
-                  children: List.generate(items.length, (int index) {
-                    return MediaCarrouselItem(mediaItem: items[index]);
-                  }),
-                ),
-              ),
-          ],
-        );
+                FirebaseAnalytics.instance.logScreenView(
+                  screenName: 'details_media_item',
+                );
+                FirebaseAnalytics.instance.logEvent(
+                  name: 'view_details',
+                  parameters: {'mediaType': widget.mediaType},
+                );
+                SerieRoute(id: tvSerie.id).go(context);
+              },
+              children: List.generate(items.length, (int index) {
+                return MediaCarrouselItem(mediaItem: items[index]);
+              }),
+            ),
+          ),
+      ],
+    );
   }
 
   _loadMore() {
