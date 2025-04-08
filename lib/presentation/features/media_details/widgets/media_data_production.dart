@@ -14,17 +14,15 @@ class MediaDataProduction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.custom(
+    return GridView.builder(
+      itemCount: crew.length,
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 150,
         mainAxisExtent: 300,
         mainAxisSpacing: 3,
         crossAxisSpacing: 18,
       ),
-      childrenDelegate: SliverChildBuilderDelegate(childCount: crew.length, (
-        _,
-        index,
-      ) {
+      itemBuilder: (context, index) {
         FilmWorkerEntity filmWorker = crew[index];
 
         return ListTile(
@@ -85,7 +83,7 @@ class MediaDataProduction extends StatelessWidget {
             ],
           ),
         );
-      }),
+      },
     );
   }
 }

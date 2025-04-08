@@ -1,47 +1,72 @@
-<a name="readme-top"></a>
+# Film Flu - Your Ultimate Movie & TV Show Companion
+Film Flu is a Flutter application designed for movie and TV show enthusiasts. It provides a rich and intuitive experience to discover, explore, and manage your favorite entertainment.
 
+## Features
+* **Browse Movies:** Discover a wide range of movies, including trending, popular, upcoming, and top-rated titles.
+* **Movie Details:** Access comprehensive information about each movie, including its synopsis, release date, genre, runtime, and user ratings.
+* **Cast & Crew:** Explore the talented individuals behind the scenes and in front of the camera, with detailed cast and crew listings.
+* **User Authentication:** Securely sign in to personalize your experience.
+* **Favorites:** Mark movies and TV shows as favorites to easily track and access them later.
+* **Search Functionality:** Quickly find movies, TV shows, or actors using a powerful search bar.
+* **Trailer Playback:** Watch high-quality trailers directly within the app to get a sneak peek.
+* **Actor/Crew Details:** Dive deeper into the profiles of actors, directors, writers, and other production members, viewing their filmography and biographical information.
+* **Browse TV Shows (Future Enhancement):** [Planned] Explore and discover a variety of television series.
+* **TV Show Details (Future Enhancement):** [Planned] Access detailed information about TV shows, including seasons, episodes, and air dates.
 
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a>
-    <img src="assets/images/logo.png" alt="Logo" width="200" height="200">
-  </a>
-  <p align="center">
-    Is a project that show the capacity of Flutter and RiverPod in different enviroments using Provider Pattern and Clean Architecture design.
-    <br />
-  </p>
-</div>
+## Screenshots
+![Film Flu Home Screen](product_image.png)
+![Film Flu Detail Screen](product_image2.png)
 
+## Technologies Used
+* **Flutter:** The UI toolkit for building beautiful, natively compiled applications for mobile, web, and desktop from a single codebase.
+* **[Add any specific state management solution you used, e.g., Provider, Riverpod, BLoC]**
+* **[Add any specific networking library you used, e.g., Dio, http]**
+* **[Add any specific image caching library you used, e.g., cached_network_image]**
+* **[Add any specific authentication service you used, e.g., Firebase Auth]**
+* **[Add any other relevant libraries or services]**
 
+## Getting Started
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-    <ul>
-        <li><a href="#built-with">Built With</a></li>
-    </ul>
-</details>
+1.  **Clone the repository:**
+    ```bash
+    git clone https://www.github.com/dherediat97/FilmFlu
+    cd filmflu
+    ```
 
+2.  **Install dependencies:**
+    ```bash
+    flutter pub get
+    dart run build_runner build --delete-conflicting-outputs 
+    ```
 
-### Built With
-* [![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)](#)
-* [![Dart](https://img.shields.io/badge/Dart-%230175C2.svg?logo=dart&logoColor=white)](#)
-* [![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?logo=openjdk&logoColor=white)](#)
-* [![Kotlin](https://img.shields.io/badge/Kotlin-%237F52FF.svg?logo=kotlin&logoColor=white)](#)
-* [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000)](#)
-* [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff)](#)
+3.  **Configure API Keys (if applicable):**
+    * If your app uses an external API for movie data (e.g., TMDB), you might need to obtain an API key and configure it within the project. Refer to the API provider's documentation and look for a configuration file (e.g., `lib/config/api_keys.dart`) or environment variable setup.
 
-### PACKAGES USED:
-* Riverpod
-* Freezed
-* Dio
-* Envied Generator
-* Intl
+4.  **Run the application:**
+    ```bash
+    flutter run
+    ```
 
+## Future Enhancements
+* Implement browsing and details for TV shows.
+* Add user profile management.
+* Implement rating and reviewing system.
+* Provide personalized recommendations.
+* Explore integration with other movie-related services.
+* Implement responsive layout for different screen sizes.
+* Add support for different languages.
 
-### ENVIROMENT STATUS:
-[![FilmFlu App](https://github.com/dherediat97/Filmflu/actions/workflows/flutter_multiplatform_app.yml/badge.svg)](https://github.com/dherediat97/Filmflu/actions/workflows/flutter_multiplatform_app.yml)
-[![FilmFlu Web](https://github.com/dherediat97/Filmflu/actions/workflows/flutter_web.yml/badge.svg)](https://github.com/dherediat97/Filmflu/actions/workflows/flutter_web.yml)
-  
-<p align="right"><a href="#readme-top">back to top</a></p>
+## Contributing
+Contributions are welcome! If you'd like to contribute to the development of Cinephile App, please follow these steps:
+
+1.  Fork the repository.
+2.  Create a new branch for your feature or bug fix.
+3.  Make your changes and commit them.
+4.  Push your changes to your fork.
+5.  Submit a pull request.
+
+## License
+BSD 3-Clause License
+
+## Contact
+[David/FilmFlu]

@@ -1,7 +1,7 @@
 import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/constants/app_constants.dart';
 import 'package:film_flu/app/l10n/localizations/app_localizations.dart';
-import 'package:film_flu/presentation/features/app_bar/widgets/language_picker.dart';
+import 'package:film_flu/presentation/features/settings/widgets/language_picker.dart';
 import 'package:film_flu/presentation/notifiers/app_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

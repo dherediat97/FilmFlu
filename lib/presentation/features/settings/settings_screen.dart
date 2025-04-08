@@ -1,6 +1,6 @@
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/domain/enums/settings_tab.dart';
-import 'package:film_flu/presentation/features/app_bar/widgets/settings_app_bar_actions.dart';
+import 'package:film_flu/presentation/features/settings/widgets/settings_app_bar_actions.dart';
 import 'package:film_flu/presentation/features/settings/widgets/about_us_tab.dart';
 import 'package:film_flu/presentation/features/settings/widgets/accessibility_tab.dart';
 import 'package:film_flu/presentation/features/settings/widgets/general_tab.dart';

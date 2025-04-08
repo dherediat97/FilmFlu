@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/constants/app_colors.dart';
+import 'package:film_flu/presentation/features/common/network_image_widget.dart';
 import 'package:film_flu/presentation/notifiers/app_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -45,14 +45,9 @@ class _BackgroundImageMediaItemState
       blendMode: BlendMode.dstATop,
       child: Align(
         alignment: Alignment.topRight,
-        child: CachedNetworkImage(
+        child: NetworkImageWidget(
           imageUrl: widget.imageUrl!,
-          cacheKey: widget.imageUrl,
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          color: Colors.black,
-          errorWidget:
-              (context, url, error) => SvgPicture.asset(AppAssets.noImageMovie),
+          errorWidget: SvgPicture.asset(AppAssets.noImageMovie),
           imageBuilder:
               (context, imageProvider) => Container(
                 clipBehavior: Clip.antiAliasWithSaveLayer,

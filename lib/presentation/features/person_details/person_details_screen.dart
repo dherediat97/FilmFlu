@@ -1,7 +1,7 @@
 import 'package:film_flu/app/constants/app_assets.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/presentation/features/person_details/widgets/person_details.dart';
-import 'package:film_flu/presentation/features/person_details/widgets/sliver_app_delegate.dart';
+import 'package:film_flu/presentation/features/common/sliver_app_delegate.dart';
 import 'package:film_flu/presentation/features/person_details/widgets/actor_credits.dart';
 import 'package:film_flu/presentation/features/person_details/widgets/production_credits.dart';
 import 'package:film_flu/presentation/notifiers/models/person_state.dart';
@@ -33,8 +33,8 @@ class _PersonDetailsPagePage extends ConsumerState<PersonItemScreenDetails>
 
   @override
   void dispose() {
-    super.dispose();
     _tabController.dispose();
+    super.dispose();
   }
 
   @override
@@ -98,14 +98,6 @@ class _PersonDetailsPagePage extends ConsumerState<PersonItemScreenDetails>
           children: [
             person.when(
               data: (data) {
-                if (data.credits!.cast != null) {
-                  return SvgPicture.asset(
-                    AppAssets.noImagePerson,
-                    height: 160,
-                    width: 150,
-                    fit: BoxFit.contain,
-                  );
-                }
                 return ActorCreditsWidget(
                   person: data,
                   credits: data.credits!.cast!,
