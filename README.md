@@ -67,6 +67,3 @@ Contributions are welcome! If you'd like to contribute to the development of Cin
 
 ## License
 BSD 3-Clause License
-
-## Contact
-[David/FilmFlu]
