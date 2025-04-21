@@ -17,7 +17,7 @@ dependencies:
   # horusvision: ^1.0.0
 
   ## Navigation:
-  go_router: ^14.4.1 # A declarative routing package for Flutter.
+  go_router: ^15.0.0 # A declarative routing package for Flutter.
 
   ## Data Modeling:
   freezed_annotation: ^2.4.1 # Annotations for the `freezed` package, enabling immutable data class generation.
