@@ -20,7 +20,7 @@ dependencies:
   go_router: ^14.4.1 # A declarative routing package for Flutter.
 
   ## Data Modeling:
-  freezed_annotation: ^2.4.1 # Annotations for the `freezed` package, enabling immutable data class generation.
+  freezed_annotation: ^3.0.0 # Annotations for the `freezed` package, enabling immutable data class generation.
   json_annotation: ^4.9.0 # Annotations for the `json_serializable` package, used to generate JSON serialization code.
 
 
@@ -78,8 +78,8 @@ dev_dependencies:
   ## Code Generation:
   build_runner: ^2.4.15 # A generic package for running code generators in Flutter.
   json_serializable: ^6.9.4 # Automatically generates code for serializing to and from JSON.
-  riverpod_generator: ^2.6.4 # Codegen support for Riverpod, simplifying the creation of providers.
-  freezed: ^2.5.8 # Immutable data classes with built-in support for equality, copying, and `toString`.
+  riverpod_generator: ^2.6.5 # Codegen support for Riverpod, simplifying the creation of providers.
+  freezed: ^3.0.6 # Immutable data classes with built-in support for equality, copying, and `toString`.
   go_router_builder: ^2.8.2 # Code builder for the `go_router` package, simplifying route definition.
 
   ## Testing:
@@ -88,8 +88,8 @@ dev_dependencies:
   build_verify: ^3.1.0 # Ensures that generated files are up-to-date.
 
   ## Custom Linting:
-  custom_lint: ^0.7.3 # A framework for creating custom lint rules for Flutter and Dart.
-  riverpod_lint: ^2.6.4 # Custom lint rules specifically for Riverpod.
+  custom_lint: ^0.7.5 # A framework for creating custom lint rules for Flutter and Dart.
+  riverpod_lint: ^2.6.5 # Custom lint rules specifically for Riverpod.
 
   ## App Configuration:
   flutter_launcher_icons: ^0.14.1 # A package to easily generate app launcher icons for different platforms.
