@@ -67,7 +67,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     if (result) {
       setState(() {
         Navigator.pop(context);
-        HomeScreenRoute().push(context);
+        StartScreenRoute().push(context);
       });
     }
   }

@@ -8,7 +8,7 @@ class AppUrls {
   static const String providerImgBaseUrl =
       'https://image.tmdb.org/t/p/original';
   static const String profileImgBaseUrl =
-      'https://avatar.iran.liara.run/username?username=';
+      'https://ui-avatars.com/api/&rounded=true?name=';
 
   AppUrls._();
 }

@@ -1,0 +1,69 @@
+{
+    "name": "El castillo Ambulante Versión 2024",
+    "paid_seats": [{
+        "seatId": "C20",
+        "price": {
+            "value":10,
+            "currency":"EUR"
+        }
+    },
+    {
+        "seatId": "B16",
+        "price": {
+            "value":12,
+            "currency":"EUR"
+        }
+    },
+    {
+        "seatId": "C23",
+        "price": {
+            "value":10,
+            "currency":"EUR"
+        }
+    },
+    {
+        "seatId": "Y243",
+        "price": {
+            "value":8,
+            "currency":"EUR"
+        }
+    },
+    {
+        "seatId": "Y243",
+        "price": {
+            "value":8,
+            "currency":"EUR"
+        }
+    }, {
+        "seatId": "Y244",
+        "price": {
+            "value":8,
+            "currency":"EUR"
+        }
+    }, {
+        "seatId": "Y245",
+        "price": {
+            "value":8,
+            "currency":"EUR"
+        }
+    }, {
+        "seatId": "Y246",
+        "price": {
+            "value":8,
+            "currency":"EUR"
+        }
+    }],
+    "site": "Cinesur el Tablero",
+    "locality":"Córdoba",
+    "comunity":"Andalucía",
+    "max_price": {
+        "value": 24,
+        "currency": "EUR"
+    },
+    "min_price": {
+        "value": 5,
+        "currency": "EUR"
+    },
+    "max_capacity": 250,
+    "accessible_place": true
+  }

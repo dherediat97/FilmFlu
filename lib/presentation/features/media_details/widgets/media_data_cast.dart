@@ -17,6 +17,7 @@ class MediaDataCast extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       itemCount: cast.length,
+      physics: BouncingScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 200,
         mainAxisExtent: 300,

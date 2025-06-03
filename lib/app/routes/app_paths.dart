@@ -1,5 +1,6 @@
 class AppPaths {
   static const String startRoute = '/';
+  static const String homeRoute = '/home';
   static const String movieRoute = 'movie';
   static const String serieRoute = 'tv';
   static const String trendingPersonRoute = 'trendingPerson';

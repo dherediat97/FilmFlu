@@ -19,11 +19,9 @@ Film Flu is a Flutter application designed for movie and TV show enthusiasts. It
 
 ## Technologies Used
 * **Flutter:** The UI toolkit for building beautiful, natively compiled applications for mobile, web, and desktop from a single codebase.
-* **[Add any specific state management solution you used, e.g., Provider, Riverpod, BLoC]**
-* **[Add any specific networking library you used, e.g., Dio, http]**
-* **[Add any specific image caching library you used, e.g., cached_network_image]**
-* **[Add any specific authentication service you used, e.g., Firebase Auth]**
-* **[Add any other relevant libraries or services]**
+* **Provider, Riverpod**
+* **Dio, http**
+* **cached_network_image**
 
 ## Getting Started
 
@@ -39,10 +37,7 @@ Film Flu is a Flutter application designed for movie and TV show enthusiasts. It
     dart run build_runner build --delete-conflicting-outputs 
     ```
 
-3.  **Configure API Keys (if applicable):**
-    * If your app uses an external API for movie data (e.g., TMDB), you might need to obtain an API key and configure it within the project. Refer to the API provider's documentation and look for a configuration file (e.g., `lib/config/api_keys.dart`) or environment variable setup.
-
-4.  **Run the application:**
+3.  **Run the application:**
     ```bash
     flutter run
     ```

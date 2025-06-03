@@ -143,7 +143,7 @@ class AppTheme {
       backgroundColor: colorScheme.primary,
       selectedItemColor: AppColors.textPrimaryColor,
     ),
-    tabBarTheme: TabBarTheme(
+    tabBarTheme: TabBarThemeData(
       indicatorColor: colorScheme.primary,
       labelColor: colorScheme.secondary,
       splashFactory: NoSplash.splashFactory,
