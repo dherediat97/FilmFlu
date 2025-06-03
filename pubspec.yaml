@@ -66,8 +66,8 @@ dependencies:
   feedback: ^3.1.0 # A package to easily implement in-app feedback mechanisms.
   flutter_email_sender: ^7.0.0 # Allows your Flutter app to compose and send emails.
   rive: ^0.13.20
-  horusvision:
-    path: ../horusvision/
+  # horusvision:
+  #   path: ../horusvision/
 
 dev_dependencies:
   flutter_test:

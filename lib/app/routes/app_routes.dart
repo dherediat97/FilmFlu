@@ -12,7 +12,7 @@ import 'package:film_flu/presentation/features/common/custom_scaffold_page.dart'
 import 'package:film_flu/presentation/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:horusvision/presentation/features/horusvision.dart';
+// import 'package:horusvision/presentation/features/horusvision.dart';
 
 part 'app_routes.g.dart';
 
@@ -28,7 +28,7 @@ part 'app_routes.g.dart';
     TypedGoRoute<SerieRoute>(path: '${AppPaths.serieRoute}/:id'),
     TypedGoRoute<PersonRoute>(path: '${AppPaths.personRoute}/:id'),
     TypedGoRoute<SettingsRoute>(path: AppPaths.settingsRoute),
-    TypedGoRoute<HorusVisionRoute>(path: AppPaths.horusVisionRoute),
+    // TypedGoRoute<HorusVisionRoute>(path: AppPaths.horusVisionRoute),
   ],
 )
 @immutable
