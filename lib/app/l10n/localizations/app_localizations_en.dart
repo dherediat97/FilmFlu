@@ -146,19 +146,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get general => 'General';
 
   @override
-  String get general_sl => 'General tab is the place where the user can change the data according to him profile';
+  String get general_sl =>
+      'General tab is the place where the user can change the data according to him profile';
 
   @override
   String get accessibility => 'Accessibility';
 
   @override
-  String get accessibility_sl => 'Accessibility tab is the place where the user can adjust the application according to him';
+  String get accessibility_sl =>
+      'Accessibility tab is the place where the user can adjust the application according to him';
 
   @override
   String get about_us => 'About us';
 
   @override
-  String get about_us_sl => 'About us tab is the place where the user can see all licenses of the application';
+  String get about_us_sl =>
+      'About us tab is the place where the user can see all licenses of the application';
 
   @override
   String get trending_person_day => 'Trending persons today';

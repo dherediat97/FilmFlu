@@ -1,6 +1,9 @@
 import 'dart:io';
 
+import 'package:film_flu/app/constants/app_colors.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
+import 'package:film_flu/app/routes/app_routes.dart';
+import 'package:film_flu/domain/enums/media_types.dart';
 import 'package:film_flu/presentation/features/media_details/widgets/detail_tab_media_item.dart';
 import 'package:film_flu/presentation/notifiers/models/media_item_states.dart';
 import 'package:film_flu/presentation/notifiers/media_detail_notifier.dart';
@@ -63,17 +66,15 @@ class _MovieDetailsPageState extends ConsumerState<MediaItemScreenDetails> {
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            // if (widget.mediaType == MediaType.movie.name)
-            //   FloatingActionButton.extended(
-            //     heroTag: 'buyTickets',
-            //     foregroundColor: AppColors.primaryColor,
-            //     backgroundColor: AppColors.backgroundColorLight,
-            //     onPressed: () {
-            //       context.go(AppRoutePaths.horusVisionRoute);
-            //     },
-            //     icon: const Icon(Icons.local_movies_outlined),
-            //     label: Text(context.localizations.buy_tickets),
-            //   ),
+            if (widget.mediaType == MediaType.movie.name)
+              FloatingActionButton.extended(
+                heroTag: 'buyTickets',
+                foregroundColor: AppColors.primaryColor,
+                backgroundColor: AppColors.backgroundColorLight,
+                onPressed: () => HorusVisionRoute().go(context),
+                icon: const Icon(Icons.local_movies_outlined),
+                label: Text(context.localizations.buy_tickets),
+              ),
             const SizedBox(height: 20),
 
             trailerDetails.when(

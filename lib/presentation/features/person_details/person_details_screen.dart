@@ -75,16 +75,14 @@ class _PersonDetailsPagePage extends ConsumerState<PersonItemScreenDetails>
               floating: true,
               delegate: SliverAppBarDelegate(
                 TabBar(
-                  dividerColor: Colors.transparent,
                   controller: _tabController,
-                  indicatorSize: TabBarIndicatorSize.label,
                   tabs: [
                     Tab(
                       icon: const Icon(Icons.movie),
                       text: context.localizations.character_cast,
                     ),
                     Tab(
-                      icon: const Icon(Icons.movie),
+                      icon: const Icon(Icons.tv_sharp),
                       text: context.localizations.production_cast,
                     ),
                   ],

@@ -14,10 +14,8 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
 
-  # horusvision: ^1.0.0
-
   ## Navigation:
-  go_router: ^14.4.1 # A declarative routing package for Flutter.
+  go_router: ^15.1.2 # A declarative routing package for Flutter.
 
   ## Data Modeling:
   freezed_annotation: ^2.4.1 # Annotations for the `freezed` package, enabling immutable data class generation.
@@ -46,7 +44,7 @@ dependencies:
   flutter_widget_from_html: ^0.16.0 # Renders HTML content as Flutter widgets, useful for displaying formatted text or simple web content.
 
   ## Utility & Platform Services:
-  intl: ^0.19.0 # Provides internationalization and localization facilities, crucial for supporting multiple languages.
+  intl: ^0.20.2 # Provides internationalization and localization facilities, crucial for supporting multiple languages.
   package_info_plus: ^8.3.0 # Retrieves information about the application package, such as app name, version, and build number.
   shared_preferences: ^2.5.2 # Provides a simple way to store and retrieve key-value pairs of primitive data types persistently across app launches.
   path_provider: ^2.1.5 # Provides access to commonly used locations on the device's file system, such as temporary and application support directories.
@@ -67,6 +65,9 @@ dependencies:
   color_blindness: ^0.2.0 # Tools and widgets to simulate different types of color blindness, aiding in accessibility testing.
   feedback: ^3.1.0 # A package to easily implement in-app feedback mechanisms.
   flutter_email_sender: ^7.0.0 # Allows your Flutter app to compose and send emails.
+  rive: ^0.13.20
+  horusvision:
+    path: ../horusvision/
 
 dev_dependencies:
   flutter_test:
@@ -93,6 +94,10 @@ dev_dependencies:
 
   ## App Configuration:
   flutter_launcher_icons: ^0.14.1 # A package to easily generate app launcher icons for different platforms.
+
+dependency_overrides:
+  analyzer_plugin: ^0.13.1
+
 
 flutter:
   generate: true

@@ -25,18 +25,14 @@ class _TopAppBarState extends ConsumerState<TopAppBar> {
       backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
       leadingWidth: 64,
       leading:
-          !context.canPop()
+          GoRouter.of(context).state.matchedLocation == '/home'
               ? IconButton(
                 padding: EdgeInsets.zero,
                 style: ButtonStyle(
                   overlayColor: WidgetStateProperty.all(Colors.transparent),
                 ),
                 icon: Image.asset(AppAssets.logoIcon, fit: BoxFit.fitHeight),
-                onPressed: () {
-                  if (context.canPop()) {
-                    context.pop();
-                  }
-                },
+                onPressed: () => {},
               )
               : null,
       actions: [AppBarActions(isMainMenu: context.canPop())],

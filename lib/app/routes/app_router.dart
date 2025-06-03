@@ -13,7 +13,7 @@ GoRouter goRouter(Ref ref) {
   return GoRouter(
     navigatorKey: rootNavigatorKey,
     debugLogDiagnostics: true,
-    initialLocation: HomeScreenRoute().location,
+    initialLocation: StartScreenRoute().location,
     routes: $appRoutes,
   );
 }

@@ -9,14 +9,17 @@ import 'package:film_flu/presentation/features/person_details/person_details_scr
 import 'package:film_flu/presentation/features/person_list/trending_person_list.dart';
 import 'package:film_flu/presentation/features/settings/settings_screen.dart';
 import 'package:film_flu/presentation/features/common/custom_scaffold_page.dart';
+import 'package:film_flu/presentation/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:horusvision/presentation/features/horusvision.dart';
 
 part 'app_routes.g.dart';
 
-@TypedGoRoute<HomeScreenRoute>(
+@TypedGoRoute<StartScreenRoute>(
   path: AppPaths.startRoute,
   routes: [
+    TypedGoRoute<HomeScreenRoute>(path: AppPaths.homeRoute),
     TypedGoRoute<AuthRoute>(path: AppPaths.authenticateRoute),
     TypedGoRoute<MovieScreenRoute>(path: AppPaths.movieRoute),
     TypedGoRoute<TVSeriesScreenRoute>(path: AppPaths.serieRoute),
@@ -25,8 +28,19 @@ part 'app_routes.g.dart';
     TypedGoRoute<SerieRoute>(path: '${AppPaths.serieRoute}/:id'),
     TypedGoRoute<PersonRoute>(path: '${AppPaths.personRoute}/:id'),
     TypedGoRoute<SettingsRoute>(path: AppPaths.settingsRoute),
+    TypedGoRoute<HorusVisionRoute>(path: AppPaths.horusVisionRoute),
   ],
 )
+@immutable
+class StartScreenRoute extends GoRouteData {
+  const StartScreenRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return SplashScreen();
+  }
+}
+
 @immutable
 class HomeScreenRoute extends GoRouteData {
   const HomeScreenRoute();
@@ -89,7 +103,7 @@ class RedirectRoute extends GoRouteData {
   // There is no need to implement [build] when this [redirect] is unconditional.
   @override
   String? redirect(BuildContext context, GoRouterState state) {
-    return HomeScreenRoute().location;
+    return StartScreenRoute().location;
   }
 }
 
@@ -106,6 +120,16 @@ class MovieRoute extends GoRouteData {
       languageCode: context.localizations.localeName,
       mediaType: MediaType.movie.name,
     );
+  }
+}
+
+@immutable
+class HorusVisionRoute extends GoRouteData {
+  const HorusVisionRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return HorusVision();
   }
 }
 

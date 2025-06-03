@@ -25,7 +25,6 @@ jobs:
           FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID}}
           FIREBASE_PROJECT_NAME: ${{ secrets.FIREBASE_PROJECT_NAME}}
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID}}
-          VERSION_CODE: ${{ secrets.VERSION_CODE}}
       - name: Install dependencies
         run: sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
       - name: Install project dependencies
@@ -46,8 +45,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-            tag_name: v${{secrets.VERSION_CODE}}@linux
-            release_name: Versión v${{secrets.VERSION_CODE}} - Linux
+            tag_name: v2.0.0@linux
+            release_name: Versión v2.0.0 - Linux
             draft: false
             prerelease: false
       - name: Upload Linux Zip to Release
@@ -95,8 +94,8 @@ jobs:
        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
        with:
-          tag_name: v${{secrets.VERSION_CODE}}@windows
-          release_name: Version ${{secrets.VERSION_CODE}} - Windows
+          tag_name: v2.0.0@windows
+          release_name: Version 2.0.0 - Windows
           draft: false
           prerelease: false
      - name: Upload Zip to Release
@@ -137,8 +136,8 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
-            tag_name: v${{secrets.VERSION_CODE}}@android
-            release_name: Version ${{secrets.VERSION_CODE}} - Android
+            tag_name: v2.0.0@android
+            release_name: Version 2.0.0 - Android
             draft: false
             prerelease: false
         - name: Upload APK to Release

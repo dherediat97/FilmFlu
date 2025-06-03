@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_routes.dart';
 import 'package:film_flu/domain/enums/media_types.dart';
@@ -95,6 +96,14 @@ class _MediaDataList extends ConsumerState<SimilarsList> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        AutoSizeText(
+          context.localizations.similars,
+          maxFontSize: 30,
+          minFontSize: 20,
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
+        ),
         if (widget.mediaType == MediaType.movie.name)
           SizedBox(
             height: 230,
