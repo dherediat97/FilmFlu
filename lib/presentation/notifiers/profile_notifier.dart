@@ -14,8 +14,14 @@ class Profile extends _$Profile {
   AuthRepository get repository => ref.read(authRepositoryProvider);
 
   @override
-  Future<ProfileEntity> build() {
-    return getProfile('20111553');
+  Future<ProfileEntity> build() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.getString(AppConstants.userTokenKey) != null) {
+      return getProfile('20111553');
+    }
+    return Future.value(
+      ProfileEntity(id: 0, name: 'Invitado', username: 'anonymous@example.com'),
+    );
   }
 
   Future<String> requestToken() async {

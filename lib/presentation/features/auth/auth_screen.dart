@@ -19,6 +19,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     final profile = ref.watch(profileProvider);
+
     return SingleChildScrollView(
       child: Center(
         child: Column(
@@ -37,14 +38,13 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
               },
             ),
             const Divider(),
-            if (profile.hasValue) ...[
+            if (profile.value?.id != 0) ...[
               ListTile(
                 leading: const Icon(Icons.logout),
                 onTap: () => _signOut(),
                 title: Text('Cerrar sesión'),
               ),
-            ],
-            if (!profile.hasValue) ...[
+            ] else ...[
               ListTile(
                 leading: const Icon(Icons.account_circle),
                 onTap: () => _signIn(),
