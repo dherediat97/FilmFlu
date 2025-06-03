@@ -123,15 +123,15 @@ class MovieRoute extends GoRouteData {
   }
 }
 
-@immutable
-class HorusVisionRoute extends GoRouteData {
-  const HorusVisionRoute();
+// @immutable
+// class HorusVisionRoute extends GoRouteData {
+//   const HorusVisionRoute();
 
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return HorusVision();
-  }
-}
+//   @override
+//   Widget build(BuildContext context, GoRouterState state) {
+//     return HorusVision();
+//   }
+// }
 
 @immutable
 class SerieRoute extends GoRouteData {
