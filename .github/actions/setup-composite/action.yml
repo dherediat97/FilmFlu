@@ -41,9 +41,6 @@ on:
         GOOGLE_CLIENT_ID:
           required: true
           type: string
-        VERSION_CODE:
-          required: true
-          type: string
 defaults:
   run:
     shell: bash
@@ -57,15 +54,6 @@ runs:
       with:
           channel: stable
           cache: true
-    - name: Get version
-      id: yq
-      uses: mikefarah/yq@master
-      with:
-        cmd: yq '.version' < pubspec.yaml
-    - run: set /p VERSION=<version.file
-      shell: bash
-    - run: echo VERSION=%VERSION% >> %VERSION_CODE%
-      shell: bash
     - run: flutter clean
       shell: bash
     - run: flutter pub get
