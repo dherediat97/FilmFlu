@@ -5,7 +5,6 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   firebase_auth
   firebase_core
-  flutter_unity_widget
   rive_common
   url_launcher_windows
 )
