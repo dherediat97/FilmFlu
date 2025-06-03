@@ -1,6 +1,6 @@
+import 'package:film_flu/app/extensions/localizations_extensions.dart';
 import 'package:film_flu/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:rive/rive.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -13,39 +13,38 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   String get assetPath => './assets/animations/loading_screen.riv';
 
-  RiveFile? _file;
+  void _onInit(Artboard artboard) {
+    var ctrl =
+        StateMachineController.fromArtboard(
+          artboard,
+          artboard.stateMachines.first.name,
+        )!;
+    ctrl.isActive = false;
+    artboard.addController(ctrl);
 
-  @override
-  void initState() {
-    super.initState();
-    preload();
+    var textRun = artboard.textRun('action_label');
+    if (textRun != null) {
+      textRun.text = '${context.localizations.action_type} !!';
+    }
+    Future.delayed(const Duration(seconds: 2), () {
+      ctrl.isActive = true;
+      HomeScreenRoute().pushReplacement(context);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return (_file == null)
-        ? const SizedBox.shrink()
-        : RiveAnimation.direct(
-          _file!,
-          placeHolder: const Center(child: CircularProgressIndicator()),
-          speedMultiplier: 1.20,
-          fit: BoxFit.cover,
-          alignment: Alignment.center,
-          antialiasing: false,
-        );
+    return RiveAnimation.asset(
+      assetPath,
+      placeHolder: const Center(child: CircularProgressIndicator()),
+      animations: ['clapperboard'],
+      fit: BoxFit.cover,
+      alignment: Alignment.center,
+      onInit: _onInit,
+    );
   }
+}
 
-  Future<void> preload() async {
-    rootBundle.load(assetPath).then((data) async {
-      await RiveFile.initialize();
-
-      // Load the RiveFile from the binary data.
-      setState(() {
-        _file = RiveFile.import(data);
-      });
-      Future.delayed(const Duration(seconds: 4), () {
-        HomeScreenRoute().pushReplacement(context);
-      });
-    });
-  }
+extension _TextExtension on Artboard {
+  TextValueRun? textRun(String name) => component<TextValueRun>(name);
 }
