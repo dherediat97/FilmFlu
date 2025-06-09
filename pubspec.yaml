@@ -74,7 +74,7 @@ dev_dependencies:
     sdk: flutter
 
   ## Linter & Code Analysis:
-  flutter_lints: ^5.0.0 # A set of recommended lints to enforce good coding practices in Flutter.
+  flutter_lints: ^6.0.0 # A set of recommended lints to enforce good coding practices in Flutter.
 
   ## Code Generation:
   build_runner: ^2.4.15 # A generic package for running code generators in Flutter.
