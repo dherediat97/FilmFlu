@@ -81,7 +81,7 @@ dev_dependencies:
   json_serializable: ^6.9.4 # Automatically generates code for serializing to and from JSON.
   riverpod_generator: ^2.6.4 # Codegen support for Riverpod, simplifying the creation of providers.
   freezed: ^2.5.8 # Immutable data classes with built-in support for equality, copying, and `toString`.
-  go_router_builder: ^2.8.2 # Code builder for the `go_router` package, simplifying route definition.
+  go_router_builder: ^3.0.0 # Code builder for the `go_router` package, simplifying route definition.
 
   ## Testing:
   mockito: ^5.4.5 # A mock framework inspired by Mockito, useful for creating test doubles.
