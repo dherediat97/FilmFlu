@@ -1,7 +1,0 @@
-arb-dir: lib/app/l10n
-template-arb-file: app_es.arb
-output-dir: lib/app/l10n/localizations/
-output-localization-file: app_localizations.dart
-header: ///Film Flu Translations
-nullable-getter: false
-synthetic-package: false
