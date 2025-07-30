@@ -15,10 +15,10 @@ dependencies:
     sdk: flutter
 
   ## Navigation:
-  go_router: ^15.1.2 # A declarative routing package for Flutter.
+  go_router: ^16.0.0 # A declarative routing package for Flutter.
 
   ## Data Modeling:
-  freezed_annotation: ^2.4.1 # Annotations for the `freezed` package, enabling immutable data class generation.
+  freezed_annotation: ^3.0.0 # Annotations for the `freezed` package, enabling immutable data class generation.
   json_annotation: ^4.9.0 # Annotations for the `json_serializable` package, used to generate JSON serialization code.
 
 
@@ -74,7 +74,7 @@ dev_dependencies:
     sdk: flutter
 
   ## Linter & Code Analysis:
-  flutter_lints: ^5.0.0 # A set of recommended lints to enforce good coding practices in Flutter.
+  flutter_lints: ^6.0.0 # A set of recommended lints to enforce good coding practices in Flutter.
 
   ## Code Generation:
   build_runner: ^2.4.15 # A generic package for running code generators in Flutter.
@@ -89,8 +89,8 @@ dev_dependencies:
   build_verify: ^3.1.0 # Ensures that generated files are up-to-date.
 
   ## Custom Linting:
-  custom_lint: ^0.7.3 # A framework for creating custom lint rules for Flutter and Dart.
-  riverpod_lint: ^2.6.4 # Custom lint rules specifically for Riverpod.
+  custom_lint: ^0.7.5 # A framework for creating custom lint rules for Flutter and Dart.
+  riverpod_lint: ^2.6.5 # Custom lint rules specifically for Riverpod.
 
   ## App Configuration:
   flutter_launcher_icons: ^0.14.1 # A package to easily generate app launcher icons for different platforms.
